@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CV_INPUT_AREA" xml:space="preserve">
+    <value>[Input Area]</value>
+  </data>
+  <data name="CV_INPUT_BUFFER" xml:space="preserve">
+    <value>[Input Buffer]</value>
+  </data>
+  <data name="CV_OUTPUT_AREA" xml:space="preserve">
+    <value>[Output Area]</value>
+  </data>
+  <data name="CV_WORK_AREA" xml:space="preserve">
+    <value>[Work Area]</value>
+  </data>
+  <data name="LOG_LOGIN" xml:space="preserve">
+    <value>Log-In as [{0}]</value>
+  </data>
+  <data name="MB_CAL_INIT_OFFSET" xml:space="preserve">
+    <value>Initialize Offset Data?</value>
+  </data>
+  <data name="MB_CAL_PUT_JIG" xml:space="preserve">
+    <value>Put On a Zig for Calibration on ULC</value>
+  </data>
+  <data name="MB_CAL_PUT_TRAY" xml:space="preserve">
+    <value>Put On a Tray on Rail</value>
+  </data>
+  <data name="MB_CAL_REMOVE_JIG" xml:space="preserve">
+    <value>Please Remove Jig</value>
+  </data>
+  <data name="MB_CAL_REMOVE_TRAY" xml:space="preserve">
+    <value>Please Reject Tray</value>
+  </data>
+  <data name="MB_CV_CANNOT_INITIALIZE" xml:space="preserve">
+    <value>Can't Initial Conveyor, Because Tray is Being [{0}]</value>
+  </data>
+  <data name="MB_CV_TRAY_EXIST" xml:space="preserve">
+    <value>Sensor for [{0}] is On. Please Reject the Tray</value>
+  </data>
+  <data name="MB_CV_TRAY_EXIST_SENSOR" xml:space="preserve">
+    <value>[Input Area] And [Input Buffer] Sensor is On
+Please Retry After Check the Sensor</value>
+  </data>
+  <data name="MB_CV_TRAY_LOADING_INFO" xml:space="preserve">
+    <value>Select Map Data Type</value>
+  </data>
+  <data name="MB_CV_TRAY_REJECT" xml:space="preserve">
+    <value>Remove Tray Information for {0}?</value>
+  </data>
+  <data name="MB_CV_TRAY_REV_CHECK_ERROR" xml:space="preserve">
+    <value>Tray is not Detected</value>
+  </data>
+  <data name="MB_CV_TRAY_REV_CHECK_RESULT" xml:space="preserve">
+    <value>Inspection Time : {0}[us]
+Inspection Result : {1}[mm]</value>
+  </data>
+  <data name="MB_CV_TRAY_TRANSFER" xml:space="preserve">
+    <value>Tray is not Detected on Conveyor.
+Do you want to Request Previous Machine for Feeding?</value>
+  </data>
+  <data name="MB_ERROR_REPORT_DATE_ERROR" xml:space="preserve">
+    <value>Date of Start is Larger then Last one</value>
+  </data>
+  <data name="MB_ETC_CHECK_AIR" xml:space="preserve">
+    <value>Please Check the Main Air Status</value>
+  </data>
+  <data name="MB_ETC_CHECK_SERVO" xml:space="preserve">
+    <value>Please Check the Motor Turned On</value>
+  </data>
+  <data name="MB_ETC_CHECK_VAC" xml:space="preserve">
+    <value>Please Check the Main Vacuum Status</value>
+  </data>
+  <data name="MB_ETC_COMM_ERROR" xml:space="preserve">
+    <value>Commuication Error Occurred : [{0}]</value>
+  </data>
+  <data name="MB_ETC_EXIT_SW" xml:space="preserve">
+    <value>Do You Really Want to ShutDown SoftWare?</value>
+  </data>
+  <data name="MB_ETC_FILE_LOAD_FAIL" xml:space="preserve">
+    <value>Load Fail : {0}</value>
+  </data>
+  <data name="MB_ETC_FILE_LOAD_OK" xml:space="preserve">
+    <value>Load OK : {0}</value>
+  </data>
+  <data name="MB_ETC_FILE_NOT_EXIST" xml:space="preserve">
+    <value>Load Fail : {0} File is not Exist.</value>
+  </data>
+  <data name="MB_ETC_FILE_SAVE_FAIL" xml:space="preserve">
+    <value>Save Fail : {0}</value>
+  </data>
+  <data name="MB_ETC_FILE_SAVE_OK" xml:space="preserve">
+    <value>Save OK : {0}</value>
+  </data>
+  <data name="MB_ETC_PARA_SAVE" xml:space="preserve">
+    <value>Do You Want to Apply for Changed Parameter?</value>
+  </data>
+  <data name="MB_ETC_PARA_SAVE_BEFORE_EXIT" xml:space="preserve">
+    <value>Do You Want to ShutDown SW After to Apply for Changed Parameter?</value>
+  </data>
+  <data name="MB_ETC_PARA_SAVE_BEFORE_START" xml:space="preserve">
+    <value>Do You Want to Start Work After to Apply for Changed Parameter?</value>
+  </data>
+  <data name="MB_ETC_SW_RESTART" xml:space="preserve">
+    <value>Changed Parameter Will Be Updated After Restart SW</value>
+  </data>
+  <data name="MB_ETC_UPDATE_TRAY_INFO_ALL" xml:space="preserve">
+    <value>All of the Data Will Be Changed to Selected Value. Do You Want to Continue?</value>
+  </data>
+  <data name="MB_HD_PICK_INIT_AUTO_TRACK" xml:space="preserve">
+    <value>Initialize Offset Data for Auto Tracking?</value>
+  </data>
+  <data name="MB_HD_PICK_INIT_FINISH" xml:space="preserve">
+    <value>Initialize Finished</value>
+  </data>
+  <data name="MB_HD_PICK_INIT_OFFSET_XYZ" xml:space="preserve">
+    <value>All of the Data for Pick Offset Values(X, Y, Z). Do You Want to Continue?</value>
+  </data>
+  <data name="MB_HD_PICK_INIT_OFFSET_Z" xml:space="preserve">
+    <value>All of the Data for Pick Offset Values(Z). Do You Want to Continue?</value>
+  </data>
+  <data name="MB_HD_PRESS_CREATE_TMS" xml:space="preserve">
+    <value>TMS File For Press Mode is Created</value>
+  </data>
+  <data name="MB_REQ_INIT" xml:space="preserve">
+    <value>Please Do Initialize [{0}]</value>
+  </data>
+  <data name="MB_SF_ONOFF" xml:space="preserve">
+    <value>Please Check [{0}] Turned On</value>
+  </data>
+  <data name="MB_USER_ADD_ACCOUNT" xml:space="preserve">
+    <value>New Account is Added : [{0}]</value>
+  </data>
+  <data name="MB_USER_CONFIRM_PW" xml:space="preserve">
+    <value>Please Input the Password For Confirmation</value>
+  </data>
+  <data name="MB_USER_DELETE_ACCOUNT" xml:space="preserve">
+    <value>Account is Deleted : [{0}]</value>
+  </data>
+  <data name="MB_USER_INPUT_NEW_PW" xml:space="preserve">
+    <value>Please Input the New Password</value>
+  </data>
+  <data name="MB_USER_INPUT_PW" xml:space="preserve">
+    <value>Please Input the Password For This User</value>
+  </data>
+  <data name="MB_USER_LOGGED_IN_ACCOUNT" xml:space="preserve">
+    <value>Log-In as [{0}]</value>
+  </data>
+  <data name="MB_USER_LOGOUT" xml:space="preserve">
+    <value>Log-Out From [{0}]</value>
+  </data>
+  <data name="MB_USER_LOG_IN_ACCOUNT" xml:space="preserve">
+    <value>Log-In Please</value>
+  </data>
+  <data name="MB_USER_MASTER_PW_FAIL" xml:space="preserve">
+    <value>Entered Master Password is Not Correct</value>
+  </data>
+  <data name="MB_USER_NAME_COUNT_FAIL" xml:space="preserve">
+    <value>Account Name of Length Should Be At Least Two Characters</value>
+  </data>
+  <data name="MB_USER_NAME_DUPLICATE_FAIL" xml:space="preserve">
+    <value>Overlapped Account Name has been Detected</value>
+  </data>
+  <data name="MB_USER_NOT_EXIST_NAME" xml:space="preserve">
+    <value>This Account does not exist</value>
+  </data>
+  <data name="MB_USER_PW_COUNT_FAIL" xml:space="preserve">
+    <value>Password of Length Should Be At Least Two Characters</value>
+  </data>
+  <data name="MB_USER_PW_FAIL" xml:space="preserve">
+    <value>Password is Not Correct</value>
+  </data>
+  <data name="MB_USER_SELECT_ACCOUNT" xml:space="preserve">
+    <value>Please Select An Account</value>
+  </data>
+  <data name="TB_ERROR_REPORT_ADDITIONAL_INFORMATION" xml:space="preserve">
+    <value>Additional Information</value>
+  </data>
+  <data name="TB_ERROR_REPORT_AXIS_NAME" xml:space="preserve">
+    <value>Axis Name</value>
+  </data>
+  <data name="TB_ERROR_REPORT_CONTENTS_OF_ERROR" xml:space="preserve">
+    <value>Error Message</value>
+  </data>
+  <data name="TB_ERROR_REPORT_ERRORCODE" xml:space="preserve">
+    <value>Error Code</value>
+  </data>
+  <data name="TB_ERROR_REPORT_OCCURRED_TIME" xml:space="preserve">
+    <value>Occurred Time</value>
+  </data>
+  <data name="TB_ERROR_REPORT_SOLUTION" xml:space="preserve">
+    <value>Solution</value>
+  </data>
+  <data name="TB_ERROR_REPORT_SOURCE" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="TB_ERROR_REPORT_SW_MODULE" xml:space="preserve">
+    <value>SW Module</value>
+  </data>
+  <data name="TB_SYSTEM_CHECK_FAIL" xml:space="preserve">
+    <value>Please Check the System</value>
+  </data>
+  <data name="TB_SYSTEM_CHECK_FAIL_EXIT" xml:space="preserve">
+    <value>If You Want to ShutDown SW, Double-Click the 'PROTEC' Symbol</value>
+  </data>
+  <data name="TB_SYSTEM_CHECK_OK" xml:space="preserve">
+    <value>The Machine is Good</value>
+  </data>
+</root>

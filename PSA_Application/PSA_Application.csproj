@@ -1,0 +1,884 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B883BFD2-F823-4258-A890-7D290FA99BA6}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PSA_Application</RootNamespace>
+    <AssemblyName>PSA_Application</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>게시\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\PSA_Application.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\PSA_Application.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="halcondotnet">
+      <HintPath>C:\Program Files\MVTec\HALCON-10.0\bin\dotnet35\halcondotnet.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CenterRight_ChangeUser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CenterRight_ChangeUser.Designer.cs">
+      <DependentUpon>CenterRight_ChangeUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CenterRight_ColorCode.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CenterRight_ColorCode.Designer.cs">
+      <DependentUpon>CenterRight_ColorCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CenterRight_Main.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CenterRight_Main.Designer.cs">
+      <DependentUpon>CenterRight_Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CenterRight_Press.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CenterRight_Press.Designer.cs">
+      <DependentUpon>CenterRight_Press.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CenterRight_TowerLamp.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CenterRight_TowerLamp.Designer.cs">
+      <DependentUpon>CenterRight_TowerLamp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CenterRight_WorkArea.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CenterRight_WorkArea.Designer.cs">
+      <DependentUpon>CenterRight_WorkArea.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormATC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormATC.Designer.cs">
+      <DependentUpon>FormATC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAutoTrack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAutoTrack.Designer.cs">
+      <DependentUpon>FormAutoTrack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAxesStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAxesStatus.Designer.cs">
+      <DependentUpon>FormAxesStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormChangeStatusColor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormChangeStatusColor.designer.cs">
+      <DependentUpon>FormChangeStatusColor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormErrorReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormErrorReport.Designer.cs">
+      <DependentUpon>FormErrorReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormFlatnessCalibration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFlatnessCalibration.Designer.cs">
+      <DependentUpon>FormFlatnessCalibration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormForceCalibration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormForceCalibration.Designer.cs">
+      <DependentUpon>FormForceCalibration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormGraphControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGraphControl.Designer.cs">
+      <DependentUpon>FormGraphControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormHalconModelTeach.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormHalconModelTeach.Designer.cs">
+      <DependentUpon>FormHalconModelTeach.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormIOInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormIOInfo.Designer.cs">
+      <DependentUpon>FormIOInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormJogPad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormJogPad.Designer.cs">
+      <DependentUpon>FormJogPad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormJogPadTeach.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormJogPadTeach.Designer.cs">
+      <DependentUpon>FormJogPadTeach.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormJogPadXYZ.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormJogPadXYZ.Designer.cs">
+      <DependentUpon>FormJogPadXYZ.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormJogPadZ.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormJogPadZ.Designer.cs">
+      <DependentUpon>FormJogPadZ.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLighting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLighting.Designer.cs">
+      <DependentUpon>FormLighting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLightingExposure.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLightingExposure.Designer.cs">
+      <DependentUpon>FormLightingExposure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLoadcellCalib.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLoadcellCalib.Designer.cs">
+      <DependentUpon>FormLoadcellCalib.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLogIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLogIn.Designer.cs">
+      <DependentUpon>FormLogIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLogInPw.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLogInPw.Designer.cs">
+      <DependentUpon>FormLogInPw.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormOriginOffset.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOriginOffset.designer.cs">
+      <DependentUpon>FormOriginOffset.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPassword.Designer.cs">
+      <DependentUpon>FormPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPlaceOffsetCalibration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPlaceOffsetCalibration.Designer.cs">
+      <DependentUpon>FormPlaceOffsetCalibration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormProtecBackup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProtecBackup.Designer.cs">
+      <DependentUpon>FormProtecBackup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSelect.Designer.cs">
+      <DependentUpon>FormSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormStart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStart.Designer.cs">
+      <DependentUpon>FormStart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormTerminalMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTerminalMessage.Designer.cs">
+      <DependentUpon>FormTerminalMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormTrayEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTrayEdit.Designer.cs">
+      <DependentUpon>FormTrayEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormTubeEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTubeEdit.Designer.cs">
+      <DependentUpon>FormTubeEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PedestalFlatness.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PedestalFlatness.Designer.cs">
+      <DependentUpon>PedestalFlatness.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BottomRight_Conveyor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BottomRight_Conveyor.Designer.cs">
+      <DependentUpon>BottomRight_Conveyor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BottomRight_Head.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BottomRight_Head.Designer.cs">
+      <DependentUpon>BottomRight_Head.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BottomRight_Main.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BottomRight_Main.Designer.cs">
+      <DependentUpon>BottomRight_Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BottomRight_Pedestal.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BottomRight_Pedestal.Designer.cs">
+      <DependentUpon>BottomRight_Pedestal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BottomRight_StackFeeder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BottomRight_StackFeeder.Designer.cs">
+      <DependentUpon>BottomRight_StackFeeder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CenterRight_Calibration.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CenterRight_Calibration.Designer.cs">
+      <DependentUpon>CenterRight_Calibration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CenterRight_Conveyor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CenterRight_Conveyor.Designer.cs">
+      <DependentUpon>CenterRight_Conveyor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CenterRight_SecsGem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CenterRight_SecsGem.Designer.cs">
+      <DependentUpon>CenterRight_SecsGem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BottomRight.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BottomRight.Designer.cs">
+      <DependentUpon>BottomRight.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BottomLeft.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BottomLeft.Designer.cs">
+      <DependentUpon>BottomLeft.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CenterLeft.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CenterLeft.Designer.cs">
+      <DependentUpon>CenterLeft.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CenterRight.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CenterRight.Designer.cs">
+      <DependentUpon>CenterRight.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CenterRight_HeadCamera.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CenterRight_HeadCamera.Designer.cs">
+      <DependentUpon>CenterRight_HeadCamera.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CenterRight_Head_Pick.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CenterRight_Head_Pick.Designer.cs">
+      <DependentUpon>CenterRight_Head_Pick.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CenterRight_Head_Place.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CenterRight_Head_Place.Designer.cs">
+      <DependentUpon>CenterRight_Head_Place.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CenterRight_Material.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CenterRight_Material.Designer.cs">
+      <DependentUpon>CenterRight_Material.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CenterRight_Advance.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CenterRight_Advance.Designer.cs">
+      <DependentUpon>CenterRight_Advance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CenterRight_StackFeeder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CenterRight_StackFeeder.Designer.cs">
+      <DependentUpon>CenterRight_StackFeeder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CenterRight_UpLookingCamera.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CenterRight_UpLookingCamera.Designer.cs">
+      <DependentUpon>CenterRight_UpLookingCamera.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StackFeederStatus.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StackFeederStatus.Designer.cs">
+      <DependentUpon>StackFeederStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="textResource.en-US.Designer.cs">
+      <DependentUpon>textResource.en-US.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="textResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>textResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UpLeft.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UpLeft.Designer.cs">
+      <DependentUpon>UpLeft.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UpRight.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UpRight.Designer.cs">
+      <DependentUpon>UpRight.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CenterRight_Initial.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CenterRight_Initial.Designer.cs">
+      <DependentUpon>CenterRight_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CenterRight_HeatSlug.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CenterRight_HeatSlug.Designer.cs">
+      <DependentUpon>CenterRight_HeatSlug.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="BottomRight_Conveyor.en-US.resx">
+      <DependentUpon>BottomRight_Conveyor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BottomRight_Head.en-US.resx">
+      <DependentUpon>BottomRight_Head.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BottomRight_Main.en-US.resx">
+      <DependentUpon>BottomRight_Main.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BottomRight_Pedestal.en-US.resx">
+      <DependentUpon>BottomRight_Pedestal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BottomRight_StackFeeder.en-US.resx">
+      <DependentUpon>BottomRight_StackFeeder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_Advance.en-US.resx">
+      <DependentUpon>CenterRight_Advance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_ChangeUser.en-US.resx">
+      <DependentUpon>CenterRight_ChangeUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_ChangeUser.resx">
+      <DependentUpon>CenterRight_ChangeUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_ColorCode.resx">
+      <DependentUpon>CenterRight_ColorCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_Conveyor.en-US.resx">
+      <DependentUpon>CenterRight_Conveyor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_HeadCamera.en-US.resx">
+      <DependentUpon>CenterRight_HeadCamera.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_Head_Pick.en-US.resx">
+      <DependentUpon>CenterRight_Head_Pick.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_Main.en-US.resx">
+      <DependentUpon>CenterRight_Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_Main.resx">
+      <DependentUpon>CenterRight_Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_Press.en-US.resx">
+      <DependentUpon>CenterRight_Press.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_Press.resx">
+      <DependentUpon>CenterRight_Press.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_StackFeeder.en-US.resx">
+      <DependentUpon>CenterRight_StackFeeder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_TowerLamp.resx">
+      <DependentUpon>CenterRight_TowerLamp.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_WorkArea.resx">
+      <DependentUpon>CenterRight_WorkArea.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormATC.resx">
+      <DependentUpon>FormATC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAutoTrack.resx">
+      <DependentUpon>FormAutoTrack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAxesStatus.resx">
+      <DependentUpon>FormAxesStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormChangeStatusColor.resx">
+      <DependentUpon>FormChangeStatusColor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormErrorReport.en-US.resx">
+      <DependentUpon>FormErrorReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormErrorReport.resx">
+      <DependentUpon>FormErrorReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFlatnessCalibration.resx">
+      <DependentUpon>FormFlatnessCalibration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormForceCalibration.resx">
+      <DependentUpon>FormForceCalibration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGraphControl.resx">
+      <DependentUpon>FormGraphControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormHalconModelTeach.resx">
+      <DependentUpon>FormHalconModelTeach.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormIOInfo.resx">
+      <DependentUpon>FormIOInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormJogPad.resx">
+      <DependentUpon>FormJogPad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormJogPadTeach.resx">
+      <DependentUpon>FormJogPadTeach.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormJogPadXYZ.resx">
+      <DependentUpon>FormJogPadXYZ.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormJogPadZ.resx">
+      <DependentUpon>FormJogPadZ.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLighting.resx">
+      <DependentUpon>FormLighting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLightingExposure.resx">
+      <DependentUpon>FormLightingExposure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLoadcellCalib.resx">
+      <DependentUpon>FormLoadcellCalib.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLogIn.resx">
+      <DependentUpon>FormLogIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLogInPw.resx">
+      <DependentUpon>FormLogInPw.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOriginOffset.resx">
+      <DependentUpon>FormOriginOffset.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPassword.resx">
+      <DependentUpon>FormPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPlaceOffsetCalibration.resx">
+      <DependentUpon>FormPlaceOffsetCalibration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProtecBackup.resx">
+      <DependentUpon>FormProtecBackup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSelect.en-US.resx">
+      <DependentUpon>FormSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSelect.resx">
+      <DependentUpon>FormSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStart.en-US.resx">
+      <DependentUpon>FormStart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStart.resx">
+      <DependentUpon>FormStart.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTerminalMessage.resx">
+      <DependentUpon>FormTerminalMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTrayEdit.resx">
+      <DependentUpon>FormTrayEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTubeEdit.resx">
+      <DependentUpon>FormTubeEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PedestalFlatness.resx">
+      <DependentUpon>PedestalFlatness.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="BottomRight_Conveyor.resx">
+      <DependentUpon>BottomRight_Conveyor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BottomRight_Head.resx">
+      <DependentUpon>BottomRight_Head.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BottomRight_Main.resx">
+      <DependentUpon>BottomRight_Main.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BottomRight_Pedestal.resx">
+      <DependentUpon>BottomRight_Pedestal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BottomRight_StackFeeder.resx">
+      <DependentUpon>BottomRight_StackFeeder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_Calibration.resx">
+      <DependentUpon>CenterRight_Calibration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_Conveyor.resx">
+      <DependentUpon>CenterRight_Conveyor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_SecsGem.resx">
+      <DependentUpon>CenterRight_SecsGem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_HeadCamera.resx">
+      <DependentUpon>CenterRight_HeadCamera.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_Head_Pick.resx">
+      <DependentUpon>CenterRight_Head_Pick.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_Head_Place.resx">
+      <DependentUpon>CenterRight_Head_Place.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_Initial.resx">
+      <DependentUpon>CenterRight_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BottomRight.resx">
+      <DependentUpon>BottomRight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BottomLeft.resx">
+      <DependentUpon>BottomLeft.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterLeft.resx">
+      <DependentUpon>CenterLeft.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight.resx">
+      <DependentUpon>CenterRight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_Material.resx">
+      <DependentUpon>CenterRight_Material.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_Advance.resx">
+      <DependentUpon>CenterRight_Advance.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_StackFeeder.resx">
+      <DependentUpon>CenterRight_StackFeeder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_UpLookingCamera.resx">
+      <DependentUpon>CenterRight_UpLookingCamera.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StackFeederStatus.resx">
+      <DependentUpon>StackFeederStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="textResource.en-US.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>textResource.en-US.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="textResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>textResource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpLeft.resx">
+      <DependentUpon>UpLeft.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpRight.resx">
+      <DependentUpon>UpRight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_HeatSlug.en-US.resx">
+      <DependentUpon>CenterRight_HeatSlug.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_HeatSlug.resx">
+      <DependentUpon>CenterRight_HeatSlug.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="ErrCode.ini" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AccessoryLibrary\AccessoryLibrary.csproj">
+      <Project>{B3695683-2D1E-4FBB-B101-19AA656C4387}</Project>
+      <Name>AccessoryLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DefineLibrary\DefineLibrary.csproj">
+      <Project>{E4956146-9CC1-4C5F-A33D-C8B410D63689}</Project>
+      <Name>DefineLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HalconLibrary\HalconLibrary.csproj">
+      <Project>{6CDE235A-83BE-4DBE-90CF-2210C5AA937A}</Project>
+      <Name>HalconLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MeiLibrary\MeiLibrary.csproj">
+      <Project>{5538520D-DC08-4D1B-9EFA-DD4D1130AD08}</Project>
+      <Name>MeiLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MeiLibrary_C_Language\MeiMotionLibrary.vcxproj">
+      <Project>{66CF311D-1DB7-4831-96F0-7934F4787558}</Project>
+      <Name>MeiLibrary_C_Language</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PSA_SystemLibrary\PSA_SystemLibrary.csproj">
+      <Project>{95F6C5E5-FF6C-4D4F-B093-0943F9FA2296}</Project>
+      <Name>PSA_SystemLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CW_Arrow1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CCW_Arrow1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Green_LED.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Red_LED.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Yellow_LED.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Fail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Complete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Red_LED_OFF.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Green_LED_OFF.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YellowLED_OFF.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Checked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bullet_ball_gray.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bullet_triangle_blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blue_triangle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\red_ball.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gray_ball.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\red_ball1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gray_ball1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\yellow_ball1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\red_retangle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pad_center.bmp" />
+    <None Include="Resources\c1.png" />
+    <None Include="Resources\c2.png" />
+    <None Include="Resources\c3.png" />
+    <None Include="Resources\c4.png" />
+    <None Include="Resources\rectangle.png" />
+    <None Include="Resources\chamfer_c1.png" />
+    <None Include="Resources\chamfer_c2.png" />
+    <None Include="Resources\chamfer_c3.png" />
+    <None Include="Resources\chamfer_c4.png" />
+    <None Include="Resources\Failure.jpg" />
+    <None Include="Resources\Information.jpg" />
+    <None Include="Resources\Question.jpg" />
+    <None Include="Resources\Warning.jpg" />
+    <None Include="Resources\FileLoad.jpg" />
+    <None Include="Resources\FileSave.jpg" />
+    <None Include="Resources\FileSaveAs.jpg" />
+    <None Include="Resources\FileLoad_Small.jpg" />
+    <None Include="Resources\FileSave_Small.jpg" />
+    <None Include="Resources\FileSaveAs_Small.jpg" />
+    <Content Include="Revision and ToDo\RevisionControl.txt" />
+    <Content Include="Revision and ToDo\ToDo List.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile%28x86 및 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

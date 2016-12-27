@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CV_INPUT_AREA" xml:space="preserve">
+    <value>[입구 영역]</value>
+  </data>
+  <data name="CV_INPUT_BUFFER" xml:space="preserve">
+    <value>[입구 버퍼]</value>
+  </data>
+  <data name="CV_OUTPUT_AREA" xml:space="preserve">
+    <value>[출구 영역]</value>
+  </data>
+  <data name="CV_WORK_AREA" xml:space="preserve">
+    <value>[작업 영역]</value>
+  </data>
+  <data name="LOG_LOGIN" xml:space="preserve">
+    <value>사용자 [{0}] (으)로 Log-In 했습니다.</value>
+  </data>
+  <data name="MB_CAL_INIT_OFFSET" xml:space="preserve">
+    <value>Offset Data를 초기화 할까요?</value>
+  </data>
+  <data name="MB_CAL_INSERT_JIG" xml:space="preserve">
+    <value>지그를 준비해 주세요.</value>
+  </data>
+  <data name="MB_CAL_INSERT_TRAY" xml:space="preserve">
+    <value>트레이를 레일 위에 올려 주세요.</value>
+  </data>
+  <data name="MB_CAL_REMOVE_JIG" xml:space="preserve">
+    <value>지그를 제거해 주세요.</value>
+  </data>
+  <data name="MB_CAL_REMOVE_TRAY" xml:space="preserve">
+    <value>트레이를 제거해 주세요.</value>
+  </data>
+  <data name="MB_CV_CANNOT_INITIALIZE" xml:space="preserve">
+    <value>컨베어를 초기화 할 수 없습니다.
+트레이가 [{0}] 에 존재 합니다.</value>
+  </data>
+  <data name="MB_CV_TRAY_EXIST" xml:space="preserve">
+    <value>{0} 센서가 감지되고 있습니다.
+트레이를 손으로 제거하세요.</value>
+  </data>
+  <data name="MB_CV_TRAY_EXIST_SENSOR" xml:space="preserve">
+    <value>[입구]와 [버퍼] 센서가 동시에 감지되었습니다.
+상태 확인후 다시 시도하세요!</value>
+  </data>
+  <data name="MB_CV_TRAY_LOADING_INFO" xml:space="preserve">
+    <value>트레이 로딩 정보를 선택해주세요.</value>
+  </data>
+  <data name="MB_CV_TRAY_REJECT" xml:space="preserve">
+    <value>{0} 트레이 정보를 삭제할까요?</value>
+  </data>
+  <data name="MB_CV_TRAY_REV_CHECK_ERROR" xml:space="preserve">
+    <value>트레이가 검사되지 않았습니다.</value>
+  </data>
+  <data name="MB_CV_TRAY_REV_CHECK_RESULT" xml:space="preserve">
+    <value>검사시간 : {0}[us]\n검사결과 : {1}[mm]</value>
+  </data>
+  <data name="MB_CV_TRAY_TRANSFER" xml:space="preserve">
+    <value>컨베이어 상에 트레이가 감지되지 않았습니다.
+이전 장비로부터 이송을 시도할까요?</value>
+  </data>
+  <data name="MB_ERROR_REPORT_DATE_ERROR" xml:space="preserve">
+    <value>검색 시작 날짜가 검색 마지막 날짜보다 큽니다.</value>
+  </data>
+  <data name="MB_ETC_CHECK_AIR" xml:space="preserve">
+    <value>메인 공압이 정상상태인지 확인하세요.</value>
+  </data>
+  <data name="MB_ETC_CHECK_SERVO" xml:space="preserve">
+    <value>MOTOR [ON]상태인지 검사하세요.</value>
+  </data>
+  <data name="MB_ETC_CHECK_VAC" xml:space="preserve">
+    <value>진공압(VACUUM)이 정상상태인지 확인하세요.</value>
+  </data>
+  <data name="MB_ETC_COMM_ERROR" xml:space="preserve">
+    <value>[{0}] 통신 에러 발생</value>
+  </data>
+  <data name="MB_ETC_EXIT_SW" xml:space="preserve">
+    <value>프로그램을 종료할까요?</value>
+  </data>
+  <data name="MB_ETC_FILE_LOAD_FAIL" xml:space="preserve">
+    <value>{0} 읽기를 실패했습니다.</value>
+  </data>
+  <data name="MB_ETC_FILE_LOAD_OK" xml:space="preserve">
+    <value>{0} 읽기를 성공했습니다.</value>
+  </data>
+  <data name="MB_ETC_FILE_NOT_EXIST" xml:space="preserve">
+    <value>{0} 파일이 존재하지 않습니다.</value>
+  </data>
+  <data name="MB_ETC_FILE_SAVE_FAIL" xml:space="preserve">
+    <value>{0} 저장에 실패했습니다.</value>
+  </data>
+  <data name="MB_ETC_FILE_SAVE_OK" xml:space="preserve">
+    <value>{0} 를 정상적으로 저장했습니다.</value>
+  </data>
+  <data name="MB_ETC_PARA_SAVE" xml:space="preserve">
+    <value>변경된 파라미터를 적용할까요?</value>
+  </data>
+  <data name="MB_ETC_PARA_SAVE_BEFORE_EXIT" xml:space="preserve">
+    <value>변경된 파라미터를 적용한 뒤 종료할까요?</value>
+  </data>
+  <data name="MB_ETC_PARA_SAVE_BEFORE_START" xml:space="preserve">
+    <value>변경된 파라미터를 적용한 뒤 시작할까요?</value>
+  </data>
+  <data name="MB_ETC_SW_RESTART" xml:space="preserve">
+    <value>프로그램을 재시작 후 적용됩니다.</value>
+  </data>
+  <data name="MB_ETC_UPDATE_TRAY_INFO_ALL" xml:space="preserve">
+    <value>모든 데이터가 선택된 값으로 변경됩니다. 계속 진행할까요?</value>
+  </data>
+  <data name="MB_HD_PICK_INIT_AUTO_TRACK" xml:space="preserve">
+    <value>정말로 자동보정값을 초기화 할까요?</value>
+  </data>
+  <data name="MB_HD_PICK_INIT_FINISH" xml:space="preserve">
+    <value>초기화 완료되었습니다.</value>
+  </data>
+  <data name="MB_HD_PICK_INIT_OFFSET_XYZ" xml:space="preserve">
+    <value>모든 Pick Offset X,Y,Z 값은 초기화 됩니다.
+계속 진행할까요?</value>
+  </data>
+  <data name="MB_HD_PICK_INIT_OFFSET_Z" xml:space="preserve">
+    <value>모든 Pick Offset Z 값은 초기화 됩니다.
+계속 진행할까요?</value>
+  </data>
+  <data name="MB_HD_PRESS_CREATE_TMS" xml:space="preserve">
+    <value>Press 모드용 TMS 파일이 생성되었습니다.</value>
+  </data>
+  <data name="MB_REQ_INIT" xml:space="preserve">
+    <value>[{0}] 의 원점을 새로 잡아 주새요.</value>
+  </data>
+  <data name="MB_SF_ONOFF" xml:space="preserve">
+    <value>[{0}] 의 사용유무가 OFF 되어 있어서
+사용할 수 없습니다.
+사용하려면 사용유무를 ON 해주세요.</value>
+  </data>
+  <data name="MB_USER_ADD_ACCOUNT" xml:space="preserve">
+    <value>사용자[{0}]가 추가되었습니다.</value>
+  </data>
+  <data name="MB_USER_CONFIRM_PW" xml:space="preserve">
+    <value>Password 를 다시 한번 입력해 주세요</value>
+  </data>
+  <data name="MB_USER_DELETE_ACCOUNT" xml:space="preserve">
+    <value>사용자[{0}]가 삭제되었습니다.</value>
+  </data>
+  <data name="MB_USER_INPUT_NEW_PW" xml:space="preserve">
+    <value>새 Password 를 입력해 주세요.</value>
+  </data>
+  <data name="MB_USER_INPUT_PW" xml:space="preserve">
+    <value>사용자[{0}] Password 입력</value>
+  </data>
+  <data name="MB_USER_LOGGED_IN_ACCOUNT" xml:space="preserve">
+    <value>사용자 [{0}]로 Log-In했습니다.</value>
+  </data>
+  <data name="MB_USER_LOGOUT" xml:space="preserve">
+    <value>사용자 [{0}]가 Log-Out했습니다.</value>
+  </data>
+  <data name="MB_USER_LOG_IN_ACCOUNT" xml:space="preserve">
+    <value>먼저 Log-In을 하세요.</value>
+  </data>
+  <data name="MB_USER_MASTER_PW_FAIL" xml:space="preserve">
+    <value>Master Password가 정확하지 않습니다.</value>
+  </data>
+  <data name="MB_USER_NAME_COUNT_FAIL" xml:space="preserve">
+    <value>이름은 최소 2글자이상이어야 합니다.</value>
+  </data>
+  <data name="MB_USER_NAME_DUPLICATE_FAIL" xml:space="preserve">
+    <value>동일한 사용자 이름이 이미 존재합니다.</value>
+  </data>
+  <data name="MB_USER_NOT_EXIST_NAME" xml:space="preserve">
+    <value>사용자 이름이 목록에 없습니다.</value>
+  </data>
+  <data name="MB_USER_PW_COUNT_FAIL" xml:space="preserve">
+    <value>Password는 최소 2글자이상이어야 합니다.</value>
+  </data>
+  <data name="MB_USER_PW_FAIL" xml:space="preserve">
+    <value>Password가 일치하지 않습니다.</value>
+  </data>
+  <data name="MB_USER_SELECT_ACCOUNT" xml:space="preserve">
+    <value>사용자를 먼저 선택해 주세요.</value>
+  </data>
+  <data name="TB_ERROR_REPORT_ADDITIONAL_INFORMATION" xml:space="preserve">
+    <value>부가정보</value>
+  </data>
+  <data name="TB_ERROR_REPORT_AXIS_NAME" xml:space="preserve">
+    <value>축이름</value>
+  </data>
+  <data name="TB_ERROR_REPORT_CONTENTS_OF_ERROR" xml:space="preserve">
+    <value>에러내용</value>
+  </data>
+  <data name="TB_ERROR_REPORT_ERRORCODE" xml:space="preserve">
+    <value>에러코드</value>
+  </data>
+  <data name="TB_ERROR_REPORT_OCCURRED_TIME" xml:space="preserve">
+    <value>발생시간</value>
+  </data>
+  <data name="TB_ERROR_REPORT_SOLUTION" xml:space="preserve">
+    <value>조치사항</value>
+  </data>
+  <data name="TB_ERROR_REPORT_SOURCE" xml:space="preserve">
+    <value>발생원인</value>
+  </data>
+  <data name="TB_ERROR_REPORT_SW_MODULE" xml:space="preserve">
+    <value>SW모듈</value>
+  </data>
+  <data name="TB_SYSTEM_CHECK_FAIL" xml:space="preserve">
+    <value>시스템 점검이 필요합니다.</value>
+  </data>
+  <data name="TB_SYSTEM_CHECK_FAIL_EXIT" xml:space="preserve">
+    <value>종료하려면 프로텍 로그를 더블클릭하세요.</value>
+  </data>
+  <data name="TB_SYSTEM_CHECK_OK" xml:space="preserve">
+    <value>시스템이 정상 입니다.</value>
+  </data>
+</root>

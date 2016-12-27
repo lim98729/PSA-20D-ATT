@@ -1,0 +1,7 @@
+﻿2013-10-08
+01. CenterRight Form Open시 발생하는 문제 수정.(Resource 수정의 경우에는 절대로 Manual로 수정해서는 안됨.)
+
+2013-10-14
+01. ULC/HDC IP Address 및 PC IP Address 잘못 설정시 발생하는 문제 Display하도록.
+02. Program Instance가 하나만 실행되도록 Mutex 추가
+03. 

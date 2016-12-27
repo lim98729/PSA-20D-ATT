@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="LOG_CLICK_BUTTON" xml:space="preserve">
+    <value>[Center Right : {0}] 의 [Button : {1}] 이(가) 클릭되었습니다. (by {2})</value>
+  </data>
+  <data name="LOG_CLICK_BUTTON_DEFAULT" xml:space="preserve">
+    <value>[Button : {0}] 이(가) 클릭되었습니다. (by {1})</value>
+  </data>
+  <data name="LOG_CLICK_BUTTON_IO" xml:space="preserve">
+    <value>[I/O Menu : {0}] 의 [Button : {1}] 이(가) 클릭되었습니다. (by {2})</value>
+  </data>
+  <data name="LOG_CLICK_TAG" xml:space="preserve">
+    <value>[Center Right : {0}] 의 [{1}] 이(가) 클릭되었습니다. (by {2})</value>
+  </data>
+  <data name="LOG_DEBUG_HD_FORCE_TRACKING_INIT" xml:space="preserve">
+    <value>Force 차이값이 너무 크기 때문에 보정값을 0으로 재 설정 합니다.</value>
+  </data>
+  <data name="LOG_DEBUG_PUSHED_BTN" xml:space="preserve">
+    <value>판넬의 {0} 버튼이 눌렸습니다.</value>
+  </data>
+  <data name="LOG_DEBUG_SF_READY_DOWN" xml:space="preserve">
+    <value>{0} 의 자재가 모두 소진되어 Down 합니다.</value>
+  </data>
+  <data name="LOG_DEBUG_SF_READY_UP" xml:space="preserve">
+    <value>{0} Ready 상태이므로 Up 합니다.</value>
+  </data>
+  <data name="LOG_ERROR_MPC_FAILED_COPY_FILE" xml:space="preserve">
+    <value>MPC 폴더에 있는 {0} 파일을 복사 할 수 없습니다.</value>
+  </data>
+  <data name="LOG_ERROR_PEDESTAL_NOT_READY" xml:space="preserve">
+    <value>Pedestal 이 Error 상태이기 때문에 준비동작을 완료할 수 없습니다.</value>
+  </data>
+  <data name="LOG_TRACE_HD_TOOL_FLATNESS" xml:space="preserve">
+    <value>Tool 평탄도[{0}] - Touch Probe Value : {1} [um]</value>
+  </data>
+  <data name="LOG_TRACE_HD_TOOL_FLATNESS_RESULT" xml:space="preserve">
+    <value>Tool 평탄도 Max : {0}, Min : {1}, Max Diff : {2} [um]</value>
+  </data>
+  <data name="LOG_TRACE_PD_FLATNESS" xml:space="preserve">
+    <value>Pedestal 평탄도[{0}] - Laser Value : {1} (um)</value>
+  </data>
+  <data name="LOG_TRACE_PD_FLATNESS_RESULT" xml:space="preserve">
+    <value>Pedestal 평탄도 Max : {0}, Min : {1}, Max Diff : {2} [um]</value>
+  </data>
+  <data name="MB_ETC_COMM_ERROR" xml:space="preserve">
+    <value>[{0}] 통신 에러 발생</value>
+  </data>
+  <data name="MB_HD_CYCLE_ATTACH" xml:space="preserve">
+    <value>다음 : Attach 를 진행 합니다.</value>
+  </data>
+  <data name="MB_HD_CYCLE_DOUBLE_DET" xml:space="preserve">
+    <value>다음 : Double Check 검사 합니다.</value>
+  </data>
+  <data name="MB_HD_CYCLE_ISP_ORIENTATION" xml:space="preserve">
+    <value>다음 : 자재 방향을 검사 합니다.</value>
+  </data>
+  <data name="MB_HD_CYCLE_ISP_TILT" xml:space="preserve">
+    <value>다음 : 기울기 측정을 진행 합니다.</value>
+  </data>
+  <data name="MB_HD_CYCLE_LOAD_TMS" xml:space="preserve">
+    <value>Yes : 트레이 맵 정보 이용
+No: 매뉴얼 지정</value>
+  </data>
+  <data name="MB_HD_CYCLE_MOVE_PICK" xml:space="preserve">
+    <value>다음 : Tool 을 Pick 위치로 이동 합니다.
+({0} 위치)</value>
+  </data>
+  <data name="MB_HD_CYCLE_MOVE_S2" xml:space="preserve">
+    <value>두 번째 서치 위치로 이동 합니다.</value>
+  </data>
+  <data name="MB_HD_CYCLE_MOVE_STANDBY" xml:space="preserve">
+    <value>대기 위치로 이동 합니다.</value>
+  </data>
+  <data name="MB_HD_CYCLE_MOVE_ULC" xml:space="preserve">
+    <value>다음 : HeatSlug 검사위치로 이동 합니다.</value>
+  </data>
+  <data name="MB_HD_CYCLE_NOWASTE" xml:space="preserve">
+    <value>자재를 버리지 말고 검사 위치로 이동 합니다.</value>
+  </data>
+  <data name="MB_HD_CYCLE_PCB_ALIGN" xml:space="preserve">
+    <value>다음 : 자재 얼라인을 진행 합니다.
+얼라인 진행 후 첫 번째 서치 위치로 이동 합니다.</value>
+  </data>
+  <data name="MB_HD_CYCLE_PICK_DOWN" xml:space="preserve">
+    <value>다음 : Pick Down 합니다.</value>
+  </data>
+  <data name="MB_HD_CYCLE_REQ_SF_UP" xml:space="preserve">
+    <value>다음 : Stack Feeder 를 Up 시킵니다.</value>
+  </data>
+  <data name="MB_HD_CYCLE_SUC_HS" xml:space="preserve">
+    <value>다음 : 자재를 흡착 합니다.</value>
+  </data>
+  <data name="MB_HD_CYCLE_VIB" xml:space="preserve">
+    <value>다음 : Vibration Mode 시작 합니다.</value>
+  </data>
+  <data name="MB_HD_CYCLE_WASTE" xml:space="preserve">
+    <value>자재를 버릴까요?</value>
+  </data>
+  <data name="MB_SF_TUBE_ERROR" xml:space="preserve">
+    <value>Tube가 활성화 되어 있지 않습니다.
+장비 패널의 Magazine Button 을 누르거나
+Edit 창을 열어서 Tube를 활성화 시키십시오.</value>
+  </data>
+</root>

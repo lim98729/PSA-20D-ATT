@@ -1,0 +1,54 @@
+﻿- Heat Slug Reset Button 기능 수정
+	- 소등 : Stack Feeder Z축이 내려와 있는 경우
+	- 점등 : Stack Feeder Z축이 올라와 있을 경우(해당 Magazine에 있을 경우)
+	- 점멸 : 작업중 모든 Heat Slug를 소진한 경우 해당함
+
+					if ((graphDisplayIndex % graphDisplayCount) == 0 && graphDisplayPoint == 0)
+					{
+						mc.AIN.ER(out loadVolt, out ret.message); if (ioCheck(sqc, ret.message)) break;
+						mc.hd.tool.F.voltage2kilogram(loadVolt, out loadForce, out ret.message); if (ioCheck(sqc, ret.message)) break;
+						mc.AIN.SG(out sgaugeVolt, out ret.message); if (ioCheck(sqc, ret.message)) break;
+						mc.hd.tool.F.sgVoltage2kilogram(sgaugeVolt, out sgaugeForce, out ret.message); if (ioCheck(sqc, ret.message)) break;
+						if (UtilityControl.graphDisplayEnabled == 1 && graphDispStart)
+						{
+							if ((meanFilterIndex + 1) % UtilityControl.graphMeanFilter == 0)
+							{
+								// Mean값 만들고
+								calcMean(loadForceFilter, sgaugeForceFilter, UtilityControl.graphMeanFilter, ref ret.d1, ref ret.d2);
+								EVENT.addLoadcellData(0, loadTime.Elapsed, ret.d1, ret.d2);
+								meanFilterIndex = 0;
+							}
+							else
+							{
+								loadForceFilter[meanFilterIndex] = loadForce;
+								sgaugeForceFilter[meanFilterIndex] = sgaugeForce;
+								meanFilterIndex++;
+							}
+						}
+					}
+					graphDisplayIndex++;
+
+					if ((graphDisplayIndex % graphDisplayCount) == 0 && graphDisplayPoint == startPoint)
+					{
+						mc.AIN.ER(out loadVolt, out ret.message); if (ioCheck(sqc, ret.message)) return false;
+						mc.hd.tool.F.voltage2kilogram(loadVolt, out loadForce, out ret.message); if (ioCheck(sqc, ret.message)) return false;
+						mc.AIN.SG(out sgaugeVolt, out ret.message); if (ioCheck(sqc, ret.message)) return false;
+						mc.hd.tool.F.sgVoltage2kilogram(sgaugeVolt, out sgaugeForce, out ret.message); if (ioCheck(sqc, ret.message)) return false;
+						if (UtilityControl.graphDisplayEnabled == 1 && graphDispStart)
+						{
+							if ((meanFilterIndex + 1) % UtilityControl.graphMeanFilter == 0)
+							{
+								// Mean값 만들고
+								calcMean(loadForceFilter, sgaugeForceFilter, UtilityControl.graphMeanFilter, ref ret.d1, ref ret.d2);
+								EVENT.addLoadcellData(0, loadTime.Elapsed, ret.d1, ret.d2);
+								meanFilterIndex = 0;
+							}
+							else
+							{
+								loadForceFilter[meanFilterIndex] = loadForce;
+								sgaugeForceFilter[meanFilterIndex] = sgaugeForce;
+								meanFilterIndex++;
+							}
+						}
+					}
+					graphDisplayIndex++;
