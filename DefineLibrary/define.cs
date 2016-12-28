@@ -1798,10 +1798,6 @@ namespace DefineLibrary
 		HD_PICK_OFFSET_SF2,
 		HD_PICK_OFFSET_SF3,
 		HD_PICK_OFFSET_SF4,
-		HD_PICK_OFFSET_SF5,
-		HD_PICK_OFFSET_SF6,
-		HD_PICK_OFFSET_SF7,
-		HD_PICK_OFFSET_SF8,
 		HD_PICK_DOUBLE_DET,
 	}
 
@@ -2337,10 +2333,6 @@ namespace DefineLibrary
 		SF2,
 		SF3,
 		SF4,
-		SF5,
-		SF6,
-		SF7,
-		SF8,
 	}
 	public enum PickCodeInfo
 	{
@@ -2478,10 +2470,6 @@ namespace DefineLibrary
 		SF_TUBE2 = 83000,
 		SF_TUBE3 = 118000,
 		SF_TUBE4 = 153000,
-		SF_TUBE5 = 227000,
-		SF_TUBE6 = 262000,
-		SF_TUBE7 = 297000,
-		SF_TUBE8 = 332000,
 		
 		SF_TUBE1_4SLOT = 64500,		// 35500 + 29000,
 		SF_TUBE2_4SLOT = SF_TUBE1_4SLOT + 70000,		//134500,	// 105500 + 29000,

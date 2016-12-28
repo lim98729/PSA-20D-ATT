@@ -21270,12 +21270,6 @@ namespace PSA_SystemLibrary
 		// top loadcell 전압을 kilogram으로 산출...전압과 indicator force는 동일...
 		public void sgVoltage2kilogram(double volt, out double kg, out RetMessage retMessage)
 		{
-			if ((mc.swcontrol.mechanicalRevision & 0x01) == 0)
-			{
-				kg = -1;
-				retMessage = RetMessage.OK;
-				return;
-			}
 			double a, b;
 
 			for (int i = 0; i < 19; i++)
@@ -21961,18 +21955,14 @@ namespace PSA_SystemLibrary
 				else if (tubeNumber == UnitCodeSF.SF2) tmp += (double)MP_HD_X.SF_TUBE2;
 				else if (tubeNumber == UnitCodeSF.SF3) tmp += (double)MP_HD_X.SF_TUBE3;
 				else if (tubeNumber == UnitCodeSF.SF4) tmp += (double)MP_HD_X.SF_TUBE4;
-				else if (tubeNumber == UnitCodeSF.SF5) tmp += (double)MP_HD_X.SF_TUBE5;
-				else if (tubeNumber == UnitCodeSF.SF6) tmp += (double)MP_HD_X.SF_TUBE6;
-				else if (tubeNumber == UnitCodeSF.SF7) tmp += (double)MP_HD_X.SF_TUBE7;
-				else if (tubeNumber == UnitCodeSF.SF8) tmp += (double)MP_HD_X.SF_TUBE8;
 				else tmp += (double)MP_HD_X.SF_TUBE1;
 			}
 			else
 			{
 				if (tubeNumber == UnitCodeSF.SF1) tmp += (double)MP_HD_X.SF_TUBE1_4SLOT;
 				else if (tubeNumber == UnitCodeSF.SF2) tmp += (double)MP_HD_X.SF_TUBE2_4SLOT;
-				else if (tubeNumber == UnitCodeSF.SF5) tmp += (double)MP_HD_X.SF_TUBE3_4SLOT;
-				else if (tubeNumber == UnitCodeSF.SF6) tmp += (double)MP_HD_X.SF_TUBE4_4SLOT;
+				else if (tubeNumber == UnitCodeSF.SF3) tmp += (double)MP_HD_X.SF_TUBE3_4SLOT;
+				else if (tubeNumber == UnitCodeSF.SF4) tmp += (double)MP_HD_X.SF_TUBE4_4SLOT;
 				else tmp += (double)MP_HD_X.SF_TUBE1_4SLOT;
 			}
 			tmp += mc.para.CAL.pick.x.value;
@@ -22211,10 +22201,6 @@ namespace PSA_SystemLibrary
 			else if (tubeNumber == UnitCodeSF.SF2) tmp += (double)MP_HD_Y.SF_TUBE2;
 			else if (tubeNumber == UnitCodeSF.SF3) tmp += (double)MP_HD_Y.SF_TUBE3;
 			else if (tubeNumber == UnitCodeSF.SF4) tmp += (double)MP_HD_Y.SF_TUBE4;
-			else if (tubeNumber == UnitCodeSF.SF5) tmp += (double)MP_HD_Y.SF_TUBE5;
-			else if (tubeNumber == UnitCodeSF.SF6) tmp += (double)MP_HD_Y.SF_TUBE6;
-			else if (tubeNumber == UnitCodeSF.SF7) tmp += (double)MP_HD_Y.SF_TUBE7;
-			else if (tubeNumber == UnitCodeSF.SF8) tmp += (double)MP_HD_Y.SF_TUBE8;
 			else tmp += (double)MP_HD_Y.SF_TUBE1;
 			tmp += mc.para.CAL.pick.y.value;
 			#endregion
@@ -22413,18 +22399,14 @@ namespace PSA_SystemLibrary
 				else if (tubeNumber == UnitCodeSF.SF2) tmp += (double)MP_HD_X.SF_TUBE2 + mc.para.HD.pick.offset[(int)UnitCodeSF.SF2].x.value;
 				else if (tubeNumber == UnitCodeSF.SF3) tmp += (double)MP_HD_X.SF_TUBE3 + mc.para.HD.pick.offset[(int)UnitCodeSF.SF3].x.value;
 				else if (tubeNumber == UnitCodeSF.SF4) tmp += (double)MP_HD_X.SF_TUBE4 + mc.para.HD.pick.offset[(int)UnitCodeSF.SF4].x.value;
-				else if (tubeNumber == UnitCodeSF.SF5) tmp += (double)MP_HD_X.SF_TUBE5 + mc.para.HD.pick.offset[(int)UnitCodeSF.SF5].x.value;
-				else if (tubeNumber == UnitCodeSF.SF6) tmp += (double)MP_HD_X.SF_TUBE6 + mc.para.HD.pick.offset[(int)UnitCodeSF.SF6].x.value;
-				else if (tubeNumber == UnitCodeSF.SF7) tmp += (double)MP_HD_X.SF_TUBE7 + mc.para.HD.pick.offset[(int)UnitCodeSF.SF7].x.value;
-				else if (tubeNumber == UnitCodeSF.SF8) tmp += (double)MP_HD_X.SF_TUBE8 + mc.para.HD.pick.offset[(int)UnitCodeSF.SF8].x.value;
 				else tmp += (double)MP_HD_X.SF_TUBE1;
 			}
 			else
 			{
 				if (tubeNumber == UnitCodeSF.SF1) tmp += (double)MP_HD_X.SF_TUBE1_4SLOT + mc.para.HD.pick.offset[(int)UnitCodeSF.SF1].x.value;
 				else if (tubeNumber == UnitCodeSF.SF2) tmp += (double)MP_HD_X.SF_TUBE2_4SLOT + mc.para.HD.pick.offset[(int)UnitCodeSF.SF2].x.value;
-				else if (tubeNumber == UnitCodeSF.SF5) tmp += (double)MP_HD_X.SF_TUBE3_4SLOT + mc.para.HD.pick.offset[(int)UnitCodeSF.SF5].x.value;
-				else if (tubeNumber == UnitCodeSF.SF6) tmp += (double)MP_HD_X.SF_TUBE4_4SLOT + mc.para.HD.pick.offset[(int)UnitCodeSF.SF6].x.value;
+				else if (tubeNumber == UnitCodeSF.SF3) tmp += (double)MP_HD_X.SF_TUBE3_4SLOT + mc.para.HD.pick.offset[(int)UnitCodeSF.SF3].x.value;
+				else if (tubeNumber == UnitCodeSF.SF4) tmp += (double)MP_HD_X.SF_TUBE4_4SLOT + mc.para.HD.pick.offset[(int)UnitCodeSF.SF4].x.value;
 				else tmp += (double)MP_HD_X.SF_TUBE1_4SLOT + mc.para.HD.pick.offset[(int)UnitCodeSF.SF1].x.value;
 			}
 			tmp += mc.para.CAL.pick.x.value;
@@ -22435,10 +22417,6 @@ namespace PSA_SystemLibrary
 				else if (tubeNumber == UnitCodeSF.SF2) tmp += mc.para.HD.pick.pickPosComp[(int)UnitCodeSF.SF2].x.value;
 				else if (tubeNumber == UnitCodeSF.SF3) tmp += mc.para.HD.pick.pickPosComp[(int)UnitCodeSF.SF3].x.value;
 				else if (tubeNumber == UnitCodeSF.SF4) tmp += mc.para.HD.pick.pickPosComp[(int)UnitCodeSF.SF4].x.value;
-				else if (tubeNumber == UnitCodeSF.SF5) tmp += mc.para.HD.pick.pickPosComp[(int)UnitCodeSF.SF5].x.value;
-				else if (tubeNumber == UnitCodeSF.SF6) tmp += mc.para.HD.pick.pickPosComp[(int)UnitCodeSF.SF6].x.value;
-				else if (tubeNumber == UnitCodeSF.SF7) tmp += mc.para.HD.pick.pickPosComp[(int)UnitCodeSF.SF7].x.value;
-				else if (tubeNumber == UnitCodeSF.SF8) tmp += mc.para.HD.pick.pickPosComp[(int)UnitCodeSF.SF8].x.value;
 			}
 			#endregion
 			return tmp;
@@ -22611,10 +22589,6 @@ namespace PSA_SystemLibrary
 			else if (tubeNumber == UnitCodeSF.SF2) tmp += (double)MP_HD_Y.SF_TUBE2 + mc.para.HD.pick.offset[(int)UnitCodeSF.SF2].y.value;
 			else if (tubeNumber == UnitCodeSF.SF3) tmp += (double)MP_HD_Y.SF_TUBE3 + mc.para.HD.pick.offset[(int)UnitCodeSF.SF3].y.value;
 			else if (tubeNumber == UnitCodeSF.SF4) tmp += (double)MP_HD_Y.SF_TUBE4 + mc.para.HD.pick.offset[(int)UnitCodeSF.SF4].y.value;
-			else if (tubeNumber == UnitCodeSF.SF5) tmp += (double)MP_HD_Y.SF_TUBE5 + mc.para.HD.pick.offset[(int)UnitCodeSF.SF5].y.value;
-			else if (tubeNumber == UnitCodeSF.SF6) tmp += (double)MP_HD_Y.SF_TUBE6 + mc.para.HD.pick.offset[(int)UnitCodeSF.SF6].y.value;
-			else if (tubeNumber == UnitCodeSF.SF7) tmp += (double)MP_HD_Y.SF_TUBE7 + mc.para.HD.pick.offset[(int)UnitCodeSF.SF7].y.value;
-			else if (tubeNumber == UnitCodeSF.SF8) tmp += (double)MP_HD_Y.SF_TUBE8 + mc.para.HD.pick.offset[(int)UnitCodeSF.SF8].y.value;
 			else tmp += (double)MP_HD_Y.SF_TUBE1;
 			tmp += mc.para.CAL.pick.y.value;
 
@@ -22624,10 +22598,6 @@ namespace PSA_SystemLibrary
 				else if (tubeNumber == UnitCodeSF.SF2) tmp += mc.para.HD.pick.pickPosComp[(int)UnitCodeSF.SF2].y.value;
 				else if (tubeNumber == UnitCodeSF.SF3) tmp += mc.para.HD.pick.pickPosComp[(int)UnitCodeSF.SF3].y.value;
 				else if (tubeNumber == UnitCodeSF.SF4) tmp += mc.para.HD.pick.pickPosComp[(int)UnitCodeSF.SF4].y.value;
-				else if (tubeNumber == UnitCodeSF.SF5) tmp += mc.para.HD.pick.pickPosComp[(int)UnitCodeSF.SF5].y.value;
-				else if (tubeNumber == UnitCodeSF.SF6) tmp += mc.para.HD.pick.pickPosComp[(int)UnitCodeSF.SF6].y.value;
-				else if (tubeNumber == UnitCodeSF.SF7) tmp += mc.para.HD.pick.pickPosComp[(int)UnitCodeSF.SF7].y.value;
-				else if (tubeNumber == UnitCodeSF.SF8) tmp += mc.para.HD.pick.pickPosComp[(int)UnitCodeSF.SF8].y.value;
 			}
 			#endregion
 			return tmp;
@@ -22765,10 +22735,6 @@ namespace PSA_SystemLibrary
 			else if (tubeNumber == UnitCodeSF.SF2) tmp += mc.para.HD.pick.offset[(int)UnitCodeSF.SF2].z.value;
 			else if (tubeNumber == UnitCodeSF.SF3) tmp += mc.para.HD.pick.offset[(int)UnitCodeSF.SF3].z.value;
 			else if (tubeNumber == UnitCodeSF.SF4) tmp += mc.para.HD.pick.offset[(int)UnitCodeSF.SF4].z.value;
-			else if (tubeNumber == UnitCodeSF.SF5) tmp += mc.para.HD.pick.offset[(int)UnitCodeSF.SF5].z.value;
-			else if (tubeNumber == UnitCodeSF.SF6) tmp += mc.para.HD.pick.offset[(int)UnitCodeSF.SF6].z.value;
-			else if (tubeNumber == UnitCodeSF.SF7) tmp += mc.para.HD.pick.offset[(int)UnitCodeSF.SF7].z.value;
-			else if (tubeNumber == UnitCodeSF.SF8) tmp += mc.para.HD.pick.offset[(int)UnitCodeSF.SF8].z.value;
 			else tmp += mc.para.HD.pick.offset[(int)UnitCodeSF.SF1].z.value;
 			#endregion
 			return tmp;
@@ -23079,18 +23045,14 @@ namespace PSA_SystemLibrary
 				else if (tubeNumber == 2) tmp += (double)MP_HD_X.SF_TUBE2;
 				else if (tubeNumber == 3) tmp += (double)MP_HD_X.SF_TUBE3;
 				else if (tubeNumber == 4) tmp += (double)MP_HD_X.SF_TUBE4;
-				else if (tubeNumber == 5) tmp += (double)MP_HD_X.SF_TUBE5;
-				else if (tubeNumber == 6) tmp += (double)MP_HD_X.SF_TUBE6;
-				else if (tubeNumber == 7) tmp += (double)MP_HD_X.SF_TUBE7;
-				else if (tubeNumber == 8) tmp += (double)MP_HD_X.SF_TUBE8;
 				else tmp += (double)MP_HD_X.SF_TUBE1;
 			}
 			else
 			{
 				if (tubeNumber == 1) tmp += (double)MP_HD_X.SF_TUBE1_4SLOT;
 				else if (tubeNumber == 2) tmp += (double)MP_HD_X.SF_TUBE2_4SLOT;
-				else if (tubeNumber == 5) tmp += (double)MP_HD_X.SF_TUBE3_4SLOT;
-				else if (tubeNumber == 6) tmp += (double)MP_HD_X.SF_TUBE4_4SLOT;
+				else if (tubeNumber == 3) tmp += (double)MP_HD_X.SF_TUBE3_4SLOT;
+				else if (tubeNumber == 4) tmp += (double)MP_HD_X.SF_TUBE4_4SLOT;
 				else tmp += (double)MP_HD_X.SF_TUBE1_4SLOT;
 			}
 			#endregion

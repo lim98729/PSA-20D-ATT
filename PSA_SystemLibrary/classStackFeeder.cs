@@ -138,10 +138,6 @@ namespace PSA_SystemLibrary
 		SF_TUBE_STATUS tubeStatusSF2;
 		SF_TUBE_STATUS tubeStatusSF3;
 		SF_TUBE_STATUS tubeStatusSF4;
-		SF_TUBE_STATUS tubeStatusSF5;
-		SF_TUBE_STATUS tubeStatusSF6;
-		SF_TUBE_STATUS tubeStatusSF7;
-		SF_TUBE_STATUS tubeStatusSF8;
 
 		public SF_TUBE_STATUS tubeStatus(UnitCodeSF unitCode)
 		{
@@ -149,10 +145,6 @@ namespace PSA_SystemLibrary
 			else if (unitCode == UnitCodeSF.SF2) return tubeStatusSF2;
 			else if (unitCode == UnitCodeSF.SF3) return tubeStatusSF3;
 			else if (unitCode == UnitCodeSF.SF4) return tubeStatusSF4;
-			else if (unitCode == UnitCodeSF.SF5) return tubeStatusSF5;
-			else if (unitCode == UnitCodeSF.SF6) return tubeStatusSF6;
-			else if (unitCode == UnitCodeSF.SF7) return tubeStatusSF7;
-			else if (unitCode == UnitCodeSF.SF8) return tubeStatusSF8;
 			else return SF_TUBE_STATUS.INVALID;
 		}
 		
@@ -164,20 +156,12 @@ namespace PSA_SystemLibrary
 				if (tubeStatusSF2 == SF_TUBE_STATUS.WORKING) { tubeStatusSF2 = SF_TUBE_STATUS.READY; EVENT.sfTubeStatus(UnitCodeSF.SF2, SF_TUBE_STATUS.READY); }
 				if (tubeStatusSF3 == SF_TUBE_STATUS.WORKING) { tubeStatusSF3 = SF_TUBE_STATUS.READY; EVENT.sfTubeStatus(UnitCodeSF.SF3, SF_TUBE_STATUS.READY); }
 				if (tubeStatusSF4 == SF_TUBE_STATUS.WORKING) { tubeStatusSF4 = SF_TUBE_STATUS.READY; EVENT.sfTubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.READY); }
-				if (tubeStatusSF5 == SF_TUBE_STATUS.WORKING) { tubeStatusSF5 = SF_TUBE_STATUS.READY; EVENT.sfTubeStatus(UnitCodeSF.SF5, SF_TUBE_STATUS.READY); }
-				if (tubeStatusSF6 == SF_TUBE_STATUS.WORKING) { tubeStatusSF6 = SF_TUBE_STATUS.READY; EVENT.sfTubeStatus(UnitCodeSF.SF6, SF_TUBE_STATUS.READY); }
-				if (tubeStatusSF7 == SF_TUBE_STATUS.WORKING) { tubeStatusSF7 = SF_TUBE_STATUS.READY; EVENT.sfTubeStatus(UnitCodeSF.SF7, SF_TUBE_STATUS.READY); }
-				if (tubeStatusSF8 == SF_TUBE_STATUS.WORKING) { tubeStatusSF8 = SF_TUBE_STATUS.READY; EVENT.sfTubeStatus(UnitCodeSF.SF8, SF_TUBE_STATUS.READY); }
 			}
 
 			if (unitCode == UnitCodeSF.SF1) { tubeStatusSF1 = status; EVENT.sfTubeStatus(UnitCodeSF.SF1, status); }
 			else if (unitCode == UnitCodeSF.SF2) { tubeStatusSF2 = status; EVENT.sfTubeStatus(UnitCodeSF.SF2, status); }
 			else if (unitCode == UnitCodeSF.SF3) { tubeStatusSF3 = status; EVENT.sfTubeStatus(UnitCodeSF.SF3, status); }
 			else if (unitCode == UnitCodeSF.SF4) { tubeStatusSF4 = status; EVENT.sfTubeStatus(UnitCodeSF.SF4, status); }
-			else if (unitCode == UnitCodeSF.SF5) { tubeStatusSF5 = status; EVENT.sfTubeStatus(UnitCodeSF.SF5, status); }
-			else if (unitCode == UnitCodeSF.SF6) { tubeStatusSF6 = status; EVENT.sfTubeStatus(UnitCodeSF.SF6, status); }
-			else if (unitCode == UnitCodeSF.SF7) { tubeStatusSF7 = status; EVENT.sfTubeStatus(UnitCodeSF.SF7, status); }
-			else if (unitCode == UnitCodeSF.SF8) { tubeStatusSF8 = status; EVENT.sfTubeStatus(UnitCodeSF.SF8, status); }
 		}
 		public bool tubeLast
 		{
@@ -188,10 +172,6 @@ namespace PSA_SystemLibrary
 				if (tubeStatus(UnitCodeSF.SF2) != SF_TUBE_STATUS.INVALID) i++;
 				if (tubeStatus(UnitCodeSF.SF3) != SF_TUBE_STATUS.INVALID) i++;
 				if (tubeStatus(UnitCodeSF.SF4) != SF_TUBE_STATUS.INVALID) i++;
-				if (tubeStatus(UnitCodeSF.SF5) != SF_TUBE_STATUS.INVALID) i++;
-				if (tubeStatus(UnitCodeSF.SF6) != SF_TUBE_STATUS.INVALID) i++;
-				if (tubeStatus(UnitCodeSF.SF7) != SF_TUBE_STATUS.INVALID) i++;
-				if (tubeStatus(UnitCodeSF.SF8) != SF_TUBE_STATUS.INVALID) i++;
 				if (i > 1) return false;
 				return true;
 			}
@@ -205,19 +185,11 @@ namespace PSA_SystemLibrary
 				if (tubeStatusSF2 == SF_TUBE_STATUS.WORKING) return UnitCodeSF.SF2;
 				if (tubeStatusSF3 == SF_TUBE_STATUS.WORKING) return UnitCodeSF.SF3;
 				if (tubeStatusSF4 == SF_TUBE_STATUS.WORKING) return UnitCodeSF.SF4;
-				if (tubeStatusSF5 == SF_TUBE_STATUS.WORKING) return UnitCodeSF.SF5;
-				if (tubeStatusSF6 == SF_TUBE_STATUS.WORKING) return UnitCodeSF.SF6;
-				if (tubeStatusSF7 == SF_TUBE_STATUS.WORKING) return UnitCodeSF.SF7;
-				if (tubeStatusSF8 == SF_TUBE_STATUS.WORKING) return UnitCodeSF.SF8;
 
 				if (tubeStatusSF1 == SF_TUBE_STATUS.READY) { tubeStatus(UnitCodeSF.SF1, SF_TUBE_STATUS.WORKING); return UnitCodeSF.SF1; }
 				if (tubeStatusSF2 == SF_TUBE_STATUS.READY) { tubeStatus(UnitCodeSF.SF2, SF_TUBE_STATUS.WORKING); return UnitCodeSF.SF2; }
 				if (tubeStatusSF3 == SF_TUBE_STATUS.READY) { tubeStatus(UnitCodeSF.SF3, SF_TUBE_STATUS.WORKING); return UnitCodeSF.SF3; }
 				if (tubeStatusSF4 == SF_TUBE_STATUS.READY) { tubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.WORKING); return UnitCodeSF.SF4; }
-				if (tubeStatusSF5 == SF_TUBE_STATUS.READY) { tubeStatus(UnitCodeSF.SF5, SF_TUBE_STATUS.WORKING); return UnitCodeSF.SF5; }
-				if (tubeStatusSF6 == SF_TUBE_STATUS.READY) { tubeStatus(UnitCodeSF.SF6, SF_TUBE_STATUS.WORKING); return UnitCodeSF.SF6; }
-				if (tubeStatusSF7 == SF_TUBE_STATUS.READY) { tubeStatus(UnitCodeSF.SF7, SF_TUBE_STATUS.WORKING); return UnitCodeSF.SF7; }
-				if (tubeStatusSF8 == SF_TUBE_STATUS.READY) { tubeStatus(UnitCodeSF.SF8, SF_TUBE_STATUS.WORKING); return UnitCodeSF.SF8; }
 				return UnitCodeSF.INVALID;
 			}
 		}
@@ -225,18 +197,18 @@ namespace PSA_SystemLibrary
 		{
 			if (unitCode == UnitCodeSFMG.MG1)
 			{
-				tubeStatus(UnitCodeSF.SF1, SF_TUBE_STATUS.INVALID);
-				tubeStatus(UnitCodeSF.SF2, SF_TUBE_STATUS.INVALID);
-				tubeStatus(UnitCodeSF.SF3, SF_TUBE_STATUS.INVALID);
-				tubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.INVALID);
+//                if(mc.swcontrol.mechanicalRevision == 1)
+                {
+                }
+                tubeStatus(UnitCodeSF.SF1, SF_TUBE_STATUS.INVALID);
+                tubeStatus(UnitCodeSF.SF2, SF_TUBE_STATUS.INVALID);
+
 				mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG1, true, out ret.message);
 			}
 			if (unitCode == UnitCodeSFMG.MG2)
 			{
-				tubeStatus(UnitCodeSF.SF5, SF_TUBE_STATUS.INVALID);
-				tubeStatus(UnitCodeSF.SF6, SF_TUBE_STATUS.INVALID);
-				tubeStatus(UnitCodeSF.SF7, SF_TUBE_STATUS.INVALID);
-				tubeStatus(UnitCodeSF.SF8, SF_TUBE_STATUS.INVALID);
+				tubeStatus(UnitCodeSF.SF3, SF_TUBE_STATUS.INVALID);
+				tubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.INVALID);
 				mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG2, true, out ret.message);
 			}
 		}
@@ -251,11 +223,6 @@ namespace PSA_SystemLibrary
 					if (tubeStatus(UnitCodeSF.SF2) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF2; tubeStatus(UnitCodeSF.SF2, SF_TUBE_STATUS.WORKING); return true; }
 					else if (tubeStatus(UnitCodeSF.SF3) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF3; tubeStatus(UnitCodeSF.SF3, SF_TUBE_STATUS.WORKING); return true; }
 					else if (tubeStatus(UnitCodeSF.SF4) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF4; tubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.WORKING); return true; }
-
-					else if (tubeStatus(UnitCodeSF.SF5) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF5; tubeStatus(UnitCodeSF.SF5, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF6) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF6; tubeStatus(UnitCodeSF.SF6, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF7) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF7; tubeStatus(UnitCodeSF.SF7, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF8) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF8; tubeStatus(UnitCodeSF.SF8, SF_TUBE_STATUS.WORKING); return true; }
 					else return false;
 				}
 				if (workingTubeNumber == UnitCodeSF.SF2)
@@ -264,11 +231,6 @@ namespace PSA_SystemLibrary
 					if (tubeStatus(UnitCodeSF.SF3) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF3; tubeStatus(UnitCodeSF.SF3, SF_TUBE_STATUS.WORKING); return true; }
 					else if (tubeStatus(UnitCodeSF.SF4) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF4; tubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.WORKING); return true; }
 					else if (tubeStatus(UnitCodeSF.SF1) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF1; tubeStatus(UnitCodeSF.SF1, SF_TUBE_STATUS.WORKING); return true; }
-
-					else if (tubeStatus(UnitCodeSF.SF5) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF5; tubeStatus(UnitCodeSF.SF5, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF6) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF6; tubeStatus(UnitCodeSF.SF6, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF7) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF7; tubeStatus(UnitCodeSF.SF7, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF8) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF8; tubeStatus(UnitCodeSF.SF8, SF_TUBE_STATUS.WORKING); return true; }
 					else return false;
 				}
 				if (workingTubeNumber == UnitCodeSF.SF3)
@@ -277,11 +239,6 @@ namespace PSA_SystemLibrary
 					if (tubeStatus(UnitCodeSF.SF4) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF4; tubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.WORKING); return true; }
 					else if (tubeStatus(UnitCodeSF.SF1) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF1; tubeStatus(UnitCodeSF.SF1, SF_TUBE_STATUS.WORKING); return true; }
 					else if (tubeStatus(UnitCodeSF.SF2) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF2; tubeStatus(UnitCodeSF.SF2, SF_TUBE_STATUS.WORKING); return true; }
-
-					else if (tubeStatus(UnitCodeSF.SF5) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF5; tubeStatus(UnitCodeSF.SF5, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF6) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF6; tubeStatus(UnitCodeSF.SF6, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF7) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF7; tubeStatus(UnitCodeSF.SF7, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF8) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF8; tubeStatus(UnitCodeSF.SF8, SF_TUBE_STATUS.WORKING); return true; }
 					else return false;
 				}
 				if (workingTubeNumber == UnitCodeSF.SF4)
@@ -290,66 +247,9 @@ namespace PSA_SystemLibrary
 					if (tubeStatus(UnitCodeSF.SF1) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF1; tubeStatus(UnitCodeSF.SF1, SF_TUBE_STATUS.WORKING); return true; }
 					else if (tubeStatus(UnitCodeSF.SF2) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF2; tubeStatus(UnitCodeSF.SF2, SF_TUBE_STATUS.WORKING); return true; }
 					else if (tubeStatus(UnitCodeSF.SF3) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF3; tubeStatus(UnitCodeSF.SF3, SF_TUBE_STATUS.WORKING); return true; }
-
-					else if (tubeStatus(UnitCodeSF.SF5) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF5; tubeStatus(UnitCodeSF.SF5, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF6) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF6; tubeStatus(UnitCodeSF.SF6, SF_TUBE_STATUS.WORKING);tubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF7) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF7; tubeStatus(UnitCodeSF.SF7, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF8) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF8; tubeStatus(UnitCodeSF.SF8, SF_TUBE_STATUS.WORKING); return true; }
 					else return false;
 				}
-				if (workingTubeNumber == UnitCodeSF.SF5)
-				{
-					tubeStatus(UnitCodeSF.SF5, SF_TUBE_STATUS.INVALID);
-					if (tubeStatus(UnitCodeSF.SF6) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF6; tubeStatus(UnitCodeSF.SF6, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF7) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF7; tubeStatus(UnitCodeSF.SF7, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF8) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF8; tubeStatus(UnitCodeSF.SF8, SF_TUBE_STATUS.WORKING); return true; }
-
-					else if (tubeStatus(UnitCodeSF.SF1) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF1; tubeStatus(UnitCodeSF.SF1, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF2) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF2; tubeStatus(UnitCodeSF.SF2, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF3) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF3; tubeStatus(UnitCodeSF.SF3, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF4) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF4; tubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.WORKING); return true; }
-					else return false;
-				}
-				if (workingTubeNumber == UnitCodeSF.SF6)
-				{
-					tubeStatus(UnitCodeSF.SF6, SF_TUBE_STATUS.INVALID);
-					if (tubeStatus(UnitCodeSF.SF7) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF7; tubeStatus(UnitCodeSF.SF7, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF8) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF8; tubeStatus(UnitCodeSF.SF8, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF5) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF5; tubeStatus(UnitCodeSF.SF5, SF_TUBE_STATUS.WORKING); return true; }
-
-					else if (tubeStatus(UnitCodeSF.SF1) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF1; tubeStatus(UnitCodeSF.SF1, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF2) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF2; tubeStatus(UnitCodeSF.SF2, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF3) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF3; tubeStatus(UnitCodeSF.SF3, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF4) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF4; tubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.WORKING); return true; }
-					else return false;
-				}
-				if (workingTubeNumber == UnitCodeSF.SF7)
-				{
-					tubeStatus(UnitCodeSF.SF7, SF_TUBE_STATUS.INVALID);
-					if (tubeStatus(UnitCodeSF.SF8) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF8; tubeStatus(UnitCodeSF.SF8, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF5) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF5; tubeStatus(UnitCodeSF.SF5, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF6) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF6; tubeStatus(UnitCodeSF.SF6, SF_TUBE_STATUS.WORKING); return true; }
-
-					else if (tubeStatus(UnitCodeSF.SF1) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF1; tubeStatus(UnitCodeSF.SF1, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF2) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF2; tubeStatus(UnitCodeSF.SF2, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF3) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF3; tubeStatus(UnitCodeSF.SF3, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF4) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF4; tubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.WORKING); return true; }
-					else return false;
-				}
-				if (workingTubeNumber == UnitCodeSF.SF8)
-				{
-					tubeStatus(UnitCodeSF.SF8, SF_TUBE_STATUS.INVALID);
-					if (tubeStatus(UnitCodeSF.SF5) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF5; tubeStatus(UnitCodeSF.SF5, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF6) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF6; tubeStatus(UnitCodeSF.SF6, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF7) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF7; tubeStatus(UnitCodeSF.SF7, SF_TUBE_STATUS.WORKING); return true; }
-
-					else if (tubeStatus(UnitCodeSF.SF1) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF1; tubeStatus(UnitCodeSF.SF1, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF2) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF2; tubeStatus(UnitCodeSF.SF2, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF3) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF3; tubeStatus(UnitCodeSF.SF3, SF_TUBE_STATUS.WORKING); return true; }
-					else if (tubeStatus(UnitCodeSF.SF4) == SF_TUBE_STATUS.READY) { reqTubeNumber = UnitCodeSF.SF4; tubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.WORKING); return true; }
-					else return false;
-				}
-
+				
 				return false;
 			}
 		}
@@ -532,8 +432,8 @@ namespace PSA_SystemLibrary
                     }
                     if (readyPosition == 1)
                     {
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF5, out ret.b3, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF6, out ret.b4, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF3, out ret.b3, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF4, out ret.b4, out ret.message); if (ioCheck(sqc, ret.message)) break;
                         Z2.IN_P_LIMIT(out limitCheck2, out ret.message); if (mpiCheck(Z2.config.axisCode, sqc, ret.message)) break;
                     }
 
@@ -578,17 +478,17 @@ namespace PSA_SystemLibrary
                             Z.reset(out ret.message);
                             if (ret.b3)
                             {
-                                if (tubeStatus(UnitCodeSF.SF5) != SF_TUBE_STATUS.INVALID)
-                                    tubeStatus(UnitCodeSF.SF5, SF_TUBE_STATUS.WORKING);
-                                if (tubeStatus(UnitCodeSF.SF6) != SF_TUBE_STATUS.INVALID)
-                                    tubeStatus(UnitCodeSF.SF6, SF_TUBE_STATUS.READY);
+                                if (tubeStatus(UnitCodeSF.SF3) != SF_TUBE_STATUS.INVALID)
+                                    tubeStatus(UnitCodeSF.SF3, SF_TUBE_STATUS.WORKING);
+                                if (tubeStatus(UnitCodeSF.SF4) != SF_TUBE_STATUS.INVALID)
+                                    tubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.READY);
                             }
                             else if (ret.b4)
                             {
-                                if (tubeStatus(UnitCodeSF.SF5) != SF_TUBE_STATUS.INVALID)
-                                    tubeStatus(UnitCodeSF.SF5, SF_TUBE_STATUS.READY);
-                                if (tubeStatus(UnitCodeSF.SF6) != SF_TUBE_STATUS.INVALID)
-                                    tubeStatus(UnitCodeSF.SF6, SF_TUBE_STATUS.WORKING);
+                                if (tubeStatus(UnitCodeSF.SF3) != SF_TUBE_STATUS.INVALID)
+                                    tubeStatus(UnitCodeSF.SF3, SF_TUBE_STATUS.READY);
+                                if (tubeStatus(UnitCodeSF.SF4) != SF_TUBE_STATUS.INVALID)
+                                    tubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.WORKING);
                             }
                             sqc = SQC.READY + 4;
                         }
@@ -609,8 +509,10 @@ namespace PSA_SystemLibrary
                         if (homingZ.ERROR) { Esqc = sqc; sqc = SQC.HOMING_ERROR; break; }
 						
 						// tube가 모두 소진되어서 갈아야 하므로 PickPosComp 을 초기화 한다.
-						if (mc.swcontrol.mechanicalRevision == 0) tubeNumber = 4;
-						else if (mc.swcontrol.mechanicalRevision == 1) tubeNumber = 2;
+                        //if (mc.swcontrol.mechanicalRevision == 0) tubeNumber = 4;
+                        //else if (mc.swcontrol.mechanicalRevision == 1) tubeNumber = 2;
+                        
+                        tubeNumber = 2;
 						for (int i = 0; i < tubeNumber; i++)        // MGZ#1 이므로 0~3까지(0~1까지)
 						{
 							mc.para.HD.pick.pickPosComp[i].x.value = 0;
@@ -626,12 +528,13 @@ namespace PSA_SystemLibrary
                         if (homingZ2.RUNING) break;
                         if (homingZ2.ERROR) { Esqc = sqc; sqc = SQC.HOMING_ERROR; break; }
 						// tube가 모두 소진되어서 갈아야 하므로 PickPosComp 을 초기화 한다.
-						if (mc.swcontrol.mechanicalRevision == 0) tubeNumber = 8;
-						else if (mc.swcontrol.mechanicalRevision == 1) tubeNumber = 6;
-						for (int i = 4; i < tubeNumber; i++)        // MGZ#2 이므로 4~7까지(4~5까지)
+                        //if (mc.swcontrol.mechanicalRevision == 0) tubeNumber = 8;
+                        //else if (mc.swcontrol.mechanicalRevision == 1) tubeNumber = 4;
+                        tubeNumber = 2;
+						for (int i = 0; i < tubeNumber; i++)        // MGZ#2
 						{
-							mc.para.HD.pick.pickPosComp[i].x.value = 0;
-							mc.para.HD.pick.pickPosComp[i].y.value = 0;
+							mc.para.HD.pick.pickPosComp[i + 2].x.value = 0;
+							mc.para.HD.pick.pickPosComp[i + 2].y.value = 0;
 						}
 						magazineClear(UnitCodeSFMG.MG2);
 
@@ -790,8 +693,8 @@ namespace PSA_SystemLibrary
                     }
                     else
                     {
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF5, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF6, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF3, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF4, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
                     }
                     if (ret.b1 || ret.b2)
                     {
@@ -857,8 +760,8 @@ namespace PSA_SystemLibrary
                     }
                     else
                     {
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF5, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF6, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF3, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF4, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
                         Z2.IN_P_LIMIT(out ret.b3, out ret.message); if (mpiCheck(Z2.config.axisCode, sqc, ret.message)) break;
                     }
 
@@ -1020,8 +923,8 @@ namespace PSA_SystemLibrary
                     }
                     else
                     {
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF5, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF6, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF3, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF4, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
                     }
                     if (ret.b1 || ret.b2)
                     {
@@ -1080,7 +983,7 @@ namespace PSA_SystemLibrary
                         Z.move(pos.z.FULL_STROKE, out ret.message);
                         moveSFZ = true;
                     }
-                    else if (tubeStatus(UnitCodeSF.SF5) == SF_TUBE_STATUS.WORKING || tubeStatus(UnitCodeSF.SF6) == SF_TUBE_STATUS.WORKING)
+                    else if (tubeStatus(UnitCodeSF.SF3) == SF_TUBE_STATUS.WORKING || tubeStatus(UnitCodeSF.SF4) == SF_TUBE_STATUS.WORKING)
                     {
                         mc.log.debug.write(mc.log.CODE.INFO, String.Format(textResource.LOG_DEBUG_SF_READY_UP, "MGZ #2"), false);
                         Z2.move(pos.z.FULL_STROKE, out ret.message);
@@ -1137,8 +1040,8 @@ namespace PSA_SystemLibrary
                     }
                     else if(moveSFZ2)
                     {
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF5, out ret.b3, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF6, out ret.b4, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF3, out ret.b3, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF4, out ret.b4, out ret.message); if (ioCheck(sqc, ret.message)) break;
                         Z2.IN_P_LIMIT(out limitCheck2, out ret.message); if (mpiCheck(Z2.config.axisCode, sqc, ret.message)) break;
                     }
 
@@ -1184,15 +1087,15 @@ namespace PSA_SystemLibrary
                             Z.reset(out ret.message);
                             if (ret.b3)
                             {
-                                tubeStatus(UnitCodeSF.SF5, SF_TUBE_STATUS.WORKING);
-                                if (tubeStatus(UnitCodeSF.SF6) != SF_TUBE_STATUS.INVALID)
-                                    tubeStatus(UnitCodeSF.SF6, SF_TUBE_STATUS.READY);
+                                tubeStatus(UnitCodeSF.SF3, SF_TUBE_STATUS.WORKING);
+                                if (tubeStatus(UnitCodeSF.SF4) != SF_TUBE_STATUS.INVALID)
+                                    tubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.READY);
                             }
                             else if (ret.b4)
                             {
-                                if (tubeStatus(UnitCodeSF.SF5) != SF_TUBE_STATUS.INVALID)
-                                    tubeStatus(UnitCodeSF.SF5, SF_TUBE_STATUS.READY);
-                                tubeStatus(UnitCodeSF.SF6, SF_TUBE_STATUS.WORKING);
+                                if (tubeStatus(UnitCodeSF.SF3) != SF_TUBE_STATUS.INVALID)
+                                    tubeStatus(UnitCodeSF.SF3, SF_TUBE_STATUS.READY);
+                                tubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.WORKING);
                             }
                             sqc = SQC.AUTO + 4;
                         }
@@ -1215,8 +1118,9 @@ namespace PSA_SystemLibrary
                         if (homingZ.ERROR) { Esqc = sqc; sqc = SQC.HOMING_ERROR; break; }
 
 						// tube가 모두 소진되어서 갈아야 하므로 PickPosComp 을 초기화 한다.
-						if (mc.swcontrol.mechanicalRevision == 0) tubeNumber = 4;
-						else if (mc.swcontrol.mechanicalRevision == 1) tubeNumber = 2;
+                        //if (mc.swcontrol.mechanicalRevision == 0) tubeNumber = 4;
+                        //else if (mc.swcontrol.mechanicalRevision == 1) 
+                        tubeNumber = 2;
 						for (int i = 0; i < tubeNumber; i++)        // MGZ#1 이므로 0~3까지(0~1까지)
 						{
 							mc.para.HD.pick.pickPosComp[i].x.value = 0;
@@ -1231,12 +1135,13 @@ namespace PSA_SystemLibrary
                         if (homingZ2.ERROR) { Esqc = sqc; sqc = SQC.HOMING_ERROR; break; }
 
 						// tube가 모두 소진되어서 갈아야 하므로 PickPosComp 을 초기화 한다.
-						if (mc.swcontrol.mechanicalRevision == 0) tubeNumber = 8;
-						else if (mc.swcontrol.mechanicalRevision == 1) tubeNumber = 6;
-						for (int i = 4; i < tubeNumber; i++)        // MGZ#2 이므로 4~7까지(4~5까지)
+                        //if (mc.swcontrol.mechanicalRevision == 0) tubeNumber = 8;
+                        //else if (mc.swcontrol.mechanicalRevision == 1) tubeNumber = 6;
+                        tubeNumber = 2;
+						for (int i = 0; i < tubeNumber; i++)        // MGZ#2
 						{
-							mc.para.HD.pick.pickPosComp[i].x.value = 0;
-							mc.para.HD.pick.pickPosComp[i].y.value = 0;
+							mc.para.HD.pick.pickPosComp[i + 2].x.value = 0;
+							mc.para.HD.pick.pickPosComp[i + 2].y.value = 0;
 						}
                     }
                     sqc = SQC.AUTO; break;
@@ -1391,8 +1296,8 @@ namespace PSA_SystemLibrary
                     }
                     else
                     {
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF5, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF6, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF3, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF4, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
                     }
                     if (ret.b1 || ret.b2)
                     {
@@ -1465,8 +1370,8 @@ namespace PSA_SystemLibrary
                     }
                     else
                     {
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF5, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF6, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF3, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF4, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
                         Z2.IN_P_LIMIT(out ret.b3, out ret.message); if (mpiCheck(Z2.config.axisCode, sqc, ret.message)) break;
                     }
 
@@ -1613,8 +1518,8 @@ namespace PSA_SystemLibrary
                     }
                     else
                     {
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF5, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF6, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF3, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF4, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
                     }
 					if (ret.b1 || ret.b2)
 					{
@@ -1795,35 +1700,6 @@ namespace PSA_SystemLibrary
         public classStackFeederPositionZ z2 = new classStackFeederPositionZ();
 	}
 
-	public class classStackFeederPositionX
-	{
-		public double TUBE(UnitCodeSF unitCode)
-		{
-			double tmp;
-			if (mc.swcontrol.mechanicalRevision == 0)
-			{
-				if (unitCode == UnitCodeSF.SF1) tmp = (double)MP_SF_X.TUBE1;
-                else if (unitCode == UnitCodeSF.SF2) tmp = (double)MP_SF_X.TUBE2;
-                else if (unitCode == UnitCodeSF.SF3) tmp = (double)MP_SF_X.TUBE3;
-                else if (unitCode == UnitCodeSF.SF4) tmp = (double)MP_SF_X.TUBE4;
-                else if (unitCode == UnitCodeSF.SF5) tmp = (double)MP_SF_X.TUBE5;
-                else if (unitCode == UnitCodeSF.SF6) tmp = (double)MP_SF_X.TUBE6;
-                else if (unitCode == UnitCodeSF.SF7) tmp = (double)MP_SF_X.TUBE7;
-                else if (unitCode == UnitCodeSF.SF8) tmp = (double)MP_SF_X.TUBE8;
-				else tmp = (double)MP_SF_X.TUBE1;
-			}
-			else
-			{
-                if (unitCode == UnitCodeSF.SF1) tmp = (double)MP_SF_X_4SLOT.TUBE1;
-				else if (unitCode == UnitCodeSF.SF2) tmp = (double)MP_SF_X_4SLOT.TUBE2;
-				else if (unitCode == UnitCodeSF.SF5) tmp = (double)MP_SF_X_4SLOT.TUBE3;
-				else if (unitCode == UnitCodeSF.SF6) tmp = (double)MP_SF_X_4SLOT.TUBE4;
-				else tmp = (double)MP_SF_X_4SLOT.TUBE1;
-			}
-			return tmp;
-		}
-	}
-
 	public class classStackFeederPositionZ
 	{
 		public double DOWN
@@ -1831,7 +1707,8 @@ namespace PSA_SystemLibrary
 			get
 			{
 				double tmp;
-				tmp = (mc.swcontrol.mechanicalRevision == 0) ? (double)MP_SF_Z.DOWN : (double)MP_SF_Z.DOWN_4SLOT;		// 간섭 때문에 더 내려야 한다.
+				//tmp = (mc.swcontrol.mechanicalRevision == 0) ? (double)MP_SF_Z.DOWN : (double)MP_SF_Z.DOWN_4SLOT;		// 간섭 때문에 더 내려야 한다.
+                tmp = (double)MP_SF_Z.DOWN_4SLOT;		// 간섭 때문에 더 내려야 한다.
 				return tmp;
 			}
 		}
@@ -1840,7 +1717,8 @@ namespace PSA_SystemLibrary
 			get
 			{
 				double tmp;
-				tmp = (mc.swcontrol.mechanicalRevision == 0) ? (double)MP_SF_Z.STROKE : (double)MP_SF_Z.STROKE_4SLOT;
+				//tmp = (mc.swcontrol.mechanicalRevision == 0) ? (double)MP_SF_Z.STROKE : (double)MP_SF_Z.STROKE_4SLOT;
+                tmp = (double)MP_SF_Z.STROKE_4SLOT;
 				return tmp;
 			}
 		}

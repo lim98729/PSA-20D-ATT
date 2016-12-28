@@ -938,7 +938,7 @@ namespace PSA_SystemLibrary
 					mc.IN.CV.SMEMA_NEXT(out ret.b, out ret.message);
 					if (!ret.b) break;
                     // 2016.10.24 - Unloader 아닐때만 SMEMA OUT 신호를 킨다.
-                    if (mc.swcontrol.nextMCUnloader == 0)
+                    if (mc.swcontrol.useUnloaderBuffer == 0)
                     {
                         mc.OUT.CV.SMEMA_NEXT(true, out ret.message);
                         sqc = 100; break;
@@ -977,7 +977,7 @@ namespace PSA_SystemLibrary
 					mc.OUT.CV.FD_MTR3(true, out ret.message); if (ioCheck(sqc, ret.message)) break;
 
                     // 2016.10.24 - Unloader 벨트 같이 돌린다.
-                    if (mc.swcontrol.nextMCUnloader == 1)
+                    if (mc.swcontrol.useUnloaderBuffer == 1)
                     {
                         mc.OUT.CV.UV_FD_MTR_RUN(true, out ret.message); if (ioCheck(sqc, ret.message)) break;
                     }
@@ -1007,7 +1007,7 @@ namespace PSA_SystemLibrary
 					if (dwell.Elapsed < 0.1) break;
 					speed = timer.Elapsed / T3 * (V3 - V2) + V2;
 
-                    if (mc.swcontrol.nextMCUnloader == 0)
+                    if (mc.swcontrol.useUnloaderBuffer == 0)
                     {
                         mc.AOUT.CV.FD_MTR3(speed, out ret.message); if (ioCheck(sqc, ret.message)) break;
                         dwell.Reset();
@@ -1035,7 +1035,7 @@ namespace PSA_SystemLibrary
 					mc.AOUT.CV.FD_MTR3(mc.para.CV.unloadingConveyorSpeed.value, out ret.message);
 
                     // 2016.10.24 - Amkor Unloader 일 경우 UV MTR 멈춘다.
-                    if (mc.swcontrol.nextMCUnloader == 1)
+                    if (mc.swcontrol.useUnloaderBuffer == 1)
                     {
                         mc.OUT.CV.UV_FD_MTR_RUN(false, out ret.message);
 
@@ -1083,7 +1083,7 @@ namespace PSA_SystemLibrary
 					//string str = "CV ToNextMC Esqc " + Esqc.ToString();
 
                     // 2016.10.24 - Amkor Unloader 일 경우 UV MTR 멈춘다.
-                    if (mc.swcontrol.nextMCUnloader == 1)
+                    if (mc.swcontrol.useUnloaderBuffer == 1)
                     {
                         mc.OUT.CV.UV_FD_MTR_RUN(false, out ret.message);
                     }

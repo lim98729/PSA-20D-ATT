@@ -245,7 +245,7 @@ namespace PSA_Application
 				else
 					TB_PROD_Work_TrayID.Text = mc.board.working.tmsInfo.TrayID;
 
-                if (mc.swcontrol.nextMCUnloader == 0)
+                if (mc.swcontrol.useUnloaderBuffer == 0)
                 {
 				    // Display Tray Count
 				    TB_PROD_Work_TrayCount.Text = mc.para.runInfo.trayLotCount.ToString();

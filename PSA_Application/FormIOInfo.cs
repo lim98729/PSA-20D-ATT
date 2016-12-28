@@ -55,24 +55,16 @@ namespace PSA_Application
             //string[] outputNameETC = { "Input Conveyor Belt", "Work Conveyor Belt", "Output Conveyor Belt", "VPPM" };
             string[] outputNameETC = { "Input Conveyor Belt", "Work Conveyor Belt", "Output Conveyor Belt", "" };
 
+            for (int k = 0; k < 32; k++)
+            {
+                if (inputName1[k] == "Tube Detect Sensor #3" || inputName1[k] == "Tube Detect Sensor #4" || inputName1[k] == "Tube Detect Sensor #7" || inputName1[k] == "Tube Detect Sensor #8")
+                    inputName1[k] = "";
+                if (inputName1[k] == "Tube Detect Sensor #5") inputName1[k] = "Tube Detect Sensor #3";
+                if (inputName1[k] == "Tube Detect Sensor #6") inputName1[k] = "Tube Detect Sensor #4";
+            }
+
             if (mc.swcontrol.mechanicalRevision == 1)
             {
-                for (int k = 0; k < 32; k++)
-                {
-                    if (inputName1[k] == "Tube Detect Sensor #3" || inputName1[k] == "Tube Detect Sensor #4" || inputName1[k] == "Tube Detect Sensor #7" || inputName1[k] == "Tube Detect Sensor #8")
-                        inputName1[k] = "";
-                    if (inputName1[k] == "Tube Detect Sensor #5") inputName1[k] = "Tube Detect Sensor #3";
-                    if (inputName1[k] == "Tube Detect Sensor #6") inputName1[k] = "Tube Detect Sensor #4";
-                }
-
-                for (int k = 0; k < 14; k++)
-                {
-                    if (inputNameETC[k] == "Tube Guide Sensor #3" || inputNameETC[k] == "Tube Guide Sensor #4" || inputNameETC[k] == "Tube Guide Sensor #7" || inputNameETC[k] == "Tube Guide Sensor #8")
-                        inputNameETC[k] = "";
-                    if (inputNameETC[k] == "Tube Guide Sensor #5") inputNameETC[k] = "Tube Guide Sensor #3";
-                    if (inputNameETC[k] == "Tube Guide Sensor #6") inputNameETC[k] = "Tube Guide Sensor #4";
-
-                }
             }
 
             int nameIndex = 0; int i = 0; int subIndex = 0;
@@ -134,13 +126,11 @@ namespace PSA_Application
                     else if(inputNameETC[nameIndex] == "Tube Guide Sensor #4") GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = "13";
                     else if (inputNameETC[nameIndex] == "Tube Guide Sensor #5")
                     {
-                        if (mc.swcontrol.oldGuideAddress) GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = "14";
-                        else GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = "12";
+                        GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = "12";
                     }
                     else if (inputNameETC[nameIndex] == "Tube Guide Sensor #6")
                     {
-                        if (mc.swcontrol.oldGuideAddress) GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = "15";
-                        else GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = "13";
+                        GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = "13";
                     }
                 }
                 else if (inputNameETC[nameIndex] == "Tube Guide Sensor #7" || inputNameETC[nameIndex] == "Tube Guide Sensor #8")
@@ -421,80 +411,34 @@ namespace PSA_Application
                 else imageDisp = imageOff;
                 GV_InputModule_1.Rows[11].Cells[(int)CellName.ONOFF].Value = imageDisp;
 
+                mc.IN.SF.TUBE_DET(UnitCodeSF.SF3, out ret.b, out ret.message);
+                if (ret.b) imageDisp = imageOn;
+                else imageDisp = imageOff;
+                GV_InputModule_1.Rows[12].Cells[(int)CellName.ONOFF].Value = imageDisp;
+
+                mc.IN.SF.TUBE_DET(UnitCodeSF.SF4, out ret.b, out ret.message);
+                if (ret.b) imageDisp = imageOn;
+                else imageDisp = imageOff;
+                GV_InputModule_1.Rows[13].Cells[(int)CellName.ONOFF].Value = imageDisp;
+
+                mc.IN.SF.MG_RESET(UnitCodeSFMG.MG1, out ret.b, out ret.message);
+                if (ret.b) imageDisp = imageOn;
+                else imageDisp = imageOff;
+                GV_InputModule_1.Rows[18].Cells[(int)CellName.ONOFF].Value = imageDisp;
+
+                mc.IN.SF.MG_RESET(UnitCodeSFMG.MG2, out ret.b, out ret.message);
+                if (ret.b) imageDisp = imageOn;
+                else imageDisp = imageOff;
+                GV_InputModule_1.Rows[19].Cells[(int)CellName.ONOFF].Value = imageDisp;
+
+                mc.IN.PD.UP_SENSOR_CHK(out ret.b, out ret.message);
+                if (ret.b) imageDisp = imageOn;
+                else imageDisp = imageOff;
+                GV_InputModule_1.Rows[21].Cells[(int)CellName.ONOFF].Value = imageDisp;
+
                 if (mc.swcontrol.mechanicalRevision == 0)
                 {
-                    mc.IN.SF.TUBE_DET(UnitCodeSF.SF3, out ret.b, out ret.message);
-                    if (ret.b) imageDisp = imageOn;
-                    else imageDisp = imageOff;
-                    GV_InputModule_1.Rows[12].Cells[(int)CellName.ONOFF].Value = imageDisp;
-
-                    mc.IN.SF.TUBE_DET(UnitCodeSF.SF4, out ret.b, out ret.message);
-                    if (ret.b) imageDisp = imageOn;
-                    else imageDisp = imageOff;
-                    GV_InputModule_1.Rows[13].Cells[(int)CellName.ONOFF].Value = imageDisp;
-
-                    mc.IN.SF.TUBE_DET(UnitCodeSF.SF5, out ret.b, out ret.message);
-                    if (ret.b) imageDisp = imageOn;
-                    else imageDisp = imageOff;
-                    GV_InputModule_1.Rows[14].Cells[(int)CellName.ONOFF].Value = imageDisp;
-
-                    mc.IN.SF.TUBE_DET(UnitCodeSF.SF6, out ret.b, out ret.message);
-                    if (ret.b) imageDisp = imageOn;
-                    else imageDisp = imageOff;
-                    GV_InputModule_1.Rows[15].Cells[(int)CellName.ONOFF].Value = imageDisp;
-
-                    mc.IN.SF.TUBE_DET(UnitCodeSF.SF7, out ret.b, out ret.message);
-                    if (ret.b) imageDisp = imageOn;
-                    else imageDisp = imageOff;
-                    GV_InputModule_1.Rows[16].Cells[(int)CellName.ONOFF].Value = imageDisp;
-
-                    mc.IN.SF.TUBE_DET(UnitCodeSF.SF8, out ret.b, out ret.message);
-                    if (ret.b) imageDisp = imageOn;
-                    else imageDisp = imageOff;
-                    GV_InputModule_1.Rows[17].Cells[(int)CellName.ONOFF].Value = imageDisp;
-
-                    mc.IN.SF.MG_RESET(UnitCodeSFMG.MG1, out ret.b, out ret.message);
-                    if (ret.b) imageDisp = imageOn;
-                    else imageDisp = imageOff;
-                    GV_InputModule_1.Rows[18].Cells[(int)CellName.ONOFF].Value = imageDisp;
-
-                    mc.IN.SF.MG_RESET(UnitCodeSFMG.MG2, out ret.b, out ret.message);
-                    if (ret.b) imageDisp = imageOn;
-                    else imageDisp = imageOff;
-                    GV_InputModule_1.Rows[19].Cells[(int)CellName.ONOFF].Value = imageDisp;
-
-                    mc.IN.PD.UP_SENSOR_CHK(out ret.b, out ret.message);
-                    if (ret.b) imageDisp = imageOn;
-                    else imageDisp = imageOff;
-                    GV_InputModule_1.Rows[21].Cells[(int)CellName.ONOFF].Value = imageDisp;
-                }
-                else 
-                {
-                    mc.IN.SF.TUBE_DET(UnitCodeSF.SF5, out ret.b, out ret.message);
-                    if (ret.b) imageDisp = imageOn;
-                    else imageDisp = imageOff;
-                    GV_InputModule_1.Rows[12].Cells[(int)CellName.ONOFF].Value = imageDisp;
-
-                    mc.IN.SF.TUBE_DET(UnitCodeSF.SF6, out ret.b, out ret.message);
-                    if (ret.b) imageDisp = imageOn;
-                    else imageDisp = imageOff;
-                    GV_InputModule_1.Rows[13].Cells[(int)CellName.ONOFF].Value = imageDisp;
-
-                    mc.IN.SF.MG_RESET(UnitCodeSFMG.MG1, out ret.b, out ret.message);
-                    if (ret.b) imageDisp = imageOn;
-                    else imageDisp = imageOff;
-                    GV_InputModule_1.Rows[14].Cells[(int)CellName.ONOFF].Value = imageDisp;
-
-                    mc.IN.SF.MG_RESET(UnitCodeSFMG.MG2, out ret.b, out ret.message);
-                    if (ret.b) imageDisp = imageOn;
-                    else imageDisp = imageOff;
-                    GV_InputModule_1.Rows[15].Cells[(int)CellName.ONOFF].Value = imageDisp;
-
-                    mc.IN.PD.UP_SENSOR_CHK(out ret.b, out ret.message);
-                    if (ret.b) imageDisp = imageOn;
-                    else imageDisp = imageOff;
-                    GV_InputModule_1.Rows[16].Cells[(int)CellName.ONOFF].Value = imageDisp;
-
+                    
                 }
 
                 #endregion
@@ -522,52 +466,19 @@ namespace PSA_Application
                 else imageDisp = imageOff;
                 GV_InputModule_ETC.Rows[3].Cells[(int)CellName.ONOFF].Value = imageDisp;
 
-                if (mc.swcontrol.mechanicalRevision == 0)
-                {
-                    mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF3, out ret.b, out ret.message);
-                    if (ret.b) imageDisp = imageOn;
-                    else imageDisp = imageOff;
-                    GV_InputModule_ETC.Rows[4].Cells[(int)CellName.ONOFF].Value = imageDisp;
+                mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF3, out ret.b, out ret.message);
+                if (ret.b) imageDisp = imageOn;
+                else imageDisp = imageOff;
+                GV_InputModule_ETC.Rows[4].Cells[(int)CellName.ONOFF].Value = imageDisp;
 
-                    mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF4, out ret.b, out ret.message);
-                    if (ret.b) imageDisp = imageOn;
-                    else imageDisp = imageOff;
-                    GV_InputModule_ETC.Rows[5].Cells[(int)CellName.ONOFF].Value = imageDisp;
+                mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF4, out ret.b, out ret.message);
+                if (ret.b) imageDisp = imageOn;
+                else imageDisp = imageOff;
+                GV_InputModule_ETC.Rows[5].Cells[(int)CellName.ONOFF].Value = imageDisp;
 
-                    mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF5, out ret.b, out ret.message);
-                    if (ret.b) imageDisp = imageOn;
-                    else imageDisp = imageOff;
-                    GV_InputModule_ETC.Rows[6].Cells[(int)CellName.ONOFF].Value = imageDisp;
-
-                    mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF6, out ret.b, out ret.message);
-                    if (ret.b) imageDisp = imageOn;
-                    else imageDisp = imageOff;
-                    GV_InputModule_ETC.Rows[7].Cells[(int)CellName.ONOFF].Value = imageDisp;
-
-                    mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF7, out ret.b, out ret.message);
-                    if (ret.b) imageDisp = imageOn;
-                    else imageDisp = imageOff;
-                    GV_InputModule_ETC.Rows[8].Cells[(int)CellName.ONOFF].Value = imageDisp;
-
-                    mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF8, out ret.b, out ret.message);
-                    if (ret.b) imageDisp = imageOn;
-                    else imageDisp = imageOff;
-                    GV_InputModule_ETC.Rows[9].Cells[(int)CellName.ONOFF].Value = imageDisp;
-                }
-                else
-                {
-                    mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF5, out ret.b, out ret.message);
-                    if (ret.b) imageDisp = imageOn;
-                    else imageDisp = imageOff;
-                    GV_InputModule_ETC.Rows[4].Cells[(int)CellName.ONOFF].Value = imageDisp;
-
-                    mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF6, out ret.b, out ret.message);
-                    if (ret.b) imageDisp = imageOn;
-                    else imageDisp = imageOff;
-                    GV_InputModule_ETC.Rows[5].Cells[(int)CellName.ONOFF].Value = imageDisp;
-                }
-
-
+                //if (mc.swcontrol.mechanicalRevision == 0)
+                //{
+                //}
                 #endregion
             }
 

@@ -64,10 +64,6 @@ namespace PSA_Application
 			else if (unitCode == UnitCodeSF.SF2) PB_Tube2.Value = value;
 			else if (unitCode == UnitCodeSF.SF3) PB_Tube3.Value = value;
 			else if (unitCode == UnitCodeSF.SF4) PB_Tube4.Value = value;
-			else if (unitCode == UnitCodeSF.SF5) PB_Tube5.Value = value;
-			else if (unitCode == UnitCodeSF.SF6) PB_Tube6.Value = value;
-			else if (unitCode == UnitCodeSF.SF7) PB_Tube7.Value = value;
-			else if (unitCode == UnitCodeSF.SF8) PB_Tube8.Value = value;
 		}
 		void reset(UnitCodeSFMG unitCode)
 		{
@@ -78,15 +74,11 @@ namespace PSA_Application
 			{
 				mc.sf.tubeStatus(UnitCodeSF.SF1, SF_TUBE_STATUS.INVALID); 
 				mc.sf.tubeStatus(UnitCodeSF.SF2, SF_TUBE_STATUS.INVALID);
-				mc.sf.tubeStatus(UnitCodeSF.SF3, SF_TUBE_STATUS.INVALID);
-				mc.sf.tubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.INVALID);
 			}
 			if (unitCode == UnitCodeSFMG.MG2)
 			{
-				mc.sf.tubeStatus(UnitCodeSF.SF5, SF_TUBE_STATUS.INVALID);
-				mc.sf.tubeStatus(UnitCodeSF.SF6, SF_TUBE_STATUS.INVALID);
-				mc.sf.tubeStatus(UnitCodeSF.SF7, SF_TUBE_STATUS.INVALID);
-				mc.sf.tubeStatus(UnitCodeSF.SF8, SF_TUBE_STATUS.INVALID);
+				mc.sf.tubeStatus(UnitCodeSF.SF3, SF_TUBE_STATUS.INVALID);
+				mc.sf.tubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.INVALID);
 			}
 
 			mc.IN.SF.MG_DET(unitCode, out ret.b, out ret.message);
@@ -96,35 +88,26 @@ namespace PSA_Application
 			{
 				mc.IN.SF.TUBE_DET(UnitCodeSF.SF1, out ret.b1, out ret.message);
 				mc.IN.SF.TUBE_DET(UnitCodeSF.SF2, out ret.b2, out ret.message); 
-				mc.IN.SF.TUBE_DET(UnitCodeSF.SF3, out ret.b3, out ret.message); 
-				mc.IN.SF.TUBE_DET(UnitCodeSF.SF4, out ret.b4, out ret.message);
-				if (!ret.b1 && !ret.b2 && !ret.b3 && !ret.b4) mc.OUT.SF.MG_RESET(unitCode, true, out ret.message);
+				if (!ret.b1 && !ret.b2) mc.OUT.SF.MG_RESET(unitCode, true, out ret.message);
 				if (ret.b1) mc.sf.tubeStatus(UnitCodeSF.SF1, SF_TUBE_STATUS.READY);
 				if (ret.b2) mc.sf.tubeStatus(UnitCodeSF.SF2, SF_TUBE_STATUS.READY);
 				if (mc.swcontrol.mechanicalRevision == 0)
 				{
-					if (ret.b3) mc.sf.tubeStatus(UnitCodeSF.SF3, SF_TUBE_STATUS.READY);
-					if (ret.b4) mc.sf.tubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.READY);
-				}
-				else
-				{
-					mc.sf.tubeStatus(UnitCodeSF.SF3, SF_TUBE_STATUS.INVALID);
-					mc.sf.tubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.INVALID);
+                    //if (ret.b3) mc.sf.tubeStatus(UnitCodeSF.SF3, SF_TUBE_STATUS.READY);
+                    //if (ret.b4) mc.sf.tubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.READY);
 				}
 			}
 			if (unitCode == UnitCodeSFMG.MG2)
 			{
-				mc.IN.SF.TUBE_DET(UnitCodeSF.SF5, out ret.b1, out ret.message);
-				mc.IN.SF.TUBE_DET(UnitCodeSF.SF6, out ret.b2, out ret.message); 
-				mc.IN.SF.TUBE_DET(UnitCodeSF.SF7, out ret.b3, out ret.message); 
-				mc.IN.SF.TUBE_DET(UnitCodeSF.SF8, out ret.b4, out ret.message);
-				if (!ret.b1 && !ret.b2 && !ret.b3 && !ret.b4) mc.OUT.SF.MG_RESET(unitCode, true, out ret.message);
-				if (ret.b1) mc.sf.tubeStatus(UnitCodeSF.SF5, SF_TUBE_STATUS.READY);
-				if (ret.b2) mc.sf.tubeStatus(UnitCodeSF.SF6, SF_TUBE_STATUS.READY);
+                mc.IN.SF.TUBE_DET(UnitCodeSF.SF3, out ret.b3, out ret.message);
+                mc.IN.SF.TUBE_DET(UnitCodeSF.SF4, out ret.b4, out ret.message);
+				if (!ret.b1 && !ret.b2) mc.OUT.SF.MG_RESET(unitCode, true, out ret.message);
+				if (ret.b1) mc.sf.tubeStatus(UnitCodeSF.SF3, SF_TUBE_STATUS.READY);
+				if (ret.b2) mc.sf.tubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.READY);
 				if (mc.swcontrol.mechanicalRevision == 0)
 				{
-					if (ret.b3) mc.sf.tubeStatus(UnitCodeSF.SF7, SF_TUBE_STATUS.READY);
-					if (ret.b4) mc.sf.tubeStatus(UnitCodeSF.SF8, SF_TUBE_STATUS.READY);
+                    //if (ret.b3) mc.sf.tubeStatus(UnitCodeSF.SF7, SF_TUBE_STATUS.READY);
+                    //if (ret.b4) mc.sf.tubeStatus(UnitCodeSF.SF8, SF_TUBE_STATUS.READY);
 				}
 
 			}
@@ -198,19 +181,19 @@ namespace PSA_Application
 		{
 			if (mc.swcontrol.mechanicalRevision == 1)
 			{
-				PB_Tube1.Size = new System.Drawing.Size(50, 115);
-				PB_Tube2.Size = new System.Drawing.Size(50, 115);
-				PB_Tube2.Location = new System.Drawing.Point(68, 3);
+                //PB_Tube1.Size = new System.Drawing.Size(50, 115);
+                //PB_Tube2.Size = new System.Drawing.Size(50, 115);
+                //PB_Tube2.Location = new System.Drawing.Point(68, 3);
 
-				PB_Tube3.Visible = false;
-				PB_Tube4.Visible = false;
+                //PB_Tube3.Visible = false;
+                //PB_Tube4.Visible = false;
 
-				PB_Tube5.Size = new System.Drawing.Size(50, 115);
-				PB_Tube6.Size = new System.Drawing.Size(50, 115);
-				PB_Tube6.Location = new System.Drawing.Point(68, 3);
+                //PB_Tube5.Size = new System.Drawing.Size(50, 115);
+                //PB_Tube6.Size = new System.Drawing.Size(50, 115);
+                //PB_Tube6.Location = new System.Drawing.Point(68, 3);
 
-				PB_Tube7.Visible = false;
-				PB_Tube8.Visible = false;
+                //PB_Tube7.Visible = false;
+                //PB_Tube8.Visible = false;
 			}
 		}
 

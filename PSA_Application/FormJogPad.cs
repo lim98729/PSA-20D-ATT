@@ -1100,238 +1100,82 @@ namespace PSA_Application
 					double resX1, resX2, resY1, resY2;
 					distance = 3000;
 					mc.hdc.LIVE = false;
-					if(!mc.swcontrol.useVisionResolutionPT)
+
+					#region moving
+					posX = mc.hd.tool.cPos.x.REF0;
+					posY = mc.hd.tool.cPos.y.REF0;
+					//posX = (double)MP_TO_X.CAMERA + (double)MP_HD_X.REF0 + mc.para.CAL.machineRef[(int)UnitCodeMachineRef.REF0].x.value;
+					//posY = (double)MP_TO_Y.CAMERA + (double)MP_HD_Y.REF0 + mc.para.CAL.machineRef[(int)UnitCodeMachineRef.REF0].y.value;
+					mc.hd.tool.jogMove(posX + distance, posY + distance, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+					#endregion
+					mc.idle(100);
+					#region circleFind
+					mc.hdc.circleFind();
+					if ((double)mc.hdc.cam.circleCenter.resultRadius == -1)
 					{
-						#region moving
-						posX = mc.hd.tool.cPos.x.REF0;
-						posY = mc.hd.tool.cPos.y.REF0;
-						//posX = (double)MP_TO_X.CAMERA + (double)MP_HD_X.REF0 + mc.para.CAL.machineRef[(int)UnitCodeMachineRef.REF0].x.value;
-						//posY = (double)MP_TO_Y.CAMERA + (double)MP_HD_Y.REF0 + mc.para.CAL.machineRef[(int)UnitCodeMachineRef.REF0].y.value;
-						mc.hd.tool.jogMove(posX + distance, posY + distance, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-						#endregion
-						mc.idle(100);
-						#region circleFind
-						mc.hdc.circleFind();
-						if ((double)mc.hdc.cam.circleCenter.resultRadius == -1)
-						{
-							mc.message.alarm("Vision Error"); goto EXIT;
-						}
-						x1 = mc.hdc.cam.circleCenter.findColumn;
-						y1 = mc.hdc.cam.circleCenter.findRow;
-						#endregion
-						mc.idle(100);
-						#region moving
-						mc.hd.tool.jogMove(posX - distance, posY - distance, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-						#endregion
-						mc.idle(100);
-						#region circleFind
-						mc.hdc.circleFind();
-						if ((double)mc.hdc.cam.circleCenter.resultRadius == -1)
-						{
-							mc.message.alarm("Vision Error"); goto EXIT;
-						}
-						x2 = mc.hdc.cam.circleCenter.findColumn;
-						y2 = mc.hdc.cam.circleCenter.findRow;
-						#endregion
-						mc.idle(100);
-						resX1 = (distance * 2) / Math.Abs(x1 - x2);
-						resY1 = (distance * 2) / Math.Abs(y1 - y2);
-
-						#region moving
-						mc.hd.tool.jogMove(posX + distance, posY - distance, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-						#endregion
-						mc.idle(100);
-						#region circleFind
-						mc.hdc.circleFind();
-						if ((double)mc.hdc.cam.circleCenter.resultRadius == -1)
-						{
-							mc.message.alarm("Vision Error"); goto EXIT;
-						}
-						x1 = mc.hdc.cam.circleCenter.findColumn;
-						y1 = mc.hdc.cam.circleCenter.findRow;
-						#endregion
-						mc.idle(100);
-						#region moving
-						mc.hd.tool.jogMove(posX - distance, posY + distance, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-						#endregion
-						mc.idle(100);
-						#region circleFind
-						mc.hdc.circleFind();
-						if ((double)mc.hdc.cam.circleCenter.resultRadius == -1)
-						{
-							mc.message.alarm("Vision Error"); goto EXIT;
-						}
-						x2 = mc.hdc.cam.circleCenter.findColumn;
-						y2 = mc.hdc.cam.circleCenter.findRow;
-						#endregion
-						mc.idle(100);
-						resX2 = (distance * 2) / Math.Abs(x1 - x2);
-						resY2 = (distance * 2) / Math.Abs(y1 - y2);
-
-						mc.hdc.cam.acq.ResolutionX = Math.Round((resX1 + resX2) / 2, 3);
-						mc.hdc.cam.acq.ResolutionY = Math.Round((resY1 + resY2) / 2, 3);
-
-						dataX.value = mc.hdc.cam.acq.ResolutionX;
-						dataY.value = mc.hdc.cam.acq.ResolutionY;
-						#region moving
-						mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-						#endregion
+						mc.message.alarm("Vision Error"); goto EXIT;
 					}
-					else
+					x1 = mc.hdc.cam.circleCenter.findColumn;
+					y1 = mc.hdc.cam.circleCenter.findRow;
+					#endregion
+					mc.idle(100);
+					#region moving
+					mc.hd.tool.jogMove(posX - distance, posY - distance, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+					#endregion
+					mc.idle(100);
+					#region circleFind
+					mc.hdc.circleFind();
+					if ((double)mc.hdc.cam.circleCenter.resultRadius == -1)
 					{
-						#region moving
-						posX = mc.hd.tool.cPos.x.PADC2(0) - 6000;
-						posY = mc.hd.tool.cPos.y.PADC2(0) + 3000;
-						mc.hd.tool.jogMove(posX + distance, posY + distance, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-						#endregion
-						mc.idle(100);
-						#region reqModel
-						if (mc.para.HDC.modelVisionCAL.isCreate.value == (int)BOOL.TRUE)
-						{
-							mc.hdc.reqMode = REQMODE.FIND_MODEL;
-							mc.hdc.reqModelNumber = (int)HDC_MODEL.VISION_RESOLUTION_NCC;
-						}
-						else
-						{
-							mc.hdc.reqMode = REQMODE.GRAB;
-						}
-						mc.hdc.lighting_exposure(mc.para.HDC.light[(int)LIGHTMODE_HDC.CALIBRATION], mc.para.HDC.exposure[(int)LIGHTMODE_HDC.CALIBRATION]);
-
-						mc.hdc.triggerMode = TRIGGERMODE.SOFTWARE;
-						mc.hdc.req = true;
-						mc.main.Thread_Polling();
-						#endregion
-						#region HDC result
-						double rX = 0;
-						double rY = 0;
-						double rT = 0;
-						if (mc.para.HDC.modelVisionCAL.isCreate.value == (int)BOOL.TRUE)
-						{
-							rX = mc.hdc.cam.model[(int)HDC_MODEL.VISION_RESOLUTION_NCC].resultX;
-							rY = mc.hdc.cam.model[(int)HDC_MODEL.VISION_RESOLUTION_NCC].resultY;
-							rT = mc.hdc.cam.model[(int)HDC_MODEL.VISION_RESOLUTION_NCC].resultAngle;
-						}
-						x1 = rX;
-						y1 = rY;
-						#endregion
-						mc.idle(100);
-						#region moving
-						mc.hd.tool.jogMove(posX - distance, posY - distance, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-						#endregion
-						mc.idle(100);
-						#region reqModel
-						if (mc.para.HDC.modelVisionCAL.isCreate.value == (int)BOOL.TRUE)
-						{
-							mc.hdc.reqMode = REQMODE.FIND_MODEL;
-							mc.hdc.reqModelNumber = (int)HDC_MODEL.VISION_RESOLUTION_NCC;
-						}
-						else
-						{
-							mc.hdc.reqMode = REQMODE.GRAB;
-						}
-						mc.hdc.lighting_exposure(mc.para.HDC.light[(int)LIGHTMODE_HDC.CALIBRATION], mc.para.HDC.exposure[(int)LIGHTMODE_HDC.CALIBRATION]);
-
-						mc.hdc.triggerMode = TRIGGERMODE.SOFTWARE;
-						mc.hdc.req = true;
-						mc.main.Thread_Polling();
-						#endregion
-						#region HDC result
-						rX = 0;
-						rY = 0;
-						rT = 0;
-						if (mc.para.HDC.modelVisionCAL.isCreate.value == (int)BOOL.TRUE)
-						{
-							rX = mc.hdc.cam.model[(int)HDC_MODEL.VISION_RESOLUTION_NCC].resultX;
-							rY = mc.hdc.cam.model[(int)HDC_MODEL.VISION_RESOLUTION_NCC].resultY;
-							rT = mc.hdc.cam.model[(int)HDC_MODEL.VISION_RESOLUTION_NCC].resultAngle;
-						}
-						x2 = rX;
-						y2 = rY;
-						#endregion
-						mc.idle(100);
-						resX1 = (distance * 2) / (Math.Abs(x1 - x2) / mc.hdc.cam.acq.ResolutionX);
-						resY1 = (distance * 2) / (Math.Abs(y1 - y2) / mc.hdc.cam.acq.ResolutionY);
-
-						#region moving
-						mc.hd.tool.jogMove(posX + distance, posY - distance, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-						#endregion
-						mc.idle(100);
-						#region reqModel
-						if (mc.para.HDC.modelVisionCAL.isCreate.value == (int)BOOL.TRUE)
-						{
-							mc.hdc.reqMode = REQMODE.FIND_MODEL;
-							mc.hdc.reqModelNumber = (int)HDC_MODEL.VISION_RESOLUTION_NCC;
-						}
-						else
-						{
-							mc.hdc.reqMode = REQMODE.GRAB;
-						}
-						mc.hdc.lighting_exposure(mc.para.HDC.light[(int)LIGHTMODE_HDC.CALIBRATION], mc.para.HDC.exposure[(int)LIGHTMODE_HDC.CALIBRATION]);
-
-						mc.hdc.triggerMode = TRIGGERMODE.SOFTWARE;
-						mc.hdc.req = true;
-						mc.main.Thread_Polling();
-						#endregion
-						#region HDC result
-						rX = 0;
-						rY = 0;
-						rT = 0;
-						if (mc.para.HDC.modelVisionCAL.isCreate.value == (int)BOOL.TRUE)
-						{
-							rX = mc.hdc.cam.model[(int)HDC_MODEL.VISION_RESOLUTION_NCC].resultX;
-							rY = mc.hdc.cam.model[(int)HDC_MODEL.VISION_RESOLUTION_NCC].resultY;
-							rT = mc.hdc.cam.model[(int)HDC_MODEL.VISION_RESOLUTION_NCC].resultAngle;
-						}
-						x1 = rX;
-						y1 = rY;
-						#endregion
-						mc.idle(100);
-						#region moving
-						mc.hd.tool.jogMove(posX - distance, posY + distance, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-						#endregion
-						mc.idle(100);
-						#region reqModel
-						if (mc.para.HDC.modelVisionCAL.isCreate.value == (int)BOOL.TRUE)
-						{
-							mc.hdc.reqMode = REQMODE.FIND_MODEL;
-							mc.hdc.reqModelNumber = (int)HDC_MODEL.VISION_RESOLUTION_NCC;
-						}
-						else
-						{
-							mc.hdc.reqMode = REQMODE.GRAB;
-						}
-						mc.hdc.lighting_exposure(mc.para.HDC.light[(int)LIGHTMODE_HDC.CALIBRATION], mc.para.HDC.exposure[(int)LIGHTMODE_HDC.CALIBRATION]);
-
-						mc.hdc.triggerMode = TRIGGERMODE.SOFTWARE;
-						mc.hdc.req = true;
-						mc.main.Thread_Polling();
-						#endregion
-						#region HDC result
-						rX = 0;
-						rY = 0;
-						rT = 0;
-						if (mc.para.HDC.modelVisionCAL.isCreate.value == (int)BOOL.TRUE)
-						{
-							rX = mc.hdc.cam.model[(int)HDC_MODEL.VISION_RESOLUTION_NCC].resultX;
-							rY = mc.hdc.cam.model[(int)HDC_MODEL.VISION_RESOLUTION_NCC].resultY;
-							rT = mc.hdc.cam.model[(int)HDC_MODEL.VISION_RESOLUTION_NCC].resultAngle;
-						}
-						x2 = rX;
-						y2 = rY;
-						#endregion
-						mc.idle(100);
-						resX2 = (distance * 2) / (Math.Abs(x1 - x2) / mc.hdc.cam.acq.ResolutionX);
-						resY2 = (distance * 2) / (Math.Abs(y1 - y2) / mc.hdc.cam.acq.ResolutionY);
-
-						mc.hdc.cam.acq.ResolutionX = Math.Round((resX1 + resX2) / 2, 3);
-						mc.hdc.cam.acq.ResolutionY = Math.Round((resY1 + resY2) / 2, 3);
-
-						dataX.value = mc.hdc.cam.acq.ResolutionX;
-						dataY.value = mc.hdc.cam.acq.ResolutionY;
-						#region moving
-						mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-						#endregion
+						mc.message.alarm("Vision Error"); goto EXIT;
 					}
+					x2 = mc.hdc.cam.circleCenter.findColumn;
+					y2 = mc.hdc.cam.circleCenter.findRow;
+					#endregion
+					mc.idle(100);
+					resX1 = (distance * 2) / Math.Abs(x1 - x2);
+					resY1 = (distance * 2) / Math.Abs(y1 - y2);
+
+					#region moving
+					mc.hd.tool.jogMove(posX + distance, posY - distance, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+					#endregion
+					mc.idle(100);
+					#region circleFind
+					mc.hdc.circleFind();
+					if ((double)mc.hdc.cam.circleCenter.resultRadius == -1)
+					{
+						mc.message.alarm("Vision Error"); goto EXIT;
+					}
+					x1 = mc.hdc.cam.circleCenter.findColumn;
+					y1 = mc.hdc.cam.circleCenter.findRow;
+					#endregion
+					mc.idle(100);
+					#region moving
+					mc.hd.tool.jogMove(posX - distance, posY + distance, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+					#endregion
+					mc.idle(100);
+					#region circleFind
+					mc.hdc.circleFind();
+					if ((double)mc.hdc.cam.circleCenter.resultRadius == -1)
+					{
+						mc.message.alarm("Vision Error"); goto EXIT;
+					}
+					x2 = mc.hdc.cam.circleCenter.findColumn;
+					y2 = mc.hdc.cam.circleCenter.findRow;
+					#endregion
+					mc.idle(100);
+					resX2 = (distance * 2) / Math.Abs(x1 - x2);
+					resY2 = (distance * 2) / Math.Abs(y1 - y2);
+
+					mc.hdc.cam.acq.ResolutionX = Math.Round((resX1 + resX2) / 2, 3);
+					mc.hdc.cam.acq.ResolutionY = Math.Round((resY1 + resY2) / 2, 3);
+
+					dataX.value = mc.hdc.cam.acq.ResolutionX;
+					dataY.value = mc.hdc.cam.acq.ResolutionY;
+					#region moving
+					mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+					#endregion
+					
 					mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.CALIBRATION;
 				}
 				#endregion

@@ -449,7 +449,7 @@ namespace PSA_SystemLibrary
 					if (ret.b)
 					{
                         // 2016.10.24 - Amkor Unloader 일 경우 SMEMA NEXT OUt 신호 보내지 않는다.
-                        if(mc.swcontrol.nextMCUnloader == 0)
+                        if(mc.swcontrol.useUnloaderBuffer == 0)
 						    mc.OUT.CV.SMEMA_NEXT(true, out ret.message);
 						sqc++; break;
 					}
@@ -466,7 +466,7 @@ namespace PSA_SystemLibrary
 					if (mc.cv.toNextMC.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
                     
                     // 2016.10.24 - Amkor Unloader 일 경우 SMEMA NEXT OUt 신호 보내지 않는다.
-                    if (mc.swcontrol.nextMCUnloader == 0)
+                    if (mc.swcontrol.useUnloaderBuffer == 0)
     					mc.OUT.CV.SMEMA_NEXT(false, out ret.message);
 					
                     sqc -= 4; break;

@@ -48,11 +48,7 @@ namespace PSA_Application
 			if(jogMode == JOGXYZ_MODE.HD_PICK_OFFSET_SF1 || 
 				jogMode == JOGXYZ_MODE.HD_PICK_OFFSET_SF2 || 
 				jogMode == JOGXYZ_MODE.HD_PICK_OFFSET_SF3 || 
-				jogMode == JOGXYZ_MODE.HD_PICK_OFFSET_SF4 || 
-				jogMode == JOGXYZ_MODE.HD_PICK_OFFSET_SF5 || 
-				jogMode == JOGXYZ_MODE.HD_PICK_OFFSET_SF6 || 
-				jogMode == JOGXYZ_MODE.HD_PICK_OFFSET_SF7 || 
-				jogMode == JOGXYZ_MODE.HD_PICK_OFFSET_SF8)
+				jogMode == JOGXYZ_MODE.HD_PICK_OFFSET_SF4)
 			{
 				speedType = SPEED_TYPE.LARGE;
 			}
@@ -151,7 +147,7 @@ namespace PSA_Application
 				}
 				if (jogMode == JOGXYZ_MODE.HD_PICK_OFFSET_SF3)
 				{
-					if (mc.swcontrol.mechanicalRevision == 0)
+					//if (mc.swcontrol.mechanicalRevision == 0)
 					{
 						mc.para.HD.pick.offset[(int)UnitCodeSF.SF3].x.value = dataX.value;
 						mc.para.HD.pick.offset[(int)UnitCodeSF.SF3].y.value = dataY.value;
@@ -160,22 +156,13 @@ namespace PSA_Application
 						posY = mc.hd.tool.tPos.y.PICK(UnitCodeSF.SF3);
 						posZ = mc.hd.tool.tPos.z.PICK(UnitCodeSF.SF3);
 					}
-					else
-					{
-						mc.para.HD.pick.offset[(int)UnitCodeSF.SF5].x.value = dataX.value;
-						mc.para.HD.pick.offset[(int)UnitCodeSF.SF5].y.value = dataY.value;
-						mc.para.HD.pick.offset[(int)UnitCodeSF.SF5].z.value = dataZ.value;
-						posX = mc.hd.tool.tPos.x.PICK(UnitCodeSF.SF5);
-						posY = mc.hd.tool.tPos.y.PICK(UnitCodeSF.SF5);
-						posZ = mc.hd.tool.tPos.z.PICK(UnitCodeSF.SF5);
-					}
 					#region moving
 					mc.hd.tool.jogMoveXYZ(posX, posY, posZ, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 					#endregion
 				}
 				if (jogMode == JOGXYZ_MODE.HD_PICK_OFFSET_SF4)
 				{
-					if (mc.swcontrol.mechanicalRevision == 0)
+					//if (mc.swcontrol.mechanicalRevision == 0)
 					{
 						mc.para.HD.pick.offset[(int)UnitCodeSF.SF4].x.value = dataX.value;
 						mc.para.HD.pick.offset[(int)UnitCodeSF.SF4].y.value = dataY.value;
@@ -184,64 +171,7 @@ namespace PSA_Application
 						posY = mc.hd.tool.tPos.y.PICK(UnitCodeSF.SF4);
 						posZ = mc.hd.tool.tPos.z.PICK(UnitCodeSF.SF4);
 					}
-					else
-					{
-						mc.para.HD.pick.offset[(int)UnitCodeSF.SF6].x.value = dataX.value;
-						mc.para.HD.pick.offset[(int)UnitCodeSF.SF6].y.value = dataY.value;
-						mc.para.HD.pick.offset[(int)UnitCodeSF.SF6].z.value = dataZ.value;
-						posX = mc.hd.tool.tPos.x.PICK(UnitCodeSF.SF6);
-						posY = mc.hd.tool.tPos.y.PICK(UnitCodeSF.SF6);
-						posZ = mc.hd.tool.tPos.z.PICK(UnitCodeSF.SF6);
-					}
 					#region moving
-					mc.hd.tool.jogMoveXYZ(posX, posY, posZ, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-					#endregion
-				}
-				if (jogMode == JOGXYZ_MODE.HD_PICK_OFFSET_SF5)
-				{
-					mc.para.HD.pick.offset[(int)UnitCodeSF.SF5].x.value = dataX.value;
-					mc.para.HD.pick.offset[(int)UnitCodeSF.SF5].y.value = dataY.value;
-					mc.para.HD.pick.offset[(int)UnitCodeSF.SF5].z.value = dataZ.value;
-					#region moving
-					posX = mc.hd.tool.tPos.x.PICK(UnitCodeSF.SF5);
-					posY = mc.hd.tool.tPos.y.PICK(UnitCodeSF.SF5);
-					posZ = mc.hd.tool.tPos.z.PICK(UnitCodeSF.SF5);
-					mc.hd.tool.jogMoveXYZ(posX, posY, posZ, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-					#endregion
-				}
-				if (jogMode == JOGXYZ_MODE.HD_PICK_OFFSET_SF6)
-				{
-					mc.para.HD.pick.offset[(int)UnitCodeSF.SF6].x.value = dataX.value;
-					mc.para.HD.pick.offset[(int)UnitCodeSF.SF6].y.value = dataY.value;
-					mc.para.HD.pick.offset[(int)UnitCodeSF.SF6].z.value = dataZ.value;
-					#region moving
-					posX = mc.hd.tool.tPos.x.PICK(UnitCodeSF.SF6);
-					posY = mc.hd.tool.tPos.y.PICK(UnitCodeSF.SF6);
-					posZ = mc.hd.tool.tPos.z.PICK(UnitCodeSF.SF6);
-					mc.hd.tool.jogMoveXYZ(posX, posY, posZ, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-					#endregion
-				}
-				if (jogMode == JOGXYZ_MODE.HD_PICK_OFFSET_SF7)
-				{
-					mc.para.HD.pick.offset[(int)UnitCodeSF.SF7].x.value = dataX.value;
-					mc.para.HD.pick.offset[(int)UnitCodeSF.SF7].y.value = dataY.value;
-					mc.para.HD.pick.offset[(int)UnitCodeSF.SF7].z.value = dataZ.value;
-					#region moving
-					posX = mc.hd.tool.tPos.x.PICK(UnitCodeSF.SF7);
-					posY = mc.hd.tool.tPos.y.PICK(UnitCodeSF.SF7);
-					posZ = mc.hd.tool.tPos.z.PICK(UnitCodeSF.SF7);
-					mc.hd.tool.jogMoveXYZ(posX, posY, posZ, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-					#endregion
-				}
-				if (jogMode == JOGXYZ_MODE.HD_PICK_OFFSET_SF8)
-				{
-					mc.para.HD.pick.offset[(int)UnitCodeSF.SF8].x.value = dataX.value;
-					mc.para.HD.pick.offset[(int)UnitCodeSF.SF8].y.value = dataY.value;
-					mc.para.HD.pick.offset[(int)UnitCodeSF.SF8].z.value = dataZ.value;
-					#region moving
-					posX = mc.hd.tool.tPos.x.PICK(UnitCodeSF.SF8);
-					posY = mc.hd.tool.tPos.y.PICK(UnitCodeSF.SF8);
-					posZ = mc.hd.tool.tPos.z.PICK(UnitCodeSF.SF8);
 					mc.hd.tool.jogMoveXYZ(posX, posY, posZ, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 					#endregion
 				}

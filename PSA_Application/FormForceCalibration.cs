@@ -145,10 +145,7 @@ namespace PSA_Application
 							retT.d2 = mc.AIN.HeadLoadcell();
 							strainGaugeResult[i] = retT.d2;
 
-							if (mc.swcontrol.mechanicalRevision == 0)
-								mc.log.debug.write(mc.log.CODE.TRACE, "Volt : " + tmpForceCalDataA[j].ToString() + ", VPPM : " + Math.Round(retT.d1, 3).ToString() + ", Count : " + i.ToString() + ", Force : " + autoCheckResult[i].ToString());
-							else
-								mc.log.debug.write(mc.log.CODE.TRACE, "Volt : " + tmpForceCalDataA[j].ToString() + ", VPPM : " + Math.Round(vppmResult[i], 3).ToString() + ", LoadC : " + Math.Round(strainGaugeResult[i], 3).ToString() + ", Count : " + i.ToString() + ", Force : " + autoCheckResult[i].ToString());
+							mc.log.debug.write(mc.log.CODE.TRACE, "Volt : " + tmpForceCalDataA[j].ToString() + ", VPPM : " + Math.Round(vppmResult[i], 3).ToString() + ", LoadC : " + Math.Round(strainGaugeResult[i], 3).ToString() + ", Count : " + i.ToString() + ", Force : " + autoCheckResult[i].ToString());
 						}
 
 						// loadcell force value 생성
@@ -222,10 +219,7 @@ namespace PSA_Application
 						}
 						meanValVSG = sumValVSG / 3.0;
 
-						if (mc.swcontrol.mechanicalRevision == 0)
-							mc.log.debug.write(mc.log.CODE.TRACE, "Max[" + maxIndex.ToString() + "] : " + maxVal.ToString() + ", Min[" + minIndex.ToString() + "] : " + minVal.ToString() + ", Mean : " + meanVal.ToString() + " [kg], " + Math.Round(meanValV, 3).ToString() + "[V]");
-						else
-							mc.log.debug.write(mc.log.CODE.TRACE, "Max[" + maxIndex.ToString() + "] : " + maxVal.ToString() + ", Min[" + minIndex.ToString() + "] : " + minVal.ToString() + ", Mean : " + meanVal.ToString() + " [kg], VPPM: " + Math.Round(meanValV, 3).ToString() + "[V], LD:" + Math.Round(meanValVSG, 3).ToString() + "[V]");
+						mc.log.debug.write(mc.log.CODE.TRACE, "Max[" + maxIndex.ToString() + "] : " + maxVal.ToString() + ", Min[" + minIndex.ToString() + "] : " + minVal.ToString() + ", Mean : " + meanVal.ToString() + " [kg], VPPM: " + Math.Round(meanValV, 3).ToString() + "[V], LD:" + Math.Round(meanValVSG, 3).ToString() + "[V]");
 						//mc.log.debug.write(mc.log.CODE.TRACE, "Max[" + maxIndexV.ToString() + "] : " + maxValV.ToString() + ", Min[" + minIndexV.ToString() + "] : " + minValV.ToString() + ", Mean : " + meanVal.ToString() + " [kg], " + Math.Round(meanValV, 3).ToString() + "[V]");
 
 						//mc.para.CAL.force.B[i].value

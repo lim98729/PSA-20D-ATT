@@ -757,25 +757,13 @@ namespace PSA_Application
 				ff.jogMode = JOGMODE.HDC_CALIBRATION;
 				ff.dataX = mc.para.CAL.HDC_Resolution.x;
 				ff.dataY = mc.para.CAL.HDC_Resolution.y;
-				if(!mc.swcontrol.useVisionResolutionPT)
-				{
-					#region moving
-					posX = mc.hd.tool.cPos.x.REF0;
-					posY = mc.hd.tool.cPos.y.REF0;
-					mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-					#endregion
-					ff.ShowDialog();
-				}
-				else
-				{
-					#region moving
-					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC2(0) - 6000, mc.hd.tool.cPos.y.PADC2(0) + 3000, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-					mc.pd.jogMode = (int)PD_JOGMODE.UP_MODE;
-					mc.pd.jogMove(mc.pd.pos.x.PAD(0), mc.pd.pos.y.PAD(0), mc.pd.pos.z.BD_UP, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-					#endregion
-					ff.Show();
-					while (true) { mc.idle(100); if (ff.IsDisposed) break; }
-				}
+
+                #region moving
+                posX = mc.hd.tool.cPos.x.REF0;
+                posY = mc.hd.tool.cPos.y.REF0;
+                mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                #endregion
+                ff.ShowDialog();
 
 				mc.para.CAL.HDC_Resolution.x.value = ff.dataX.value;
 				mc.para.CAL.HDC_Resolution.y.value = ff.dataY.value;

@@ -342,10 +342,6 @@ namespace PSA_Application
 			if (sender.Equals(LB_PickInfoT2)) mc.para.runInfo.clearPickInfo(UnitCodeSF.SF2);
 			if (sender.Equals(LB_PickInfoT3)) mc.para.runInfo.clearPickInfo(UnitCodeSF.SF3);
 			if (sender.Equals(LB_PickInfoT4)) mc.para.runInfo.clearPickInfo(UnitCodeSF.SF4);
-			if (sender.Equals(LB_PickInfoT5)) mc.para.runInfo.clearPickInfo(UnitCodeSF.SF5);
-			if (sender.Equals(LB_PickInfoT6)) mc.para.runInfo.clearPickInfo(UnitCodeSF.SF6);
-			if (sender.Equals(LB_PickInfoT7)) mc.para.runInfo.clearPickInfo(UnitCodeSF.SF7);
-			if (sender.Equals(LB_PickInfoT8)) mc.para.runInfo.clearPickInfo(UnitCodeSF.SF8);
 			if (sender.Equals(LB_CHAMFER_ERR)) mc.para.runInfo.clearPickInfo();
 		}
 

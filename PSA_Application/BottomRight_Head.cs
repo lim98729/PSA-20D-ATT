@@ -289,10 +289,6 @@ namespace PSA_Application
 			if (sender.Equals(BT_PositionSelect_Pick2)) BT_PositionSelect.Text = BT_PositionSelect_Pick2.Text;
 			if (sender.Equals(BT_PositionSelect_Pick3)) BT_PositionSelect.Text = BT_PositionSelect_Pick3.Text;
 			if (sender.Equals(BT_PositionSelect_Pick4)) BT_PositionSelect.Text = BT_PositionSelect_Pick4.Text;
-			if (sender.Equals(BT_PositionSelect_Pick5)) BT_PositionSelect.Text = BT_PositionSelect_Pick5.Text;
-			if (sender.Equals(BT_PositionSelect_Pick6)) BT_PositionSelect.Text = BT_PositionSelect_Pick6.Text;
-			if (sender.Equals(BT_PositionSelect_Pick7)) BT_PositionSelect.Text = BT_PositionSelect_Pick7.Text;
-			if (sender.Equals(BT_PositionSelect_Pick8)) BT_PositionSelect.Text = BT_PositionSelect_Pick8.Text;
 
 			if (sender.Equals(BT_PositionSelect_ULC)) BT_PositionSelect.Text = BT_PositionSelect_ULC.Text;
 
@@ -380,49 +376,21 @@ namespace PSA_Application
 			}
 			else if (BT_PositionSelect.Text == BT_PositionSelect_Pick3.Text)
 			{
-				if (mc.swcontrol.mechanicalRevision == 0)
-				{
-					posX = mc.hd.tool.cPos.x.PICK(UnitCodeSF.SF3);
-					posY = mc.hd.tool.cPos.y.PICK(UnitCodeSF.SF3);
-				}
-				else
-				{
-					posX = mc.hd.tool.cPos.x.PICK(UnitCodeSF.SF5);
-					posY = mc.hd.tool.cPos.y.PICK(UnitCodeSF.SF5);
-				}
+                posX = mc.hd.tool.cPos.x.PICK(UnitCodeSF.SF3);
+                posY = mc.hd.tool.cPos.y.PICK(UnitCodeSF.SF3);
+
+                //if (mc.swcontrol.mechanicalRevision == 0)
+                //{
+                //}
 			}
 			else if (BT_PositionSelect.Text == BT_PositionSelect_Pick4.Text)
 			{
-				if (mc.swcontrol.mechanicalRevision == 0)
-				{
-					posX = mc.hd.tool.cPos.x.PICK(UnitCodeSF.SF4);
-					posY = mc.hd.tool.cPos.y.PICK(UnitCodeSF.SF4);
-				}
-				else
-				{
-					posX = mc.hd.tool.cPos.x.PICK(UnitCodeSF.SF6);
-					posY = mc.hd.tool.cPos.y.PICK(UnitCodeSF.SF6);
-				}
-			}
-			else if (BT_PositionSelect.Text == BT_PositionSelect_Pick5.Text)
-			{
-				posX = mc.hd.tool.cPos.x.PICK(UnitCodeSF.SF5);
-				posY = mc.hd.tool.cPos.y.PICK(UnitCodeSF.SF5);
-			}
-			else if (BT_PositionSelect.Text == BT_PositionSelect_Pick6.Text)
-			{
-				posX = mc.hd.tool.cPos.x.PICK(UnitCodeSF.SF6);
-				posY = mc.hd.tool.cPos.y.PICK(UnitCodeSF.SF6);
-			}
-			else if (BT_PositionSelect.Text == BT_PositionSelect_Pick7.Text)
-			{
-				posX = mc.hd.tool.cPos.x.PICK(UnitCodeSF.SF7);
-				posY = mc.hd.tool.cPos.y.PICK(UnitCodeSF.SF7);
-			}
-			else if (BT_PositionSelect.Text == BT_PositionSelect_Pick8.Text)
-			{
-				posX = mc.hd.tool.cPos.x.PICK(UnitCodeSF.SF8);
-				posY = mc.hd.tool.cPos.y.PICK(UnitCodeSF.SF8);
+                posX = mc.hd.tool.cPos.x.PICK(UnitCodeSF.SF4);
+                posY = mc.hd.tool.cPos.y.PICK(UnitCodeSF.SF4);
+
+                //if (mc.swcontrol.mechanicalRevision == 0)
+                //{
+                //}
 			}
 			else if (BT_PositionSelect.Text == BT_PositionSelect_ULC.Text)
 			{
@@ -533,49 +501,21 @@ namespace PSA_Application
 			}
 			else if (BT_PositionSelect.Text == BT_PositionSelect_Pick3.Text)
 			{
-				if (mc.swcontrol.mechanicalRevision == 0)
-				{
-					posX = mc.hd.tool.tPos.x.PICK(UnitCodeSF.SF3);
-					posY = mc.hd.tool.tPos.y.PICK(UnitCodeSF.SF3);
-				}
-				else
-				{
-					posX = mc.hd.tool.tPos.x.PICK(UnitCodeSF.SF5);
-					posY = mc.hd.tool.tPos.y.PICK(UnitCodeSF.SF5);
-				}
+                posX = mc.hd.tool.tPos.x.PICK(UnitCodeSF.SF3);
+                posY = mc.hd.tool.tPos.y.PICK(UnitCodeSF.SF3);
+
+                //if (mc.swcontrol.mechanicalRevision == 0)
+                //{
+                //}
 			}
 			else if (BT_PositionSelect.Text == BT_PositionSelect_Pick4.Text)
 			{
-				if (mc.swcontrol.mechanicalRevision == 0)
-				{
-					posX = mc.hd.tool.tPos.x.PICK(UnitCodeSF.SF4);
-					posY = mc.hd.tool.tPos.y.PICK(UnitCodeSF.SF4);
-				}
-				else
-				{
-					posX = mc.hd.tool.tPos.x.PICK(UnitCodeSF.SF6);
-					posY = mc.hd.tool.tPos.y.PICK(UnitCodeSF.SF6);
-				}
-			}
-			else if (BT_PositionSelect.Text == BT_PositionSelect_Pick5.Text)
-			{
-				posX = mc.hd.tool.tPos.x.PICK(UnitCodeSF.SF5);
-				posY = mc.hd.tool.tPos.y.PICK(UnitCodeSF.SF5);
-			}
-			else if (BT_PositionSelect.Text == BT_PositionSelect_Pick6.Text)
-			{
-				posX = mc.hd.tool.tPos.x.PICK(UnitCodeSF.SF6);
-				posY = mc.hd.tool.tPos.y.PICK(UnitCodeSF.SF6);
-			}
-			else if (BT_PositionSelect.Text == BT_PositionSelect_Pick7.Text)
-			{
-				posX = mc.hd.tool.tPos.x.PICK(UnitCodeSF.SF7);
-				posY = mc.hd.tool.tPos.y.PICK(UnitCodeSF.SF7);
-			}
-			else if (BT_PositionSelect.Text == BT_PositionSelect_Pick8.Text)
-			{
-				posX = mc.hd.tool.tPos.x.PICK(UnitCodeSF.SF8);
-				posY = mc.hd.tool.tPos.y.PICK(UnitCodeSF.SF8);
+                posX = mc.hd.tool.tPos.x.PICK(UnitCodeSF.SF4);
+                posY = mc.hd.tool.tPos.y.PICK(UnitCodeSF.SF4);
+
+                //if (mc.swcontrol.mechanicalRevision == 0)
+                //{
+                //}
 			}
 			else if (BT_PositionSelect.Text == BT_PositionSelect_ULC.Text)
 			{
@@ -667,10 +607,10 @@ namespace PSA_Application
 		{
 			if (mc.swcontrol.mechanicalRevision == 1)
 			{
-				BT_PositionSelect_Pick5.Visible = false;
-				BT_PositionSelect_Pick6.Visible = false;
-				BT_PositionSelect_Pick7.Visible = false;
-				BT_PositionSelect_Pick8.Visible = false;
+                //BT_PositionSelect_Pick5.Visible = false;
+                //BT_PositionSelect_Pick6.Visible = false;
+                //BT_PositionSelect_Pick7.Visible = false;
+                //BT_PositionSelect_Pick8.Visible = false;
 			}
 		}
 

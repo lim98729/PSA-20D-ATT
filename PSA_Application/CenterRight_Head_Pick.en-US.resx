@@ -127,4 +127,7 @@
   <data name="toolStrip11.Size" type="System.Drawing.Size, System.Drawing">
     <value>614, 25</value>
   </data>
+  <data name="toolStrip5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>381, 25</value>
+  </data>
 </root>

@@ -670,10 +670,7 @@ namespace PSA_SystemLibrary
                     Y.homing.N_LimitDuration = 0.001;
                     Y.homing.direction = MPIHomingDirect.Minus;
                     Y.homing.maxStroke = 600000;//(double)MP_HD_Y.REF2 - (double)MP_HD_Y.N_STOPPER;
-                    if (swcontrol.hwRevision <= 1)
-                        Y.homing.captureReadyPosition = (double)MP_HD_Y.SCALE_REF - (double)MP_HD_Y.N_LIMIT - 5000;
-                    else
-                        Y.homing.captureReadyPosition = (double)MP_HD_Y.SCALE_REF - (double)MP_HD_Y.N_LIMIT - 5000 - 17000;
+                    Y.homing.captureReadyPosition = (double)MP_HD_Y.SCALE_REF - (double)MP_HD_Y.N_LIMIT - 5000 - 17000;
                     Y.homing.dedicatedIn = MPIMotorDedicatedIn.INDEX_SECONDARY;
                     Y.homing.captureDirection = MPIHomingDirect.Plus;
                     Y.homing.captureEdge = MPICaptureEdge.RISING;
@@ -761,24 +758,24 @@ namespace PSA_SystemLibrary
                     Z.homing.N_LimitDuration = 0.001;
                     Z.homing.direction = MPIHomingDirect.Plus;
                     Z.homing.maxStroke = (double)MP_HD_Z.STROKE;//(double)MP_HD_Z.P_STOPPER - (double)MP_HD_Z.N_STOPPER;
-                    if (swcontrol.mechanicalRevision == 0)
-                    {
-                        Z.homing.captureReadyPosition = 5000;
-                        Z.homing.dedicatedIn = MPIMotorDedicatedIn.LIMIT_HW_POS;
-                        Z.homing.captureDirection = MPIHomingDirect.Plus;
-                        Z.homing.captureEdge = MPICaptureEdge.RISING;
-                        Z.homing.captureMovingStroke = 10000;
-                        Z.homing.capturedPosition = (double)MP_HD_Z.P_LIMIT;
-                    }
-                    else
-                    {
+                    //if (swcontrol.mechanicalRevision == 0)
+                    //{
+                    //    Z.homing.captureReadyPosition = 5000;
+                    //    Z.homing.dedicatedIn = MPIMotorDedicatedIn.LIMIT_HW_POS;
+                    //    Z.homing.captureDirection = MPIHomingDirect.Plus;
+                    //    Z.homing.captureEdge = MPICaptureEdge.RISING;
+                    //    Z.homing.captureMovingStroke = 10000;
+                    //    Z.homing.capturedPosition = (double)MP_HD_Z.P_LIMIT;
+                    //}
+                    //else
+                    //{
                         Z.homing.captureReadyPosition = 2000;	// 5000->2000
                         Z.homing.dedicatedIn = MPIMotorDedicatedIn.INDEX_PRIMARY;	// LIMIT_HW_POS->INDEX_PRIMARY. Sensor에서 Z상으로 변화시킴.
                         Z.homing.captureDirection = MPIHomingDirect.Minus;	// Plus->Minus
                         Z.homing.captureEdge = MPICaptureEdge.RISING;
                         Z.homing.captureMovingStroke = 8000;
                         Z.homing.capturedPosition = (double)MP_HD_Z.P_LIMIT - 5000;
-                    }
+                    //}
                     Z.homing.originOffset = 0.0;     // kenny 130711
                     Z.homing.homePosition = (double)MP_HD_Z.XY_MOVING;
                     Z.homing.timeLimit = 5;
@@ -1049,11 +1046,7 @@ namespace PSA_SystemLibrary
                     Z.homing.captureEdge = MPICaptureEdge.FALLING;
                     Z.homing.captureMovingStroke = 10000;
                     Z.homing.capturedPosition = (double)MP_SF_Z.HOME_SENSOR;
-                    Z.homing.originOffset = 0.0;     // kenny 130711
-                    if (mc.swcontrol.mechanicalRevision == 0)
-                        Z.homing.homePosition = (double)MP_SF_Z.DOWN;
-                    else	// 간섭때문에 Z축 높이가 달라져야 한다.
-                        Z.homing.homePosition = (double)MP_SF_Z.DOWN_4SLOT;
+                    Z.homing.homePosition = (double)MP_SF_Z.DOWN_4SLOT;
                     Z.homing.timeLimit = 20;
                     Z.homing.captureTimeLimit = 1;
                     Z.homing.speed = mc.speed.homing;
@@ -1098,10 +1091,7 @@ namespace PSA_SystemLibrary
                     Z2.homing.captureMovingStroke = 10000;
                     Z2.homing.capturedPosition = (double)MP_SF_Z.HOME_SENSOR;
                     Z2.homing.originOffset = 0.0;     // kenny 130711
-                    if (mc.swcontrol.mechanicalRevision == 0)
-                        Z2.homing.homePosition = (double)MP_SF_Z.DOWN;
-                    else	// 간섭때문에 Z축 높이가 달라져야 한다.
-                        Z2.homing.homePosition = (double)MP_SF_Z.DOWN_4SLOT;
+                    Z2.homing.homePosition = (double)MP_SF_Z.DOWN_4SLOT;
                     Z2.homing.timeLimit = 20;
                     Z2.homing.captureTimeLimit = 1;
                     Z2.homing.speed = mc.speed.homing;
@@ -4428,22 +4418,19 @@ namespace PSA_SystemLibrary
             public static bool nouselight;
             public static bool nouseloadcell;
             public static bool nousetouchprobe;
-            public static bool oldGuideAddress;
             public static bool noUsePDUpSensor;
             public static bool noUseCompPickPosition;
-            public static int hwRevision;			// Bit0:Working Area Tray 감지 센서 A->B접점, Bit1:Tube Magazine 감지 센서 A->B접점, Bit:2 Ionizer Output B->A접점
             public static int hwCheckSkip;			// Bit0:Main Air Check, Bit1:Stand-Alone Machine
             public static int removeConveyor;		// Conveyor Homing Skip이 On되어 있는 상태에서 아예 Conveyor Width축에 전원도 인가하지 않음.
             public static int mechanicalRevision;	// 0:Samsung(SF8ea), 1:ChipPAC(SF4ea:Sensor는 1,2,5,6사용, Loadcell)
             public static int setupMode;	// Graph Display Start Point. 0:from Z Down Start, 1:from 2nd search Start
             public static int useHwTriger;		// hwTriger 사용 유무
             public static double forceMeanOffset;
-            public static bool PD_FLAT_ChipPAC;
+
             // 20140612 
             public static int logSave;
-            public static bool useVisionResolutionPT;
             public static bool useDoorControl;
-            public static int nextMCUnloader;
+            public static int useUnloaderBuffer;
             //static string filename = Environment.CurrentDirectory + "\\PSA.INI";
             static string filename = "C:\\PROTEC\\DATA\\PSA.INI";
             static iniUtil swconfig = new iniUtil(filename);
@@ -4455,10 +4442,6 @@ namespace PSA_SystemLibrary
                 int temp;
                 double tempD;
                 bool genflag = false;
-
-                temp = swconfig.GetInt("PD_Flat_ChipPAC", 2);
-                if (temp == 2) genflag = true;
-                PD_FLAT_ChipPAC = (temp != 1) ? false : true;
 
                 temp = swconfig.GetInt("NouseMotion", 2);
                 if (temp == 2) genflag = true;
@@ -4484,10 +4467,6 @@ namespace PSA_SystemLibrary
                 if (temp == 2) genflag = true;
                 nousetouchprobe = (temp != 1) ? false : true;
 
-                temp = swconfig.GetInt("OldGuideAddress", 2);
-                if (temp == 2) genflag = true;
-                oldGuideAddress = (temp != 1) ? false : true;
-
                 temp = swconfig.GetInt("noUsePDUpSensor", 2);
                 if (temp == 2) genflag = true;
                 noUsePDUpSensor = (temp != 1) ? false : true;
@@ -4495,13 +4474,6 @@ namespace PSA_SystemLibrary
                 temp = swconfig.GetInt("noUseCompPickPosition", 2);
                 if (temp == 2) genflag = true;
                 noUseCompPickPosition = (temp != 1) ? false : true;
-
-                temp = swconfig.GetInt("HWRevision", 0);
-                if (temp < 0 || temp > 7)   // Invalid HWRevision Number
-                {
-                    hwRevision = 0;
-                }
-                else hwRevision = temp;
 
                 temp = swconfig.GetInt("HWCheckSkip", 0);
                 if (temp < 0 || temp > 3)   // Invalid HWCheckSkip Number
@@ -4540,12 +4512,13 @@ namespace PSA_SystemLibrary
                 else logSave = temp;
 
                 // 2016.10.24 - Amkor Unloader 옵션 read INI 부분 추가
-                temp = swconfig.GetInt("nextMCUnloader", 0);
+                temp = swconfig.GetInt("useUnloaderBuffer", -1);
+                if (temp == -1) genflag = true;
                 if (temp < 0 || temp > 1)
                 {
-                    nextMCUnloader = 0;
+                    useUnloaderBuffer = 0;
                 }
-                else nextMCUnloader = temp;
+                else useUnloaderBuffer = temp;
 
                 temp = swconfig.GetInt("useHwTriger", -1);
                 if (temp == -1) genflag = true;
@@ -4563,10 +4536,6 @@ namespace PSA_SystemLibrary
                 }
                 else forceMeanOffset = tempD;
 
-                temp = swconfig.GetInt("useVisionResolutionPT", 2);
-                if (temp == 2) genflag = true;
-                useVisionResolutionPT = (temp != 1) ? false : true;
-
                 temp = swconfig.GetInt("useDoorControl", 2);
                 if (temp == 2) genflag = true;
                 useDoorControl = (temp != 1) ? false : true;
@@ -4578,6 +4547,8 @@ namespace PSA_SystemLibrary
                 dev.NotExistHW.LOADCELL = nouselight;
                 dev.NotExistHW.TOUCHPROBE = nousetouchprobe;
 
+
+                // Simulation Mode
                 if (UtilityControl.simulation)
                 {
                     dev.debug = true;
@@ -4589,6 +4560,31 @@ namespace PSA_SystemLibrary
                     dev.NotExistHW.TOUCHPROBE = true;
                 }
 
+                if (nousemotion)
+                {
+                    dev.NotExistHW.ZMP = true;
+                }
+                if (nousecamera)
+                {
+                    dev.NotExistHW.CAMERA = true;
+                }
+                if (nouseio)
+                {
+                    dev.NotExistHW.AXT = true;
+                }
+                if (nouselight)
+                {
+                    dev.NotExistHW.LIGHTING = true;
+                }
+                if (nouseloadcell)
+                {
+                    dev.NotExistHW.LOADCELL = true;
+                }
+                if (nousetouchprobe)
+                {
+                    dev.NotExistHW.TOUCHPROBE = true;
+                }
+
                 if (genflag) wrtieconfig();
             }
             public static void wrtieconfig()
@@ -4597,8 +4593,6 @@ namespace PSA_SystemLibrary
 
                 int temp;
 
-                temp = PD_FLAT_ChipPAC ? 1 : 0;
-                swconfig.WriteInt("PD_Flat_ChipPAC", temp);
                 temp = nousemotion ? 1 : 0;
                 swconfig.WriteInt("NouseMotion", temp);
                 temp = nouseio ? 1 : 0;
@@ -4611,16 +4605,10 @@ namespace PSA_SystemLibrary
                 swconfig.WriteInt("NouseLoadcell", temp);
                 temp = nouselight ? 1 : 0;
                 swconfig.WriteInt("NouseTouchprobe", temp);
-                temp = oldGuideAddress ? 1 : 0;
-                swconfig.WriteInt("OldGuideAddress", temp);
                 temp = noUsePDUpSensor ? 1 : 0;
                 swconfig.WriteInt("noUsePDUpSensor", temp);
                 temp = noUseCompPickPosition ? 1 : 0;
                 swconfig.WriteInt("noUseCompPickPosition", temp);
-
-                swconfig.WriteInt("HWRevision", hwRevision);
-
-                swconfig.WriteInt("HWCheckSkip", hwCheckSkip);
 
                 swconfig.WriteInt("RemoveConveyor", removeConveyor);
 
@@ -4632,10 +4620,7 @@ namespace PSA_SystemLibrary
                 swconfig.WriteDouble("forceMeanOffset", forceMeanOffset);
 
                 // 2016.10.24 - Amkor Unloader 옵션 write INI 부분 추가
-                swconfig.WriteInt("nextMCUnloader", nextMCUnloader);
-
-                temp = useVisionResolutionPT ? 1 : 0;
-                swconfig.WriteInt("useVisionResolutionPT", temp);
+                swconfig.WriteInt("useUnloaderBuffer", useUnloaderBuffer);
 
                 temp = useDoorControl ? 1 : 0;
                 swconfig.WriteInt("useDoorControl", temp);
@@ -9062,13 +9047,7 @@ namespace PSA_SystemLibrary
                     if (b)
                     {
                         // Default 상태가 뒤집힌 상태로 변환됨.
-                        if ((swcontrol.hwRevision &0x01) != 0)
-                        {
-                            if (v) detected = false;
-                            else detected = true;
-                        }
-                        else
-                            detected = v;
+                        detected = v;
                         retMessage = RetMessage.OK;
                     }
                     else
@@ -9134,7 +9113,7 @@ namespace PSA_SystemLibrary
                 public static void SMEMA_NEXT(out bool detected, out RetMessage retMessage)
                 {
                     // 2016.10.24 - Amkor Unlaoder SMEMA 내용 옵션처리
-                    if (swcontrol.nextMCUnloader == 0)
+                    if (swcontrol.useUnloaderBuffer == 0)
                     {
                         axtModulNumber = 0;
                         bitNumber = 5;
@@ -9265,13 +9244,7 @@ namespace PSA_SystemLibrary
                         return;
                     }
                     mpi.zmp0.MOTOR_GENERAL_IN(axisNumber, bitNumber, out temp, out retMessage);
-                    if ((swcontrol.hwRevision & 0x02) != 0)
-                    {
-                        if (temp && !dev.NotExistHW.ZMP) detected = false;
-                        else detected = true;
-                    }
-                    else
-                        detected = temp;
+                    detected = temp;
                 }
 
                 public static void TUBE_GUIDE(UnitCodeSF unitCode, out bool detected, out RetMessage retMessage)
@@ -9287,31 +9260,11 @@ namespace PSA_SystemLibrary
                     }
                     else if (unitCode == UnitCodeSF.SF3)
                     {
-                        axisNumber = 10; bitNumber = 12;
+                        axisNumber = 10; bitNumber = 14;
                     }
                     else if (unitCode == UnitCodeSF.SF4)
                     {
-                        axisNumber = 10; bitNumber = 13;
-                    }
-                    else if (unitCode == UnitCodeSF.SF5)
-                    {
-                        axisNumber = 10;
-                        if (!mc.swcontrol.oldGuideAddress) bitNumber = 12;
-                        else bitNumber = 14;
-                    }
-                    else if (unitCode == UnitCodeSF.SF6)
-                    {
-                        axisNumber = 10;
-                        if (!mc.swcontrol.oldGuideAddress) bitNumber = 13;
-                        else bitNumber = 15;
-                    }
-                    else if (unitCode == UnitCodeSF.SF7)
-                    {
-                        axisNumber = 11; bitNumber = 12;
-                    }
-                    else if (unitCode == UnitCodeSF.SF8)
-                    {
-                        axisNumber = 11; bitNumber = 13;
+                        axisNumber = 10; bitNumber = 15;
                     }
                     else
                     {
@@ -9371,32 +9324,12 @@ namespace PSA_SystemLibrary
                     else if (unitCode == UnitCodeSF.SF3)
                     {
                         axtModulNumber = 1;
-                        bitNumber = 12;
+                        bitNumber = 14;
                     }
                     else if (unitCode == UnitCodeSF.SF4)
                     {
                         axtModulNumber = 1;
-                        bitNumber = 13;
-                    }
-                    else if (unitCode == UnitCodeSF.SF5)
-                    {
-                        axtModulNumber = 1;
-                        bitNumber = 14;
-                    }
-                    else if (unitCode == UnitCodeSF.SF6)
-                    {
-                        axtModulNumber = 1;
                         bitNumber = 15;
-                    }
-                    else if (unitCode == UnitCodeSF.SF7)
-                    {
-                        axtModulNumber = 1;
-                        bitNumber = 16;
-                    }
-                    else if (unitCode == UnitCodeSF.SF8)
-                    {
-                        axtModulNumber = 1;
-                        bitNumber = 17;
                     }
                     else
                     {
@@ -9854,10 +9787,7 @@ namespace PSA_SystemLibrary
 
                     axtModulNumber = 2;
                     bitNumber = 25;
-                    if ((mc.swcontrol.hwRevision & 0x04) == 0)
-                        off = !OnOff;
-                    else
-                        off = OnOff;
+                    off = OnOff;
                     axt.output(axtModulNumber, bitNumber, off, out b);
                     if (b)
                     {
@@ -9875,12 +9805,7 @@ namespace PSA_SystemLibrary
 
                     bool b, off;
                     axt.output(axtModulNumber, bitNumber, out off, out b);
-                    //OnOff = !off;
-
-                    if ((mc.swcontrol.hwRevision & 0x04) == 0)
-                        OnOff = !off;
-                    else
-                        OnOff = off;
+                    OnOff = off;
                     if (b)
                     {
                         retMessage = RetMessage.OK;
@@ -9913,12 +9838,7 @@ namespace PSA_SystemLibrary
 
                     bool b, off;
                     axt.output(axtModulNumber, bitNumber, out off, out b);
-                    //OnOff = !off;
-
-                    if ((mc.swcontrol.hwRevision & 0x04) == 0)
-                        OnOff = !off;
-                    else
-                        OnOff = off;
+                    OnOff = off;
                     if (b)
                     {
                         retMessage = RetMessage.OK;
@@ -10712,16 +10632,6 @@ namespace PSA_SystemLibrary
                         bitNumber = 30;
                     }
                     else if (unitCode == UnitCodeSF.SF4)
-                    {
-                        axtModulNumber = 2;
-                        bitNumber = 31;
-                    }
-                    else if (unitCode == UnitCodeSF.SF5)
-                    {
-                        axtModulNumber = 2;
-                        bitNumber = 30;
-                    }
-                    else if (unitCode == UnitCodeSF.SF6)
                     {
                         axtModulNumber = 2;
                         bitNumber = 31;

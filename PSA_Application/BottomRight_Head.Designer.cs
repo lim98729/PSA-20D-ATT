@@ -78,10 +78,6 @@
             this.BT_PositionSelect_Pick2 = new System.Windows.Forms.ToolStripMenuItem();
             this.BT_PositionSelect_Pick3 = new System.Windows.Forms.ToolStripMenuItem();
             this.BT_PositionSelect_Pick4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.BT_PositionSelect_Pick5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.BT_PositionSelect_Pick6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.BT_PositionSelect_Pick7 = new System.Windows.Forms.ToolStripMenuItem();
-            this.BT_PositionSelect_Pick8 = new System.Windows.Forms.ToolStripMenuItem();
             this.BT_PositionSelect_ULC = new System.Windows.Forms.ToolStripMenuItem();
             this.BT_PositionSelect_BDEdge = new System.Windows.Forms.ToolStripMenuItem();
             this.BT_PositionSelect_Pad = new System.Windows.Forms.ToolStripMenuItem();
@@ -439,11 +435,7 @@
             this.BT_PositionSelect_Pick1,
             this.BT_PositionSelect_Pick2,
             this.BT_PositionSelect_Pick3,
-            this.BT_PositionSelect_Pick4,
-            this.BT_PositionSelect_Pick5,
-            this.BT_PositionSelect_Pick6,
-            this.BT_PositionSelect_Pick7,
-            this.BT_PositionSelect_Pick8});
+            this.BT_PositionSelect_Pick4});
             this.BT_PositionSelect_Pick.Name = "BT_PositionSelect_Pick";
             this.BT_PositionSelect_Pick.Click += new System.EventHandler(this.Position_Click);
             // 
@@ -470,30 +462,6 @@
             resources.ApplyResources(this.BT_PositionSelect_Pick4, "BT_PositionSelect_Pick4");
             this.BT_PositionSelect_Pick4.Name = "BT_PositionSelect_Pick4";
             this.BT_PositionSelect_Pick4.Click += new System.EventHandler(this.Position_Click);
-            // 
-            // BT_PositionSelect_Pick5
-            // 
-            resources.ApplyResources(this.BT_PositionSelect_Pick5, "BT_PositionSelect_Pick5");
-            this.BT_PositionSelect_Pick5.Name = "BT_PositionSelect_Pick5";
-            this.BT_PositionSelect_Pick5.Click += new System.EventHandler(this.Position_Click);
-            // 
-            // BT_PositionSelect_Pick6
-            // 
-            resources.ApplyResources(this.BT_PositionSelect_Pick6, "BT_PositionSelect_Pick6");
-            this.BT_PositionSelect_Pick6.Name = "BT_PositionSelect_Pick6";
-            this.BT_PositionSelect_Pick6.Click += new System.EventHandler(this.Position_Click);
-            // 
-            // BT_PositionSelect_Pick7
-            // 
-            resources.ApplyResources(this.BT_PositionSelect_Pick7, "BT_PositionSelect_Pick7");
-            this.BT_PositionSelect_Pick7.Name = "BT_PositionSelect_Pick7";
-            this.BT_PositionSelect_Pick7.Click += new System.EventHandler(this.Position_Click);
-            // 
-            // BT_PositionSelect_Pick8
-            // 
-            resources.ApplyResources(this.BT_PositionSelect_Pick8, "BT_PositionSelect_Pick8");
-            this.BT_PositionSelect_Pick8.Name = "BT_PositionSelect_Pick8";
-            this.BT_PositionSelect_Pick8.Click += new System.EventHandler(this.Position_Click);
             // 
             // BT_PositionSelect_ULC
             // 
@@ -789,10 +757,6 @@
         private System.Windows.Forms.ToolStripMenuItem BT_PositionSelect_Pick2;
         private System.Windows.Forms.ToolStripMenuItem BT_PositionSelect_Pick3;
         private System.Windows.Forms.ToolStripMenuItem BT_PositionSelect_Pick4;
-        private System.Windows.Forms.ToolStripMenuItem BT_PositionSelect_Pick5;
-        private System.Windows.Forms.ToolStripMenuItem BT_PositionSelect_Pick6;
-        private System.Windows.Forms.ToolStripMenuItem BT_PositionSelect_Pick7;
-        private System.Windows.Forms.ToolStripMenuItem BT_PositionSelect_Pick8;
         private System.Windows.Forms.ToolStripMenuItem BT_PositionSelect_ULC;
         private System.Windows.Forms.ToolStripMenuItem BT_PositionSelect_BDEdge;
         private System.Windows.Forms.ToolStripMenuItem BT_PositionSelect_Pad;

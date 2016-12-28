@@ -39,35 +39,19 @@
             this.LB_IN_GUIDE1 = new System.Windows.Forms.ToolStripLabel();
             this.SL_IN_GUIDE2 = new System.Windows.Forms.ToolStripSeparator();
             this.LB_IN_GUIDE2 = new System.Windows.Forms.ToolStripLabel();
-            this.SL_IN_GUIDE3 = new System.Windows.Forms.ToolStripSeparator();
-            this.LB_IN_GUIDE3 = new System.Windows.Forms.ToolStripLabel();
-            this.SL_IN_GUIDE4 = new System.Windows.Forms.ToolStripSeparator();
-            this.LB_IN_GUIDE4 = new System.Windows.Forms.ToolStripLabel();
             this.TS_IN2 = new System.Windows.Forms.ToolStrip();
             this.LB_IN2 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.LB_IN_MG2 = new System.Windows.Forms.ToolStripLabel();
             this.SL_IN_GUIDE5 = new System.Windows.Forms.ToolStripSeparator();
-            this.LB_IN_GUIDE5 = new System.Windows.Forms.ToolStripLabel();
+            this.LB_IN_GUIDE3 = new System.Windows.Forms.ToolStripLabel();
             this.SL_IN_GUIDE6 = new System.Windows.Forms.ToolStripSeparator();
-            this.LB_IN_GUIDE6 = new System.Windows.Forms.ToolStripLabel();
-            this.SL_IN_GUIDE7 = new System.Windows.Forms.ToolStripSeparator();
-            this.LB_IN_GUIDE7 = new System.Windows.Forms.ToolStripLabel();
-            this.SL_IN_GUIDE8 = new System.Windows.Forms.ToolStripSeparator();
-            this.LB_IN_GUIDE8 = new System.Windows.Forms.ToolStripLabel();
+            this.LB_IN_GUIDE4 = new System.Windows.Forms.ToolStripLabel();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.TS_Position = new System.Windows.Forms.ToolStrip();
             this.LB_Position = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.BT_PositionSelect = new System.Windows.Forms.ToolStripDropDownButton();
-            this.BT_PositionSelect_Tube1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.BT_PositionSelect_Tube2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.BT_PositionSelect_Tube3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.BT_PositionSelect_Tube4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.BT_PositionSelect_Tube5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.BT_PositionSelect_Tube6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.BT_PositionSelect_Tube7 = new System.Windows.Forms.ToolStripMenuItem();
-            this.BT_PositionSelect_Tube8 = new System.Windows.Forms.ToolStripMenuItem();
             this.BT_PositionSelect_MGZ1 = new System.Windows.Forms.ToolStripMenuItem();
             this.BT_PositionSelect_MGZ2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
@@ -79,24 +63,20 @@
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.LB_IN_MG2_RESET = new System.Windows.Forms.ToolStripLabel();
             this.SL_IN_TUBE5 = new System.Windows.Forms.ToolStripSeparator();
-            this.LB_IN_TUBE5 = new System.Windows.Forms.ToolStripLabel();
+            this.LB_IN_TUBE_3 = new System.Windows.Forms.ToolStripLabel();
             this.SL_IN_TUBE6 = new System.Windows.Forms.ToolStripSeparator();
-            this.LB_IN_TUBE6 = new System.Windows.Forms.ToolStripLabel();
-            this.SL_IN_TUBE7 = new System.Windows.Forms.ToolStripSeparator();
+            this.LB_IN_TUBE_4 = new System.Windows.Forms.ToolStripLabel();
             this.LB_IN_TUBE7 = new System.Windows.Forms.ToolStripLabel();
-            this.SL_IN_TUBE8 = new System.Windows.Forms.ToolStripSeparator();
             this.LB_IN_TUBE8 = new System.Windows.Forms.ToolStripLabel();
             this.TS_IN3 = new System.Windows.Forms.ToolStrip();
             this.LB_IN3 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
             this.LB_IN_MG1_RESET = new System.Windows.Forms.ToolStripLabel();
             this.SL_IN_TUBE1 = new System.Windows.Forms.ToolStripSeparator();
-            this.LB_IN_TUBE1 = new System.Windows.Forms.ToolStripLabel();
+            this.LB_IN_TUBE_1 = new System.Windows.Forms.ToolStripLabel();
             this.SL_IN_TUBE2 = new System.Windows.Forms.ToolStripSeparator();
-            this.LB_IN_TUBE2 = new System.Windows.Forms.ToolStripLabel();
-            this.SL_IN_TUBE3 = new System.Windows.Forms.ToolStripSeparator();
+            this.LB_IN_TUBE_2 = new System.Windows.Forms.ToolStripLabel();
             this.LB_IN_TUBE3 = new System.Windows.Forms.ToolStripLabel();
-            this.SL_IN_TUBE4 = new System.Windows.Forms.ToolStripSeparator();
             this.LB_IN_TUBE4 = new System.Windows.Forms.ToolStripLabel();
             this.TS_OUT = new System.Windows.Forms.ToolStrip();
             this.LB_OUT = new System.Windows.Forms.ToolStripLabel();
@@ -130,8 +110,8 @@
             // 
             // TS_IN
             // 
-            resources.ApplyResources(this.TS_IN, "TS_IN");
             this.TS_IN.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.TS_IN, "TS_IN");
             this.TS_IN.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LB_IN,
             this.toolStripSeparator5,
@@ -139,11 +119,7 @@
             this.SL_IN_GUIDE1,
             this.LB_IN_GUIDE1,
             this.SL_IN_GUIDE2,
-            this.LB_IN_GUIDE2,
-            this.SL_IN_GUIDE3,
-            this.LB_IN_GUIDE3,
-            this.SL_IN_GUIDE4,
-            this.LB_IN_GUIDE4});
+            this.LB_IN_GUIDE2});
             this.TS_IN.Name = "TS_IN";
             // 
             // LB_IN
@@ -153,8 +129,8 @@
             // 
             // toolStripSeparator5
             // 
-            resources.ApplyResources(this.toolStripSeparator5, "toolStripSeparator5");
             this.toolStripSeparator5.Name = "toolStripSeparator5";
+            resources.ApplyResources(this.toolStripSeparator5, "toolStripSeparator5");
             // 
             // LB_IN_MG1
             // 
@@ -163,8 +139,8 @@
             // 
             // SL_IN_GUIDE1
             // 
-            resources.ApplyResources(this.SL_IN_GUIDE1, "SL_IN_GUIDE1");
             this.SL_IN_GUIDE1.Name = "SL_IN_GUIDE1";
+            resources.ApplyResources(this.SL_IN_GUIDE1, "SL_IN_GUIDE1");
             // 
             // LB_IN_GUIDE1
             // 
@@ -173,50 +149,26 @@
             // 
             // SL_IN_GUIDE2
             // 
-            resources.ApplyResources(this.SL_IN_GUIDE2, "SL_IN_GUIDE2");
             this.SL_IN_GUIDE2.Name = "SL_IN_GUIDE2";
+            resources.ApplyResources(this.SL_IN_GUIDE2, "SL_IN_GUIDE2");
             // 
             // LB_IN_GUIDE2
             // 
             resources.ApplyResources(this.LB_IN_GUIDE2, "LB_IN_GUIDE2");
             this.LB_IN_GUIDE2.Name = "LB_IN_GUIDE2";
             // 
-            // SL_IN_GUIDE3
-            // 
-            resources.ApplyResources(this.SL_IN_GUIDE3, "SL_IN_GUIDE3");
-            this.SL_IN_GUIDE3.Name = "SL_IN_GUIDE3";
-            // 
-            // LB_IN_GUIDE3
-            // 
-            resources.ApplyResources(this.LB_IN_GUIDE3, "LB_IN_GUIDE3");
-            this.LB_IN_GUIDE3.Name = "LB_IN_GUIDE3";
-            // 
-            // SL_IN_GUIDE4
-            // 
-            resources.ApplyResources(this.SL_IN_GUIDE4, "SL_IN_GUIDE4");
-            this.SL_IN_GUIDE4.Name = "SL_IN_GUIDE4";
-            // 
-            // LB_IN_GUIDE4
-            // 
-            resources.ApplyResources(this.LB_IN_GUIDE4, "LB_IN_GUIDE4");
-            this.LB_IN_GUIDE4.Name = "LB_IN_GUIDE4";
-            // 
             // TS_IN2
             // 
-            resources.ApplyResources(this.TS_IN2, "TS_IN2");
             this.TS_IN2.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.TS_IN2, "TS_IN2");
             this.TS_IN2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LB_IN2,
             this.toolStripSeparator1,
             this.LB_IN_MG2,
             this.SL_IN_GUIDE5,
-            this.LB_IN_GUIDE5,
+            this.LB_IN_GUIDE3,
             this.SL_IN_GUIDE6,
-            this.LB_IN_GUIDE6,
-            this.SL_IN_GUIDE7,
-            this.LB_IN_GUIDE7,
-            this.SL_IN_GUIDE8,
-            this.LB_IN_GUIDE8});
+            this.LB_IN_GUIDE4});
             this.TS_IN2.Name = "TS_IN2";
             // 
             // LB_IN2
@@ -226,8 +178,8 @@
             // 
             // toolStripSeparator1
             // 
-            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             this.toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             // 
             // LB_IN_MG2
             // 
@@ -236,43 +188,23 @@
             // 
             // SL_IN_GUIDE5
             // 
-            resources.ApplyResources(this.SL_IN_GUIDE5, "SL_IN_GUIDE5");
             this.SL_IN_GUIDE5.Name = "SL_IN_GUIDE5";
+            resources.ApplyResources(this.SL_IN_GUIDE5, "SL_IN_GUIDE5");
             // 
-            // LB_IN_GUIDE5
+            // LB_IN_GUIDE3
             // 
-            resources.ApplyResources(this.LB_IN_GUIDE5, "LB_IN_GUIDE5");
-            this.LB_IN_GUIDE5.Name = "LB_IN_GUIDE5";
+            resources.ApplyResources(this.LB_IN_GUIDE3, "LB_IN_GUIDE3");
+            this.LB_IN_GUIDE3.Name = "LB_IN_GUIDE3";
             // 
             // SL_IN_GUIDE6
             // 
-            resources.ApplyResources(this.SL_IN_GUIDE6, "SL_IN_GUIDE6");
             this.SL_IN_GUIDE6.Name = "SL_IN_GUIDE6";
+            resources.ApplyResources(this.SL_IN_GUIDE6, "SL_IN_GUIDE6");
             // 
-            // LB_IN_GUIDE6
+            // LB_IN_GUIDE4
             // 
-            resources.ApplyResources(this.LB_IN_GUIDE6, "LB_IN_GUIDE6");
-            this.LB_IN_GUIDE6.Name = "LB_IN_GUIDE6";
-            // 
-            // SL_IN_GUIDE7
-            // 
-            resources.ApplyResources(this.SL_IN_GUIDE7, "SL_IN_GUIDE7");
-            this.SL_IN_GUIDE7.Name = "SL_IN_GUIDE7";
-            // 
-            // LB_IN_GUIDE7
-            // 
-            resources.ApplyResources(this.LB_IN_GUIDE7, "LB_IN_GUIDE7");
-            this.LB_IN_GUIDE7.Name = "LB_IN_GUIDE7";
-            // 
-            // SL_IN_GUIDE8
-            // 
-            resources.ApplyResources(this.SL_IN_GUIDE8, "SL_IN_GUIDE8");
-            this.SL_IN_GUIDE8.Name = "SL_IN_GUIDE8";
-            // 
-            // LB_IN_GUIDE8
-            // 
-            resources.ApplyResources(this.LB_IN_GUIDE8, "LB_IN_GUIDE8");
-            this.LB_IN_GUIDE8.Name = "LB_IN_GUIDE8";
+            resources.ApplyResources(this.LB_IN_GUIDE4, "LB_IN_GUIDE4");
+            this.LB_IN_GUIDE4.Name = "LB_IN_GUIDE4";
             // 
             // timer
             // 
@@ -281,8 +213,8 @@
             // 
             // TS_Position
             // 
-            resources.ApplyResources(this.TS_Position, "TS_Position");
             this.TS_Position.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.TS_Position, "TS_Position");
             this.TS_Position.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LB_Position,
             this.toolStripSeparator9,
@@ -300,74 +232,18 @@
             // 
             // toolStripSeparator9
             // 
-            resources.ApplyResources(this.toolStripSeparator9, "toolStripSeparator9");
             this.toolStripSeparator9.Name = "toolStripSeparator9";
+            resources.ApplyResources(this.toolStripSeparator9, "toolStripSeparator9");
             // 
             // BT_PositionSelect
             // 
             resources.ApplyResources(this.BT_PositionSelect, "BT_PositionSelect");
             this.BT_PositionSelect.AutoToolTip = false;
             this.BT_PositionSelect.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.BT_PositionSelect_Tube1,
-            this.BT_PositionSelect_Tube2,
-            this.BT_PositionSelect_Tube3,
-            this.BT_PositionSelect_Tube4,
-            this.BT_PositionSelect_Tube5,
-            this.BT_PositionSelect_Tube6,
-            this.BT_PositionSelect_Tube7,
-            this.BT_PositionSelect_Tube8,
             this.BT_PositionSelect_MGZ1,
             this.BT_PositionSelect_MGZ2});
             this.BT_PositionSelect.Image = global::PSA_Application.Properties.Resources.Checked;
             this.BT_PositionSelect.Name = "BT_PositionSelect";
-            // 
-            // BT_PositionSelect_Tube1
-            // 
-            resources.ApplyResources(this.BT_PositionSelect_Tube1, "BT_PositionSelect_Tube1");
-            this.BT_PositionSelect_Tube1.Name = "BT_PositionSelect_Tube1";
-            this.BT_PositionSelect_Tube1.Click += new System.EventHandler(this.BT_PositionSelect_Click);
-            // 
-            // BT_PositionSelect_Tube2
-            // 
-            resources.ApplyResources(this.BT_PositionSelect_Tube2, "BT_PositionSelect_Tube2");
-            this.BT_PositionSelect_Tube2.Name = "BT_PositionSelect_Tube2";
-            this.BT_PositionSelect_Tube2.Click += new System.EventHandler(this.BT_PositionSelect_Click);
-            // 
-            // BT_PositionSelect_Tube3
-            // 
-            resources.ApplyResources(this.BT_PositionSelect_Tube3, "BT_PositionSelect_Tube3");
-            this.BT_PositionSelect_Tube3.Name = "BT_PositionSelect_Tube3";
-            this.BT_PositionSelect_Tube3.Click += new System.EventHandler(this.BT_PositionSelect_Click);
-            // 
-            // BT_PositionSelect_Tube4
-            // 
-            resources.ApplyResources(this.BT_PositionSelect_Tube4, "BT_PositionSelect_Tube4");
-            this.BT_PositionSelect_Tube4.Name = "BT_PositionSelect_Tube4";
-            this.BT_PositionSelect_Tube4.Click += new System.EventHandler(this.BT_PositionSelect_Click);
-            // 
-            // BT_PositionSelect_Tube5
-            // 
-            resources.ApplyResources(this.BT_PositionSelect_Tube5, "BT_PositionSelect_Tube5");
-            this.BT_PositionSelect_Tube5.Name = "BT_PositionSelect_Tube5";
-            this.BT_PositionSelect_Tube5.Click += new System.EventHandler(this.BT_PositionSelect_Click);
-            // 
-            // BT_PositionSelect_Tube6
-            // 
-            resources.ApplyResources(this.BT_PositionSelect_Tube6, "BT_PositionSelect_Tube6");
-            this.BT_PositionSelect_Tube6.Name = "BT_PositionSelect_Tube6";
-            this.BT_PositionSelect_Tube6.Click += new System.EventHandler(this.BT_PositionSelect_Click);
-            // 
-            // BT_PositionSelect_Tube7
-            // 
-            resources.ApplyResources(this.BT_PositionSelect_Tube7, "BT_PositionSelect_Tube7");
-            this.BT_PositionSelect_Tube7.Name = "BT_PositionSelect_Tube7";
-            this.BT_PositionSelect_Tube7.Click += new System.EventHandler(this.BT_PositionSelect_Click);
-            // 
-            // BT_PositionSelect_Tube8
-            // 
-            resources.ApplyResources(this.BT_PositionSelect_Tube8, "BT_PositionSelect_Tube8");
-            this.BT_PositionSelect_Tube8.Name = "BT_PositionSelect_Tube8";
-            this.BT_PositionSelect_Tube8.Click += new System.EventHandler(this.BT_PositionSelect_Click);
             // 
             // BT_PositionSelect_MGZ1
             // 
@@ -383,8 +259,8 @@
             // 
             // toolStripSeparator10
             // 
-            resources.ApplyResources(this.toolStripSeparator10, "toolStripSeparator10");
             this.toolStripSeparator10.Name = "toolStripSeparator10";
+            resources.ApplyResources(this.toolStripSeparator10, "toolStripSeparator10");
             // 
             // BT_Position_Pick
             // 
@@ -395,8 +271,8 @@
             // 
             // toolStripSeparator11
             // 
-            resources.ApplyResources(this.toolStripSeparator11, "toolStripSeparator11");
             this.toolStripSeparator11.Name = "toolStripSeparator11";
+            resources.ApplyResources(this.toolStripSeparator11, "toolStripSeparator11");
             // 
             // BT_Position_Ready
             // 
@@ -407,19 +283,17 @@
             // 
             // TS_IN4
             // 
-            resources.ApplyResources(this.TS_IN4, "TS_IN4");
             this.TS_IN4.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.TS_IN4, "TS_IN4");
             this.TS_IN4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LB_IN4,
             this.toolStripSeparator12,
             this.LB_IN_MG2_RESET,
             this.SL_IN_TUBE5,
-            this.LB_IN_TUBE5,
+            this.LB_IN_TUBE_3,
             this.SL_IN_TUBE6,
-            this.LB_IN_TUBE6,
-            this.SL_IN_TUBE7,
+            this.LB_IN_TUBE_4,
             this.LB_IN_TUBE7,
-            this.SL_IN_TUBE8,
             this.LB_IN_TUBE8});
             this.TS_IN4.Name = "TS_IN4";
             // 
@@ -430,8 +304,8 @@
             // 
             // toolStripSeparator12
             // 
-            resources.ApplyResources(this.toolStripSeparator12, "toolStripSeparator12");
             this.toolStripSeparator12.Name = "toolStripSeparator12";
+            resources.ApplyResources(this.toolStripSeparator12, "toolStripSeparator12");
             // 
             // LB_IN_MG2_RESET
             // 
@@ -440,59 +314,47 @@
             // 
             // SL_IN_TUBE5
             // 
-            resources.ApplyResources(this.SL_IN_TUBE5, "SL_IN_TUBE5");
             this.SL_IN_TUBE5.Name = "SL_IN_TUBE5";
+            resources.ApplyResources(this.SL_IN_TUBE5, "SL_IN_TUBE5");
             // 
-            // LB_IN_TUBE5
+            // LB_IN_TUBE_3
             // 
-            resources.ApplyResources(this.LB_IN_TUBE5, "LB_IN_TUBE5");
-            this.LB_IN_TUBE5.Name = "LB_IN_TUBE5";
+            resources.ApplyResources(this.LB_IN_TUBE_3, "LB_IN_TUBE_3");
+            this.LB_IN_TUBE_3.Name = "LB_IN_TUBE_3";
             // 
             // SL_IN_TUBE6
             // 
-            resources.ApplyResources(this.SL_IN_TUBE6, "SL_IN_TUBE6");
             this.SL_IN_TUBE6.Name = "SL_IN_TUBE6";
+            resources.ApplyResources(this.SL_IN_TUBE6, "SL_IN_TUBE6");
             // 
-            // LB_IN_TUBE6
+            // LB_IN_TUBE_4
             // 
-            resources.ApplyResources(this.LB_IN_TUBE6, "LB_IN_TUBE6");
-            this.LB_IN_TUBE6.Name = "LB_IN_TUBE6";
-            // 
-            // SL_IN_TUBE7
-            // 
-            resources.ApplyResources(this.SL_IN_TUBE7, "SL_IN_TUBE7");
-            this.SL_IN_TUBE7.Name = "SL_IN_TUBE7";
+            resources.ApplyResources(this.LB_IN_TUBE_4, "LB_IN_TUBE_4");
+            this.LB_IN_TUBE_4.Name = "LB_IN_TUBE_4";
             // 
             // LB_IN_TUBE7
             // 
-            resources.ApplyResources(this.LB_IN_TUBE7, "LB_IN_TUBE7");
             this.LB_IN_TUBE7.Name = "LB_IN_TUBE7";
-            // 
-            // SL_IN_TUBE8
-            // 
-            resources.ApplyResources(this.SL_IN_TUBE8, "SL_IN_TUBE8");
-            this.SL_IN_TUBE8.Name = "SL_IN_TUBE8";
+            resources.ApplyResources(this.LB_IN_TUBE7, "LB_IN_TUBE7");
             // 
             // LB_IN_TUBE8
             // 
-            resources.ApplyResources(this.LB_IN_TUBE8, "LB_IN_TUBE8");
             this.LB_IN_TUBE8.Name = "LB_IN_TUBE8";
+            resources.ApplyResources(this.LB_IN_TUBE8, "LB_IN_TUBE8");
             // 
             // TS_IN3
             // 
-            resources.ApplyResources(this.TS_IN3, "TS_IN3");
             this.TS_IN3.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.TS_IN3, "TS_IN3");
             this.TS_IN3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LB_IN3,
             this.toolStripSeparator19,
             this.LB_IN_MG1_RESET,
             this.SL_IN_TUBE1,
-            this.LB_IN_TUBE1,
+            this.LB_IN_TUBE_1,
             this.SL_IN_TUBE2,
-            this.LB_IN_TUBE2,
-            this.SL_IN_TUBE3,
+            this.LB_IN_TUBE_2,
             this.LB_IN_TUBE3,
-            this.SL_IN_TUBE4,
             this.LB_IN_TUBE4});
             this.TS_IN3.Name = "TS_IN3";
             // 
@@ -503,8 +365,8 @@
             // 
             // toolStripSeparator19
             // 
-            resources.ApplyResources(this.toolStripSeparator19, "toolStripSeparator19");
             this.toolStripSeparator19.Name = "toolStripSeparator19";
+            resources.ApplyResources(this.toolStripSeparator19, "toolStripSeparator19");
             // 
             // LB_IN_MG1_RESET
             // 
@@ -513,48 +375,38 @@
             // 
             // SL_IN_TUBE1
             // 
-            resources.ApplyResources(this.SL_IN_TUBE1, "SL_IN_TUBE1");
             this.SL_IN_TUBE1.Name = "SL_IN_TUBE1";
+            resources.ApplyResources(this.SL_IN_TUBE1, "SL_IN_TUBE1");
             // 
-            // LB_IN_TUBE1
+            // LB_IN_TUBE_1
             // 
-            resources.ApplyResources(this.LB_IN_TUBE1, "LB_IN_TUBE1");
-            this.LB_IN_TUBE1.Name = "LB_IN_TUBE1";
+            resources.ApplyResources(this.LB_IN_TUBE_1, "LB_IN_TUBE_1");
+            this.LB_IN_TUBE_1.Name = "LB_IN_TUBE_1";
             // 
             // SL_IN_TUBE2
             // 
-            resources.ApplyResources(this.SL_IN_TUBE2, "SL_IN_TUBE2");
             this.SL_IN_TUBE2.Name = "SL_IN_TUBE2";
+            resources.ApplyResources(this.SL_IN_TUBE2, "SL_IN_TUBE2");
             // 
-            // LB_IN_TUBE2
+            // LB_IN_TUBE_2
             // 
-            resources.ApplyResources(this.LB_IN_TUBE2, "LB_IN_TUBE2");
-            this.LB_IN_TUBE2.Name = "LB_IN_TUBE2";
-            // 
-            // SL_IN_TUBE3
-            // 
-            resources.ApplyResources(this.SL_IN_TUBE3, "SL_IN_TUBE3");
-            this.SL_IN_TUBE3.Name = "SL_IN_TUBE3";
+            resources.ApplyResources(this.LB_IN_TUBE_2, "LB_IN_TUBE_2");
+            this.LB_IN_TUBE_2.Name = "LB_IN_TUBE_2";
             // 
             // LB_IN_TUBE3
             // 
-            resources.ApplyResources(this.LB_IN_TUBE3, "LB_IN_TUBE3");
             this.LB_IN_TUBE3.Name = "LB_IN_TUBE3";
-            // 
-            // SL_IN_TUBE4
-            // 
-            resources.ApplyResources(this.SL_IN_TUBE4, "SL_IN_TUBE4");
-            this.SL_IN_TUBE4.Name = "SL_IN_TUBE4";
+            resources.ApplyResources(this.LB_IN_TUBE3, "LB_IN_TUBE3");
             // 
             // LB_IN_TUBE4
             // 
-            resources.ApplyResources(this.LB_IN_TUBE4, "LB_IN_TUBE4");
             this.LB_IN_TUBE4.Name = "LB_IN_TUBE4";
+            resources.ApplyResources(this.LB_IN_TUBE4, "LB_IN_TUBE4");
             // 
             // TS_OUT
             // 
-            resources.ApplyResources(this.TS_OUT, "TS_OUT");
             this.TS_OUT.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.TS_OUT, "TS_OUT");
             this.TS_OUT.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LB_OUT,
             this.toolStripSeparator24,
@@ -570,8 +422,8 @@
             // 
             // toolStripSeparator24
             // 
-            resources.ApplyResources(this.toolStripSeparator24, "toolStripSeparator24");
             this.toolStripSeparator24.Name = "toolStripSeparator24";
+            resources.ApplyResources(this.toolStripSeparator24, "toolStripSeparator24");
             // 
             // BT_OUT_MG1_RESET
             // 
@@ -583,8 +435,8 @@
             // 
             // toolStripSeparator25
             // 
-            resources.ApplyResources(this.toolStripSeparator25, "toolStripSeparator25");
             this.toolStripSeparator25.Name = "toolStripSeparator25";
+            resources.ApplyResources(this.toolStripSeparator25, "toolStripSeparator25");
             // 
             // BT_OUT_MG2_RESET
             // 
@@ -596,8 +448,8 @@
             // 
             // toolStrip1
             // 
-            resources.ApplyResources(this.toolStrip1, "toolStrip1");
             this.toolStrip1.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.toolStrip1, "toolStrip1");
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel1,
             this.toolStripSeparator2,
@@ -617,8 +469,8 @@
             // 
             // toolStripSeparator2
             // 
-            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
             this.toolStripSeparator2.Name = "toolStripSeparator2";
+            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
             // 
             // BT_OUT_TUBEBLOW1
             // 
@@ -630,8 +482,8 @@
             // 
             // toolStripSeparator4
             // 
-            resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
             this.toolStripSeparator4.Name = "toolStripSeparator4";
+            resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
             // 
             // BT_OUT_TUBEBLOW2
             // 
@@ -643,8 +495,8 @@
             // 
             // toolStripSeparator3
             // 
-            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
             this.toolStripSeparator3.Name = "toolStripSeparator3";
+            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
             // 
             // BT_OUT_TUBEBLOW3
             // 
@@ -656,8 +508,8 @@
             // 
             // toolStripSeparator6
             // 
-            resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
             this.toolStripSeparator6.Name = "toolStripSeparator6";
+            resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
             // 
             // BT_OUT_TUBEBLOW4
             // 
@@ -712,35 +564,19 @@
         private System.Windows.Forms.ToolStripLabel LB_IN_GUIDE1;
         private System.Windows.Forms.ToolStripSeparator SL_IN_GUIDE2;
         private System.Windows.Forms.ToolStripLabel LB_IN_GUIDE2;
-        private System.Windows.Forms.ToolStripSeparator SL_IN_GUIDE3;
-        private System.Windows.Forms.ToolStripLabel LB_IN_GUIDE3;
-        private System.Windows.Forms.ToolStripSeparator SL_IN_GUIDE4;
-        private System.Windows.Forms.ToolStripLabel LB_IN_GUIDE4;
         private System.Windows.Forms.ToolStrip TS_IN2;
         private System.Windows.Forms.ToolStripLabel LB_IN2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripLabel LB_IN_MG2;
         private System.Windows.Forms.ToolStripSeparator SL_IN_GUIDE5;
-        private System.Windows.Forms.ToolStripLabel LB_IN_GUIDE5;
+        private System.Windows.Forms.ToolStripLabel LB_IN_GUIDE3;
         private System.Windows.Forms.ToolStripSeparator SL_IN_GUIDE6;
-        private System.Windows.Forms.ToolStripLabel LB_IN_GUIDE6;
-        private System.Windows.Forms.ToolStripSeparator SL_IN_GUIDE7;
-        private System.Windows.Forms.ToolStripLabel LB_IN_GUIDE7;
-        private System.Windows.Forms.ToolStripSeparator SL_IN_GUIDE8;
-        private System.Windows.Forms.ToolStripLabel LB_IN_GUIDE8;
+        private System.Windows.Forms.ToolStripLabel LB_IN_GUIDE4;
         public System.Windows.Forms.Timer timer;
         private System.Windows.Forms.ToolStrip TS_Position;
         private System.Windows.Forms.ToolStripLabel LB_Position;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripDropDownButton BT_PositionSelect;
-        private System.Windows.Forms.ToolStripMenuItem BT_PositionSelect_Tube1;
-        private System.Windows.Forms.ToolStripMenuItem BT_PositionSelect_Tube2;
-        private System.Windows.Forms.ToolStripMenuItem BT_PositionSelect_Tube3;
-        private System.Windows.Forms.ToolStripMenuItem BT_PositionSelect_Tube4;
-        private System.Windows.Forms.ToolStripMenuItem BT_PositionSelect_Tube5;
-        private System.Windows.Forms.ToolStripMenuItem BT_PositionSelect_Tube6;
-        private System.Windows.Forms.ToolStripMenuItem BT_PositionSelect_Tube7;
-        private System.Windows.Forms.ToolStripMenuItem BT_PositionSelect_Tube8;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ToolStripButton BT_Position_Pick;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
@@ -750,24 +586,20 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
         private System.Windows.Forms.ToolStripLabel LB_IN_MG2_RESET;
         private System.Windows.Forms.ToolStripSeparator SL_IN_TUBE5;
-        private System.Windows.Forms.ToolStripLabel LB_IN_TUBE5;
+        private System.Windows.Forms.ToolStripLabel LB_IN_TUBE_3;
         private System.Windows.Forms.ToolStripSeparator SL_IN_TUBE6;
-        private System.Windows.Forms.ToolStripLabel LB_IN_TUBE6;
-        private System.Windows.Forms.ToolStripSeparator SL_IN_TUBE7;
+        private System.Windows.Forms.ToolStripLabel LB_IN_TUBE_4;
         private System.Windows.Forms.ToolStripLabel LB_IN_TUBE7;
-        private System.Windows.Forms.ToolStripSeparator SL_IN_TUBE8;
         private System.Windows.Forms.ToolStripLabel LB_IN_TUBE8;
         private System.Windows.Forms.ToolStrip TS_IN3;
         private System.Windows.Forms.ToolStripLabel LB_IN3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator19;
         private System.Windows.Forms.ToolStripLabel LB_IN_MG1_RESET;
         private System.Windows.Forms.ToolStripSeparator SL_IN_TUBE1;
-        private System.Windows.Forms.ToolStripLabel LB_IN_TUBE1;
+        private System.Windows.Forms.ToolStripLabel LB_IN_TUBE_1;
         private System.Windows.Forms.ToolStripSeparator SL_IN_TUBE2;
-        private System.Windows.Forms.ToolStripLabel LB_IN_TUBE2;
-        private System.Windows.Forms.ToolStripSeparator SL_IN_TUBE3;
+        private System.Windows.Forms.ToolStripLabel LB_IN_TUBE_2;
         private System.Windows.Forms.ToolStripLabel LB_IN_TUBE3;
-        private System.Windows.Forms.ToolStripSeparator SL_IN_TUBE4;
         private System.Windows.Forms.ToolStripLabel LB_IN_TUBE4;
         private System.Windows.Forms.ToolStrip TS_OUT;
         private System.Windows.Forms.ToolStripLabel LB_OUT;

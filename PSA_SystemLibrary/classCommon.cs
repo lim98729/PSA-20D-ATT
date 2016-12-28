@@ -1711,7 +1711,7 @@ namespace PSA_SystemLibrary
 				saveTuple = new HTuple();
 
 				#region pick
-				for (int k = 0; k < 8; k++)
+				for (int k = 0; k < 4; k++)
 				{
 					writeTuple(pick.offset[k].x, i, out i);
 					writeTuple(pick.offset[k].y, i, out i);
@@ -1775,14 +1775,6 @@ namespace PSA_SystemLibrary
                 writeTuple(pick.pickPosComp[2].y, i, out i);
                 writeTuple(pick.pickPosComp[3].x, i, out i);
                 writeTuple(pick.pickPosComp[3].y, i, out i);
-				writeTuple(pick.pickPosComp[4].x, i, out i);
-				writeTuple(pick.pickPosComp[4].y, i, out i);
-				writeTuple(pick.pickPosComp[5].x, i, out i);
-				writeTuple(pick.pickPosComp[5].y, i, out i);
-				writeTuple(pick.pickPosComp[6].x, i, out i);
-				writeTuple(pick.pickPosComp[6].y, i, out i);
-				writeTuple(pick.pickPosComp[7].x, i, out i);
-				writeTuple(pick.pickPosComp[7].y, i, out i);
 
 				#endregion
 				#region place
@@ -1909,7 +1901,7 @@ namespace PSA_SystemLibrary
 				bool fail;
 
 				#region pick
-				for (int k = 0; k < 8; k++)
+				for (int k = 0; k < 4; k++)
 				{
 					readTuple("pick.offset[" + k.ToString() + "].x", out pick.offset[k].x, out fail); if (fail) goto SET_FAIL;
 					readTuple("pick.offset[" + k.ToString() + "].y", out pick.offset[k].y, out fail); if (fail) goto SET_FAIL;
@@ -1972,14 +1964,6 @@ namespace PSA_SystemLibrary
                 readTuple("pick.pickPosComp[2].y", out pick.pickPosComp[2].y, out fail); if (fail) goto SET_FAIL;
                 readTuple("pick.pickPosComp[3].x", out pick.pickPosComp[3].x, out fail); if (fail) goto SET_FAIL;
                 readTuple("pick.pickPosComp[3].y", out pick.pickPosComp[3].y, out fail); if (fail) goto SET_FAIL;
-				readTuple("pick.pickPosComp[4].x", out pick.pickPosComp[4].x, out fail); if (fail) goto SET_FAIL;
-				readTuple("pick.pickPosComp[4].y", out pick.pickPosComp[4].y, out fail); if (fail) goto SET_FAIL;
-				readTuple("pick.pickPosComp[5].x", out pick.pickPosComp[5].x, out fail); if (fail) goto SET_FAIL;
-				readTuple("pick.pickPosComp[5].y", out pick.pickPosComp[5].y, out fail); if (fail) goto SET_FAIL;
-				readTuple("pick.pickPosComp[6].x", out pick.pickPosComp[6].x, out fail); if (fail) goto SET_FAIL;
-				readTuple("pick.pickPosComp[6].y", out pick.pickPosComp[6].y, out fail); if (fail) goto SET_FAIL;
-				readTuple("pick.pickPosComp[7].x", out pick.pickPosComp[7].x, out fail); if (fail) goto SET_FAIL;
-				readTuple("pick.pickPosComp[7].y", out pick.pickPosComp[7].y, out fail); if (fail) goto SET_FAIL;
 
 				#endregion
 				#region place
@@ -2144,7 +2128,7 @@ namespace PSA_SystemLibrary
 			bool fail;
 
 			#region pick
-			for (int k = 0; k < 8; k++)
+			for (int k = 0; k < 4; k++)
 			{
 				setDefault("pick.offset[" + k.ToString() + "].x", out pick.offset[k].x, out fail); if (fail) goto SET_FAIL;
 				setDefault("pick.offset[" + k.ToString() + "].y", out pick.offset[k].y, out fail); if (fail) goto SET_FAIL;
@@ -2207,15 +2191,6 @@ namespace PSA_SystemLibrary
             setDefault("pick.pickPosComp[2].y", out pick.pickPosComp[2].y, out fail); if (fail) goto SET_FAIL;
             setDefault("pick.pickPosComp[3].x", out pick.pickPosComp[3].x, out fail); if (fail) goto SET_FAIL;
             setDefault("pick.pickPosComp[3].y", out pick.pickPosComp[3].y, out fail); if (fail) goto SET_FAIL;
-			setDefault("pick.pickPosComp[4].x", out pick.pickPosComp[4].x, out fail); if (fail) goto SET_FAIL;
-			setDefault("pick.pickPosComp[4].y", out pick.pickPosComp[4].y, out fail); if (fail) goto SET_FAIL;
-			setDefault("pick.pickPosComp[5].x", out pick.pickPosComp[5].x, out fail); if (fail) goto SET_FAIL;
-			setDefault("pick.pickPosComp[5].y", out pick.pickPosComp[5].y, out fail); if (fail) goto SET_FAIL;
-			setDefault("pick.pickPosComp[6].x", out pick.pickPosComp[6].x, out fail); if (fail) goto SET_FAIL;
-			setDefault("pick.pickPosComp[6].y", out pick.pickPosComp[6].y, out fail); if (fail) goto SET_FAIL;
-			setDefault("pick.pickPosComp[7].x", out pick.pickPosComp[7].x, out fail); if (fail) goto SET_FAIL;
-			setDefault("pick.pickPosComp[7].y", out pick.pickPosComp[7].y, out fail); if (fail) goto SET_FAIL;
-
 			#endregion
 			#region place
 			setDefault("place.forceMode.mode", out place.forceMode.mode, out fail); if (fail) goto SET_FAIL;
@@ -2294,7 +2269,7 @@ namespace PSA_SystemLibrary
 				int id = -1;
 				#region pick
 				id++; if (name == "pick.paraMode") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "Picking Parameter Change Mode");
-				for (int k = 0; k < 8; k++)
+				for (int k = 0; k < 4; k++)
 				{
 					id++; if (name == "pick.offset[" + k.ToString() + "].x") setDefault(out p, name, id, 0, -5000, 5000, AUTHORITY.MAINTENCE.ToString(), "Pick X[" + k.ToString() + "] Position Offset Value from Default Position");
 					id++; if (name == "pick.offset[" + k.ToString() + "].y") setDefault(out p, name, id, 0, -5000, 5000, AUTHORITY.MAINTENCE.ToString(), "Pick Y[" + k.ToString() + "] Position Offset Value from Default Position");
@@ -2359,15 +2334,6 @@ namespace PSA_SystemLibrary
                 id++; if (name == "pick.pickPosComp[2].y") setDefault(out p, name, id, 0, -5000, 5000, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "pick.pickPosComp[3].x") setDefault(out p, name, id, 0, -5000, 5000, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "pick.pickPosComp[3].y") setDefault(out p, name, id, 0, -5000, 5000, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "pick.pickPosComp[4].x") setDefault(out p, name, id, 0, -5000, 5000, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "pick.pickPosComp[4].y") setDefault(out p, name, id, 0, -5000, 5000, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "pick.pickPosComp[5].x") setDefault(out p, name, id, 0, -5000, 5000, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "pick.pickPosComp[5].y") setDefault(out p, name, id, 0, -5000, 5000, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "pick.pickPosComp[6].x") setDefault(out p, name, id, 0, -5000, 5000, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "pick.pickPosComp[6].y") setDefault(out p, name, id, 0, -5000, 5000, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "pick.pickPosComp[7].x") setDefault(out p, name, id, 0, -5000, 5000, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "pick.pickPosComp[7].y") setDefault(out p, name, id, 0, -5000, 5000, AUTHORITY.MAINTENCE.ToString(), "description");
-
 				#endregion
 				#region place
 				id++; if (name == "place.forceMode.mode") setDefault(out p, name, id, 0, 0, 2, AUTHORITY.MAINTENCE.ToString(), "Select Force Control Mode. High->Low/Low->High/Spring");
@@ -7412,7 +7378,7 @@ namespace PSA_SystemLibrary
 	}
 	public class pick_parameter
 	{
-        public parameterXYZ[] offset = new parameterXYZ[8]; public double[,] _offset = new double[3,8];				
+        public parameterXYZ[] offset = new parameterXYZ[4]; public double[,] _offset = new double[3,4];				
         public parameterSearch search = new parameterSearch(); public parameterSearch _search = new parameterSearch();
         public parameterSearch search2 = new parameterSearch(); public parameterSearch _search2 = new parameterSearch();
         public para_member force = new para_member(); public para_member _force = new para_member();
@@ -7425,7 +7391,7 @@ namespace PSA_SystemLibrary
         public parameterPickShake shake = new parameterPickShake(); public parameterPickShake _shake = new parameterPickShake();
         public para_member wasteDelay = new para_member(); public para_member _wasteDelay = new para_member();
 
-		public parameterXY[] pickPosComp = new parameterXY[8];				// 내부적으로 Pick Position Offset 을 이용하여 Pick Position 을 자동 보정 한다.
+		public parameterXY[] pickPosComp = new parameterXY[4];				// 내부적으로 Pick Position Offset 을 이용하여 Pick Position 을 자동 보정 한다.
 	}
 	public class place_parameter
 	{

@@ -85,21 +85,10 @@ namespace PSA_Application
 			#region offset
 			if (sender.Equals(BT_PositionOffset_SelectSF1)) slectOffsetSF = UnitCodeSF.SF1;
 			if (sender.Equals(BT_PositionOffset_SelectSF2)) slectOffsetSF = UnitCodeSF.SF2;
-			if (sender.Equals(BT_PositionOffset_SelectSF3))
-			{
-				if (mc.swcontrol.mechanicalRevision == 0) slectOffsetSF = UnitCodeSF.SF3;
-				else slectOffsetSF = UnitCodeSF.SF5;
-			}
-			if (sender.Equals(BT_PositionOffset_SelectSF4))
-			{
-				if (mc.swcontrol.mechanicalRevision == 0) slectOffsetSF = UnitCodeSF.SF4;
-				else slectOffsetSF = UnitCodeSF.SF6;
-			}
-			if (sender.Equals(BT_PositionOffset_SelectSF5)) slectOffsetSF = UnitCodeSF.SF5;
-			if (sender.Equals(BT_PositionOffset_SelectSF6)) slectOffsetSF = UnitCodeSF.SF6;
-			if (sender.Equals(BT_PositionOffset_SelectSF7)) slectOffsetSF = UnitCodeSF.SF7;
-			if (sender.Equals(BT_PositionOffset_SelectSF8)) slectOffsetSF = UnitCodeSF.SF8;
-			if (sender.Equals(TB_PositionOffset_X)) mc.para.setting(mc.para.HD.pick.offset[(int)slectOffsetSF].x, out mc.para.HD.pick.offset[(int)slectOffsetSF].x);
+			if (sender.Equals(BT_PositionOffset_SelectSF3)) slectOffsetSF = UnitCodeSF.SF3;
+			if (sender.Equals(BT_PositionOffset_SelectSF4)) slectOffsetSF = UnitCodeSF.SF4;
+
+            if (sender.Equals(TB_PositionOffset_X)) mc.para.setting(mc.para.HD.pick.offset[(int)slectOffsetSF].x, out mc.para.HD.pick.offset[(int)slectOffsetSF].x);
 			if (sender.Equals(TB_PositionOffset_Y)) mc.para.setting(mc.para.HD.pick.offset[(int)slectOffsetSF].y, out mc.para.HD.pick.offset[(int)slectOffsetSF].y);
 			//if (sender.Equals(TB_PositionOffset_Z)) mc.para.setting(mc.para.HD.pick.offset[(int)slectOffsetSF].z, out mc.para.HD.pick.offset[(int)slectOffsetSF].z);
 			if (sender.Equals(BT_PositionOffset_Jog))
@@ -118,10 +107,6 @@ namespace PSA_Application
 				else if (slectOffsetSF == UnitCodeSF.SF2) ff.jogMode = JOGXYZ_MODE.HD_PICK_OFFSET_SF2;
 				else if (slectOffsetSF == UnitCodeSF.SF3) ff.jogMode = JOGXYZ_MODE.HD_PICK_OFFSET_SF3;
 				else if (slectOffsetSF == UnitCodeSF.SF4) ff.jogMode = JOGXYZ_MODE.HD_PICK_OFFSET_SF4;
-				else if (slectOffsetSF == UnitCodeSF.SF5) ff.jogMode = JOGXYZ_MODE.HD_PICK_OFFSET_SF5;
-				else if (slectOffsetSF == UnitCodeSF.SF6) ff.jogMode = JOGXYZ_MODE.HD_PICK_OFFSET_SF6;
-				else if (slectOffsetSF == UnitCodeSF.SF7) ff.jogMode = JOGXYZ_MODE.HD_PICK_OFFSET_SF7;
-				else if (slectOffsetSF == UnitCodeSF.SF8) ff.jogMode = JOGXYZ_MODE.HD_PICK_OFFSET_SF8;
 				else ff.jogMode = JOGXYZ_MODE.HD_PICK_OFFSET_SF1;
 				#endregion
 				ff.dataX = mc.para.HD.pick.offset[(int)slectOffsetSF].x;
@@ -181,10 +166,11 @@ namespace PSA_Application
 				double[] tempval = new double[5];
 				int stackFeedNum = 8;
 				int sfTemp = 0;
-				if (mc.swcontrol.mechanicalRevision == 1) stackFeedNum = 4;
+				//if (mc.swcontrol.mechanicalRevision == 1) 
+                stackFeedNum = 4;
 				for (int i = 0; i < stackFeedNum; i++)
 				{
-					if (mc.swcontrol.mechanicalRevision == 1 && i >= 2) sfTemp = i + 2;
+					//if (mc.swcontrol.mechanicalRevision == 1 && i >= 2) sfTemp = i + 2;
 					mc.log.debug.write(mc.log.CODE.CAL, String.Format("Stack Feeder Move to {0} position", sfTemp + 1));
 					for (int k = 0; k < 5; k++)
 					{
@@ -311,10 +297,6 @@ namespace PSA_Application
 			if (sender.Equals(TB_PickOffsetZ2)) mc.para.setting(mc.para.HD.pick.offset[1].z, out mc.para.HD.pick.offset[1].z);
 			if (sender.Equals(TB_PickOffsetZ3)) mc.para.setting(mc.para.HD.pick.offset[2].z, out mc.para.HD.pick.offset[2].z);
 			if (sender.Equals(TB_PickOffsetZ4)) mc.para.setting(mc.para.HD.pick.offset[3].z, out mc.para.HD.pick.offset[3].z);
-			if (sender.Equals(TB_PickOffsetZ5)) mc.para.setting(mc.para.HD.pick.offset[4].z, out mc.para.HD.pick.offset[4].z);
-			if (sender.Equals(TB_PickOffsetZ6)) mc.para.setting(mc.para.HD.pick.offset[5].z, out mc.para.HD.pick.offset[5].z);
-			if (sender.Equals(TB_PickOffsetZ7)) mc.para.setting(mc.para.HD.pick.offset[6].z, out mc.para.HD.pick.offset[6].z);
-			if (sender.Equals(TB_PickOffsetZ8)) mc.para.setting(mc.para.HD.pick.offset[7].z, out mc.para.HD.pick.offset[7].z);
 			#endregion
 			#region suction
 			if (sender.Equals(BT_SuctionMode_Select_MovingLevelOn)) mc.para.setting(ref mc.para.HD.pick.suction.mode, (int)PICK_SUCTION_MODE.MOVING_LEVEL_ON);
@@ -489,13 +471,14 @@ namespace PSA_Application
 				#endregion
 
 				#region offset
-				if(mc.swcontrol.mechanicalRevision == 0) BT_PositionOffset_SelectSF.Text = slectOffsetSF.ToString();
-				else
-				{
-					if (slectOffsetSF == UnitCodeSF.SF5) BT_PositionOffset_SelectSF.Text = UnitCodeSF.SF3.ToString();
-					else if (slectOffsetSF == UnitCodeSF.SF6) BT_PositionOffset_SelectSF.Text = UnitCodeSF.SF4.ToString();
-					else BT_PositionOffset_SelectSF.Text = slectOffsetSF.ToString();
-				}
+                BT_PositionOffset_SelectSF.Text = slectOffsetSF.ToString();
+                //if(mc.swcontrol.mechanicalRevision == 0) BT_PositionOffset_SelectSF.Text = slectOffsetSF.ToString();
+                //else
+                //{
+                //    if (slectOffsetSF == UnitCodeSF.SF5) BT_PositionOffset_SelectSF.Text = UnitCodeSF.SF3.ToString();
+                //    else if (slectOffsetSF == UnitCodeSF.SF6) BT_PositionOffset_SelectSF.Text = UnitCodeSF.SF4.ToString();
+                //    else BT_PositionOffset_SelectSF.Text = slectOffsetSF.ToString();
+                //}
 
 				TB_PositionOffset_X.Text = mc.para.HD.pick.offset[(int)slectOffsetSF].x.value.ToString();
 				TB_PositionOffset_Y.Text = mc.para.HD.pick.offset[(int)slectOffsetSF].y.value.ToString();
@@ -504,10 +487,6 @@ namespace PSA_Application
 				TB_PickOffsetZ2.Text = mc.para.HD.pick.offset[1].z.value.ToString();
 				TB_PickOffsetZ3.Text = mc.para.HD.pick.offset[2].z.value.ToString();
 				TB_PickOffsetZ4.Text = mc.para.HD.pick.offset[3].z.value.ToString();
-				TB_PickOffsetZ5.Text = mc.para.HD.pick.offset[4].z.value.ToString();
-				TB_PickOffsetZ6.Text = mc.para.HD.pick.offset[5].z.value.ToString();
-				TB_PickOffsetZ7.Text = mc.para.HD.pick.offset[6].z.value.ToString();
-				TB_PickOffsetZ8.Text = mc.para.HD.pick.offset[7].z.value.ToString();
 				#endregion
 
 				#region suction
@@ -612,48 +591,21 @@ namespace PSA_Application
 
 		private void CenterRight_Head_Pick_Load(object sender, EventArgs e)
 		{
-			if (mc.swcontrol.mechanicalRevision == 1)
-			{
-				LB_PickOffsetZ1.Text = "SF1";
-				LB_PickOffsetZ2.Text = "SF2";
-				LB_PickOffsetZ5.Text = "SF3";
-				LB_PickOffsetZ6.Text = "SF4";
+            LB_PickOffsetZ1.Text = "SF1";
+            LB_PickOffsetZ2.Text = "SF2";
+            LB_PickOffsetZ3.Text = "SF3";
+            LB_PickOffsetZ4.Text = "SF4";
 
-				LB_PickOffsetZ3.Visible = false;
-				LB_PickOffsetZ4.Visible = false;
-				LB_PickOffsetZ7.Visible = false;
-				LB_PickOffsetZ8.Visible = false;
+            TB_PickOffsetZ1.Size = new System.Drawing.Size(50, 25);
+            TB_PickOffsetZ2.Size = new System.Drawing.Size(50, 25);
+            TB_PickOffsetZ3.Size = new System.Drawing.Size(50, 25);
+            TB_PickOffsetZ4.Size = new System.Drawing.Size(50, 25);
 
-				TB_PickOffsetZ1.Size = new System.Drawing.Size(50, 25);
-				TB_PickOffsetZ2.Size = new System.Drawing.Size(50, 25);
-				TB_PickOffsetZ5.Size = new System.Drawing.Size(50, 25);
-				TB_PickOffsetZ6.Size = new System.Drawing.Size(50, 25);
 
-				TB_PickOffsetZ3.Visible = false;
-				TB_PickOffsetZ4.Visible = false;
-				TB_PickOffsetZ7.Visible = false;
-				TB_PickOffsetZ8.Visible = false;
+            if (mc.swcontrol.mechanicalRevision == 1)
+            {
 
-				SL_PickOffsetZ3.Visible = false;
-				SL_PickOffsetZ4.Visible = false;
-				SL_PickOffsetZ7.Visible = false;
-				SL_PickOffsetZ8.Visible = false;
-
-				if (mc.swcontrol.mechanicalRevision == 1)
-				{
-					BT_PositionOffset_SelectSF.DropDownItems.Remove(BT_PositionOffset_SelectSF5);
-					BT_PositionOffset_SelectSF.DropDownItems.Remove(BT_PositionOffset_SelectSF6);
-					BT_PositionOffset_SelectSF.DropDownItems.Remove(BT_PositionOffset_SelectSF7);
-					BT_PositionOffset_SelectSF.DropDownItems.Remove(BT_PositionOffset_SelectSF8);
-				}
-				else
-				{
-					BT_PositionOffset_SelectSF.DropDownItems.Add(BT_PositionOffset_SelectSF5);
-					BT_PositionOffset_SelectSF.DropDownItems.Add(BT_PositionOffset_SelectSF6);
-					BT_PositionOffset_SelectSF.DropDownItems.Add(BT_PositionOffset_SelectSF7);
-					BT_PositionOffset_SelectSF.DropDownItems.Add(BT_PositionOffset_SelectSF8);
-				}
-			}
+            }
 		}
 	}
 }

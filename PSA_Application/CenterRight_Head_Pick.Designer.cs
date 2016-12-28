@@ -61,10 +61,6 @@
             this.BT_PositionOffset_SelectSF2 = new System.Windows.Forms.ToolStripMenuItem();
             this.BT_PositionOffset_SelectSF3 = new System.Windows.Forms.ToolStripMenuItem();
             this.BT_PositionOffset_SelectSF4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.BT_PositionOffset_SelectSF5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.BT_PositionOffset_SelectSF6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.BT_PositionOffset_SelectSF7 = new System.Windows.Forms.ToolStripMenuItem();
-            this.BT_PositionOffset_SelectSF8 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator40 = new System.Windows.Forms.ToolStripSeparator();
             this.LB_PositionOffset_X = new System.Windows.Forms.ToolStripLabel();
             this.TB_PositionOffset_X = new System.Windows.Forms.ToolStripTextBox();
@@ -196,17 +192,6 @@
             this.LB_PickOffsetZ4 = new System.Windows.Forms.ToolStripLabel();
             this.TB_PickOffsetZ4 = new System.Windows.Forms.ToolStripTextBox();
             this.SL_PickOffsetZ4 = new System.Windows.Forms.ToolStripSeparator();
-            this.LB_PickOffsetZ5 = new System.Windows.Forms.ToolStripLabel();
-            this.TB_PickOffsetZ5 = new System.Windows.Forms.ToolStripTextBox();
-            this.SL_PickOffsetZ5 = new System.Windows.Forms.ToolStripSeparator();
-            this.LB_PickOffsetZ6 = new System.Windows.Forms.ToolStripLabel();
-            this.TB_PickOffsetZ6 = new System.Windows.Forms.ToolStripTextBox();
-            this.SL_PickOffsetZ6 = new System.Windows.Forms.ToolStripSeparator();
-            this.LB_PickOffsetZ7 = new System.Windows.Forms.ToolStripLabel();
-            this.TB_PickOffsetZ7 = new System.Windows.Forms.ToolStripTextBox();
-            this.SL_PickOffsetZ7 = new System.Windows.Forms.ToolStripSeparator();
-            this.LB_PickOffsetZ8 = new System.Windows.Forms.ToolStripLabel();
-            this.TB_PickOffsetZ8 = new System.Windows.Forms.ToolStripTextBox();
             this.SL_PickOffsetZ8 = new System.Windows.Forms.ToolStripSeparator();
             this.BT_PickOffsetZCal = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator44 = new System.Windows.Forms.ToolStripSeparator();
@@ -452,11 +437,7 @@
             this.BT_PositionOffset_SelectSF1,
             this.BT_PositionOffset_SelectSF2,
             this.BT_PositionOffset_SelectSF3,
-            this.BT_PositionOffset_SelectSF4,
-            this.BT_PositionOffset_SelectSF5,
-            this.BT_PositionOffset_SelectSF6,
-            this.BT_PositionOffset_SelectSF7,
-            this.BT_PositionOffset_SelectSF8});
+            this.BT_PositionOffset_SelectSF4});
             this.BT_PositionOffset_SelectSF.Name = "BT_PositionOffset_SelectSF";
             // 
             // BT_PositionOffset_SelectSF1
@@ -482,30 +463,6 @@
             resources.ApplyResources(this.BT_PositionOffset_SelectSF4, "BT_PositionOffset_SelectSF4");
             this.BT_PositionOffset_SelectSF4.Name = "BT_PositionOffset_SelectSF4";
             this.BT_PositionOffset_SelectSF4.Click += new System.EventHandler(this.Control_Click);
-            // 
-            // BT_PositionOffset_SelectSF5
-            // 
-            resources.ApplyResources(this.BT_PositionOffset_SelectSF5, "BT_PositionOffset_SelectSF5");
-            this.BT_PositionOffset_SelectSF5.Name = "BT_PositionOffset_SelectSF5";
-            this.BT_PositionOffset_SelectSF5.Click += new System.EventHandler(this.Control_Click);
-            // 
-            // BT_PositionOffset_SelectSF6
-            // 
-            resources.ApplyResources(this.BT_PositionOffset_SelectSF6, "BT_PositionOffset_SelectSF6");
-            this.BT_PositionOffset_SelectSF6.Name = "BT_PositionOffset_SelectSF6";
-            this.BT_PositionOffset_SelectSF6.Click += new System.EventHandler(this.Control_Click);
-            // 
-            // BT_PositionOffset_SelectSF7
-            // 
-            resources.ApplyResources(this.BT_PositionOffset_SelectSF7, "BT_PositionOffset_SelectSF7");
-            this.BT_PositionOffset_SelectSF7.Name = "BT_PositionOffset_SelectSF7";
-            this.BT_PositionOffset_SelectSF7.Click += new System.EventHandler(this.Control_Click);
-            // 
-            // BT_PositionOffset_SelectSF8
-            // 
-            resources.ApplyResources(this.BT_PositionOffset_SelectSF8, "BT_PositionOffset_SelectSF8");
-            this.BT_PositionOffset_SelectSF8.Name = "BT_PositionOffset_SelectSF8";
-            this.BT_PositionOffset_SelectSF8.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator40
             // 
@@ -1327,17 +1284,6 @@
             this.LB_PickOffsetZ4,
             this.TB_PickOffsetZ4,
             this.SL_PickOffsetZ4,
-            this.LB_PickOffsetZ5,
-            this.TB_PickOffsetZ5,
-            this.SL_PickOffsetZ5,
-            this.LB_PickOffsetZ6,
-            this.TB_PickOffsetZ6,
-            this.SL_PickOffsetZ6,
-            this.LB_PickOffsetZ7,
-            this.TB_PickOffsetZ7,
-            this.SL_PickOffsetZ7,
-            this.LB_PickOffsetZ8,
-            this.TB_PickOffsetZ8,
             this.SL_PickOffsetZ8,
             this.BT_PickOffsetZCal,
             this.toolStripSeparator44,
@@ -1425,73 +1371,6 @@
             // 
             resources.ApplyResources(this.SL_PickOffsetZ4, "SL_PickOffsetZ4");
             this.SL_PickOffsetZ4.Name = "SL_PickOffsetZ4";
-            // 
-            // LB_PickOffsetZ5
-            // 
-            resources.ApplyResources(this.LB_PickOffsetZ5, "LB_PickOffsetZ5");
-            this.LB_PickOffsetZ5.Name = "LB_PickOffsetZ5";
-            // 
-            // TB_PickOffsetZ5
-            // 
-            resources.ApplyResources(this.TB_PickOffsetZ5, "TB_PickOffsetZ5");
-            this.TB_PickOffsetZ5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TB_PickOffsetZ5.Name = "TB_PickOffsetZ5";
-            this.TB_PickOffsetZ5.ReadOnly = true;
-            this.TB_PickOffsetZ5.Click += new System.EventHandler(this.Control_Click);
-            // 
-            // SL_PickOffsetZ5
-            // 
-            resources.ApplyResources(this.SL_PickOffsetZ5, "SL_PickOffsetZ5");
-            this.SL_PickOffsetZ5.Name = "SL_PickOffsetZ5";
-            // 
-            // LB_PickOffsetZ6
-            // 
-            resources.ApplyResources(this.LB_PickOffsetZ6, "LB_PickOffsetZ6");
-            this.LB_PickOffsetZ6.Name = "LB_PickOffsetZ6";
-            // 
-            // TB_PickOffsetZ6
-            // 
-            resources.ApplyResources(this.TB_PickOffsetZ6, "TB_PickOffsetZ6");
-            this.TB_PickOffsetZ6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TB_PickOffsetZ6.Name = "TB_PickOffsetZ6";
-            this.TB_PickOffsetZ6.ReadOnly = true;
-            this.TB_PickOffsetZ6.Click += new System.EventHandler(this.Control_Click);
-            // 
-            // SL_PickOffsetZ6
-            // 
-            resources.ApplyResources(this.SL_PickOffsetZ6, "SL_PickOffsetZ6");
-            this.SL_PickOffsetZ6.Name = "SL_PickOffsetZ6";
-            // 
-            // LB_PickOffsetZ7
-            // 
-            resources.ApplyResources(this.LB_PickOffsetZ7, "LB_PickOffsetZ7");
-            this.LB_PickOffsetZ7.Name = "LB_PickOffsetZ7";
-            // 
-            // TB_PickOffsetZ7
-            // 
-            resources.ApplyResources(this.TB_PickOffsetZ7, "TB_PickOffsetZ7");
-            this.TB_PickOffsetZ7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TB_PickOffsetZ7.Name = "TB_PickOffsetZ7";
-            this.TB_PickOffsetZ7.ReadOnly = true;
-            this.TB_PickOffsetZ7.Click += new System.EventHandler(this.Control_Click);
-            // 
-            // SL_PickOffsetZ7
-            // 
-            resources.ApplyResources(this.SL_PickOffsetZ7, "SL_PickOffsetZ7");
-            this.SL_PickOffsetZ7.Name = "SL_PickOffsetZ7";
-            // 
-            // LB_PickOffsetZ8
-            // 
-            resources.ApplyResources(this.LB_PickOffsetZ8, "LB_PickOffsetZ8");
-            this.LB_PickOffsetZ8.Name = "LB_PickOffsetZ8";
-            // 
-            // TB_PickOffsetZ8
-            // 
-            resources.ApplyResources(this.TB_PickOffsetZ8, "TB_PickOffsetZ8");
-            this.TB_PickOffsetZ8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TB_PickOffsetZ8.Name = "TB_PickOffsetZ8";
-            this.TB_PickOffsetZ8.ReadOnly = true;
-            this.TB_PickOffsetZ8.Click += new System.EventHandler(this.Control_Click);
             // 
             // SL_PickOffsetZ8
             // 
@@ -1728,10 +1607,6 @@
         private System.Windows.Forms.ToolStripMenuItem BT_PositionOffset_SelectSF2;
         private System.Windows.Forms.ToolStripMenuItem BT_PositionOffset_SelectSF3;
         private System.Windows.Forms.ToolStripMenuItem BT_PositionOffset_SelectSF4;
-        private System.Windows.Forms.ToolStripMenuItem BT_PositionOffset_SelectSF5;
-        private System.Windows.Forms.ToolStripMenuItem BT_PositionOffset_SelectSF6;
-        private System.Windows.Forms.ToolStripMenuItem BT_PositionOffset_SelectSF7;
-        private System.Windows.Forms.ToolStripMenuItem BT_PositionOffset_SelectSF8;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator40;
         private System.Windows.Forms.ToolStripLabel LB_PositionOffset_X;
         private System.Windows.Forms.ToolStripTextBox TB_PositionOffset_X;
@@ -1866,17 +1741,6 @@
         private System.Windows.Forms.ToolStripLabel LB_PickOffsetZ4;
         private System.Windows.Forms.ToolStripTextBox TB_PickOffsetZ4;
         private System.Windows.Forms.ToolStripSeparator SL_PickOffsetZ4;
-        private System.Windows.Forms.ToolStripLabel LB_PickOffsetZ5;
-        private System.Windows.Forms.ToolStripTextBox TB_PickOffsetZ5;
-        private System.Windows.Forms.ToolStripSeparator SL_PickOffsetZ5;
-        private System.Windows.Forms.ToolStripLabel LB_PickOffsetZ6;
-        private System.Windows.Forms.ToolStripTextBox TB_PickOffsetZ6;
-        private System.Windows.Forms.ToolStripSeparator SL_PickOffsetZ6;
-        private System.Windows.Forms.ToolStripLabel LB_PickOffsetZ7;
-        private System.Windows.Forms.ToolStripTextBox TB_PickOffsetZ7;
-        private System.Windows.Forms.ToolStripSeparator SL_PickOffsetZ7;
-        private System.Windows.Forms.ToolStripLabel LB_PickOffsetZ8;
-        private System.Windows.Forms.ToolStripTextBox TB_PickOffsetZ8;
         private System.Windows.Forms.ToolStripSeparator SL_PickOffsetZ8;
         private System.Windows.Forms.ToolStripButton BT_PickOffsetZCal;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator44;
