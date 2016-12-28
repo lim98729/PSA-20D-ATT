@@ -27,9 +27,7 @@ namespace PSA_Application
                                                 //          4
         double[] tmp = new double[5];
 
-        double distanceX, distanceY, offset;
-        bool stsX = false;
-        bool stsY = false;
+        double distanceX, distanceY;
 		delegate void refresh_Call();
 		void refresh()
 		{

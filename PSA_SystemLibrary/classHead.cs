@@ -22459,7 +22459,7 @@ namespace PSA_SystemLibrary
 				double tmp;
 				tmp = REF0;
 				if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG)
-					tmp += (double)MP_HD_X.WASTE;
+                    tmp += (double)MP_HD_X.WASTE_2SLOT;
 				else
 					tmp += (double)MP_HD_X.WASTE_4SLOT;
 				return tmp;
@@ -22640,7 +22640,7 @@ namespace PSA_SystemLibrary
 				double tmp;
 				tmp = REF0;
                 if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG)
-					tmp += (double)MP_HD_Y.WASTE;
+                    tmp += (double)MP_HD_Y.WASTE_2SLOT;
 				else
 					tmp += (double)MP_HD_Y.WASTE_4SLOT;
 				return tmp;

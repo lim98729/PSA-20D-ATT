@@ -543,6 +543,10 @@ namespace MeiLibrary
 				retMessage = RetMessage.INVALID;
 				return; 
 			}
+
+            string status = "";
+            checkAlarmStatus(out status, out retMessage);
+
 			axisMotionProfile pf;
 			pf.position = um_to_c(position);
 			pf.speed.velocity = m_to_c(speed.velocity);
