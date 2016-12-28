@@ -378,19 +378,11 @@ namespace PSA_Application
 			{
                 posX = mc.hd.tool.cPos.x.PICK(UnitCodeSF.SF3);
                 posY = mc.hd.tool.cPos.y.PICK(UnitCodeSF.SF3);
-
-                //if (mc.swcontrol.mechanicalRevision == 0)
-                //{
-                //}
 			}
 			else if (BT_PositionSelect.Text == BT_PositionSelect_Pick4.Text)
 			{
                 posX = mc.hd.tool.cPos.x.PICK(UnitCodeSF.SF4);
                 posY = mc.hd.tool.cPos.y.PICK(UnitCodeSF.SF4);
-
-                //if (mc.swcontrol.mechanicalRevision == 0)
-                //{
-                //}
 			}
 			else if (BT_PositionSelect.Text == BT_PositionSelect_ULC.Text)
 			{
@@ -503,19 +495,11 @@ namespace PSA_Application
 			{
                 posX = mc.hd.tool.tPos.x.PICK(UnitCodeSF.SF3);
                 posY = mc.hd.tool.tPos.y.PICK(UnitCodeSF.SF3);
-
-                //if (mc.swcontrol.mechanicalRevision == 0)
-                //{
-                //}
 			}
 			else if (BT_PositionSelect.Text == BT_PositionSelect_Pick4.Text)
 			{
                 posX = mc.hd.tool.tPos.x.PICK(UnitCodeSF.SF4);
                 posY = mc.hd.tool.tPos.y.PICK(UnitCodeSF.SF4);
-
-                //if (mc.swcontrol.mechanicalRevision == 0)
-                //{
-                //}
 			}
 			else if (BT_PositionSelect.Text == BT_PositionSelect_ULC.Text)
 			{
@@ -605,12 +589,10 @@ namespace PSA_Application
 
 		private void BottomRight_Head_Load(object sender, EventArgs e)
 		{
-			if (mc.swcontrol.mechanicalRevision == 1)
+			if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG)
 			{
-                //BT_PositionSelect_Pick5.Visible = false;
-                //BT_PositionSelect_Pick6.Visible = false;
-                //BT_PositionSelect_Pick7.Visible = false;
-                //BT_PositionSelect_Pick8.Visible = false;
+                BT_PositionSelect_Pick3.Visible = false;
+                BT_PositionSelect_Pick4.Visible = false;
 			}
 		}
 

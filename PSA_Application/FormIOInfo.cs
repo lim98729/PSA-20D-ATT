@@ -33,167 +33,177 @@ namespace PSA_Application
 
         private void InitializeGridInformation()
         {
-            string[] inputName0 = { "MC", "Door Open Sensor", "Low Door Open Sensor", "VAC MET", "AIR MET", "SMEMA Next", "SMEMA Pre", "CP6",
-                                    "CP7", "CP8", "CP9", "CP10", "Loader Input Sensor", "Unloader Sensor", "Loader Buff Sensor", "Work Area Sensor", "Stoper Sensor", "Side Pusher #1 Sensor", "Side Pusher #2 Sensor",
-                                    "PD VAC", "", "Laser Alarm", "Laser Near", "Laser Far", "VPPM Compare", "Over Press Sensor", "", "", "", "Start Button Sensor", "Stop Button Sensor", "Reset Button Sensor" };
-
-            string[] inputName1 = { "Blow MET", "Ionizer MET", "Under Press Sensor", "Head VAC", "Double Detect Sensor", "ATC Open Sensor", "ATC Close Sensor",
-                                    "Ionizer CON", "Ionizer Alarm", "Ionizer Level", "Tube Detect Sensor #1", "Tube Detect Sensor #2", "Tube Detect Sensor #3",
-                                    "Tube Detect Sensor #4", "Tube Detect Sensor #5", "Tube Detect Sensor #6", "Tube Detect Sensor #7", "Tube Detect Sensor #8",
-                                    "Magazine Reset #1", "Magazine Reset #2", "", "Pedestal Up Sensor", "", "", "", "", "", "", "", "", "", ""};
-            
-            string[] inputNameETC = { "Magazine Detect #1", "Magazine Detect #2", "Tube Guide Sensor #1", "Tube Guide Sensor #2", "Tube Guide Sensor #3", 
-                                    "Tube Guide Sensor #4", "Tube Guide Sensor #5", "Tube Guide Sensor #6", "Tube Guide Sensor #7", "Tube Guide Sensor #8",
-                                    //"VPPM", "LASER", "Bottom Loadcell", "Head Loadcell"};
-                                    "", "", "", ""};
-
-            string[] outputName0 = { "", "Safety", "Door Open", "Door Lock", "형광등", "SMEMA Next", "SMEMA Pre", "Tower Lamp : Red", "Tower Lamp : Yellow", "Tower Lamp : Green",
-                                    "Buzzer", "Tool Vacuum On", "Tool Blow", "Auto Tool Changer", "Side Pusher", "STOPER", "Pedestal Vacuum", "Pedestal Blow", "LASER ON", "Set Laser Zero",
-                                    "Laser Time", "Set VPPM Speed", "Up Looking Camera Trigger", "Head Camera Trigger", "Set Ionizer Balance", "Ionizer On", "Magazine Reset #1", "Magazine Reset #2",
-                                    "Tube Blow #1", "Tube Blow #2", "Tube Blow #3", "Tube Blow #4"};
-
-            //string[] outputNameETC = { "Input Conveyor Belt", "Work Conveyor Belt", "Output Conveyor Belt", "VPPM" };
-            string[] outputNameETC = { "Input Conveyor Belt", "Work Conveyor Belt", "Output Conveyor Belt", "" };
-
-            for (int k = 0; k < 32; k++)
+            try
             {
-                if (inputName1[k] == "Tube Detect Sensor #3" || inputName1[k] == "Tube Detect Sensor #4" || inputName1[k] == "Tube Detect Sensor #7" || inputName1[k] == "Tube Detect Sensor #8")
-                    inputName1[k] = "";
-                if (inputName1[k] == "Tube Detect Sensor #5") inputName1[k] = "Tube Detect Sensor #3";
-                if (inputName1[k] == "Tube Detect Sensor #6") inputName1[k] = "Tube Detect Sensor #4";
-            }
+                string[] inputName0 = { "MC", "Door Open Sensor", "Low Door Open Sensor", "VAC MET", "AIR MET", "SMEMA Next", "SMEMA Pre", "CP6",
+                                                "CP7", "CP8", "CP9", "CP10", "Loader Input Sensor", "Unloader Sensor", "Loader Buff Sensor", "Work Area Sensor", "Stoper Sensor", "Side Pusher #1 Sensor", "Side Pusher #2 Sensor",
+                                                "PD VAC", "", "Laser Alarm", "Laser Near", "Laser Far", "VPPM Compare", "Over Press Sensor", "", "", "", "Start Button Sensor", "Stop Button Sensor", "Reset Button Sensor" };
 
-            if (mc.swcontrol.mechanicalRevision == 1)
-            {
-            }
+                string[] inputName1 = { "Blow MET", "Ionizer MET", "Under Press Sensor", "Head VAC", "Double Detect Sensor", "ATC Open Sensor", "ATC Close Sensor",
+                                                "Ionizer CON", "Ionizer Alarm", "Ionizer Level", "Tube Detect Sensor #1", "Tube Detect Sensor #2", "Tube Detect Sensor #3",
+                                                "Tube Detect Sensor #4", "", "", "", "", "Magazine Reset #1", "Magazine Reset #2", "", "Pedestal Up Sensor", "", "", "", "", "", "", "", "", "", ""};
 
-            int nameIndex = 0; int i = 0; int subIndex = 0;
-            imageOff = Properties.Resources.Green_LED_OFF;
-            imageOn = Properties.Resources.Green_LED;
-            while (nameIndex < 32)
-            {
-                while (nameIndex < 32 && inputName0[nameIndex] == "")
-                {
-                    nameIndex++;
-                }
-                if (nameIndex == 32) break;
-                GV_InputModule_0.Rows.Add();
-                GV_InputModule_0.Rows[i].Cells[(int)CellName.NAME].Value = inputName0[nameIndex];
-                GV_InputModule_0.Rows[i].Cells[(int)CellName.MODULE].Value = "Axt Input Module #0";
-                GV_InputModule_0.Rows[i].Cells[(int)CellName.BIT].Value = nameIndex.ToString();
-                GV_InputModule_0.Rows[i].Cells[(int)CellName.ONOFF].Value = imageOff;
-                nameIndex++; i++;
-            }
+                string[] inputNameETC = { "Magazine Detect #1", "Magazine Detect #2", "Tube Guide Sensor #1", "Tube Guide Sensor #2", "Tube Guide Sensor #3", 
+                                                "Tube Guide Sensor #4", "", "", "", "", //"VPPM", "LASER", "Bottom Loadcell", "Head Loadcell"};
+                                                "", "", "", ""};
 
-            nameIndex = 0; i = 0;
-            while (nameIndex < 32)
-            {
-                while (nameIndex < 32 && inputName1[nameIndex] == "")
-                {
-                    nameIndex++;
-                }
-                if (nameIndex == 32) break;
-                GV_InputModule_1.Rows.Add();
-                GV_InputModule_1.Rows[i].Cells[(int)CellName.NAME].Value = inputName1[nameIndex];
-                GV_InputModule_1.Rows[i].Cells[(int)CellName.MODULE].Value = "Axt Input Module #1";
-                GV_InputModule_1.Rows[i].Cells[(int)CellName.BIT].Value = nameIndex.ToString();
-                GV_InputModule_1.Rows[i].Cells[(int)CellName.ONOFF].Value = imageOff;
-                nameIndex++; i++;
-            }
+                string[] outputName0 = { "", "Safety", "Door Open", "Door Lock", "형광등", "SMEMA Next", "SMEMA Pre", "Tower Lamp : Red", "Tower Lamp : Yellow", "Tower Lamp : Green",
+                                                "Buzzer", "Tool Vacuum On", "Tool Blow", "Auto Tool Changer", "Side Pusher", "STOPER", "Pedestal Vacuum", "Pedestal Blow", "LASER ON", "Set Laser Zero",
+                                                "Laser Time", "Set VPPM Speed", "Up Looking Camera Trigger", "Head Camera Trigger", "Set Ionizer Balance", "Ionizer On", "Magazine Reset #1", "Magazine Reset #2",
+                                                "Tube Blow #1", "Tube Blow #2", "Tube Blow #3", "Tube Blow #4"};
 
-            nameIndex = 0; i = 0;
-            while (nameIndex < 10)      // 14
-            {
-                while (nameIndex < 10 && inputNameETC[nameIndex] == "")     // 14
+                //string[] outputNameETC = { "Input Conveyor Belt", "Work Conveyor Belt", "Output Conveyor Belt", "VPPM" };
+                string[] outputNameETC = { "Input Conveyor Belt", "Work Conveyor Belt", "Output Conveyor Belt", "" };
+
+                for (int k = 0; k < 32; k++)
                 {
-                    nameIndex++;
-                }
-                if (nameIndex == 10) break;     // 14
-                GV_InputModule_ETC.Rows.Add();
-                GV_InputModule_ETC.Rows[i].Cells[(int)CellName.NAME].Value = inputNameETC[nameIndex];
-                if(inputNameETC[nameIndex] == "Magazine Detect #1" || inputNameETC[nameIndex] == "Magazine Detect #2" || inputNameETC[nameIndex] == "Tube Guide Sensor #1" || inputNameETC[nameIndex] == "Tube Guide Sensor #2")
-                {
-                    GV_InputModule_ETC.Rows[i].Cells[(int)CellName.MODULE].Value = "Motor(Axis #9) Input Module";
-                    if(inputNameETC[nameIndex] == "Magazine Detect #1") GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = "12";
-                    else if(inputNameETC[nameIndex] == "Magazine Detect #2") GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = "13";
-                    else if(inputNameETC[nameIndex] == "Tube Guide Sensor #1") GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = "14";
-                    else if (inputNameETC[nameIndex] == "Tube Guide Sensor #2") GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = "15";
-                }
-                else if (inputNameETC[nameIndex] == "Tube Guide Sensor #3" || inputNameETC[nameIndex] == "Tube Guide Sensor #4" || inputNameETC[nameIndex] == "Tube Guide Sensor #5" || inputNameETC[nameIndex] == "Tube Guide Sensor #6")
-                {
-                    GV_InputModule_ETC.Rows[i].Cells[(int)CellName.MODULE].Value = "Motor(Axis #10) Input Module";
-                    if (inputNameETC[nameIndex] == "Tube Guide Sensor #3") GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = "12";
-                    else if(inputNameETC[nameIndex] == "Tube Guide Sensor #4") GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = "13";
-                    else if (inputNameETC[nameIndex] == "Tube Guide Sensor #5")
+                    if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG)
                     {
-                        GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = "12";
+                        if (inputName1[k] == "Tube Detect Sensor #1" || inputName1[k] == "Tube Detect Sensor #2" || inputName1[k] == "Tube Detect Sensor #3" || inputName1[k] == "Tube Detect Sensor #4")
+                            inputName1[k] = "";
+                        if (inputNameETC[k] == "Tube Guide Sensor #3" || inputNameETC[k] == "Tube Guide Sensor #4")
+                            inputNameETC[k] = "";
                     }
-                    else if (inputNameETC[nameIndex] == "Tube Guide Sensor #6")
+
+                    if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG)
                     {
-                        GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = "13";
+                        if (outputName0[k] == "Tube Blow #1" || outputName0[k] == "Tube Blow #4")
+                            outputName0[k] = "";
                     }
                 }
-                else if (inputNameETC[nameIndex] == "Tube Guide Sensor #7" || inputNameETC[nameIndex] == "Tube Guide Sensor #8")
-                {
-                    GV_InputModule_ETC.Rows[i].Cells[(int)CellName.MODULE].Value = "Motor(Axis #11) Input Module";
-                    if (inputNameETC[nameIndex] == "Tube Guide Sensor #7") GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = "12";
-                    else if (inputNameETC[nameIndex] == "Tube Guide Sensor #8") GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = "13";
-                }
-                else 
-                {
-                    GV_InputModule_ETC.Rows[i].Cells[(int)CellName.MODULE].Value = "Analog Input Module";
-                    GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = subIndex.ToString();
-                    subIndex++;
-                }
-                
-                GV_InputModule_ETC.Rows[i].Cells[(int)CellName.ONOFF].Value = imageOff;
 
-                nameIndex++; i++;
+                int nameIndex = 0; int i = 0; int subIndex = 0;
+                imageOff = Properties.Resources.Green_LED_OFF;
+                imageOn = Properties.Resources.Green_LED;
+                while (nameIndex < 32)
+                {
+                    while (nameIndex < 32 && inputName0[nameIndex] == "")
+                    {
+                        nameIndex++;
+                    }
+                    if (nameIndex == 32) break;
+                    GV_InputModule_0.Rows.Add();
+                    GV_InputModule_0.Rows[i].Cells[(int)CellName.NAME].Value = inputName0[nameIndex];
+                    GV_InputModule_0.Rows[i].Cells[(int)CellName.MODULE].Value = "Axt Input Module #0";
+                    GV_InputModule_0.Rows[i].Cells[(int)CellName.BIT].Value = nameIndex.ToString();
+                    GV_InputModule_0.Rows[i].Cells[(int)CellName.ONOFF].Value = imageOff;
+                    nameIndex++; i++;
+                }
+
+                nameIndex = 0; i = 0;
+                while (nameIndex < 32)
+                {
+                    while (nameIndex < 32 && inputName1[nameIndex] == "")
+                    {
+                        nameIndex++;
+                    }
+                    if (nameIndex == 32) break;
+                    GV_InputModule_1.Rows.Add();
+                    GV_InputModule_1.Rows[i].Cells[(int)CellName.NAME].Value = inputName1[nameIndex];
+                    GV_InputModule_1.Rows[i].Cells[(int)CellName.MODULE].Value = "Axt Input Module #1";
+                    GV_InputModule_1.Rows[i].Cells[(int)CellName.BIT].Value = nameIndex.ToString();
+                    GV_InputModule_1.Rows[i].Cells[(int)CellName.ONOFF].Value = imageOff;
+                    nameIndex++; i++;
+                }
+
+                nameIndex = 0; i = 0;
+                while (nameIndex < 10)      // 14
+                {
+                    while (nameIndex < 10 && inputNameETC[nameIndex] == "")     // 14
+                    {
+                        nameIndex++;
+                    }
+                    if (nameIndex == 10) break;     // 14
+                    GV_InputModule_ETC.Rows.Add();
+                    GV_InputModule_ETC.Rows[i].Cells[(int)CellName.NAME].Value = inputNameETC[nameIndex];
+                    if (inputNameETC[nameIndex] == "Magazine Detect #1" || inputNameETC[nameIndex] == "Magazine Detect #2" || inputNameETC[nameIndex] == "Tube Guide Sensor #1" || inputNameETC[nameIndex] == "Tube Guide Sensor #2")
+                    {
+                        GV_InputModule_ETC.Rows[i].Cells[(int)CellName.MODULE].Value = "Motor(Axis #9) Input Module";
+                        if (inputNameETC[nameIndex] == "Magazine Detect #1") GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = "12";
+                        else if (inputNameETC[nameIndex] == "Magazine Detect #2") GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = "13";
+                        else if (inputNameETC[nameIndex] == "Tube Guide Sensor #1") GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = "14";
+                        else if (inputNameETC[nameIndex] == "Tube Guide Sensor #2") GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = "15";
+                    }
+                    else if (inputNameETC[nameIndex] == "Tube Guide Sensor #3" || inputNameETC[nameIndex] == "Tube Guide Sensor #4" || inputNameETC[nameIndex] == "Tube Guide Sensor #5" || inputNameETC[nameIndex] == "Tube Guide Sensor #6")
+                    {
+                        GV_InputModule_ETC.Rows[i].Cells[(int)CellName.MODULE].Value = "Motor(Axis #10) Input Module";
+                        if (inputNameETC[nameIndex] == "Tube Guide Sensor #3") GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = "12";
+                        else if (inputNameETC[nameIndex] == "Tube Guide Sensor #4") GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = "13";
+                        else if (inputNameETC[nameIndex] == "Tube Guide Sensor #5")
+                        {
+                            GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = "12";
+                        }
+                        else if (inputNameETC[nameIndex] == "Tube Guide Sensor #6")
+                        {
+                            GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = "13";
+                        }
+                    }
+                    else if (inputNameETC[nameIndex] == "Tube Guide Sensor #7" || inputNameETC[nameIndex] == "Tube Guide Sensor #8")
+                    {
+                        GV_InputModule_ETC.Rows[i].Cells[(int)CellName.MODULE].Value = "Motor(Axis #11) Input Module";
+                        if (inputNameETC[nameIndex] == "Tube Guide Sensor #7") GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = "12";
+                        else if (inputNameETC[nameIndex] == "Tube Guide Sensor #8") GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = "13";
+                    }
+                    else
+                    {
+                        GV_InputModule_ETC.Rows[i].Cells[(int)CellName.MODULE].Value = "Analog Input Module";
+                        GV_InputModule_ETC.Rows[i].Cells[(int)CellName.BIT].Value = subIndex.ToString();
+                        subIndex++;
+                    }
+
+                    GV_InputModule_ETC.Rows[i].Cells[(int)CellName.ONOFF].Value = imageOff;
+
+                    nameIndex++; i++;
+                }
+
+                nameIndex = 0; i = 0;
+                while (nameIndex < 32)
+                {
+                    while (nameIndex < 32 && outputName0[nameIndex] == "")
+                    {
+                        nameIndex++;
+                    }
+                    if (nameIndex == 32) break;
+                    GV_OutputModule.Rows.Add();
+                    GV_OutputModule.Rows[i].Cells[(int)CellName.NAME].Value = outputName0[nameIndex];
+                    GV_OutputModule.Rows[i].Cells[(int)CellName.MODULE].Value = "Axt Output Module #0";
+                    GV_OutputModule.Rows[i].Cells[(int)CellName.BIT].Value = nameIndex.ToString();
+                    GV_OutputModule.Rows[i].Cells[(int)CellName.ONOFF].Value = imageOff;
+                    nameIndex++; i++;
+                }
+
+                nameIndex = 0; i = 0; subIndex = 0;
+                while (nameIndex < 3)       // 4
+                {
+                    while (nameIndex < 3 && outputNameETC[nameIndex] == "")     // 4
+                    {
+                        nameIndex++;
+                    }
+                    if (nameIndex == 3) break;      // 4
+                    GV_OutputModuleETC.Rows.Add();
+                    GV_OutputModuleETC.Rows[i].Cells[(int)CellName.NAME].Value = outputNameETC[nameIndex];
+                    if (outputNameETC[nameIndex] == "Input Conveyor Belt" || outputNameETC[nameIndex] == "Work Conveyor Belt" || outputNameETC[nameIndex] == "Output Conveyor Belt")
+                    {
+                        GV_OutputModuleETC.Rows[i].Cells[(int)CellName.MODULE].Value = "Motor(Axis #9) Output Module";
+                        GV_OutputModuleETC.Rows[i].Cells[(int)CellName.BIT].Value = subIndex.ToString();
+                        subIndex++;
+                    }
+                    else
+                    {
+                        GV_OutputModuleETC.Rows[i].Cells[(int)CellName.MODULE].Value = "Analog Output Module";
+                        GV_OutputModuleETC.Rows[i].Cells[(int)CellName.BIT].Value = "0";
+                    }
+
+                    GV_OutputModuleETC.Rows[i].Cells[(int)CellName.ONOFF].Value = imageOff;
+                    nameIndex++; i++;
+                }
+
+                GV_InputModule_0.CurrentCell = null;
             }
-
-            nameIndex = 0; i = 0;
-            while (nameIndex < 32)
+            catch
             {
-                while (nameIndex < 32 && outputName0[nameIndex] == "")
-                {
-                    nameIndex++;
-                }
-                if (nameIndex == 32) break;
-                GV_OutputModule.Rows.Add();
-                GV_OutputModule.Rows[i].Cells[(int)CellName.NAME].Value = outputName0[nameIndex];
-                GV_OutputModule.Rows[i].Cells[(int)CellName.MODULE].Value = "Axt Output Module #0";
-                GV_OutputModule.Rows[i].Cells[(int)CellName.BIT].Value = nameIndex.ToString();
-                GV_OutputModule.Rows[i].Cells[(int)CellName.ONOFF].Value = imageOff;
-                nameIndex++; i++;
+
             }
-
-            nameIndex = 0; i = 0; subIndex = 0;
-            while (nameIndex < 3)       // 4
-            {
-                while (nameIndex < 3 && outputNameETC[nameIndex] == "")     // 4
-                {
-                    nameIndex++;
-                }
-                if (nameIndex == 3) break;      // 4
-                GV_OutputModuleETC.Rows.Add();
-                GV_OutputModuleETC.Rows[i].Cells[(int)CellName.NAME].Value = outputNameETC[nameIndex];
-                if (outputNameETC[nameIndex] == "Input Conveyor Belt" || outputNameETC[nameIndex] == "Work Conveyor Belt" || outputNameETC[nameIndex] == "Output Conveyor Belt")
-                {
-                    GV_OutputModuleETC.Rows[i].Cells[(int)CellName.MODULE].Value = "Motor(Axis #9) Output Module";
-                    GV_OutputModuleETC.Rows[i].Cells[(int)CellName.BIT].Value = subIndex.ToString();
-                    subIndex++;
-                }
-                else
-                {
-                    GV_OutputModuleETC.Rows[i].Cells[(int)CellName.MODULE].Value = "Analog Output Module";
-                    GV_OutputModuleETC.Rows[i].Cells[(int)CellName.BIT].Value = "0";
-                }
-
-                GV_OutputModuleETC.Rows[i].Cells[(int)CellName.ONOFF].Value = imageOff;
-                nameIndex++; i++;
-            }
-
-            GV_InputModule_0.CurrentCell = null;
         }
 
         private void Cotrol_Click(object sender, EventArgs e)
@@ -424,22 +434,17 @@ namespace PSA_Application
                 mc.IN.SF.MG_RESET(UnitCodeSFMG.MG1, out ret.b, out ret.message);
                 if (ret.b) imageDisp = imageOn;
                 else imageDisp = imageOff;
-                GV_InputModule_1.Rows[18].Cells[(int)CellName.ONOFF].Value = imageDisp;
+                GV_InputModule_1.Rows[14].Cells[(int)CellName.ONOFF].Value = imageDisp;
 
                 mc.IN.SF.MG_RESET(UnitCodeSFMG.MG2, out ret.b, out ret.message);
                 if (ret.b) imageDisp = imageOn;
                 else imageDisp = imageOff;
-                GV_InputModule_1.Rows[19].Cells[(int)CellName.ONOFF].Value = imageDisp;
+                GV_InputModule_1.Rows[15].Cells[(int)CellName.ONOFF].Value = imageDisp;
 
                 mc.IN.PD.UP_SENSOR_CHK(out ret.b, out ret.message);
                 if (ret.b) imageDisp = imageOn;
                 else imageDisp = imageOff;
-                GV_InputModule_1.Rows[21].Cells[(int)CellName.ONOFF].Value = imageDisp;
-
-                if (mc.swcontrol.mechanicalRevision == 0)
-                {
-                    
-                }
+                GV_InputModule_1.Rows[16].Cells[(int)CellName.ONOFF].Value = imageDisp;
 
                 #endregion
             }
@@ -476,9 +481,6 @@ namespace PSA_Application
                 else imageDisp = imageOff;
                 GV_InputModule_ETC.Rows[5].Cells[(int)CellName.ONOFF].Value = imageDisp;
 
-                //if (mc.swcontrol.mechanicalRevision == 0)
-                //{
-                //}
                 #endregion
             }
 

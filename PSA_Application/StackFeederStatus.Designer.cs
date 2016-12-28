@@ -64,29 +64,29 @@
             this.PN_MGZ2.BackColor = System.Drawing.Color.LightSteelBlue;
             this.PN_MGZ2.Controls.Add(this.PB_Tube3);
             this.PN_MGZ2.Controls.Add(this.PB_Tube4);
-            this.PN_MGZ2.Location = new System.Drawing.Point(144, 8);
+            this.PN_MGZ2.Location = new System.Drawing.Point(149, 8);
             this.PN_MGZ2.Name = "PN_MGZ2";
-            this.PN_MGZ2.Size = new System.Drawing.Size(130, 122);
+            this.PN_MGZ2.Size = new System.Drawing.Size(140, 122);
             this.PN_MGZ2.TabIndex = 17;
             this.PN_MGZ2.Click += new System.EventHandler(this.Tube_Click);
             // 
             // PB_Tube3
             // 
             this.PB_Tube3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PB_Tube3.Location = new System.Drawing.Point(10, 3);
+            this.PB_Tube3.Location = new System.Drawing.Point(8, 4);
             this.PB_Tube3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.PB_Tube3.Name = "PB_Tube3";
-            this.PB_Tube3.Size = new System.Drawing.Size(50, 115);
+            this.PB_Tube3.Size = new System.Drawing.Size(60, 115);
             this.PB_Tube3.TabIndex = 12;
             this.PB_Tube3.Value = 0;
             // 
             // PB_Tube4
             // 
             this.PB_Tube4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PB_Tube4.Location = new System.Drawing.Point(69, 3);
+            this.PB_Tube4.Location = new System.Drawing.Point(71, 4);
             this.PB_Tube4.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.PB_Tube4.Name = "PB_Tube4";
-            this.PB_Tube4.Size = new System.Drawing.Size(50, 115);
+            this.PB_Tube4.Size = new System.Drawing.Size(60, 115);
             this.PB_Tube4.TabIndex = 13;
             this.PB_Tube4.Value = 0;
             // 
@@ -95,18 +95,18 @@
             this.PN_MGZ1.BackColor = System.Drawing.Color.LightSteelBlue;
             this.PN_MGZ1.Controls.Add(this.PB_Tube1);
             this.PN_MGZ1.Controls.Add(this.PB_Tube2);
-            this.PN_MGZ1.Location = new System.Drawing.Point(11, 8);
+            this.PN_MGZ1.Location = new System.Drawing.Point(6, 8);
             this.PN_MGZ1.Name = "PN_MGZ1";
-            this.PN_MGZ1.Size = new System.Drawing.Size(130, 122);
+            this.PN_MGZ1.Size = new System.Drawing.Size(140, 122);
             this.PN_MGZ1.TabIndex = 16;
             // 
             // PB_Tube1
             // 
             this.PB_Tube1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PB_Tube1.Location = new System.Drawing.Point(10, 3);
+            this.PB_Tube1.Location = new System.Drawing.Point(9, 4);
             this.PB_Tube1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.PB_Tube1.Name = "PB_Tube1";
-            this.PB_Tube1.Size = new System.Drawing.Size(50, 115);
+            this.PB_Tube1.Size = new System.Drawing.Size(60, 115);
             this.PB_Tube1.TabIndex = 0;
             this.PB_Tube1.Value = 0;
             this.PB_Tube1.Click += new System.EventHandler(this.Tube_Click);
@@ -114,17 +114,16 @@
             // PB_Tube2
             // 
             this.PB_Tube2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PB_Tube2.Location = new System.Drawing.Point(69, 3);
+            this.PB_Tube2.Location = new System.Drawing.Point(72, 4);
             this.PB_Tube2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.PB_Tube2.Name = "PB_Tube2";
-            this.PB_Tube2.Size = new System.Drawing.Size(50, 115);
+            this.PB_Tube2.Size = new System.Drawing.Size(60, 115);
             this.PB_Tube2.TabIndex = 9;
             this.PB_Tube2.Value = 0;
             // 
             // StackFeederStatus
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.Controls.Add(this.GB_);
             this.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

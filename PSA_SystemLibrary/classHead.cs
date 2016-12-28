@@ -21949,13 +21949,11 @@ namespace PSA_SystemLibrary
 			double tmp;
 			tmp = REF0;
 			#region tube select
-			if (mc.swcontrol.mechanicalRevision == 0)
+			if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG)
 			{
-				if (tubeNumber == UnitCodeSF.SF1) tmp += (double)MP_HD_X.SF_TUBE1;
-				else if (tubeNumber == UnitCodeSF.SF2) tmp += (double)MP_HD_X.SF_TUBE2;
-				else if (tubeNumber == UnitCodeSF.SF3) tmp += (double)MP_HD_X.SF_TUBE3;
-				else if (tubeNumber == UnitCodeSF.SF4) tmp += (double)MP_HD_X.SF_TUBE4;
-				else tmp += (double)MP_HD_X.SF_TUBE1;
+                if (tubeNumber == UnitCodeSF.SF1) tmp += (double)MP_HD_X.SF_TUBE1_2SLOT;
+                else if (tubeNumber == UnitCodeSF.SF2) tmp += (double)MP_HD_X.SF_TUBE2_2SLOT;
+                else tmp += (double)MP_HD_X.SF_TUBE1_2SLOT;
 			}
 			else
 			{
@@ -22393,13 +22391,11 @@ namespace PSA_SystemLibrary
 			double tmp;
 			tmp = REF0;
 			#region tube select
-			if (mc.swcontrol.mechanicalRevision == 0)
+			if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG)
 			{
-				if (tubeNumber == UnitCodeSF.SF1) tmp += (double)MP_HD_X.SF_TUBE1 + mc.para.HD.pick.offset[(int)UnitCodeSF.SF1].x.value;
-				else if (tubeNumber == UnitCodeSF.SF2) tmp += (double)MP_HD_X.SF_TUBE2 + mc.para.HD.pick.offset[(int)UnitCodeSF.SF2].x.value;
-				else if (tubeNumber == UnitCodeSF.SF3) tmp += (double)MP_HD_X.SF_TUBE3 + mc.para.HD.pick.offset[(int)UnitCodeSF.SF3].x.value;
-				else if (tubeNumber == UnitCodeSF.SF4) tmp += (double)MP_HD_X.SF_TUBE4 + mc.para.HD.pick.offset[(int)UnitCodeSF.SF4].x.value;
-				else tmp += (double)MP_HD_X.SF_TUBE1;
+                if (tubeNumber == UnitCodeSF.SF1) tmp += (double)MP_HD_X.SF_TUBE1_2SLOT + mc.para.HD.pick.offset[(int)UnitCodeSF.SF1].x.value;
+                else if (tubeNumber == UnitCodeSF.SF2) tmp += (double)MP_HD_X.SF_TUBE2_2SLOT + mc.para.HD.pick.offset[(int)UnitCodeSF.SF2].x.value;
+                else tmp += (double)MP_HD_X.SF_TUBE1_2SLOT;
 			}
 			else
 			{
@@ -22462,7 +22458,7 @@ namespace PSA_SystemLibrary
 			{
 				double tmp;
 				tmp = REF0;
-				if (mc.swcontrol.mechanicalRevision == 0)
+				if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG)
 					tmp += (double)MP_HD_X.WASTE;
 				else
 					tmp += (double)MP_HD_X.WASTE_4SLOT;
@@ -22643,7 +22639,7 @@ namespace PSA_SystemLibrary
 			{
 				double tmp;
 				tmp = REF0;
-				if (mc.swcontrol.mechanicalRevision == 0)
+                if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG)
 					tmp += (double)MP_HD_Y.WASTE;
 				else
 					tmp += (double)MP_HD_Y.WASTE_4SLOT;
@@ -23039,13 +23035,11 @@ namespace PSA_SystemLibrary
 			double tmp;
 			tmp = REF0;
 			#region tube select
-			if (mc.swcontrol.mechanicalRevision == 0)
+            if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG)
 			{
-				if (tubeNumber == 1) tmp += (double)MP_HD_X.SF_TUBE1;
-				else if (tubeNumber == 2) tmp += (double)MP_HD_X.SF_TUBE2;
-				else if (tubeNumber == 3) tmp += (double)MP_HD_X.SF_TUBE3;
-				else if (tubeNumber == 4) tmp += (double)MP_HD_X.SF_TUBE4;
-				else tmp += (double)MP_HD_X.SF_TUBE1;
+                if (tubeNumber == 1) tmp += (double)MP_HD_X.SF_TUBE1_2SLOT;
+                else if (tubeNumber == 2) tmp += (double)MP_HD_X.SF_TUBE2_2SLOT;
+                else tmp += (double)MP_HD_X.SF_TUBE1_2SLOT;
 			}
 			else
 			{

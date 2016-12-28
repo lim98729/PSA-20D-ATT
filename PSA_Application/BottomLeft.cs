@@ -260,73 +260,41 @@ namespace PSA_Application
 				TB_PickCountT2.Text = mc.para.pick[1].count.ToString();
 				TB_PickCountT3.Text = mc.para.pick[2].count.ToString();
 				TB_PickCountT4.Text = mc.para.pick[3].count.ToString();
-				TB_PickCountT5.Text = mc.para.pick[4].count.ToString();
-				TB_PickCountT6.Text = mc.para.pick[5].count.ToString();
-				TB_PickCountT7.Text = mc.para.pick[6].count.ToString();
-				TB_PickCountT8.Text = mc.para.pick[7].count.ToString();
 
 				TB_ErrorCountT1.Text = mc.para.pick[0].error.ToString();
 				TB_ErrorCountT2.Text = mc.para.pick[1].error.ToString();
 				TB_ErrorCountT3.Text = mc.para.pick[2].error.ToString();
 				TB_ErrorCountT4.Text = mc.para.pick[3].error.ToString();
-				TB_ErrorCountT5.Text = mc.para.pick[4].error.ToString();
-				TB_ErrorCountT6.Text = mc.para.pick[5].error.ToString();
-				TB_ErrorCountT7.Text = mc.para.pick[6].error.ToString();
-				TB_ErrorCountT8.Text = mc.para.pick[7].error.ToString();
 
 				TB_AirErrorT1.Text = mc.para.pick[0].air.ToString();
 				TB_AirErrorT2.Text = mc.para.pick[1].air.ToString();
 				TB_AirErrorT3.Text = mc.para.pick[2].air.ToString();
 				TB_AirErrorT4.Text = mc.para.pick[3].air.ToString();
-				TB_AirErrorT5.Text = mc.para.pick[4].air.ToString();
-				TB_AirErrorT6.Text = mc.para.pick[5].air.ToString();
-				TB_AirErrorT7.Text = mc.para.pick[6].air.ToString();
-				TB_AirErrorT8.Text = mc.para.pick[7].air.ToString();
 
 				TB_VisErrorT1.Text = mc.para.pick[0].vision.ToString();
 				TB_VisErrorT2.Text = mc.para.pick[1].vision.ToString();
 				TB_VisErrorT3.Text = mc.para.pick[2].vision.ToString();
 				TB_VisErrorT4.Text = mc.para.pick[3].vision.ToString();
-				TB_VisErrorT5.Text = mc.para.pick[4].vision.ToString();
-				TB_VisErrorT6.Text = mc.para.pick[5].vision.ToString();
-				TB_VisErrorT7.Text = mc.para.pick[6].vision.ToString();
-				TB_VisErrorT8.Text = mc.para.pick[7].vision.ToString();
 
 				TB_SizeErrorT1.Text = mc.para.pick[0].size.ToString();
 				TB_SizeErrorT2.Text = mc.para.pick[1].size.ToString();
 				TB_SizeErrorT3.Text = mc.para.pick[2].size.ToString();
 				TB_SizeErrorT4.Text = mc.para.pick[3].size.ToString();
-				TB_SizeErrorT5.Text = mc.para.pick[4].size.ToString();
-				TB_SizeErrorT6.Text = mc.para.pick[5].size.ToString();
-				TB_SizeErrorT7.Text = mc.para.pick[6].size.ToString();
-				TB_SizeErrorT8.Text = mc.para.pick[7].size.ToString();
 
 				TB_PosErrorT1.Text = mc.para.pick[0].pos.ToString();
 				TB_PosErrorT2.Text = mc.para.pick[1].pos.ToString();
 				TB_PosErrorT3.Text = mc.para.pick[2].pos.ToString();
 				TB_PosErrorT4.Text = mc.para.pick[3].pos.ToString();
-				TB_PosErrorT5.Text = mc.para.pick[4].pos.ToString();
-				TB_PosErrorT6.Text = mc.para.pick[5].pos.ToString();
-				TB_PosErrorT7.Text = mc.para.pick[6].pos.ToString();
-				TB_PosErrorT8.Text = mc.para.pick[7].pos.ToString();
 
 				TB_ChfErrorT1.Text = mc.para.pick[0].chamfer.ToString();
 				TB_ChfErrorT2.Text = mc.para.pick[1].chamfer.ToString();
 				TB_ChfErrorT3.Text = mc.para.pick[2].chamfer.ToString();
 				TB_ChfErrorT4.Text = mc.para.pick[3].chamfer.ToString();
-				TB_ChfErrorT5.Text = mc.para.pick[4].chamfer.ToString();
-				TB_ChfErrorT6.Text = mc.para.pick[5].chamfer.ToString();
-				TB_ChfErrorT7.Text = mc.para.pick[6].chamfer.ToString();
-				TB_ChfErrorT8.Text = mc.para.pick[7].chamfer.ToString();
 
 				TB_CircleErrorT1.Text = mc.para.pick[0].circle.ToString();
 				TB_CircleErrorT2.Text = mc.para.pick[1].circle.ToString();
 				TB_CircleErrorT3.Text = mc.para.pick[2].circle.ToString();
 				TB_CircleErrorT4.Text = mc.para.pick[3].circle.ToString();
-				TB_CircleErrorT5.Text = mc.para.pick[4].circle.ToString();
-				TB_CircleErrorT6.Text = mc.para.pick[5].circle.ToString();
-				TB_CircleErrorT7.Text = mc.para.pick[6].circle.ToString();
-				TB_CircleErrorT8.Text = mc.para.pick[7].circle.ToString();
 			}
 			timerRefresh.Enabled = true;
 		}

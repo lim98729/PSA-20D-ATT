@@ -54,7 +54,7 @@ namespace PSA_SystemLibrary
         {
             get
             {
-                return "att20161227A";
+                return "att20161228A";
             }
         }
         //public static bool START;
@@ -4728,7 +4728,7 @@ namespace PSA_SystemLibrary
                     HD.pick._driver2.delay.value = HD.pick.driver2.delay.value;
                     HD.pick._driver2.force.value = HD.pick.driver2.force.value;
 
-                    for (int i = 0; i < 8; i++)
+                    for (int i = 0; i < 4; i++)
                     {
                         HD.pick._offset[0,i] = HD.pick.offset[i].x.value;
                         HD.pick._offset[1,i] = HD.pick.offset[i].y.value;
@@ -5160,7 +5160,7 @@ namespace PSA_SystemLibrary
                     if (HD.pick._driver2.delay.value != HD.pick.driver2.delay.value) { b = true; return b; }
                     if (HD.pick._driver2.force.value != HD.pick.driver2.force.value) { b = true; return b; }
 
-                    for (int i = 0; i < 8; i++)
+                    for (int i = 0; i < 4; i++)
                     {
                         if (HD.pick._offset[0,i] != HD.pick.offset[i].x.value) { b = true; return b; }
                         if (HD.pick._offset[1,i] != HD.pick.offset[i].y.value) { b = true; return b; }
@@ -5601,7 +5601,7 @@ namespace PSA_SystemLibrary
                     HD.pick.driver2.delay.value = HD.pick._driver2.delay.value;
                     HD.pick.driver2.force.value = HD.pick._driver2.force.value;
 
-                    for (int i = 0; i < 8; i++)
+                    for (int i = 0; i < 4; i++)
                     {
                          HD.pick.offset[i].x.value= HD.pick._offset[0, i];
                          HD.pick.offset[i].y.value= HD.pick._offset[1, i];
@@ -6220,7 +6220,7 @@ namespace PSA_SystemLibrary
                 public int circle;
             }
 
-            public static pickInfo[] pick = new pickInfo[8];
+            public static pickInfo[] pick = new pickInfo[4];
 
             public struct runInfo
             {
@@ -6288,7 +6288,7 @@ namespace PSA_SystemLibrary
 
                     string tmpstr;
                     runInfoCtl.sectionName = "PickInfo";
-                    for (int i = 0; i < 8; i++)
+                    for (int i = 0; i < 4; i++)
                     {
                         tmpstr = String.Format("T{0}Count", i + 1);
                         pick[i].count = runInfoCtl.GetInt(tmpstr, 0);
@@ -6428,7 +6428,7 @@ namespace PSA_SystemLibrary
 
                     string tmpstr;
                     runInfoCtl.sectionName = "PickInfo";
-                    for (int i = 0; i < 8; i++)
+                    for (int i = 0; i < 4; i++)
                     {
                         tmpstr = String.Format("T{0}Count", i + 1);
                         runInfoCtl.WriteInt(tmpstr, pick[i].count);
@@ -6642,7 +6642,7 @@ namespace PSA_SystemLibrary
                 {
                     string tmpstr;
                     runInfoCtl.sectionName = "PickInfo";
-                    for (int i = 0; i < 8; i++)
+                    for (int i = 0; i < 4; i++)
                     {
                         pick[i].count = 0;
                         tmpstr = String.Format("T{0}Count", i + 1);

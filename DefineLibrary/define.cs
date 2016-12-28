@@ -2466,10 +2466,8 @@ namespace DefineLibrary
 		BD_EDGE_FR = 359500,
 		BD_EDGE_RR = 20500,
 
-		SF_TUBE1 = 48000,
-		SF_TUBE2 = 83000,
-		SF_TUBE3 = 118000,
-		SF_TUBE4 = 153000,
+        SF_TUBE1_2SLOT = 48000,
+        SF_TUBE2_2SLOT = 83000,
 		
 		SF_TUBE1_4SLOT = 64500,		// 35500 + 29000,
 		SF_TUBE2_4SLOT = SF_TUBE1_4SLOT + 70000,		//134500,	// 105500 + 29000,
@@ -2508,15 +2506,18 @@ namespace DefineLibrary
 		TOUCHPROBE = 0,
 		LOADCELL = 0,
 		BD_EDGE = 80000,
-		
+
+        SF_TUBE1_2SLOT = -130000,
+        SF_TUBE2_2SLOT = -130000,
+
 		SF_TUBE1 = -130000,
-		SF_TUBE2 = -130000,
-		SF_TUBE3 = -130000,
-		SF_TUBE4 = -130000,
-		SF_TUBE5 = -130000,
-		SF_TUBE6 = -130000,
-		SF_TUBE7 = -130000,
-		SF_TUBE8 = -130000,
+        SF_TUBE2 = -130000,
+        SF_TUBE3 = -130000,
+        SF_TUBE4 = -130000,
+        SF_TUBE5 = -130000,
+        SF_TUBE6 = -130000,
+        SF_TUBE7 = -130000,
+        SF_TUBE8 = -130000,
 
 		N_LIMIT = -150000,
 		N_STOPPER = -160500,
@@ -2832,6 +2833,12 @@ namespace DefineLibrary
 		FAIL,
 	}
 	#endregion
+
+    public enum CUSTOMER
+    {
+        SAMSUNG = 0,
+        CHIPPAC = 1,
+    }
 
     public class classBoard
     {

@@ -196,11 +196,11 @@
             this.LB_AxisInfo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LB_AxisInfo.Font = new System.Drawing.Font("Arial Black", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_AxisInfo.ForeColor = System.Drawing.Color.White;
-            this.LB_AxisInfo.Location = new System.Drawing.Point(404, 7);
+            this.LB_AxisInfo.Location = new System.Drawing.Point(414, 7);
             this.LB_AxisInfo.Name = "LB_AxisInfo";
-            this.LB_AxisInfo.Size = new System.Drawing.Size(80, 22);
+            this.LB_AxisInfo.Size = new System.Drawing.Size(131, 22);
             this.LB_AxisInfo.TabIndex = 208;
-            this.LB_AxisInfo.Text = "Axis";
+            this.LB_AxisInfo.Text = "Axis Info";
             this.LB_AxisInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LB_AxisInfo.DoubleClick += new System.EventHandler(this.LB_AxisInfo_DoubleClick);
             // 
@@ -212,7 +212,7 @@
             this.LB_TMS.ForeColor = System.Drawing.Color.White;
             this.LB_TMS.Location = new System.Drawing.Point(343, 7);
             this.LB_TMS.Name = "LB_TMS";
-            this.LB_TMS.Size = new System.Drawing.Size(56, 22);
+            this.LB_TMS.Size = new System.Drawing.Size(64, 22);
             this.LB_TMS.TabIndex = 207;
             this.LB_TMS.Text = "TMS";
             this.LB_TMS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -237,12 +237,13 @@
             this.LB_IOInfo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LB_IOInfo.Font = new System.Drawing.Font("Arial Black", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_IOInfo.ForeColor = System.Drawing.Color.White;
-            this.LB_IOInfo.Location = new System.Drawing.Point(489, 7);
+            this.LB_IOInfo.Location = new System.Drawing.Point(528, 12);
             this.LB_IOInfo.Name = "LB_IOInfo";
             this.LB_IOInfo.Size = new System.Drawing.Size(55, 22);
             this.LB_IOInfo.TabIndex = 209;
             this.LB_IOInfo.Text = "IO";
             this.LB_IOInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.LB_IOInfo.Visible = false;
             this.LB_IOInfo.DoubleClick += new System.EventHandler(this.LB_IOInfo_DoubleClick);
             // 
             // LB_ErrorReport
@@ -282,7 +283,6 @@
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.RB_PressMode);
             this.Controls.Add(this.LB_ErrorReport);
-            this.Controls.Add(this.LB_IOInfo);
             this.Controls.Add(this.LB_AxisInfo);
             this.Controls.Add(this.LB_TMS);
             this.Controls.Add(this.LB_SECSGEM);
@@ -295,6 +295,7 @@
             this.Controls.Add(this.label);
             this.Controls.Add(this.BT_Start);
             this.Controls.Add(this.BT_PowerOff);
+            this.Controls.Add(this.LB_IOInfo);
             this.Font = new System.Drawing.Font("Arial", 8.25F);
             this.Name = "UpRight";
             this.Size = new System.Drawing.Size(665, 93);

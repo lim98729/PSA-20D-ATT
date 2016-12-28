@@ -393,14 +393,11 @@ namespace PSA_Application
 			this.Left = 620;
 			this.Top = 170;
 
-            if(mc.swcontrol.mechanicalRevision == 1)
-            {
-                BT_Pickup.Visible = false;
-                BT_Home.Visible = false;
-                BT_Place.Visible = false;
-                CB_ZHeight.Enabled = false;
-                CB_ZHeight.Checked = true;
-            }
+            BT_Pickup.Visible = false;
+            BT_Home.Visible = false;
+            BT_Place.Visible = false;
+            CB_ZHeight.Enabled = false;
+            CB_ZHeight.Checked = true;
 
 			for (int ix = 0; ix < 50; ix++)
 			{

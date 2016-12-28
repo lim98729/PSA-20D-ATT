@@ -112,13 +112,13 @@ namespace PSA_Application
 				if (ret.message != RetMessage.OK) image = Properties.Resources.Fail;
 				else if (ret.b) image = Properties.Resources.Green_LED;
 				else image = Properties.Resources.Green_LED_OFF;
-				LB_IN_TUBE3.Image = image;
+				LB_IN_TUBE_3.Image = image;
 
 				mc.IN.SF.TUBE_DET(UnitCodeSF.SF4, out ret.b, out ret.message);
 				if (ret.message != RetMessage.OK) image = Properties.Resources.Fail;
 				else if (ret.b) image = Properties.Resources.Green_LED;
 				else image = Properties.Resources.Green_LED_OFF;
-				LB_IN_TUBE4.Image = image;
+				LB_IN_TUBE_4.Image = image;
 				#endregion
 
 				#region OUT
@@ -274,31 +274,20 @@ namespace PSA_Application
 
 		private void BottomRight_StackFeeder_Load(object sender, EventArgs e)
 		{
-			// SF가 4개인 경우와 8개인 경우 Display하는 것이 다르다.
-			// IO Line은 4Slot인 경우 5,6이 3,4에 Mapping된다.
             mc.sf.readyPosition = 0;
-			if (mc.swcontrol.mechanicalRevision == 1)
+			if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG)
 			{
-                //LB_IN_GUIDE3.Visible = false;
-                //LB_IN_GUIDE4.Visible = false;
-                
-                //LB_IN_TUBE3.Visible = false;
-                //LB_IN_TUBE4.Visible = false;
-                //LB_IN_TUBE7.Visible = false;
-                //LB_IN_TUBE8.Visible = false;
+                LB_IN_GUIDE3.Visible = false;
+                LB_IN_GUIDE4.Visible = false;
+                SL_IN_GUIDE3.Visible = false;
+                SL_IN_GUIDE4.Visible = false;
 
+                TS_IN4.Visible = false;
 
-                //LB_IN_TUBE3.Text = "TUBE 3";
-                //LB_IN_TUBE_4.Text = "TUBE 4";
-
-                //BT_PositionSelect_Tube1.Visible = false;
-                //BT_PositionSelect_Tube2.Visible = false;
-                //BT_PositionSelect_Tube3.Visible = false;
-                //BT_PositionSelect_Tube4.Visible = false;
-                //BT_PositionSelect_Tube5.Visible = false;
-                //BT_PositionSelect_Tube6.Visible = false;
-                //BT_PositionSelect_Tube7.Visible = false;
-                //BT_PositionSelect_Tube8.Visible = false;
+                BT_OUT_TUBEBLOW3.Visible = false;
+                BT_OUT_TUBEBLOW4.Visible = false;
+                SL_OUT_TUBEBLOW3.Visible = false;
+                SL_OUT_TUBEBLOW4.Visible = false;
 			}
 		}
 	}

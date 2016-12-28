@@ -147,30 +147,24 @@ namespace PSA_Application
 				}
 				if (jogMode == JOGXYZ_MODE.HD_PICK_OFFSET_SF3)
 				{
-					//if (mc.swcontrol.mechanicalRevision == 0)
-					{
-						mc.para.HD.pick.offset[(int)UnitCodeSF.SF3].x.value = dataX.value;
-						mc.para.HD.pick.offset[(int)UnitCodeSF.SF3].y.value = dataY.value;
-						mc.para.HD.pick.offset[(int)UnitCodeSF.SF3].z.value = dataZ.value;
-						posX = mc.hd.tool.tPos.x.PICK(UnitCodeSF.SF3);
-						posY = mc.hd.tool.tPos.y.PICK(UnitCodeSF.SF3);
-						posZ = mc.hd.tool.tPos.z.PICK(UnitCodeSF.SF3);
-					}
+					mc.para.HD.pick.offset[(int)UnitCodeSF.SF3].x.value = dataX.value;
+					mc.para.HD.pick.offset[(int)UnitCodeSF.SF3].y.value = dataY.value;
+					mc.para.HD.pick.offset[(int)UnitCodeSF.SF3].z.value = dataZ.value;
+					posX = mc.hd.tool.tPos.x.PICK(UnitCodeSF.SF3);
+					posY = mc.hd.tool.tPos.y.PICK(UnitCodeSF.SF3);
+					posZ = mc.hd.tool.tPos.z.PICK(UnitCodeSF.SF3);
 					#region moving
 					mc.hd.tool.jogMoveXYZ(posX, posY, posZ, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 					#endregion
 				}
 				if (jogMode == JOGXYZ_MODE.HD_PICK_OFFSET_SF4)
 				{
-					//if (mc.swcontrol.mechanicalRevision == 0)
-					{
-						mc.para.HD.pick.offset[(int)UnitCodeSF.SF4].x.value = dataX.value;
-						mc.para.HD.pick.offset[(int)UnitCodeSF.SF4].y.value = dataY.value;
-						mc.para.HD.pick.offset[(int)UnitCodeSF.SF4].z.value = dataZ.value;
-						posX = mc.hd.tool.tPos.x.PICK(UnitCodeSF.SF4);
-						posY = mc.hd.tool.tPos.y.PICK(UnitCodeSF.SF4);
-						posZ = mc.hd.tool.tPos.z.PICK(UnitCodeSF.SF4);
-					}
+					mc.para.HD.pick.offset[(int)UnitCodeSF.SF4].x.value = dataX.value;
+					mc.para.HD.pick.offset[(int)UnitCodeSF.SF4].y.value = dataY.value;
+					mc.para.HD.pick.offset[(int)UnitCodeSF.SF4].z.value = dataZ.value;
+					posX = mc.hd.tool.tPos.x.PICK(UnitCodeSF.SF4);
+					posY = mc.hd.tool.tPos.y.PICK(UnitCodeSF.SF4);
+					posZ = mc.hd.tool.tPos.z.PICK(UnitCodeSF.SF4);
 					#region moving
 					mc.hd.tool.jogMoveXYZ(posX, posY, posZ, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 					#endregion

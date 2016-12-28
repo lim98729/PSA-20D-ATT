@@ -176,6 +176,33 @@ namespace PSA_SystemLibrary
 				return true;
 			}
 		}
+
+        void InitSFCompData(UnitCodeSFMG mg)
+        {
+            if (mg == UnitCodeSFMG.MG1)
+            {
+                if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG) tubeNumber = 1;
+                else if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.CHIPPAC) tubeNumber = 2;
+
+                for (int i = 0; i < tubeNumber; i++)        // MGZ#1 이므로 0~3까지(0~1까지)
+                {
+                    mc.para.HD.pick.pickPosComp[i].x.value = 0;
+                    mc.para.HD.pick.pickPosComp[i].y.value = 0;
+                }
+            }
+            else
+            {
+                if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG) tubeNumber = 2;
+                else if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.CHIPPAC) tubeNumber = 4;
+
+                for (int i = tubeNumber / 2; i < tubeNumber; i++)        // MGZ#2
+                {
+                    mc.para.HD.pick.pickPosComp[i].x.value = 0;
+                    mc.para.HD.pick.pickPosComp[i].y.value = 0;
+                }
+            }
+            magazineClear(mg);
+        }
 		// get working tube number(if there is readied tube, change to working tube sequentially
 		public UnitCodeSF workingTubeNumber
 		{
@@ -195,22 +222,35 @@ namespace PSA_SystemLibrary
 		}
 		public void magazineClear(UnitCodeSFMG unitCode)
 		{
-			if (unitCode == UnitCodeSFMG.MG1)
-			{
-//                if(mc.swcontrol.mechanicalRevision == 1)
+            if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.CHIPPAC)
+            {
+                if (unitCode == UnitCodeSFMG.MG1)
                 {
-                }
-                tubeStatus(UnitCodeSF.SF1, SF_TUBE_STATUS.INVALID);
-                tubeStatus(UnitCodeSF.SF2, SF_TUBE_STATUS.INVALID);
+                    tubeStatus(UnitCodeSF.SF1, SF_TUBE_STATUS.INVALID);
+                    tubeStatus(UnitCodeSF.SF2, SF_TUBE_STATUS.INVALID);
 
-				mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG1, true, out ret.message);
-			}
-			if (unitCode == UnitCodeSFMG.MG2)
-			{
-				tubeStatus(UnitCodeSF.SF3, SF_TUBE_STATUS.INVALID);
-				tubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.INVALID);
-				mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG2, true, out ret.message);
-			}
+                    mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG1, true, out ret.message);
+                }
+                if (unitCode == UnitCodeSFMG.MG2)
+                {
+                    tubeStatus(UnitCodeSF.SF3, SF_TUBE_STATUS.INVALID);
+                    tubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.INVALID);
+                    mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG2, true, out ret.message);
+                }
+            }
+            else if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG)
+            {
+                if (unitCode == UnitCodeSFMG.MG1)
+                {
+                    tubeStatus(UnitCodeSF.SF1, SF_TUBE_STATUS.INVALID);
+                    mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG1, true, out ret.message);
+                }
+                if (unitCode == UnitCodeSFMG.MG2)
+                {
+                    tubeStatus(UnitCodeSF.SF2, SF_TUBE_STATUS.INVALID);
+                    mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG2, true, out ret.message);
+                }
+            }
 		}
 
 		public bool nextTubeChange
@@ -509,16 +549,7 @@ namespace PSA_SystemLibrary
                         if (homingZ.ERROR) { Esqc = sqc; sqc = SQC.HOMING_ERROR; break; }
 						
 						// tube가 모두 소진되어서 갈아야 하므로 PickPosComp 을 초기화 한다.
-                        //if (mc.swcontrol.mechanicalRevision == 0) tubeNumber = 4;
-                        //else if (mc.swcontrol.mechanicalRevision == 1) tubeNumber = 2;
-                        
-                        tubeNumber = 2;
-						for (int i = 0; i < tubeNumber; i++)        // MGZ#1 이므로 0~3까지(0~1까지)
-						{
-							mc.para.HD.pick.pickPosComp[i].x.value = 0;
-							mc.para.HD.pick.pickPosComp[i].y.value = 0;
-						}
-						magazineClear(UnitCodeSFMG.MG1);
+                        InitSFCompData(UnitCodeSFMG.MG1);
 
 						Z.reset(out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
 						Z.status(out mpiState, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
@@ -528,15 +559,7 @@ namespace PSA_SystemLibrary
                         if (homingZ2.RUNING) break;
                         if (homingZ2.ERROR) { Esqc = sqc; sqc = SQC.HOMING_ERROR; break; }
 						// tube가 모두 소진되어서 갈아야 하므로 PickPosComp 을 초기화 한다.
-                        //if (mc.swcontrol.mechanicalRevision == 0) tubeNumber = 8;
-                        //else if (mc.swcontrol.mechanicalRevision == 1) tubeNumber = 4;
-                        tubeNumber = 2;
-						for (int i = 0; i < tubeNumber; i++)        // MGZ#2
-						{
-							mc.para.HD.pick.pickPosComp[i + 2].x.value = 0;
-							mc.para.HD.pick.pickPosComp[i + 2].y.value = 0;
-						}
-						magazineClear(UnitCodeSFMG.MG2);
+                        InitSFCompData(UnitCodeSFMG.MG2);
 
 						Z2.reset(out ret.message); if (mpiCheck(Z2.config.axisCode, sqc, ret.message)) break;
 						Z2.status(out mpiState, out ret.message); if (mpiCheck(Z2.config.axisCode, sqc, ret.message)) break;
@@ -1118,15 +1141,7 @@ namespace PSA_SystemLibrary
                         if (homingZ.ERROR) { Esqc = sqc; sqc = SQC.HOMING_ERROR; break; }
 
 						// tube가 모두 소진되어서 갈아야 하므로 PickPosComp 을 초기화 한다.
-                        //if (mc.swcontrol.mechanicalRevision == 0) tubeNumber = 4;
-                        //else if (mc.swcontrol.mechanicalRevision == 1) 
-                        tubeNumber = 2;
-						for (int i = 0; i < tubeNumber; i++)        // MGZ#1 이므로 0~3까지(0~1까지)
-						{
-							mc.para.HD.pick.pickPosComp[i].x.value = 0;
-							mc.para.HD.pick.pickPosComp[i].y.value = 0;
-						}
-						magazineClear(UnitCodeSFMG.MG1);
+                        InitSFCompData(UnitCodeSFMG.MG1);
                     }
                     else if (homingZ2.req)
                     {
@@ -1135,14 +1150,7 @@ namespace PSA_SystemLibrary
                         if (homingZ2.ERROR) { Esqc = sqc; sqc = SQC.HOMING_ERROR; break; }
 
 						// tube가 모두 소진되어서 갈아야 하므로 PickPosComp 을 초기화 한다.
-                        //if (mc.swcontrol.mechanicalRevision == 0) tubeNumber = 8;
-                        //else if (mc.swcontrol.mechanicalRevision == 1) tubeNumber = 6;
-                        tubeNumber = 2;
-						for (int i = 0; i < tubeNumber; i++)        // MGZ#2
-						{
-							mc.para.HD.pick.pickPosComp[i + 2].x.value = 0;
-							mc.para.HD.pick.pickPosComp[i + 2].y.value = 0;
-						}
+                        InitSFCompData(UnitCodeSFMG.MG2);
                     }
                     sqc = SQC.AUTO; break;
                 case SQC.AUTO + 3:

@@ -179,19 +179,18 @@
             this.TB_WasteDelay = new System.Windows.Forms.ToolStripTextBox();
             this.toolStrip5 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
+            this.SL_PickOffsetZ1 = new System.Windows.Forms.ToolStripSeparator();
             this.LB_PickOffsetZ1 = new System.Windows.Forms.ToolStripLabel();
             this.TB_PickOffsetZ1 = new System.Windows.Forms.ToolStripTextBox();
-            this.SL_PickOffsetZ1 = new System.Windows.Forms.ToolStripSeparator();
+            this.SL_PickOffsetZ2 = new System.Windows.Forms.ToolStripSeparator();
             this.LB_PickOffsetZ2 = new System.Windows.Forms.ToolStripLabel();
             this.TB_PickOffsetZ2 = new System.Windows.Forms.ToolStripTextBox();
-            this.SL_PickOffsetZ2 = new System.Windows.Forms.ToolStripSeparator();
+            this.SL_PickOffsetZ3 = new System.Windows.Forms.ToolStripSeparator();
             this.LB_PickOffsetZ3 = new System.Windows.Forms.ToolStripLabel();
             this.TB_PickOffsetZ3 = new System.Windows.Forms.ToolStripTextBox();
-            this.SL_PickOffsetZ3 = new System.Windows.Forms.ToolStripSeparator();
+            this.SL_PickOffsetZ4 = new System.Windows.Forms.ToolStripSeparator();
             this.LB_PickOffsetZ4 = new System.Windows.Forms.ToolStripLabel();
             this.TB_PickOffsetZ4 = new System.Windows.Forms.ToolStripTextBox();
-            this.SL_PickOffsetZ4 = new System.Windows.Forms.ToolStripSeparator();
             this.SL_PickOffsetZ8 = new System.Windows.Forms.ToolStripSeparator();
             this.BT_PickOffsetZCal = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator44 = new System.Windows.Forms.ToolStripSeparator();
@@ -232,8 +231,8 @@
             // 
             // toolStrip15
             // 
-            resources.ApplyResources(this.toolStrip15, "toolStrip15");
             this.toolStrip15.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.toolStrip15, "toolStrip15");
             this.toolStrip15.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LB_DoubleCheck,
             this.toolStripSeparator47,
@@ -255,8 +254,8 @@
             // 
             // toolStripSeparator47
             // 
-            resources.ApplyResources(this.toolStripSeparator47, "toolStripSeparator47");
             this.toolStripSeparator47.Name = "toolStripSeparator47";
+            resources.ApplyResources(this.toolStripSeparator47, "toolStripSeparator47");
             // 
             // BT_DoubleCheck_SelectOnOff
             // 
@@ -282,8 +281,8 @@
             // 
             // toolStripSeparator48
             // 
-            resources.ApplyResources(this.toolStripSeparator48, "toolStripSeparator48");
             this.toolStripSeparator48.Name = "toolStripSeparator48";
+            resources.ApplyResources(this.toolStripSeparator48, "toolStripSeparator48");
             // 
             // LB_DoubleCheck_Retry
             // 
@@ -292,16 +291,16 @@
             // 
             // TB_DoubleCheck_Retry
             // 
-            resources.ApplyResources(this.TB_DoubleCheck_Retry, "TB_DoubleCheck_Retry");
             this.TB_DoubleCheck_Retry.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_DoubleCheck_Retry, "TB_DoubleCheck_Retry");
             this.TB_DoubleCheck_Retry.Name = "TB_DoubleCheck_Retry";
             this.TB_DoubleCheck_Retry.ReadOnly = true;
             this.TB_DoubleCheck_Retry.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator4
             // 
-            resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
             this.toolStripSeparator4.Name = "toolStripSeparator4";
+            resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
             // 
             // LB_DoubleCheck_Offset
             // 
@@ -310,29 +309,29 @@
             // 
             // TB_DoubleCheck_Offset
             // 
-            resources.ApplyResources(this.TB_DoubleCheck_Offset, "TB_DoubleCheck_Offset");
             this.TB_DoubleCheck_Offset.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_DoubleCheck_Offset, "TB_DoubleCheck_Offset");
             this.TB_DoubleCheck_Offset.Name = "TB_DoubleCheck_Offset";
             this.TB_DoubleCheck_Offset.ReadOnly = true;
             this.TB_DoubleCheck_Offset.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator43
             // 
-            resources.ApplyResources(this.toolStripSeparator43, "toolStripSeparator43");
             this.toolStripSeparator43.Name = "toolStripSeparator43";
+            resources.ApplyResources(this.toolStripSeparator43, "toolStripSeparator43");
             // 
             // BT_DoubleCheck_Jog
             // 
-            resources.ApplyResources(this.BT_DoubleCheck_Jog, "BT_DoubleCheck_Jog");
             this.BT_DoubleCheck_Jog.AutoToolTip = false;
             this.BT_DoubleCheck_Jog.Image = global::PSA_Application.Properties.Resources.blue_triangle;
+            resources.ApplyResources(this.BT_DoubleCheck_Jog, "BT_DoubleCheck_Jog");
             this.BT_DoubleCheck_Jog.Name = "BT_DoubleCheck_Jog";
             this.BT_DoubleCheck_Jog.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStrip12
             // 
-            resources.ApplyResources(this.toolStrip12, "toolStrip12");
             this.toolStrip12.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.toolStrip12, "toolStrip12");
             this.toolStrip12.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LB_SuctionMode,
             this.toolStripSeparator45,
@@ -349,16 +348,16 @@
             // 
             // toolStripSeparator45
             // 
-            resources.ApplyResources(this.toolStripSeparator45, "toolStripSeparator45");
             this.toolStripSeparator45.Name = "toolStripSeparator45";
+            resources.ApplyResources(this.toolStripSeparator45, "toolStripSeparator45");
             // 
             // BT_SuctionMode_Select
             // 
-            resources.ApplyResources(this.BT_SuctionMode_Select, "BT_SuctionMode_Select");
             this.BT_SuctionMode_Select.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.BT_SuctionMode_Select_MovingLevelOn,
             this.BT_SuctionMode_Select_SearchLevelOn,
             this.BT_SuctionMode_Select_PickLevelOn});
+            resources.ApplyResources(this.BT_SuctionMode_Select, "BT_SuctionMode_Select");
             this.BT_SuctionMode_Select.Name = "BT_SuctionMode_Select";
             // 
             // BT_SuctionMode_Select_MovingLevelOn
@@ -381,8 +380,8 @@
             // 
             // toolStripSeparator46
             // 
-            resources.ApplyResources(this.toolStripSeparator46, "toolStripSeparator46");
             this.toolStripSeparator46.Name = "toolStripSeparator46";
+            resources.ApplyResources(this.toolStripSeparator46, "toolStripSeparator46");
             // 
             // LB_SuctionMode_Level
             // 
@@ -391,16 +390,16 @@
             // 
             // TB_SuctionMode_Level
             // 
-            resources.ApplyResources(this.TB_SuctionMode_Level, "TB_SuctionMode_Level");
             this.TB_SuctionMode_Level.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_SuctionMode_Level, "TB_SuctionMode_Level");
             this.TB_SuctionMode_Level.Name = "TB_SuctionMode_Level";
             this.TB_SuctionMode_Level.ReadOnly = true;
             this.TB_SuctionMode_Level.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStrip11
             // 
-            resources.ApplyResources(this.toolStrip11, "toolStrip11");
             this.toolStrip11.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.toolStrip11, "toolStrip11");
             this.toolStrip11.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LB_PositionOffset,
             this.toolStripSeparator39,
@@ -426,8 +425,8 @@
             // 
             // toolStripSeparator39
             // 
-            resources.ApplyResources(this.toolStripSeparator39, "toolStripSeparator39");
             this.toolStripSeparator39.Name = "toolStripSeparator39";
+            resources.ApplyResources(this.toolStripSeparator39, "toolStripSeparator39");
             // 
             // BT_PositionOffset_SelectSF
             // 
@@ -466,83 +465,83 @@
             // 
             // toolStripSeparator40
             // 
-            resources.ApplyResources(this.toolStripSeparator40, "toolStripSeparator40");
             this.toolStripSeparator40.Name = "toolStripSeparator40";
+            resources.ApplyResources(this.toolStripSeparator40, "toolStripSeparator40");
             // 
             // LB_PositionOffset_X
             // 
-            resources.ApplyResources(this.LB_PositionOffset_X, "LB_PositionOffset_X");
             this.LB_PositionOffset_X.Name = "LB_PositionOffset_X";
+            resources.ApplyResources(this.LB_PositionOffset_X, "LB_PositionOffset_X");
             // 
             // TB_PositionOffset_X
             // 
-            resources.ApplyResources(this.TB_PositionOffset_X, "TB_PositionOffset_X");
             this.TB_PositionOffset_X.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_PositionOffset_X, "TB_PositionOffset_X");
             this.TB_PositionOffset_X.Name = "TB_PositionOffset_X";
             this.TB_PositionOffset_X.ReadOnly = true;
             this.TB_PositionOffset_X.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator41
             // 
-            resources.ApplyResources(this.toolStripSeparator41, "toolStripSeparator41");
             this.toolStripSeparator41.Name = "toolStripSeparator41";
+            resources.ApplyResources(this.toolStripSeparator41, "toolStripSeparator41");
             // 
             // LB_PositionOffset_Y
             // 
-            resources.ApplyResources(this.LB_PositionOffset_Y, "LB_PositionOffset_Y");
             this.LB_PositionOffset_Y.Name = "LB_PositionOffset_Y";
+            resources.ApplyResources(this.LB_PositionOffset_Y, "LB_PositionOffset_Y");
             // 
             // TB_PositionOffset_Y
             // 
-            resources.ApplyResources(this.TB_PositionOffset_Y, "TB_PositionOffset_Y");
             this.TB_PositionOffset_Y.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_PositionOffset_Y, "TB_PositionOffset_Y");
             this.TB_PositionOffset_Y.Name = "TB_PositionOffset_Y";
             this.TB_PositionOffset_Y.ReadOnly = true;
             this.TB_PositionOffset_Y.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator42
             // 
-            resources.ApplyResources(this.toolStripSeparator42, "toolStripSeparator42");
             this.toolStripSeparator42.Name = "toolStripSeparator42";
+            resources.ApplyResources(this.toolStripSeparator42, "toolStripSeparator42");
             // 
             // BT_PositionOffset_Jog
             // 
-            resources.ApplyResources(this.BT_PositionOffset_Jog, "BT_PositionOffset_Jog");
             this.BT_PositionOffset_Jog.AutoToolTip = false;
             this.BT_PositionOffset_Jog.Image = global::PSA_Application.Properties.Resources.blue_triangle;
+            resources.ApplyResources(this.BT_PositionOffset_Jog, "BT_PositionOffset_Jog");
             this.BT_PositionOffset_Jog.Name = "BT_PositionOffset_Jog";
             this.BT_PositionOffset_Jog.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator6
             // 
-            resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
             this.toolStripSeparator6.Name = "toolStripSeparator6";
+            resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
             // 
             // BT_PositionOffset_AllClear
             // 
-            resources.ApplyResources(this.BT_PositionOffset_AllClear, "BT_PositionOffset_AllClear");
             this.BT_PositionOffset_AllClear.AutoToolTip = false;
             this.BT_PositionOffset_AllClear.Image = global::PSA_Application.Properties.Resources.blue_triangle;
+            resources.ApplyResources(this.BT_PositionOffset_AllClear, "BT_PositionOffset_AllClear");
             this.BT_PositionOffset_AllClear.Name = "BT_PositionOffset_AllClear";
             this.BT_PositionOffset_AllClear.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator34
             // 
-            resources.ApplyResources(this.toolStripSeparator34, "toolStripSeparator34");
             this.toolStripSeparator34.Name = "toolStripSeparator34";
+            resources.ApplyResources(this.toolStripSeparator34, "toolStripSeparator34");
             // 
             // BT_AutoPickCompenClear
             // 
-            resources.ApplyResources(this.BT_AutoPickCompenClear, "BT_AutoPickCompenClear");
             this.BT_AutoPickCompenClear.AutoToolTip = false;
             this.BT_AutoPickCompenClear.Image = global::PSA_Application.Properties.Resources.Refresh;
+            resources.ApplyResources(this.BT_AutoPickCompenClear, "BT_AutoPickCompenClear");
             this.BT_AutoPickCompenClear.Name = "BT_AutoPickCompenClear";
             this.BT_AutoPickCompenClear.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStrip10
             // 
-            resources.ApplyResources(this.toolStrip10, "toolStrip10");
             this.toolStrip10.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.toolStrip10, "toolStrip10");
             this.toolStrip10.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LB_Drive2nd,
             this.toolStripSeparator31,
@@ -568,8 +567,8 @@
             // 
             // toolStripSeparator31
             // 
-            resources.ApplyResources(this.toolStripSeparator31, "toolStripSeparator31");
             this.toolStripSeparator31.Name = "toolStripSeparator31";
+            resources.ApplyResources(this.toolStripSeparator31, "toolStripSeparator31");
             // 
             // BT_Drive2nd_SelectOnOff
             // 
@@ -595,8 +594,8 @@
             // 
             // toolStripSeparator32
             // 
-            resources.ApplyResources(this.toolStripSeparator32, "toolStripSeparator32");
             this.toolStripSeparator32.Name = "toolStripSeparator32";
+            resources.ApplyResources(this.toolStripSeparator32, "toolStripSeparator32");
             // 
             // LB_Drive2nd_Level
             // 
@@ -605,16 +604,16 @@
             // 
             // TB_Drive2nd_Level
             // 
-            resources.ApplyResources(this.TB_Drive2nd_Level, "TB_Drive2nd_Level");
             this.TB_Drive2nd_Level.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_Drive2nd_Level, "TB_Drive2nd_Level");
             this.TB_Drive2nd_Level.Name = "TB_Drive2nd_Level";
             this.TB_Drive2nd_Level.ReadOnly = true;
             this.TB_Drive2nd_Level.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator37
             // 
-            resources.ApplyResources(this.toolStripSeparator37, "toolStripSeparator37");
             this.toolStripSeparator37.Name = "toolStripSeparator37";
+            resources.ApplyResources(this.toolStripSeparator37, "toolStripSeparator37");
             // 
             // LB_Drive2nd_Speed
             // 
@@ -623,16 +622,16 @@
             // 
             // TB_Drive2nd_Speed
             // 
-            resources.ApplyResources(this.TB_Drive2nd_Speed, "TB_Drive2nd_Speed");
             this.TB_Drive2nd_Speed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_Drive2nd_Speed, "TB_Drive2nd_Speed");
             this.TB_Drive2nd_Speed.Name = "TB_Drive2nd_Speed";
             this.TB_Drive2nd_Speed.ReadOnly = true;
             this.TB_Drive2nd_Speed.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator38
             // 
-            resources.ApplyResources(this.toolStripSeparator38, "toolStripSeparator38");
             this.toolStripSeparator38.Name = "toolStripSeparator38";
+            resources.ApplyResources(this.toolStripSeparator38, "toolStripSeparator38");
             // 
             // LB_Drive2nd_Delay
             // 
@@ -641,16 +640,16 @@
             // 
             // TB_Drive2nd_Delay
             // 
-            resources.ApplyResources(this.TB_Drive2nd_Delay, "TB_Drive2nd_Delay");
             this.TB_Drive2nd_Delay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_Drive2nd_Delay, "TB_Drive2nd_Delay");
             this.TB_Drive2nd_Delay.Name = "TB_Drive2nd_Delay";
             this.TB_Drive2nd_Delay.ReadOnly = true;
             this.TB_Drive2nd_Delay.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator14
             // 
-            resources.ApplyResources(this.toolStripSeparator14, "toolStripSeparator14");
             this.toolStripSeparator14.Name = "toolStripSeparator14";
+            resources.ApplyResources(this.toolStripSeparator14, "toolStripSeparator14");
             // 
             // LB_Drive2nd_Force
             // 
@@ -659,16 +658,16 @@
             // 
             // TB_Drive2nd_Force
             // 
-            resources.ApplyResources(this.TB_Drive2nd_Force, "TB_Drive2nd_Force");
             this.TB_Drive2nd_Force.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_Drive2nd_Force, "TB_Drive2nd_Force");
             this.TB_Drive2nd_Force.Name = "TB_Drive2nd_Force";
             this.TB_Drive2nd_Force.ReadOnly = true;
             this.TB_Drive2nd_Force.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStrip9
             // 
-            resources.ApplyResources(this.toolStrip9, "toolStrip9");
             this.toolStrip9.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.toolStrip9, "toolStrip9");
             this.toolStrip9.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LB_Drive1st,
             this.toolStripSeparator27,
@@ -694,8 +693,8 @@
             // 
             // toolStripSeparator27
             // 
-            resources.ApplyResources(this.toolStripSeparator27, "toolStripSeparator27");
             this.toolStripSeparator27.Name = "toolStripSeparator27";
+            resources.ApplyResources(this.toolStripSeparator27, "toolStripSeparator27");
             // 
             // BT_Drive1st_SelectOnOff
             // 
@@ -721,8 +720,8 @@
             // 
             // toolStripSeparator28
             // 
-            resources.ApplyResources(this.toolStripSeparator28, "toolStripSeparator28");
             this.toolStripSeparator28.Name = "toolStripSeparator28";
+            resources.ApplyResources(this.toolStripSeparator28, "toolStripSeparator28");
             // 
             // LB_Drive1st_Level
             // 
@@ -731,16 +730,16 @@
             // 
             // TB_Drive1st_Level
             // 
-            resources.ApplyResources(this.TB_Drive1st_Level, "TB_Drive1st_Level");
             this.TB_Drive1st_Level.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_Drive1st_Level, "TB_Drive1st_Level");
             this.TB_Drive1st_Level.Name = "TB_Drive1st_Level";
             this.TB_Drive1st_Level.ReadOnly = true;
             this.TB_Drive1st_Level.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator29
             // 
-            resources.ApplyResources(this.toolStripSeparator29, "toolStripSeparator29");
             this.toolStripSeparator29.Name = "toolStripSeparator29";
+            resources.ApplyResources(this.toolStripSeparator29, "toolStripSeparator29");
             // 
             // LB_Drive1st_Speed
             // 
@@ -749,16 +748,16 @@
             // 
             // TB_Drive1st_Speed
             // 
-            resources.ApplyResources(this.TB_Drive1st_Speed, "TB_Drive1st_Speed");
             this.TB_Drive1st_Speed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_Drive1st_Speed, "TB_Drive1st_Speed");
             this.TB_Drive1st_Speed.Name = "TB_Drive1st_Speed";
             this.TB_Drive1st_Speed.ReadOnly = true;
             this.TB_Drive1st_Speed.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator30
             // 
-            resources.ApplyResources(this.toolStripSeparator30, "toolStripSeparator30");
             this.toolStripSeparator30.Name = "toolStripSeparator30";
+            resources.ApplyResources(this.toolStripSeparator30, "toolStripSeparator30");
             // 
             // LB_Drive1st_Delay
             // 
@@ -767,16 +766,16 @@
             // 
             // TB_Drive1st_Delay
             // 
-            resources.ApplyResources(this.TB_Drive1st_Delay, "TB_Drive1st_Delay");
             this.TB_Drive1st_Delay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_Drive1st_Delay, "TB_Drive1st_Delay");
             this.TB_Drive1st_Delay.Name = "TB_Drive1st_Delay";
             this.TB_Drive1st_Delay.ReadOnly = true;
             this.TB_Drive1st_Delay.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator13
             // 
-            resources.ApplyResources(this.toolStripSeparator13, "toolStripSeparator13");
             this.toolStripSeparator13.Name = "toolStripSeparator13";
+            resources.ApplyResources(this.toolStripSeparator13, "toolStripSeparator13");
             // 
             // LB_Drive1st_Force
             // 
@@ -785,16 +784,16 @@
             // 
             // TB_Drive1st_Force
             // 
-            resources.ApplyResources(this.TB_Drive1st_Force, "TB_Drive1st_Force");
             this.TB_Drive1st_Force.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_Drive1st_Force, "TB_Drive1st_Force");
             this.TB_Drive1st_Force.Name = "TB_Drive1st_Force";
             this.TB_Drive1st_Force.ReadOnly = true;
             this.TB_Drive1st_Force.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStrip8
             // 
-            resources.ApplyResources(this.toolStrip8, "toolStrip8");
             this.toolStrip8.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.toolStrip8, "toolStrip8");
             this.toolStrip8.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LB_Delay,
             this.toolStripSeparator25,
@@ -811,21 +810,21 @@
             // 
             // toolStripSeparator25
             // 
-            resources.ApplyResources(this.toolStripSeparator25, "toolStripSeparator25");
             this.toolStripSeparator25.Name = "toolStripSeparator25";
+            resources.ApplyResources(this.toolStripSeparator25, "toolStripSeparator25");
             // 
             // TB_Delay
             // 
-            resources.ApplyResources(this.TB_Delay, "TB_Delay");
             this.TB_Delay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_Delay, "TB_Delay");
             this.TB_Delay.Name = "TB_Delay";
             this.TB_Delay.ReadOnly = true;
             this.TB_Delay.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator15
             // 
-            resources.ApplyResources(this.toolStripSeparator15, "toolStripSeparator15");
             this.toolStripSeparator15.Name = "toolStripSeparator15";
+            resources.ApplyResources(this.toolStripSeparator15, "toolStripSeparator15");
             // 
             // LB_Force
             // 
@@ -834,16 +833,16 @@
             // 
             // TB_Force
             // 
-            resources.ApplyResources(this.TB_Force, "TB_Force");
             this.TB_Force.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_Force, "TB_Force");
             this.TB_Force.Name = "TB_Force";
             this.TB_Force.ReadOnly = true;
             this.TB_Force.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStrip7
             // 
-            resources.ApplyResources(this.toolStrip7, "toolStrip7");
             this.toolStrip7.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.toolStrip7, "toolStrip7");
             this.toolStrip7.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LB_Search2nd,
             this.toolStripSeparator21,
@@ -869,8 +868,8 @@
             // 
             // toolStripSeparator21
             // 
-            resources.ApplyResources(this.toolStripSeparator21, "toolStripSeparator21");
             this.toolStripSeparator21.Name = "toolStripSeparator21";
+            resources.ApplyResources(this.toolStripSeparator21, "toolStripSeparator21");
             // 
             // BT_Search2nd_SelectOnOff
             // 
@@ -896,8 +895,8 @@
             // 
             // toolStripSeparator22
             // 
-            resources.ApplyResources(this.toolStripSeparator22, "toolStripSeparator22");
             this.toolStripSeparator22.Name = "toolStripSeparator22";
+            resources.ApplyResources(this.toolStripSeparator22, "toolStripSeparator22");
             // 
             // LB_Search2nd_Level
             // 
@@ -906,16 +905,16 @@
             // 
             // TB_Search2nd_Level
             // 
-            resources.ApplyResources(this.TB_Search2nd_Level, "TB_Search2nd_Level");
             this.TB_Search2nd_Level.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_Search2nd_Level, "TB_Search2nd_Level");
             this.TB_Search2nd_Level.Name = "TB_Search2nd_Level";
             this.TB_Search2nd_Level.ReadOnly = true;
             this.TB_Search2nd_Level.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator23
             // 
-            resources.ApplyResources(this.toolStripSeparator23, "toolStripSeparator23");
             this.toolStripSeparator23.Name = "toolStripSeparator23";
+            resources.ApplyResources(this.toolStripSeparator23, "toolStripSeparator23");
             // 
             // LB_Search2nd_Speed
             // 
@@ -924,16 +923,16 @@
             // 
             // TB_Search2nd_Speed
             // 
-            resources.ApplyResources(this.TB_Search2nd_Speed, "TB_Search2nd_Speed");
             this.TB_Search2nd_Speed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_Search2nd_Speed, "TB_Search2nd_Speed");
             this.TB_Search2nd_Speed.Name = "TB_Search2nd_Speed";
             this.TB_Search2nd_Speed.ReadOnly = true;
             this.TB_Search2nd_Speed.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator24
             // 
-            resources.ApplyResources(this.toolStripSeparator24, "toolStripSeparator24");
             this.toolStripSeparator24.Name = "toolStripSeparator24";
+            resources.ApplyResources(this.toolStripSeparator24, "toolStripSeparator24");
             // 
             // LB_Search2nd_Delay
             // 
@@ -942,16 +941,16 @@
             // 
             // TB_Search2nd_Delay
             // 
-            resources.ApplyResources(this.TB_Search2nd_Delay, "TB_Search2nd_Delay");
             this.TB_Search2nd_Delay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_Search2nd_Delay, "TB_Search2nd_Delay");
             this.TB_Search2nd_Delay.Name = "TB_Search2nd_Delay";
             this.TB_Search2nd_Delay.ReadOnly = true;
             this.TB_Search2nd_Delay.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator3
             // 
-            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
             this.toolStripSeparator3.Name = "toolStripSeparator3";
+            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
             // 
             // LB_Search2nd_Force
             // 
@@ -960,16 +959,16 @@
             // 
             // TB_Search2nd_Force
             // 
-            resources.ApplyResources(this.TB_Search2nd_Force, "TB_Search2nd_Force");
             this.TB_Search2nd_Force.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_Search2nd_Force, "TB_Search2nd_Force");
             this.TB_Search2nd_Force.Name = "TB_Search2nd_Force";
             this.TB_Search2nd_Force.ReadOnly = true;
             this.TB_Search2nd_Force.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStrip6
             // 
-            resources.ApplyResources(this.toolStrip6, "toolStrip6");
             this.toolStrip6.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.toolStrip6, "toolStrip6");
             this.toolStrip6.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LB_Search1st,
             this.toolStripSeparator7,
@@ -995,8 +994,8 @@
             // 
             // toolStripSeparator7
             // 
-            resources.ApplyResources(this.toolStripSeparator7, "toolStripSeparator7");
             this.toolStripSeparator7.Name = "toolStripSeparator7";
+            resources.ApplyResources(this.toolStripSeparator7, "toolStripSeparator7");
             // 
             // BT_Search1st_SelectOnOff
             // 
@@ -1022,8 +1021,8 @@
             // 
             // toolStripSeparator8
             // 
-            resources.ApplyResources(this.toolStripSeparator8, "toolStripSeparator8");
             this.toolStripSeparator8.Name = "toolStripSeparator8";
+            resources.ApplyResources(this.toolStripSeparator8, "toolStripSeparator8");
             // 
             // LB_Search1st_Level
             // 
@@ -1032,16 +1031,16 @@
             // 
             // TB_Search1st_Level
             // 
-            resources.ApplyResources(this.TB_Search1st_Level, "TB_Search1st_Level");
             this.TB_Search1st_Level.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_Search1st_Level, "TB_Search1st_Level");
             this.TB_Search1st_Level.Name = "TB_Search1st_Level";
             this.TB_Search1st_Level.ReadOnly = true;
             this.TB_Search1st_Level.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator10
             // 
-            resources.ApplyResources(this.toolStripSeparator10, "toolStripSeparator10");
             this.toolStripSeparator10.Name = "toolStripSeparator10";
+            resources.ApplyResources(this.toolStripSeparator10, "toolStripSeparator10");
             // 
             // LB_Search1st_Speed
             // 
@@ -1050,16 +1049,16 @@
             // 
             // TB_Search1st_Speed
             // 
-            resources.ApplyResources(this.TB_Search1st_Speed, "TB_Search1st_Speed");
             this.TB_Search1st_Speed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_Search1st_Speed, "TB_Search1st_Speed");
             this.TB_Search1st_Speed.Name = "TB_Search1st_Speed";
             this.TB_Search1st_Speed.ReadOnly = true;
             this.TB_Search1st_Speed.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator12
             // 
-            resources.ApplyResources(this.toolStripSeparator12, "toolStripSeparator12");
             this.toolStripSeparator12.Name = "toolStripSeparator12";
+            resources.ApplyResources(this.toolStripSeparator12, "toolStripSeparator12");
             // 
             // LB_Search1st_Delay
             // 
@@ -1068,16 +1067,16 @@
             // 
             // TB_Search1st_Delay
             // 
-            resources.ApplyResources(this.TB_Search1st_Delay, "TB_Search1st_Delay");
             this.TB_Search1st_Delay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_Search1st_Delay, "TB_Search1st_Delay");
             this.TB_Search1st_Delay.Name = "TB_Search1st_Delay";
             this.TB_Search1st_Delay.ReadOnly = true;
             this.TB_Search1st_Delay.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator2
             // 
-            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
             this.toolStripSeparator2.Name = "toolStripSeparator2";
+            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
             // 
             // LB_Search1st_Force
             // 
@@ -1086,8 +1085,8 @@
             // 
             // TB_Search1st_Force
             // 
-            resources.ApplyResources(this.TB_Search1st_Force, "TB_Search1st_Force");
             this.TB_Search1st_Force.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_Search1st_Force, "TB_Search1st_Force");
             this.TB_Search1st_Force.Name = "TB_Search1st_Force";
             this.TB_Search1st_Force.ReadOnly = true;
             this.TB_Search1st_Force.Click += new System.EventHandler(this.Control_Click);
@@ -1099,8 +1098,8 @@
             // 
             // toolStrip1
             // 
-            resources.ApplyResources(this.toolStrip1, "toolStrip1");
             this.toolStrip1.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.toolStrip1, "toolStrip1");
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LB_PickParameter});
             this.toolStrip1.Name = "toolStrip1";
@@ -1113,8 +1112,8 @@
             // 
             // toolStrip2
             // 
-            resources.ApplyResources(this.toolStrip2, "toolStrip2");
             this.toolStrip2.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.toolStrip2, "toolStrip2");
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LB_MissCheck,
             this.toolStripSeparator1,
@@ -1131,8 +1130,8 @@
             // 
             // toolStripSeparator1
             // 
-            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             this.toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             // 
             // BT_MissCheck_SelectOnOff
             // 
@@ -1158,8 +1157,8 @@
             // 
             // toolStripSeparator5
             // 
-            resources.ApplyResources(this.toolStripSeparator5, "toolStripSeparator5");
             this.toolStripSeparator5.Name = "toolStripSeparator5";
+            resources.ApplyResources(this.toolStripSeparator5, "toolStripSeparator5");
             // 
             // LB_MissCheck_Retry
             // 
@@ -1168,16 +1167,16 @@
             // 
             // TB_MissCheck_Retry
             // 
-            resources.ApplyResources(this.TB_MissCheck_Retry, "TB_MissCheck_Retry");
             this.TB_MissCheck_Retry.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_MissCheck_Retry, "TB_MissCheck_Retry");
             this.TB_MissCheck_Retry.Name = "TB_MissCheck_Retry";
             this.TB_MissCheck_Retry.ReadOnly = true;
             this.TB_MissCheck_Retry.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStrip3
             // 
-            resources.ApplyResources(this.toolStrip3, "toolStrip3");
             this.toolStrip3.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.toolStrip3, "toolStrip3");
             this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LB_SuctionCheck,
             this.toolStripSeparator9,
@@ -1194,8 +1193,8 @@
             // 
             // toolStripSeparator9
             // 
-            resources.ApplyResources(this.toolStripSeparator9, "toolStripSeparator9");
             this.toolStripSeparator9.Name = "toolStripSeparator9";
+            resources.ApplyResources(this.toolStripSeparator9, "toolStripSeparator9");
             // 
             // BT_SuctionCheck_SelectOnOff
             // 
@@ -1221,8 +1220,8 @@
             // 
             // toolStripSeparator11
             // 
-            resources.ApplyResources(this.toolStripSeparator11, "toolStripSeparator11");
             this.toolStripSeparator11.Name = "toolStripSeparator11";
+            resources.ApplyResources(this.toolStripSeparator11, "toolStripSeparator11");
             // 
             // LB_SuctionCheck_Limit
             // 
@@ -1231,16 +1230,16 @@
             // 
             // TB_SuctionCheck_Limit
             // 
-            resources.ApplyResources(this.TB_SuctionCheck_Limit, "TB_SuctionCheck_Limit");
             this.TB_SuctionCheck_Limit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_SuctionCheck_Limit, "TB_SuctionCheck_Limit");
             this.TB_SuctionCheck_Limit.Name = "TB_SuctionCheck_Limit";
             this.TB_SuctionCheck_Limit.ReadOnly = true;
             this.TB_SuctionCheck_Limit.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStrip4
             // 
-            resources.ApplyResources(this.toolStrip4, "toolStrip4");
             this.toolStrip4.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.toolStrip4, "toolStrip4");
             this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel1,
             this.toolStripSeparator16,
@@ -1254,36 +1253,35 @@
             // 
             // toolStripSeparator16
             // 
-            resources.ApplyResources(this.toolStripSeparator16, "toolStripSeparator16");
             this.toolStripSeparator16.Name = "toolStripSeparator16";
+            resources.ApplyResources(this.toolStripSeparator16, "toolStripSeparator16");
             // 
             // TB_WasteDelay
             // 
-            resources.ApplyResources(this.TB_WasteDelay, "TB_WasteDelay");
             this.TB_WasteDelay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_WasteDelay, "TB_WasteDelay");
             this.TB_WasteDelay.Name = "TB_WasteDelay";
             this.TB_WasteDelay.ReadOnly = true;
             this.TB_WasteDelay.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStrip5
             // 
-            resources.ApplyResources(this.toolStrip5, "toolStrip5");
             this.toolStrip5.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.toolStrip5, "toolStrip5");
             this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel2,
-            this.toolStripSeparator17,
+            this.SL_PickOffsetZ1,
             this.LB_PickOffsetZ1,
             this.TB_PickOffsetZ1,
-            this.SL_PickOffsetZ1,
+            this.SL_PickOffsetZ2,
             this.LB_PickOffsetZ2,
             this.TB_PickOffsetZ2,
-            this.SL_PickOffsetZ2,
+            this.SL_PickOffsetZ3,
             this.LB_PickOffsetZ3,
             this.TB_PickOffsetZ3,
-            this.SL_PickOffsetZ3,
+            this.SL_PickOffsetZ4,
             this.LB_PickOffsetZ4,
             this.TB_PickOffsetZ4,
-            this.SL_PickOffsetZ4,
             this.SL_PickOffsetZ8,
             this.BT_PickOffsetZCal,
             this.toolStripSeparator44,
@@ -1295,10 +1293,10 @@
             resources.ApplyResources(this.toolStripLabel2, "toolStripLabel2");
             this.toolStripLabel2.Name = "toolStripLabel2";
             // 
-            // toolStripSeparator17
+            // SL_PickOffsetZ1
             // 
-            resources.ApplyResources(this.toolStripSeparator17, "toolStripSeparator17");
-            this.toolStripSeparator17.Name = "toolStripSeparator17";
+            this.SL_PickOffsetZ1.Name = "SL_PickOffsetZ1";
+            resources.ApplyResources(this.SL_PickOffsetZ1, "SL_PickOffsetZ1");
             // 
             // LB_PickOffsetZ1
             // 
@@ -1307,16 +1305,16 @@
             // 
             // TB_PickOffsetZ1
             // 
-            resources.ApplyResources(this.TB_PickOffsetZ1, "TB_PickOffsetZ1");
             this.TB_PickOffsetZ1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_PickOffsetZ1, "TB_PickOffsetZ1");
             this.TB_PickOffsetZ1.Name = "TB_PickOffsetZ1";
             this.TB_PickOffsetZ1.ReadOnly = true;
             this.TB_PickOffsetZ1.Click += new System.EventHandler(this.Control_Click);
             // 
-            // SL_PickOffsetZ1
+            // SL_PickOffsetZ2
             // 
-            resources.ApplyResources(this.SL_PickOffsetZ1, "SL_PickOffsetZ1");
-            this.SL_PickOffsetZ1.Name = "SL_PickOffsetZ1";
+            this.SL_PickOffsetZ2.Name = "SL_PickOffsetZ2";
+            resources.ApplyResources(this.SL_PickOffsetZ2, "SL_PickOffsetZ2");
             // 
             // LB_PickOffsetZ2
             // 
@@ -1325,16 +1323,16 @@
             // 
             // TB_PickOffsetZ2
             // 
-            resources.ApplyResources(this.TB_PickOffsetZ2, "TB_PickOffsetZ2");
             this.TB_PickOffsetZ2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_PickOffsetZ2, "TB_PickOffsetZ2");
             this.TB_PickOffsetZ2.Name = "TB_PickOffsetZ2";
             this.TB_PickOffsetZ2.ReadOnly = true;
             this.TB_PickOffsetZ2.Click += new System.EventHandler(this.Control_Click);
             // 
-            // SL_PickOffsetZ2
+            // SL_PickOffsetZ3
             // 
-            resources.ApplyResources(this.SL_PickOffsetZ2, "SL_PickOffsetZ2");
-            this.SL_PickOffsetZ2.Name = "SL_PickOffsetZ2";
+            this.SL_PickOffsetZ3.Name = "SL_PickOffsetZ3";
+            resources.ApplyResources(this.SL_PickOffsetZ3, "SL_PickOffsetZ3");
             // 
             // LB_PickOffsetZ3
             // 
@@ -1343,16 +1341,16 @@
             // 
             // TB_PickOffsetZ3
             // 
-            resources.ApplyResources(this.TB_PickOffsetZ3, "TB_PickOffsetZ3");
             this.TB_PickOffsetZ3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_PickOffsetZ3, "TB_PickOffsetZ3");
             this.TB_PickOffsetZ3.Name = "TB_PickOffsetZ3";
             this.TB_PickOffsetZ3.ReadOnly = true;
             this.TB_PickOffsetZ3.Click += new System.EventHandler(this.Control_Click);
             // 
-            // SL_PickOffsetZ3
+            // SL_PickOffsetZ4
             // 
-            resources.ApplyResources(this.SL_PickOffsetZ3, "SL_PickOffsetZ3");
-            this.SL_PickOffsetZ3.Name = "SL_PickOffsetZ3";
+            this.SL_PickOffsetZ4.Name = "SL_PickOffsetZ4";
+            resources.ApplyResources(this.SL_PickOffsetZ4, "SL_PickOffsetZ4");
             // 
             // LB_PickOffsetZ4
             // 
@@ -1361,47 +1359,42 @@
             // 
             // TB_PickOffsetZ4
             // 
-            resources.ApplyResources(this.TB_PickOffsetZ4, "TB_PickOffsetZ4");
             this.TB_PickOffsetZ4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_PickOffsetZ4, "TB_PickOffsetZ4");
             this.TB_PickOffsetZ4.Name = "TB_PickOffsetZ4";
             this.TB_PickOffsetZ4.ReadOnly = true;
             this.TB_PickOffsetZ4.Click += new System.EventHandler(this.Control_Click);
             // 
-            // SL_PickOffsetZ4
-            // 
-            resources.ApplyResources(this.SL_PickOffsetZ4, "SL_PickOffsetZ4");
-            this.SL_PickOffsetZ4.Name = "SL_PickOffsetZ4";
-            // 
             // SL_PickOffsetZ8
             // 
-            resources.ApplyResources(this.SL_PickOffsetZ8, "SL_PickOffsetZ8");
             this.SL_PickOffsetZ8.Name = "SL_PickOffsetZ8";
+            resources.ApplyResources(this.SL_PickOffsetZ8, "SL_PickOffsetZ8");
             // 
             // BT_PickOffsetZCal
             // 
-            resources.ApplyResources(this.BT_PickOffsetZCal, "BT_PickOffsetZCal");
             this.BT_PickOffsetZCal.AutoToolTip = false;
+            resources.ApplyResources(this.BT_PickOffsetZCal, "BT_PickOffsetZCal");
             this.BT_PickOffsetZCal.Image = global::PSA_Application.Properties.Resources.blue_triangle;
             this.BT_PickOffsetZCal.Name = "BT_PickOffsetZCal";
             this.BT_PickOffsetZCal.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator44
             // 
-            resources.ApplyResources(this.toolStripSeparator44, "toolStripSeparator44");
             this.toolStripSeparator44.Name = "toolStripSeparator44";
+            resources.ApplyResources(this.toolStripSeparator44, "toolStripSeparator44");
             // 
             // BT_PickOffsetZOffset
             // 
-            resources.ApplyResources(this.BT_PickOffsetZOffset, "BT_PickOffsetZOffset");
             this.BT_PickOffsetZOffset.AutoToolTip = false;
+            resources.ApplyResources(this.BT_PickOffsetZOffset, "BT_PickOffsetZOffset");
             this.BT_PickOffsetZOffset.Image = global::PSA_Application.Properties.Resources.blue_triangle;
             this.BT_PickOffsetZOffset.Name = "BT_PickOffsetZOffset";
             this.BT_PickOffsetZOffset.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStrip13
             // 
-            resources.ApplyResources(this.toolStrip13, "toolStrip13");
             this.toolStrip13.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.toolStrip13, "toolStrip13");
             this.toolStrip13.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel3,
             this.toolStripSeparator18,
@@ -1427,8 +1420,8 @@
             // 
             // toolStripSeparator18
             // 
-            resources.ApplyResources(this.toolStripSeparator18, "toolStripSeparator18");
             this.toolStripSeparator18.Name = "toolStripSeparator18";
+            resources.ApplyResources(this.toolStripSeparator18, "toolStripSeparator18");
             // 
             // BT_ShakeUse_OnOff
             // 
@@ -1454,8 +1447,8 @@
             // 
             // toolStripSeparator19
             // 
-            resources.ApplyResources(this.toolStripSeparator19, "toolStripSeparator19");
             this.toolStripSeparator19.Name = "toolStripSeparator19";
+            resources.ApplyResources(this.toolStripSeparator19, "toolStripSeparator19");
             // 
             // LB_ShakeCount
             // 
@@ -1464,16 +1457,16 @@
             // 
             // TB_ShakeCount
             // 
-            resources.ApplyResources(this.TB_ShakeCount, "TB_ShakeCount");
             this.TB_ShakeCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_ShakeCount, "TB_ShakeCount");
             this.TB_ShakeCount.Name = "TB_ShakeCount";
             this.TB_ShakeCount.ReadOnly = true;
             this.TB_ShakeCount.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator20
             // 
-            resources.ApplyResources(this.toolStripSeparator20, "toolStripSeparator20");
             this.toolStripSeparator20.Name = "toolStripSeparator20";
+            resources.ApplyResources(this.toolStripSeparator20, "toolStripSeparator20");
             // 
             // LB_ShakeDist
             // 
@@ -1482,16 +1475,16 @@
             // 
             // TB_ShakeDist
             // 
-            resources.ApplyResources(this.TB_ShakeDist, "TB_ShakeDist");
             this.TB_ShakeDist.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_ShakeDist, "TB_ShakeDist");
             this.TB_ShakeDist.Name = "TB_ShakeDist";
             this.TB_ShakeDist.ReadOnly = true;
             this.TB_ShakeDist.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator26
             // 
-            resources.ApplyResources(this.toolStripSeparator26, "toolStripSeparator26");
             this.toolStripSeparator26.Name = "toolStripSeparator26";
+            resources.ApplyResources(this.toolStripSeparator26, "toolStripSeparator26");
             // 
             // LB_ShakeSpeed
             // 
@@ -1500,16 +1493,16 @@
             // 
             // TB_ShakeSpeed
             // 
-            resources.ApplyResources(this.TB_ShakeSpeed, "TB_ShakeSpeed");
             this.TB_ShakeSpeed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_ShakeSpeed, "TB_ShakeSpeed");
             this.TB_ShakeSpeed.Name = "TB_ShakeSpeed";
             this.TB_ShakeSpeed.ReadOnly = true;
             this.TB_ShakeSpeed.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator33
             // 
-            resources.ApplyResources(this.toolStripSeparator33, "toolStripSeparator33");
             this.toolStripSeparator33.Name = "toolStripSeparator33";
+            resources.ApplyResources(this.toolStripSeparator33, "toolStripSeparator33");
             // 
             // LB_ShakeDelay
             // 
@@ -1518,8 +1511,8 @@
             // 
             // TB_ShakeDelay
             // 
-            resources.ApplyResources(this.TB_ShakeDelay, "TB_ShakeDelay");
             this.TB_ShakeDelay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.TB_ShakeDelay, "TB_ShakeDelay");
             this.TB_ShakeDelay.Name = "TB_ShakeDelay";
             this.TB_ShakeDelay.ReadOnly = true;
             this.TB_ShakeDelay.Click += new System.EventHandler(this.Control_Click);
@@ -1728,19 +1721,18 @@
         private System.Windows.Forms.ToolStripTextBox TB_WasteDelay;
         private System.Windows.Forms.ToolStrip toolStrip5;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
+        private System.Windows.Forms.ToolStripSeparator SL_PickOffsetZ1;
         private System.Windows.Forms.ToolStripLabel LB_PickOffsetZ1;
         private System.Windows.Forms.ToolStripTextBox TB_PickOffsetZ1;
-        private System.Windows.Forms.ToolStripSeparator SL_PickOffsetZ1;
+        private System.Windows.Forms.ToolStripSeparator SL_PickOffsetZ2;
         private System.Windows.Forms.ToolStripLabel LB_PickOffsetZ2;
         private System.Windows.Forms.ToolStripTextBox TB_PickOffsetZ2;
-        private System.Windows.Forms.ToolStripSeparator SL_PickOffsetZ2;
+        private System.Windows.Forms.ToolStripSeparator SL_PickOffsetZ3;
         private System.Windows.Forms.ToolStripLabel LB_PickOffsetZ3;
         private System.Windows.Forms.ToolStripTextBox TB_PickOffsetZ3;
-        private System.Windows.Forms.ToolStripSeparator SL_PickOffsetZ3;
+        private System.Windows.Forms.ToolStripSeparator SL_PickOffsetZ4;
         private System.Windows.Forms.ToolStripLabel LB_PickOffsetZ4;
         private System.Windows.Forms.ToolStripTextBox TB_PickOffsetZ4;
-        private System.Windows.Forms.ToolStripSeparator SL_PickOffsetZ4;
         private System.Windows.Forms.ToolStripSeparator SL_PickOffsetZ8;
         private System.Windows.Forms.ToolStripButton BT_PickOffsetZCal;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator44;

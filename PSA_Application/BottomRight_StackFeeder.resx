@@ -148,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;LB_.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <metadata name="TS_IN.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -158,30 +158,6 @@
   </data>
   <data name="TS_IN.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
-  </data>
-  <data name="TS_IN.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 37</value>
-  </data>
-  <data name="TS_IN.Size" type="System.Drawing.Size, System.Drawing">
-    <value>410, 35</value>
-  </data>
-  <data name="TS_IN.TabIndex" type="System.Int32, mscorlib">
-    <value>77</value>
-  </data>
-  <data name="TS_IN.Text" xml:space="preserve">
-    <value>toolStrip11</value>
-  </data>
-  <data name="&gt;&gt;TS_IN.Name" xml:space="preserve">
-    <value>TS_IN</value>
-  </data>
-  <data name="&gt;&gt;TS_IN.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TS_IN.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;TS_IN.ZOrder" xml:space="preserve">
-    <value>6</value>
   </data>
   <data name="LB_IN.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -224,6 +200,138 @@
   </data>
   <data name="LB_IN_MG1.Text" xml:space="preserve">
     <value>MAGAZINE1</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="LB_IN_MG2.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="LB_IN_MG2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
+        AAAB60lEQVRIS+2VsU7DMBCGO/IMvANIDOUheI0ysVaIPgRsGTt06UaGDh1ZGLrBwMDAgMTM0InZ6DP+
+        o8NcnKSiYuGkT6kT5z6f7bij/yjFZrMJ8PT6Eq+W1OX3QqLtdttAW+xF3ia0sly6Wq8CpObwsFLJ0qNi
+        1HUdRLrVP6xUwvXdOlTPVTh/uAhHH2cRfsPicfFNsqyXYT6fD5N7UoSIjsNpKzy3A0BcVVU/OSJPmksO
+        w0lD/kxy1hkxdK65quVKO5ciOnCwA7CVU/XsZhannXZr2GpZUzu9CGhDLhbqO34fxyoBMSTFz9A0e9VS
+        EcLbt/u4mfpUTj/yIJ1eTtunOxfzopKQFLE2WS60WHG1rOI0I2atoygPhKBNpQS2urZKLaqa6Z5cT6Kw
+        KEZoxVRm5X3ROxJPrr5oXedcrAS7MkgsaNs13oWdxd7BMQQGbsUQRV5IStSbOu5gL2kXebWCXZ7Sl2OX
+        qtlgUeqIiwcJH7o92IfKvSmOpMGktH4g5q9Np40ODk8kmun1pEbceoIRiDlxQB25Ug0gsTRVdkghCkqB
+        XH9rdgBsEJuowRMK0y8m7wrJ2RSCQXDPFXgYaXFzeYGMlzhzhSuxGKFg36SUw8JOv9CASkLo/Q0PDRIz
+        iFzIvb1J8yh+Mn8bo9EnpdQXVpEtIdAAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="LB_IN_MG2.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="LB_IN_MG2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 32</value>
+  </data>
+  <data name="LB_IN_MG2.Text" xml:space="preserve">
+    <value>MAGAZINE2</value>
+  </data>
+  <data name="toolStripSeparator19.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="LB_IN_MG1_RESET.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="LB_IN_MG1_RESET.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
+        AAAB60lEQVRIS+2VsU7DMBCGO/IMvANIDOUheI0ysVaIPgRsGTt06UaGDh1ZGLrBwMDAgMTM0InZ6DP+
+        o8NcnKSiYuGkT6kT5z6f7bij/yjFZrMJ8PT6Eq+W1OX3QqLtdttAW+xF3ia0sly6Wq8CpObwsFLJ0qNi
+        1HUdRLrVP6xUwvXdOlTPVTh/uAhHH2cRfsPicfFNsqyXYT6fD5N7UoSIjsNpKzy3A0BcVVU/OSJPmksO
+        w0lD/kxy1hkxdK65quVKO5ciOnCwA7CVU/XsZhannXZr2GpZUzu9CGhDLhbqO34fxyoBMSTFz9A0e9VS
+        EcLbt/u4mfpUTj/yIJ1eTtunOxfzopKQFLE2WS60WHG1rOI0I2atoygPhKBNpQS2urZKLaqa6Z5cT6Kw
+        KEZoxVRm5X3ROxJPrr5oXedcrAS7MkgsaNs13oWdxd7BMQQGbsUQRV5IStSbOu5gL2kXebWCXZ7Sl2OX
+        qtlgUeqIiwcJH7o92IfKvSmOpMGktH4g5q9Np40ODk8kmun1pEbceoIRiDlxQB25Ug0gsTRVdkghCkqB
+        XH9rdgBsEJuowRMK0y8m7wrJ2RSCQXDPFXgYaXFzeYGMlzhzhSuxGKFg36SUw8JOv9CASkLo/Q0PDRIz
+        iFzIvb1J8yh+Mn8bo9EnpdQXVpEtIdAAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="LB_IN_MG1_RESET.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="LB_IN_MG1_RESET.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 32</value>
+  </data>
+  <data name="LB_IN_MG1_RESET.Text" xml:space="preserve">
+    <value>MG 1 Reset</value>
+  </data>
+  <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="LB_IN_MG2_RESET.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="LB_IN_MG2_RESET.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
+        AAAB60lEQVRIS+2VsU7DMBCGO/IMvANIDOUheI0ysVaIPgRsGTt06UaGDh1ZGLrBwMDAgMTM0InZ6DP+
+        o8NcnKSiYuGkT6kT5z6f7bij/yjFZrMJ8PT6Eq+W1OX3QqLtdttAW+xF3ia0sly6Wq8CpObwsFLJ0qNi
+        1HUdRLrVP6xUwvXdOlTPVTh/uAhHH2cRfsPicfFNsqyXYT6fD5N7UoSIjsNpKzy3A0BcVVU/OSJPmksO
+        w0lD/kxy1hkxdK65quVKO5ciOnCwA7CVU/XsZhannXZr2GpZUzu9CGhDLhbqO34fxyoBMSTFz9A0e9VS
+        EcLbt/u4mfpUTj/yIJ1eTtunOxfzopKQFLE2WS60WHG1rOI0I2atoygPhKBNpQS2urZKLaqa6Z5cT6Kw
+        KEZoxVRm5X3ROxJPrr5oXedcrAS7MkgsaNs13oWdxd7BMQQGbsUQRV5IStSbOu5gL2kXebWCXZ7Sl2OX
+        qtlgUeqIiwcJH7o92IfKvSmOpMGktH4g5q9Np40ODk8kmun1pEbceoIRiDlxQB25Ug0gsTRVdkghCkqB
+        XH9rdgBsEJuowRMK0y8m7wrJ2RSCQXDPFXgYaXFzeYGMlzhzhSuxGKFg36SUw8JOv9CASkLo/Q0PDRIz
+        iFzIvb1J8yh+Mn8bo9EnpdQXVpEtIdAAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="LB_IN_MG2_RESET.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="LB_IN_MG2_RESET.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 32</value>
+  </data>
+  <data name="LB_IN_MG2_RESET.Text" xml:space="preserve">
+    <value>MG 2 Reset</value>
+  </data>
+  <data name="TS_IN.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 37</value>
+  </data>
+  <data name="TS_IN.Size" type="System.Drawing.Size, System.Drawing">
+    <value>516, 35</value>
+  </data>
+  <data name="TS_IN.TabIndex" type="System.Int32, mscorlib">
+    <value>77</value>
+  </data>
+  <data name="TS_IN.Text" xml:space="preserve">
+    <value>toolStrip11</value>
+  </data>
+  <data name="&gt;&gt;TS_IN.Name" xml:space="preserve">
+    <value>TS_IN</value>
+  </data>
+  <data name="&gt;&gt;TS_IN.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TS_IN.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TS_IN.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <metadata name="TS_IN2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>103, 14</value>
+  </metadata>
+  <data name="TS_IN2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="TS_IN2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9pt</value>
+  </data>
+  <data name="LB_IN2.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="LB_IN2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 22</value>
+  </data>
+  <data name="LB_IN2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
   <data name="SL_IN_GUIDE1.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
@@ -285,79 +393,7 @@
   <data name="LB_IN_GUIDE2.Text" xml:space="preserve">
     <value>GUIDE 2</value>
   </data>
-  <metadata name="TS_IN2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>103, 14</value>
-  </metadata>
-  <data name="TS_IN2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="TS_IN2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9pt</value>
-  </data>
-  <data name="TS_IN2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 72</value>
-  </data>
-  <data name="TS_IN2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>410, 35</value>
-  </data>
-  <data name="TS_IN2.TabIndex" type="System.Int32, mscorlib">
-    <value>78</value>
-  </data>
-  <data name="TS_IN2.Text" xml:space="preserve">
-    <value>toolStrip11</value>
-  </data>
-  <data name="&gt;&gt;TS_IN2.Name" xml:space="preserve">
-    <value>TS_IN2</value>
-  </data>
-  <data name="&gt;&gt;TS_IN2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TS_IN2.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;TS_IN2.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="LB_IN2.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="LB_IN2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 22</value>
-  </data>
-  <data name="LB_IN2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="LB_IN_MG2.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="LB_IN_MG2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
-        AAAB60lEQVRIS+2VsU7DMBCGO/IMvANIDOUheI0ysVaIPgRsGTt06UaGDh1ZGLrBwMDAgMTM0InZ6DP+
-        o8NcnKSiYuGkT6kT5z6f7bij/yjFZrMJ8PT6Eq+W1OX3QqLtdttAW+xF3ia0sly6Wq8CpObwsFLJ0qNi
-        1HUdRLrVP6xUwvXdOlTPVTh/uAhHH2cRfsPicfFNsqyXYT6fD5N7UoSIjsNpKzy3A0BcVVU/OSJPmksO
-        w0lD/kxy1hkxdK65quVKO5ciOnCwA7CVU/XsZhannXZr2GpZUzu9CGhDLhbqO34fxyoBMSTFz9A0e9VS
-        EcLbt/u4mfpUTj/yIJ1eTtunOxfzopKQFLE2WS60WHG1rOI0I2atoygPhKBNpQS2urZKLaqa6Z5cT6Kw
-        KEZoxVRm5X3ROxJPrr5oXedcrAS7MkgsaNs13oWdxd7BMQQGbsUQRV5IStSbOu5gL2kXebWCXZ7Sl2OX
-        qtlgUeqIiwcJH7o92IfKvSmOpMGktH4g5q9Np40ODk8kmun1pEbceoIRiDlxQB25Ug0gsTRVdkghCkqB
-        XH9rdgBsEJuowRMK0y8m7wrJ2RSCQXDPFXgYaXFzeYGMlzhzhSuxGKFg36SUw8JOv9CASkLo/Q0PDRIz
-        iFzIvb1J8yh+Mn8bo9EnpdQXVpEtIdAAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="LB_IN_MG2.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="LB_IN_MG2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 32</value>
-  </data>
-  <data name="LB_IN_MG2.Text" xml:space="preserve">
-    <value>MAGAZINE2</value>
-  </data>
-  <data name="SL_IN_GUIDE5.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="SL_IN_GUIDE3.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
   </data>
   <data name="LB_IN_GUIDE3.AutoSize" type="System.Boolean, mscorlib">
@@ -387,7 +423,7 @@
   <data name="LB_IN_GUIDE3.Text" xml:space="preserve">
     <value>GUIDE 3</value>
   </data>
-  <data name="SL_IN_GUIDE6.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="SL_IN_GUIDE4.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
   </data>
   <data name="LB_IN_GUIDE4.AutoSize" type="System.Boolean, mscorlib">
@@ -416,6 +452,30 @@
   </data>
   <data name="LB_IN_GUIDE4.Text" xml:space="preserve">
     <value>GUIDE 4</value>
+  </data>
+  <data name="TS_IN2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 72</value>
+  </data>
+  <data name="TS_IN2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>516, 35</value>
+  </data>
+  <data name="TS_IN2.TabIndex" type="System.Int32, mscorlib">
+    <value>78</value>
+  </data>
+  <data name="TS_IN2.Text" xml:space="preserve">
+    <value>toolStrip11</value>
+  </data>
+  <data name="&gt;&gt;TS_IN2.Name" xml:space="preserve">
+    <value>TS_IN2</value>
+  </data>
+  <data name="&gt;&gt;TS_IN2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TS_IN2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TS_IN2.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <metadata name="timer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>336, 16</value>
@@ -451,7 +511,7 @@
     <value>Arial Narrow, 18pt, style=Bold</value>
   </data>
   <data name="BT_PositionSelect_MGZ1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 34</value>
+    <value>152, 34</value>
   </data>
   <data name="BT_PositionSelect_MGZ1.Text" xml:space="preserve">
     <value>MGZ #1</value>
@@ -460,7 +520,7 @@
     <value>Arial Narrow, 18pt, style=Bold</value>
   </data>
   <data name="BT_PositionSelect_MGZ2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 34</value>
+    <value>152, 34</value>
   </data>
   <data name="BT_PositionSelect_MGZ2.Text" xml:space="preserve">
     <value>MGZ #2</value>
@@ -543,7 +603,7 @@
     <value>3, 253</value>
   </data>
   <data name="TS_Position.Size" type="System.Drawing.Size, System.Drawing">
-    <value>501, 35</value>
+    <value>470, 35</value>
   </data>
   <data name="TS_Position.TabIndex" type="System.Int32, mscorlib">
     <value>79</value>
@@ -561,7 +621,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;TS_Position.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <metadata name="TS_IN4.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>532, 16</value>
@@ -572,30 +632,6 @@
   <data name="TS_IN4.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
   </data>
-  <data name="TS_IN4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 142</value>
-  </data>
-  <data name="TS_IN4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>410, 35</value>
-  </data>
-  <data name="TS_IN4.TabIndex" type="System.Int32, mscorlib">
-    <value>81</value>
-  </data>
-  <data name="TS_IN4.Text" xml:space="preserve">
-    <value>toolStrip11</value>
-  </data>
-  <data name="&gt;&gt;TS_IN4.Name" xml:space="preserve">
-    <value>TS_IN4</value>
-  </data>
-  <data name="&gt;&gt;TS_IN4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TS_IN4.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;TS_IN4.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="LB_IN4.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -604,174 +640,6 @@
   </data>
   <data name="LB_IN4.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
-  </data>
-  <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="LB_IN_MG2_RESET.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="LB_IN_MG2_RESET.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
-        AAAB60lEQVRIS+2VsU7DMBCGO/IMvANIDOUheI0ysVaIPgRsGTt06UaGDh1ZGLrBwMDAgMTM0InZ6DP+
-        o8NcnKSiYuGkT6kT5z6f7bij/yjFZrMJ8PT6Eq+W1OX3QqLtdttAW+xF3ia0sly6Wq8CpObwsFLJ0qNi
-        1HUdRLrVP6xUwvXdOlTPVTh/uAhHH2cRfsPicfFNsqyXYT6fD5N7UoSIjsNpKzy3A0BcVVU/OSJPmksO
-        w0lD/kxy1hkxdK65quVKO5ciOnCwA7CVU/XsZhannXZr2GpZUzu9CGhDLhbqO34fxyoBMSTFz9A0e9VS
-        EcLbt/u4mfpUTj/yIJ1eTtunOxfzopKQFLE2WS60WHG1rOI0I2atoygPhKBNpQS2urZKLaqa6Z5cT6Kw
-        KEZoxVRm5X3ROxJPrr5oXedcrAS7MkgsaNs13oWdxd7BMQQGbsUQRV5IStSbOu5gL2kXebWCXZ7Sl2OX
-        qtlgUeqIiwcJH7o92IfKvSmOpMGktH4g5q9Np40ODk8kmun1pEbceoIRiDlxQB25Ug0gsTRVdkghCkqB
-        XH9rdgBsEJuowRMK0y8m7wrJ2RSCQXDPFXgYaXFzeYGMlzhzhSuxGKFg36SUw8JOv9CASkLo/Q0PDRIz
-        iFzIvb1J8yh+Mn8bo9EnpdQXVpEtIdAAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="LB_IN_MG2_RESET.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="LB_IN_MG2_RESET.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 32</value>
-  </data>
-  <data name="LB_IN_MG2_RESET.Text" xml:space="preserve">
-    <value>MG 2 Reset</value>
-  </data>
-  <data name="SL_IN_TUBE5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="LB_IN_TUBE_3.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="LB_IN_TUBE_3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
-        AAAB60lEQVRIS+2VsU7DMBCGO/IMvANIDOUheI0ysVaIPgRsGTt06UaGDh1ZGLrBwMDAgMTM0InZ6DP+
-        o8NcnKSiYuGkT6kT5z6f7bij/yjFZrMJ8PT6Eq+W1OX3QqLtdttAW+xF3ia0sly6Wq8CpObwsFLJ0qNi
-        1HUdRLrVP6xUwvXdOlTPVTh/uAhHH2cRfsPicfFNsqyXYT6fD5N7UoSIjsNpKzy3A0BcVVU/OSJPmksO
-        w0lD/kxy1hkxdK65quVKO5ciOnCwA7CVU/XsZhannXZr2GpZUzu9CGhDLhbqO34fxyoBMSTFz9A0e9VS
-        EcLbt/u4mfpUTj/yIJ1eTtunOxfzopKQFLE2WS60WHG1rOI0I2atoygPhKBNpQS2urZKLaqa6Z5cT6Kw
-        KEZoxVRm5X3ROxJPrr5oXedcrAS7MkgsaNs13oWdxd7BMQQGbsUQRV5IStSbOu5gL2kXebWCXZ7Sl2OX
-        qtlgUeqIiwcJH7o92IfKvSmOpMGktH4g5q9Np40ODk8kmun1pEbceoIRiDlxQB25Ug0gsTRVdkghCkqB
-        XH9rdgBsEJuowRMK0y8m7wrJ2RSCQXDPFXgYaXFzeYGMlzhzhSuxGKFg36SUw8JOv9CASkLo/Q0PDRIz
-        iFzIvb1J8yh+Mn8bo9EnpdQXVpEtIdAAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="LB_IN_TUBE_3.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="LB_IN_TUBE_3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 32</value>
-  </data>
-  <data name="LB_IN_TUBE_3.Text" xml:space="preserve">
-    <value>TUBE 5</value>
-  </data>
-  <data name="SL_IN_TUBE6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="LB_IN_TUBE_4.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="LB_IN_TUBE_4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
-        AAAB60lEQVRIS+2VsU7DMBCGO/IMvANIDOUheI0ysVaIPgRsGTt06UaGDh1ZGLrBwMDAgMTM0InZ6DP+
-        o8NcnKSiYuGkT6kT5z6f7bij/yjFZrMJ8PT6Eq+W1OX3QqLtdttAW+xF3ia0sly6Wq8CpObwsFLJ0qNi
-        1HUdRLrVP6xUwvXdOlTPVTh/uAhHH2cRfsPicfFNsqyXYT6fD5N7UoSIjsNpKzy3A0BcVVU/OSJPmksO
-        w0lD/kxy1hkxdK65quVKO5ciOnCwA7CVU/XsZhannXZr2GpZUzu9CGhDLhbqO34fxyoBMSTFz9A0e9VS
-        EcLbt/u4mfpUTj/yIJ1eTtunOxfzopKQFLE2WS60WHG1rOI0I2atoygPhKBNpQS2urZKLaqa6Z5cT6Kw
-        KEZoxVRm5X3ROxJPrr5oXedcrAS7MkgsaNs13oWdxd7BMQQGbsUQRV5IStSbOu5gL2kXebWCXZ7Sl2OX
-        qtlgUeqIiwcJH7o92IfKvSmOpMGktH4g5q9Np40ODk8kmun1pEbceoIRiDlxQB25Ug0gsTRVdkghCkqB
-        XH9rdgBsEJuowRMK0y8m7wrJ2RSCQXDPFXgYaXFzeYGMlzhzhSuxGKFg36SUw8JOv9CASkLo/Q0PDRIz
-        iFzIvb1J8yh+Mn8bo9EnpdQXVpEtIdAAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="LB_IN_TUBE_4.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="LB_IN_TUBE_4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 32</value>
-  </data>
-  <data name="LB_IN_TUBE_4.Text" xml:space="preserve">
-    <value>TUBE 6</value>
-  </data>
-  <data name="LB_IN_TUBE7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 32</value>
-  </data>
-  <data name="LB_IN_TUBE8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 32</value>
-  </data>
-  <metadata name="TS_IN3.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>638, 16</value>
-  </metadata>
-  <data name="TS_IN3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="TS_IN3.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9pt</value>
-  </data>
-  <data name="TS_IN3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 107</value>
-  </data>
-  <data name="TS_IN3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>410, 35</value>
-  </data>
-  <data name="TS_IN3.TabIndex" type="System.Int32, mscorlib">
-    <value>80</value>
-  </data>
-  <data name="TS_IN3.Text" xml:space="preserve">
-    <value>toolStrip11</value>
-  </data>
-  <data name="&gt;&gt;TS_IN3.Name" xml:space="preserve">
-    <value>TS_IN3</value>
-  </data>
-  <data name="&gt;&gt;TS_IN3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TS_IN3.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;TS_IN3.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="LB_IN3.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="LB_IN3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 22</value>
-  </data>
-  <data name="LB_IN3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="toolStripSeparator19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="LB_IN_MG1_RESET.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="LB_IN_MG1_RESET.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
-        AAAB60lEQVRIS+2VsU7DMBCGO/IMvANIDOUheI0ysVaIPgRsGTt06UaGDh1ZGLrBwMDAgMTM0InZ6DP+
-        o8NcnKSiYuGkT6kT5z6f7bij/yjFZrMJ8PT6Eq+W1OX3QqLtdttAW+xF3ia0sly6Wq8CpObwsFLJ0qNi
-        1HUdRLrVP6xUwvXdOlTPVTh/uAhHH2cRfsPicfFNsqyXYT6fD5N7UoSIjsNpKzy3A0BcVVU/OSJPmksO
-        w0lD/kxy1hkxdK65quVKO5ciOnCwA7CVU/XsZhannXZr2GpZUzu9CGhDLhbqO34fxyoBMSTFz9A0e9VS
-        EcLbt/u4mfpUTj/yIJ1eTtunOxfzopKQFLE2WS60WHG1rOI0I2atoygPhKBNpQS2urZKLaqa6Z5cT6Kw
-        KEZoxVRm5X3ROxJPrr5oXedcrAS7MkgsaNs13oWdxd7BMQQGbsUQRV5IStSbOu5gL2kXebWCXZ7Sl2OX
-        qtlgUeqIiwcJH7o92IfKvSmOpMGktH4g5q9Np40ODk8kmun1pEbceoIRiDlxQB25Ug0gsTRVdkghCkqB
-        XH9rdgBsEJuowRMK0y8m7wrJ2RSCQXDPFXgYaXFzeYGMlzhzhSuxGKFg36SUw8JOv9CASkLo/Q0PDRIz
-        iFzIvb1J8yh+Mn8bo9EnpdQXVpEtIdAAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="LB_IN_MG1_RESET.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="LB_IN_MG1_RESET.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 32</value>
-  </data>
-  <data name="LB_IN_MG1_RESET.Text" xml:space="preserve">
-    <value>MG 1 Reset</value>
   </data>
   <data name="SL_IN_TUBE1.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
@@ -833,11 +701,95 @@
   <data name="LB_IN_TUBE_2.Text" xml:space="preserve">
     <value>TUBE 2</value>
   </data>
-  <data name="LB_IN_TUBE3.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="SL_IN_TUBE3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="LB_IN_TUBE_3.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="LB_IN_TUBE_3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
+        AAAB60lEQVRIS+2VsU7DMBCGO/IMvANIDOUheI0ysVaIPgRsGTt06UaGDh1ZGLrBwMDAgMTM0InZ6DP+
+        o8NcnKSiYuGkT6kT5z6f7bij/yjFZrMJ8PT6Eq+W1OX3QqLtdttAW+xF3ia0sly6Wq8CpObwsFLJ0qNi
+        1HUdRLrVP6xUwvXdOlTPVTh/uAhHH2cRfsPicfFNsqyXYT6fD5N7UoSIjsNpKzy3A0BcVVU/OSJPmksO
+        w0lD/kxy1hkxdK65quVKO5ciOnCwA7CVU/XsZhannXZr2GpZUzu9CGhDLhbqO34fxyoBMSTFz9A0e9VS
+        EcLbt/u4mfpUTj/yIJ1eTtunOxfzopKQFLE2WS60WHG1rOI0I2atoygPhKBNpQS2urZKLaqa6Z5cT6Kw
+        KEZoxVRm5X3ROxJPrr5oXedcrAS7MkgsaNs13oWdxd7BMQQGbsUQRV5IStSbOu5gL2kXebWCXZ7Sl2OX
+        qtlgUeqIiwcJH7o92IfKvSmOpMGktH4g5q9Np40ODk8kmun1pEbceoIRiDlxQB25Ug0gsTRVdkghCkqB
+        XH9rdgBsEJuowRMK0y8m7wrJ2RSCQXDPFXgYaXFzeYGMlzhzhSuxGKFg36SUw8JOv9CASkLo/Q0PDRIz
+        iFzIvb1J8yh+Mn8bo9EnpdQXVpEtIdAAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="LB_IN_TUBE_3.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="LB_IN_TUBE_3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 32</value>
+  </data>
+  <data name="LB_IN_TUBE_3.Text" xml:space="preserve">
+    <value>TUBE 3</value>
+  </data>
+  <data name="SL_IN_TUBE4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="LB_IN_TUBE_4.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="LB_IN_TUBE_4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
+        AAAB60lEQVRIS+2VsU7DMBCGO/IMvANIDOUheI0ysVaIPgRsGTt06UaGDh1ZGLrBwMDAgMTM0InZ6DP+
+        o8NcnKSiYuGkT6kT5z6f7bij/yjFZrMJ8PT6Eq+W1OX3QqLtdttAW+xF3ia0sly6Wq8CpObwsFLJ0qNi
+        1HUdRLrVP6xUwvXdOlTPVTh/uAhHH2cRfsPicfFNsqyXYT6fD5N7UoSIjsNpKzy3A0BcVVU/OSJPmksO
+        w0lD/kxy1hkxdK65quVKO5ciOnCwA7CVU/XsZhannXZr2GpZUzu9CGhDLhbqO34fxyoBMSTFz9A0e9VS
+        EcLbt/u4mfpUTj/yIJ1eTtunOxfzopKQFLE2WS60WHG1rOI0I2atoygPhKBNpQS2urZKLaqa6Z5cT6Kw
+        KEZoxVRm5X3ROxJPrr5oXedcrAS7MkgsaNs13oWdxd7BMQQGbsUQRV5IStSbOu5gL2kXebWCXZ7Sl2OX
+        qtlgUeqIiwcJH7o92IfKvSmOpMGktH4g5q9Np40ODk8kmun1pEbceoIRiDlxQB25Ug0gsTRVdkghCkqB
+        XH9rdgBsEJuowRMK0y8m7wrJ2RSCQXDPFXgYaXFzeYGMlzhzhSuxGKFg36SUw8JOv9CASkLo/Q0PDRIz
+        iFzIvb1J8yh+Mn8bo9EnpdQXVpEtIdAAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="LB_IN_TUBE_4.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="LB_IN_TUBE_4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 32</value>
+  </data>
+  <data name="LB_IN_TUBE_4.Text" xml:space="preserve">
+    <value>TUBE 4</value>
+  </data>
+  <data name="LB_IN_TUBE7.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 32</value>
   </data>
-  <data name="LB_IN_TUBE4.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="LB_IN_TUBE8.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 32</value>
+  </data>
+  <data name="TS_IN4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 107</value>
+  </data>
+  <data name="TS_IN4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>516, 35</value>
+  </data>
+  <data name="TS_IN4.TabIndex" type="System.Int32, mscorlib">
+    <value>81</value>
+  </data>
+  <data name="TS_IN4.Text" xml:space="preserve">
+    <value>toolStrip11</value>
+  </data>
+  <data name="&gt;&gt;TS_IN4.Name" xml:space="preserve">
+    <value>TS_IN4</value>
+  </data>
+  <data name="&gt;&gt;TS_IN4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TS_IN4.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TS_IN4.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <metadata name="TS_OUT.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 57</value>
@@ -847,30 +799,6 @@
   </data>
   <data name="TS_OUT.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
-  </data>
-  <data name="TS_OUT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 218</value>
-  </data>
-  <data name="TS_OUT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>404, 35</value>
-  </data>
-  <data name="TS_OUT.TabIndex" type="System.Int32, mscorlib">
-    <value>82</value>
-  </data>
-  <data name="TS_OUT.Text" xml:space="preserve">
-    <value>toolStrip11</value>
-  </data>
-  <data name="&gt;&gt;TS_OUT.Name" xml:space="preserve">
-    <value>TS_OUT</value>
-  </data>
-  <data name="&gt;&gt;TS_OUT.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TS_OUT.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;TS_OUT.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="LB_OUT.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -920,6 +848,30 @@
   <data name="BT_OUT_MG2_RESET.Text" xml:space="preserve">
     <value>MAGAZINE #2 RESET</value>
   </data>
+  <data name="TS_OUT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 218</value>
+  </data>
+  <data name="TS_OUT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>404, 35</value>
+  </data>
+  <data name="TS_OUT.TabIndex" type="System.Int32, mscorlib">
+    <value>82</value>
+  </data>
+  <data name="TS_OUT.Text" xml:space="preserve">
+    <value>toolStrip11</value>
+  </data>
+  <data name="&gt;&gt;TS_OUT.Name" xml:space="preserve">
+    <value>TS_OUT</value>
+  </data>
+  <data name="&gt;&gt;TS_OUT.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TS_OUT.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TS_OUT.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>112, 57</value>
   </metadata>
@@ -929,11 +881,95 @@
   <data name="toolStrip1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
   </data>
+  <data name="toolStripLabel1.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toolStripLabel1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9pt, style=Bold</value>
+  </data>
+  <data name="toolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 22</value>
+  </data>
+  <data name="toolStripLabel1.Text" xml:space="preserve">
+    <value>BLOW</value>
+  </data>
+  <data name="SL_OUT_TUBEBLOW1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="BT_OUT_TUBEBLOW1.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BT_OUT_TUBEBLOW1.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="BT_OUT_TUBEBLOW1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_OUT_TUBEBLOW1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 32</value>
+  </data>
+  <data name="BT_OUT_TUBEBLOW1.Text" xml:space="preserve">
+    <value>TUBE BLOW #1</value>
+  </data>
+  <data name="SL_OUT_TUBEBLOW2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="BT_OUT_TUBEBLOW2.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BT_OUT_TUBEBLOW2.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="BT_OUT_TUBEBLOW2.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_OUT_TUBEBLOW2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 32</value>
+  </data>
+  <data name="BT_OUT_TUBEBLOW2.Text" xml:space="preserve">
+    <value>TUBE BLOW #2</value>
+  </data>
+  <data name="SL_OUT_TUBEBLOW3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="BT_OUT_TUBEBLOW3.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BT_OUT_TUBEBLOW3.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="BT_OUT_TUBEBLOW3.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_OUT_TUBEBLOW3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 32</value>
+  </data>
+  <data name="BT_OUT_TUBEBLOW3.Text" xml:space="preserve">
+    <value>TUBE BLOW #3</value>
+  </data>
+  <data name="SL_OUT_TUBEBLOW4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="BT_OUT_TUBEBLOW4.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BT_OUT_TUBEBLOW4.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="BT_OUT_TUBEBLOW4.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_OUT_TUBEBLOW4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 32</value>
+  </data>
+  <data name="BT_OUT_TUBEBLOW4.Text" xml:space="preserve">
+    <value>TUBE BLOW #4</value>
+  </data>
   <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 183</value>
   </data>
   <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>576, 35</value>
+    <value>607, 35</value>
   </data>
   <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>83</value>
@@ -952,90 +988,6 @@
   </data>
   <data name="&gt;&gt;toolStrip1.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="toolStripLabel1.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="toolStripLabel1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9pt, style=Bold</value>
-  </data>
-  <data name="toolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 22</value>
-  </data>
-  <data name="toolStripLabel1.Text" xml:space="preserve">
-    <value>BLOW</value>
-  </data>
-  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="BT_OUT_TUBEBLOW1.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="BT_OUT_TUBEBLOW1.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="BT_OUT_TUBEBLOW1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="BT_OUT_TUBEBLOW1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 32</value>
-  </data>
-  <data name="BT_OUT_TUBEBLOW1.Text" xml:space="preserve">
-    <value>TUBE BLOW #1</value>
-  </data>
-  <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="BT_OUT_TUBEBLOW2.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="BT_OUT_TUBEBLOW2.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="BT_OUT_TUBEBLOW2.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="BT_OUT_TUBEBLOW2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 32</value>
-  </data>
-  <data name="BT_OUT_TUBEBLOW2.Text" xml:space="preserve">
-    <value>TUBE BLOW #2</value>
-  </data>
-  <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="BT_OUT_TUBEBLOW3.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="BT_OUT_TUBEBLOW3.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="BT_OUT_TUBEBLOW3.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="BT_OUT_TUBEBLOW3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 32</value>
-  </data>
-  <data name="BT_OUT_TUBEBLOW3.Text" xml:space="preserve">
-    <value>TUBE BLOW #3</value>
-  </data>
-  <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="BT_OUT_TUBEBLOW4.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="BT_OUT_TUBEBLOW4.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="BT_OUT_TUBEBLOW4.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="BT_OUT_TUBEBLOW4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 32</value>
-  </data>
-  <data name="BT_OUT_TUBEBLOW4.Text" xml:space="preserve">
-    <value>TUBE BLOW #4</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1070,52 +1022,16 @@
   <data name="&gt;&gt;LB_IN_MG1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;SL_IN_GUIDE1.Name" xml:space="preserve">
-    <value>SL_IN_GUIDE1</value>
-  </data>
-  <data name="&gt;&gt;SL_IN_GUIDE1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_GUIDE1.Name" xml:space="preserve">
-    <value>LB_IN_GUIDE1</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_GUIDE1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SL_IN_GUIDE2.Name" xml:space="preserve">
-    <value>SL_IN_GUIDE2</value>
-  </data>
-  <data name="&gt;&gt;SL_IN_GUIDE2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_GUIDE2.Name" xml:space="preserve">
-    <value>LB_IN_GUIDE2</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_GUIDE2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;LB_IN2.Name" xml:space="preserve">
     <value>LB_IN2</value>
   </data>
   <data name="&gt;&gt;LB_IN2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
-    <value>toolStripSeparator1</value>
+  <data name="&gt;&gt;SL_IN_GUIDE3.Name" xml:space="preserve">
+    <value>SL_IN_GUIDE3</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_MG2.Name" xml:space="preserve">
-    <value>LB_IN_MG2</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_MG2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SL_IN_GUIDE5.Name" xml:space="preserve">
-    <value>SL_IN_GUIDE5</value>
-  </data>
-  <data name="&gt;&gt;SL_IN_GUIDE5.Type" xml:space="preserve">
+  <data name="&gt;&gt;SL_IN_GUIDE3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;LB_IN_GUIDE3.Name" xml:space="preserve">
@@ -1124,10 +1040,10 @@
   <data name="&gt;&gt;LB_IN_GUIDE3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;SL_IN_GUIDE6.Name" xml:space="preserve">
-    <value>SL_IN_GUIDE6</value>
+  <data name="&gt;&gt;SL_IN_GUIDE4.Name" xml:space="preserve">
+    <value>SL_IN_GUIDE4</value>
   </data>
-  <data name="&gt;&gt;SL_IN_GUIDE6.Type" xml:space="preserve">
+  <data name="&gt;&gt;SL_IN_GUIDE4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;LB_IN_GUIDE4.Name" xml:space="preserve">
@@ -1202,22 +1118,10 @@
   <data name="&gt;&gt;LB_IN4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator12.Name" xml:space="preserve">
-    <value>toolStripSeparator12</value>
+  <data name="&gt;&gt;SL_IN_TUBE3.Name" xml:space="preserve">
+    <value>SL_IN_TUBE3</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_MG2_RESET.Name" xml:space="preserve">
-    <value>LB_IN_MG2_RESET</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_MG2_RESET.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SL_IN_TUBE5.Name" xml:space="preserve">
-    <value>SL_IN_TUBE5</value>
-  </data>
-  <data name="&gt;&gt;SL_IN_TUBE5.Type" xml:space="preserve">
+  <data name="&gt;&gt;SL_IN_TUBE3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;LB_IN_TUBE_3.Name" xml:space="preserve">
@@ -1226,10 +1130,10 @@
   <data name="&gt;&gt;LB_IN_TUBE_3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;SL_IN_TUBE6.Name" xml:space="preserve">
-    <value>SL_IN_TUBE6</value>
+  <data name="&gt;&gt;SL_IN_TUBE4.Name" xml:space="preserve">
+    <value>SL_IN_TUBE4</value>
   </data>
-  <data name="&gt;&gt;SL_IN_TUBE6.Type" xml:space="preserve">
+  <data name="&gt;&gt;SL_IN_TUBE4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;LB_IN_TUBE_4.Name" xml:space="preserve">
@@ -1248,60 +1152,6 @@
     <value>LB_IN_TUBE8</value>
   </data>
   <data name="&gt;&gt;LB_IN_TUBE8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LB_IN3.Name" xml:space="preserve">
-    <value>LB_IN3</value>
-  </data>
-  <data name="&gt;&gt;LB_IN3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator19.Name" xml:space="preserve">
-    <value>toolStripSeparator19</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator19.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_MG1_RESET.Name" xml:space="preserve">
-    <value>LB_IN_MG1_RESET</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_MG1_RESET.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SL_IN_TUBE1.Name" xml:space="preserve">
-    <value>SL_IN_TUBE1</value>
-  </data>
-  <data name="&gt;&gt;SL_IN_TUBE1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_TUBE_1.Name" xml:space="preserve">
-    <value>LB_IN_TUBE_1</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_TUBE_1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SL_IN_TUBE2.Name" xml:space="preserve">
-    <value>SL_IN_TUBE2</value>
-  </data>
-  <data name="&gt;&gt;SL_IN_TUBE2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_TUBE_2.Name" xml:space="preserve">
-    <value>LB_IN_TUBE_2</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_TUBE_2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_TUBE3.Name" xml:space="preserve">
-    <value>LB_IN_TUBE3</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_TUBE3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_TUBE4.Name" xml:space="preserve">
-    <value>LB_IN_TUBE4</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_TUBE4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;LB_OUT.Name" xml:space="preserve">
@@ -1340,10 +1190,10 @@
   <data name="&gt;&gt;toolStripLabel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
-    <value>toolStripSeparator2</value>
+  <data name="&gt;&gt;SL_OUT_TUBEBLOW1.Name" xml:space="preserve">
+    <value>SL_OUT_TUBEBLOW1</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
+  <data name="&gt;&gt;SL_OUT_TUBEBLOW1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;BT_OUT_TUBEBLOW1.Name" xml:space="preserve">
@@ -1352,10 +1202,10 @@
   <data name="&gt;&gt;BT_OUT_TUBEBLOW1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator4.Name" xml:space="preserve">
-    <value>toolStripSeparator4</value>
+  <data name="&gt;&gt;SL_OUT_TUBEBLOW2.Name" xml:space="preserve">
+    <value>SL_OUT_TUBEBLOW2</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator4.Type" xml:space="preserve">
+  <data name="&gt;&gt;SL_OUT_TUBEBLOW2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;BT_OUT_TUBEBLOW2.Name" xml:space="preserve">
@@ -1364,10 +1214,10 @@
   <data name="&gt;&gt;BT_OUT_TUBEBLOW2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
-    <value>toolStripSeparator3</value>
+  <data name="&gt;&gt;SL_OUT_TUBEBLOW3.Name" xml:space="preserve">
+    <value>SL_OUT_TUBEBLOW3</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator3.Type" xml:space="preserve">
+  <data name="&gt;&gt;SL_OUT_TUBEBLOW3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;BT_OUT_TUBEBLOW3.Name" xml:space="preserve">
@@ -1376,10 +1226,10 @@
   <data name="&gt;&gt;BT_OUT_TUBEBLOW3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator6.Name" xml:space="preserve">
-    <value>toolStripSeparator6</value>
+  <data name="&gt;&gt;SL_OUT_TUBEBLOW4.Name" xml:space="preserve">
+    <value>SL_OUT_TUBEBLOW4</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator6.Type" xml:space="preserve">
+  <data name="&gt;&gt;SL_OUT_TUBEBLOW4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;BT_OUT_TUBEBLOW4.Name" xml:space="preserve">
@@ -1387,6 +1237,90 @@
   </data>
   <data name="&gt;&gt;BT_OUT_TUBEBLOW4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_TUBE_1.Name" xml:space="preserve">
+    <value>LB_IN_TUBE_1</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_TUBE_1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SL_IN_TUBE2.Name" xml:space="preserve">
+    <value>SL_IN_TUBE2</value>
+  </data>
+  <data name="&gt;&gt;SL_IN_TUBE2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_TUBE_2.Name" xml:space="preserve">
+    <value>LB_IN_TUBE_2</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_TUBE_2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SL_IN_TUBE1.Name" xml:space="preserve">
+    <value>SL_IN_TUBE1</value>
+  </data>
+  <data name="&gt;&gt;SL_IN_TUBE1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
+    <value>toolStripSeparator1</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_GUIDE1.Name" xml:space="preserve">
+    <value>LB_IN_GUIDE1</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_GUIDE1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SL_IN_GUIDE1.Name" xml:space="preserve">
+    <value>SL_IN_GUIDE1</value>
+  </data>
+  <data name="&gt;&gt;SL_IN_GUIDE1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SL_IN_GUIDE2.Name" xml:space="preserve">
+    <value>SL_IN_GUIDE2</value>
+  </data>
+  <data name="&gt;&gt;SL_IN_GUIDE2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_GUIDE2.Name" xml:space="preserve">
+    <value>LB_IN_GUIDE2</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_GUIDE2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_MG2.Name" xml:space="preserve">
+    <value>LB_IN_MG2</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_MG2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator19.Name" xml:space="preserve">
+    <value>toolStripSeparator19</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator19.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_MG2_RESET.Name" xml:space="preserve">
+    <value>LB_IN_MG2_RESET</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_MG2_RESET.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator12.Name" xml:space="preserve">
+    <value>toolStripSeparator12</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_MG1_RESET.Name" xml:space="preserve">
+    <value>LB_IN_MG1_RESET</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_MG1_RESET.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>BottomRight_StackFeeder</value>

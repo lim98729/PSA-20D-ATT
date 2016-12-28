@@ -359,7 +359,7 @@ namespace PSA_SystemLibrary
 			   
 				#region AUTO
 				case SQC.AUTO:
-					if (mc.para.ETC.pedestalUse.value == 0) { sqc = SQC.STOP; break; }
+					if (mc.para.ETC.pedestalUse.value == 0 || dev.NotExistHW.ZMP) { sqc = SQC.STOP; break; }
 					else
 					{
 						if (reqMode == REQMODE.DUMY)
@@ -656,7 +656,7 @@ namespace PSA_SystemLibrary
 
 				#region READY
 				case SQC.READY:
-					if (mc.para.ETC.pedestalUse.value == 0) { sqc = SQC.STOP; break; }
+                    if (mc.para.ETC.pedestalUse.value == 0 || dev.NotExistHW.ZMP) { sqc = SQC.STOP; break; }
 					else
 					{
 						mc.OUT.PD.SUC(false, out ret.message); if (ioCheck(sqc, ret.message)) break;

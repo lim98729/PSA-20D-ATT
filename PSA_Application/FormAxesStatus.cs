@@ -22,7 +22,7 @@ namespace PSA_Application
 		MPIState mpiState;
 		RetValue ret;
 
-		enum axisNumber {HD_X, HD_Y, HD_Z, HD_T, PD_X, PD_Y, PD_Z, SF_Z2, SF_Z, CONV}
+		enum axisNumber {HD_X, HD_Y, HD_Z, HD_T, PD_X, PD_Y, PD_Z, SF_Z, SF_Z2, CONV}
 
 		private void FormAxesStatus_Load(object sender, EventArgs e)
 		{
@@ -34,7 +34,7 @@ namespace PSA_Application
 
 		private void InitializeGridInformation()
 		{
-			string[] axisName = {"HD X", "HD Y", "HD Z", "HD T", "PD X", "PD Y", "PD Z", "SF X", "SF Z", "CONV"};
+			string[] axisName = {"HD X", "HD Y", "HD Z", "HD T", "PD X", "PD Y", "PD Z", "SF Z", "SF Z2", "CONV"};
 			imageOff = Properties.Resources.YellowLED_OFF;
 			imageOn = Properties.Resources.Yellow_LED;
 			for (int i = 0; i < 10; i++)
@@ -250,7 +250,34 @@ namespace PSA_Application
 			#endregion
 
 			#region Stack Feeder Information
-			//// SF X
+            //// SF Z
+            // Get Position
+            mc.sf.Z.actualPosition(out ret.d, out ret.message);
+            GV_AxisInfo.Rows[(int)axisNumber.SF_Z].Cells[1].Value = ret.d;
+            // Get - Limit Status
+            mc.sf.Z.IN_N_LIMIT(out ret.b, out ret.message);
+            if (ret.b) imageDisp = imageOn; else imageDisp = imageOff;
+            GV_AxisInfo.Rows[(int)axisNumber.SF_Z].Cells[2].Value = imageDisp;
+            // Get + Limit
+            mc.sf.Z.IN_P_LIMIT(out ret.b, out ret.message);
+            if (ret.b) imageDisp = imageOn; else imageDisp = imageOff;
+            GV_AxisInfo.Rows[(int)axisNumber.SF_Z].Cells[3].Value = imageDisp;
+            // Get Home
+            mc.sf.Z.IN_HOME(out ret.b, out ret.message);
+            if (ret.b) imageDisp = imageOn; else imageDisp = imageOff;
+            GV_AxisInfo.Rows[(int)axisNumber.SF_Z].Cells[4].Value = imageDisp;
+            // Get Amp Error
+            mc.sf.Z.getAmpFault(out ret.i, out ret.i1, out ret.message);
+            if (ret.i > 0) GV_AxisInfo.Rows[(int)axisNumber.SF_Z].Cells[5].Value = "0x" + ret.i1.ToString("X");
+            else GV_AxisInfo.Rows[(int)axisNumber.SF_Z].Cells[5].Value = "none";
+            // Get Axis State
+            mc.sf.Z.status(out mpiState, out ret.message);
+            GV_AxisInfo.Rows[(int)axisNumber.SF_Z].Cells[6].Value = mpiState.ToString();
+            // Get Servo State
+            mc.sf.Z.MOTOR_ENABLE(out ret.b, out ret.message);
+            GV_AxisInfo.Rows[(int)axisNumber.SF_Z].Cells[7].Value = ret.b;
+
+			//// SF Z2
 			// Get Position
 			mc.sf.Z2.actualPosition(out ret.d, out ret.message);
 			GV_AxisInfo.Rows[(int)axisNumber.SF_Z2].Cells[1].Value = ret.d;
@@ -276,33 +303,6 @@ namespace PSA_Application
 			// Get Servo State
 			mc.sf.Z2.MOTOR_ENABLE(out ret.b, out ret.message);
 			GV_AxisInfo.Rows[(int)axisNumber.SF_Z2].Cells[7].Value = ret.b;
-
-			//// SF Z
-			// Get Position
-			mc.sf.Z.actualPosition(out ret.d, out ret.message);
-			GV_AxisInfo.Rows[(int)axisNumber.SF_Z].Cells[1].Value = ret.d;
-			// Get - Limit Status
-			mc.sf.Z.IN_N_LIMIT(out ret.b, out ret.message);
-			if (ret.b) imageDisp = imageOn; else imageDisp = imageOff;
-			GV_AxisInfo.Rows[(int)axisNumber.SF_Z].Cells[2].Value = imageDisp;
-			// Get + Limit
-			mc.sf.Z.IN_P_LIMIT(out ret.b, out ret.message);
-			if (ret.b) imageDisp = imageOn; else imageDisp = imageOff;
-			GV_AxisInfo.Rows[(int)axisNumber.SF_Z].Cells[3].Value = imageDisp;
-			// Get Home
-			mc.sf.Z.IN_HOME(out ret.b, out ret.message);
-			if (ret.b) imageDisp = imageOn; else imageDisp = imageOff;
-			GV_AxisInfo.Rows[(int)axisNumber.SF_Z].Cells[4].Value = imageDisp;
-			// Get Amp Error
-			mc.sf.Z.getAmpFault(out ret.i, out ret.i1, out ret.message);
-			if (ret.i > 0) GV_AxisInfo.Rows[(int)axisNumber.SF_Z].Cells[5].Value = "0x" + ret.i1.ToString("X");
-			else GV_AxisInfo.Rows[(int)axisNumber.SF_Z].Cells[5].Value = "none";
-			// Get Axis State
-			mc.sf.Z.status(out mpiState, out ret.message);
-			GV_AxisInfo.Rows[(int)axisNumber.SF_Z].Cells[6].Value = mpiState.ToString();
-			// Get Servo State
-			mc.sf.Z.MOTOR_ENABLE(out ret.b, out ret.message);
-			GV_AxisInfo.Rows[(int)axisNumber.SF_Z].Cells[7].Value = ret.b;
 			#endregion
 
 			#region Conveyor Information
