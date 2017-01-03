@@ -79,6 +79,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BoardStatus.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BoardStatus.Designer.cs">
+      <DependentUpon>BoardStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormBoardStatusEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +147,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="BoardStatus.resx">
+      <DependentUpon>BoardStatus.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormBoardStatusEdit.resx">
       <DependentUpon>FormBoardStatusEdit.cs</DependentUpon>
     </EmbeddedResource>

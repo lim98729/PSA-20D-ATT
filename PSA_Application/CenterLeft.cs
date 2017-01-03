@@ -442,25 +442,13 @@ namespace PSA_Application
 			}
 			else
 			{
-// 				if (mc.para.ETC.passwordProtect.value == 1)
-// 				{
-// 					if (mc.user.logInDone == false)
-// 					{
-// 						FormLogIn ff = new FormLogIn();
-// 						ff.ShowDialog();
-// 
-// 						if (FormLogIn.logInCheck == false) return;
-// 					}
-// 				}
 				if (FormTrayEdit.IsDisplayed)
 				{
-					//mc.board.workingedit = mc.board.working;
 					ff.UpdateSelectedPad(x, y);
 					ff.indexRow = x;
 					ff.indexColumn = y;
 					ff.TopLevel = true;
 					ff.BringToFront();
-					//ff.editFlag = false;
 					ff.refresh();
 				}
 				else
