@@ -130,7 +130,7 @@ namespace PSA_Application
 					mc.hdc.model_delete(mode);
 					int retry = 0;
 				RETRY:
-					mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.THIRD, out ret.b); if (!ret.b) goto EXIT;
+					mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.FIRST, out ret.b); if (!ret.b) goto EXIT;
 					#region moving
 					if ((double)mc.hdc.cam.edgeIntersection.resultX > 2.0 || (double)mc.hdc.cam.edgeIntersection.resultY > 2.0)
 					{
@@ -148,7 +148,7 @@ namespace PSA_Application
 					#endregion
 					mc.idle(100);
 					if (retry++ < 5) goto RETRY;
-					mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.THIRD, out ret.b); if (!ret.b) goto EXIT;
+                    mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.FIRST, out ret.b); if (!ret.b) goto EXIT;
 
 					halcon_region tmpRegion;
 					#region auto teach
@@ -275,7 +275,7 @@ namespace PSA_Application
 					mc.hdc.model_delete(mode);
 					int retry = 0;
 				RETRY:
-					mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.FIRST, out ret.b); if (!ret.b) goto EXIT;
+					mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.THIRD, out ret.b); if (!ret.b) goto EXIT;
 					if ((double)mc.hdc.cam.edgeIntersection.resultX > 2.0 || (double)mc.hdc.cam.edgeIntersection.resultY > 2.0)
 					{
 						string showstr;
@@ -292,7 +292,7 @@ namespace PSA_Application
 					#endregion
 					mc.idle(100);
 					if (retry++ < 5) goto RETRY;
-					mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.FIRST, out ret.b); if (!ret.b) goto EXIT;
+                    mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.THIRD, out ret.b); if (!ret.b) goto EXIT;
 
 					halcon_region tmpRegion;
 					#region auto teach
@@ -347,7 +347,7 @@ namespace PSA_Application
 					mc.hdc.model_delete(mode);
 					int retry = 0;
 				RETRY:
-					mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.FORUTH, out ret.b); if (!ret.b) goto EXIT;
+					mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.FOURTH, out ret.b); if (!ret.b) goto EXIT;
 					if ((double)mc.hdc.cam.edgeIntersection.resultX > 2.0 || (double)mc.hdc.cam.edgeIntersection.resultY > 2.0)
 					{
 						string showstr;
@@ -364,7 +364,7 @@ namespace PSA_Application
 					#endregion
 					mc.idle(100);
 					if (retry++ < 5) goto RETRY;
-					mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.FORUTH, out ret.b); if (!ret.b) goto EXIT;
+                    mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.FOURTH, out ret.b); if (!ret.b) goto EXIT;
 
 					halcon_region tmpRegion;
 					#region auto teach
@@ -422,7 +422,7 @@ namespace PSA_Application
                     mc.hdc.model_delete(mode);
                     int retry = 0;
                 RETRY:
-                    mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.THIRD, out ret.b); if (!ret.b) goto EXIT;
+                    mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.FIRST, out ret.b); if (!ret.b) goto EXIT;
                     #region moving
                     if ((double)mc.hdc.cam.edgeIntersection.resultX > 2.0 || (double)mc.hdc.cam.edgeIntersection.resultY > 2.0)
                     {
@@ -440,7 +440,7 @@ namespace PSA_Application
                     #endregion
                     mc.idle(100);
                     if (retry++ < 5) goto RETRY;
-                    mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.THIRD, out ret.b); if (!ret.b) goto EXIT;
+                    mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.FIRST, out ret.b); if (!ret.b) goto EXIT;
 
                     halcon_region tmpRegion;
                     #region auto teach
@@ -567,7 +567,7 @@ namespace PSA_Application
                     mc.hdc.model_delete(mode);
                     int retry = 0;
                 RETRY:
-                    mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.FIRST, out ret.b); if (!ret.b) goto EXIT;
+                    mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.THIRD, out ret.b); if (!ret.b) goto EXIT;
                     if ((double)mc.hdc.cam.edgeIntersection.resultX > 2.0 || (double)mc.hdc.cam.edgeIntersection.resultY > 2.0)
                     {
                         string showstr;
@@ -584,7 +584,7 @@ namespace PSA_Application
                     #endregion
                     mc.idle(100);
                     if (retry++ < 5) goto RETRY;
-                    mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.FIRST, out ret.b); if (!ret.b) goto EXIT;
+                    mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.THIRD, out ret.b); if (!ret.b) goto EXIT;
 
                     halcon_region tmpRegion;
                     #region auto teach
@@ -639,7 +639,7 @@ namespace PSA_Application
                     mc.hdc.model_delete(mode);
                     int retry = 0;
                 RETRY:
-                    mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.FORUTH, out ret.b); if (!ret.b) goto EXIT;
+                    mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.FOURTH, out ret.b); if (!ret.b) goto EXIT;
                     if ((double)mc.hdc.cam.edgeIntersection.resultX > 2.0 || (double)mc.hdc.cam.edgeIntersection.resultY > 2.0)
                     {
                         string showstr;
@@ -656,7 +656,7 @@ namespace PSA_Application
                     #endregion
                     mc.idle(100);
                     if (retry++ < 5) goto RETRY;
-                    mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.FORUTH, out ret.b); if (!ret.b) goto EXIT;
+                    mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.FOURTH, out ret.b); if (!ret.b) goto EXIT;
 
                     halcon_region tmpRegion;
                     #region auto teach
@@ -730,7 +730,7 @@ namespace PSA_Application
 					#endregion
 					mc.idle(100);
 					if (retry++ < 5) goto RETRY;
-					mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.FORUTH, out ret.b); if (!ret.b) goto EXIT;
+                    mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.FOURTH, out ret.b); if (!ret.b) goto EXIT;
 
 					halcon_region tmpRegion;
 					#region auto teach

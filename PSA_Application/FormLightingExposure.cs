@@ -50,6 +50,26 @@ namespace PSA_Application
                 light_para = mc.para.ULC.model.light;
                 exposure_para = mc.para.ULC.model.exposureTime;
             }
+            if (mode == LIGHTEXPOSUREMODE.ULC_LIDC1)
+            {
+                light_para = mc.para.ULC.modelLIDC1.light;
+                exposure_para = mc.para.ULC.modelLIDC1.exposureTime;
+            }
+            if (mode == LIGHTEXPOSUREMODE.ULC_LIDC2)
+            {
+                light_para = mc.para.ULC.modelLIDC2.light;
+                exposure_para = mc.para.ULC.modelLIDC2.exposureTime;
+            }
+            if (mode == LIGHTEXPOSUREMODE.ULC_LIDC3)
+            {
+                light_para = mc.para.ULC.modelLIDC3.light;
+                exposure_para = mc.para.ULC.modelLIDC3.exposureTime;
+            }
+            if (mode == LIGHTEXPOSUREMODE.ULC_LIDC4)
+            {
+                light_para = mc.para.ULC.modelLIDC4.light;
+                exposure_para = mc.para.ULC.modelLIDC4.exposureTime;
+            }
             if (mode == LIGHTEXPOSUREMODE.HDC_PAD)
             {
                 light_para = mc.para.HDC.modelPAD.light;
@@ -134,7 +154,8 @@ namespace PSA_Application
         }
         void control()
         {
-            if (mode == LIGHTEXPOSUREMODE.ULC)
+            if (mode == LIGHTEXPOSUREMODE.ULC || mode == LIGHTEXPOSUREMODE.ULC_LIDC1 || mode == LIGHTEXPOSUREMODE.ULC_LIDC2
+                || mode == LIGHTEXPOSUREMODE.ULC_LIDC3 || mode == LIGHTEXPOSUREMODE.ULC_LIDC4)
             {
                 mc.light.ULC(light_para, out ret.b);
                 if (!ret.b) mc.message.alarm(String.Format(textResource.MB_ETC_COMM_ERROR, "Lighting Controller"));
@@ -233,6 +254,26 @@ namespace PSA_Application
                     mc.para.ULC.model.light = light_para;
                     mc.para.ULC.model.exposureTime = exposure_para;
                 }
+                if (mode == LIGHTEXPOSUREMODE.ULC_LIDC1)
+                {
+                    mc.para.ULC.modelLIDC1.light = light_para;
+                    mc.para.ULC.modelLIDC1.exposureTime = exposure_para;
+                }
+                if (mode == LIGHTEXPOSUREMODE.ULC_LIDC2)
+                {
+                    mc.para.ULC.modelLIDC2.light = light_para;
+                    mc.para.ULC.modelLIDC2.exposureTime = exposure_para;
+                }
+                if (mode == LIGHTEXPOSUREMODE.ULC_LIDC3)
+                {
+                    mc.para.ULC.modelLIDC3.light = light_para;
+                    mc.para.ULC.modelLIDC3.exposureTime = exposure_para;
+                }
+                if (mode == LIGHTEXPOSUREMODE.ULC_LIDC4)
+                {
+                    mc.para.ULC.modelLIDC4.light = light_para;
+                    mc.para.ULC.modelLIDC4.exposureTime = exposure_para;
+                }
                 if (mode == LIGHTEXPOSUREMODE.HDC_PAD)
                 {
                     mc.para.HDC.modelPAD.light = light_para;
@@ -315,6 +356,27 @@ namespace PSA_Application
                     light_para = mc.para.ULC.model.light;
                     exposure_para = mc.para.ULC.model.exposureTime;
                 }
+				                if (mode == LIGHTEXPOSUREMODE.ULC_LIDC1)
+                {
+                    light_para = mc.para.ULC.modelLIDC1.light;
+                    exposure_para = mc.para.ULC.modelLIDC1.exposureTime;
+                }
+                if (mode == LIGHTEXPOSUREMODE.ULC_LIDC2)
+                {
+                    light_para = mc.para.ULC.modelLIDC2.light;
+                    exposure_para = mc.para.ULC.modelLIDC2.exposureTime;
+                }
+                if (mode == LIGHTEXPOSUREMODE.ULC_LIDC3)
+                {
+                    light_para = mc.para.ULC.modelLIDC3.light;
+                    exposure_para = mc.para.ULC.modelLIDC3.exposureTime;
+                }
+                if (mode == LIGHTEXPOSUREMODE.ULC_LIDC4)
+                {
+                    light_para = mc.para.ULC.modelLIDC4.light;
+                    exposure_para = mc.para.ULC.modelLIDC4.exposureTime;
+                }
+
                 if (mode == LIGHTEXPOSUREMODE.HDC_PAD)
                 {
                     light_para = mc.para.HDC.modelPAD.light;

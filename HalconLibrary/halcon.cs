@@ -4959,7 +4959,7 @@ namespace HalconLibrary
 				return false;
 			}
 		}
-		public bool writeLogGrapImage(HTuple fileName)
+		public bool writeLogGrabImage(HTuple fileName)
 		{
 			try
 			{
@@ -7184,7 +7184,7 @@ namespace HalconLibrary
 					createHRow1 = oy - shortLength;
 					createHRow2 = oy + shortLength * cropArea;
 				}
-				else if (quarterNumber == QUARTER_NUMBER.FORUTH)
+				else if (quarterNumber == QUARTER_NUMBER.FOURTH)
 				{
 					createVColumn1 = ox - shortLength;
 					createVColumn2 = ox + shortLength * cropArea;

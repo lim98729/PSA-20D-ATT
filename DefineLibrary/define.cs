@@ -1294,10 +1294,10 @@ namespace DefineLibrary
 		public const int FIND_RECTANGLE = 3150;
 		public const int FIND_CIRCLE = 3200;
 		public const int FIND_CORNER = 3250;
-		public const int FIND_EDGE_QUARTER_1 = 3300;
-		public const int FIND_EDGE_QUARTER_2 = 3350;
-		public const int FIND_EDGE_QUARTER_3 = 3400;
-		public const int FIND_EDGE_QUARTER_4 = 3450;
+        public const int FIND_EDGE_QUARTER_THIRD = 3300;
+        public const int FIND_EDGE_QUARTER_SECOND = 3350;
+        public const int FIND_EDGE_QUARTER_FIRST = 3400;
+        public const int FIND_EDGE_QUARTER_FOURTH = 3450;
 		public const int FIND_CIRCLE_QUARTER_1 = 3500;
 		public const int FIND_CIRCLE_QUARTER_2 = 3510;
 		public const int FIND_CIRCLE_QUARTER_3 = 3520;
@@ -1590,7 +1590,7 @@ namespace DefineLibrary
 		FIRST,
 		SECOND,
 		THIRD,
-		FORUTH,
+		FOURTH,
 	}
 	public enum MODEL_ALGORISM
 	{
@@ -1713,10 +1713,10 @@ namespace DefineLibrary
 		FIND_CIRCLE_QUARTER3,
 		FIND_CIRCLE_QUARTER4,
 		FIND_CORNER,
-		FIND_EDGE_QUARTER_1,
-		FIND_EDGE_QUARTER_2,
-		FIND_EDGE_QUARTER_3,
-		FIND_EDGE_QUARTER_4,
+        FIND_EDGE_QUARTER_3,
+        FIND_EDGE_QUARTER_2,
+        FIND_EDGE_QUARTER_1,
+        FIND_EDGE_QUARTER_4,
 		FIND_RECTANGLE_HS,
 		
 		READY,

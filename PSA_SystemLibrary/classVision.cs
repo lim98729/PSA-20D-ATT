@@ -80,10 +80,10 @@ namespace PSA_SystemLibrary
 					if (reqMode == REQMODE.FIND_CIRCLE_QUARTER4) { sqc = SQC.FIND_CIRCLE_QUARTER_4; break; }
 					if (reqMode == REQMODE.FIND_CIRCLE) { sqc = SQC.FIND_CIRCLE; break; }
 					if (reqMode == REQMODE.FIND_CORNER) { sqc = SQC.FIND_CORNER; break; }
-					if (reqMode == REQMODE.FIND_EDGE_QUARTER_1) { sqc = SQC.FIND_EDGE_QUARTER_1; break; }
-					if (reqMode == REQMODE.FIND_EDGE_QUARTER_2) { sqc = SQC.FIND_EDGE_QUARTER_2; break; }
-					if (reqMode == REQMODE.FIND_EDGE_QUARTER_3) { sqc = SQC.FIND_EDGE_QUARTER_3; break; }
-					if (reqMode == REQMODE.FIND_EDGE_QUARTER_4) { sqc = SQC.FIND_EDGE_QUARTER_4; break; }
+					if (reqMode == REQMODE.FIND_EDGE_QUARTER_1) { sqc = SQC.FIND_EDGE_QUARTER_FIRST; break; }
+					if (reqMode == REQMODE.FIND_EDGE_QUARTER_2) { sqc = SQC.FIND_EDGE_QUARTER_SECOND; break; }
+					if (reqMode == REQMODE.FIND_EDGE_QUARTER_3) { sqc = SQC.FIND_EDGE_QUARTER_THIRD; break; }
+					if (reqMode == REQMODE.FIND_EDGE_QUARTER_4) { sqc = SQC.FIND_EDGE_QUARTER_FOURTH; break; }
 					if (reqMode == REQMODE.FIND_RECTANGLE_HS) { sqc = SQC.FIND_RECTANGLE_HS; break; }
 					if (unitCode == UnitCode.HDC)
 					{
@@ -237,7 +237,7 @@ namespace PSA_SystemLibrary
 					{
 						if (unitCode == UnitCode.HDC && (int)mc.para.HDC.imageSave.value == 1)
 						{
-							cam.writeLogGrapImage("HDC_Process_Fail");
+							cam.writeLogGrabImage("HDC_Process_Fail");
 						}
 						sqc = SQC.FIND_ERROR;
 						break;
@@ -247,7 +247,7 @@ namespace PSA_SystemLibrary
 						if (unitCode == UnitCode.HDC && (int)mc.para.HDC.imageSave.value == 2)
 						{
 							//mc.log.debug.write(mc.log.CODE.TRACE, "ULC All Image Save");
-							cam.writeLogGrapImage("HDC_Process_OK");
+							cam.writeLogGrabImage("HDC_Process_OK");
 						}
 					}
 					#region refresh
@@ -276,7 +276,7 @@ namespace PSA_SystemLibrary
 					{
 						if (unitCode == UnitCode.ULC && (int)mc.para.ULC.imageSave.value == 1)
 						{
-							cam.writeLogGrapImage("ULC_Process_Fail");
+							cam.writeLogGrabImage("ULC_Process_Fail");
 						}
 						sqc = SQC.FIND_ERROR;
 						break;
@@ -294,7 +294,7 @@ namespace PSA_SystemLibrary
 								if (unitCode == UnitCode.ULC && (int)mc.para.ULC.imageSave.value == 1)
 								{
 									//mc.log.debug.write(mc.log.CODE.TRACE, "ULC Fail Image Save");
-									cam.writeLogGrapImage("ULC_Process_Fail");
+									cam.writeLogGrabImage("ULC_Process_Fail");
 								}
 								sqc = SQC.FIND_ERROR;
 								break;
@@ -304,7 +304,7 @@ namespace PSA_SystemLibrary
 								if (unitCode == UnitCode.ULC && (int)mc.para.ULC.imageSave.value == 2)
 								{
 									//mc.log.debug.write(mc.log.CODE.TRACE, "ULC All Image Save");
-									cam.writeLogGrapImage("ULC_Process_OK");
+									cam.writeLogGrabImage("ULC_Process_OK");
 								}
 							}
 						}
@@ -373,7 +373,7 @@ namespace PSA_SystemLibrary
 				#endregion
 
 				#region FIND_EDGE_QUARTER
-				case SQC.FIND_EDGE_QUARTER_1:
+				case SQC.FIND_EDGE_QUARTER_THIRD:
 					if (cam.refresh_req) break;
 					#region grab
 					if (triggerMode == TRIGGERMODE.SOFTWARE)
@@ -386,21 +386,29 @@ namespace PSA_SystemLibrary
 					}
 					//cam.writeGrabImage("FIND_EDGE_QUARTER_1");
 					#endregion
-					cam.edgeIntersection.create(cam.acq.Image, cam.window, cam.acq.ResolutionX, cam.acq.ResolutionY, QUARTER_NUMBER.FIRST, out ret.b); if(!ret.b){ sqc = SQC.FIND_ERROR; break; }
+					cam.edgeIntersection.create(cam.acq.Image, cam.window, cam.acq.ResolutionX, cam.acq.ResolutionY, QUARTER_NUMBER.THIRD, out ret.b); if(!ret.b){ sqc = SQC.FIND_ERROR; break; }
 					cam.edgeIntersection.find(out ret.b);
 					if (!ret.b)
 					{
-						if (unitCode == UnitCode.HDC && (int)mc.para.ULC.imageSave.value == 1)
+						if (unitCode == UnitCode.HDC && (int)mc.para.HDC.imageSave.value == 1)
 						{
-							cam.writeLogGrapImage("HDC_C3_Process_Fail");
+							cam.writeLogGrabImage("HDC_C3_Process_Fail");
 						}
+                        else if (unitCode == UnitCode.ULC && (int)mc.para.ULC.imageSave.value == 1)
+                        {
+                            cam.writeLogGrabImage("ULC_C3_Process_Fail");
+                        }
 						sqc = SQC.FIND_ERROR; break;
 					}
 					else
 					{
-						if (unitCode == UnitCode.HDC && (int)mc.para.ULC.imageSave.value == 2)
+						if (unitCode == UnitCode.HDC && (int)mc.para.HDC.imageSave.value == 2)
 						{
-							cam.writeLogGrapImage("HDC_C3_OK");
+							cam.writeLogGrabImage("HDC_C3_OK");
+						}
+                        if (unitCode == UnitCode.ULC && (int)mc.para.ULC.imageSave.value == 2)
+                        {
+                            cam.writeLogGrabImage("ULC_C3_OK");
 						}
 					}
 					#region refresh
@@ -408,7 +416,7 @@ namespace PSA_SystemLibrary
 					cam.refresh_reqMode = REFRESH_REQMODE.EDGE_INTERSECTION;
 					#endregion
 					sqc = SQC.STOP; break;
-				case SQC.FIND_EDGE_QUARTER_2:
+				case SQC.FIND_EDGE_QUARTER_SECOND:
 					if (cam.refresh_req) break;
 					#region grab
 					if (triggerMode == TRIGGERMODE.SOFTWARE)
@@ -425,17 +433,25 @@ namespace PSA_SystemLibrary
 					cam.edgeIntersection.find(out ret.b);
 					if (!ret.b)
 					{
-						if (unitCode == UnitCode.HDC && (int)mc.para.ULC.imageSave.value == 1)
+						if (unitCode == UnitCode.HDC && (int)mc.para.HDC.imageSave.value == 1)
 						{
-							cam.writeLogGrapImage("HDC_C2_Process_Fail");
+							cam.writeLogGrabImage("HDC_C2_Process_Fail");
 						}
+                        if (unitCode == UnitCode.ULC && (int)mc.para.ULC.imageSave.value == 1)
+                        {
+                            cam.writeLogGrabImage("ULC_C2_Process_Fail");
+                        }
 						sqc = SQC.FIND_ERROR; break;
 					}
 					else
 					{
-						if (unitCode == UnitCode.HDC && (int)mc.para.ULC.imageSave.value == 2)
+						if (unitCode == UnitCode.HDC && (int)mc.para.HDC.imageSave.value == 2)
 						{
-							cam.writeLogGrapImage("HDC_C2_OK");
+							cam.writeLogGrabImage("HDC_C2_OK");
+						}
+                        if (unitCode == UnitCode.ULC && (int)mc.para.ULC.imageSave.value == 2)
+                        {
+                            cam.writeLogGrabImage("ULC_C2_OK");
 						}
 					}
 					#region refresh
@@ -443,7 +459,7 @@ namespace PSA_SystemLibrary
 					cam.refresh_reqMode = REFRESH_REQMODE.EDGE_INTERSECTION;
 					#endregion
 					sqc = SQC.STOP; break;
-				case SQC.FIND_EDGE_QUARTER_3:
+				case SQC.FIND_EDGE_QUARTER_FIRST:
 					if (cam.refresh_req) break;
 					#region grab
 					if (triggerMode == TRIGGERMODE.SOFTWARE)
@@ -456,21 +472,29 @@ namespace PSA_SystemLibrary
 					}
 					//cam.writeGrabImage("FIND_EDGE_QUARTER_3");
 					#endregion
-					cam.edgeIntersection.create(cam.acq.Image, cam.window, cam.acq.ResolutionX, cam.acq.ResolutionY, QUARTER_NUMBER.THIRD, out ret.b); if (!ret.b) { sqc = SQC.FIND_ERROR; break; }
+					cam.edgeIntersection.create(cam.acq.Image, cam.window, cam.acq.ResolutionX, cam.acq.ResolutionY, QUARTER_NUMBER.FIRST, out ret.b); if (!ret.b) { sqc = SQC.FIND_ERROR; break; }
 					cam.edgeIntersection.find(out ret.b);
 					if (!ret.b)
 					{
-						if (unitCode == UnitCode.HDC && (int)mc.para.ULC.imageSave.value == 1)
+						if (unitCode == UnitCode.HDC && (int)mc.para.HDC.imageSave.value == 1)
 						{
-							cam.writeLogGrapImage("HDC_C1_Process_Fail");
+							cam.writeLogGrabImage("HDC_C1_Process_Fail");
 						}
+                        if (unitCode == UnitCode.ULC && (int)mc.para.ULC.imageSave.value == 1)
+                        {
+                            cam.writeLogGrabImage("ULC_C1_Process_Fail");
+                        }
 						sqc = SQC.FIND_ERROR; break;
 					}
 					else
 					{
-						if (unitCode == UnitCode.HDC && (int)mc.para.ULC.imageSave.value == 2)
+						if (unitCode == UnitCode.HDC && (int)mc.para.HDC.imageSave.value == 2)
 						{
-							cam.writeLogGrapImage("HDC_C1_OK");
+							cam.writeLogGrabImage("HDC_C1_OK");
+						}
+                        if (unitCode == UnitCode.ULC && (int)mc.para.ULC.imageSave.value == 2)
+                        {
+                            cam.writeLogGrabImage("ULC_C1_OK");
 						}
 					}
 					#region refresh
@@ -478,7 +502,7 @@ namespace PSA_SystemLibrary
 					cam.refresh_reqMode = REFRESH_REQMODE.EDGE_INTERSECTION;
 					#endregion
 					sqc = SQC.STOP; break;
-				case SQC.FIND_EDGE_QUARTER_4:
+				case SQC.FIND_EDGE_QUARTER_FOURTH:
 					if (cam.refresh_req) break;
 					#region grab
 					if (triggerMode == TRIGGERMODE.SOFTWARE)
@@ -491,22 +515,30 @@ namespace PSA_SystemLibrary
 					}
 					//cam.writeGrabImage("FIND_EDGE_QUARTER_4");
 					#endregion
-					cam.edgeIntersection.create(cam.acq.Image, cam.window, cam.acq.ResolutionX, cam.acq.ResolutionY, QUARTER_NUMBER.FORUTH, out ret.b); if (!ret.b) { sqc = SQC.FIND_ERROR; break; }
+					cam.edgeIntersection.create(cam.acq.Image, cam.window, cam.acq.ResolutionX, cam.acq.ResolutionY, QUARTER_NUMBER.FOURTH, out ret.b); if (!ret.b) { sqc = SQC.FIND_ERROR; break; }
 					cam.edgeIntersection.find(out ret.b);
 					if (!ret.b)
 					{
-						if (unitCode == UnitCode.HDC && (int)mc.para.ULC.imageSave.value == 1)
+						if (unitCode == UnitCode.HDC && (int)mc.para.HDC.imageSave.value == 1)
 						{
-							cam.writeLogGrapImage("HDC_C4_Process_Fail");
+							cam.writeLogGrabImage("HDC_C4_Process_Fail");
 						}
+                        if (unitCode == UnitCode.ULC && (int)mc.para.ULC.imageSave.value == 1)
+                        {
+                            cam.writeLogGrabImage("ULC_C4_Process_Fail");
+                        }
 						sqc = SQC.FIND_ERROR; break;
 					}
 					else
 					{
-						if (unitCode == UnitCode.HDC && (int)mc.para.ULC.imageSave.value == 2)
+						if (unitCode == UnitCode.HDC && (int)mc.para.HDC.imageSave.value == 2)
 						{
-							cam.writeLogGrapImage("HDC_C4_OK");
+							cam.writeLogGrabImage("HDC_C4_OK");
 						}
+                        if (unitCode == UnitCode.ULC && (int)mc.para.ULC.imageSave.value == 2)
+                        {
+                            cam.writeLogGrabImage("ULC_C4_OK");
+                        }
 					}
 					#region refresh
 					cam.refresh_req = true;
@@ -769,8 +801,10 @@ namespace PSA_SystemLibrary
 		}
 		#endregion
 
-		public void edgeIntersectionFind(QUARTER_NUMBER quarterNumber, out bool b)
+        public void edgeIntersectionFind(QUARTER_NUMBER quarterNumber, out bool b, int mode = 0)
 		{
+            if(mode == 0)           // hdc
+            {
 			mc.hdc.cam.grabSofrwareTrigger();
 			mc.hdc.cam.edgeIntersection.create(mc.hdc.cam.acq.Image, mc.hdc.cam.window, mc.hdc.cam.acq.ResolutionX, mc.hdc.cam.acq.ResolutionY, quarterNumber, out b); if (!b) return;
 			mc.hdc.cam.edgeIntersection.find(out b); if (!b) return;
@@ -784,11 +818,27 @@ namespace PSA_SystemLibrary
 			}
 			b = mc.hdc.cam.edgeIntersection.SUCCESS;
 		}
+            else           // ulc
+            {
+                mc.ulc.cam.grabSofrwareTrigger();
+                mc.ulc.cam.edgeIntersection.create(mc.ulc.cam.acq.Image, mc.ulc.cam.window, mc.ulc.cam.acq.ResolutionX, mc.ulc.cam.acq.ResolutionY, quarterNumber, out b); if (!b) return;
+                mc.ulc.cam.edgeIntersection.find(out b); if (!b) return;
+                mc.ulc.cam.refresh_req = true; mc.ulc.cam.refresh_reqMode = REFRESH_REQMODE.EDGE_INTERSECTION;
+                dwell.Reset();
+                while (true)
+                {
+                    if (dwell.Elapsed > 5000) { mc.ulc.cam.refresh_req = false; b = false; return; }
+                    mc.idle(1);
+                    if (!mc.ulc.cam.refresh_req) break;
+                }
+                b = mc.ulc.cam.edgeIntersection.SUCCESS;
+            }
+		}
 
 		public void cornerEdgeFind(QUARTER_NUMBER quarterNumber)
 		{
 			//halcon_region tmpRegion = new halcon_region();
-			if (quarterNumber == QUARTER_NUMBER.FIRST)
+			if (quarterNumber == QUARTER_NUMBER.THIRD)
 			{
 				tmpRegion.row1 = mc.hdc.cam.acq.height * 0.1;
 				tmpRegion.row2 = mc.hdc.cam.acq.height * 0.6;
@@ -802,14 +852,14 @@ namespace PSA_SystemLibrary
 				tmpRegion.column1 = mc.hdc.cam.acq.width * 0.1;
 				tmpRegion.column2 = mc.hdc.cam.acq.width * 0.6;
 			}
-			if (quarterNumber == QUARTER_NUMBER.THIRD)
+			if (quarterNumber == QUARTER_NUMBER.FIRST)
 			{
 				tmpRegion.row1 = mc.hdc.cam.acq.height * 0.4;
 				tmpRegion.row2 = mc.hdc.cam.acq.height * 0.9;
 				tmpRegion.column1 = mc.hdc.cam.acq.width * 0.1;
 				tmpRegion.column2 = mc.hdc.cam.acq.width * 0.6;
 			}
-			if (quarterNumber == QUARTER_NUMBER.FORUTH)
+			if (quarterNumber == QUARTER_NUMBER.FOURTH)
 			{
 				tmpRegion.row1 = mc.hdc.cam.acq.height * 0.4;
 				tmpRegion.row2 = mc.hdc.cam.acq.height * 0.9;

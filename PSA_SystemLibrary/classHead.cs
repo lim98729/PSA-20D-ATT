@@ -4212,7 +4212,7 @@ namespace PSA_SystemLibrary
 										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
 										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 											sqc = 120; break;
 										}
 										else
@@ -4224,7 +4224,7 @@ namespace PSA_SystemLibrary
 											}
 											else
 											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 												tempSb.Clear(); tempSb.Length = 0;
 												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
 												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -4237,7 +4237,7 @@ namespace PSA_SystemLibrary
 										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
 										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 											sqc = 120; break;
 										}
 										else
@@ -4249,7 +4249,7 @@ namespace PSA_SystemLibrary
 											}
 											else
 											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 												tempSb.Clear(); tempSb.Length = 0;
 												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
 												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -4262,7 +4262,7 @@ namespace PSA_SystemLibrary
 										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
 										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 											sqc = 120; break;
 										}
 										else
@@ -4274,7 +4274,7 @@ namespace PSA_SystemLibrary
 											}
 											else
 											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 												tempSb.Clear(); tempSb.Length = 0;
 												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
 												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -4290,7 +4290,7 @@ namespace PSA_SystemLibrary
 										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
 										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 											sqc = 120; break;
 										}
 										else
@@ -4302,7 +4302,7 @@ namespace PSA_SystemLibrary
 											}
 											else
 											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 												tempSb.Clear(); tempSb.Length = 0;
 												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
 												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -4315,7 +4315,7 @@ namespace PSA_SystemLibrary
 										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
 										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 											sqc = 120; break;
 										}
 										else
@@ -4327,7 +4327,7 @@ namespace PSA_SystemLibrary
 											}
 											else
 											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 												tempSb.Clear(); tempSb.Length = 0;
 												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
 												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -4340,7 +4340,7 @@ namespace PSA_SystemLibrary
 										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
 										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 											sqc = 120; break;
 										}
 										else
@@ -4352,7 +4352,7 @@ namespace PSA_SystemLibrary
 											}
 											else
 											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 												tempSb.Clear(); tempSb.Length = 0;
 												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
 												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -4455,7 +4455,7 @@ namespace PSA_SystemLibrary
 										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
 										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 											sqc = 120; break;
 										}
 										else
@@ -4467,7 +4467,7 @@ namespace PSA_SystemLibrary
 											}
 											else
 											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 												tempSb.Clear(); tempSb.Length = 0;
 												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
 												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -4480,7 +4480,7 @@ namespace PSA_SystemLibrary
 										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0} um", hdcP1Y));
 										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 											sqc = 120; break;
 										}
 										else
@@ -4492,7 +4492,7 @@ namespace PSA_SystemLibrary
 											}
 											else
 											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 												tempSb.Clear(); tempSb.Length = 0;
 												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
 												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -4505,7 +4505,7 @@ namespace PSA_SystemLibrary
 										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
 										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 											sqc = 120; break;
 										}
 										else
@@ -4517,7 +4517,7 @@ namespace PSA_SystemLibrary
 											}
 											else
 											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 												tempSb.Clear(); tempSb.Length = 0;
 												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
 												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -4533,7 +4533,7 @@ namespace PSA_SystemLibrary
 										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0} um", hdcP1X));
 										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 											sqc = 120; break;
 										}
 										else
@@ -4545,7 +4545,7 @@ namespace PSA_SystemLibrary
 											}
 											else
 											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 												tempSb.Clear(); tempSb.Length = 0;
 												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
 												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -4558,7 +4558,7 @@ namespace PSA_SystemLibrary
 										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
 										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 											sqc = 120; break;
 										}
 										else
@@ -4570,7 +4570,7 @@ namespace PSA_SystemLibrary
 											}
 											else
 											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C21_Y_Limit");
+												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C21_Y_Limit");
 												tempSb.Clear(); tempSb.Length = 0;
 												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
 												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -4583,7 +4583,7 @@ namespace PSA_SystemLibrary
 										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
 										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 											sqc = 120; break;
 										}
 										else
@@ -4595,7 +4595,7 @@ namespace PSA_SystemLibrary
 											}
 											else
 											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 												tempSb.Clear(); tempSb.Length = 0;
 												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
 												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -4697,7 +4697,7 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 										sqc = 120; break;
 									}
 									else
@@ -4709,7 +4709,7 @@ namespace PSA_SystemLibrary
 										}
 										else
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 											tempSb.Clear(); tempSb.Length = 0;
 											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -4722,7 +4722,7 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 										sqc = 120; break;
 									}
 									else
@@ -4734,7 +4734,7 @@ namespace PSA_SystemLibrary
 										}
 										else
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 											tempSb.Clear(); tempSb.Length = 0;
 											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -4772,7 +4772,7 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Score Limit Error : {0:F1}%", hdcResult));
  									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
  									{
- 										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_P1_Score_Limit");
+ 										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
  										sqc = 120; break;
  									}
  									else
@@ -4784,7 +4784,7 @@ namespace PSA_SystemLibrary
  										}
  										else
  										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_P1_Score_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
  											tempSb.Clear(); tempSb.Length = 0;
 											tempSb.AppendFormat("PadX[{0}],PadY[{1}], P1: Score[{2}%]", (padX + 1), (padY + 1), Math.Round(hdcResult, 2));
  											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -4801,7 +4801,7 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 										sqc = 120; break;
 									}
 									else
@@ -4813,7 +4813,7 @@ namespace PSA_SystemLibrary
 										}
 										else
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 											tempSb.Clear(); tempSb.Length = 0;
 											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -4826,7 +4826,7 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 										sqc = 120; break;
 									}
 									else
@@ -4838,7 +4838,7 @@ namespace PSA_SystemLibrary
 										}
 										else
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 											tempSb.Clear(); tempSb.Length = 0;
 											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -4877,7 +4877,7 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Score Limit Error : {0:F1}%", hdcResult));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_P1_Score_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
 									sqc = 120; break;
 								}
 								else
@@ -4889,7 +4889,7 @@ namespace PSA_SystemLibrary
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_P1_Score_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}], P1: Score[{2}%]", (padX + 1), (padY + 1), Math.Round(hdcResult, 2));
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -4993,7 +4993,7 @@ namespace PSA_SystemLibrary
 										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
 										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 											sqc = 120; break;
 										}
 										else
@@ -5005,7 +5005,7 @@ namespace PSA_SystemLibrary
 											}
 											else
 											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 												tempSb.Clear(); tempSb.Length = 0;
 												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
 												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -5018,7 +5018,7 @@ namespace PSA_SystemLibrary
 										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
 										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 											sqc = 120; break;
 										}
 										else
@@ -5030,7 +5030,7 @@ namespace PSA_SystemLibrary
 											}
 											else
 											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 												tempSb.Clear(); tempSb.Length = 0;
 												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
 												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -5043,7 +5043,7 @@ namespace PSA_SystemLibrary
 										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
 										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 											sqc = 120; break;
 										}
 										else
@@ -5055,7 +5055,7 @@ namespace PSA_SystemLibrary
 											}
 											else
 											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 												tempSb.Clear(); tempSb.Length = 0;
 												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
 												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -5071,7 +5071,7 @@ namespace PSA_SystemLibrary
 										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
 										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 											sqc = 120; break;
 										}
 										else
@@ -5083,7 +5083,7 @@ namespace PSA_SystemLibrary
 											}
 											else
 											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 												tempSb.Clear(); tempSb.Length = 0;
 												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
 												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -5096,7 +5096,7 @@ namespace PSA_SystemLibrary
 										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
 										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 											sqc = 120; break;
 										}
 										else
@@ -5108,7 +5108,7 @@ namespace PSA_SystemLibrary
 											}
 											else
 											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C21_Y_Limit");
+												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C21_Y_Limit");
 												tempSb.Clear(); tempSb.Length = 0;
 												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
 												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -5121,7 +5121,7 @@ namespace PSA_SystemLibrary
 										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
 										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 											sqc = 120; break;
 										}
 										else
@@ -5133,7 +5133,7 @@ namespace PSA_SystemLibrary
 											}
 											else
 											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 												tempSb.Clear(); tempSb.Length = 0;
 												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
 												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -5236,7 +5236,7 @@ namespace PSA_SystemLibrary
 										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
 										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 											sqc = 120; break;
 										}
 										else
@@ -5248,7 +5248,7 @@ namespace PSA_SystemLibrary
 											}
 											else
 											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 												tempSb.Clear(); tempSb.Length = 0;
 												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
 												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -5261,7 +5261,7 @@ namespace PSA_SystemLibrary
 										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
 										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 											sqc = 120; break;
 										}
 										else
@@ -5273,7 +5273,7 @@ namespace PSA_SystemLibrary
 											}
 											else
 											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 												tempSb.Clear(); tempSb.Length = 0;
 												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
 												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -5286,7 +5286,7 @@ namespace PSA_SystemLibrary
 										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
 										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 											sqc = 120; break;
 										}
 										else
@@ -5298,7 +5298,7 @@ namespace PSA_SystemLibrary
 											}
 											else
 											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 												tempSb.Clear(); tempSb.Length = 0;
 												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
 												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -5314,7 +5314,7 @@ namespace PSA_SystemLibrary
 										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
 										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 											sqc = 120; break;
 										}
 										else
@@ -5326,7 +5326,7 @@ namespace PSA_SystemLibrary
 											}
 											else
 											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 												tempSb.Clear(); tempSb.Length = 0;
 												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
 												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -5339,7 +5339,7 @@ namespace PSA_SystemLibrary
 										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
 										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 											sqc = 120; break;
 										}
 										else
@@ -5351,7 +5351,7 @@ namespace PSA_SystemLibrary
 											}
 											else
 											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 												tempSb.Clear(); tempSb.Length = 0;
 												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
 												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -5364,7 +5364,7 @@ namespace PSA_SystemLibrary
 										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
 										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 											sqc = 120; break;
 										}
 										else
@@ -5376,7 +5376,7 @@ namespace PSA_SystemLibrary
 											}
 											else
 											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 												tempSb.Clear(); tempSb.Length = 0;
 												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
 												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -5479,7 +5479,7 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 										sqc = 120; break;
 									}
 									else
@@ -5491,7 +5491,7 @@ namespace PSA_SystemLibrary
 										}
 										else
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 											tempSb.Clear(); tempSb.Length = 0;
 											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -5504,7 +5504,7 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 										sqc = 120; break;
 									}
 									else
@@ -5516,7 +5516,7 @@ namespace PSA_SystemLibrary
 										}
 										else
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 											tempSb.Clear(); tempSb.Length = 0;
 											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -5554,7 +5554,7 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Score Limit Error : {0:F1}%", hdcResult));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_P1_Score_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
 										sqc = 120; break;
 									}
 									else
@@ -5566,7 +5566,7 @@ namespace PSA_SystemLibrary
 										}
 										else
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_P1_Score_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
 											tempSb.Clear(); tempSb.Length = 0;
 											tempSb.AppendFormat("PadX[{0}],PadY[{1}], P1: Score[{2}%]", (padX + 1), (padY + 1), Math.Round(hdcResult, 2));
 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -5582,7 +5582,7 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 										sqc = 120; break;
 									}
 									else
@@ -5594,7 +5594,7 @@ namespace PSA_SystemLibrary
 										}
 										else
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 											tempSb.Clear(); tempSb.Length = 0;
 											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -5607,7 +5607,7 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 										sqc = 120; break;
 									}
 									else
@@ -5619,7 +5619,7 @@ namespace PSA_SystemLibrary
 										}
 										else
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 											tempSb.Clear(); tempSb.Length = 0;
 											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -5657,7 +5657,7 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Score Limit Error : {0:F1}%", hdcResult));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_P1_Score_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
 										sqc = 120; break;
 									}
 									else
@@ -5669,7 +5669,7 @@ namespace PSA_SystemLibrary
 										}
 										else
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_P1_Score_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
 											tempSb.Clear(); tempSb.Length = 0;
 											tempSb.AppendFormat("PadX[{0}],PadY[{1}], P1: Score[{2}%]", (padX + 1), (padY + 1), Math.Round(hdcResult, 2));
 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -5827,13 +5827,13 @@ namespace PSA_SystemLibrary
                                     mc.log.debug.write(mc.log.CODE.ERROR, tempSb.ToString());
                                     //EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
                                     ulcfailchecked = true;
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_Lid_Size_Error");
+                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_Lid_Size_Error");
                                     mc.para.runInfo.writePickInfo(PickCodeInfo.SIZEERR);
                                     sqc = SQC.END; break;
                                 }
                                 else
                                 {
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_Lid_Size_Error");
+                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_Lid_Size_Error");
                                     mc.para.runInfo.writePickInfo(PickCodeInfo.SIZEERR);
                                     tempSb.Clear(); tempSb.Length = 0;
                                     tempSb.AppendFormat("LID Chk Fail(Size ERROR)-PadX[{0}],PadY[{1}],FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.ulcfailcount);
@@ -5855,13 +5855,13 @@ namespace PSA_SystemLibrary
                                     mc.log.debug.write(mc.log.CODE.EVENT, tempSb.ToString());
                                     //EVENT.statusDisplay("Chamfer Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
                                     ulcfailchecked = true;
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_Chamfer_Check_Fail");
+                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_Chamfer_Check_Fail");
                                     mc.para.runInfo.writePickInfo(PickCodeInfo.CHAMFERERR);
                                     sqc = SQC.END; break;
                                 }
                                 else
                                 {
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_Chamfer_Check_Fail");
+                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_Chamfer_Check_Fail");
                                     mc.para.runInfo.writePickInfo(PickCodeInfo.CHAMFERERR);
                                     tempSb.Clear(); tempSb.Length = 0;
                                     tempSb.AppendFormat("LID Chk Fail(Chamfer NOT Found)-PadX[{0}],PadY[{1}],FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.ulcfailcount);
@@ -5884,14 +5884,14 @@ namespace PSA_SystemLibrary
                                     mc.log.debug.write(mc.log.CODE.EVENT, tempSb.ToString());
                                     //EVENT.statusDisplay("Chamfer Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
                                     ulcfailchecked = true;
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_Circle_Check_Fail");
+                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_Circle_Check_Fail");
                                     mc.para.runInfo.writePickInfo(PickCodeInfo.CIRCLEERR);
                                     sqc = SQC.END; break;
                                 }
                                 else
                                 {
 
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_Circle_Check_Fail");
+                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_Circle_Check_Fail");
                                     mc.para.runInfo.writePickInfo(PickCodeInfo.CIRCLEERR);
                                     tempSb.Clear(); tempSb.Length = 0;
                                     tempSb.AppendFormat("LID Chk Fail(Circle NOT Found)-PadX[{0}],PadY[{1}],FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.ulcfailcount);
@@ -5917,13 +5917,13 @@ namespace PSA_SystemLibrary
                                 {
                                     //EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
                                     ulcfailchecked = true;
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_X_Limit_Fail");
+                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_X_Limit_Fail");
                                     mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
                                     sqc = SQC.END; break;
                                 }
                                 else
                                 {
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_X_Limit_Fail");
+                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_X_Limit_Fail");
                                     mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
                                     tempSb.Clear(); tempSb.Length = 0;
                                     tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(ulcX));
@@ -5947,13 +5947,13 @@ namespace PSA_SystemLibrary
                                 {
                                     //EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
                                     ulcfailchecked = true;
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_Y_Limit_Fail");
+                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_Y_Limit_Fail");
                                     mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
                                     sqc = SQC.END; break;
                                 }
                                 else
                                 {
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_Y_Limit_Fail");
+                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_Y_Limit_Fail");
                                     mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
                                     tempSb.Clear(); tempSb.Length = 0;
                                     tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(ulcY));
@@ -5973,13 +5973,13 @@ namespace PSA_SystemLibrary
                                 {
                                     //EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
                                     ulcfailchecked = true;
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_T_Limit_Fail");
+                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_T_Limit_Fail");
                                     mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
                                     sqc = SQC.END; break;
                                 }
                                 else
                                 {
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_T_Limit_Fail");
+                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_T_Limit_Fail");
                                     mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
                                     tempSb.Clear(); tempSb.Length = 0;
                                     tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(ulcT));
@@ -6015,13 +6015,13 @@ namespace PSA_SystemLibrary
                                 {
                                     //EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
                                     ulcfailchecked = true;
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_X_Limit_Fail");
+                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_X_Limit_Fail");
                                     mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
                                     sqc = SQC.END; break;
                                 }
                                 else
                                 {
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_X_Limit_Fail");
+                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_X_Limit_Fail");
                                     mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
                                     tempSb.Clear(); tempSb.Length = 0;
                                     tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(ulcX));
@@ -6044,13 +6044,13 @@ namespace PSA_SystemLibrary
                                 {
                                     //EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
                                     ulcfailchecked = true;
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_Y_Limit_Fail");
+                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_Y_Limit_Fail");
                                     mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
                                     sqc = SQC.END; break;
                                 }
                                 else
                                 {
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_Y_Limit_Fail");
+                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_Y_Limit_Fail");
                                     mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
                                     tempSb.Clear(); tempSb.Length = 0;
                                     tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(ulcY));
@@ -6069,13 +6069,13 @@ namespace PSA_SystemLibrary
                                 {
                                     //EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
                                     ulcfailchecked = true;
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_T_Limit_Fail");
+                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_T_Limit_Fail");
                                     mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
                                     sqc = SQC.END; break;
                                 }
                                 else
                                 {
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_T_Limit_Fail");
+                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_T_Limit_Fail");
                                     mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
                                     tempSb.Clear(); tempSb.Length = 0;
                                     tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(ulcT));
@@ -6321,7 +6321,7 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1} um", hdcP2X));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_X_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
 									sqc = 120; break;
 								}
 								else
@@ -6334,7 +6334,7 @@ namespace PSA_SystemLibrary
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2X);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2X).ToString() + "]";
@@ -6347,7 +6347,7 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1} um", hdcP2Y));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_Y_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
 									sqc = 120; break;
 								}
 								else
@@ -6360,7 +6360,7 @@ namespace PSA_SystemLibrary
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2Y);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2Y).ToString() + "]";
@@ -6373,7 +6373,7 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1} degree", hdcP2T));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_T_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_T_Limit");
 									sqc = 120; break;
 								}
 								else
@@ -6386,7 +6386,7 @@ namespace PSA_SystemLibrary
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_T_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2T);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2T).ToString() + "]";
@@ -6403,7 +6403,7 @@ namespace PSA_SystemLibrary
 								//EVENT.statusDisplay("HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString());
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_(C1-C3)_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
 									sqc = 120; break;
 								}
 								else
@@ -6416,7 +6416,7 @@ namespace PSA_SystemLibrary
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_(C1-C3)_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
 										//str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y - hdcP2T).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_PAD_SIZE_OVER); break;
 									}
@@ -6430,7 +6430,7 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1} um", hdcP2X));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_X_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
 									sqc = 120; break;
 								}
 								else
@@ -6443,7 +6443,7 @@ namespace PSA_SystemLibrary
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2X);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2X).ToString() + "]";
@@ -6456,7 +6456,7 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1} um", hdcP2Y));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_Y_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
 									sqc = 120; break;
 								}
 								else
@@ -6469,7 +6469,7 @@ namespace PSA_SystemLibrary
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2Y);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2Y).ToString() + "]";
@@ -6482,7 +6482,7 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1} degree", hdcP2T));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_T_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_T_Limit");
 									sqc = 120; break;
 								}
 								else
@@ -6495,7 +6495,7 @@ namespace PSA_SystemLibrary
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_T_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2T);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2T).ToString() + "]";
@@ -6512,7 +6512,7 @@ namespace PSA_SystemLibrary
 								//EVENT.statusDisplay("HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString());
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_(C1-C3)_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
 									sqc = 120; break;
 								}
 								else
@@ -6525,7 +6525,7 @@ namespace PSA_SystemLibrary
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_(C1-C3)_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
 										//str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y - hdcP2T).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_PAD_SIZE_OVER); break;
 									}
@@ -6571,7 +6571,7 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1} um", hdcP2X));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_X_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
 									sqc = 120; break;
 								}
 								else
@@ -6584,7 +6584,7 @@ namespace PSA_SystemLibrary
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2X);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2X).ToString() + "]";
@@ -6597,7 +6597,7 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1} um", hdcP2Y));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_Y_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
 									sqc = 120; break;
 								}
 								else
@@ -6610,7 +6610,7 @@ namespace PSA_SystemLibrary
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2Y);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2Y).ToString() + "]";
@@ -6649,7 +6649,7 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Score Limit Error : {0:F1}%", hdcResult));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_P2_Score_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P2_Score_Limit");
 									sqc = 120; break;
 								}
 								else
@@ -6661,7 +6661,7 @@ namespace PSA_SystemLibrary
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_P2_Score_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P2_Score_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}], P2: Score[{2}%]", (padX + 1), (padY + 1), Math.Round(hdcResult, 2));
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -6678,7 +6678,7 @@ namespace PSA_SystemLibrary
 								//EVENT.statusDisplay("HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString());
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_(C1-C3)_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
 									sqc = 120; break;
 								}
 								else
@@ -6691,7 +6691,7 @@ namespace PSA_SystemLibrary
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_(C1-C3)_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
 										//str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y - hdcP2T).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_PAD_SIZE_OVER); break;
 									}
@@ -6705,7 +6705,7 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1} um", hdcP2X));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_X_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
 									sqc = 120; break;
 								}
 								else
@@ -6718,7 +6718,7 @@ namespace PSA_SystemLibrary
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2X);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2X).ToString() + "]";
@@ -6731,7 +6731,7 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1} um", hdcP2Y));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_Y_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
 									sqc = 120; break;
 								}
 								else
@@ -6744,7 +6744,7 @@ namespace PSA_SystemLibrary
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2Y);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2Y).ToString() + "]";
@@ -6783,7 +6783,7 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Score Limit Error : {0:F1}%", hdcResult));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_P2_Score_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P2_Score_Limit");
 									sqc = 120; break;
 								}
 								else
@@ -6795,7 +6795,7 @@ namespace PSA_SystemLibrary
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_P2_Score_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P2_Score_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}], P2: Score[{2}%]", (padX + 1), (padY + 1), Math.Round(hdcResult, 2));
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -6812,7 +6812,7 @@ namespace PSA_SystemLibrary
 								//EVENT.statusDisplay("HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString());
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_(C1-C3)_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
 									sqc = 120; break;
 								}
 								else
@@ -6825,7 +6825,7 @@ namespace PSA_SystemLibrary
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_(C1-C3)_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
 										//str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y - hdcP2T).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_PAD_SIZE_OVER); break;
 									}
@@ -6878,7 +6878,7 @@ namespace PSA_SystemLibrary
 							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC Package X Position Limit Error : {0:F1} um", hdcX));
 							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_Packege_XPos_Over");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_Packege_XPos_Over");
 								sqc = 120; break;
 							}
 							else
@@ -6891,7 +6891,7 @@ namespace PSA_SystemLibrary
 								}
 								else
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_Packege_XPos_Over");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_Packege_XPos_Over");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}] - Package Center X: {2:F2}, Limit: {3:F2}", (padX + 1), (padY + 1), hdcX, mc.para.MT.padCheckCenterLimit.value);
 									//string str = "HDC[" + padX.ToString() + "," + padY.ToString() + "] Package Center X: " + Math.Round(hdcX, 2).ToString() + ", Limit: " + Math.Round(mc.para.MT.padCheckCenterLimit.value, 2).ToString();
@@ -6904,7 +6904,7 @@ namespace PSA_SystemLibrary
 							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC Package Y Position Limit Error : {0:F1}um", hdcY));
 							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_Packege_YPos_Over");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_Packege_YPos_Over");
 								sqc = 120; break;
 							}
 							else
@@ -6917,7 +6917,7 @@ namespace PSA_SystemLibrary
 								}
 								else
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_Packege_YPos_Over");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_Packege_YPos_Over");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}] - Package Center Y: {2:F2}, Limit: {3:F2}", (padX + 1), (padY + 1), hdcY, mc.para.MT.padCheckCenterLimit.value);
 									//string str = "HDC[" + padX.ToString() + "," + padY.ToString() + "] Package Center Y: " + Math.Round(hdcY, 2).ToString() + ", Limit: " + Math.Round(mc.para.MT.padCheckCenterLimit.value, 2).ToString();
@@ -7941,7 +7941,7 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 										sqc = 120; break;
 									}
 									else
@@ -7953,7 +7953,7 @@ namespace PSA_SystemLibrary
 										}
 										else
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 											tempSb.Clear(); tempSb.Length = 0;
 											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -7966,7 +7966,7 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 										sqc = 120; break;
 									}
 									else
@@ -7978,7 +7978,7 @@ namespace PSA_SystemLibrary
 										}
 										else
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 											tempSb.Clear(); tempSb.Length = 0;
 											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -7991,7 +7991,7 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 										sqc = 120; break;
 									}
 									else
@@ -8003,7 +8003,7 @@ namespace PSA_SystemLibrary
 										}
 										else
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 											tempSb.Clear(); tempSb.Length = 0;
 											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -8019,7 +8019,7 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 										sqc = 120; break;
 									}
 									else
@@ -8031,7 +8031,7 @@ namespace PSA_SystemLibrary
 										}
 										else
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 											tempSb.Clear(); tempSb.Length = 0;
 											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -8044,7 +8044,7 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, "HDC P1-Y Compensation Amount Limit Error : " + Math.Round(hdcP1Y).ToString() + " um");
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 										sqc = 120; break;
 									}
 									else
@@ -8056,7 +8056,7 @@ namespace PSA_SystemLibrary
 										}
 										else
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 											tempSb.Clear(); tempSb.Length = 0;
 											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -8069,7 +8069,7 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 										sqc = 120; break;
 									}
 									else
@@ -8081,7 +8081,7 @@ namespace PSA_SystemLibrary
 										}
 										else
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 											tempSb.Clear(); tempSb.Length = 0;
 											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -8184,7 +8184,7 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 										sqc = 120; break;
 									}
 									else
@@ -8196,7 +8196,7 @@ namespace PSA_SystemLibrary
 										}
 										else
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 											tempSb.Clear(); tempSb.Length = 0;
 											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -8209,7 +8209,7 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 										sqc = 120; break;
 									}
 									else
@@ -8221,7 +8221,7 @@ namespace PSA_SystemLibrary
 										}
 										else
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 											tempSb.Clear(); tempSb.Length = 0;
 											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -8234,7 +8234,7 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 										sqc = 120; break;
 									}
 									else
@@ -8246,7 +8246,7 @@ namespace PSA_SystemLibrary
 										}
 										else
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 											tempSb.Clear(); tempSb.Length = 0;
 											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -8262,7 +8262,7 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 										sqc = 120; break;
 									}
 									else
@@ -8274,7 +8274,7 @@ namespace PSA_SystemLibrary
 										}
 										else
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 											tempSb.Clear(); tempSb.Length = 0;
 											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -8287,7 +8287,7 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 										sqc = 120; break;
 									}
 									else
@@ -8299,7 +8299,7 @@ namespace PSA_SystemLibrary
 										}
 										else
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C21_Y_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C21_Y_Limit");
 											tempSb.Clear(); tempSb.Length = 0;
 											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -8312,7 +8312,7 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 										sqc = 120; break;
 									}
 									else
@@ -8324,7 +8324,7 @@ namespace PSA_SystemLibrary
 										}
 										else
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 											tempSb.Clear(); tempSb.Length = 0;
 											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -8427,7 +8427,7 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 									sqc = 120; break;
 								}
 								else
@@ -8439,7 +8439,7 @@ namespace PSA_SystemLibrary
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -8452,7 +8452,7 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 									sqc = 120; break;
 								}
 								else
@@ -8464,7 +8464,7 @@ namespace PSA_SystemLibrary
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -8502,7 +8502,7 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Score Limit Error : {0:F1}%", hdcResult));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_P1_Score_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
 									sqc = 120; break;
 								}
 								else
@@ -8514,7 +8514,7 @@ namespace PSA_SystemLibrary
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_P1_Score_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}], P1: Score[{2}%]", (padX + 1), (padY + 1), Math.Round(hdcResult, 2));
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -8530,7 +8530,7 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 									sqc = 120; break;
 								}
 								else
@@ -8542,7 +8542,7 @@ namespace PSA_SystemLibrary
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -8555,7 +8555,7 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 									sqc = 120; break;
 								}
 								else
@@ -8567,7 +8567,7 @@ namespace PSA_SystemLibrary
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -8605,7 +8605,7 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Score Limit Error : {0:F1}%", hdcResult));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_P1_Score_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
 									sqc = 120; break;
 								}
 								else
@@ -8617,7 +8617,7 @@ namespace PSA_SystemLibrary
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_P1_Score_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}], P1: Score[{2}%]", (padX + 1), (padY + 1), Math.Round(hdcResult, 2));
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -9214,12 +9214,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HS P1-X Compensation Amount Limit Error : {0:F1} um", HSP1X));
 								if (mc.para.HS.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HS.failretry.value)
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C1_X_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C1_X_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C1_X_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C1_X_Limit");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(HSP1X));
 									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
@@ -9230,13 +9230,13 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HS P1-Y Compensation Amount Limit Error : {0:F1} um", HSP1Y));
 								if (mc.para.HS.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HS.failretry.value)
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C1_Y_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C1_Y_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
 									
-										if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C1_Y_Limit");
+										if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C1_Y_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(HSP1Y));
 										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
@@ -9247,12 +9247,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HS P1-T Compensation Amount Limit Error : {0:F1} degree", HSP1T));
 								if (mc.para.HS.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HS.failretry.value)
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C1_T_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C1_T_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C1_T_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C1_T_Limit");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(HSP1T));
 									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
@@ -9342,12 +9342,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HS P2-X Compensation Amount Limit Error : {0:F1} um", HSP1X));
 								if (mc.para.HS.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HS.failretry.value)
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C2_X_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C2_X_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(HSP1X));
 									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
@@ -9358,12 +9358,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HS P2-Y Compensation Amount Limit Error : {0} um", HSP1Y));
 								if (mc.para.HS.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HS.failretry.value)
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C2_Y_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C2_Y_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(HSP1Y));
 								    errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
@@ -9374,12 +9374,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HS P2-T Compensation Amount Limit Error : {0:F1} degree", HSP1T));
 								if (mc.para.HS.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HS.failretry.value)
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C2_T_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C2_T_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C2_T_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C2_T_Limit");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(HSP1T));
 									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
@@ -9472,12 +9472,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HS P2-X Compensation Amount Limit Error : {0:F1} um", HSP1X));
 								if (mc.para.HS.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HS.failretry.value)
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C2_X_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C2_X_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C2_X_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C2_X_Limit");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(HSP1X));
 									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
@@ -9488,12 +9488,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HS P2-Y Compensation Amount Limit Error : {0:F1} um", HSP1Y));
 								if (mc.para.HS.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HS.failretry.value)
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C2_Y_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C2_Y_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(HSP1Y));
 								    errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
@@ -9504,12 +9504,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HS P2-T Compensation Amount Limit Error : {0:F1} degree", HSP1T));
 								if (mc.para.HS.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HS.failretry.value)
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C2_T_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C2_T_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C2_T_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C2_T_Limit");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(HSP1T));
 									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
@@ -9599,12 +9599,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HS P1-X Compensation Amount Limit Error : {0:F1} um", HSP1X));
 								if (mc.para.HS.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HS.failretry.value)
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C1_X_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C1_X_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C1_X_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C1_X_Limit");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(HSP1X));
 									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
@@ -9615,12 +9615,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HS P1-Y Compensation Amount Limit Error : {0:F1} um", HSP1Y));
 								if (mc.para.HS.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HS.failretry.value)
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C1_Y_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C1_Y_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C1_Y_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C1_Y_Limit");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(HSP1Y));
 								    errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
@@ -9631,12 +9631,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HS P1-T Compensation Amount Limit Error : {0:F1} degree", HSP1T));
 								if (mc.para.HS.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HS.failretry.value)
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C1_T_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C1_T_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C1_T_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C1_T_Limit");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(HSP1T));
 									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
@@ -9805,12 +9805,12 @@ namespace PSA_SystemLibrary
 						mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HS P2-X Compensation Amount Limit Error : {0:F1} um", HSP2X));
 						if (mc.para.HS.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HS.failretry.value)
 						{
-							if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C3_X_Limit");
+							if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C3_X_Limit");
 							sqc = 120; break;
 						}
 						else
 						{
-							if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C3_X_Limit");
+							if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C3_X_Limit");
 							tempSb.Clear(); tempSb.Length = 0;
                             tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), HSP2X);
                             errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
@@ -9821,12 +9821,12 @@ namespace PSA_SystemLibrary
 						mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HS P2-Y Compensation Amount Limit Error : {0:F1} um", HSP2Y));
 						if (mc.para.HS.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HS.failretry.value)
 						{
-							if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C3_Y_Limit");
+							if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C3_Y_Limit");
 							sqc = 120; break;
 						}
 						else
 						{
-							if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C3_Y_Limit");
+							if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C3_Y_Limit");
 							tempSb.Clear(); tempSb.Length = 0;
 							tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), HSP2Y);
 							errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
@@ -9837,12 +9837,12 @@ namespace PSA_SystemLibrary
 						mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HS P2-T Compensation Amount Limit Error : {0:F1} degree", HSP2T));
 						if (mc.para.HS.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HS.failretry.value)
 						{
-							if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C3_T_Limit");
+							if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C3_T_Limit");
 							sqc = 120; break;
 						}
 						else
 						{
-							if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C3_T_Limit");
+							if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C3_T_Limit");
 							tempSb.Clear(); tempSb.Length = 0;
 							tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), HSP2T);
 							errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
@@ -9886,12 +9886,12 @@ namespace PSA_SystemLibrary
                         mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HeatSlug X Position Limit Error : {0:F1} um", HSX - hdcX));
                         if (mc.para.HS.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HS.failretry.value)
                         {
-                            if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_Packege_XPos_Over");
+                            if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_Packege_XPos_Over");
                             sqc = 120; break;
                         }
                         else
                         {
-                            if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_Packege_XPos_Over");
+                            if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_Packege_XPos_Over");
                             tempSb.Clear(); tempSb.Length = 0;
                             tempSb.AppendFormat("PadX[{0}],PadY[{1}] - Heat Slug Align X: {2:F2}, Limit: {3:F2}", (padX + 1), (padY + 1), HSX - hdcX, mc.para.HS.PositionLimit.value);
                             errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
@@ -9903,12 +9903,12 @@ namespace PSA_SystemLibrary
                         mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HeatSlug Y Position Limit Error : {0:F1}um", HSY - hdcY));
                         if (mc.para.HS.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HS.failretry.value)
                         {
-                            if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_Packege_YPos_Over");
+                            if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_Packege_YPos_Over");
                             sqc = 120; break;
                         }
                         else
                         {
-                            if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_Packege_YPos_Over");
+                            if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_Packege_YPos_Over");
                             tempSb.Clear(); tempSb.Length = 0;
 							tempSb.AppendFormat("PadX[{0}],PadY[{1}] - Heat Slug Align Y: {2:F2}, Limit: {3:F2}", (padX + 1), (padY + 1), HSY - hdcY, mc.para.HS.PositionLimit.value);
                             errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
@@ -9920,12 +9920,12 @@ namespace PSA_SystemLibrary
                         mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HeatSlug Theta Limit Error : {0:F1}um", HST - hdcT));
                         if (mc.para.HS.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HS.failretry.value)
                         {
-                            if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_Packege_TPos_Over");
+                            if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_Packege_TPos_Over");
                             sqc = 120; break;
                         }
                         else
                         {
-                            if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_Packege_TPos_Over");
+                            if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_Packege_TPos_Over");
                             tempSb.Clear(); tempSb.Length = 0;
                             tempSb.AppendFormat("PadX[{0}],PadY[{1}] - Heat Slug Align T: {2:F2}, Limit: {3:F2}", (padX + 1), (padY + 1), HST - hdcT , mc.para.HS.AngleLimit.value);
                             errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
@@ -10146,12 +10146,12 @@ namespace PSA_SystemLibrary
 							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HS P1-X Compensation Amount Limit Error : {0:F1}um", HSP1X));
 							if (mc.para.HS.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HS.failretry.value)
 							{
-								if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C1_X_Limit");
+								if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C1_X_Limit");
 								sqc = 120; break;
 							}
 							else
 							{
-								if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C1_X_Limit");
+								if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C1_X_Limit");
 								tempSb.Clear(); tempSb.Length = 0;
 								tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), HSP1X);
 								errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
@@ -10162,12 +10162,12 @@ namespace PSA_SystemLibrary
 							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HS P1-Y Compensation Amount Limit Error : {0:F1}um", HSP1Y));
 							if (mc.para.HS.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HS.failretry.value)
 							{
-								if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C1_Y_Limit");
+								if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C1_Y_Limit");
 								sqc = 120; break;
 							}
 							else
 							{
-								if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C1_Y_Limit");
+								if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C1_Y_Limit");
 								tempSb.Clear(); tempSb.Length = 0;
 								tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), HSP1Y);
 								errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
@@ -10178,12 +10178,12 @@ namespace PSA_SystemLibrary
 							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HS P1-T Compensation Amount Limit Error : {0:F1}degree", HSP1T));
 							if (mc.para.HS.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HS.failretry.value)
 							{
-								if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C1_T_Limit");
+								if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C1_T_Limit");
 								sqc = 120; break;
 							}
 							else
 							{
-								if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C1_T_Limit");
+								if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C1_T_Limit");
 								tempSb.Clear(); tempSb.Length = 0;
 								tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), HSP1T);
 								errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
@@ -10274,12 +10274,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HS P2-X Compensation Amount Limit Error : {0:F1}um", HSP1X));
 								if (mc.para.HS.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HS.failretry.value)
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C2_X_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C2_X_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C2_X_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C2_X_Limit");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), HSP1X);
 									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
@@ -10290,12 +10290,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HS P2-Y Compensation Amount Limit Error : {0:F1}um", HSP1Y));
 								if (mc.para.HS.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HS.failretry.value)
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C2_Y_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C2_Y_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C2_Y_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C2_Y_Limit");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), HSP1Y);
 									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
@@ -10306,12 +10306,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HS P2-T Compensation Amount Limit Error : {0:F1}degree", HSP1T));
 								if (mc.para.HS.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HS.failretry.value)
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C2_T_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C2_T_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HS_C2_T_Limit");
+									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C2_T_Limit");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), HSP1T);
 									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
@@ -10915,12 +10915,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, "HDC P1-X Compensation Amount Limit Error : " + Math.Round(hdcP1X).ToString() + " um");
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
 									}
@@ -10930,12 +10930,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, "HDC P1-Y Compensation Amount Limit Error : " + Math.Round(hdcP1Y).ToString() + " um");
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
 									}
@@ -10945,12 +10945,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, "HDC P1-T Compensation Amount Limit Error : " + Math.Round(hdcP1T).ToString() + " degree");
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
 									}
@@ -10963,12 +10963,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, "HDC P1-X Compensation Amount Limit Error : " + Math.Round(hdcP1X).ToString() + " um");
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
 									}
@@ -10978,12 +10978,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, "HDC P1-Y Compensation Amount Limit Error : " + Math.Round(hdcP1Y).ToString() + " um");
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
 									}
@@ -10993,12 +10993,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, "HDC P1-T Compensation Amount Limit Error : " + Math.Round(hdcP1T).ToString() + " degree");
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
 									}
@@ -11086,12 +11086,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, "HDC P2-X Compensation Amount Limit Error : " + Math.Round(hdcP1X).ToString() + " um");
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
 									}
@@ -11101,12 +11101,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, "HDC P2-Y Compensation Amount Limit Error : " + Math.Round(hdcP1Y).ToString() + " um");
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
 									}
@@ -11116,12 +11116,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, "HDC P2-T Compensation Amount Limit Error : " + Math.Round(hdcP1T).ToString() + " degree");
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
 									}
@@ -11134,12 +11134,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, "HDC P2-X Compensation Amount Limit Error : " + Math.Round(hdcP1X).ToString() + " um");
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
 									}
@@ -11149,12 +11149,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, "HDC P2-Y Compensation Amount Limit Error : " + Math.Round(hdcP1Y).ToString() + " um");
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C21_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C21_Y_Limit");
 										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
 									}
@@ -11164,12 +11164,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, "HDC P2-T Compensation Amount Limit Error : " + Math.Round(hdcP1T).ToString() + " degree");
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
 									}
@@ -11261,12 +11261,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, "HDC P2-X Compensation Amount Limit Error : " + Math.Round(hdcP1X).ToString() + " um");
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
 									}
@@ -11276,12 +11276,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, "HDC P2-Y Compensation Amount Limit Error : " + Math.Round(hdcP1Y).ToString() + " um");
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
 									}
@@ -11291,12 +11291,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, "HDC P2-T Compensation Amount Limit Error : " + Math.Round(hdcP1T).ToString() + " degree");
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
 									}
@@ -11309,12 +11309,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, "HDC P2-X Compensation Amount Limit Error : " + Math.Round(hdcP1X).ToString() + " um");
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
 									}
@@ -11324,12 +11324,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, "HDC P2-Y Compensation Amount Limit Error : " + Math.Round(hdcP1Y).ToString() + " um");
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C21_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C21_Y_Limit");
 										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
 									}
@@ -11339,12 +11339,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, "HDC P2-T Compensation Amount Limit Error : " + Math.Round(hdcP1T).ToString() + " degree");
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
 									}
@@ -11433,12 +11433,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, "HDC P1-X Compensation Amount Limit Error : " + Math.Round(hdcP1X).ToString() + " um");
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
 									}
@@ -11448,12 +11448,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, "HDC P1-Y Compensation Amount Limit Error : " + Math.Round(hdcP1Y).ToString() + " um");
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
 									}
@@ -11463,12 +11463,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, "HDC P1-T Compensation Amount Limit Error : " + Math.Round(hdcP1T).ToString() + " degree");
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
 									}
@@ -11481,12 +11481,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, "HDC P1-X Compensation Amount Limit Error : " + Math.Round(hdcP1X).ToString() + " um");
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
 									}
@@ -11496,12 +11496,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, "HDC P1-Y Compensation Amount Limit Error : " + Math.Round(hdcP1Y).ToString() + " um");
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
 									}
@@ -11511,12 +11511,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, "HDC P1-T Compensation Amount Limit Error : " + Math.Round(hdcP1T).ToString() + " degree");
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
 									}
@@ -11664,13 +11664,13 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, str);
 								//EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
 								ulcfailchecked = true;
-								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_Lid_Size_Error");
+								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_Lid_Size_Error");
 								mc.para.runInfo.writePickInfo(PickCodeInfo.SIZEERR);
 								sqc = SQC.END; break;
 							}
 							else
 							{
-								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_Lid_Size_Error");
+								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_Lid_Size_Error");
 								mc.para.runInfo.writePickInfo(PickCodeInfo.SIZEERR);
 								string str = "PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "]";
 								errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_ULC_HEAT_SLUG_SIZE_FAIL); break;
@@ -11688,13 +11688,13 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.EVENT, str);
 								//EVENT.statusDisplay("Chamfer Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
 								ulcfailchecked = true;
-								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_Chamfer_Check_Fail");
+								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_Chamfer_Check_Fail");
 								mc.para.runInfo.writePickInfo(PickCodeInfo.CHAMFERERR);
 								sqc = SQC.END; break;
 							}
 							else
 							{
-								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_Chamfer_Check_Fail");
+								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_Chamfer_Check_Fail");
 								mc.para.runInfo.writePickInfo(PickCodeInfo.CHAMFERERR);
 								string str = "PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "]";
 								errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_ULC_HEAT_SLUG_CHAMFER_FAIL); break;
@@ -11713,14 +11713,14 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.EVENT, str);
 								//EVENT.statusDisplay("Chamfer Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
 								ulcfailchecked = true;
-								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_Circle_Check_Fail");
+								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_Circle_Check_Fail");
 								mc.para.runInfo.writePickInfo(PickCodeInfo.CIRCLEERR);
 								sqc = SQC.END; break;
 							}
 							else
 							{
 
-								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_Circle_Check_Fail");
+								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_Circle_Check_Fail");
 								mc.para.runInfo.writePickInfo(PickCodeInfo.CIRCLEERR);
 								string str = "PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "]";
 								errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_ULC_HEAT_SLUG_CIRCLE_NOT_FIND); break;
@@ -11742,13 +11742,13 @@ namespace PSA_SystemLibrary
 							{
 								//EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
 								ulcfailchecked = true;
-								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_X_Limit_Fail");
+								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_X_Limit_Fail");
 								mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
 								sqc = SQC.END; break;
 							}
 							else
 							{
-								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_X_Limit_Fail");
+								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_X_Limit_Fail");
 								mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
 								str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(ulcX).ToString() + "]";
 								errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_ULC_HEAT_SLUG_X_RESULT_OVER); break;
@@ -11768,13 +11768,13 @@ namespace PSA_SystemLibrary
 							{
 								//EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
 								ulcfailchecked = true;
-								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_Y_Limit_Fail");
+								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_Y_Limit_Fail");
 								mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
 								sqc = SQC.END; break;
 							}
 							else
 							{
-								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_Y_Limit_Fail");
+								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_Y_Limit_Fail");
 								mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
 								str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(ulcY).ToString() + "]";
 								errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_ULC_HEAT_SLUG_Y_RESULT_OVER); break;
@@ -11790,13 +11790,13 @@ namespace PSA_SystemLibrary
 							{
 								//EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
 								ulcfailchecked = true;
-								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_T_Limit_Fail");
+								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_T_Limit_Fail");
 								mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
 								sqc = SQC.END; break;
 							}
 							else
 							{
-								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_T_Limit_Fail");
+								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_T_Limit_Fail");
 								mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
 								str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(ulcT).ToString() + "]";
 								errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_ULC_HEAT_SLUG_T_RESULT_OVER); break;
@@ -11820,13 +11820,13 @@ namespace PSA_SystemLibrary
 							{
 								//EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
 								ulcfailchecked = true;
-								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_X_Limit_Fail");
+								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_X_Limit_Fail");
 								mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
 								sqc = SQC.END; break;
 							}
 							else
 							{
-								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_X_Limit_Fail");
+								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_X_Limit_Fail");
 								mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
 								str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(ulcX).ToString() + "]";
 								errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_ULC_HEAT_SLUG_X_RESULT_OVER); break;
@@ -11845,13 +11845,13 @@ namespace PSA_SystemLibrary
 							{
 								//EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
 								ulcfailchecked = true;
-								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_Y_Limit_Fail");
+								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_Y_Limit_Fail");
 								mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
 								sqc = SQC.END; break;
 							}
 							else
 							{
-								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_Y_Limit_Fail");
+								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_Y_Limit_Fail");
 								mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
 								str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(ulcY).ToString() + "]";
 								errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_ULC_HEAT_SLUG_Y_RESULT_OVER); break;
@@ -11866,13 +11866,13 @@ namespace PSA_SystemLibrary
 							{
 								//EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
 								ulcfailchecked = true;
-								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_T_Limit_Fail");
+								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_T_Limit_Fail");
 								mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
 								sqc = SQC.END; break;
 							}
 							else
 							{
-								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrapImage("ULC_T_Limit_Fail");
+								if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_T_Limit_Fail");
 								mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
 								str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(ulcT).ToString() + "]";
 								errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_ULC_HEAT_SLUG_T_RESULT_OVER); break;
@@ -11995,12 +11995,12 @@ namespace PSA_SystemLibrary
 							mc.log.debug.write(mc.log.CODE.ERROR, "HDC P2-X Compensation Amount Limit Error : " + Math.Round(hdcP2X).ToString() + " um");
 							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_X_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
 								sqc = 120; break;
 							}
 							else
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_X_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
 								string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2X).ToString() + "]";
 								errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
 							}
@@ -12010,12 +12010,12 @@ namespace PSA_SystemLibrary
 							mc.log.debug.write(mc.log.CODE.ERROR, "HDC P2-Y Compensation Amount Limit Error : " + Math.Round(hdcP2Y).ToString() + " um");
 							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_Y_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
 								sqc = 120; break;
 							}
 							else
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_Y_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
 								string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2Y).ToString() + "]";
 								errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
 							}
@@ -12025,12 +12025,12 @@ namespace PSA_SystemLibrary
 							mc.log.debug.write(mc.log.CODE.ERROR, "HDC P2-T Compensation Amount Limit Error : " + Math.Round(hdcP2T).ToString() + " degree");
 							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_T_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_T_Limit");
 								sqc = 120; break;
 							}
 							else
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_T_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_T_Limit");
 								string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2T).ToString() + "]";
 								errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
 							}
@@ -12042,12 +12042,12 @@ namespace PSA_SystemLibrary
 							//EVENT.statusDisplay("HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString());
 							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_(C1-C3)_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
 								sqc = 120; break;
 							}
 							else
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_(C1-C3)_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
 								str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y - hdcP2T).ToString() + "]";
 								errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_PAD_SIZE_OVER); break;
 							}
@@ -12060,12 +12060,12 @@ namespace PSA_SystemLibrary
 							mc.log.debug.write(mc.log.CODE.ERROR, "HDC P2-X Compensation Amount Limit Error : " + Math.Round(hdcP2X).ToString() + " um");
 							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_X_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
 								sqc = 120; break;
 							}
 							else
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_X_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
 								string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2X).ToString() + "]";
 								errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
 							}
@@ -12075,12 +12075,12 @@ namespace PSA_SystemLibrary
 							mc.log.debug.write(mc.log.CODE.ERROR, "HDC P2-Y Compensation Amount Limit Error : " + Math.Round(hdcP2Y).ToString() + " um");
 							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_Y_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
 								sqc = 120; break;
 							}
 							else
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_Y_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
 								string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2Y).ToString() + "]";
 								errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
 							}
@@ -12090,12 +12090,12 @@ namespace PSA_SystemLibrary
 							mc.log.debug.write(mc.log.CODE.ERROR, "HDC P2-T Compensation Amount Limit Error : " + Math.Round(hdcP2T).ToString() + " degree");
 							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_T_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_T_Limit");
 								sqc = 120; break;
 							}
 							else
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_T_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_T_Limit");
 								string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2T).ToString() + "]";
 								errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
 							}
@@ -12107,12 +12107,12 @@ namespace PSA_SystemLibrary
 							//EVENT.statusDisplay("HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString());
 							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_(C1-C3)_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
 								sqc = 120; break;
 							}
 							else
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_(C1-C3)_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
 								str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y - hdcP2T).ToString() + "]";
 								errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_PAD_SIZE_OVER); break;
 							}
@@ -12127,12 +12127,12 @@ namespace PSA_SystemLibrary
 						mc.log.debug.write(mc.log.CODE.ERROR, "HDC Package X Position Limit Error : " + Math.Round(hdcX).ToString() + " um");
 						if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 						{
-							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_Packege_XPos_Over");
+							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_Packege_XPos_Over");
 							sqc = 120; break;
 						}
 						else
 						{
-							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_Packege_XPos_Over");
+							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_Packege_XPos_Over");
 							string str = "HDC[" + padX.ToString() + "," + padY.ToString() + "] Package Center X: " + Math.Round(hdcX, 2).ToString() + ", Limit: " + Math.Round(mc.para.MT.padCheckCenterLimit.value, 2).ToString();
 							errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_PACKAGE_CENTER_XRESULT_OVER); break;
 						}
@@ -12142,12 +12142,12 @@ namespace PSA_SystemLibrary
 						mc.log.debug.write(mc.log.CODE.ERROR, "HDC Package Y Position Limit Error : " + Math.Round(hdcY).ToString() + " um");
 						if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 						{
-							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_Packege_YPos_Over");
+							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_Packege_YPos_Over");
 							sqc = 120; break;
 						}
 						else
 						{
-							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_Packege_YPos_Over");
+							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_Packege_YPos_Over");
 							string str = "HDC[" + padX.ToString() + "," + padY.ToString() + "] Package Center Y: " + Math.Round(hdcY, 2).ToString() + ", Limit: " + Math.Round(mc.para.MT.padCheckCenterLimit.value, 2).ToString();
 							errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_PACKAGE_CENTER_YRESULT_OVER); break;
 						}
@@ -13009,12 +13009,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, "HDC P1-X Compensation Amount Limit Error : " + Math.Round(hdcP1X).ToString() + " um");
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 									string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
 									errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
 								}
@@ -13024,12 +13024,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, "HDC P1-Y Compensation Amount Limit Error : " + Math.Round(hdcP1Y).ToString() + " um");
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 									string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
 									errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
 								}
@@ -13039,12 +13039,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, "HDC P1-T Compensation Amount Limit Error : " + Math.Round(hdcP1T).ToString() + " degree");
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 									string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
 									errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
 								}
@@ -13057,12 +13057,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, "HDC P1-X Compensation Amount Limit Error : " + Math.Round(hdcP1X).ToString() + " um");
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 									string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
 									errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
 								}
@@ -13072,12 +13072,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, "HDC P1-Y Compensation Amount Limit Error : " + Math.Round(hdcP1Y).ToString() + " um");
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 									string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
 									errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
 								}
@@ -13087,12 +13087,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, "HDC P1-T Compensation Amount Limit Error : " + Math.Round(hdcP1T).ToString() + " degree");
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 									string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
 									errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
 								}
@@ -13180,12 +13180,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, "HDC P2-X Compensation Amount Limit Error : " + Math.Round(hdcP1X).ToString() + " um");
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 									string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
 									errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
 								}
@@ -13195,12 +13195,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, "HDC P2-Y Compensation Amount Limit Error : " + Math.Round(hdcP1Y).ToString() + " um");
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 									string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
 									errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
 								}
@@ -13210,12 +13210,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, "HDC P2-T Compensation Amount Limit Error : " + Math.Round(hdcP1T).ToString() + " degree");
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 									string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
 									errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
 								}
@@ -13228,12 +13228,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, "HDC P2-X Compensation Amount Limit Error : " + Math.Round(hdcP1X).ToString() + " um");
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 									string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
 									errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
 								}
@@ -13243,12 +13243,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, "HDC P2-Y Compensation Amount Limit Error : " + Math.Round(hdcP1Y).ToString() + " um");
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C21_Y_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C21_Y_Limit");
 									string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
 									errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
 								}
@@ -13258,12 +13258,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, "HDC P2-T Compensation Amount Limit Error : " + Math.Round(hdcP1T).ToString() + " degree");
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 									string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
 									errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
 								}
@@ -14163,12 +14163,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -14181,12 +14181,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -14199,12 +14199,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -14220,12 +14220,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -14238,12 +14238,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -14256,12 +14256,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -14356,12 +14356,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -14373,12 +14373,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -14390,12 +14390,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -14410,12 +14410,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -14427,12 +14427,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C21_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C21_Y_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -14444,12 +14444,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
 										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -14548,12 +14548,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -14565,12 +14565,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -14582,12 +14582,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -14602,12 +14602,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -14619,12 +14619,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C21_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C21_Y_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -14636,12 +14636,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -14737,12 +14737,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -14754,12 +14754,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -14771,12 +14771,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
 										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -14791,12 +14791,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -14808,12 +14808,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -14825,12 +14825,12 @@ namespace PSA_SystemLibrary
 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 										sqc = 120; break;
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -15017,12 +15017,12 @@ namespace PSA_SystemLibrary
 							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1}um", hdcP2X));
 							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_X_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
 								sqc = 120; break;
 							}
 							else
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_X_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
 								tempSb.Clear(); tempSb.Length = 0;
 								tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2X);
 								//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2X).ToString() + "]";
@@ -15034,12 +15034,12 @@ namespace PSA_SystemLibrary
 							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1}um", hdcP2Y));
 							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_Y_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
 								sqc = 120; break;
 							}
 							else
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_Y_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
 								tempSb.Clear(); tempSb.Length = 0;
 								tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2Y);
 								//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2Y).ToString() + "]";
@@ -15051,12 +15051,12 @@ namespace PSA_SystemLibrary
 							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1}degree", hdcP2T));
 							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_T_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_T_Limit");
 								sqc = 120; break;
 							}
 							else
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_T_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_T_Limit");
 								tempSb.Clear(); tempSb.Length = 0;
 								tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2T);
 								//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2T).ToString() + "]";
@@ -15072,12 +15072,12 @@ namespace PSA_SystemLibrary
 							//EVENT.statusDisplay("HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString());
 							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_(C1-C3)_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
 								sqc = 120; break;
 							}
 							else
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_(C1-C3)_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
 								//str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y - hdcP2T).ToString() + "]";
 								errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_PAD_SIZE_OVER); break;
 							}
@@ -15090,12 +15090,12 @@ namespace PSA_SystemLibrary
 							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1}um", hdcP2X));
 							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_X_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
 								sqc = 120; break;
 							}
 							else
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_X_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
 								tempSb.Clear(); tempSb.Length = 0;
 								tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2X);
 								//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2X).ToString() + "]";
@@ -15107,12 +15107,12 @@ namespace PSA_SystemLibrary
 							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1}um", hdcP2Y));
 							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_Y_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
 								sqc = 120; break;
 							}
 							else
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_Y_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
 								tempSb.Clear(); tempSb.Length = 0;
 								tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2Y);
 								//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2Y).ToString() + "]";
@@ -15124,12 +15124,12 @@ namespace PSA_SystemLibrary
 							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1}degree", hdcP2T));
 							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_T_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_T_Limit");
 								sqc = 120; break;
 							}
 							else
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_T_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_T_Limit");
 								tempSb.Clear(); tempSb.Length = 0;
 								tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2T);
 								//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2T).ToString() + "]";
@@ -15145,12 +15145,12 @@ namespace PSA_SystemLibrary
 							//EVENT.statusDisplay("HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString());
 							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_(C1-C3)_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
 								sqc = 120; break;
 							}
 							else
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_(C1-C3)_Limit");
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
 								//str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y - hdcP2T).ToString() + "]";
 								errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_PAD_SIZE_OVER); break;
 							}
@@ -15165,12 +15165,12 @@ namespace PSA_SystemLibrary
 						mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC Package X Position Limit Error : {0:F1}um", hdcX));
 						if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 						{
-							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_Packege_XPos_Over");
+							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_Packege_XPos_Over");
 							sqc = 120; break;
 						}
 						else
 						{
-							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_Packege_XPos_Over");
+							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_Packege_XPos_Over");
 							tempSb.Clear(); tempSb.Length = 0;
 							tempSb.AppendFormat("PadX[{0}],PadY[{1}] - Package Center X: {2:F2}, Limit: {3:F2}", (padX + 1), (padY + 1), hdcX, mc.para.MT.padCheckCenterLimit.value);
 							//string str = "HDC[" + padX.ToString() + "," + padY.ToString() + "] Package Center X: " + Math.Round(hdcX, 2).ToString() + ", Limit: " + Math.Round(mc.para.MT.padCheckCenterLimit.value, 2).ToString();
@@ -15182,12 +15182,12 @@ namespace PSA_SystemLibrary
 						mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC Package Y Position Limit Error : {0:F1}um", hdcY));
 						if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 						{
-							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_Packege_YPos_Over");
+							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_Packege_YPos_Over");
 							sqc = 120; break;
 						}
 						else
 						{
-							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_Packege_YPos_Over");
+							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_Packege_YPos_Over");
 							tempSb.Clear(); tempSb.Length = 0;
 							tempSb.AppendFormat("PadX[{0}],PadY[{1}] - Package Center Y: {2:F2}, Limit: {3:F2}", (padX + 1), (padY + 1), hdcY, mc.para.MT.padCheckCenterLimit.value);
 							//string str = "HDC[" + padX.ToString() + "," + padY.ToString() + "] Package Center Y: " + Math.Round(hdcY, 2).ToString() + ", Limit: " + Math.Round(mc.para.MT.padCheckCenterLimit.value, 2).ToString();
@@ -16049,12 +16049,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
 									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -16066,12 +16066,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
 									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -16083,12 +16083,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
 									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -16103,12 +16103,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_X_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
 									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -16120,12 +16120,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_Y_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
 									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -16137,12 +16137,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
 									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -16236,12 +16236,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
 									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -16253,12 +16253,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
 									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -16270,12 +16270,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
 									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
@@ -16290,12 +16290,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_X_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
 									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
@@ -16307,12 +16307,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_Y_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C21_Y_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C21_Y_Limit");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
 									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
@@ -16324,12 +16324,12 @@ namespace PSA_SystemLibrary
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 									sqc = 120; break;
 								}
 								else
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C2_T_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
 									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
