@@ -2438,7 +2438,6 @@ namespace PSA_SystemLibrary
 		public halconModelParameter modelPADC3 = new halconModelParameter();
 		public halconModelParameter modelPADC4 = new halconModelParameter();
 		public manualTeachParameter modelManualTeach = new manualTeachParameter();
-		public halconModelParameter modelVisionCAL = new halconModelParameter();
 		public halconModelParameter modelTrayReversePattern1 = new halconModelParameter();
 		public halconModelParameter modelTrayReversePattern2 = new halconModelParameter();
 
@@ -2476,7 +2475,6 @@ namespace PSA_SystemLibrary
 				saveTuple = new HTuple();
 
 				writeTuple(modelPAD.isCreate, i, out i);
-				writeTuple(modelPAD.ID, i, out i);
 				writeTuple(modelPAD.algorism, i, out i);
 				writeTuple(modelPAD.passScore, i, out i);
 				writeTuple(modelPAD.angleStart, i, out i);
@@ -2486,7 +2484,6 @@ namespace PSA_SystemLibrary
 				writeTuple(modelPAD.light.ch2, i, out i);
 
 				writeTuple(modelPADC1.isCreate, i, out i);
-				writeTuple(modelPADC1.ID, i, out i);
 				writeTuple(modelPADC1.algorism, i, out i);
 				writeTuple(modelPADC1.passScore, i, out i);
 				writeTuple(modelPADC1.angleStart, i, out i);
@@ -2496,7 +2493,6 @@ namespace PSA_SystemLibrary
 				writeTuple(modelPADC1.light.ch2, i, out i);
 
 				writeTuple(modelPADC2.isCreate, i, out i);
-				writeTuple(modelPADC2.ID, i, out i);
 				writeTuple(modelPADC2.algorism, i, out i);
 				writeTuple(modelPADC2.passScore, i, out i);
 				writeTuple(modelPADC2.angleStart, i, out i);
@@ -2506,7 +2502,6 @@ namespace PSA_SystemLibrary
 				writeTuple(modelPADC2.light.ch2, i, out i);
 
 				writeTuple(modelPADC3.isCreate, i, out i);
-				writeTuple(modelPADC3.ID, i, out i);
 				writeTuple(modelPADC3.algorism, i, out i);
 				writeTuple(modelPADC3.passScore, i, out i);
 				writeTuple(modelPADC3.angleStart, i, out i);
@@ -2516,7 +2511,6 @@ namespace PSA_SystemLibrary
 				writeTuple(modelPADC3.light.ch2, i, out i);
 
 				writeTuple(modelPADC4.isCreate, i, out i);
-				writeTuple(modelPADC4.ID, i, out i);
 				writeTuple(modelPADC4.algorism, i, out i);
 				writeTuple(modelPADC4.passScore, i, out i);
 				writeTuple(modelPADC4.angleStart, i, out i);
@@ -2526,7 +2520,6 @@ namespace PSA_SystemLibrary
 				writeTuple(modelPADC4.light.ch2, i, out i);
 
 				writeTuple(modelManualTeach.paraP1.isCreate, i, out i);
-				writeTuple(modelManualTeach.paraP1.ID, i, out i);
 				writeTuple(modelManualTeach.paraP1.algorism, i, out i);
 				writeTuple(modelManualTeach.paraP1.passScore, i, out i);
 				writeTuple(modelManualTeach.paraP1.angleStart, i, out i);
@@ -2536,7 +2529,6 @@ namespace PSA_SystemLibrary
 				writeTuple(modelManualTeach.paraP1.light.ch2, i, out i);
 
 				writeTuple(modelManualTeach.paraP2.isCreate, i, out i);
-				writeTuple(modelManualTeach.paraP2.ID, i, out i);
 				writeTuple(modelManualTeach.paraP2.algorism, i, out i);
 				writeTuple(modelManualTeach.paraP2.passScore, i, out i);
 				writeTuple(modelManualTeach.paraP2.angleStart, i, out i);
@@ -2576,7 +2568,6 @@ namespace PSA_SystemLibrary
 				writeTuple(detectDirection, i, out i);
 
 				writeTuple(modelFiducial.isCreate, i, out i);
-				writeTuple(modelFiducial.ID, i, out i);
 				writeTuple(modelFiducial.algorism, i, out i);
 				writeTuple(modelFiducial.passScore, i, out i);
 				writeTuple(modelFiducial.angleStart, i, out i);
@@ -2598,18 +2589,7 @@ namespace PSA_SystemLibrary
 				writeTuple(MTeachPosX_P2, i, out i);
 				writeTuple(MTeachPosY_P2, i, out i);
 
-				writeTuple(modelVisionCAL.isCreate, i, out i);
-				writeTuple(modelVisionCAL.ID, i, out i);
-				writeTuple(modelVisionCAL.algorism, i, out i);
-				writeTuple(modelVisionCAL.passScore, i, out i);
-				writeTuple(modelVisionCAL.angleStart, i, out i);
-				writeTuple(modelVisionCAL.angleExtent, i, out i);
-				writeTuple(modelVisionCAL.exposureTime, i, out i);
-				writeTuple(modelVisionCAL.light.ch1, i, out i);
-				writeTuple(modelVisionCAL.light.ch2, i, out i);
-
 				writeTuple(modelTrayReversePattern1.isCreate, i, out i);
-				writeTuple(modelTrayReversePattern1.ID, i, out i);
 				writeTuple(modelTrayReversePattern1.algorism, i, out i);
 				writeTuple(modelTrayReversePattern1.passScore, i, out i);
 				writeTuple(modelTrayReversePattern1.angleStart, i, out i);
@@ -2619,7 +2599,6 @@ namespace PSA_SystemLibrary
 				writeTuple(modelTrayReversePattern1.light.ch2, i, out i);
 
 				writeTuple(modelTrayReversePattern2.isCreate, i, out i);
-				writeTuple(modelTrayReversePattern2.ID, i, out i);
 				writeTuple(modelTrayReversePattern2.algorism, i, out i);
 				writeTuple(modelTrayReversePattern2.passScore, i, out i);
 				writeTuple(modelTrayReversePattern2.angleStart, i, out i);
@@ -2686,7 +2665,6 @@ namespace PSA_SystemLibrary
 				bool fail;
 
 				readTuple("modelPAD.isCreate", out modelPAD.isCreate, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelPAD.ID", out modelPAD.ID, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelPAD.algorism", out modelPAD.algorism, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelPAD.passScore", out modelPAD.passScore, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelPAD.angleStart", out modelPAD.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -2696,7 +2674,6 @@ namespace PSA_SystemLibrary
 				readTuple("modelPAD.light.ch2", out modelPAD.light.ch2, out fail); if (fail) goto SET_FAIL;
 
 				readTuple("modelPADC1.isCreate", out modelPADC1.isCreate, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelPADC1.ID", out modelPADC1.ID, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelPADC1.algorism", out modelPADC1.algorism, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelPADC1.passScore", out modelPADC1.passScore, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelPADC1.angleStart", out modelPADC1.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -2706,7 +2683,6 @@ namespace PSA_SystemLibrary
 				readTuple("modelPADC1.light.ch2", out modelPADC1.light.ch2, out fail); if (fail) goto SET_FAIL;
 
 				readTuple("modelPADC2.isCreate", out modelPADC2.isCreate, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelPADC2.ID", out modelPADC2.ID, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelPADC2.algorism", out modelPADC2.algorism, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelPADC2.passScore", out modelPADC2.passScore, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelPADC2.angleStart", out modelPADC2.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -2716,7 +2692,6 @@ namespace PSA_SystemLibrary
 				readTuple("modelPADC2.light.ch2", out modelPADC2.light.ch2, out fail); if (fail) goto SET_FAIL;
 
 				readTuple("modelPADC3.isCreate", out modelPADC3.isCreate, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelPADC3.ID", out modelPADC3.ID, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelPADC3.algorism", out modelPADC3.algorism, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelPADC3.passScore", out modelPADC3.passScore, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelPADC3.angleStart", out modelPADC3.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -2726,7 +2701,6 @@ namespace PSA_SystemLibrary
 				readTuple("modelPADC3.light.ch2", out modelPADC3.light.ch2, out fail); if (fail) goto SET_FAIL;
 
 				readTuple("modelPADC4.isCreate", out modelPADC4.isCreate, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelPADC4.ID", out modelPADC4.ID, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelPADC4.algorism", out modelPADC4.algorism, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelPADC4.passScore", out modelPADC4.passScore, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelPADC4.angleStart", out modelPADC4.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -2736,7 +2710,6 @@ namespace PSA_SystemLibrary
 				readTuple("modelPADC4.light.ch2", out modelPADC4.light.ch2, out fail); if (fail) goto SET_FAIL;
 
 				readTuple("modelManualTeach.paraP1.isCreate", out modelManualTeach.paraP1.isCreate, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelManualTeach.paraP1.ID", out modelManualTeach.paraP1.ID, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelManualTeach.paraP1.algorism", out modelManualTeach.paraP1.algorism, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelManualTeach.paraP1.passScore", out modelManualTeach.paraP1.passScore, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelManualTeach.paraP1.angleStart", out modelManualTeach.paraP1.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -2746,7 +2719,6 @@ namespace PSA_SystemLibrary
 				readTuple("modelManualTeach.paraP1.light.ch2", out modelManualTeach.paraP1.light.ch2, out fail); if (fail) goto SET_FAIL;
 
 				readTuple("modelManualTeach.paraP2.isCreate", out modelManualTeach.paraP2.isCreate, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelManualTeach.paraP2.ID", out modelManualTeach.paraP2.ID, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelManualTeach.paraP2.algorism", out modelManualTeach.paraP2.algorism, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelManualTeach.paraP2.passScore", out modelManualTeach.paraP2.passScore, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelManualTeach.paraP2.angleStart", out modelManualTeach.paraP2.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -2764,18 +2736,7 @@ namespace PSA_SystemLibrary
 				readTuple("modelManualTeach.offsetX_P2", out modelManualTeach.offsetX_P2, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelManualTeach.offsetY_P2", out modelManualTeach.offsetY_P2, out fail); if (fail) goto SET_FAIL;
 				
-				readTuple("modelVisionCAL.isCreate", out modelVisionCAL.isCreate, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelVisionCAL.ID", out modelVisionCAL.ID, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelVisionCAL.algorism", out modelVisionCAL.algorism, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelVisionCAL.passScore", out modelVisionCAL.passScore, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelVisionCAL.angleStart", out modelVisionCAL.angleStart, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelVisionCAL.angleExtent", out modelVisionCAL.angleExtent, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelVisionCAL.exposureTime", out modelVisionCAL.exposureTime, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelVisionCAL.light.ch1", out modelVisionCAL.light.ch1, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelVisionCAL.light.ch2", out modelVisionCAL.light.ch2, out fail); if (fail) goto SET_FAIL;
-
 				readTuple("modelTrayReversePattern1.isCreate", out modelTrayReversePattern1.isCreate, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelTrayReversePattern1.ID", out modelTrayReversePattern1.ID, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelTrayReversePattern1.algorism", out modelTrayReversePattern1.algorism, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelTrayReversePattern1.passScore", out modelTrayReversePattern1.passScore, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelTrayReversePattern1.angleStart", out modelTrayReversePattern1.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -2785,7 +2746,6 @@ namespace PSA_SystemLibrary
 				readTuple("modelTrayReversePattern1.light.ch2", out modelTrayReversePattern1.light.ch2, out fail); if (fail) goto SET_FAIL;
 
 				readTuple("modelTrayReversePattern2.isCreate", out modelTrayReversePattern2.isCreate, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelTrayReversePattern2.ID", out modelTrayReversePattern2.ID, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelTrayReversePattern2.algorism", out modelTrayReversePattern2.algorism, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelTrayReversePattern2.passScore", out modelTrayReversePattern2.passScore, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelTrayReversePattern2.angleStart", out modelTrayReversePattern2.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -2817,7 +2777,6 @@ namespace PSA_SystemLibrary
 				readTuple("detectDirection", out detectDirection, out fail); if (fail) goto SET_FAIL;
 
 				readTuple("modelFiducial.isCreate", out modelFiducial.isCreate, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelFiducial.ID", out modelFiducial.ID, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelFiducial.algorism", out modelFiducial.algorism, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelFiducial.passScore", out modelFiducial.passScore, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelFiducial.angleStart", out modelFiducial.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -2938,7 +2897,6 @@ namespace PSA_SystemLibrary
 			bool fail;
 
 			setDefault("modelPAD.isCreate", out modelPAD.isCreate, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelPAD.ID", out modelPAD.ID, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelPAD.algorism", out modelPAD.algorism, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelPAD.passScore", out modelPAD.passScore, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelPAD.angleStart", out modelPAD.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -2948,7 +2906,6 @@ namespace PSA_SystemLibrary
 			setDefault("modelPAD.light.ch2", out modelPAD.light.ch2, out fail); if (fail) goto SET_FAIL;
 		  
 			setDefault("modelPADC1.isCreate", out modelPADC1.isCreate, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelPADC1.ID", out modelPADC1.ID, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelPADC1.algorism", out modelPADC1.algorism, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelPADC1.passScore", out modelPADC1.passScore, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelPADC1.angleStart", out modelPADC1.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -2958,7 +2915,6 @@ namespace PSA_SystemLibrary
 			setDefault("modelPADC1.light.ch2", out modelPADC1.light.ch2, out fail); if (fail) goto SET_FAIL;
 
 			setDefault("modelPADC2.isCreate", out modelPADC2.isCreate, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelPADC2.ID", out modelPADC2.ID, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelPADC2.algorism", out modelPADC2.algorism, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelPADC2.passScore", out modelPADC2.passScore, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelPADC2.angleStart", out modelPADC2.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -2968,7 +2924,6 @@ namespace PSA_SystemLibrary
 			setDefault("modelPADC2.light.ch2", out modelPADC2.light.ch2, out fail); if (fail) goto SET_FAIL;
 
 			setDefault("modelPADC3.isCreate", out modelPADC3.isCreate, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelPADC3.ID", out modelPADC3.ID, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelPADC3.algorism", out modelPADC3.algorism, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelPADC3.passScore", out modelPADC3.passScore, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelPADC3.angleStart", out modelPADC3.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -2978,7 +2933,6 @@ namespace PSA_SystemLibrary
 			setDefault("modelPADC3.light.ch2", out modelPADC3.light.ch2, out fail); if (fail) goto SET_FAIL;
 
 			setDefault("modelPADC4.isCreate", out modelPADC4.isCreate, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelPADC4.ID", out modelPADC4.ID, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelPADC4.algorism", out modelPADC4.algorism, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelPADC4.passScore", out modelPADC4.passScore, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelPADC4.angleStart", out modelPADC4.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -2988,7 +2942,6 @@ namespace PSA_SystemLibrary
 			setDefault("modelPADC4.light.ch2", out modelPADC4.light.ch2, out fail); if (fail) goto SET_FAIL;
 
 			setDefault("modelManualTeach.paraP1.isCreate", out modelManualTeach.paraP1.isCreate, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelManualTeach.paraP1.ID", out modelManualTeach.paraP1.ID, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelManualTeach.paraP1.algorism", out modelManualTeach.paraP1.algorism, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelManualTeach.paraP1.passScore", out modelManualTeach.paraP1.passScore, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelManualTeach.paraP1.angleStart", out modelManualTeach.paraP1.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -2998,7 +2951,6 @@ namespace PSA_SystemLibrary
 			setDefault("modelManualTeach.paraP1.light.ch2", out modelManualTeach.paraP1.light.ch2, out fail); if (fail) goto SET_FAIL;
 
 			setDefault("modelManualTeach.paraP2.isCreate", out modelManualTeach.paraP2.isCreate, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelManualTeach.paraP2.ID", out modelManualTeach.paraP2.ID, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelManualTeach.paraP2.algorism", out modelManualTeach.paraP2.algorism, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelManualTeach.paraP2.passScore", out modelManualTeach.paraP2.passScore, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelManualTeach.paraP2.angleStart", out modelManualTeach.paraP2.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -3016,18 +2968,7 @@ namespace PSA_SystemLibrary
 			setDefault("modelManualTeach.offsetX_P2", out modelManualTeach.offsetX_P2, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelManualTeach.offsetY_P2", out modelManualTeach.offsetY_P2, out fail); if (fail) goto SET_FAIL;
 			
-			setDefault("modelVisionCAL.isCreate", out modelVisionCAL.isCreate, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelVisionCAL.ID", out modelVisionCAL.ID, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelVisionCAL.algorism", out modelVisionCAL.algorism, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelVisionCAL.passScore", out modelVisionCAL.passScore, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelVisionCAL.angleStart", out modelVisionCAL.angleStart, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelVisionCAL.angleExtent", out modelVisionCAL.angleExtent, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelVisionCAL.exposureTime", out modelVisionCAL.exposureTime, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelVisionCAL.light.ch1", out modelVisionCAL.light.ch1, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelVisionCAL.light.ch2", out modelVisionCAL.light.ch2, out fail); if (fail) goto SET_FAIL;
-
 			setDefault("modelTrayReversePattern1.isCreate", out modelTrayReversePattern1.isCreate, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelTrayReversePattern1.ID", out modelTrayReversePattern1.ID, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelTrayReversePattern1.algorism", out modelTrayReversePattern1.algorism, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelTrayReversePattern1.passScore", out modelTrayReversePattern1.passScore, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelTrayReversePattern1.angleStart", out modelTrayReversePattern1.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -3037,7 +2978,6 @@ namespace PSA_SystemLibrary
 			setDefault("modelTrayReversePattern1.light.ch2", out modelTrayReversePattern1.light.ch2, out fail); if (fail) goto SET_FAIL;
 
 			setDefault("modelTrayReversePattern2.isCreate", out modelTrayReversePattern2.isCreate, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelTrayReversePattern2.ID", out modelTrayReversePattern2.ID, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelTrayReversePattern2.algorism", out modelTrayReversePattern2.algorism, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelTrayReversePattern2.passScore", out modelTrayReversePattern2.passScore, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelTrayReversePattern2.angleStart", out modelTrayReversePattern2.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -3070,7 +3010,6 @@ namespace PSA_SystemLibrary
 			setDefault("detectDirection", out detectDirection, out fail); if (fail) goto SET_FAIL;
 
 			setDefault("modelFiducial.isCreate", out modelFiducial.isCreate, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelFiducial.ID", out modelFiducial.ID, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelFiducial.algorism", out modelFiducial.algorism, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelFiducial.passScore", out modelFiducial.passScore, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelFiducial.angleStart", out modelFiducial.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -3106,7 +3045,6 @@ namespace PSA_SystemLibrary
 				int id = -1;
 
 				id++; if (name == "modelPAD.isCreate") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelPAD.ID") setDefault(out p, name, id, 0, 0, 1000, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelPAD.algorism") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelPAD.passScore") setDefault(out p, name, id, 70, 30, 90, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelPAD.angleStart") setDefault(out p, name, id, -30, -360, 0, AUTHORITY.MAINTENCE.ToString(), "description");
@@ -3116,7 +3054,6 @@ namespace PSA_SystemLibrary
 				id++; if (name == "modelPAD.light.ch2") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
 
 				id++; if (name == "modelPADC1.isCreate") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelPADC1.ID") setDefault(out p, name, id, 0, 0, 1000, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelPADC1.algorism") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelPADC1.passScore") setDefault(out p, name, id, 70, 30, 90, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelPADC1.angleStart") setDefault(out p, name, id, -30, -360, 0, AUTHORITY.MAINTENCE.ToString(), "description");
@@ -3126,7 +3063,6 @@ namespace PSA_SystemLibrary
 				id++; if (name == "modelPADC1.light.ch2") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
 
 				id++; if (name == "modelPADC2.isCreate") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelPADC2.ID") setDefault(out p, name, id, 0, 0, 1000, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelPADC2.algorism") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelPADC2.passScore") setDefault(out p, name, id, 70, 30, 90, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelPADC2.angleStart") setDefault(out p, name, id, -30, -360, 0, AUTHORITY.MAINTENCE.ToString(), "description");
@@ -3136,7 +3072,6 @@ namespace PSA_SystemLibrary
 				id++; if (name == "modelPADC2.light.ch2") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
 
 				id++; if (name == "modelPADC3.isCreate") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelPADC3.ID") setDefault(out p, name, id, 0, 0, 1000, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelPADC3.algorism") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelPADC3.passScore") setDefault(out p, name, id, 70, 30, 90, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelPADC3.angleStart") setDefault(out p, name, id, -30, -360, 0, AUTHORITY.MAINTENCE.ToString(), "description");
@@ -3146,7 +3081,6 @@ namespace PSA_SystemLibrary
 				id++; if (name == "modelPADC3.light.ch2") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
 
 				id++; if (name == "modelPADC4.isCreate") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelPADC4.ID") setDefault(out p, name, id, 0, 0, 1000, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelPADC4.algorism") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelPADC4.passScore") setDefault(out p, name, id, 70, 30, 90, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelPADC4.angleStart") setDefault(out p, name, id, -30, -360, 0, AUTHORITY.MAINTENCE.ToString(), "description");
@@ -3177,7 +3111,6 @@ namespace PSA_SystemLibrary
 				id++; if (name == "detectDirection") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "Edge Detect Start Direction(C1->C3 or C2->C4)");
 
 				id++; if (name == "modelFiducial.isCreate") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "Fiducial Mark Model Created or NOT");
-				id++; if (name == "modelFiducial.ID") setDefault(out p, name, id, 0, 0, 1000, AUTHORITY.MAINTENCE.ToString(), "Fiducial Mark Model ID");
 				id++; if (name == "modelFiducial.algorism") setDefault(out p, name, id, 0, 0, 3, AUTHORITY.MAINTENCE.ToString(), "Fiducial Mark Detection Algorithm");
 				id++; if (name == "modelFiducial.passScore") setDefault(out p, name, id, 70, 30, 90, AUTHORITY.MAINTENCE.ToString(), "Fiducial Mark Pass Score");
 				id++; if (name == "modelFiducial.angleStart") setDefault(out p, name, id, -30, -360, 0, AUTHORITY.MAINTENCE.ToString(), "Fiducial Mark Detection Start Angle");
@@ -3199,7 +3132,6 @@ namespace PSA_SystemLibrary
 				id++; if (name == "MTeachPosY_P2") setDefault(out p, name, id, 0, -100000, 100000, AUTHORITY.MAINTENCE.ToString(), "Manual Teaching Position 2");
 
 				id++; if (name == "modelManualTeach.paraP1.isCreate") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelManualTeach.paraP1.ID") setDefault(out p, name, id, 0, 0, 1000, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelManualTeach.paraP1.algorism") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelManualTeach.paraP1.passScore") setDefault(out p, name, id, 70, 30, 90, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelManualTeach.paraP1.angleStart") setDefault(out p, name, id, -30, -360, 0, AUTHORITY.MAINTENCE.ToString(), "description");
@@ -3209,7 +3141,6 @@ namespace PSA_SystemLibrary
 				id++; if (name == "modelManualTeach.paraP1.light.ch2") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
 
 				id++; if (name == "modelManualTeach.paraP2.isCreate") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelManualTeach.paraP2.ID") setDefault(out p, name, id, 0, 0, 1000, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelManualTeach.paraP2.algorism") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelManualTeach.paraP2.passScore") setDefault(out p, name, id, 70, 30, 90, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelManualTeach.paraP2.angleStart") setDefault(out p, name, id, -30, -360, 0, AUTHORITY.MAINTENCE.ToString(), "description");
@@ -3227,18 +3158,7 @@ namespace PSA_SystemLibrary
 				id++; if (name == "modelManualTeach.offsetX_P2") setDefault(out p, name, id, 0, -100000, 100000, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelManualTeach.offsetY_P2") setDefault(out p, name, id, 0, -100000, 100000, AUTHORITY.MAINTENCE.ToString(), "description");
 
-				id++; if (name == "modelVisionCAL.isCreate") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelVisionCAL.ID") setDefault(out p, name, id, 0, 0, 1000, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelVisionCAL.algorism") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelVisionCAL.passScore") setDefault(out p, name, id, 70, 30, 90, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelVisionCAL.angleStart") setDefault(out p, name, id, -30, -360, 0, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelVisionCAL.angleExtent") setDefault(out p, name, id, 60, 0, 360, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelVisionCAL.exposureTime") setDefault(out p, name, id, 5000, 1000, 30000, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelVisionCAL.light.ch1") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelVisionCAL.light.ch2") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
-
 				id++; if (name == "modelTrayReversePattern1.isCreate") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelTrayReversePattern1.ID") setDefault(out p, name, id, 0, 0, 1000, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelTrayReversePattern1.algorism") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelTrayReversePattern1.passScore") setDefault(out p, name, id, 70, 30, 90, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelTrayReversePattern1.angleStart") setDefault(out p, name, id, -30, -360, 0, AUTHORITY.MAINTENCE.ToString(), "description");
@@ -3248,7 +3168,6 @@ namespace PSA_SystemLibrary
 				id++; if (name == "modelTrayReversePattern1.light.ch2") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
 
 				id++; if (name == "modelTrayReversePattern2.isCreate") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelTrayReversePattern2.ID") setDefault(out p, name, id, 0, 0, 1000, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelTrayReversePattern2.algorism") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelTrayReversePattern2.passScore") setDefault(out p, name, id, 70, 30, 90, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelTrayReversePattern2.angleStart") setDefault(out p, name, id, -30, -360, 0, AUTHORITY.MAINTENCE.ToString(), "description");
@@ -3317,7 +3236,6 @@ namespace PSA_SystemLibrary
 
                 writeTuple(useCheck, i, out i);
                 writeTuple(modelPAD.isCreate, i, out i);
-                writeTuple(modelPAD.ID, i, out i);
                 writeTuple(modelPAD.algorism, i, out i);
                 writeTuple(modelPAD.passScore, i, out i);
                 writeTuple(modelPAD.angleStart, i, out i);
@@ -3327,7 +3245,6 @@ namespace PSA_SystemLibrary
                 writeTuple(modelPAD.light.ch2, i, out i);
 
                 writeTuple(modelPADC1.isCreate, i, out i);
-                writeTuple(modelPADC1.ID, i, out i);
                 writeTuple(modelPADC1.algorism, i, out i);
                 writeTuple(modelPADC1.passScore, i, out i);
                 writeTuple(modelPADC1.angleStart, i, out i);
@@ -3337,7 +3254,6 @@ namespace PSA_SystemLibrary
                 writeTuple(modelPADC1.light.ch2, i, out i);
 
                 writeTuple(modelPADC2.isCreate, i, out i);
-                writeTuple(modelPADC2.ID, i, out i);
                 writeTuple(modelPADC2.algorism, i, out i);
                 writeTuple(modelPADC2.passScore, i, out i);
                 writeTuple(modelPADC2.angleStart, i, out i);
@@ -3347,7 +3263,6 @@ namespace PSA_SystemLibrary
                 writeTuple(modelPADC2.light.ch2, i, out i);
 
                 writeTuple(modelPADC3.isCreate, i, out i);
-                writeTuple(modelPADC3.ID, i, out i);
                 writeTuple(modelPADC3.algorism, i, out i);
                 writeTuple(modelPADC3.passScore, i, out i);
                 writeTuple(modelPADC3.angleStart, i, out i);
@@ -3357,7 +3272,6 @@ namespace PSA_SystemLibrary
                 writeTuple(modelPADC3.light.ch2, i, out i);
 
                 writeTuple(modelPADC4.isCreate, i, out i);
-                writeTuple(modelPADC4.ID, i, out i);
                 writeTuple(modelPADC4.algorism, i, out i);
                 writeTuple(modelPADC4.passScore, i, out i);
                 writeTuple(modelPADC4.angleStart, i, out i);
@@ -3382,7 +3296,6 @@ namespace PSA_SystemLibrary
                 writeTuple(detectDirection, i, out i);
 
                 writeTuple(modelVisionCAL.isCreate, i, out i);
-                writeTuple(modelVisionCAL.ID, i, out i);
                 writeTuple(modelVisionCAL.algorism, i, out i);
                 writeTuple(modelVisionCAL.passScore, i, out i);
                 writeTuple(modelVisionCAL.angleStart, i, out i);
@@ -3453,7 +3366,6 @@ namespace PSA_SystemLibrary
 
                 readTuple("useCheck", out useCheck, out fail); if (fail) goto SET_FAIL;
                 readTuple("modelPAD.isCreate", out modelPAD.isCreate, out fail); if (fail) goto SET_FAIL;
-                readTuple("modelPAD.ID", out modelPAD.ID, out fail); if (fail) goto SET_FAIL;
                 readTuple("modelPAD.algorism", out modelPAD.algorism, out fail); if (fail) goto SET_FAIL;
                 readTuple("modelPAD.passScore", out modelPAD.passScore, out fail); if (fail) goto SET_FAIL;
                 readTuple("modelPAD.angleStart", out modelPAD.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -3463,7 +3375,6 @@ namespace PSA_SystemLibrary
                 readTuple("modelPAD.light.ch2", out modelPAD.light.ch2, out fail); if (fail) goto SET_FAIL;
 
                 readTuple("modelPADC1.isCreate", out modelPADC1.isCreate, out fail); if (fail) goto SET_FAIL;
-                readTuple("modelPADC1.ID", out modelPADC1.ID, out fail); if (fail) goto SET_FAIL;
                 readTuple("modelPADC1.algorism", out modelPADC1.algorism, out fail); if (fail) goto SET_FAIL;
                 readTuple("modelPADC1.passScore", out modelPADC1.passScore, out fail); if (fail) goto SET_FAIL;
                 readTuple("modelPADC1.angleStart", out modelPADC1.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -3473,7 +3384,6 @@ namespace PSA_SystemLibrary
                 readTuple("modelPADC1.light.ch2", out modelPADC1.light.ch2, out fail); if (fail) goto SET_FAIL;
 
                 readTuple("modelPADC2.isCreate", out modelPADC2.isCreate, out fail); if (fail) goto SET_FAIL;
-                readTuple("modelPADC2.ID", out modelPADC2.ID, out fail); if (fail) goto SET_FAIL;
                 readTuple("modelPADC2.algorism", out modelPADC2.algorism, out fail); if (fail) goto SET_FAIL;
                 readTuple("modelPADC2.passScore", out modelPADC2.passScore, out fail); if (fail) goto SET_FAIL;
                 readTuple("modelPADC2.angleStart", out modelPADC2.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -3483,7 +3393,6 @@ namespace PSA_SystemLibrary
                 readTuple("modelPADC2.light.ch2", out modelPADC2.light.ch2, out fail); if (fail) goto SET_FAIL;
 
                 readTuple("modelPADC3.isCreate", out modelPADC3.isCreate, out fail); if (fail) goto SET_FAIL;
-                readTuple("modelPADC3.ID", out modelPADC3.ID, out fail); if (fail) goto SET_FAIL;
                 readTuple("modelPADC3.algorism", out modelPADC3.algorism, out fail); if (fail) goto SET_FAIL;
                 readTuple("modelPADC3.passScore", out modelPADC3.passScore, out fail); if (fail) goto SET_FAIL;
                 readTuple("modelPADC3.angleStart", out modelPADC3.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -3493,7 +3402,6 @@ namespace PSA_SystemLibrary
                 readTuple("modelPADC3.light.ch2", out modelPADC3.light.ch2, out fail); if (fail) goto SET_FAIL;
 
                 readTuple("modelPADC4.isCreate", out modelPADC4.isCreate, out fail); if (fail) goto SET_FAIL;
-                readTuple("modelPADC4.ID", out modelPADC4.ID, out fail); if (fail) goto SET_FAIL;
                 readTuple("modelPADC4.algorism", out modelPADC4.algorism, out fail); if (fail) goto SET_FAIL;
                 readTuple("modelPADC4.passScore", out modelPADC4.passScore, out fail); if (fail) goto SET_FAIL;
                 readTuple("modelPADC4.angleStart", out modelPADC4.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -3503,7 +3411,6 @@ namespace PSA_SystemLibrary
                 readTuple("modelPADC4.light.ch2", out modelPADC4.light.ch2, out fail); if (fail) goto SET_FAIL;
 
                 readTuple("modelVisionCAL.isCreate", out modelVisionCAL.isCreate, out fail); if (fail) goto SET_FAIL;
-                readTuple("modelVisionCAL.ID", out modelVisionCAL.ID, out fail); if (fail) goto SET_FAIL;
                 readTuple("modelVisionCAL.algorism", out modelVisionCAL.algorism, out fail); if (fail) goto SET_FAIL;
                 readTuple("modelVisionCAL.passScore", out modelVisionCAL.passScore, out fail); if (fail) goto SET_FAIL;
                 readTuple("modelVisionCAL.angleStart", out modelVisionCAL.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -3630,7 +3537,6 @@ namespace PSA_SystemLibrary
 
             setDefault("useCheck", out useCheck, out fail); if (fail) goto SET_FAIL;
             setDefault("modelPAD.isCreate", out modelPAD.isCreate, out fail); if (fail) goto SET_FAIL;
-            setDefault("modelPAD.ID", out modelPAD.ID, out fail); if (fail) goto SET_FAIL;
             setDefault("modelPAD.algorism", out modelPAD.algorism, out fail); if (fail) goto SET_FAIL;
             setDefault("modelPAD.passScore", out modelPAD.passScore, out fail); if (fail) goto SET_FAIL;
             setDefault("modelPAD.angleStart", out modelPAD.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -3640,7 +3546,6 @@ namespace PSA_SystemLibrary
             setDefault("modelPAD.light.ch2", out modelPAD.light.ch2, out fail); if (fail) goto SET_FAIL;
 
             setDefault("modelPADC1.isCreate", out modelPADC1.isCreate, out fail); if (fail) goto SET_FAIL;
-            setDefault("modelPADC1.ID", out modelPADC1.ID, out fail); if (fail) goto SET_FAIL;
             setDefault("modelPADC1.algorism", out modelPADC1.algorism, out fail); if (fail) goto SET_FAIL;
             setDefault("modelPADC1.passScore", out modelPADC1.passScore, out fail); if (fail) goto SET_FAIL;
             setDefault("modelPADC1.angleStart", out modelPADC1.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -3650,7 +3555,6 @@ namespace PSA_SystemLibrary
             setDefault("modelPADC1.light.ch2", out modelPADC1.light.ch2, out fail); if (fail) goto SET_FAIL;
 
             setDefault("modelPADC2.isCreate", out modelPADC2.isCreate, out fail); if (fail) goto SET_FAIL;
-            setDefault("modelPADC2.ID", out modelPADC2.ID, out fail); if (fail) goto SET_FAIL;
             setDefault("modelPADC2.algorism", out modelPADC2.algorism, out fail); if (fail) goto SET_FAIL;
             setDefault("modelPADC2.passScore", out modelPADC2.passScore, out fail); if (fail) goto SET_FAIL;
             setDefault("modelPADC2.angleStart", out modelPADC2.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -3660,7 +3564,6 @@ namespace PSA_SystemLibrary
             setDefault("modelPADC2.light.ch2", out modelPADC2.light.ch2, out fail); if (fail) goto SET_FAIL;
 
             setDefault("modelPADC3.isCreate", out modelPADC3.isCreate, out fail); if (fail) goto SET_FAIL;
-            setDefault("modelPADC3.ID", out modelPADC3.ID, out fail); if (fail) goto SET_FAIL;
             setDefault("modelPADC3.algorism", out modelPADC3.algorism, out fail); if (fail) goto SET_FAIL;
             setDefault("modelPADC3.passScore", out modelPADC3.passScore, out fail); if (fail) goto SET_FAIL;
             setDefault("modelPADC3.angleStart", out modelPADC3.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -3670,7 +3573,6 @@ namespace PSA_SystemLibrary
             setDefault("modelPADC3.light.ch2", out modelPADC3.light.ch2, out fail); if (fail) goto SET_FAIL;
 
             setDefault("modelPADC4.isCreate", out modelPADC4.isCreate, out fail); if (fail) goto SET_FAIL;
-            setDefault("modelPADC4.ID", out modelPADC4.ID, out fail); if (fail) goto SET_FAIL;
             setDefault("modelPADC4.algorism", out modelPADC4.algorism, out fail); if (fail) goto SET_FAIL;
             setDefault("modelPADC4.passScore", out modelPADC4.passScore, out fail); if (fail) goto SET_FAIL;
             setDefault("modelPADC4.angleStart", out modelPADC4.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -3680,7 +3582,6 @@ namespace PSA_SystemLibrary
             setDefault("modelPADC4.light.ch2", out modelPADC4.light.ch2, out fail); if (fail) goto SET_FAIL;
 
             setDefault("modelVisionCAL.isCreate", out modelVisionCAL.isCreate, out fail); if (fail) goto SET_FAIL;
-            setDefault("modelVisionCAL.ID", out modelVisionCAL.ID, out fail); if (fail) goto SET_FAIL;
             setDefault("modelVisionCAL.algorism", out modelVisionCAL.algorism, out fail); if (fail) goto SET_FAIL;
             setDefault("modelVisionCAL.passScore", out modelVisionCAL.passScore, out fail); if (fail) goto SET_FAIL;
             setDefault("modelVisionCAL.angleStart", out modelVisionCAL.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -3725,7 +3626,6 @@ namespace PSA_SystemLibrary
                 id++; if (name == "useCheck") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
 
                 id++; if (name == "modelPAD.isCreate") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
-                id++; if (name == "modelPAD.ID") setDefault(out p, name, id, 0, 0, 1000, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "modelPAD.algorism") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "modelPAD.passScore") setDefault(out p, name, id, 70, 30, 90, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "modelPAD.angleStart") setDefault(out p, name, id, -30, -360, 0, AUTHORITY.MAINTENCE.ToString(), "description");
@@ -3735,7 +3635,6 @@ namespace PSA_SystemLibrary
                 id++; if (name == "modelPAD.light.ch2") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
 
                 id++; if (name == "modelPADC1.isCreate") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
-                id++; if (name == "modelPADC1.ID") setDefault(out p, name, id, 0, 0, 1000, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "modelPADC1.algorism") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "modelPADC1.passScore") setDefault(out p, name, id, 70, 30, 90, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "modelPADC1.angleStart") setDefault(out p, name, id, -30, -360, 0, AUTHORITY.MAINTENCE.ToString(), "description");
@@ -3745,7 +3644,6 @@ namespace PSA_SystemLibrary
                 id++; if (name == "modelPADC1.light.ch2") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
 
                 id++; if (name == "modelPADC2.isCreate") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
-                id++; if (name == "modelPADC2.ID") setDefault(out p, name, id, 0, 0, 1000, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "modelPADC2.algorism") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "modelPADC2.passScore") setDefault(out p, name, id, 70, 30, 90, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "modelPADC2.angleStart") setDefault(out p, name, id, -30, -360, 0, AUTHORITY.MAINTENCE.ToString(), "description");
@@ -3755,7 +3653,6 @@ namespace PSA_SystemLibrary
                 id++; if (name == "modelPADC2.light.ch2") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
 
                 id++; if (name == "modelPADC3.isCreate") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
-                id++; if (name == "modelPADC3.ID") setDefault(out p, name, id, 0, 0, 1000, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "modelPADC3.algorism") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "modelPADC3.passScore") setDefault(out p, name, id, 70, 30, 90, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "modelPADC3.angleStart") setDefault(out p, name, id, -30, -360, 0, AUTHORITY.MAINTENCE.ToString(), "description");
@@ -3765,7 +3662,6 @@ namespace PSA_SystemLibrary
                 id++; if (name == "modelPADC3.light.ch2") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
 
                 id++; if (name == "modelPADC4.isCreate") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
-                id++; if (name == "modelPADC4.ID") setDefault(out p, name, id, 0, 0, 1000, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "modelPADC4.algorism") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "modelPADC4.passScore") setDefault(out p, name, id, 70, 30, 90, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "modelPADC4.angleStart") setDefault(out p, name, id, -30, -360, 0, AUTHORITY.MAINTENCE.ToString(), "description");
@@ -3790,15 +3686,12 @@ namespace PSA_SystemLibrary
                 }
                 #endregion
 
-                
-
                 id++; if (name == "failretry") setDefault(out p, name, id, 0, 0, 10, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "imageSave") setDefault(out p, name, id, 0, 0, 10, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "cropArea") setDefault(out p, name, id, 2.5, 0.8, 3.0, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "detectDirection") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "Edge Detect Start Direction(C1->C3 or C2->C4)");
 
                 id++; if (name == "modelVisionCAL.isCreate") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
-                id++; if (name == "modelVisionCAL.ID") setDefault(out p, name, id, 0, 0, 1000, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "modelVisionCAL.algorism") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "modelVisionCAL.passScore") setDefault(out p, name, id, 70, 30, 90, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "modelVisionCAL.angleStart") setDefault(out p, name, id, -30, -360, 0, AUTHORITY.MAINTENCE.ToString(), "description");
@@ -3838,7 +3731,7 @@ namespace PSA_SystemLibrary
 		RetValue ret;
 		public UnitCode unitCode;
 
-		public halconModelParameter model = new halconModelParameter();
+		public halconModelParameter2 model = new halconModelParameter2();
 		public light_2channel_paramer[] light = new light_2channel_paramer[20];
 		public para_member[] exposure = new para_member[20];
 		public para_member failretry;
@@ -3857,6 +3750,12 @@ namespace PSA_SystemLibrary
 		public para_member orientationUse;
 		public halconModelParameter modelHSOrientation = new halconModelParameter();
 
+        public halconModelParameter2 modelLIDC1 = new halconModelParameter2();
+        public halconModelParameter2 modelLIDC2 = new halconModelParameter2();
+        public halconModelParameter2 modelLIDC3 = new halconModelParameter2();
+        public halconModelParameter2 modelLIDC4 = new halconModelParameter2();
+        public para_member algorism = new para_member();
+        public para_member alignDirection = new para_member();
 		public HTuple saveTuple;
 		public void write(out bool r, string savepath = "C:\\PROTEC\\Data")
 		{
@@ -3866,9 +3765,6 @@ namespace PSA_SystemLibrary
 				saveTuple = new HTuple();
 
 				writeTuple(model.isCreate, i, out i);
-				writeTuple(model.ID, i, out i);
-				writeTuple(model.algorism, i, out i);
-				writeTuple(model.passScore, i, out i);
 				writeTuple(model.angleStart, i, out i);
 				writeTuple(model.angleExtent, i, out i);
 				writeTuple(model.exposureTime, i, out i);
@@ -3900,7 +3796,6 @@ namespace PSA_SystemLibrary
 				
 				writeTuple(orientationUse, i, out i);
 				writeTuple(modelHSOrientation.isCreate, i, out i);
-				writeTuple(modelHSOrientation.ID, i, out i);
 				writeTuple(modelHSOrientation.algorism, i, out i);
 				writeTuple(modelHSOrientation.passScore, i, out i);
 				writeTuple(modelHSOrientation.angleStart, i, out i);
@@ -3908,6 +3803,37 @@ namespace PSA_SystemLibrary
 				writeTuple(modelHSOrientation.exposureTime, i, out i);
 				writeTuple(modelHSOrientation.light.ch1, i, out i);
 				writeTuple(modelHSOrientation.light.ch2, i, out i);
+
+                writeTuple(modelLIDC1.isCreate, i, out i);
+                writeTuple(modelLIDC1.angleStart, i, out i);
+                writeTuple(modelLIDC1.angleExtent, i, out i);
+                writeTuple(modelLIDC1.exposureTime, i, out i);
+                writeTuple(modelLIDC1.light.ch1, i, out i);
+                writeTuple(modelLIDC1.light.ch2, i, out i);
+
+                writeTuple(modelLIDC2.isCreate, i, out i);
+                writeTuple(modelLIDC2.angleStart, i, out i);
+                writeTuple(modelLIDC2.angleExtent, i, out i);
+                writeTuple(modelLIDC2.exposureTime, i, out i);
+                writeTuple(modelLIDC2.light.ch1, i, out i);
+                writeTuple(modelLIDC2.light.ch2, i, out i);
+
+                writeTuple(modelLIDC3.isCreate, i, out i);
+                writeTuple(modelLIDC3.angleStart, i, out i);
+                writeTuple(modelLIDC3.angleExtent, i, out i);
+                writeTuple(modelLIDC3.exposureTime, i, out i);
+                writeTuple(modelLIDC3.light.ch1, i, out i);
+                writeTuple(modelLIDC3.light.ch2, i, out i);
+
+                writeTuple(modelLIDC4.isCreate, i, out i);
+                writeTuple(modelLIDC4.angleStart, i, out i);
+                writeTuple(modelLIDC4.angleExtent, i, out i);
+                writeTuple(modelLIDC4.exposureTime, i, out i);
+                writeTuple(modelLIDC4.light.ch1, i, out i);
+                writeTuple(modelLIDC4.light.ch2, i, out i);
+
+                writeTuple(algorism, i, out i);
+                writeTuple(alignDirection, i, out i);
 
 				HTuple filePath, fileName;
 				filePath = savepath + "\\Parameter\\";
@@ -3967,9 +3893,6 @@ namespace PSA_SystemLibrary
 				bool fail;
 
 				readTuple("model.isCreate", out model.isCreate, out fail); if (fail) goto SET_FAIL;
-				readTuple("model.ID", out model.ID, out fail); if (fail) goto SET_FAIL;
-				readTuple("model.algorism", out model.algorism, out fail); if (fail) goto SET_FAIL;
-				readTuple("model.passScore", out model.passScore, out fail); if (fail) goto SET_FAIL;
 				readTuple("model.angleStart", out model.angleStart, out fail); if (fail) goto SET_FAIL;
 				readTuple("model.angleExtent", out model.angleExtent, out fail); if (fail) goto SET_FAIL;
 				readTuple("model.exposureTime", out model.exposureTime, out fail); if (fail) goto SET_FAIL;
@@ -4005,7 +3928,6 @@ namespace PSA_SystemLibrary
 
 				readTuple("orientationUse", out orientationUse, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelHSOrientation.isCreate", out modelHSOrientation.isCreate, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelHSOrientation.ID", out modelHSOrientation.ID, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelHSOrientation.algorism", out modelHSOrientation.algorism, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelHSOrientation.passScore", out modelHSOrientation.passScore, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelHSOrientation.angleStart", out modelHSOrientation.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -4013,6 +3935,37 @@ namespace PSA_SystemLibrary
 				readTuple("modelHSOrientation.exposureTime", out modelHSOrientation.exposureTime, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelHSOrientation.light.ch1", out modelHSOrientation.light.ch1, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelHSOrientation.light.ch2", out modelHSOrientation.light.ch2, out fail); if (fail) goto SET_FAIL;
+
+                readTuple("modelLIDC1.isCreate", out modelLIDC1.isCreate, out fail); if (fail) goto SET_FAIL;
+                readTuple("modelLIDC1.angleStart", out modelLIDC1.angleStart, out fail); if (fail) goto SET_FAIL;
+                readTuple("modelLIDC1.angleExtent", out modelLIDC1.angleExtent, out fail); if (fail) goto SET_FAIL;
+                readTuple("modelLIDC1.exposureTime", out modelLIDC1.exposureTime, out fail); if (fail) goto SET_FAIL;
+                readTuple("modelLIDC1.light.ch1", out modelLIDC1.light.ch1, out fail); if (fail) goto SET_FAIL;
+                readTuple("modelLIDC1.light.ch2", out modelLIDC1.light.ch2, out fail); if (fail) goto SET_FAIL;
+
+                readTuple("modelLIDC2.isCreate", out modelLIDC2.isCreate, out fail); if (fail) goto SET_FAIL;
+                readTuple("modelLIDC2.angleStart", out modelLIDC2.angleStart, out fail); if (fail) goto SET_FAIL;
+                readTuple("modelLIDC2.angleExtent", out modelLIDC2.angleExtent, out fail); if (fail) goto SET_FAIL;
+                readTuple("modelLIDC2.exposureTime", out modelLIDC2.exposureTime, out fail); if (fail) goto SET_FAIL;
+                readTuple("modelLIDC2.light.ch1", out modelLIDC2.light.ch1, out fail); if (fail) goto SET_FAIL;
+                readTuple("modelLIDC2.light.ch2", out modelLIDC2.light.ch2, out fail); if (fail) goto SET_FAIL;
+
+                readTuple("modelLIDC3.isCreate", out modelLIDC3.isCreate, out fail); if (fail) goto SET_FAIL;
+                readTuple("modelLIDC3.angleStart", out modelLIDC3.angleStart, out fail); if (fail) goto SET_FAIL;
+                readTuple("modelLIDC3.angleExtent", out modelLIDC3.angleExtent, out fail); if (fail) goto SET_FAIL;
+                readTuple("modelLIDC3.exposureTime", out modelLIDC3.exposureTime, out fail); if (fail) goto SET_FAIL;
+                readTuple("modelLIDC3.light.ch1", out modelLIDC3.light.ch1, out fail); if (fail) goto SET_FAIL;
+                readTuple("modelLIDC3.light.ch2", out modelLIDC3.light.ch2, out fail); if (fail) goto SET_FAIL;
+
+                readTuple("modelLIDC4.isCreate", out modelLIDC4.isCreate, out fail); if (fail) goto SET_FAIL;
+                readTuple("modelLIDC4.angleStart", out modelLIDC4.angleStart, out fail); if (fail) goto SET_FAIL;
+                readTuple("modelLIDC4.angleExtent", out modelLIDC4.angleExtent, out fail); if (fail) goto SET_FAIL;
+                readTuple("modelLIDC4.exposureTime", out modelLIDC4.exposureTime, out fail); if (fail) goto SET_FAIL;
+                readTuple("modelLIDC4.light.ch1", out modelLIDC4.light.ch1, out fail); if (fail) goto SET_FAIL;
+                readTuple("modelLIDC4.light.ch2", out modelLIDC4.light.ch2, out fail); if (fail) goto SET_FAIL;
+
+                readTuple("algorism", out algorism, out fail); if (fail) goto SET_FAIL;
+                readTuple("alignDirection", out alignDirection, out fail); if (fail) goto SET_FAIL;
 
 				r = true;
 				return;
@@ -4113,9 +4066,6 @@ namespace PSA_SystemLibrary
 			bool fail;
 
 			setDefault("model.isCreate", out model.isCreate, out fail); if (fail) goto SET_FAIL;
-			setDefault("model.ID", out model.ID, out fail); if (fail) goto SET_FAIL;
-			setDefault("model.algorism", out model.algorism, out fail); if (fail) goto SET_FAIL;
-			setDefault("model.passScore", out model.passScore, out fail); if (fail) goto SET_FAIL;
 			setDefault("model.angleStart", out model.angleStart, out fail); if (fail) goto SET_FAIL;
 			setDefault("model.angleExtent", out model.angleExtent, out fail); if (fail) goto SET_FAIL;
 			setDefault("model.exposureTime", out model.exposureTime, out fail); if (fail) goto SET_FAIL;
@@ -4147,7 +4097,6 @@ namespace PSA_SystemLibrary
 
 			setDefault("orientationUse", out orientationUse, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelHSOrientation.isCreate", out modelHSOrientation.isCreate, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelHSOrientation.ID", out modelHSOrientation.ID, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelHSOrientation.algorism", out modelHSOrientation.algorism, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelHSOrientation.passScore", out modelHSOrientation.passScore, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelHSOrientation.angleStart", out modelHSOrientation.angleStart, out fail); if (fail) goto SET_FAIL;
@@ -4155,6 +4104,37 @@ namespace PSA_SystemLibrary
 			setDefault("modelHSOrientation.exposureTime", out modelHSOrientation.exposureTime, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelHSOrientation.light.ch1", out modelHSOrientation.light.ch1, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelHSOrientation.light.ch2", out modelHSOrientation.light.ch2, out fail); if (fail) goto SET_FAIL;
+
+            setDefault("modelLIDC1.isCreate", out modelLIDC1.isCreate, out fail); if (fail) goto SET_FAIL;
+            setDefault("modelLIDC1.angleStart", out modelLIDC1.angleStart, out fail); if (fail) goto SET_FAIL;
+            setDefault("modelLIDC1.angleExtent", out modelLIDC1.angleExtent, out fail); if (fail) goto SET_FAIL;
+            setDefault("modelLIDC1.exposureTime", out modelLIDC1.exposureTime, out fail); if (fail) goto SET_FAIL;
+            setDefault("modelLIDC1.light.ch1", out modelLIDC1.light.ch1, out fail); if (fail) goto SET_FAIL;
+            setDefault("modelLIDC1.light.ch2", out modelLIDC1.light.ch2, out fail); if (fail) goto SET_FAIL;
+
+            setDefault("modelLIDC2.isCreate", out modelLIDC2.isCreate, out fail); if (fail) goto SET_FAIL;
+            setDefault("modelLIDC2.angleStart", out modelLIDC2.angleStart, out fail); if (fail) goto SET_FAIL;
+            setDefault("modelLIDC2.angleExtent", out modelLIDC2.angleExtent, out fail); if (fail) goto SET_FAIL;
+            setDefault("modelLIDC2.exposureTime", out modelLIDC2.exposureTime, out fail); if (fail) goto SET_FAIL;
+            setDefault("modelLIDC2.light.ch1", out modelLIDC2.light.ch1, out fail); if (fail) goto SET_FAIL;
+            setDefault("modelLIDC2.light.ch2", out modelLIDC2.light.ch2, out fail); if (fail) goto SET_FAIL;
+
+            setDefault("modelLIDC3.isCreate", out modelLIDC3.isCreate, out fail); if (fail) goto SET_FAIL;
+            setDefault("modelLIDC3.angleStart", out modelLIDC3.angleStart, out fail); if (fail) goto SET_FAIL;
+            setDefault("modelLIDC3.angleExtent", out modelLIDC3.angleExtent, out fail); if (fail) goto SET_FAIL;
+            setDefault("modelLIDC3.exposureTime", out modelLIDC3.exposureTime, out fail); if (fail) goto SET_FAIL;
+            setDefault("modelLIDC3.light.ch1", out modelLIDC3.light.ch1, out fail); if (fail) goto SET_FAIL;
+            setDefault("modelLIDC3.light.ch2", out modelLIDC3.light.ch2, out fail); if (fail) goto SET_FAIL;
+
+            setDefault("modelLIDC4.isCreate", out modelLIDC4.isCreate, out fail); if (fail) goto SET_FAIL;
+            setDefault("modelLIDC4.angleStart", out modelLIDC4.angleStart, out fail); if (fail) goto SET_FAIL;
+            setDefault("modelLIDC4.angleExtent", out modelLIDC4.angleExtent, out fail); if (fail) goto SET_FAIL;
+            setDefault("modelLIDC4.exposureTime", out modelLIDC4.exposureTime, out fail); if (fail) goto SET_FAIL;
+            setDefault("modelLIDC4.light.ch1", out modelLIDC4.light.ch1, out fail); if (fail) goto SET_FAIL;
+            setDefault("modelLIDC4.light.ch2", out modelLIDC4.light.ch2, out fail); if (fail) goto SET_FAIL;
+
+            setDefault("algorism", out algorism, out fail); if (fail) goto SET_FAIL;
+            setDefault("alignDirection", out alignDirection, out fail); if (fail) goto SET_FAIL;
 
 			r = true;
 			return;
@@ -4172,9 +4152,6 @@ namespace PSA_SystemLibrary
 				int id = -1;
 
 				id++; if (name == "model.isCreate") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "model.ID") setDefault(out p, name, id, 0, 0, 1000, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "model.algorism") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "model.passScore") setDefault(out p, name, id, 70, 30, 90, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "model.angleStart") setDefault(out p, name, id, -30, -360, 0, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "model.angleExtent") setDefault(out p, name, id, 60, 0, 360, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "model.exposureTime") setDefault(out p, name, id, 5000, 1000, 30000, AUTHORITY.MAINTENCE.ToString(), "description");
@@ -4208,7 +4185,6 @@ namespace PSA_SystemLibrary
 
 				id++; if (name == "orientationUse") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "Set Image Save Option");
 				id++; if (name == "modelHSOrientation.isCreate") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelHSOrientation.ID") setDefault(out p, name, id, 0, 0, 1000, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelHSOrientation.algorism") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelHSOrientation.passScore") setDefault(out p, name, id, 70, 30, 90, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelHSOrientation.angleStart") setDefault(out p, name, id, -30, -360, 0, AUTHORITY.MAINTENCE.ToString(), "description");
@@ -4216,6 +4192,37 @@ namespace PSA_SystemLibrary
 				id++; if (name == "modelHSOrientation.exposureTime") setDefault(out p, name, id, 5000, 1000, 30000, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelHSOrientation.light.ch1") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelHSOrientation.light.ch2") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
+
+                id++; if (name == "modelLIDC1.isCreate") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "modelLIDC1.angleStart") setDefault(out p, name, id, -30, -360, 0, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "modelLIDC1.angleExtent") setDefault(out p, name, id, 60, 0, 360, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "modelLIDC1.exposureTime") setDefault(out p, name, id, 5000, 1000, 30000, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "modelLIDC1.light.ch1") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "modelLIDC1.light.ch2") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
+
+                id++; if (name == "modelLIDC2.isCreate") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "modelLIDC2.angleStart") setDefault(out p, name, id, -30, -360, 0, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "modelLIDC2.angleExtent") setDefault(out p, name, id, 60, 0, 360, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "modelLIDC2.exposureTime") setDefault(out p, name, id, 5000, 1000, 30000, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "modelLIDC2.light.ch1") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "modelLIDC2.light.ch2") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
+
+                id++; if (name == "modelLIDC3.isCreate") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "modelLIDC3.angleStart") setDefault(out p, name, id, -30, -360, 0, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "modelLIDC3.angleExtent") setDefault(out p, name, id, 60, 0, 360, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "modelLIDC3.exposureTime") setDefault(out p, name, id, 5000, 1000, 30000, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "modelLIDC3.light.ch1") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "modelLIDC3.light.ch2") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
+
+                id++; if (name == "modelLIDC4.isCreate") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "modelLIDC4.angleStart") setDefault(out p, name, id, -30, -360, 0, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "modelLIDC4.angleExtent") setDefault(out p, name, id, 60, 0, 360, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "modelLIDC4.exposureTime") setDefault(out p, name, id, 5000, 1000, 30000, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "modelLIDC4.light.ch1") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "modelLIDC4.light.ch2") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
+
+                id++; if (name == "algorism") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "alignDirection") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
 
 				if (p.id == -1) { fail = true; p = new para_member(); return; }
 				fail = false;
@@ -7349,7 +7356,6 @@ namespace PSA_SystemLibrary
 	public class halconModelParameter
 	{
 		public para_member isCreate;
-		public para_member ID;
 		public para_member algorism;
 		public para_member passScore;
 		public para_member angleStart;
@@ -7357,6 +7363,16 @@ namespace PSA_SystemLibrary
 		public para_member exposureTime;
 		public light_2channel_paramer light;
 	}
+
+    public class halconModelParameter2
+    {
+        public para_member isCreate;
+        public para_member angleStart;
+        public para_member angleExtent;
+        public para_member exposureTime;
+        public light_2channel_paramer light;
+    }
+
 	public class manualTeachParameter
 	{
 		public halconModelParameter paraP1 = new halconModelParameter();

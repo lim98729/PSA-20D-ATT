@@ -1562,6 +1562,10 @@ namespace DefineLibrary
 	{
 		INVALID = -1,
 		ULC_PKG,
+        ULC_LIDC1,
+        ULC_LIDC2,
+        ULC_LIDC3,
+        ULC_LIDC4,
         HDC_PAD,
         HDC_PADC1,
         HDC_PADC2,
@@ -1571,7 +1575,6 @@ namespace DefineLibrary
 		ULC_ORIENTATION,
 		HDC_MANUAL_P1,
 		HDC_MANUAL_P2,
-		HDC_CAL,
 		TRAY_REVERSE_SHAPE1,
 		TRAY_REVERSE_SHAPE2,
         // 1121. HeatSlug
@@ -1857,7 +1860,18 @@ namespace DefineLibrary
         HEATSLUG_PADC2,
         HEATSLUG_PADC3,
         HEATSLUG_PADC4,
-	}
+
+        ULC_LIDC1,
+        ULC_LIDC2,
+        ULC_LIDC3,
+        ULC_LIDC4,
+    }
+
+    public enum ALIGN_CORNER
+    {
+        C1AndC3 = 0,
+        C2AndC4,
+    }
 
 	public enum SF_TUBE_STATUS
 	{

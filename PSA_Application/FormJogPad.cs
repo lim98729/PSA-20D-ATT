@@ -150,8 +150,6 @@ namespace PSA_Application
 			#region HDC_CALIBRATION
 			if (jogMode == JOGMODE.HDC_CALIBRATION)
 			{
-				BT_TEST.Visible = true;
-				BT_TEACH.Visible = true;
 				speedType = SPEED_TYPE.LARGE;
 				EVENT.hWindowLargeDisplay(mc.hdc.cam.acq.grabber.cameraNumber);
 				mc.hdc.lighting_exposure(mc.para.HDC.light[(int)LIGHTMODE_HDC.CALIBRATION], mc.para.HDC.exposure[(int)LIGHTMODE_HDC.CALIBRATION]);
@@ -1421,24 +1419,10 @@ namespace PSA_Application
 				TB_TEACH_RST_Y.Enabled = true;
 			}
 			#endregion
-			#region Teach.For.Vision.Resolution.Using.Pattern
 			if (sender.Equals(BT_TEACH))
 			{
 				mc.hdc.LIVE = false;
-				if(jogMode == JOGMODE.HDC_CALIBRATION)
-				{
-					#region 기존 패턴 삭제
-					mc.para.HDC.modelVisionCAL.isCreate.value = (int)BOOL.FALSE;
-					mc.hdc.cam.model[(int)HDC_MODEL.VISION_RESOLUTION_NCC].delete();
-					#endregion
-					mc.hdc.cam.model[(int)HDC_MODEL.VISION_RESOLUTION_NCC].algorism = MODEL_ALGORISM.NCC.ToString();
-					mc.hdc.cam.createModel((int)HDC_MODEL.VISION_RESOLUTION_NCC);
-					mc.hdc.cam.createFind((int)HDC_MODEL.VISION_RESOLUTION_NCC);
-					mc.para.HDC.modelVisionCAL.isCreate.value = (int)BOOL.TRUE;
-					if (mc.hdc.cam.model[(int)HDC_MODEL.VISION_RESOLUTION_NCC].isCreate == "false")
-						mc.para.HDC.modelVisionCAL.isCreate.value = (int)BOOL.FALSE;
-				}
-				else if (jogMode == JOGMODE.PATTERN_TRAYREVERSE1)
+				if (jogMode == JOGMODE.PATTERN_TRAYREVERSE1)
 				{
 					#region 기존 패턴 삭제
 					mc.para.HDC.modelTrayReversePattern1.isCreate.value = (int)BOOL.FALSE;
@@ -1468,7 +1452,6 @@ namespace PSA_Application
 				}
 				mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
 			}
-			#endregion
 			#region Test.For.Vision.Resolution.Using.Pattern
 			if (sender.Equals(BT_TEST))
 			{
@@ -1476,34 +1459,7 @@ namespace PSA_Application
 				double rY = 0;
 				double rT = 0;
 				mc.hdc.LIVE = false;
-				if (jogMode == JOGMODE.HDC_CALIBRATION)
-				{
-					#region HDC.req
-					if (mc.para.HDC.modelVisionCAL.isCreate.value == (int)BOOL.TRUE)
-					{
-						mc.hdc.reqMode = REQMODE.FIND_MODEL;
-						mc.hdc.reqModelNumber = (int)HDC_MODEL.VISION_RESOLUTION_NCC;
-					}
-					else
-					{
-						mc.hdc.reqMode = REQMODE.GRAB;
-					}
-					mc.hdc.lighting_exposure(mc.para.HDC.light[(int)LIGHTMODE_HDC.CALIBRATION], mc.para.HDC.exposure[(int)LIGHTMODE_HDC.CALIBRATION]);
-
-					mc.hdc.triggerMode = TRIGGERMODE.SOFTWARE;
-					mc.hdc.req = true;
-					#endregion
-					mc.main.Thread_Polling();
-					#region HDC result
-					if (mc.para.HDC.modelVisionCAL.isCreate.value == (int)BOOL.TRUE)
-					{
-						rX = mc.hdc.cam.model[(int)HDC_MODEL.VISION_RESOLUTION_NCC].resultX;
-						rY = mc.hdc.cam.model[(int)HDC_MODEL.VISION_RESOLUTION_NCC].resultY;
-						rT = mc.hdc.cam.model[(int)HDC_MODEL.VISION_RESOLUTION_NCC].resultAngle;
-					}
-					#endregion
-				}
-				else if (jogMode == JOGMODE.PATTERN_TRAYREVERSE1)
+				if (jogMode == JOGMODE.PATTERN_TRAYREVERSE1)
 				{
 					#region HDC.req
 					if (mc.para.HDC.modelTrayReversePattern1.isCreate.value == (int)BOOL.TRUE)

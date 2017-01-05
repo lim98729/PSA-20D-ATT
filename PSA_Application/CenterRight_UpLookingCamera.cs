@@ -38,6 +38,8 @@ namespace PSA_Application
 		}
 		#endregion
 		RetValue ret;
+        SELECT_FIND_MODEL mode = SELECT_FIND_MODEL.ULC_LIDC1;
+
 		private void Control_Click(object sender, EventArgs e)
 		{
 			if (!mc.check.READY_AUTORUN(sender)) return;
@@ -48,7 +50,12 @@ namespace PSA_Application
 				try
 				{
 					FormHalconModelTeach ff = new FormHalconModelTeach();
-					ff.mode = SELECT_FIND_MODEL.ULC_PKG;
+                    if (mode == SELECT_FIND_MODEL.ULC_PKG) ff.mode = SELECT_FIND_MODEL.ULC_PKG;
+                    else if (mode == SELECT_FIND_MODEL.ULC_LIDC1) ff.mode = SELECT_FIND_MODEL.ULC_LIDC1;
+                    else if (mode == SELECT_FIND_MODEL.ULC_LIDC2) ff.mode = SELECT_FIND_MODEL.ULC_LIDC2;
+                    else if (mode == SELECT_FIND_MODEL.ULC_LIDC3) ff.mode = SELECT_FIND_MODEL.ULC_LIDC3;
+                    else if (mode == SELECT_FIND_MODEL.ULC_LIDC4) ff.mode = SELECT_FIND_MODEL.ULC_LIDC4;
+
 					ff.Show();
 					this.Enabled = false;
 					while (true) { mc.idle(100); if (ff.IsDisposed) break; }
@@ -62,59 +69,145 @@ namespace PSA_Application
 			}
 			if (sender.Equals(BT_Model_Delect))
 			{
-				mc.ulc.model_delete(SELECT_FIND_MODEL.ULC_PKG);
-			}
+                if (mode == SELECT_FIND_MODEL.ULC_PKG) mc.ulc.model_delete(SELECT_FIND_MODEL.ULC_PKG);
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC1) mc.ulc.model_delete(SELECT_FIND_MODEL.ULC_LIDC1);
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC2) mc.ulc.model_delete(SELECT_FIND_MODEL.ULC_LIDC2);
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC3) mc.ulc.model_delete(SELECT_FIND_MODEL.ULC_LIDC3);
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC4) mc.ulc.model_delete(SELECT_FIND_MODEL.ULC_LIDC4);
+            }
 			if (sender.Equals(BT_AlgorismSelect_NccModel))
 			{
-				mc.para.setting(ref mc.para.ULC.model.algorism, (int)MODEL_ALGORISM.NCC);
+				mc.para.setting(ref mc.para.ULC.algorism, (int)MODEL_ALGORISM.NCC);
 				mc.ulc.model_delete(SELECT_FIND_MODEL.ULC_PKG);
 			}
 			if (sender.Equals(BT_AlgorismSelect_ShapeModel))
 			{
-				mc.para.setting(ref mc.para.ULC.model.algorism, (int)MODEL_ALGORISM.SHAPE);
+				mc.para.setting(ref mc.para.ULC.algorism, (int)MODEL_ALGORISM.SHAPE);
 				mc.ulc.model_delete(SELECT_FIND_MODEL.ULC_PKG);
 			}
 			if (sender.Equals(BT_AlgorismSelect_RectangleModel))
 			{
-				mc.para.setting(ref mc.para.ULC.model.algorism, (int)MODEL_ALGORISM.RECTANGLE);
+				mc.para.setting(ref mc.para.ULC.algorism, (int)MODEL_ALGORISM.RECTANGLE);
 				mc.ulc.model_delete(SELECT_FIND_MODEL.ULC_PKG);
 			}
 			if (sender.Equals(BT_AlgorismSelect_CircleModel))
 			{
-				mc.para.setting(ref mc.para.ULC.model.algorism, (int)MODEL_ALGORISM.CIRCLE);
+				mc.para.setting(ref mc.para.ULC.algorism, (int)MODEL_ALGORISM.CIRCLE);
 				mc.ulc.model_delete(SELECT_FIND_MODEL.ULC_PKG);
 			}
+            if (sender.Equals(BT_AlgorismSelect_CornerModel))
+            {
+                mc.para.setting(ref mc.para.ULC.algorism, (int)MODEL_ALGORISM.CORNER);
+                mc.ulc.model_delete(SELECT_FIND_MODEL.ULC_PKG);
+                TS_CORNER_TEACH.Visible = true;
+            }
+            if (sender.Equals(BT_SelectModel_LIDC1))
+            {
+                mode = SELECT_FIND_MODEL.ULC_LIDC1;
+            }
+            if (sender.Equals(BT_SelectModel_LIDC2))
+            {
+                mode = SELECT_FIND_MODEL.ULC_LIDC2;
+            }
+            if (sender.Equals(BT_SelectModel_LIDC3))
+            {
+                mode = SELECT_FIND_MODEL.ULC_LIDC3;
+            }
+            if (sender.Equals(BT_SelectModel_LIDC4))
+            {
+                mode = SELECT_FIND_MODEL.ULC_LIDC4;
+            }
+            if (sender.Equals(BT_AlignDirection_31))
+            {
+                mc.para.setting(ref mc.para.ULC.alignDirection, (int)ALIGN_CORNER.C1AndC3); 
+            }
+            if (sender.Equals(BT_AlignDirection_42))
+            {
+                mc.para.setting(ref mc.para.ULC.alignDirection, (int)ALIGN_CORNER.C2AndC4);
+            }
 			if (sender.Equals(TB_PassScore))
 			{
-				mc.para.setting(mc.para.ULC.model.passScore, out mc.para.ULC.model.passScore);
+				//mc.para.setting(mc.para.ULC.model.passScore, out mc.para.ULC.model.passScore);
 			}
 			if (sender.Equals(TB_AngleStart))
 			{
-				mc.para.setting(mc.para.ULC.model.angleStart, out mc.para.ULC.model.angleStart);
+                if (mode == SELECT_FIND_MODEL.ULC_PKG) mc.para.setting(mc.para.ULC.model.angleStart, out mc.para.ULC.model.angleStart);
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC1) mc.para.setting(mc.para.ULC.modelLIDC1.angleStart, out mc.para.ULC.modelLIDC1.angleStart);
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC2) mc.para.setting(mc.para.ULC.modelLIDC2.angleStart, out mc.para.ULC.modelLIDC2.angleStart);
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC3) mc.para.setting(mc.para.ULC.modelLIDC3.angleStart, out mc.para.ULC.modelLIDC3.angleStart);
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC4) mc.para.setting(mc.para.ULC.modelLIDC4.angleStart, out mc.para.ULC.modelLIDC4.angleStart);
 			}
 			if (sender.Equals(TB_AngleExtent))
 			{
-				mc.para.setting(mc.para.ULC.model.angleExtent, out mc.para.ULC.model.angleExtent);
+                if (mode == SELECT_FIND_MODEL.ULC_PKG) mc.para.setting(mc.para.ULC.model.angleExtent, out mc.para.ULC.model.angleExtent);
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC1) mc.para.setting(mc.para.ULC.modelLIDC1.angleExtent, out mc.para.ULC.modelLIDC1.angleExtent);
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC2) mc.para.setting(mc.para.ULC.modelLIDC2.angleExtent, out mc.para.ULC.modelLIDC2.angleExtent);
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC3) mc.para.setting(mc.para.ULC.modelLIDC3.angleExtent, out mc.para.ULC.modelLIDC3.angleExtent);
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC4) mc.para.setting(mc.para.ULC.modelLIDC4.angleExtent, out mc.para.ULC.modelLIDC4.angleExtent);
 			}
 			if (sender.Equals(TB_ExposureTime))
 			{
-				mc.para.setting(mc.para.ULC.model.exposureTime, out mc.para.ULC.model.exposureTime);
+                if (mode == SELECT_FIND_MODEL.ULC_PKG) mc.para.setting(mc.para.ULC.model.exposureTime, out mc.para.ULC.model.exposureTime);
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC1) mc.para.setting(mc.para.ULC.modelLIDC1.exposureTime, out mc.para.ULC.modelLIDC1.exposureTime);
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC2) mc.para.setting(mc.para.ULC.modelLIDC2.exposureTime, out mc.para.ULC.modelLIDC2.exposureTime);
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC3) mc.para.setting(mc.para.ULC.modelLIDC3.exposureTime, out mc.para.ULC.modelLIDC3.exposureTime);
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC4) mc.para.setting(mc.para.ULC.modelLIDC4.exposureTime, out mc.para.ULC.modelLIDC4.exposureTime);
 			}
 			if (sender.Equals(TB_Lighiting_Ch1))
 			{
-				mc.para.setting(mc.para.ULC.model.light.ch1, out mc.para.ULC.model.light.ch1);
+                if (mode == SELECT_FIND_MODEL.ULC_PKG) mc.para.setting(mc.para.ULC.model.light.ch1, out mc.para.ULC.model.light.ch1);
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC1) mc.para.setting(mc.para.ULC.modelLIDC1.light.ch1, out mc.para.ULC.modelLIDC1.light.ch1);
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC2) mc.para.setting(mc.para.ULC.modelLIDC2.light.ch1, out mc.para.ULC.modelLIDC2.light.ch1);
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC3) mc.para.setting(mc.para.ULC.modelLIDC3.light.ch1, out mc.para.ULC.modelLIDC3.light.ch1);
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC4) mc.para.setting(mc.para.ULC.modelLIDC4.light.ch1, out mc.para.ULC.modelLIDC4.light.ch1);
 			}
 			if (sender.Equals(TB_Lighiting_Ch2))
 			{
-				mc.para.setting(mc.para.ULC.model.light.ch2, out mc.para.ULC.model.light.ch2);
+                if (mode == SELECT_FIND_MODEL.ULC_PKG) mc.para.setting(mc.para.ULC.model.light.ch2, out mc.para.ULC.model.light.ch2);
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC1) mc.para.setting(mc.para.ULC.modelLIDC1.light.ch2, out mc.para.ULC.modelLIDC1.light.ch2);
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC2) mc.para.setting(mc.para.ULC.modelLIDC2.light.ch2, out mc.para.ULC.modelLIDC2.light.ch2);
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC3) mc.para.setting(mc.para.ULC.modelLIDC3.light.ch2, out mc.para.ULC.modelLIDC3.light.ch2);
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC4) mc.para.setting(mc.para.ULC.modelLIDC4.light.ch2, out mc.para.ULC.modelLIDC4.light.ch2);
 			}
 			if (sender.Equals(BT_Lighiting_Jog))
 			{
 				EVENT.hWindowLargeDisplay(mc.ulc.cam.acq.grabber.cameraNumber);
-				mc.hd.tool.jogMove(mc.hd.tool.tPos.x.ULC, mc.hd.tool.tPos.y.ULC, mc.hd.tool.tPos.z.ULC_FOCUS_WITH_MT, mc.para.CAL.toolAngleOffset.value, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                double posX = 0; double posY = 0;
+                FormLightingExposure ff = new FormLightingExposure();
+
+                if (mode == SELECT_FIND_MODEL.ULC_LIDC1)
+                {
+                    posX = mc.hd.tool.tPos.x.LIDC1;
+                    posY = mc.hd.tool.tPos.y.LIDC1;
+                    ff.mode = LIGHTEXPOSUREMODE.ULC_LIDC1;
+                }
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC2)
+                {
+                    posX = mc.hd.tool.tPos.x.LIDC2;
+                    posY = mc.hd.tool.tPos.y.LIDC2;
+                    ff.mode = LIGHTEXPOSUREMODE.ULC_LIDC2;
+                }
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC3)
+                {
+                    posX = mc.hd.tool.tPos.x.LIDC3;
+                    posY = mc.hd.tool.tPos.y.LIDC3;
+                    ff.mode = LIGHTEXPOSUREMODE.ULC_LIDC3;
+                }
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC4)
+                {
+                    posX = mc.hd.tool.tPos.x.LIDC4;
+                    posY = mc.hd.tool.tPos.y.LIDC4;
+                    ff.mode = LIGHTEXPOSUREMODE.ULC_LIDC4;
+                }
+                else
+                {
+                    posX = mc.hd.tool.tPos.x.ULC;
+                    posY = mc.hd.tool.tPos.y.ULC;
+                    ff.mode = LIGHTEXPOSUREMODE.ULC;
+                }
+                mc.hd.tool.jogMove(posX, posY, mc.hd.tool.tPos.z.ULC_FOCUS_WITH_MT, mc.para.CAL.toolAngleOffset.value, out ret.message); 
+                if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				mc.ulc.LIVE = true; mc.ulc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
-				FormLightingExposure ff = new FormLightingExposure();
-				ff.mode = LIGHTEXPOSUREMODE.ULC;
 				ff.ShowDialog();
 				mc.ulc.LIVE = false;
 				EVENT.hWindow2Display();
@@ -162,8 +255,6 @@ namespace PSA_Application
 			{
 				mc.para.setting(mc.para.ULC.chamferDiameter, out mc.para.ULC.chamferDiameter);
 			}
-			
-
 			if (sender.Equals(TB_ChamferScore))
 			{
 				mc.para.setting(mc.para.ULC.chamferPassScore, out mc.para.ULC.chamferPassScore);
@@ -250,7 +341,16 @@ namespace PSA_Application
 			mc.main.Thread_Polling();
 			mc.check.push(sender, false);
 		}
-	  
+
+        string angleStart = null;
+        string angelExtent = null;
+        string exposureTime = null;
+        string lightCh1 = null;
+        string lightCh2 = null;
+        Color LB_Model_Created_BackColor = Color.Transparent;
+        string LB_Model_Created_Text = "Model Uncreated";
+        string LB_SelectModel_Text = "Select LID Corner";
+
 		delegate void refresh_Call();
 		void refresh()
 		{
@@ -261,12 +361,12 @@ namespace PSA_Application
 			}
 			else
 			{
-				TB_PassScore.Text = mc.para.ULC.model.passScore.value.ToString();
-				TB_AngleStart.Text = mc.para.ULC.model.angleStart.value.ToString();
-				TB_AngleExtent.Text = mc.para.ULC.model.angleExtent.value.ToString();
-				TB_ExposureTime.Text = mc.para.ULC.model.exposureTime.value.ToString();
-				TB_Lighiting_Ch1.Text = mc.para.ULC.model.light.ch1.value.ToString();
-				TB_Lighiting_Ch2.Text = mc.para.ULC.model.light.ch2.value.ToString();
+                //TB_PassScore.Text = mc.para.ULC.model.passScore.value.ToString();
+                //TB_AngleStart.Text = mc.para.ULC.model.angleStart.value.ToString();
+                //TB_AngleExtent.Text = mc.para.ULC.model.angleExtent.value.ToString();
+                //TB_ExposureTime.Text = mc.para.ULC.model.exposureTime.value.ToString();
+                //TB_Lighiting_Ch1.Text = mc.para.ULC.model.light.ch1.value.ToString();
+                //TB_Lighiting_Ch2.Text = mc.para.ULC.model.light.ch2.value.ToString();
 
 				TB_ULC_RETRYNUM.Text = mc.para.ULC.failretry.value.ToString();
 				if ((int)mc.para.ULC.chamferuse.value == 0) { BT_CHAMFER_USE.Text = "OFF"; BT_CHAMFER_USE.Image = Properties.Resources.YellowLED_OFF; }
@@ -331,10 +431,16 @@ namespace PSA_Application
 				else if (mc.para.ULC.imageSave.value == 1) BT_ImageSave.Text = BT_ImageSave_Error.Text;
 				else BT_ImageSave.Text = BT_ImageSave_All.Text;
 
-				if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.NCC)
+				if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.NCC)
 				{
 					BT_AlgorismSelect.Text = BT_AlgorismSelect_NccModel.Text;
 					hWC_Model.Visible = true;
+                    TS_CORNER_TEACH.Visible = false;
+                    //TS_PASSSCORE.Visible = true;
+                    TS_CHECK_CAMFER.Visible = false;
+                    TS_CHECK_CIRCLE.Visible = false;
+                    TS_CHECK_ORIENTATION.Visible = false;
+                    TS_ALIGN_DIRECTION.Visible = false;
 
 					HOperatorSet.ClearWindow(hWC_Model.HalconID);
 					if (mc.para.ULC.model.isCreate.value == (int)BOOL.TRUE)
@@ -356,10 +462,16 @@ namespace PSA_Application
 						}
 					}
 				}
-				else if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+				else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.SHAPE)
 				{
 					BT_AlgorismSelect.Text = BT_AlgorismSelect_ShapeModel.Text;
 					hWC_Model.Visible = true;
+                    TS_CORNER_TEACH.Visible = false;
+                    //TS_PASSSCORE.Visible = true;
+                    TS_CHECK_CAMFER.Visible = false;
+                    TS_CHECK_CIRCLE.Visible = false;
+                    TS_CHECK_ORIENTATION.Visible = false;
+                    TS_ALIGN_DIRECTION.Visible = false;
 
 					HOperatorSet.ClearWindow(hWC_Model.HalconID);
 					if (mc.para.ULC.model.isCreate.value == (int)BOOL.TRUE)
@@ -381,16 +493,119 @@ namespace PSA_Application
 						}
 					}
 				}
-				else if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
+				else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
 				{
 					BT_AlgorismSelect.Text = BT_AlgorismSelect_RectangleModel.Text;
 					hWC_Model.Visible = false;
+                    TS_CORNER_TEACH.Visible = false;
+                    //TS_PASSSCORE.Visible = false;
+                    TS_CHECK_CAMFER.Visible = true;
+                    TS_CHECK_CIRCLE.Visible = true;
+                    TS_CHECK_ORIENTATION.Visible = true;
+                    TS_ALIGN_DIRECTION.Visible = false;
 				}
-				else if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
+				else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
 				{
 					BT_AlgorismSelect.Text = BT_AlgorismSelect_CircleModel.Text;
 					hWC_Model.Visible = false;
+                    TS_CORNER_TEACH.Visible = false;
+                    TS_ALIGN_DIRECTION.Visible = false;
 				}
+                else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                {
+                    BT_AlgorismSelect.Text = BT_AlgorismSelect_CornerModel.Text;
+                    hWC_Model.Visible = false;
+                    TS_CORNER_TEACH.Visible = true;
+                    //TS_PASSSCORE.Visible = false;
+                    TS_CHECK_CAMFER.Visible = false;
+                    TS_CHECK_CIRCLE.Visible = false;
+                    TS_CHECK_ORIENTATION.Visible = false;
+                    TS_ALIGN_DIRECTION.Visible = true;
+
+                    if (mode == SELECT_FIND_MODEL.ULC_LIDC1)
+                    {
+                        angleStart = mc.para.ULC.modelLIDC1.angleStart.value.ToString();
+                        angelExtent = mc.para.ULC.modelLIDC1.angleExtent.value.ToString();
+                        exposureTime = mc.para.ULC.modelLIDC1.exposureTime.value.ToString();
+                        lightCh1 = mc.para.ULC.modelLIDC1.light.ch1.value.ToString();
+                        lightCh2 = mc.para.ULC.modelLIDC1.light.ch2.value.ToString();
+
+                        if (mc.para.ULC.modelLIDC1.isCreate.value == (int)BOOL.TRUE)
+                        {
+                            LB_Model_Created_BackColor = Color.Transparent;
+                            LB_Model_Created_Text = "Model Created";
+                        }
+                        else
+                        {
+                            LB_Model_Created_BackColor = Color.Red;
+                            LB_Model_Created_Text = "Model Uncreated";
+                        }
+                        LB_SelectModel_Text = BT_SelectModel_LIDC1.Text;
+                    }
+                    else if (mode == SELECT_FIND_MODEL.ULC_LIDC2)
+                    {
+                        angleStart = mc.para.ULC.modelLIDC2.angleStart.value.ToString();
+                        angelExtent = mc.para.ULC.modelLIDC2.angleExtent.value.ToString();
+                        exposureTime = mc.para.ULC.modelLIDC2.exposureTime.value.ToString();
+                        lightCh1 = mc.para.ULC.modelLIDC2.light.ch1.value.ToString();
+                        lightCh2 = mc.para.ULC.modelLIDC2.light.ch2.value.ToString();
+
+                        if (mc.para.ULC.modelLIDC2.isCreate.value == (int)BOOL.TRUE)
+                        {
+                            LB_Model_Created_BackColor = Color.Transparent;
+                            LB_Model_Created_Text = "Model Created";
+                        }
+                        else
+                        {
+                            LB_Model_Created_BackColor = Color.Red;
+                            LB_Model_Created_Text = "Model Uncreated";
+                        }
+                        LB_SelectModel_Text = BT_SelectModel_LIDC2.Text;
+                    }
+                    else if (mode == SELECT_FIND_MODEL.ULC_LIDC3)
+                    {
+                        angleStart = mc.para.ULC.modelLIDC3.angleStart.value.ToString();
+                        angelExtent = mc.para.ULC.modelLIDC3.angleExtent.value.ToString();
+                        exposureTime = mc.para.ULC.modelLIDC3.exposureTime.value.ToString();
+                        lightCh1 = mc.para.ULC.modelLIDC3.light.ch1.value.ToString();
+                        lightCh2 = mc.para.ULC.modelLIDC3.light.ch2.value.ToString();
+
+                        if (mc.para.ULC.modelLIDC3.isCreate.value == (int)BOOL.TRUE)
+                        {
+                            LB_Model_Created_BackColor = Color.Transparent;
+                            LB_Model_Created_Text = "Model Created";
+                        }
+                        else
+                        {
+                            LB_Model_Created_BackColor = Color.Red;
+                            LB_Model_Created_Text = "Model Uncreated";
+                        }
+                        LB_SelectModel_Text = BT_SelectModel_LIDC3.Text;
+                    }
+                    else if (mode == SELECT_FIND_MODEL.ULC_LIDC4)
+                    {
+                        angleStart = mc.para.ULC.modelLIDC4.angleStart.value.ToString();
+                        angelExtent = mc.para.ULC.modelLIDC4.angleExtent.value.ToString();
+                        exposureTime = mc.para.ULC.modelLIDC4.exposureTime.value.ToString();
+                        lightCh1 = mc.para.ULC.modelLIDC4.light.ch1.value.ToString();
+                        lightCh2 = mc.para.ULC.modelLIDC4.light.ch2.value.ToString();
+
+                        if (mc.para.ULC.modelLIDC4.isCreate.value == (int)BOOL.TRUE)
+                        {
+                            LB_Model_Created_BackColor = Color.Transparent;
+                            LB_Model_Created_Text = "Model Created";
+                        }
+                        else
+                        {
+                            LB_Model_Created_BackColor = Color.Red;
+                            LB_Model_Created_Text = "Model Uncreated";
+                        }
+                        LB_SelectModel_Text = BT_SelectModel_LIDC4.Text;
+                    }
+                    LB_Model_Created.BackColor = LB_Model_Created_BackColor;
+                    LB_Model_Created.Text = LB_Model_Created_Text;
+                    LB_SelectModel.Text = LB_SelectModel_Text;
+                }
 				if (mc.para.ULC.model.isCreate.value == (int)BOOL.TRUE)
 				{
 					LB_Model_Created.BackColor = Color.Transparent;
@@ -432,18 +647,18 @@ namespace PSA_Application
 				}
 
 				TB_ORIENTATION_PASS_SCORE.Text = mc.para.ULC.modelHSOrientation.passScore.value.ToString();
+
+                TB_AngleStart.Text = angleStart;
+                TB_AngleExtent.Text = angelExtent;
+                TB_ExposureTime.Text = exposureTime;
+                TB_Lighiting_Ch1.Text = lightCh1;
+                TB_Lighiting_Ch2.Text = lightCh2;
+
+                if (mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3) BT_AlignDirection.Text = BT_AlignDirection_31.Text;
+                else BT_AlignDirection.Text = BT_AlignDirection_42.Text;
+
 				LB_.Focus();
 			}
-		}
-
-		private void CB_ULC_ImageSave_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			//mc.para.setting(ref mc.para.ULC.imageSave, CB_ULC_ImageSave.SelectedIndex);
-			//mc.para.write(out ret.b); if (!ret.b) { mc.message.alarm("para write error"); }
-			//refresh();
-		}
-
-	   
-
+        }
 	}
 }

@@ -82,7 +82,7 @@ namespace PSA_Application
 					}
 					#endregion
 					#region auto teach
-					if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.NCC)
+					if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.NCC)
 					{
 						mc.ulc.cam.model[(int)ULC_MODEL.PKG_NCC].algorism = MODEL_ALGORISM.NCC.ToString();
 						tmpRegion.row1 = (mc.ulc.cam.acq.height * 0.5) - (mc.ulc.cam.rectangleCenter.findHeight * 1.1);
@@ -100,7 +100,7 @@ namespace PSA_Application
 						mc.para.ULC.model.isCreate.value = (int)BOOL.TRUE;
 						if (mc.ulc.cam.model[(int)ULC_MODEL.PKG_NCC].isCreate == "false") mc.para.ULC.model.isCreate.value = (int)BOOL.FALSE;
 					}
-					if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+					if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.SHAPE)
 					{
 						mc.ulc.cam.model[(int)ULC_MODEL.PKG_SHAPE].algorism = MODEL_ALGORISM.SHAPE.ToString();
 						tmpRegion.row1 = (mc.ulc.cam.acq.height * 0.5) - (mc.ulc.cam.rectangleCenter.findHeight * 1.1);
@@ -789,7 +789,7 @@ namespace PSA_Application
 				{
 					mc.ulc.LIVE = false;
 					mc.ulc.model_delete(mode);
-					if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.NCC)
+					if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.NCC)
 					{
 						mc.ulc.cam.model[(int)ULC_MODEL.PKG_NCC].algorism = MODEL_ALGORISM.NCC.ToString();
 						//mc.ulc.cam.createModel((int)ULC_MODEL.PKG_NCC, "auto", "auto");
@@ -798,7 +798,7 @@ namespace PSA_Application
 						mc.para.ULC.model.isCreate.value = (int)BOOL.TRUE;
 						if (mc.ulc.cam.model[(int)ULC_MODEL.PKG_NCC].isCreate == "false") mc.para.ULC.model.isCreate.value = (int)BOOL.FALSE;
 					}
-					if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+					if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.SHAPE)
 					{
 						mc.ulc.cam.model[(int)ULC_MODEL.PKG_SHAPE].algorism = MODEL_ALGORISM.SHAPE.ToString();
 						//mc.ulc.cam.createModel((int)ULC_MODEL.PKG_SHAPE, "auto", "auto");
@@ -807,12 +807,12 @@ namespace PSA_Application
 						mc.para.ULC.model.isCreate.value = (int)BOOL.TRUE;
 						if (mc.ulc.cam.model[(int)ULC_MODEL.PKG_SHAPE].isCreate == "false") mc.para.ULC.model.isCreate.value = (int)BOOL.FALSE;
 					}
-					if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
+					if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
 					{
 						mc.ulc.cam.createRectangleCenter();
 						mc.para.ULC.model.isCreate.value = (int)BOOL.TRUE;
 					}
-					if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
+					if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
 					{
 						mc.ulc.cam.createCircleCenter();
 						mc.para.ULC.model.isCreate.value = (int)BOOL.TRUE;
@@ -1256,21 +1256,21 @@ namespace PSA_Application
 					#region ULC.req
 					if (mc.para.ULC.model.isCreate.value == (int)BOOL.TRUE)
 					{
-						if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.NCC)
+						if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.NCC)
 						{
 							mc.ulc.reqMode = REQMODE.FIND_MODEL;
 							mc.ulc.reqModelNumber = (int)ULC_MODEL.PKG_NCC;
 						}
-						else if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.SHAPE)
 						{
 							mc.ulc.reqMode = REQMODE.FIND_MODEL;
 							mc.ulc.reqModelNumber = (int)ULC_MODEL.PKG_SHAPE;
 						}
-						else if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
+						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
 						{
 							mc.ulc.reqMode = REQMODE.FIND_RECTANGLE_HS;
 						}
-						else if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
+						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
 						{
 							mc.ulc.reqMode = REQMODE.FIND_CIRCLE;
 						}
@@ -1293,19 +1293,19 @@ namespace PSA_Application
 					#region ULC result
 					if (mc.para.ULC.model.isCreate.value == (int)BOOL.TRUE)
 					{
-						if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.NCC)
+						if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.NCC)
 						{
 							rX = mc.ulc.cam.model[(int)ULC_MODEL.PKG_NCC].resultX;
 							rY = mc.ulc.cam.model[(int)ULC_MODEL.PKG_NCC].resultY;
 							rT = mc.ulc.cam.model[(int)ULC_MODEL.PKG_NCC].resultAngle;
 						}
-						else if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.SHAPE)
 						{
 							rX = mc.ulc.cam.model[(int)ULC_MODEL.PKG_SHAPE].resultX;
 							rY = mc.ulc.cam.model[(int)ULC_MODEL.PKG_SHAPE].resultY;
 							rT = mc.ulc.cam.model[(int)ULC_MODEL.PKG_SHAPE].resultAngle;
 						}
-						else if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
+						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
 						{
 							rX = mc.ulc.cam.rectangleCenter.resultX;
 							rY = mc.ulc.cam.rectangleCenter.resultY;
@@ -1313,7 +1313,7 @@ namespace PSA_Application
 							rWidth = mc.ulc.cam.rectangleCenter.resultWidth * 2;
 							rHeight = mc.ulc.cam.rectangleCenter.resultHeight * 2;
 						}
-						else if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
+						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
 						{
 							rX = mc.ulc.cam.circleCenter.resultX;
 							rY = mc.ulc.cam.circleCenter.resultY;
@@ -1448,21 +1448,21 @@ namespace PSA_Application
 					#region ULC.req
 					if (mc.para.ULC.model.isCreate.value == (int)BOOL.TRUE)
 					{
-						if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.NCC)
+						if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.NCC)
 						{
 							mc.ulc.reqMode = REQMODE.FIND_MODEL;
 							mc.ulc.reqModelNumber = (int)ULC_MODEL.PKG_NCC;
 						}
-						else if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.SHAPE)
 						{
 							mc.ulc.reqMode = REQMODE.FIND_MODEL;
 							mc.ulc.reqModelNumber = (int)ULC_MODEL.PKG_SHAPE;
 						}
-						else if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
+						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
 						{
 							mc.ulc.reqMode = REQMODE.FIND_RECTANGLE_HS;
 						}
-						else if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
+						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
 						{
 							mc.ulc.reqMode = REQMODE.FIND_CIRCLE;
 						}
@@ -1479,19 +1479,19 @@ namespace PSA_Application
 					#region ULC result
 					if (mc.para.ULC.model.isCreate.value == (int)BOOL.TRUE)
 					{
-						if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.NCC)
+						if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.NCC)
 						{
 							rX = mc.ulc.cam.model[(int)ULC_MODEL.PKG_NCC].resultX;
 							rY = mc.ulc.cam.model[(int)ULC_MODEL.PKG_NCC].resultY;
 							rT = mc.ulc.cam.model[(int)ULC_MODEL.PKG_NCC].resultAngle;
 						}
-						else if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.SHAPE)
 						{
 							rX = mc.ulc.cam.model[(int)ULC_MODEL.PKG_SHAPE].resultX;
 							rY = mc.ulc.cam.model[(int)ULC_MODEL.PKG_SHAPE].resultY;
 							rT = mc.ulc.cam.model[(int)ULC_MODEL.PKG_SHAPE].resultAngle;
 						}
-						else if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
+						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
 						{
 							rX = mc.ulc.cam.rectangleCenter.resultX;
 							rY = mc.ulc.cam.rectangleCenter.resultY;
@@ -1499,7 +1499,7 @@ namespace PSA_Application
 							rWidth = mc.ulc.cam.rectangleCenter.resultWidth * 2;
 							rHeight = mc.ulc.cam.rectangleCenter.resultHeight * 2;
 						}
-						else if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
+						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
 						{
 							rX = mc.ulc.cam.circleCenter.resultX;
 							rY = mc.ulc.cam.circleCenter.resultY;
@@ -2068,7 +2068,7 @@ namespace PSA_Application
 				BT_SpeedT.Visible = true;
 
 				BT_Test.Visible = true;
-				if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.NCC || mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+				if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.NCC || mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.SHAPE)
 				{
 					BT_AutoTeach.Visible = true;
 				}

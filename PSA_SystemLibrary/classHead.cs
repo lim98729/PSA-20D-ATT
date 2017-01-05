@@ -3254,21 +3254,21 @@ namespace PSA_SystemLibrary
 					if (mc.hd.reqMode == REQMODE.DUMY) mc.ulc.reqMode = REQMODE.GRAB;
 					else if (mc.para.ULC.model.isCreate.value == (int)BOOL.TRUE)
 					{
-						if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.NCC)
+						if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.NCC)
 						{
 							mc.ulc.reqMode = REQMODE.FIND_MODEL;
 							mc.ulc.reqModelNumber = (int)ULC_MODEL.PKG_NCC;
 						}
-						else if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.SHAPE)
 						{
 							mc.ulc.reqMode = REQMODE.FIND_MODEL;
 							mc.ulc.reqModelNumber = (int)ULC_MODEL.PKG_SHAPE;
 						}
-						else if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
+						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
 						{
 							mc.ulc.reqMode = REQMODE.FIND_RECTANGLE_HS;
 						}
-						else if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
+						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
 						{
 							mc.ulc.reqMode = REQMODE.FIND_CIRCLE;
 						}
@@ -5762,19 +5762,19 @@ namespace PSA_SystemLibrary
                         if (mc.hd.reqMode == REQMODE.DUMY) { }
                         else if (mc.para.ULC.model.isCreate.value == (int)BOOL.TRUE)
                         {
-                            if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.NCC)
+                            if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.NCC)
                             {
                                 ulcX = mc.ulc.cam.model[(int)ULC_MODEL.PKG_NCC].resultX;
                                 ulcY = mc.ulc.cam.model[(int)ULC_MODEL.PKG_NCC].resultY;
                                 ulcT = mc.ulc.cam.model[(int)ULC_MODEL.PKG_NCC].resultAngle;
                             }
-                            else if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+                            else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.SHAPE)
                             {
                                 ulcX = mc.ulc.cam.model[(int)ULC_MODEL.PKG_SHAPE].resultX;
                                 ulcY = mc.ulc.cam.model[(int)ULC_MODEL.PKG_SHAPE].resultY;
                                 ulcT = mc.ulc.cam.model[(int)ULC_MODEL.PKG_SHAPE].resultAngle;
                             }
-                            else if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
+                            else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
                             {
                                 ulcX = mc.ulc.cam.rectangleCenter.resultX;
                                 ulcY = mc.ulc.cam.rectangleCenter.resultY;
@@ -5782,7 +5782,7 @@ namespace PSA_SystemLibrary
                                 ulcW = mc.ulc.cam.rectangleCenter.resultWidth * 2;
                                 ulcH = mc.ulc.cam.rectangleCenter.resultHeight * 2;
                             }
-                            else if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
+                            else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
                             {	
                                 ulcX = mc.ulc.cam.circleCenter.resultX;
                                 ulcY = mc.ulc.cam.circleCenter.resultY;
@@ -5812,7 +5812,7 @@ namespace PSA_SystemLibrary
                                 errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_ULC_VISION_PROCESS_FAIL); break;
                             }
                         }
-                        if (ulcW != 0 && ulcH != 0 && mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
+                        if (ulcW != 0 && ulcH != 0 && mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
                         {
                             ulcWDif = ulcW - mc.para.MT.lidSize.x.value * 1000;
                             ulcHDif = ulcH - mc.para.MT.lidSize.y.value * 1000;
@@ -11605,19 +11605,19 @@ namespace PSA_SystemLibrary
 					if (mc.hd.reqMode == REQMODE.DUMY) { }
 					else if (mc.para.ULC.model.isCreate.value == (int)BOOL.TRUE)
 					{
-						if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.NCC)
+						if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.NCC)
 						{
 							ulcX = mc.ulc.cam.model[(int)ULC_MODEL.PKG_NCC].resultX;
 							ulcY = mc.ulc.cam.model[(int)ULC_MODEL.PKG_NCC].resultY;
 							ulcT = mc.ulc.cam.model[(int)ULC_MODEL.PKG_NCC].resultAngle;
 						}
-						else if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.SHAPE)
 						{
 							ulcX = mc.ulc.cam.model[(int)ULC_MODEL.PKG_SHAPE].resultX;
 							ulcY = mc.ulc.cam.model[(int)ULC_MODEL.PKG_SHAPE].resultY;
 							ulcT = mc.ulc.cam.model[(int)ULC_MODEL.PKG_SHAPE].resultAngle;
 						}
-						else if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
+						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
 						{
 							ulcX = mc.ulc.cam.rectangleCenter.resultX;
 							ulcY = mc.ulc.cam.rectangleCenter.resultY;
@@ -11625,7 +11625,7 @@ namespace PSA_SystemLibrary
 							ulcW = mc.ulc.cam.rectangleCenter.resultWidth * 2;
 							ulcH = mc.ulc.cam.rectangleCenter.resultHeight * 2;
 						}
-						else if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
+						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
 						{
 							ulcX = mc.ulc.cam.circleCenter.resultX;
 							ulcY = mc.ulc.cam.circleCenter.resultY;
@@ -11651,7 +11651,7 @@ namespace PSA_SystemLibrary
 							errorCheck(ERRORCODE.HD, sqc, str, ALARM_CODE.E_ULC_VISION_PROCESS_FAIL); break;
 						}
 					}
-					if (ulcW != 0 && ulcH != 0 && mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
+					if (ulcW != 0 && ulcH != 0 && mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
 					{
 						ulcWDif = ulcW - mc.para.MT.lidSize.x.value * 1000;
 						ulcHDif = ulcH - mc.para.MT.lidSize.y.value * 1000;
@@ -20782,21 +20782,21 @@ namespace PSA_SystemLibrary
 					#region ULC.req
 					if (mc.para.ULC.model.isCreate.value == (int)BOOL.TRUE)
 					{
-						if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.NCC)
+						if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.NCC)
 						{
 							mc.ulc.reqMode = REQMODE.FIND_MODEL;
 							mc.ulc.reqModelNumber = (int)ULC_MODEL.PKG_NCC;
 						}
-						else if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.SHAPE)
 						{
 							mc.ulc.reqMode = REQMODE.FIND_MODEL;
 							mc.ulc.reqModelNumber = (int)ULC_MODEL.PKG_SHAPE;
 						}
-						else if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
+						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
 						{
 							mc.ulc.reqMode = REQMODE.FIND_RECTANGLE_HS;
 						}
-						else if (mc.para.ULC.model.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
+						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
 						{
 							mc.ulc.reqMode = REQMODE.FIND_CIRCLE;
 						}
@@ -22326,6 +22326,46 @@ namespace PSA_SystemLibrary
 			}
 		}
 
+        public double LIDC1
+        {
+            get
+            {
+                double tmp;
+                tmp = ULC;
+                tmp += (mc.para.MT.lidSize.x.value * 1000 * 0.5);
+                return tmp;
+            }
+        }
+        public double LIDC2
+        {
+            get
+            {
+                double tmp;
+                tmp = LIDC1;
+                return tmp;
+            }
+        }
+        public double LIDC3
+        {
+            get
+            {
+                double tmp;
+                tmp = ULC;
+                tmp -= (mc.para.MT.lidSize.x.value * 1000 * 0.5);
+                return tmp;
+            }
+        }
+        public double LIDC4
+        {
+            get
+            {
+                double tmp;
+                tmp = LIDC3;
+                return tmp;
+            }
+        }
+
+
 		public double BD_EDGE
 		{
 			get
@@ -22520,6 +22560,46 @@ namespace PSA_SystemLibrary
 				return tmp;
 			}
 		}
+
+        public double LIDC1
+        {
+            get
+            {
+                double tmp;
+                tmp = ULC;
+                tmp += (mc.para.MT.lidSize.y.value * 1000 * 0.5);
+                return tmp;
+            }
+        }
+        public double LIDC2
+        {
+            get
+            {
+                double tmp;
+                tmp = ULC;
+                tmp -= (mc.para.MT.lidSize.y.value * 1000 * 0.5); 
+                return tmp;
+            }
+        }
+        public double LIDC3
+        {
+            get
+            {
+                double tmp;
+                tmp = LIDC2;
+                return tmp;
+            }
+        }
+        public double LIDC4
+        {
+            get
+            {
+                double tmp;
+                tmp = LIDC1;
+                return tmp;
+            }
+        }
+
 		public double BD_EDGE
 		{
 			get

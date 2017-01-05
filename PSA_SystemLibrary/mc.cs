@@ -4938,8 +4938,6 @@ namespace PSA_SystemLibrary
                 #region Up_Looking_Camera
                 else if (mode == (int)CenterRightSelMode.UpLooking_Camera)
                 {
-                    tmp_ULC.model.algorism.value = ULC.model.algorism.value;
-                    tmp_ULC.model.passScore.value = ULC.model.passScore.value;
                     tmp_ULC.model.angleStart.value = ULC.model.angleStart.value;
                     tmp_ULC.model.angleExtent.value = ULC.model.angleExtent.value;
                     tmp_ULC.model.exposureTime.value = ULC.model.exposureTime.value;
@@ -5374,8 +5372,6 @@ namespace PSA_SystemLibrary
                 #region UP_Looking_Camera
                 else if (mode == (int)CenterRightSelMode.UpLooking_Camera)
                 {
-                    if (ULC.model.algorism.value != tmp_ULC.model.algorism.value) { b = true; return b; }
-                    if (ULC.model.passScore.value != tmp_ULC.model.passScore.value) { b = true; return b; }
                     if (ULC.model.angleStart.value != tmp_ULC.model.angleStart.value) { b = true; return b; }
                     if (ULC.model.angleExtent.value != tmp_ULC.model.angleExtent.value) { b = true; return b; }
                     if (ULC.model.exposureTime.value != tmp_ULC.model.exposureTime.value) { b = true; return b; }
@@ -5820,8 +5816,6 @@ namespace PSA_SystemLibrary
                 #region Up_Looking_Camera
                 else if (mode == (int)CenterRightSelMode.UpLooking_Camera)
                 {
-                    ULC.model.algorism.value = tmp_ULC.model.algorism.value;
-                    ULC.model.passScore.value = tmp_ULC.model.passScore.value;
                     ULC.model.angleStart.value = tmp_ULC.model.angleStart.value;
                     ULC.model.angleExtent.value = tmp_ULC.model.angleExtent.value;
                     ULC.model.exposureTime.value = tmp_ULC.model.exposureTime.value;
@@ -7052,7 +7046,6 @@ namespace PSA_SystemLibrary
 
                     #region HDC
                     readRecipeItem(Module.HDC, ref HDC.modelPAD.isCreate, out msg, out fail); if (fail) goto SET_FAIL;
-                    readRecipeItem(Module.HDC, ref HDC.modelPAD.ID, out msg, out fail); if (fail) goto SET_FAIL;
                     readRecipeItem(Module.HDC, ref HDC.modelPAD.algorism, out msg, out fail); if (fail) goto SET_FAIL;
                     readRecipeItem(Module.HDC, ref HDC.modelPAD.passScore, out msg, out fail); if (fail) goto SET_FAIL;
                     readRecipeItem(Module.HDC, ref HDC.modelPAD.angleStart, out msg, out fail); if (fail) goto SET_FAIL;
@@ -7062,7 +7055,6 @@ namespace PSA_SystemLibrary
                     readRecipeItem(Module.HDC, ref HDC.modelPAD.light.ch2, out msg, out fail); if (fail) goto SET_FAIL;
 
                     readRecipeItem(Module.HDC, ref HDC.modelPADC1.isCreate, out msg, out fail); if (fail) goto SET_FAIL;
-                    readRecipeItem(Module.HDC, ref HDC.modelPADC1.ID, out msg, out fail); if (fail) goto SET_FAIL;
                     readRecipeItem(Module.HDC, ref HDC.modelPADC1.algorism, out msg, out fail); if (fail) goto SET_FAIL;
                     readRecipeItem(Module.HDC, ref HDC.modelPADC1.passScore, out msg, out fail); if (fail) goto SET_FAIL;
                     readRecipeItem(Module.HDC, ref HDC.modelPADC1.angleStart, out msg, out fail); if (fail) goto SET_FAIL;
@@ -7072,7 +7064,6 @@ namespace PSA_SystemLibrary
                     readRecipeItem(Module.HDC, ref HDC.modelPADC1.light.ch2, out msg, out fail); if (fail) goto SET_FAIL;
 
                     readRecipeItem(Module.HDC, ref HDC.modelPADC2.isCreate, out msg, out fail); if (fail) goto SET_FAIL;
-                    readRecipeItem(Module.HDC, ref HDC.modelPADC2.ID, out msg, out fail); if (fail) goto SET_FAIL;
                     readRecipeItem(Module.HDC, ref HDC.modelPADC2.algorism, out msg, out fail); if (fail) goto SET_FAIL;
                     readRecipeItem(Module.HDC, ref HDC.modelPADC2.passScore, out msg, out fail); if (fail) goto SET_FAIL;
                     readRecipeItem(Module.HDC, ref HDC.modelPADC2.angleStart, out msg, out fail); if (fail) goto SET_FAIL;
@@ -7082,7 +7073,6 @@ namespace PSA_SystemLibrary
                     readRecipeItem(Module.HDC, ref HDC.modelPADC2.light.ch2, out msg, out fail); if (fail) goto SET_FAIL;
 
                     readRecipeItem(Module.HDC, ref HDC.modelPADC3.isCreate, out msg, out fail); if (fail) goto SET_FAIL;
-                    readRecipeItem(Module.HDC, ref HDC.modelPADC3.ID, out msg, out fail); if (fail) goto SET_FAIL;
                     readRecipeItem(Module.HDC, ref HDC.modelPADC3.algorism, out msg, out fail); if (fail) goto SET_FAIL;
                     readRecipeItem(Module.HDC, ref HDC.modelPADC3.passScore, out msg, out fail); if (fail) goto SET_FAIL;
                     readRecipeItem(Module.HDC, ref HDC.modelPADC3.angleStart, out msg, out fail); if (fail) goto SET_FAIL;
@@ -7092,7 +7082,6 @@ namespace PSA_SystemLibrary
                     readRecipeItem(Module.HDC, ref HDC.modelPADC3.light.ch2, out msg, out fail); if (fail) goto SET_FAIL;
 
                     readRecipeItem(Module.HDC, ref HDC.modelPADC4.isCreate, out msg, out fail); if (fail) goto SET_FAIL;
-                    readRecipeItem(Module.HDC, ref HDC.modelPADC4.ID, out msg, out fail); if (fail) goto SET_FAIL;
                     readRecipeItem(Module.HDC, ref HDC.modelPADC4.algorism, out msg, out fail); if (fail) goto SET_FAIL;
                     readRecipeItem(Module.HDC, ref HDC.modelPADC4.passScore, out msg, out fail); if (fail) goto SET_FAIL;
                     readRecipeItem(Module.HDC, ref HDC.modelPADC4.angleStart, out msg, out fail); if (fail) goto SET_FAIL;
@@ -7117,9 +7106,6 @@ namespace PSA_SystemLibrary
 
                     #region ULC
                     readRecipeItem(Module.ULC, ref ULC.model.isCreate, out msg, out fail); if (fail) goto SET_FAIL;
-                    readRecipeItem(Module.ULC, ref ULC.model.ID, out msg, out fail); if (fail) goto SET_FAIL;
-                    readRecipeItem(Module.ULC, ref ULC.model.algorism, out msg, out fail); if (fail) goto SET_FAIL;
-                    readRecipeItem(Module.ULC, ref ULC.model.passScore, out msg, out fail); if (fail) goto SET_FAIL;
                     readRecipeItem(Module.ULC, ref ULC.model.angleStart, out msg, out fail); if (fail) goto SET_FAIL;
                     readRecipeItem(Module.ULC, ref ULC.model.angleExtent, out msg, out fail); if (fail) goto SET_FAIL;
                     readRecipeItem(Module.ULC, ref ULC.model.exposureTime, out msg, out fail); if (fail) goto SET_FAIL;
@@ -7481,7 +7467,6 @@ namespace PSA_SystemLibrary
 
                     #region HDC
                     writeRecipeItem(HDC.modelPAD.isCreate, tuplePos, out tuplePos);
-                    writeRecipeItem(HDC.modelPAD.ID, tuplePos, out tuplePos);
                     writeRecipeItem(HDC.modelPAD.algorism, tuplePos, out tuplePos);
                     writeRecipeItem(HDC.modelPAD.passScore, tuplePos, out tuplePos);
                     writeRecipeItem(HDC.modelPAD.angleStart, tuplePos, out tuplePos);
@@ -7491,7 +7476,6 @@ namespace PSA_SystemLibrary
                     writeRecipeItem(HDC.modelPAD.light.ch2, tuplePos, out tuplePos);
 
                     writeRecipeItem(HDC.modelPADC1.isCreate, tuplePos, out tuplePos);
-                    writeRecipeItem(HDC.modelPADC1.ID, tuplePos, out tuplePos);
                     writeRecipeItem(HDC.modelPADC1.algorism, tuplePos, out tuplePos);
                     writeRecipeItem(HDC.modelPADC1.passScore, tuplePos, out tuplePos);
                     writeRecipeItem(HDC.modelPADC1.angleStart, tuplePos, out tuplePos);
@@ -7501,7 +7485,6 @@ namespace PSA_SystemLibrary
                     writeRecipeItem(HDC.modelPADC1.light.ch2, tuplePos, out tuplePos);
 
                     writeRecipeItem(HDC.modelPADC2.isCreate, tuplePos, out tuplePos);
-                    writeRecipeItem(HDC.modelPADC2.ID, tuplePos, out tuplePos);
                     writeRecipeItem(HDC.modelPADC2.algorism, tuplePos, out tuplePos);
                     writeRecipeItem(HDC.modelPADC2.passScore, tuplePos, out tuplePos);
                     writeRecipeItem(HDC.modelPADC2.angleStart, tuplePos, out tuplePos);
@@ -7511,7 +7494,6 @@ namespace PSA_SystemLibrary
                     writeRecipeItem(HDC.modelPADC2.light.ch2, tuplePos, out tuplePos);
 
                     writeRecipeItem(HDC.modelPADC3.isCreate, tuplePos, out tuplePos);
-                    writeRecipeItem(HDC.modelPADC3.ID, tuplePos, out tuplePos);
                     writeRecipeItem(HDC.modelPADC3.algorism, tuplePos, out tuplePos);
                     writeRecipeItem(HDC.modelPADC3.passScore, tuplePos, out tuplePos);
                     writeRecipeItem(HDC.modelPADC3.angleStart, tuplePos, out tuplePos);
@@ -7521,7 +7503,6 @@ namespace PSA_SystemLibrary
                     writeRecipeItem(HDC.modelPADC3.light.ch2, tuplePos, out tuplePos);
 
                     writeRecipeItem(HDC.modelPADC4.isCreate, tuplePos, out tuplePos);
-                    writeRecipeItem(HDC.modelPADC4.ID, tuplePos, out tuplePos);
                     writeRecipeItem(HDC.modelPADC4.algorism, tuplePos, out tuplePos);
                     writeRecipeItem(HDC.modelPADC4.passScore, tuplePos, out tuplePos);
                     writeRecipeItem(HDC.modelPADC4.angleStart, tuplePos, out tuplePos);
@@ -7546,9 +7527,6 @@ namespace PSA_SystemLibrary
 
                     #region ULC
                     writeRecipeItem(ULC.model.isCreate, tuplePos, out tuplePos);
-                    writeRecipeItem(ULC.model.ID, tuplePos, out tuplePos);
-                    writeRecipeItem(ULC.model.algorism, tuplePos, out tuplePos);
-                    writeRecipeItem(ULC.model.passScore, tuplePos, out tuplePos);
                     writeRecipeItem(ULC.model.angleStart, tuplePos, out tuplePos);
                     writeRecipeItem(ULC.model.angleExtent, tuplePos, out tuplePos);
                     writeRecipeItem(ULC.model.exposureTime, tuplePos, out tuplePos);

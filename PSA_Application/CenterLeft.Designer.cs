@@ -49,6 +49,7 @@
             this.TB_PROD_Work_LotID = new System.Windows.Forms.TextBox();
             this.LB_PROD_Work_TrayID = new System.Windows.Forms.Label();
             this.GB_TrayCount = new System.Windows.Forms.GroupBox();
+            this.TB_PROD_Today_TrayCountLimit = new System.Windows.Forms.TextBox();
             this.LB_TodayTrayCount = new System.Windows.Forms.Label();
             this.TB_PROD_Today_TrayCount = new System.Windows.Forms.TextBox();
             this.LB_PROD_Work_TrayQty = new System.Windows.Forms.Label();
@@ -110,7 +111,6 @@
             this.LB_TubeStatus = new System.Windows.Forms.Label();
             this.CL_Timer = new System.Windows.Forms.Timer(this.components);
             this.stackFeederStatus = new PSA_Application.StackFeederStatus();
-            this.TB_PROD_Today_TrayCountLimit = new System.Windows.Forms.TextBox();
             this.TC_.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.GB_OutputTray.SuspendLayout();
@@ -360,6 +360,18 @@
             this.GB_TrayCount.TabIndex = 54;
             this.GB_TrayCount.TabStop = false;
             this.GB_TrayCount.Text = "Production Tray Count";
+            // 
+            // TB_PROD_Today_TrayCountLimit
+            // 
+            this.TB_PROD_Today_TrayCountLimit.Cursor = System.Windows.Forms.Cursors.Default;
+            this.TB_PROD_Today_TrayCountLimit.Font = new System.Drawing.Font("Arial Black", 18F, System.Drawing.FontStyle.Bold);
+            this.TB_PROD_Today_TrayCountLimit.ForeColor = System.Drawing.Color.Blue;
+            this.TB_PROD_Today_TrayCountLimit.Location = new System.Drawing.Point(503, 17);
+            this.TB_PROD_Today_TrayCountLimit.Name = "TB_PROD_Today_TrayCountLimit";
+            this.TB_PROD_Today_TrayCountLimit.ReadOnly = true;
+            this.TB_PROD_Today_TrayCountLimit.Size = new System.Drawing.Size(92, 41);
+            this.TB_PROD_Today_TrayCountLimit.TabIndex = 49;
+            this.TB_PROD_Today_TrayCountLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // LB_TodayTrayCount
             // 
@@ -1058,18 +1070,6 @@
             this.stackFeederStatus.Size = new System.Drawing.Size(295, 134);
             this.stackFeederStatus.TabIndex = 7;
             this.stackFeederStatus.Visible = false;
-            // 
-            // TB_PROD_Today_TrayCountLimit
-            // 
-            this.TB_PROD_Today_TrayCountLimit.Cursor = System.Windows.Forms.Cursors.Default;
-            this.TB_PROD_Today_TrayCountLimit.Font = new System.Drawing.Font("Arial Black", 18F, System.Drawing.FontStyle.Bold);
-            this.TB_PROD_Today_TrayCountLimit.ForeColor = System.Drawing.Color.Blue;
-            this.TB_PROD_Today_TrayCountLimit.Location = new System.Drawing.Point(503, 17);
-            this.TB_PROD_Today_TrayCountLimit.Name = "TB_PROD_Today_TrayCountLimit";
-            this.TB_PROD_Today_TrayCountLimit.ReadOnly = true;
-            this.TB_PROD_Today_TrayCountLimit.Size = new System.Drawing.Size(92, 41);
-            this.TB_PROD_Today_TrayCountLimit.TabIndex = 49;
-            this.TB_PROD_Today_TrayCountLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // CenterLeft
             // 

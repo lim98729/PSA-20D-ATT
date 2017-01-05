@@ -356,7 +356,7 @@ namespace PSA_Application
 				TB_PROD_Work_SetSpeed1.Text = mc.para.HD.place.search.vel.value.ToString();
 				TB_PROD_Work_SetSpeed2.Text = mc.para.HD.place.search2.vel.value.ToString();
 				TB_PROD_Work_HDC_Score.Text = mc.para.HDC.modelPADC1.passScore.value.ToString();
-				TB_PROD_Work_ULC_Score.Text = mc.para.ULC.model.passScore.value.ToString();
+                //TB_PROD_Work_ULC_Score.Text = mc.para.ULC.model.passScore.value.ToString();
 
 				if(mc.board.unloading.tmsInfo.LotID.S == "INVALID")
 					TB_PROD_Outbuf_LotID.Text = "";

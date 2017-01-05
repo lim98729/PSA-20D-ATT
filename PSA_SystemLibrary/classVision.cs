@@ -852,7 +852,8 @@ namespace PSA_SystemLibrary
 
 		public void model_delete(SELECT_FIND_MODEL selectModel)
 		{
-			if (selectModel == SELECT_FIND_MODEL.ULC_PKG)
+            if (selectModel == SELECT_FIND_MODEL.ULC_PKG || selectModel == SELECT_FIND_MODEL.ULC_LIDC1 || selectModel == SELECT_FIND_MODEL.ULC_LIDC2
+                || selectModel == SELECT_FIND_MODEL.ULC_LIDC3 || selectModel == SELECT_FIND_MODEL.ULC_LIDC4)
 			{
 				mc.para.ULC.model.isCreate.value = (int)BOOL.FALSE;
 				mc.ulc.cam.model[(int)ULC_MODEL.PKG_NCC].delete();
@@ -860,7 +861,6 @@ namespace PSA_SystemLibrary
 				mc.ulc.cam.rectangleCenter.delete(mc.ulc.cam.acq.grabber.cameraNumber);
 				mc.ulc.cam.circleCenter.delete(mc.ulc.cam.acq.grabber.cameraNumber);
 			}
-
 			if (selectModel == SELECT_FIND_MODEL.HDC_PAD)
 			{
 				mc.para.HDC.modelPAD.isCreate.value = (int)BOOL.FALSE;
