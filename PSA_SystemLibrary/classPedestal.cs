@@ -384,7 +384,7 @@ namespace PSA_SystemLibrary
 						//break;
 					}
 					// 161101-JHY, PD Down 속도 느려서 Up이랑 동일하게 변경.
-					Z.move(pos.z.READY, mc.speed.slowRPM, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
+					Z.move(pos.z.READY, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
 				case SQC.AUTO + 2:

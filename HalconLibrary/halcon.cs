@@ -271,11 +271,7 @@ namespace HalconLibrary
                     #endregion
                     #endregion
                 }
-                else
-                {
-                    acq.width = 800;
-                    acq.height = 600;
-                }
+
 				#region  Default settings used in HDevelop
 				HOperatorSet.SetSystem("do_low_error", "true"); // true (low level error)
 				HOperatorSet.SetSystem("temporary_mem_cache", "false");
@@ -408,6 +404,18 @@ namespace HalconLibrary
                 }
                 else
                 {
+                    if (cameraNumber == 1)
+                    {
+                        // ULC
+                        acq.width = 2048;
+                        acq.height = 2048;
+                    }
+                    if (cameraNumber == 2)
+                    {
+                        // HDC
+                        acq.width = 1626;
+                        acq.height = 1236;
+                    }
                     isActivate = true; returnStr = "dev.NotExistHW.CAMERA"; return; 
                 }
 

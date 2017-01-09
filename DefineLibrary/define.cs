@@ -2520,7 +2520,7 @@ namespace DefineLibrary
 		ULC = -20000,
 		WASTE = -52500,
 
-        WASTE_2SLOT = 21000,
+        WASTE_2SLOT = -21000,
 		WASTE_4SLOT = -121380,
 		TOUCHPROBE = 0,
 		LOADCELL = 0,

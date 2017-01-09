@@ -978,7 +978,7 @@ namespace PSA_SystemLibrary
                 //    sqc -= 3; break;
 
                 case (int)SEQ.AUTO_PLACE_STANDBY:
-					tool.place_standby();		// 20140516 : place_home() -> place_standby()
+                    tool.move_standby();		// 20140516 : place_home() -> place_standby()
 					if (tool.RUNING) break;
 					if (tool.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
 					mc.log.mcclog.write(mc.log.MCCCODE.ATTACH_WORK, 1);
@@ -3234,13 +3234,13 @@ namespace PSA_SystemLibrary
                     {
                         if (mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3)
                         {
-                            Y.moveCompare(tPos.y.LIDC3, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-                            X.moveCompare(tPos.x.LIDC3, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                            Y.moveCompare(tPos.y.LIDC1, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                            X.moveCompare(tPos.x.LIDC1, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
                         }
                         else
                         {
-                            Y.moveCompare(tPos.y.LIDC4, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-                            X.moveCompare(tPos.x.LIDC4, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                            Y.moveCompare(tPos.y.LIDC2, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                            X.moveCompare(tPos.x.LIDC2, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
                         }
                     }
 					mc.ulc.cam.grabClear(out ret.message, out ret.s);	// clear grab image 20140829
@@ -3325,17 +3325,17 @@ namespace PSA_SystemLibrary
                     else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CORNER)
                     {
                         ulcP1X = 0; ulcP1Y = 0; ulcP1T = 0;
-                        if (mc.para.ULC.modelLIDC3.isCreate.value == (int)BOOL.TRUE
+                        if (mc.para.ULC.modelLIDC1.isCreate.value == (int)BOOL.TRUE
                             && mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3)
                         {
-                            mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
-                            mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC3.light, mc.para.ULC.modelLIDC3.exposureTime);
+                            mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
+                            mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC1.light, mc.para.ULC.modelLIDC1.exposureTime);
                         }
-                        else if (mc.para.ULC.modelLIDC4.isCreate.value == (int)BOOL.TRUE
+                        else if (mc.para.ULC.modelLIDC2.isCreate.value == (int)BOOL.TRUE
                             && mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C2AndC4)
                         {
-                            mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_4;
-                            mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC4.light, mc.para.ULC.modelLIDC4.exposureTime);
+                            mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_2;
+                            mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC2.light, mc.para.ULC.modelLIDC2.exposureTime);
                         }
                         else
                         {
@@ -3395,13 +3395,13 @@ namespace PSA_SystemLibrary
 
                     if (mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3)
                     {
-                        Y.move(tPos.y.LIDC1, out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-                        X.move(tPos.x.LIDC1, out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                        Y.move(tPos.y.LIDC3, out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                        X.move(tPos.x.LIDC3, out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
                     }
                     else
                     {
-                        Y.move(tPos.y.LIDC2, out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-                        X.move(tPos.x.LIDC2, out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                        Y.move(tPos.y.LIDC4, out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                        X.move(tPos.x.LIDC4, out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
                     }
                     dwell.Reset();
                     sqc++; break;
@@ -3434,15 +3434,15 @@ namespace PSA_SystemLibrary
                     else
                     {
                         ulcP1X = 0; ulcP1Y = 0; ulcP1T = 0;
-                        if (mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3 && mc.para.ULC.modelLIDC1.isCreate.value == (int)BOOL.TRUE)
+                        if (mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3 && mc.para.ULC.modelLIDC3.isCreate.value == (int)BOOL.TRUE)
                         {
-                            mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
-                            mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC1.light, mc.para.ULC.modelLIDC1.exposureTime);
+                            mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
+                            mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC3.light, mc.para.ULC.modelLIDC3.exposureTime);
                         }
-                        else if (mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C2AndC4 && mc.para.ULC.modelLIDC2.isCreate.value == (int)BOOL.TRUE)
+                        else if (mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C2AndC4 && mc.para.ULC.modelLIDC4.isCreate.value == (int)BOOL.TRUE)
                         {
-                            mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_2;
-                            mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC2.light, mc.para.ULC.modelLIDC2.exposureTime);
+                            mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_4;
+                            mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC4.light, mc.para.ULC.modelLIDC4.exposureTime);
                         }
                         else
                         {
@@ -22540,7 +22540,7 @@ namespace PSA_SystemLibrary
             {
                 double tmp;
                 tmp = ULC;
-                tmp += (mc.para.MT.lidSize.x.value * 1000 * 0.5);
+                tmp -= (mc.para.MT.lidSize.x.value * 1000 * 0.5);
                 return tmp;
             }
         }
@@ -22559,7 +22559,7 @@ namespace PSA_SystemLibrary
             {
                 double tmp;
                 tmp = ULC;
-                tmp -= (mc.para.MT.lidSize.x.value * 1000 * 0.5);
+                tmp += (mc.para.MT.lidSize.x.value * 1000 * 0.5);
                 return tmp;
             }
         }
@@ -22775,7 +22775,7 @@ namespace PSA_SystemLibrary
             {
                 double tmp;
                 tmp = ULC;
-                tmp += (mc.para.MT.lidSize.y.value * 1000 * 0.5);
+                tmp -= (mc.para.MT.lidSize.y.value * 1000 * 0.5);
                 return tmp;
             }
         }
@@ -22785,7 +22785,7 @@ namespace PSA_SystemLibrary
             {
                 double tmp;
                 tmp = ULC;
-                tmp -= (mc.para.MT.lidSize.y.value * 1000 * 0.5); 
+                tmp += (mc.para.MT.lidSize.y.value * 1000 * 0.5); 
                 return tmp;
             }
         }

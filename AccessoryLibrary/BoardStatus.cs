@@ -257,10 +257,10 @@ namespace AccessoryLibrary
             FrRr = _FrRr;
             boardZone = zone;
 
-            padSizeX = (this.Width - countX * 3) / countX;
-            padSizeY = (this.Height - countX * 3) / countY;
-            gapX = (this.Width - countX * 3 - (padSizeX * countX)) / 2;
-            gapY = (this.Height - countY * 3 - (padSizeY * countY)) / 2;
+            padSizeX = (this.Width - (countX + 1) * 3) / countX;
+            padSizeY = (this.Height - (countY + 1) * 3) / countY;
+            gapX = (this.Width - (countX - 1) * 3 - (padSizeX * countX)) / 2;
+            gapY = (this.Height - (countY - 1) * 3 - (padSizeY * countY)) / 2;
         }
 
         private void SetStatus(Rectangle rect)

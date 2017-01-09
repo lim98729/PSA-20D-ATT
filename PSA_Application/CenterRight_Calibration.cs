@@ -184,11 +184,13 @@ namespace PSA_Application
 			#region BT_HDC_PD_Calibration
 			if (sender.Equals(BT_HDC_PD_Calibration))
 			{
+                int padX = 3;
+                int padY = 1;
 				#region HD moving
 				if (unitCodePDRef == UnitCodePDRef.P1)
 				{
-					posX = mc.hd.tool.cPos.x.PD_P1;
-					posY = mc.hd.tool.cPos.y.PD_P1;
+                    posX = mc.hd.tool.cPos.x.PAD(padX);
+                    posY = mc.hd.tool.cPos.y.PAD(padY);
 					jogMode = JOGMODE.HDC_PD_P1;
 				}
 				else if (unitCodePDRef == UnitCodePDRef.P2)
@@ -217,8 +219,8 @@ namespace PSA_Application
 				if (unitCodePDRef == UnitCodePDRef.P1)
 				{
 					//posX = (double)MP_PD_X.P1_FR; posY = (double)MP_PD_Y.P1;
-					posX = mc.pd.pos.x.P1;
-					posY = mc.pd.pos.y.P1;
+                    posX = mc.pd.pos.x.PAD(padX);
+                    posY = mc.pd.pos.y.PAD(padY);
 				}
 				else if (unitCodePDRef == UnitCodePDRef.P2)
 				{
@@ -326,7 +328,7 @@ namespace PSA_Application
 				//mc.message.OkCancel("모든 Pick Offset X,Y,Z 값은 초기화 됩니다. 계속 진행할까요?", out ret.dialog);
 				if (ret.usrDialog == DIAG_RESULT.Cancel) goto EXIT;
 				#region mc.para.HD.pick.offset clear
-				for (int i = 0; i < 8; i++)
+				for (int i = 0; i < 4; i++)
 				{
 					mc.para.HD.pick.offset[i].x.value = 0;
 					mc.para.HD.pick.offset[i].y.value = 0;

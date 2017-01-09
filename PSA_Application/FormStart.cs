@@ -290,7 +290,7 @@ namespace PSA_Application
 					MessageBox.Show("IO Read(AIR Meter) Error!\nPlease Retry Again!", "ERROR", MessageBoxButtons.OK);
 					goto EXIT;
 				}
-				if (ret.b || dev.debug || (mc.swcontrol.hwCheckSkip & 0x02) != 0) goto AIR_MET_OK;
+				if (ret.b || dev.debug || mc.swcontrol.noCheckAir == true) goto AIR_MET_OK;
 			AIR_MET:
 				mc.OUT.MAIN.T_RED(true, out ret.message);
 				mc.OUT.MAIN.T_BUZZER(true, out ret.message);

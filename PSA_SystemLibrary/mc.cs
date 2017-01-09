@@ -2564,6 +2564,7 @@ namespace PSA_SystemLibrary
                 get
                 {
                     if (dev.NotExistHW.AXT) return true;
+                    if (mc.swcontrol.noCheckAir == true) return true;
                     mc.IN.MAIN.AIR_MET(out ret.b, out ret.message);
                     if ((!ret.b || ret.message != RetMessage.OK) && (swcontrol.hwCheckSkip & 0x01) == 0)
                     {
@@ -4426,6 +4427,7 @@ namespace PSA_SystemLibrary
             public static int setupMode;	// Graph Display Start Point. 0:from Z Down Start, 1:from 2nd search Start
             //public static int useHwTriger;		// hwTriger 사용 유무
             public static double forceMeanOffset;
+            public static bool noCheckAir;
 
             // 20140612 
             public static int logSave;
@@ -4540,6 +4542,9 @@ namespace PSA_SystemLibrary
                 if (temp == 2) genflag = true;
                 useDoorControl = (temp != 1) ? false : true;
 
+                temp = swconfig.GetInt("noCheckAir", 2);
+                if (temp == 2) genflag = true;
+                noCheckAir = (temp != 1) ? false : true;
                 dev.NotExistHW.ZMP = nousemotion;
                 dev.NotExistHW.AXT = nouseio;
                 dev.NotExistHW.CAMERA = nousecamera;
@@ -4624,6 +4629,8 @@ namespace PSA_SystemLibrary
 
                 temp = useDoorControl ? 1 : 0;
                 swconfig.WriteInt("useDoorControl", temp);
+                temp = noCheckAir ? 1 : 0;
+                swconfig.WriteInt("noCheckAir", temp);
             }
         }
 

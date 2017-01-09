@@ -679,7 +679,7 @@ namespace PSA_Application
 
 		private void CenterRight_Main_Load(object sender, EventArgs e)
 		{
-            toolStrip17.Visible = false;
+            //toolStrip17.Visible = false;
 
 			if (mc.swcontrol.logSave == 30)
 				CbB_LogSave.SelectedIndex = 0;
@@ -688,7 +688,5 @@ namespace PSA_Application
 			else
 				CbB_LogSave.SelectedIndex = 2;
 		}
-
-
 	}
 }
