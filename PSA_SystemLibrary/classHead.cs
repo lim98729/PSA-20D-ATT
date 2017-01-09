@@ -3282,7 +3282,11 @@ namespace PSA_SystemLibrary
 						Z.move(tPos.z.ULC_FOCUS_WITH_MT /*+ mc.para.MT.lidSize.h.value * 1000*/, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
 					}
 					#region ULC.req
-					if (mc.hd.reqMode == REQMODE.DUMY) mc.ulc.reqMode = REQMODE.GRAB;
+                    if (mc.hd.reqMode == REQMODE.DUMY)
+                    {
+                        mc.ulc.reqMode = REQMODE.GRAB;
+                        mc.ulc.lighting_exposure(mc.para.ULC.model.light, mc.para.ULC.model.exposureTime);
+                    }
                     else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.NCC || mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.SHAPE
                         || mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE || mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
                     {
@@ -3321,13 +3325,13 @@ namespace PSA_SystemLibrary
                     else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CORNER)
                     {
                         ulcP1X = 0; ulcP1Y = 0; ulcP1T = 0;
-                        if (mc.para.ULC.modelLIDC3.isCreate.value == (int)BOOL.TRUE 
+                        if (mc.para.ULC.modelLIDC3.isCreate.value == (int)BOOL.TRUE
                             && mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3)
                         {
                             mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
                             mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC3.light, mc.para.ULC.modelLIDC3.exposureTime);
                         }
-                        else if (mc.para.ULC.modelLIDC4.isCreate.value == (int)BOOL.TRUE 
+                        else if (mc.para.ULC.modelLIDC4.isCreate.value == (int)BOOL.TRUE
                             && mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C2AndC4)
                         {
                             mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_4;
@@ -3382,6 +3386,9 @@ namespace PSA_SystemLibrary
 
                 #region case 60 XYZ.move.LIDC2(C4)
                 case 60:
+                    // 여기는 Corner Algoritm 일 때만 탄다.
+                    if (mc.para.ULC.algorism.value != (int)MODEL_ALGORISM.CORNER) break;
+
                     mc.log.mcclog.write(mc.log.MCCCODE.HEAD_MOVE_ULC_POS, 0);
                     rateY = Y.config.speed.rate; Y.config.speed.rate = Math.Max(rateY * 0.3, 0.1);
                     rateX = X.config.speed.rate; X.config.speed.rate = Math.Max(rateX * 0.3, 0.1);
@@ -3419,7 +3426,11 @@ namespace PSA_SystemLibrary
 					#endregion
 
                     #region ULC.req
-                    if (mc.hd.reqMode == REQMODE.DUMY) mc.ulc.reqMode = REQMODE.GRAB;
+                    if (mc.hd.reqMode == REQMODE.DUMY)
+                    {
+                        mc.ulc.reqMode = REQMODE.GRAB;
+                        mc.ulc.lighting_exposure(mc.para.ULC.model.light, mc.para.ULC.model.exposureTime);
+                    }
                     else
                     {
                         ulcP1X = 0; ulcP1Y = 0; ulcP1T = 0;
@@ -3437,7 +3448,7 @@ namespace PSA_SystemLibrary
                         {
                             mc.ulc.reqMode = REQMODE.GRAB;
                             mc.ulc.lighting_exposure(mc.para.ULC.model.light, mc.para.ULC.model.exposureTime);
-                        }                      
+                        }
                     }
                     //mc.ulc.req = true;
                     #endregion
@@ -3475,9 +3486,7 @@ namespace PSA_SystemLibrary
                     { Esqc = sqc; sqc = SQC.ERROR; break; }
                     mc.log.mcclog.write(mc.log.MCCCODE.SCAN_HEAT_SLUG, 1);
                     // 					mc.hd.homepickdone = true;		// 집고 문제 없으니 true
-                    if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CORNER) sqc = 60;
-                    else sqc = SQC.STOP;
-                    break;
+                    sqc = SQC.STOP; break;
                 #endregion
 
 				case SQC.ERROR:

@@ -237,7 +237,7 @@ namespace HalconLibrary
 			hWC_Cam3.Visible = false;
 			hWC_Cam4.Visible = false;
 			hWC_Main.Visible = false;
-			if (dev.NotExistHW.CAMERA) return false;
+			//if (dev.NotExistHW.CAMERA) return false;
 
 			hVision.cam1.window.handleSet(hWC_Cam1.HalconID);
 			hVision.cam2.window.handleSet(hWC_Cam2.HalconID);
@@ -253,7 +253,7 @@ namespace HalconLibrary
 		}
 		public bool hWindowLargeDisplay(int camNum)
 		{
-			if (dev.NotExistHW.CAMERA) return false;
+			//if (dev.NotExistHW.CAMERA) return false;
 			if (camNum == 1 && !hVision.cam1.isActivate) return false;
 			if (camNum == 2 && !hVision.cam2.isActivate) return false;
 			if (camNum == 3 && !hVision.cam3.isActivate) return false;
@@ -322,7 +322,7 @@ namespace HalconLibrary
 				}
 			}
 			#endregion
-
+            
 			hWindowHandle(1, hWC_Cam1.HalconID);
 			hWindowHandle(2, hWC_Cam2.HalconID);
 			hWindowHandle(3, hWC_Cam3.HalconID);
@@ -332,7 +332,7 @@ namespace HalconLibrary
 		}
 		public bool hWindow2by2Display()
 		{
-			if (dev.NotExistHW.CAMERA) return false;
+			//if (dev.NotExistHW.CAMERA) return false;
 			hWC_Cam1.Visible = hVision.cam1.isActivate;
 			hWC_Cam2.Visible = hVision.cam2.isActivate;
 			hWC_Cam3.Visible = hVision.cam3.isActivate;
@@ -398,7 +398,7 @@ namespace HalconLibrary
 		}
 		public bool hWindow2Display()
 		{
-			if (dev.NotExistHW.CAMERA) return false;
+			//if (dev.NotExistHW.CAMERA) return false;
 			hWC_Cam1.Visible = hVision.cam1.isActivate;
 			hWC_Cam2.Visible = hVision.cam2.isActivate;
 			hWC_Cam3.Visible = false;
@@ -445,7 +445,7 @@ namespace HalconLibrary
 		}
 		public bool hWindow2DisplayClear()
 		{
-			if (dev.NotExistHW.CAMERA) return false;
+			//if (dev.NotExistHW.CAMERA) return false;
 			hWindow2Display();
 			hVision.cam1.clearWindow();
 			hVision.cam2.clearWindow();

@@ -171,66 +171,111 @@ namespace HalconLibrary
 		{
 			try
 			{
-                if (dev.NotExistHW.CAMERA) { isActivate = true; returnStr = "dev.NotExistHW.CAMERA"; return; }
-				if (isActivate)
-				{
-					//returnStr = "\n";
-					//returnStr +=  " Activate      : Already" + "\n";
-					returnStr  = " Device UserID : " + acq.DeviceUserID + "\n";
-					returnStr += " Device Vendor : " + acq.DeviceVendorName + "\n";
-					returnStr += " Device Model  : " + acq.DeviceModelName + "\n";
-					returnStr += " Device IP     : " + acq.grabber.cameraIP + "\n";
-					returnStr += " Resolution    : " + acq.width.ToString() + " x " + acq.height.ToString();
-					return; 
-				}
+                if (!dev.NotExistHW.CAMERA)
+                {
+                    if (isActivate)
+                    {
+                        //returnStr = "\n";
+                        //returnStr +=  " Activate      : Already" + "\n";
+                        returnStr = " Device UserID : " + acq.DeviceUserID + "\n";
+                        returnStr += " Device Vendor : " + acq.DeviceVendorName + "\n";
+                        returnStr += " Device Model  : " + acq.DeviceModelName + "\n";
+                        returnStr += " Device IP     : " + acq.grabber.cameraIP + "\n";
+                        returnStr += " Resolution    : " + acq.width.ToString() + " x " + acq.height.ToString();
+                        return;
+                    }
 
-				#region initialize
-				acq.grabber.cameraNumber = cameraNumber;
-				acq.grabber.name = name;
-				acq.grabber.device = get_device(cameraNumber, name); if (acq.grabber.device == "NO_DEVICE") { returnStr = acq.grabber.device; return; }
-				acq.grabber.cameraIP = get_IP(cameraNumber, name); if (acq.grabber.cameraIP == "NO_DEVICE") { returnStr = acq.grabber.cameraIP; return; }
-				if (name == "pylon")
-				{
-					acq.grabber.horizontalResolution = 1;
-					acq.grabber.verticalResolution = 1;
-					acq.grabber.imageHeight = 0;
-					acq.grabber.imageWidth = 0;
-					acq.grabber.startRow = 0;
-					acq.grabber.startColumn = 0;
-					acq.grabber.field = "progressive";
-					acq.grabber.bitsPerChannel = 8;
-					acq.grabber.colorSpace = "gray";
-					acq.grabber.generic = -1;
-					acq.grabber.externalTrigger = "false";
-					acq.grabber.cameraType = "auto";
-					acq.grabber.port = 0;
-					acq.grabber.lineIn = -1;
-				}
-				else if (name == "GigEVision")
-				{
-					acq.grabber.horizontalResolution = 0;
-					acq.grabber.verticalResolution = 0;
-					acq.grabber.imageHeight = 0;
-					acq.grabber.imageWidth = 0;
-					acq.grabber.startRow = 0;
-					acq.grabber.startColumn = 0;
-					acq.grabber.field = "progressive";
-					acq.grabber.bitsPerChannel = -1;
-					acq.grabber.colorSpace = "default";
-					acq.grabber.generic = -1;
-					acq.grabber.externalTrigger = "false";
-					acq.grabber.cameraType = "default";
-					acq.grabber.port = 0;
-					acq.grabber.lineIn = -1;
-				}
-				else
-				{
-					returnStr = "Undefine Devie";
-					return;
-				}
+                    #region initialize
+                    acq.grabber.cameraNumber = cameraNumber;
+                    acq.grabber.name = name;
+                    acq.grabber.device = get_device(cameraNumber, name); if (acq.grabber.device == "NO_DEVICE") { returnStr = acq.grabber.device; return; }
+                    acq.grabber.cameraIP = get_IP(cameraNumber, name); if (acq.grabber.cameraIP == "NO_DEVICE") { returnStr = acq.grabber.cameraIP; return; }
+                    if (name == "pylon")
+                    {
+                        acq.grabber.horizontalResolution = 1;
+                        acq.grabber.verticalResolution = 1;
+                        acq.grabber.imageHeight = 0;
+                        acq.grabber.imageWidth = 0;
+                        acq.grabber.startRow = 0;
+                        acq.grabber.startColumn = 0;
+                        acq.grabber.field = "progressive";
+                        acq.grabber.bitsPerChannel = 8;
+                        acq.grabber.colorSpace = "gray";
+                        acq.grabber.generic = -1;
+                        acq.grabber.externalTrigger = "false";
+                        acq.grabber.cameraType = "auto";
+                        acq.grabber.port = 0;
+                        acq.grabber.lineIn = -1;
+                    }
+                    else if (name == "GigEVision")
+                    {
+                        acq.grabber.horizontalResolution = 0;
+                        acq.grabber.verticalResolution = 0;
+                        acq.grabber.imageHeight = 0;
+                        acq.grabber.imageWidth = 0;
+                        acq.grabber.startRow = 0;
+                        acq.grabber.startColumn = 0;
+                        acq.grabber.field = "progressive";
+                        acq.grabber.bitsPerChannel = -1;
+                        acq.grabber.colorSpace = "default";
+                        acq.grabber.generic = -1;
+                        acq.grabber.externalTrigger = "false";
+                        acq.grabber.cameraType = "default";
+                        acq.grabber.port = 0;
+                        acq.grabber.lineIn = -1;
+                    }
+                    else
+                    {
+                        returnStr = "Undefine Devie";
+                        return;
+                    }
 
-				#endregion
+                    #region Initialize acquisition
 
+                    HOperatorSet.OpenFramegrabber(acq.grabber.name,
+                                                    acq.grabber.horizontalResolution,
+                                                    acq.grabber.verticalResolution,
+                                                    acq.grabber.imageWidth,
+                                                    acq.grabber.imageHeight,
+                                                    acq.grabber.startRow,
+                                                    acq.grabber.startColumn,
+                                                    acq.grabber.field,
+                                                    acq.grabber.bitsPerChannel,
+                                                    acq.grabber.colorSpace,
+                                                    acq.grabber.generic,
+                                                    acq.grabber.externalTrigger,
+                                                    acq.grabber.cameraType,
+                                                    acq.grabber.device,
+                                                    acq.grabber.port,
+                                                    acq.grabber.lineIn,
+                                                    out acq.handle);
+                    readGrabber();
+                    #endregion
+
+                    #region strobe 조명 off 위한 grab() 실행
+                    if (acq.TriggerMode == "On")
+                    {
+                        //HOperatorSet.SetFramegrabberParam(acq.handle, "TriggerSoftware", 0);
+                        HOperatorSet.SetFramegrabberParam(acq.handle, "TriggerMode", "Off");
+                        HOperatorSet.GrabImage(out acq.Image, acq.handle);
+                        HOperatorSet.GetImageSize(acq.Image, out acq.width, out acq.height);
+                        HOperatorSet.SetFramegrabberParam(acq.handle, "TriggerMode", "On");
+                    }
+                    else
+                    {
+                        HOperatorSet.GrabImage(out acq.Image, acq.handle);
+                        HOperatorSet.GetImageSize(acq.Image, out acq.width, out acq.height);
+                    }
+
+                    if (acq.AcquisitionMode == "Continuous") HOperatorSet.GrabImageStart(acq.handle, -1);
+                    #endregion
+                    #endregion
+                }
+                else
+                {
+                    acq.width = 800;
+                    acq.height = 600;
+                }
 				#region  Default settings used in HDevelop
 				HOperatorSet.SetSystem("do_low_error", "true"); // true (low level error)
 				HOperatorSet.SetSystem("temporary_mem_cache", "false");
@@ -242,10 +287,9 @@ namespace HalconLibrary
 				//HOperatorSet.SetSystem("parallelize_operators", "false");
                 //HOperatorSet.SetSystem("thread_pool", "false");		// 문제되면 주석처리 하시오.
 
-				#region Initialize local and output iconic variables
-
-				HOperatorSet.GenEmptyObj(out acq.Image);
-
+				
+                #region Initialize local and output iconic variables
+                HOperatorSet.GenEmptyObj(out acq.Image);
 				for (int i = 0; i < MODEL_MAX_CNT; i++)
 				{
 					HOperatorSet.GenEmptyObj(out model[i].CreateTemplate);
@@ -327,27 +371,6 @@ namespace HalconLibrary
 
 				#endregion
 
-				#region Initialize acquisition
-
-				HOperatorSet.OpenFramegrabber(acq.grabber.name,
-												acq.grabber.horizontalResolution,
-												acq.grabber.verticalResolution,
-												acq.grabber.imageWidth,
-												acq.grabber.imageHeight,
-												acq.grabber.startRow,
-												acq.grabber.startColumn,
-												acq.grabber.field,
-												acq.grabber.bitsPerChannel,
-												acq.grabber.colorSpace,
-												acq.grabber.generic,
-												acq.grabber.externalTrigger,
-												acq.grabber.cameraType,
-												acq.grabber.device,
-												acq.grabber.port,
-												acq.grabber.lineIn,
-												out acq.handle);
-
-				#endregion
 
 				#region default parameter setting
 
@@ -365,37 +388,29 @@ namespace HalconLibrary
 
 
 				for (int i = 0; i < MODEL_MAX_CNT; i++) readModel(i);
-				readGrabber();
+				
 				readIntensity();
 				readCircleCenter();
 				readRectangleCenter();
 				readCornerEdge();
 
-				#region strobe 조명 off 위한 grab() 실행 
-				if (acq.TriggerMode == "On")
-				{
-					//HOperatorSet.SetFramegrabberParam(acq.handle, "TriggerSoftware", 0);
-					HOperatorSet.SetFramegrabberParam(acq.handle, "TriggerMode", "Off");
-					HOperatorSet.GrabImage(out acq.Image, acq.handle);
-					HOperatorSet.GetImageSize(acq.Image, out acq.width, out acq.height);
-					HOperatorSet.SetFramegrabberParam(acq.handle, "TriggerMode", "On");
-				}
-				else
-				{
-					HOperatorSet.GrabImage(out acq.Image, acq.handle);
-					HOperatorSet.GetImageSize(acq.Image, out acq.width, out acq.height);
-				}
-
-				if (acq.AcquisitionMode == "Continuous") HOperatorSet.GrabImageStart(acq.handle, -1);
-				#endregion
 
 				isActivate = true;
 				//returnStr = "Activate      : Success" + "\n";
-				returnStr  = "Device UserID : " + acq.DeviceUserID + "\n";
-				returnStr += "Device Vendor : " + acq.DeviceVendorName + "\n";
-				returnStr += "Device Model  : " + acq.DeviceModelName + "\n";
-				returnStr += "Device IP     : " + acq.grabber.cameraIP + "\n";
-				returnStr += "Resolution    : " + acq.width.ToString() + " x " + acq.height.ToString();
+               
+                if (!dev.NotExistHW.CAMERA)
+                {
+                    returnStr = "Device UserID : " + acq.DeviceUserID + "\n";
+                    returnStr += "Device Vendor : " + acq.DeviceVendorName + "\n";
+                    returnStr += "Device Model  : " + acq.DeviceModelName + "\n";
+                    returnStr += "Device IP     : " + acq.grabber.cameraIP + "\n";
+                    returnStr += "Resolution    : " + acq.width.ToString() + " x " + acq.height.ToString();
+                }
+                else
+                {
+                    isActivate = true; returnStr = "dev.NotExistHW.CAMERA"; return; 
+                }
+
 			}
 			catch (HalconException ex)
 			{
@@ -6248,8 +6263,6 @@ namespace HalconLibrary
 		{
 			try
 			{
-                if (dev.NotExistHW.CAMERA) return;
-
 				if (setPartReq != "true") return;
 				HOperatorSet.SetPart(handle, -1, -1, imageHeight, imgaeWidth);
 				setPartReq = "false";
