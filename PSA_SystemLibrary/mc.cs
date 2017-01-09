@@ -4424,7 +4424,7 @@ namespace PSA_SystemLibrary
             public static int removeConveyor;		// Conveyor Homing Skip이 On되어 있는 상태에서 아예 Conveyor Width축에 전원도 인가하지 않음.
             public static int mechanicalRevision;	// 0:Samsung(SF8ea), 1:ChipPAC(SF4ea:Sensor는 1,2,5,6사용, Loadcell)
             public static int setupMode;	// Graph Display Start Point. 0:from Z Down Start, 1:from 2nd search Start
-            public static int useHwTriger;		// hwTriger 사용 유무
+            //public static int useHwTriger;		// hwTriger 사용 유무
             public static double forceMeanOffset;
 
             // 20140612 
@@ -4520,13 +4520,13 @@ namespace PSA_SystemLibrary
                 }
                 else useUnloaderBuffer = temp;
 
-                temp = swconfig.GetInt("useHwTriger", -1);
-                if (temp == -1) genflag = true;
-                if (temp < 0 || temp > 1)   // Invalid useHwTriger Number
-                {
-                    useHwTriger = 1;		// default value = 1
-                }
-                else useHwTriger = temp;
+                //temp = swconfig.GetInt("useHwTriger", -1);
+                //if (temp == -1) genflag = true;
+                //if (temp < 0 || temp > 1)   // Invalid useHwTriger Number
+                //{
+                //    useHwTriger = 1;		// default value = 1
+                //}
+                //else useHwTriger = temp;
 
                 tempD = swconfig.GetDouble("forceMeanOffset", -1);
                 if (tempD == -1) genflag = true;
@@ -4616,7 +4616,7 @@ namespace PSA_SystemLibrary
 
                 // 20140612
                 swconfig.WriteInt("LogSave", logSave);
-                swconfig.WriteInt("useHwTriger", useHwTriger);
+                //swconfig.WriteInt("useHwTriger", useHwTriger);
                 swconfig.WriteDouble("forceMeanOffset", forceMeanOffset);
 
                 // 2016.10.24 - Amkor Unloader 옵션 write INI 부분 추가

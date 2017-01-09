@@ -848,6 +848,7 @@
     <None Include="Resources\FileLoad_Small.jpg" />
     <None Include="Resources\FileSave_Small.jpg" />
     <None Include="Resources\FileSaveAs_Small.jpg" />
+    <None Include="Resources\Backup.bmp" />
     <Content Include="Revision and ToDo\RevisionControl.txt" />
     <Content Include="Revision and ToDo\ToDo List.txt" />
   </ItemGroup>

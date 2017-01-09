@@ -2236,6 +2236,8 @@ namespace PSA_SystemLibrary
 		double rateX, rateY;
 		double placeX, placeY, placeT;
 		public double ulcX, ulcY, ulcT, ulcW, ulcH;
+        public double ulcP1X, ulcP1Y, ulcP1T;
+        public double ulcP2X, ulcP2Y, ulcP2T;
 		double tmpX, tmpY, tmpT;
 		public double ulcWDif, ulcHDif;
 		public double hdcX, hdcY, hdcT;
@@ -3223,8 +3225,24 @@ namespace PSA_SystemLibrary
 					mc.hd.withoutPick = false;
 					mc.log.mcclog.write(mc.log.MCCCODE.HEAD_MOVE_ULC_POS, 0);
 					tmpPos = Math.Max(tPos.z.XY_MOVING - 3000, tPos.z.DOUBLE_DET - 5000);
-					Y.moveCompare(tPos.y.ULC, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-					X.moveCompare(tPos.x.ULC, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                    if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
+                    {
+                        Y.moveCompare(tPos.y.ULC, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                        X.moveCompare(tPos.x.ULC, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                    }
+                    else
+                    {
+                        if (mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3)
+                        {
+                            Y.moveCompare(tPos.y.LIDC3, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                            X.moveCompare(tPos.x.LIDC3, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                        }
+                        else
+                        {
+                            Y.moveCompare(tPos.y.LIDC4, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                            X.moveCompare(tPos.x.LIDC4, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                        }
+                    }
 					mc.ulc.cam.grabClear(out ret.message, out ret.s);	// clear grab image 20140829
 					dwell.Reset();
 					sqc++; break;
@@ -3234,10 +3252,24 @@ namespace PSA_SystemLibrary
 					dwell.Reset();
 					sqc++; break;
 				case 42:
-					if (timeCheck(X.config.axisCode, sqc, 10)) break;
-					X.actualPosition(out ret.d1, out ret.message);if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-					Y.actualPosition(out ret.d2, out ret.message);if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-					if (Math.Abs(tPos.x.ULC - ret.d1) > 50000 || Math.Abs(tPos.y.ULC - ret.d2) > 50000) break;
+                    if (timeCheck(X.config.axisCode, sqc, 10)) break;
+                    X.actualPosition(out ret.d1, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                    Y.actualPosition(out ret.d2, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                    if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
+                    {
+                        if (Math.Abs(tPos.x.ULC - ret.d1) > 50000 || Math.Abs(tPos.y.ULC - ret.d2) > 50000) break;
+                    }
+                    else
+                    {
+                        if (mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3)
+                        {
+                            if (Math.Abs(tPos.x.LIDC3 - ret.d1) > 50000 || Math.Abs(tPos.y.LIDC3 - ret.d2) > 50000) break;
+                        }
+                        else
+                        {
+                            if (Math.Abs(tPos.x.LIDC4 - ret.d1) > 50000 || Math.Abs(tPos.y.LIDC4 - ret.d2) > 50000) break;
+                        }
+                    }
 					sqc++; break;
 				case 43:
 					if (mc.hd.reqMode == REQMODE.DUMY)
@@ -3250,35 +3282,63 @@ namespace PSA_SystemLibrary
 						Z.move(tPos.z.ULC_FOCUS_WITH_MT /*+ mc.para.MT.lidSize.h.value * 1000*/, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
 					}
 					#region ULC.req
-					ulcX = 0; ulcY = 0; ulcT = 0; ulcW = 0; ulcH = 0;
 					if (mc.hd.reqMode == REQMODE.DUMY) mc.ulc.reqMode = REQMODE.GRAB;
-					else if (mc.para.ULC.model.isCreate.value == (int)BOOL.TRUE)
-					{
-						if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.NCC)
-						{
-							mc.ulc.reqMode = REQMODE.FIND_MODEL;
-							mc.ulc.reqModelNumber = (int)ULC_MODEL.PKG_NCC;
-						}
-						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-						{
-							mc.ulc.reqMode = REQMODE.FIND_MODEL;
-							mc.ulc.reqModelNumber = (int)ULC_MODEL.PKG_SHAPE;
-						}
-						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
-						{
-							mc.ulc.reqMode = REQMODE.FIND_RECTANGLE_HS;
-						}
-						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
-						{
-							mc.ulc.reqMode = REQMODE.FIND_CIRCLE;
-						}
-					}
-					else
-					{
-						mc.ulc.reqMode = REQMODE.GRAB;
-					}
-					mc.ulc.lighting_exposure(mc.para.ULC.model.light, mc.para.ULC.model.exposureTime);
-					mc.ulc.req = true;
+                    else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.NCC || mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.SHAPE
+                        || mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE || mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
+                    {
+                        if (mc.para.ULC.model.isCreate.value == (int)BOOL.TRUE)
+                        {
+                            if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.NCC)
+                            {
+                                mc.ulc.reqMode = REQMODE.FIND_MODEL;
+                                mc.ulc.reqModelNumber = (int)ULC_MODEL.PKG_NCC;
+                                mc.ulc.lighting_exposure(mc.para.ULC.model.light, mc.para.ULC.model.exposureTime);
+                            }
+                            else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+                            {
+                                mc.ulc.reqMode = REQMODE.FIND_MODEL;
+                                mc.ulc.reqModelNumber = (int)ULC_MODEL.PKG_SHAPE;
+                                mc.ulc.lighting_exposure(mc.para.ULC.model.light, mc.para.ULC.model.exposureTime);
+                            }
+                            else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
+                            {
+                                ulcX = 0; ulcY = 0; ulcT = 0; ulcW = 0; ulcH = 0;
+                                mc.ulc.reqMode = REQMODE.FIND_RECTANGLE_HS;
+                                mc.ulc.lighting_exposure(mc.para.ULC.model.light, mc.para.ULC.model.exposureTime);
+                            }
+                            else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
+                            {
+                                mc.ulc.reqMode = REQMODE.FIND_CIRCLE;
+                                mc.ulc.lighting_exposure(mc.para.ULC.model.light, mc.para.ULC.model.exposureTime);
+                            }
+                        }
+                        else
+                        {
+                            mc.ulc.reqMode = REQMODE.GRAB;
+                            mc.ulc.lighting_exposure(mc.para.ULC.model.light, mc.para.ULC.model.exposureTime);
+                        }
+                    }
+                    else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                    {
+                        ulcP1X = 0; ulcP1Y = 0; ulcP1T = 0;
+                        if (mc.para.ULC.modelLIDC3.isCreate.value == (int)BOOL.TRUE 
+                            && mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3)
+                        {
+                            mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
+                            mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC3.light, mc.para.ULC.modelLIDC3.exposureTime);
+                        }
+                        else if (mc.para.ULC.modelLIDC4.isCreate.value == (int)BOOL.TRUE 
+                            && mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C2AndC4)
+                        {
+                            mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_4;
+                            mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC4.light, mc.para.ULC.modelLIDC4.exposureTime);
+                        }
+                        else
+                        {
+                            mc.ulc.reqMode = REQMODE.GRAB;
+                            mc.ulc.lighting_exposure(mc.para.ULC.model.light, mc.para.ULC.model.exposureTime);
+                        }
+                    }
 					#endregion
 					dwell.Reset();
 					sqc++; break;
@@ -3301,6 +3361,7 @@ namespace PSA_SystemLibrary
 					sqc++; break;
 				case 51:
 					if (dwell.Elapsed < 30) break; //  ulc camera delay
+                    mc.ulc.req = true;
 					triggerULC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
@@ -3314,8 +3375,110 @@ namespace PSA_SystemLibrary
 					{ Esqc = sqc; sqc = SQC.ERROR; break; }
 					mc.log.mcclog.write(mc.log.MCCCODE.SCAN_HEAT_SLUG, 1);
 // 					mc.hd.homepickdone = true;		// 집고 문제 없으니 true
-					sqc = SQC.STOP; break;
+                    if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CORNER) sqc = 60;
+					else sqc = SQC.STOP;
+                    break;
 				#endregion
+
+                #region case 60 XYZ.move.LIDC2(C4)
+                case 60:
+                    mc.log.mcclog.write(mc.log.MCCCODE.HEAD_MOVE_ULC_POS, 0);
+                    rateY = Y.config.speed.rate; Y.config.speed.rate = Math.Max(rateY * 0.3, 0.1);
+                    rateX = X.config.speed.rate; X.config.speed.rate = Math.Max(rateX * 0.3, 0.1);
+
+                    if (mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3)
+                    {
+                        Y.move(tPos.y.LIDC1, out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                        X.move(tPos.x.LIDC1, out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                    }
+                    else
+                    {
+                        Y.move(tPos.y.LIDC2, out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                        X.move(tPos.x.LIDC2, out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                    }
+                    dwell.Reset();
+                    sqc++; break;
+                case 61:
+                    if (!Y_AT_TARGET || !X_AT_TARGET) break;
+                    dwell.Reset();
+                    sqc++; break;
+                case 62:
+                    if (!Y_AT_DONE || !X_AT_DONE) break;
+                    if (mc.ulc.RUNING) break;
+                    if (mc.ulc.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
+					if (mc.ulc.cam.refresh_req) break;
+
+                    #region ULC.LIDC.result
+					if (mc.hd.reqMode == REQMODE.DUMY) { }
+					else
+					{
+                        ulcP1X = mc.ulc.cam.edgeIntersection.resultX;
+                        ulcP1Y = mc.ulc.cam.edgeIntersection.resultY;
+                        ulcP1T = mc.ulc.cam.edgeIntersection.resultAngleH;
+					}
+					#endregion
+
+                    #region ULC.req
+                    if (mc.hd.reqMode == REQMODE.DUMY) mc.ulc.reqMode = REQMODE.GRAB;
+                    else
+                    {
+                        ulcP1X = 0; ulcP1Y = 0; ulcP1T = 0;
+                        if (mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3 && mc.para.ULC.modelLIDC1.isCreate.value == (int)BOOL.TRUE)
+                        {
+                            mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
+                            mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC1.light, mc.para.ULC.modelLIDC1.exposureTime);
+                        }
+                        else if (mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C2AndC4 && mc.para.ULC.modelLIDC2.isCreate.value == (int)BOOL.TRUE)
+                        {
+                            mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_2;
+                            mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC2.light, mc.para.ULC.modelLIDC2.exposureTime);
+                        }
+                        else
+                        {
+                            mc.ulc.reqMode = REQMODE.GRAB;
+                            mc.ulc.lighting_exposure(mc.para.ULC.model.light, mc.para.ULC.model.exposureTime);
+                        }                      
+                    }
+                    //mc.ulc.req = true;
+                    #endregion
+                    dwell.Reset();
+                    sqc++; break;
+                case 63:
+                    if (!Z_AT_TARGET) break;
+                    dwell.Reset();
+                    sqc++; break;
+                case 64:
+                    if (!Z_AT_DONE) break;
+                    mc.log.mcclog.write(mc.log.MCCCODE.HEAD_MOVE_ULC_POS, 1);
+                    sqc = 70; break;
+                #endregion
+
+                #region case 70 triggerULC
+                case 70:
+                    if (dev.NotExistHW.CAMERA) { sqc = 73; break; }
+                    mc.log.mcclog.write(mc.log.MCCCODE.SCAN_HEAT_SLUG, 0);
+                    dwell.Reset();
+                    sqc++; break;
+                case 71:
+                    if (dwell.Elapsed < 30) break; //  ulc camera delay
+                    mc.ulc.req = true;
+                    triggerULC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
+                    dwell.Reset();
+                    sqc++; break;
+                case 72:
+                    if (dwell.Elapsed < mc.ulc.cam.acq.ExposureTimeAbs * 0.001 + 2) break;
+                    triggerULC.output(false, out ret.message); if (mpiCheck(sqc, ret.message)) break;
+                    sqc++; break;
+                case 73:
+                    if (mc.hd.tool.F.RUNING) break;
+                    if (mc.hd.tool.F.ERROR)
+                    { Esqc = sqc; sqc = SQC.ERROR; break; }
+                    mc.log.mcclog.write(mc.log.MCCCODE.SCAN_HEAT_SLUG, 1);
+                    // 					mc.hd.homepickdone = true;		// 집고 문제 없으니 true
+                    if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CORNER) sqc = 60;
+                    else sqc = SQC.STOP;
+                    break;
+                #endregion
 
 				case SQC.ERROR:
 					//string str = "HD pick_ulc Esqc " + Esqc.ToString();
@@ -3688,7 +3851,7 @@ namespace PSA_SystemLibrary
 					}
 					else mc.hdc.reqMode = REQMODE.GRAB;
 					mc.hdc.lighting_exposure(mc.para.HDC.modelFiducial.light, mc.para.HDC.modelFiducial.exposureTime);
-					if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+					//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 					#endregion
 					dwell.Reset();
 					sqc++; break;
@@ -3711,7 +3874,8 @@ namespace PSA_SystemLibrary
 					sqc++; break;
 				case 6:
 					if (dwell.Elapsed < 15) break; // head camear delay
-					if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+                    mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
@@ -3871,7 +4035,7 @@ namespace PSA_SystemLibrary
 								}
 								else mc.hdc.reqMode = REQMODE.GRAB;
 								mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
-								if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+								//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 								#endregion
 							}
 							else
@@ -3905,7 +4069,7 @@ namespace PSA_SystemLibrary
 								}
 								else mc.hdc.reqMode = REQMODE.GRAB;
 								mc.hdc.lighting_exposure(mc.para.HDC.modelPADC2.light, mc.para.HDC.modelPADC2.exposureTime);
-								if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+								//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 								#endregion
 							}
 						}
@@ -3937,7 +4101,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelManualTeach.paraP1.light, mc.para.HDC.modelManualTeach.paraP1.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 						}
 					}
@@ -3976,7 +4140,7 @@ namespace PSA_SystemLibrary
 								}
 								else mc.hdc.reqMode = REQMODE.GRAB;
 								mc.hdc.lighting_exposure(mc.para.HDC.modelPADC2.light, mc.para.HDC.modelPADC2.exposureTime);
-                                if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+                                //if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
                                 #endregion
                             }
                             else
@@ -4010,7 +4174,7 @@ namespace PSA_SystemLibrary
                                 }
                                 else mc.hdc.reqMode = REQMODE.GRAB;
                                 mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
-                                if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+                                //if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
                                 #endregion
 							}
 						}
@@ -4042,7 +4206,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelManualTeach.paraP1.light, mc.para.HDC.modelManualTeach.paraP1.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 						}
 					}
@@ -4071,13 +4235,14 @@ namespace PSA_SystemLibrary
 				#region case 20 triggerHDC
 				case 20:
                     if (dev.NotExistHW.CAMERA) { sqc = 30; break; }
-					if( mc.swcontrol.useHwTriger == 1) if (mc.hdc.req == false) { sqc = 30; break; } 
+					//if( mc.swcontrol.useHwTriger == 1) if (mc.hdc.req == false) { sqc = 30; break; } 
 					mc.log.mcclog.write(mc.log.MCCCODE.SCAN_1ST_FIDUCIAL, 0);
 					dwell.Reset();
 					sqc++; break;
 				case 21:
 					if (dwell.Elapsed < 15) break; // head camear delay
-					if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+                    mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
@@ -4391,7 +4556,7 @@ namespace PSA_SystemLibrary
 								}
 								else mc.hdc.reqMode = REQMODE.GRAB;
 								mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
-								if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+								//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 								#endregion
 							}
 							else
@@ -4634,7 +4799,7 @@ namespace PSA_SystemLibrary
 								}
 								else mc.hdc.reqMode = REQMODE.GRAB;
 								mc.hdc.lighting_exposure(mc.para.HDC.modelPADC4.light, mc.para.HDC.modelPADC4.exposureTime);
-								if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+								//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 								#endregion
 							}
 						}
@@ -4924,7 +5089,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelManualTeach.paraP2.light, mc.para.HDC.modelManualTeach.paraP2.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 						}
 					}
@@ -5172,7 +5337,7 @@ namespace PSA_SystemLibrary
 								}
 								else mc.hdc.reqMode = REQMODE.GRAB;
 								mc.hdc.lighting_exposure(mc.para.HDC.modelPADC4.light, mc.para.HDC.modelPADC4.exposureTime);
-								if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+								//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 								#endregion
 							}
 							else
@@ -5415,7 +5580,7 @@ namespace PSA_SystemLibrary
 								}
 								else mc.hdc.reqMode = REQMODE.GRAB;
 								mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
-								if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+								//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 								#endregion
 							}
 						}
@@ -5705,7 +5870,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelManualTeach.paraP2.light, mc.para.HDC.modelManualTeach.paraP2.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 						}
 					}
@@ -5724,13 +5889,14 @@ namespace PSA_SystemLibrary
 				#region case 40 triggerHDC
 				case 40:
                     if (dev.NotExistHW.CAMERA) { sqc = 50; break; }
-					if( mc.swcontrol.useHwTriger == 1) if (mc.hdc.req == false) { sqc = 50; break; }
+					//if( mc.swcontrol.useHwTriger == 1) if (mc.hdc.req == false) { sqc = 50; break; }
 					mc.log.mcclog.write(mc.log.MCCCODE.SCAN_2ND_FIDUCIAL, 0);
 					dwell.Reset();
 					sqc++; break;
 				case 41:
 					if (dwell.Elapsed < 15) break; // head camear delay
-					if( mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+					//if( mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+                    mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
@@ -5760,35 +5926,50 @@ namespace PSA_SystemLibrary
                         if (mc.ulc.ERROR || mc.hdc.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
                         #region ULC result
                         if (mc.hd.reqMode == REQMODE.DUMY) { }
-                        else if (mc.para.ULC.model.isCreate.value == (int)BOOL.TRUE)
+                        else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.NCC || mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.SHAPE
+                            || mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE || mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
                         {
-                            if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.NCC)
+                            if (mc.para.ULC.model.isCreate.value == (int)BOOL.TRUE)
                             {
-                                ulcX = mc.ulc.cam.model[(int)ULC_MODEL.PKG_NCC].resultX;
-                                ulcY = mc.ulc.cam.model[(int)ULC_MODEL.PKG_NCC].resultY;
-                                ulcT = mc.ulc.cam.model[(int)ULC_MODEL.PKG_NCC].resultAngle;
-                            }
-                            else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-                            {
-                                ulcX = mc.ulc.cam.model[(int)ULC_MODEL.PKG_SHAPE].resultX;
-                                ulcY = mc.ulc.cam.model[(int)ULC_MODEL.PKG_SHAPE].resultY;
-                                ulcT = mc.ulc.cam.model[(int)ULC_MODEL.PKG_SHAPE].resultAngle;
-                            }
-                            else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
-                            {
-                                ulcX = mc.ulc.cam.rectangleCenter.resultX;
-                                ulcY = mc.ulc.cam.rectangleCenter.resultY;
-                                ulcT = mc.ulc.cam.rectangleCenter.resultAngle;
-                                ulcW = mc.ulc.cam.rectangleCenter.resultWidth * 2;
-                                ulcH = mc.ulc.cam.rectangleCenter.resultHeight * 2;
-                            }
-                            else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
-                            {	
-                                ulcX = mc.ulc.cam.circleCenter.resultX;
-                                ulcY = mc.ulc.cam.circleCenter.resultY;
-                                ulcT = 0;
+                                if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.NCC)
+                                {
+                                    ulcX = mc.ulc.cam.model[(int)ULC_MODEL.PKG_NCC].resultX;
+                                    ulcY = mc.ulc.cam.model[(int)ULC_MODEL.PKG_NCC].resultY;
+                                    ulcT = mc.ulc.cam.model[(int)ULC_MODEL.PKG_NCC].resultAngle;
+                                }
+                                else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+                                {
+                                    ulcX = mc.ulc.cam.model[(int)ULC_MODEL.PKG_SHAPE].resultX;
+                                    ulcY = mc.ulc.cam.model[(int)ULC_MODEL.PKG_SHAPE].resultY;
+                                    ulcT = mc.ulc.cam.model[(int)ULC_MODEL.PKG_SHAPE].resultAngle;
+                                }
+                                else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
+                                {
+                                    ulcX = mc.ulc.cam.rectangleCenter.resultX;
+                                    ulcY = mc.ulc.cam.rectangleCenter.resultY;
+                                    ulcT = mc.ulc.cam.rectangleCenter.resultAngle;
+                                    ulcW = mc.ulc.cam.rectangleCenter.resultWidth * 2;
+                                    ulcH = mc.ulc.cam.rectangleCenter.resultHeight * 2;
+                                }
+                                else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
+                                {
+                                    ulcX = mc.ulc.cam.circleCenter.resultX;
+                                    ulcY = mc.ulc.cam.circleCenter.resultY;
+                                    ulcT = 0;
+                                }
                             }
                         }
+                        else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                        {
+                            ulcP2X = mc.ulc.cam.edgeIntersection.resultX;
+                            ulcP2Y = mc.ulc.cam.edgeIntersection.resultY;
+                            ulcP2T = mc.ulc.cam.edgeIntersection.resultAngleH;
+
+                            ulcX = (ulcP1X + ulcP2X) / 2;
+                            ulcY = (ulcP1Y + ulcP2Y) / 2;
+                            ulcT = (ulcP1T + ulcP2T) / 2;
+                        }
+
                         if (ulcX == -1 && ulcY == -1 && ulcT == -1) // ULC Vision Result Error
                         {
                             mc.ulc.displayUserMessage("LID DETECTION FAIL");
@@ -6094,7 +6275,7 @@ namespace PSA_SystemLibrary
 
                         // 여기에 오리엔테이션 체크 추가해야함-------------------------------------------------------------------------------------
                         if (mc.hd.reqMode == REQMODE.DUMY) { }
-                        else if (mc.para.ULC.orientationUse.value == 1 && mc.para.ULC.modelHSOrientation.isCreate.value == (int)BOOL.TRUE)
+                        else if (mc.para.ULC.algorism.value != (int)MODEL_ALGORISM.CORNER && mc.para.ULC.orientationUse.value == 1 && mc.para.ULC.modelHSOrientation.isCreate.value == (int)BOOL.TRUE)
                         {
                             if (mc.para.ULC.modelHSOrientation.algorism.value == (int)MODEL_ALGORISM.NCC)
                             {
@@ -6109,7 +6290,7 @@ namespace PSA_SystemLibrary
                                 tmpT = mc.ulc.cam.model[(int)ULC_MODEL.PKG_ORIENTATION_SHAPE].resultAngle;
                             }
                         }
-                        if (mc.para.ULC.orientationUse.value == 1 && tmpX == -1 && tmpY == -1 && tmpT == -1) // ULC Vision Result Error
+                        if (mc.para.ULC.algorism.value != (int)MODEL_ALGORISM.CORNER && mc.para.ULC.orientationUse.value == 1 && tmpX == -1 && tmpY == -1 && tmpT == -1) // ULC Vision Result Error
                         {
                             mc.ulc.displayUserMessage("LID ORIENTATION CHECK FAIL");
                             if (mc.para.ULC.failretry.value > 0 && mc.hd.tool.ulcfailcount < mc.para.ULC.failretry.value)
@@ -6135,7 +6316,7 @@ namespace PSA_SystemLibrary
                         //-------------------------------------------------------------------------------------------------------------
 
                         // 자동 보상을 해주기 위하여 검사 결과를 저장한다.
-                        if (!hdcfailchecked && mc.hd.reqMode != REQMODE.DUMY)
+                        if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.CHIPPAC && !hdcfailchecked && mc.hd.reqMode != REQMODE.DUMY)
                         {
                             if (Math.Abs(ulcX) < 500) mc.para.HD.pick.pickPosComp[mc.hd.pickedPosition].x.value += ulcX;
                             if (Math.Abs(ulcY) < 500) mc.para.HD.pick.pickPosComp[mc.hd.pickedPosition].y.value += ulcY;
@@ -7748,7 +7929,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 						}
 						else
@@ -7782,7 +7963,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC2.light, mc.para.HDC.modelPADC2.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 						}
 					}
@@ -7814,7 +7995,7 @@ namespace PSA_SystemLibrary
 						}
 						else mc.hdc.reqMode = REQMODE.GRAB;
 						mc.hdc.lighting_exposure(mc.para.HDC.modelManualTeach.paraP1.light, mc.para.HDC.modelManualTeach.paraP1.exposureTime);
-						if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+						//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 						#endregion
 					}
 					dwell.Reset();
@@ -7837,7 +8018,8 @@ namespace PSA_SystemLibrary
 					sqc++; break;
 				case 91:
 					if (dwell.Elapsed < 15) break; // head camear delay
-					if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+                    mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
@@ -8120,7 +8302,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 						}
 						else
@@ -8363,7 +8545,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC4.light, mc.para.HDC.modelPADC4.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 						}
 					}
@@ -8653,7 +8835,7 @@ namespace PSA_SystemLibrary
 						}
 						else mc.hdc.reqMode = REQMODE.GRAB;
 						mc.hdc.lighting_exposure(mc.para.HDC.modelManualTeach.paraP2.light, mc.para.HDC.modelManualTeach.paraP2.exposureTime);
-						if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+						//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 						#endregion
 					}
 					dwell.Reset();
@@ -8674,7 +8856,8 @@ namespace PSA_SystemLibrary
 					sqc++; break;
 				case 111:
 					if (dwell.Elapsed < 15) break; // head camear delay
-					if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+                    mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
@@ -8976,7 +9159,7 @@ namespace PSA_SystemLibrary
                             }
                             else mc.hdc.reqMode = REQMODE.GRAB;
                             mc.hdc.lighting_exposure(mc.para.HS.modelPADC1.light, mc.para.HS.modelPADC1.exposureTime);
-                            if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+                            //if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
                             #endregion
                         }
                         else
@@ -9010,7 +9193,7 @@ namespace PSA_SystemLibrary
                             }
                             else mc.hdc.reqMode = REQMODE.GRAB;
                             mc.hdc.lighting_exposure(mc.para.HS.modelPADC2.light, mc.para.HS.modelPADC2.exposureTime);
-                            if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+                            //if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
                             #endregion
                         }
 					}
@@ -9047,7 +9230,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HS.modelPADC2.light, mc.para.HS.modelPADC2.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 						}
 						else
@@ -9081,7 +9264,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HS.modelPADC1.light, mc.para.HS.modelPADC1.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 						}
 					}
@@ -9105,12 +9288,13 @@ namespace PSA_SystemLibrary
 				case 20:
 					if (dwell.Elapsed < 300) break;
                     if (dev.NotExistHW.CAMERA) { sqc = 30; break; }
-					if( mc.swcontrol.useHwTriger == 1) if (mc.hdc.req == false) { sqc = 30; break; } 
+					//if( mc.swcontrol.useHwTriger == 1) if (mc.hdc.req == false) { sqc = 30; break; } 
 					dwell.Reset();
 					sqc++; break;
 				case 21:
 					if (dwell.Elapsed < 15) break; // head camear delay
-					if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+                    mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
@@ -9289,7 +9473,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HS.modelPADC3.light, mc.para.HS.modelPADC3.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 						}
 						else
@@ -9416,7 +9600,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HS.modelPADC4.light, mc.para.HS.modelPADC4.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 						}
 					}
@@ -9546,7 +9730,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HS.modelPADC4.light, mc.para.HS.modelPADC4.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 						}
 						else
@@ -9673,7 +9857,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HS.modelPADC3.light, mc.para.HS.modelPADC3.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 						}
 					}
@@ -9693,12 +9877,13 @@ namespace PSA_SystemLibrary
 				case 40:
 					if (dwell.Elapsed < 300) break;
 					if (dev.NotExistHW.CAMERA) { sqc = 50; break; }
-					if( mc.swcontrol.useHwTriger == 1) if (mc.hdc.req == false) { sqc = 50; break; }
+					//if( mc.swcontrol.useHwTriger == 1) if (mc.hdc.req == false) { sqc = 50; break; }
 					dwell.Reset();
 					sqc++; break;
 				case 41:
 					if (dwell.Elapsed < 15) break; // head camear delay
-					if( mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+					//if( mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+                    mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
@@ -10003,7 +10188,7 @@ namespace PSA_SystemLibrary
 						}
 						else mc.hdc.reqMode = REQMODE.GRAB;
 						mc.hdc.lighting_exposure(mc.para.HS.modelPADC1.light, mc.para.HS.modelPADC1.exposureTime);
-						if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+						//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 						#endregion
 					}
 					else
@@ -10037,7 +10222,7 @@ namespace PSA_SystemLibrary
 						}
 						else mc.hdc.reqMode = REQMODE.GRAB;
 						mc.hdc.lighting_exposure(mc.para.HS.modelPADC2.light, mc.para.HS.modelPADC2.exposureTime);
-						if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+						//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 						#endregion
 					}
 					dwell.Reset();
@@ -10060,7 +10245,8 @@ namespace PSA_SystemLibrary
 					sqc++; break;
 				case 91:
 					if (dwell.Elapsed < 15) break; // head camear delay
-					if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+                    mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
@@ -10220,7 +10406,7 @@ namespace PSA_SystemLibrary
 						}
 						else mc.hdc.reqMode = REQMODE.GRAB;
 						mc.hdc.lighting_exposure(mc.para.HS.modelPADC3.light, mc.para.HS.modelPADC3.exposureTime);
-						if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+						//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 						#endregion
 					}
 					else
@@ -10348,7 +10534,7 @@ namespace PSA_SystemLibrary
 						}
 						else mc.hdc.reqMode = REQMODE.GRAB;
 						mc.hdc.lighting_exposure(mc.para.HS.modelPADC4.light, mc.para.HS.modelPADC4.exposureTime);
-						if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+						//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 						#endregion
 					}
 					dwell.Reset();
@@ -10369,7 +10555,8 @@ namespace PSA_SystemLibrary
 					sqc++; break;
 				case 111:
 					if (dwell.Elapsed < 15) break; // head camear delay
-					if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+                    mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
@@ -10503,7 +10690,7 @@ namespace PSA_SystemLibrary
 					}
 					else mc.hdc.reqMode = REQMODE.GRAB;
 					mc.hdc.lighting_exposure(mc.para.HDC.modelFiducial.light, mc.para.HDC.modelFiducial.exposureTime);
-					if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+					//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 					#endregion
 					dwell.Reset();
 					sqc++; break;
@@ -10526,7 +10713,8 @@ namespace PSA_SystemLibrary
 					sqc++; break;
 				case 6:
 					if (dwell.Elapsed < 15) break; // head camear delay
-					if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+                    mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
@@ -10670,7 +10858,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 
 						}
@@ -10705,7 +10893,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC2.light, mc.para.HDC.modelPADC2.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 
 						}
@@ -10743,7 +10931,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC2.light, mc.para.HDC.modelPADC2.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 						}
 						else
@@ -10777,7 +10965,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 						}
 
@@ -10805,13 +10993,14 @@ namespace PSA_SystemLibrary
 
 				#region case 20 triggerHDC
 				case 20:
-					if (mc.swcontrol.useHwTriger == 1) if (mc.hdc.req == false) { sqc = 30; break; }
+					//if (mc.swcontrol.useHwTriger == 1) if (mc.hdc.req == false) { sqc = 30; break; }
 					mc.log.mcclog.write(mc.log.MCCCODE.SCAN_1ST_FIDUCIAL, 0);
 					dwell.Reset();
 					sqc++; break;
 				case 21:
 					if (dwell.Elapsed < 15) break; // head camear delay
-					if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+                    mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
@@ -11034,7 +11223,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 						}
 						else
@@ -11205,7 +11394,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC4.light, mc.para.HDC.modelPADC4.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 						}
 
@@ -11380,7 +11569,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC4.light, mc.para.HDC.modelPADC4.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 
 						}
@@ -11552,7 +11741,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 						}
 					}
@@ -11570,13 +11759,14 @@ namespace PSA_SystemLibrary
 
 				#region case 40 triggerHDC
 				case 40:
-					if (mc.swcontrol.useHwTriger == 1) if (mc.hdc.req == false) { sqc = 50; break; }
+					//if (mc.swcontrol.useHwTriger == 1) if (mc.hdc.req == false) { sqc = 50; break; }
 					mc.log.mcclog.write(mc.log.MCCCODE.SCAN_2ND_FIDUCIAL, 0);
 					dwell.Reset();
 					sqc++; break;
 				case 41:
 					if (dwell.Elapsed < 15) break; // head camear delay
-					if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+                    mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
@@ -12867,7 +13057,7 @@ namespace PSA_SystemLibrary
 						}
 						else mc.hdc.reqMode = REQMODE.GRAB;
 						mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
-						if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+						//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 						#endregion
 
 					}
@@ -12902,7 +13092,7 @@ namespace PSA_SystemLibrary
 						}
 						else mc.hdc.reqMode = REQMODE.GRAB;
 						mc.hdc.lighting_exposure(mc.para.HDC.modelPADC2.light, mc.para.HDC.modelPADC2.exposureTime);
-						if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+						//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 						#endregion
 
 					}
@@ -12926,7 +13116,8 @@ namespace PSA_SystemLibrary
 					sqc++; break;
 				case 91:
 					if (dwell.Elapsed < 15) break; // head camear delay
-					if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+                    mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
@@ -13128,7 +13319,7 @@ namespace PSA_SystemLibrary
 						}
 						else mc.hdc.reqMode = REQMODE.GRAB;
 						mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
-						if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+						//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 						#endregion
 					}
 					else
@@ -13299,7 +13490,7 @@ namespace PSA_SystemLibrary
 						}
 						else mc.hdc.reqMode = REQMODE.GRAB;
 						mc.hdc.lighting_exposure(mc.para.HDC.modelPADC4.light, mc.para.HDC.modelPADC4.exposureTime);
-						if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+						//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 						#endregion
 					}
 
@@ -13321,7 +13512,8 @@ namespace PSA_SystemLibrary
 					sqc++; break;
 				case 111:
 					if (dwell.Elapsed < 15) break; // head camear delay
-					if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+                    mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
@@ -13741,7 +13933,7 @@ namespace PSA_SystemLibrary
 					}
 					else mc.hdc.reqMode = REQMODE.GRAB;
 					mc.hdc.lighting_exposure(mc.para.HDC.modelFiducial.light, mc.para.HDC.modelFiducial.exposureTime);
-					if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+					//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 					#endregion
 					dwell.Reset();
 					sqc++; break;
@@ -13764,7 +13956,8 @@ namespace PSA_SystemLibrary
 					sqc++; break;
 				case 7:
 					if (dwell.Elapsed < 15) break; // head camear delay
-					if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+                    mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
@@ -13908,7 +14101,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 
 						}
@@ -13943,7 +14136,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC2.light, mc.para.HDC.modelPADC2.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 
 						}
@@ -13981,7 +14174,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC2.light, mc.para.HDC.modelPADC2.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 						}
 						else
@@ -14015,7 +14208,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 						}
 
@@ -14045,13 +14238,14 @@ namespace PSA_SystemLibrary
 
 				#region case 20 triggerHDC
 				case 20:
-					if (mc.swcontrol.useHwTriger == 1) if (mc.hdc.req == false) { sqc = 30; break; }
+					//if (mc.swcontrol.useHwTriger == 1) if (mc.hdc.req == false) { sqc = 30; break; }
 					mc.log.mcclog.write(mc.log.MCCCODE.SCAN_1ST_FIDUCIAL, 0);
 					dwell.Reset();
 					sqc++; break;
 				case 21:
 					if (dwell.Elapsed < 15) break; // head camear delay
-					if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+                    mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
@@ -14300,7 +14494,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 						}
 						else
@@ -14488,7 +14682,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC4.light, mc.para.HDC.modelPADC4.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 						}
 
@@ -14680,7 +14874,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC4.light, mc.para.HDC.modelPADC4.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 
 						}
@@ -14869,7 +15063,7 @@ namespace PSA_SystemLibrary
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
-							if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 						}
 					}
@@ -14887,13 +15081,14 @@ namespace PSA_SystemLibrary
 
 				#region case 40 triggerHDC
 				case 40:
-					if (mc.swcontrol.useHwTriger == 1) if (mc.hdc.req == false) { sqc = 50; break; }
+					//if (mc.swcontrol.useHwTriger == 1) if (mc.hdc.req == false) { sqc = 50; break; }
 					mc.log.mcclog.write(mc.log.MCCCODE.SCAN_2ND_FIDUCIAL, 0);
 					dwell.Reset();
 					sqc++; break;
 				case 41:
 					if (dwell.Elapsed < 15) break; // head camear delay
-					if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+                    mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
@@ -15903,7 +16098,7 @@ namespace PSA_SystemLibrary
 						}
 						else mc.hdc.reqMode = REQMODE.GRAB;
 						mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
-						if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+						//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 						#endregion
 
 					}
@@ -15938,7 +16133,7 @@ namespace PSA_SystemLibrary
 						}
 						else mc.hdc.reqMode = REQMODE.GRAB;
 						mc.hdc.lighting_exposure(mc.para.HDC.modelPADC2.light, mc.para.HDC.modelPADC2.exposureTime);
-						if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+						//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 						#endregion
 
 					}
@@ -15962,7 +16157,8 @@ namespace PSA_SystemLibrary
 					sqc++; break;
 				case 91:
 					if (dwell.Elapsed < 15) break; // head camear delay
-					if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+                    mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
@@ -16180,7 +16376,7 @@ namespace PSA_SystemLibrary
 						}
 						else mc.hdc.reqMode = REQMODE.GRAB;
 						mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
-						if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+						//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 						#endregion
 					}
 					else
@@ -16367,7 +16563,7 @@ namespace PSA_SystemLibrary
 						}
 						else mc.hdc.reqMode = REQMODE.GRAB;
 						mc.hdc.lighting_exposure(mc.para.HDC.modelPADC4.light, mc.para.HDC.modelPADC4.exposureTime);
-						if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+						//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 						#endregion
 					}
 
@@ -16389,7 +16585,8 @@ namespace PSA_SystemLibrary
 					sqc++; break;
 				case 111:
 					if (dwell.Elapsed < 15) break; // head camear delay
-					if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+                    mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
@@ -17979,12 +18176,13 @@ namespace PSA_SystemLibrary
 					}
 					else mc.hdc.reqMode = REQMODE.GRAB;
 					mc.hdc.lighting_exposure(mc.para.HDC.light[(int)LIGHTMODE_HDC.TRAY], mc.para.HDC.exposure[(int)LIGHTMODE_HDC.TRAY]);
-					if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+					//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 					dwell.Reset();
 					sqc++; break;
 				case 24:
 					if (dwell.Elapsed < 15) break; // head camear delay
-					if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+                    mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
@@ -18178,12 +18376,13 @@ namespace PSA_SystemLibrary
 					}
 					else mc.hdc.reqMode = REQMODE.GRAB;
 					mc.hdc.lighting_exposure(mc.para.HDC.light[(int)LIGHTMODE_HDC.TRAY], mc.para.HDC.exposure[(int)LIGHTMODE_HDC.TRAY]);
-					if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+					//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 					dwell.Reset();
 					sqc++; break;
 				case 24:
 					if (dwell.Elapsed < 15) break; // head camear delay
-					if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+                    mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
