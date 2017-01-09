@@ -124,6 +124,7 @@ namespace PSA_SystemLibrary
 
 				#region LIVE
 				case SQC.LIVE:
+                    if (dev.NotExistHW.CAMERA) {sqc = SQC.STOP; break;}
 					_triggerSource = cam.acq.TriggerSource;
 					cam.acq.TriggerSource = "Software";
 					cam.acq.paraApply();

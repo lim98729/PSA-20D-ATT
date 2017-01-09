@@ -841,7 +841,7 @@
             // 
             this.BT_ImageSave_None.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_ImageSave_None.Name = "BT_ImageSave_None";
-            this.BT_ImageSave_None.Size = new System.Drawing.Size(152, 36);
+            this.BT_ImageSave_None.Size = new System.Drawing.Size(137, 36);
             this.BT_ImageSave_None.Text = "None";
             this.BT_ImageSave_None.Click += new System.EventHandler(this.Control_Click);
             // 
@@ -849,7 +849,7 @@
             // 
             this.BT_ImageSave_Error.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_ImageSave_Error.Name = "BT_ImageSave_Error";
-            this.BT_ImageSave_Error.Size = new System.Drawing.Size(152, 36);
+            this.BT_ImageSave_Error.Size = new System.Drawing.Size(137, 36);
             this.BT_ImageSave_Error.Text = "Error";
             this.BT_ImageSave_Error.Click += new System.EventHandler(this.Control_Click);
             // 
@@ -857,7 +857,7 @@
             // 
             this.BT_ImageSave_All.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_ImageSave_All.Name = "BT_ImageSave_All";
-            this.BT_ImageSave_All.Size = new System.Drawing.Size(152, 36);
+            this.BT_ImageSave_All.Size = new System.Drawing.Size(137, 36);
             this.BT_ImageSave_All.Text = "All";
             this.BT_ImageSave_All.Click += new System.EventHandler(this.Control_Click);
             // 
@@ -1245,7 +1245,7 @@
             this.BT_AlignDirection});
             this.TS_ALIGN_DIRECTION.Location = new System.Drawing.Point(3, 130);
             this.TS_ALIGN_DIRECTION.Name = "TS_ALIGN_DIRECTION";
-            this.TS_ALIGN_DIRECTION.Size = new System.Drawing.Size(252, 35);
+            this.TS_ALIGN_DIRECTION.Size = new System.Drawing.Size(221, 35);
             this.TS_ALIGN_DIRECTION.TabIndex = 82;
             this.TS_ALIGN_DIRECTION.Text = "toolStrip1";
             // 

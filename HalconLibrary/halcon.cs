@@ -672,8 +672,8 @@ namespace HalconLibrary
 													out model[number].createModelID);
 				}
 
-				HOperatorSet.ClearWindow(window.handle);
-				HOperatorSet.DispObj(acq.Image, window.handle);
+				    HOperatorSet.ClearWindow(window.handle);
+				    HOperatorSet.DispObj(acq.Image, window.handle);
 
 				if (model[number].algorism == "SHAPE")
 				{
@@ -6248,7 +6248,8 @@ namespace HalconLibrary
 		{
 			try
 			{
-				//if (setPartReq == null) return;
+                if (dev.NotExistHW.CAMERA) return;
+
 				if (setPartReq != "true") return;
 				HOperatorSet.SetPart(handle, -1, -1, imageHeight, imgaeWidth);
 				setPartReq = "false";

@@ -356,7 +356,7 @@ namespace PSA_Application
                     light_para = mc.para.ULC.model.light;
                     exposure_para = mc.para.ULC.model.exposureTime;
                 }
-				                if (mode == LIGHTEXPOSUREMODE.ULC_LIDC1)
+				if (mode == LIGHTEXPOSUREMODE.ULC_LIDC1)
                 {
                     light_para = mc.para.ULC.modelLIDC1.light;
                     exposure_para = mc.para.ULC.modelLIDC1.exposureTime;
