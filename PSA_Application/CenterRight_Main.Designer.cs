@@ -33,7 +33,6 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_ForceCompenUse = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.TB_ForceCompenTrayNum = new System.Windows.Forms.ToolStripTextBox();
@@ -44,11 +43,9 @@
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.TB_ForceCompenValue = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_ForceCompenTest = new System.Windows.Forms.ToolStripButton();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_FlatCompenUse = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel6 = new System.Windows.Forms.ToolStripLabel();
             this.TB_FlatCompenTrayNum = new System.Windows.Forms.ToolStripTextBox();
@@ -56,11 +53,9 @@
             this.toolStripLabel7 = new System.Windows.Forms.ToolStripLabel();
             this.TB_FlatCompenLimit = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_FlatCompenTest = new System.Windows.Forms.ToolStripButton();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel8 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_RefCompenUse = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel11 = new System.Windows.Forms.ToolStripLabel();
             this.TB_RefCompenTrayNum = new System.Windows.Forms.ToolStripTextBox();
@@ -68,12 +63,10 @@
             this.toolStripLabel10 = new System.Windows.Forms.ToolStripLabel();
             this.TB_RefCompenLimit = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_RefCompenTest = new System.Windows.Forms.ToolStripButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.toolStrip18 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel35 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator50 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_UseBondingCountCheck = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator51 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel36 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator53 = new System.Windows.Forms.ToolStripSeparator();
@@ -83,16 +76,13 @@
             this.toolStripSeparator54 = new System.Windows.Forms.ToolStripSeparator();
             this.TB_BondingPKGCountLimit = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator55 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_BondingCountReset = new System.Windows.Forms.ToolStripButton();
             this.toolStrip17 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel34 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator46 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_UsePedestal = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator49 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip16 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel31 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator44 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_UseWasteCountLimit = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator47 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel33 = new System.Windows.Forms.ToolStripLabel();
             this.TB_WasteCountLimit = new System.Windows.Forms.ToolStripTextBox();
@@ -100,7 +90,6 @@
             this.toolStripLabel32 = new System.Windows.Forms.ToolStripLabel();
             this.TB_CurrWasteCount = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator48 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_InitWasteCount = new System.Windows.Forms.ToolStripButton();
             this.toolStrip15 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel26 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel30 = new System.Windows.Forms.ToolStripLabel();
@@ -123,12 +112,10 @@
             this.toolStrip13 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel22 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator29 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_UsePlaceForceTracking = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator32 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip12 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel25 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator35 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_PlaceTimeForceUse = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator36 = new System.Windows.Forms.ToolStripSeparator();
             this.BT_PlaceForceCheck = new System.Windows.Forms.ToolStripDropDownButton();
             this.BT_PlaceForceCheck_Display = new System.Windows.Forms.ToolStripMenuItem();
@@ -139,18 +126,15 @@
             this.toolStrip11 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel24 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator33 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_LastTubeCheckUse = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator34 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip10 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel21 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
             this.CbB_LogSave = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_LogSave = new System.Windows.Forms.ToolStripButton();
             this.toolStrip8 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel17 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator25 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_PDSuctionCheckUse = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator26 = new System.Windows.Forms.ToolStripSeparator();
             this.BT_PDSuctionCheck = new System.Windows.Forms.ToolStripDropDownButton();
             this.BT_PDSuctionCheck_Display = new System.Windows.Forms.ToolStripMenuItem();
@@ -159,11 +143,9 @@
             this.toolStripLabel18 = new System.Windows.Forms.ToolStripLabel();
             this.TB_PedestalSuctionCheckLimit = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator28 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_PedestalSuctionCheckTest = new System.Windows.Forms.ToolStripButton();
             this.toolStrip7 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel16 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_PlaceTimeSensorUse = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
             this.BT_PlaceSensorCheck = new System.Windows.Forms.ToolStripDropDownButton();
             this.BT_PlaceSensorCheck_Display_Under = new System.Windows.Forms.ToolStripMenuItem();
@@ -171,11 +153,9 @@
             this.BT_PlaceSensorCheck_Alarm_Under = new System.Windows.Forms.ToolStripMenuItem();
             this.BT_PlaceSensorCheck_Alarm_Both = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator24 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_LoadSensorTest = new System.Windows.Forms.ToolStripButton();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel9 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_EpoxyLifetimeUse = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel12 = new System.Windows.Forms.ToolStripLabel();
             this.TB_EpoxyLifetimeHour = new System.Windows.Forms.ToolStripTextBox();
@@ -192,13 +172,33 @@
             this.toolStrip6 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel19 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_RecipeLoad = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator30 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_RecipeSave = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator31 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_RecipeSaveAs = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator43 = new System.Windows.Forms.ToolStripSeparator();
+            this.BT_RecipeLoad = new System.Windows.Forms.ToolStripButton();
+            this.BT_RecipeSave = new System.Windows.Forms.ToolStripButton();
+            this.BT_RecipeSaveAs = new System.Windows.Forms.ToolStripButton();
             this.BT_PROTECBACKUP = new System.Windows.Forms.ToolStripButton();
+            this.BT_UseBondingCountCheck = new System.Windows.Forms.ToolStripButton();
+            this.BT_BondingCountReset = new System.Windows.Forms.ToolStripButton();
+            this.BT_UsePedestal = new System.Windows.Forms.ToolStripButton();
+            this.BT_UseWasteCountLimit = new System.Windows.Forms.ToolStripButton();
+            this.BT_InitWasteCount = new System.Windows.Forms.ToolStripButton();
+            this.BT_UsePlaceForceTracking = new System.Windows.Forms.ToolStripButton();
+            this.BT_PlaceTimeForceUse = new System.Windows.Forms.ToolStripButton();
+            this.BT_LastTubeCheckUse = new System.Windows.Forms.ToolStripButton();
+            this.BT_ForceCompenUse = new System.Windows.Forms.ToolStripButton();
+            this.BT_ForceCompenTest = new System.Windows.Forms.ToolStripButton();
+            this.BT_FlatCompenUse = new System.Windows.Forms.ToolStripButton();
+            this.BT_FlatCompenTest = new System.Windows.Forms.ToolStripButton();
+            this.BT_RefCompenUse = new System.Windows.Forms.ToolStripButton();
+            this.BT_RefCompenTest = new System.Windows.Forms.ToolStripButton();
+            this.BT_LogSave = new System.Windows.Forms.ToolStripButton();
+            this.BT_PDSuctionCheckUse = new System.Windows.Forms.ToolStripButton();
+            this.BT_PedestalSuctionCheckTest = new System.Windows.Forms.ToolStripButton();
+            this.BT_PlaceTimeSensorUse = new System.Windows.Forms.ToolStripButton();
+            this.BT_LoadSensorTest = new System.Windows.Forms.ToolStripButton();
+            this.BT_EpoxyLifetimeUse = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.toolStrip3.SuspendLayout();
@@ -254,14 +254,6 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
-            // 
-            // BT_ForceCompenUse
-            // 
-            resources.ApplyResources(this.BT_ForceCompenUse, "BT_ForceCompenUse");
-            this.BT_ForceCompenUse.AutoToolTip = false;
-            this.BT_ForceCompenUse.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
-            this.BT_ForceCompenUse.Name = "BT_ForceCompenUse";
-            this.BT_ForceCompenUse.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator2
             // 
@@ -322,14 +314,6 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
             // 
-            // BT_ForceCompenTest
-            // 
-            resources.ApplyResources(this.BT_ForceCompenTest, "BT_ForceCompenTest");
-            this.BT_ForceCompenTest.AutoToolTip = false;
-            this.BT_ForceCompenTest.Image = global::PSA_Application.Properties.Resources.blue_triangle;
-            this.BT_ForceCompenTest.Name = "BT_ForceCompenTest";
-            this.BT_ForceCompenTest.Click += new System.EventHandler(this.Control_Click);
-            // 
             // toolStrip2
             // 
             this.toolStrip2.BackColor = System.Drawing.Color.Transparent;
@@ -357,14 +341,6 @@
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
-            // 
-            // BT_FlatCompenUse
-            // 
-            resources.ApplyResources(this.BT_FlatCompenUse, "BT_FlatCompenUse");
-            this.BT_FlatCompenUse.AutoToolTip = false;
-            this.BT_FlatCompenUse.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
-            this.BT_FlatCompenUse.Name = "BT_FlatCompenUse";
-            this.BT_FlatCompenUse.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator5
             // 
@@ -407,14 +383,6 @@
             this.toolStripSeparator8.Name = "toolStripSeparator8";
             resources.ApplyResources(this.toolStripSeparator8, "toolStripSeparator8");
             // 
-            // BT_FlatCompenTest
-            // 
-            resources.ApplyResources(this.BT_FlatCompenTest, "BT_FlatCompenTest");
-            this.BT_FlatCompenTest.AutoToolTip = false;
-            this.BT_FlatCompenTest.Image = global::PSA_Application.Properties.Resources.blue_triangle;
-            this.BT_FlatCompenTest.Name = "BT_FlatCompenTest";
-            this.BT_FlatCompenTest.Click += new System.EventHandler(this.Control_Click);
-            // 
             // toolStrip3
             // 
             this.toolStrip3.BackColor = System.Drawing.Color.Transparent;
@@ -442,14 +410,6 @@
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
             resources.ApplyResources(this.toolStripSeparator9, "toolStripSeparator9");
-            // 
-            // BT_RefCompenUse
-            // 
-            resources.ApplyResources(this.BT_RefCompenUse, "BT_RefCompenUse");
-            this.BT_RefCompenUse.AutoToolTip = false;
-            this.BT_RefCompenUse.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
-            this.BT_RefCompenUse.Name = "BT_RefCompenUse";
-            this.BT_RefCompenUse.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator10
             // 
@@ -491,14 +451,6 @@
             // 
             this.toolStripSeparator14.Name = "toolStripSeparator14";
             resources.ApplyResources(this.toolStripSeparator14, "toolStripSeparator14");
-            // 
-            // BT_RefCompenTest
-            // 
-            resources.ApplyResources(this.BT_RefCompenTest, "BT_RefCompenTest");
-            this.BT_RefCompenTest.AutoToolTip = false;
-            this.BT_RefCompenTest.Image = global::PSA_Application.Properties.Resources.blue_triangle;
-            this.BT_RefCompenTest.Name = "BT_RefCompenTest";
-            this.BT_RefCompenTest.Click += new System.EventHandler(this.Control_Click);
             // 
             // groupBox1
             // 
@@ -551,14 +503,6 @@
             this.toolStripSeparator50.Name = "toolStripSeparator50";
             resources.ApplyResources(this.toolStripSeparator50, "toolStripSeparator50");
             // 
-            // BT_UseBondingCountCheck
-            // 
-            resources.ApplyResources(this.BT_UseBondingCountCheck, "BT_UseBondingCountCheck");
-            this.BT_UseBondingCountCheck.AutoToolTip = false;
-            this.BT_UseBondingCountCheck.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
-            this.BT_UseBondingCountCheck.Name = "BT_UseBondingCountCheck";
-            this.BT_UseBondingCountCheck.Click += new System.EventHandler(this.Control_Click);
-            // 
             // toolStripSeparator51
             // 
             this.toolStripSeparator51.Name = "toolStripSeparator51";
@@ -610,14 +554,6 @@
             this.toolStripSeparator55.Name = "toolStripSeparator55";
             resources.ApplyResources(this.toolStripSeparator55, "toolStripSeparator55");
             // 
-            // BT_BondingCountReset
-            // 
-            resources.ApplyResources(this.BT_BondingCountReset, "BT_BondingCountReset");
-            this.BT_BondingCountReset.AutoToolTip = false;
-            this.BT_BondingCountReset.Image = global::PSA_Application.Properties.Resources.blue_triangle;
-            this.BT_BondingCountReset.Name = "BT_BondingCountReset";
-            this.BT_BondingCountReset.Click += new System.EventHandler(this.Control_Click);
-            // 
             // toolStrip17
             // 
             this.toolStrip17.BackColor = System.Drawing.Color.Transparent;
@@ -638,14 +574,6 @@
             // 
             this.toolStripSeparator46.Name = "toolStripSeparator46";
             resources.ApplyResources(this.toolStripSeparator46, "toolStripSeparator46");
-            // 
-            // BT_UsePedestal
-            // 
-            resources.ApplyResources(this.BT_UsePedestal, "BT_UsePedestal");
-            this.BT_UsePedestal.AutoToolTip = false;
-            this.BT_UsePedestal.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
-            this.BT_UsePedestal.Name = "BT_UsePedestal";
-            this.BT_UsePedestal.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator49
             // 
@@ -679,14 +607,6 @@
             // 
             this.toolStripSeparator44.Name = "toolStripSeparator44";
             resources.ApplyResources(this.toolStripSeparator44, "toolStripSeparator44");
-            // 
-            // BT_UseWasteCountLimit
-            // 
-            resources.ApplyResources(this.BT_UseWasteCountLimit, "BT_UseWasteCountLimit");
-            this.BT_UseWasteCountLimit.AutoToolTip = false;
-            this.BT_UseWasteCountLimit.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
-            this.BT_UseWasteCountLimit.Name = "BT_UseWasteCountLimit";
-            this.BT_UseWasteCountLimit.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator47
             // 
@@ -727,14 +647,6 @@
             // 
             this.toolStripSeparator48.Name = "toolStripSeparator48";
             resources.ApplyResources(this.toolStripSeparator48, "toolStripSeparator48");
-            // 
-            // BT_InitWasteCount
-            // 
-            resources.ApplyResources(this.BT_InitWasteCount, "BT_InitWasteCount");
-            this.BT_InitWasteCount.AutoToolTip = false;
-            this.BT_InitWasteCount.Image = global::PSA_Application.Properties.Resources.blue_triangle;
-            this.BT_InitWasteCount.Name = "BT_InitWasteCount";
-            this.BT_InitWasteCount.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStrip15
             // 
@@ -885,14 +797,6 @@
             this.toolStripSeparator29.Name = "toolStripSeparator29";
             resources.ApplyResources(this.toolStripSeparator29, "toolStripSeparator29");
             // 
-            // BT_UsePlaceForceTracking
-            // 
-            resources.ApplyResources(this.BT_UsePlaceForceTracking, "BT_UsePlaceForceTracking");
-            this.BT_UsePlaceForceTracking.AutoToolTip = false;
-            this.BT_UsePlaceForceTracking.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
-            this.BT_UsePlaceForceTracking.Name = "BT_UsePlaceForceTracking";
-            this.BT_UsePlaceForceTracking.Click += new System.EventHandler(this.Control_Click);
-            // 
             // toolStripSeparator32
             // 
             this.toolStripSeparator32.Name = "toolStripSeparator32";
@@ -922,14 +826,6 @@
             // 
             this.toolStripSeparator35.Name = "toolStripSeparator35";
             resources.ApplyResources(this.toolStripSeparator35, "toolStripSeparator35");
-            // 
-            // BT_PlaceTimeForceUse
-            // 
-            resources.ApplyResources(this.BT_PlaceTimeForceUse, "BT_PlaceTimeForceUse");
-            this.BT_PlaceTimeForceUse.AutoToolTip = false;
-            this.BT_PlaceTimeForceUse.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
-            this.BT_PlaceTimeForceUse.Name = "BT_PlaceTimeForceUse";
-            this.BT_PlaceTimeForceUse.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator36
             // 
@@ -996,14 +892,6 @@
             this.toolStripSeparator33.Name = "toolStripSeparator33";
             resources.ApplyResources(this.toolStripSeparator33, "toolStripSeparator33");
             // 
-            // BT_LastTubeCheckUse
-            // 
-            resources.ApplyResources(this.BT_LastTubeCheckUse, "BT_LastTubeCheckUse");
-            this.BT_LastTubeCheckUse.AutoToolTip = false;
-            this.BT_LastTubeCheckUse.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
-            this.BT_LastTubeCheckUse.Name = "BT_LastTubeCheckUse";
-            this.BT_LastTubeCheckUse.Click += new System.EventHandler(this.Control_Click);
-            // 
             // toolStripSeparator34
             // 
             this.toolStripSeparator34.Name = "toolStripSeparator34";
@@ -1046,14 +934,6 @@
             this.toolStripSeparator19.Name = "toolStripSeparator19";
             resources.ApplyResources(this.toolStripSeparator19, "toolStripSeparator19");
             // 
-            // BT_LogSave
-            // 
-            resources.ApplyResources(this.BT_LogSave, "BT_LogSave");
-            this.BT_LogSave.AutoToolTip = false;
-            this.BT_LogSave.Image = global::PSA_Application.Properties.Resources.blue_triangle;
-            this.BT_LogSave.Name = "BT_LogSave";
-            this.BT_LogSave.Click += new System.EventHandler(this.BT_LogSave_Click);
-            // 
             // toolStrip8
             // 
             this.toolStrip8.BackColor = System.Drawing.Color.Transparent;
@@ -1080,14 +960,6 @@
             // 
             this.toolStripSeparator25.Name = "toolStripSeparator25";
             resources.ApplyResources(this.toolStripSeparator25, "toolStripSeparator25");
-            // 
-            // BT_PDSuctionCheckUse
-            // 
-            resources.ApplyResources(this.BT_PDSuctionCheckUse, "BT_PDSuctionCheckUse");
-            this.BT_PDSuctionCheckUse.AutoToolTip = false;
-            this.BT_PDSuctionCheckUse.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
-            this.BT_PDSuctionCheckUse.Name = "BT_PDSuctionCheckUse";
-            this.BT_PDSuctionCheckUse.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator26
             // 
@@ -1138,14 +1010,6 @@
             this.toolStripSeparator28.Name = "toolStripSeparator28";
             resources.ApplyResources(this.toolStripSeparator28, "toolStripSeparator28");
             // 
-            // BT_PedestalSuctionCheckTest
-            // 
-            resources.ApplyResources(this.BT_PedestalSuctionCheckTest, "BT_PedestalSuctionCheckTest");
-            this.BT_PedestalSuctionCheckTest.AutoToolTip = false;
-            this.BT_PedestalSuctionCheckTest.Image = global::PSA_Application.Properties.Resources.blue_triangle;
-            this.BT_PedestalSuctionCheckTest.Name = "BT_PedestalSuctionCheckTest";
-            this.BT_PedestalSuctionCheckTest.Click += new System.EventHandler(this.Control_Click);
-            // 
             // toolStrip7
             // 
             this.toolStrip7.BackColor = System.Drawing.Color.Transparent;
@@ -1169,14 +1033,6 @@
             // 
             this.toolStripSeparator22.Name = "toolStripSeparator22";
             resources.ApplyResources(this.toolStripSeparator22, "toolStripSeparator22");
-            // 
-            // BT_PlaceTimeSensorUse
-            // 
-            resources.ApplyResources(this.BT_PlaceTimeSensorUse, "BT_PlaceTimeSensorUse");
-            this.BT_PlaceTimeSensorUse.AutoToolTip = false;
-            this.BT_PlaceTimeSensorUse.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
-            this.BT_PlaceTimeSensorUse.Name = "BT_PlaceTimeSensorUse";
-            this.BT_PlaceTimeSensorUse.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator23
             // 
@@ -1223,14 +1079,6 @@
             this.toolStripSeparator24.Name = "toolStripSeparator24";
             resources.ApplyResources(this.toolStripSeparator24, "toolStripSeparator24");
             // 
-            // BT_LoadSensorTest
-            // 
-            resources.ApplyResources(this.BT_LoadSensorTest, "BT_LoadSensorTest");
-            this.BT_LoadSensorTest.AutoToolTip = false;
-            this.BT_LoadSensorTest.Image = global::PSA_Application.Properties.Resources.blue_triangle;
-            this.BT_LoadSensorTest.Name = "BT_LoadSensorTest";
-            this.BT_LoadSensorTest.Click += new System.EventHandler(this.Control_Click);
-            // 
             // toolStrip4
             // 
             this.toolStrip4.BackColor = System.Drawing.Color.Transparent;
@@ -1256,14 +1104,6 @@
             // 
             this.toolStripSeparator12.Name = "toolStripSeparator12";
             resources.ApplyResources(this.toolStripSeparator12, "toolStripSeparator12");
-            // 
-            // BT_EpoxyLifetimeUse
-            // 
-            resources.ApplyResources(this.BT_EpoxyLifetimeUse, "BT_EpoxyLifetimeUse");
-            this.BT_EpoxyLifetimeUse.AutoToolTip = false;
-            this.BT_EpoxyLifetimeUse.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
-            this.BT_EpoxyLifetimeUse.Name = "BT_EpoxyLifetimeUse";
-            this.BT_EpoxyLifetimeUse.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator15
             // 
@@ -1368,6 +1208,21 @@
             this.toolStripSeparator13.Name = "toolStripSeparator13";
             resources.ApplyResources(this.toolStripSeparator13, "toolStripSeparator13");
             // 
+            // toolStripSeparator30
+            // 
+            this.toolStripSeparator30.Name = "toolStripSeparator30";
+            resources.ApplyResources(this.toolStripSeparator30, "toolStripSeparator30");
+            // 
+            // toolStripSeparator31
+            // 
+            this.toolStripSeparator31.Name = "toolStripSeparator31";
+            resources.ApplyResources(this.toolStripSeparator31, "toolStripSeparator31");
+            // 
+            // toolStripSeparator43
+            // 
+            this.toolStripSeparator43.Name = "toolStripSeparator43";
+            resources.ApplyResources(this.toolStripSeparator43, "toolStripSeparator43");
+            // 
             // BT_RecipeLoad
             // 
             resources.ApplyResources(this.BT_RecipeLoad, "BT_RecipeLoad");
@@ -1375,11 +1230,6 @@
             this.BT_RecipeLoad.Image = global::PSA_Application.Properties.Resources.FileLoad_Small;
             this.BT_RecipeLoad.Name = "BT_RecipeLoad";
             this.BT_RecipeLoad.Click += new System.EventHandler(this.Control_Click);
-            // 
-            // toolStripSeparator30
-            // 
-            this.toolStripSeparator30.Name = "toolStripSeparator30";
-            resources.ApplyResources(this.toolStripSeparator30, "toolStripSeparator30");
             // 
             // BT_RecipeSave
             // 
@@ -1389,11 +1239,6 @@
             this.BT_RecipeSave.Name = "BT_RecipeSave";
             this.BT_RecipeSave.Click += new System.EventHandler(this.Control_Click);
             // 
-            // toolStripSeparator31
-            // 
-            this.toolStripSeparator31.Name = "toolStripSeparator31";
-            resources.ApplyResources(this.toolStripSeparator31, "toolStripSeparator31");
-            // 
             // BT_RecipeSaveAs
             // 
             resources.ApplyResources(this.BT_RecipeSaveAs, "BT_RecipeSaveAs");
@@ -1402,17 +1247,172 @@
             this.BT_RecipeSaveAs.Name = "BT_RecipeSaveAs";
             this.BT_RecipeSaveAs.Click += new System.EventHandler(this.Control_Click);
             // 
-            // toolStripSeparator43
-            // 
-            this.toolStripSeparator43.Name = "toolStripSeparator43";
-            resources.ApplyResources(this.toolStripSeparator43, "toolStripSeparator43");
-            // 
             // BT_PROTECBACKUP
             // 
-            this.BT_PROTECBACKUP.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.BT_PROTECBACKUP, "BT_PROTECBACKUP");
+            this.BT_PROTECBACKUP.Image = global::PSA_Application.Properties.Resources.Backup;
             this.BT_PROTECBACKUP.Name = "BT_PROTECBACKUP";
             this.BT_PROTECBACKUP.Click += new System.EventHandler(this.Control_Click);
+            // 
+            // BT_UseBondingCountCheck
+            // 
+            resources.ApplyResources(this.BT_UseBondingCountCheck, "BT_UseBondingCountCheck");
+            this.BT_UseBondingCountCheck.AutoToolTip = false;
+            this.BT_UseBondingCountCheck.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
+            this.BT_UseBondingCountCheck.Name = "BT_UseBondingCountCheck";
+            this.BT_UseBondingCountCheck.Click += new System.EventHandler(this.Control_Click);
+            // 
+            // BT_BondingCountReset
+            // 
+            resources.ApplyResources(this.BT_BondingCountReset, "BT_BondingCountReset");
+            this.BT_BondingCountReset.AutoToolTip = false;
+            this.BT_BondingCountReset.Image = global::PSA_Application.Properties.Resources.blue_triangle;
+            this.BT_BondingCountReset.Name = "BT_BondingCountReset";
+            this.BT_BondingCountReset.Click += new System.EventHandler(this.Control_Click);
+            // 
+            // BT_UsePedestal
+            // 
+            resources.ApplyResources(this.BT_UsePedestal, "BT_UsePedestal");
+            this.BT_UsePedestal.AutoToolTip = false;
+            this.BT_UsePedestal.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
+            this.BT_UsePedestal.Name = "BT_UsePedestal";
+            this.BT_UsePedestal.Click += new System.EventHandler(this.Control_Click);
+            // 
+            // BT_UseWasteCountLimit
+            // 
+            resources.ApplyResources(this.BT_UseWasteCountLimit, "BT_UseWasteCountLimit");
+            this.BT_UseWasteCountLimit.AutoToolTip = false;
+            this.BT_UseWasteCountLimit.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
+            this.BT_UseWasteCountLimit.Name = "BT_UseWasteCountLimit";
+            this.BT_UseWasteCountLimit.Click += new System.EventHandler(this.Control_Click);
+            // 
+            // BT_InitWasteCount
+            // 
+            resources.ApplyResources(this.BT_InitWasteCount, "BT_InitWasteCount");
+            this.BT_InitWasteCount.AutoToolTip = false;
+            this.BT_InitWasteCount.Image = global::PSA_Application.Properties.Resources.blue_triangle;
+            this.BT_InitWasteCount.Name = "BT_InitWasteCount";
+            this.BT_InitWasteCount.Click += new System.EventHandler(this.Control_Click);
+            // 
+            // BT_UsePlaceForceTracking
+            // 
+            resources.ApplyResources(this.BT_UsePlaceForceTracking, "BT_UsePlaceForceTracking");
+            this.BT_UsePlaceForceTracking.AutoToolTip = false;
+            this.BT_UsePlaceForceTracking.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
+            this.BT_UsePlaceForceTracking.Name = "BT_UsePlaceForceTracking";
+            this.BT_UsePlaceForceTracking.Click += new System.EventHandler(this.Control_Click);
+            // 
+            // BT_PlaceTimeForceUse
+            // 
+            resources.ApplyResources(this.BT_PlaceTimeForceUse, "BT_PlaceTimeForceUse");
+            this.BT_PlaceTimeForceUse.AutoToolTip = false;
+            this.BT_PlaceTimeForceUse.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
+            this.BT_PlaceTimeForceUse.Name = "BT_PlaceTimeForceUse";
+            this.BT_PlaceTimeForceUse.Click += new System.EventHandler(this.Control_Click);
+            // 
+            // BT_LastTubeCheckUse
+            // 
+            resources.ApplyResources(this.BT_LastTubeCheckUse, "BT_LastTubeCheckUse");
+            this.BT_LastTubeCheckUse.AutoToolTip = false;
+            this.BT_LastTubeCheckUse.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
+            this.BT_LastTubeCheckUse.Name = "BT_LastTubeCheckUse";
+            this.BT_LastTubeCheckUse.Click += new System.EventHandler(this.Control_Click);
+            // 
+            // BT_ForceCompenUse
+            // 
+            resources.ApplyResources(this.BT_ForceCompenUse, "BT_ForceCompenUse");
+            this.BT_ForceCompenUse.AutoToolTip = false;
+            this.BT_ForceCompenUse.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
+            this.BT_ForceCompenUse.Name = "BT_ForceCompenUse";
+            this.BT_ForceCompenUse.Click += new System.EventHandler(this.Control_Click);
+            // 
+            // BT_ForceCompenTest
+            // 
+            resources.ApplyResources(this.BT_ForceCompenTest, "BT_ForceCompenTest");
+            this.BT_ForceCompenTest.AutoToolTip = false;
+            this.BT_ForceCompenTest.Image = global::PSA_Application.Properties.Resources.blue_triangle;
+            this.BT_ForceCompenTest.Name = "BT_ForceCompenTest";
+            this.BT_ForceCompenTest.Click += new System.EventHandler(this.Control_Click);
+            // 
+            // BT_FlatCompenUse
+            // 
+            resources.ApplyResources(this.BT_FlatCompenUse, "BT_FlatCompenUse");
+            this.BT_FlatCompenUse.AutoToolTip = false;
+            this.BT_FlatCompenUse.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
+            this.BT_FlatCompenUse.Name = "BT_FlatCompenUse";
+            this.BT_FlatCompenUse.Click += new System.EventHandler(this.Control_Click);
+            // 
+            // BT_FlatCompenTest
+            // 
+            resources.ApplyResources(this.BT_FlatCompenTest, "BT_FlatCompenTest");
+            this.BT_FlatCompenTest.AutoToolTip = false;
+            this.BT_FlatCompenTest.Image = global::PSA_Application.Properties.Resources.blue_triangle;
+            this.BT_FlatCompenTest.Name = "BT_FlatCompenTest";
+            this.BT_FlatCompenTest.Click += new System.EventHandler(this.Control_Click);
+            // 
+            // BT_RefCompenUse
+            // 
+            resources.ApplyResources(this.BT_RefCompenUse, "BT_RefCompenUse");
+            this.BT_RefCompenUse.AutoToolTip = false;
+            this.BT_RefCompenUse.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
+            this.BT_RefCompenUse.Name = "BT_RefCompenUse";
+            this.BT_RefCompenUse.Click += new System.EventHandler(this.Control_Click);
+            // 
+            // BT_RefCompenTest
+            // 
+            resources.ApplyResources(this.BT_RefCompenTest, "BT_RefCompenTest");
+            this.BT_RefCompenTest.AutoToolTip = false;
+            this.BT_RefCompenTest.Image = global::PSA_Application.Properties.Resources.blue_triangle;
+            this.BT_RefCompenTest.Name = "BT_RefCompenTest";
+            this.BT_RefCompenTest.Click += new System.EventHandler(this.Control_Click);
+            // 
+            // BT_LogSave
+            // 
+            resources.ApplyResources(this.BT_LogSave, "BT_LogSave");
+            this.BT_LogSave.AutoToolTip = false;
+            this.BT_LogSave.Image = global::PSA_Application.Properties.Resources.blue_triangle;
+            this.BT_LogSave.Name = "BT_LogSave";
+            this.BT_LogSave.Click += new System.EventHandler(this.BT_LogSave_Click);
+            // 
+            // BT_PDSuctionCheckUse
+            // 
+            resources.ApplyResources(this.BT_PDSuctionCheckUse, "BT_PDSuctionCheckUse");
+            this.BT_PDSuctionCheckUse.AutoToolTip = false;
+            this.BT_PDSuctionCheckUse.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
+            this.BT_PDSuctionCheckUse.Name = "BT_PDSuctionCheckUse";
+            this.BT_PDSuctionCheckUse.Click += new System.EventHandler(this.Control_Click);
+            // 
+            // BT_PedestalSuctionCheckTest
+            // 
+            resources.ApplyResources(this.BT_PedestalSuctionCheckTest, "BT_PedestalSuctionCheckTest");
+            this.BT_PedestalSuctionCheckTest.AutoToolTip = false;
+            this.BT_PedestalSuctionCheckTest.Image = global::PSA_Application.Properties.Resources.blue_triangle;
+            this.BT_PedestalSuctionCheckTest.Name = "BT_PedestalSuctionCheckTest";
+            this.BT_PedestalSuctionCheckTest.Click += new System.EventHandler(this.Control_Click);
+            // 
+            // BT_PlaceTimeSensorUse
+            // 
+            resources.ApplyResources(this.BT_PlaceTimeSensorUse, "BT_PlaceTimeSensorUse");
+            this.BT_PlaceTimeSensorUse.AutoToolTip = false;
+            this.BT_PlaceTimeSensorUse.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
+            this.BT_PlaceTimeSensorUse.Name = "BT_PlaceTimeSensorUse";
+            this.BT_PlaceTimeSensorUse.Click += new System.EventHandler(this.Control_Click);
+            // 
+            // BT_LoadSensorTest
+            // 
+            resources.ApplyResources(this.BT_LoadSensorTest, "BT_LoadSensorTest");
+            this.BT_LoadSensorTest.AutoToolTip = false;
+            this.BT_LoadSensorTest.Image = global::PSA_Application.Properties.Resources.blue_triangle;
+            this.BT_LoadSensorTest.Name = "BT_LoadSensorTest";
+            this.BT_LoadSensorTest.Click += new System.EventHandler(this.Control_Click);
+            // 
+            // BT_EpoxyLifetimeUse
+            // 
+            resources.ApplyResources(this.BT_EpoxyLifetimeUse, "BT_EpoxyLifetimeUse");
+            this.BT_EpoxyLifetimeUse.AutoToolTip = false;
+            this.BT_EpoxyLifetimeUse.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
+            this.BT_EpoxyLifetimeUse.Name = "BT_EpoxyLifetimeUse";
+            this.BT_EpoxyLifetimeUse.Click += new System.EventHandler(this.Control_Click);
             // 
             // CenterRight_Main
             // 

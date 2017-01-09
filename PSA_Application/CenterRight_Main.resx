@@ -125,6 +125,9 @@
   <data name="LB_.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 8.25pt</value>
   </data>
+  <data name="LB_.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="LB_.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -197,18 +200,6 @@
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
-  </data>
-  <data name="BT_ForceCompenUse.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="BT_ForceCompenUse.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="BT_ForceCompenUse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 32</value>
-  </data>
-  <data name="BT_ForceCompenUse.Text" xml:space="preserve">
-    <value>OFF</value>
   </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
@@ -285,18 +276,6 @@
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
   </data>
-  <data name="BT_ForceCompenTest.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="BT_ForceCompenTest.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="BT_ForceCompenTest.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 32</value>
-  </data>
-  <data name="BT_ForceCompenTest.Text" xml:space="preserve">
-    <value>Test</value>
-  </data>
   <metadata name="toolStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>229, 17</value>
   </metadata>
@@ -344,18 +323,6 @@
   </data>
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
-  </data>
-  <data name="BT_FlatCompenUse.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="BT_FlatCompenUse.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="BT_FlatCompenUse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 32</value>
-  </data>
-  <data name="BT_FlatCompenUse.Text" xml:space="preserve">
-    <value>OFF</value>
   </data>
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
@@ -408,18 +375,6 @@
   <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
   </data>
-  <data name="BT_FlatCompenTest.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="BT_FlatCompenTest.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="BT_FlatCompenTest.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 32</value>
-  </data>
-  <data name="BT_FlatCompenTest.Text" xml:space="preserve">
-    <value>Test</value>
-  </data>
   <metadata name="toolStrip3.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>335, 17</value>
   </metadata>
@@ -467,18 +422,6 @@
   </data>
   <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
-  </data>
-  <data name="BT_RefCompenUse.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="BT_RefCompenUse.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="BT_RefCompenUse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 32</value>
-  </data>
-  <data name="BT_RefCompenUse.Text" xml:space="preserve">
-    <value>OFF</value>
   </data>
   <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
@@ -531,18 +474,6 @@
   <data name="toolStripSeparator14.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
   </data>
-  <data name="BT_RefCompenTest.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="BT_RefCompenTest.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="BT_RefCompenTest.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 32</value>
-  </data>
-  <data name="BT_RefCompenTest.Text" xml:space="preserve">
-    <value>Test</value>
-  </data>
   <metadata name="toolStrip18.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>808, 95</value>
   </metadata>
@@ -551,102 +482,6 @@
   </data>
   <data name="toolStrip18.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
-  </data>
-  <data name="toolStripLabel35.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="toolStripLabel35.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
-  </data>
-  <data name="toolStripLabel35.Text" xml:space="preserve">
-    <value>Bonding Count Check</value>
-  </data>
-  <data name="toolStripLabel35.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="toolStripSeparator50.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="BT_UseBondingCountCheck.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="BT_UseBondingCountCheck.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="BT_UseBondingCountCheck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 32</value>
-  </data>
-  <data name="BT_UseBondingCountCheck.Text" xml:space="preserve">
-    <value>OFF</value>
-  </data>
-  <data name="toolStripSeparator51.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="toolStripLabel36.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="toolStripLabel36.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 22</value>
-  </data>
-  <data name="toolStripLabel36.Text" xml:space="preserve">
-    <value>Tray</value>
-  </data>
-  <data name="toolStripSeparator53.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="TB_BondingTrayCountLimit.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="TB_BondingTrayCountLimit.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9pt</value>
-  </data>
-  <data name="TB_BondingTrayCountLimit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 21</value>
-  </data>
-  <data name="TB_BondingTrayCountLimit.TextBoxTextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Center</value>
-  </data>
-  <data name="toolStripSeparator52.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="toolStripLabel37.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="toolStripLabel37.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 22</value>
-  </data>
-  <data name="toolStripLabel37.Text" xml:space="preserve">
-    <value>PKG</value>
-  </data>
-  <data name="toolStripSeparator54.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="TB_BondingPKGCountLimit.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="TB_BondingPKGCountLimit.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9pt</value>
-  </data>
-  <data name="TB_BondingPKGCountLimit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 21</value>
-  </data>
-  <data name="TB_BondingPKGCountLimit.TextBoxTextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Center</value>
-  </data>
-  <data name="toolStripSeparator55.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="BT_BondingCountReset.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="BT_BondingCountReset.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="BT_BondingCountReset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 32</value>
-  </data>
-  <data name="BT_BondingCountReset.Text" xml:space="preserve">
-    <value>초기화</value>
   </data>
   <data name="toolStrip18.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 395</value>
@@ -681,8 +516,38 @@
   <data name="toolStrip17.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
   </data>
+  <data name="toolStripLabel34.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toolStripLabel34.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 22</value>
+  </data>
+  <data name="toolStripLabel34.Text" xml:space="preserve">
+    <value>Use Pedestal</value>
+  </data>
+  <data name="toolStripLabel34.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="toolStripSeparator46.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="BT_UsePedestal.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BT_UsePedestal.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_UsePedestal.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 32</value>
+  </data>
+  <data name="BT_UsePedestal.Text" xml:space="preserve">
+    <value>OFF</value>
+  </data>
+  <data name="toolStripSeparator49.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
   <data name="toolStrip17.Location" type="System.Drawing.Point, System.Drawing">
-    <value>317, 360</value>
+    <value>323, 360</value>
   </data>
   <data name="toolStrip17.Size" type="System.Drawing.Size, System.Drawing">
     <value>231, 35</value>
@@ -1062,34 +927,76 @@
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="toolStripLabel34.AutoSize" type="System.Boolean, mscorlib">
+  <data name="toolStripLabel35.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="toolStripLabel34.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="toolStripLabel35.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 22</value>
   </data>
-  <data name="toolStripLabel34.Text" xml:space="preserve">
-    <value>Use Pedestal</value>
+  <data name="toolStripLabel35.Text" xml:space="preserve">
+    <value>Bonding Count Check</value>
   </data>
-  <data name="toolStripLabel34.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="toolStripLabel35.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleRight</value>
   </data>
-  <data name="toolStripSeparator46.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="toolStripSeparator50.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
   </data>
-  <data name="BT_UsePedestal.AutoSize" type="System.Boolean, mscorlib">
+  <data name="toolStripSeparator51.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="toolStripLabel36.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="BT_UsePedestal.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="toolStripLabel36.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 22</value>
   </data>
-  <data name="BT_UsePedestal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 32</value>
+  <data name="toolStripLabel36.Text" xml:space="preserve">
+    <value>Tray</value>
   </data>
-  <data name="BT_UsePedestal.Text" xml:space="preserve">
-    <value>OFF</value>
+  <data name="toolStripSeparator53.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
   </data>
-  <data name="toolStripSeparator49.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="TB_BondingTrayCountLimit.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="TB_BondingTrayCountLimit.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9pt</value>
+  </data>
+  <data name="TB_BondingTrayCountLimit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 21</value>
+  </data>
+  <data name="TB_BondingTrayCountLimit.TextBoxTextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="toolStripSeparator52.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="toolStripLabel37.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="toolStripLabel37.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 22</value>
+  </data>
+  <data name="toolStripLabel37.Text" xml:space="preserve">
+    <value>PKG</value>
+  </data>
+  <data name="toolStripSeparator54.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="TB_BondingPKGCountLimit.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="TB_BondingPKGCountLimit.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9pt</value>
+  </data>
+  <data name="TB_BondingPKGCountLimit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 21</value>
+  </data>
+  <data name="TB_BondingPKGCountLimit.TextBoxTextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="toolStripSeparator55.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
   </data>
   <data name="toolStripLabel31.AutoSize" type="System.Boolean, mscorlib">
@@ -1106,18 +1013,6 @@
   </data>
   <data name="toolStripSeparator44.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
-  </data>
-  <data name="BT_UseWasteCountLimit.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="BT_UseWasteCountLimit.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="BT_UseWasteCountLimit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 32</value>
-  </data>
-  <data name="BT_UseWasteCountLimit.Text" xml:space="preserve">
-    <value>OFF</value>
   </data>
   <data name="toolStripSeparator47.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
@@ -1169,18 +1064,6 @@
   </data>
   <data name="toolStripSeparator48.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
-  </data>
-  <data name="BT_InitWasteCount.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="BT_InitWasteCount.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="BT_InitWasteCount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 32</value>
-  </data>
-  <data name="BT_InitWasteCount.Text" xml:space="preserve">
-    <value>초기화</value>
   </data>
   <data name="toolStripLabel26.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1314,18 +1197,6 @@
   <data name="toolStripSeparator29.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
   </data>
-  <data name="BT_UsePlaceForceTracking.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="BT_UsePlaceForceTracking.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="BT_UsePlaceForceTracking.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 32</value>
-  </data>
-  <data name="BT_UsePlaceForceTracking.Text" xml:space="preserve">
-    <value>OFF</value>
-  </data>
   <data name="toolStripSeparator32.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
   </data>
@@ -1343,18 +1214,6 @@
   </data>
   <data name="toolStripSeparator35.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
-  </data>
-  <data name="BT_PlaceTimeForceUse.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="BT_PlaceTimeForceUse.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="BT_PlaceTimeForceUse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 32</value>
-  </data>
-  <data name="BT_PlaceTimeForceUse.Text" xml:space="preserve">
-    <value>OFF</value>
   </data>
   <data name="toolStripSeparator36.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
@@ -1428,18 +1287,6 @@
   <data name="toolStripSeparator33.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
   </data>
-  <data name="BT_LastTubeCheckUse.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="BT_LastTubeCheckUse.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="BT_LastTubeCheckUse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 32</value>
-  </data>
-  <data name="BT_LastTubeCheckUse.Text" xml:space="preserve">
-    <value>OFF</value>
-  </data>
   <data name="toolStripSeparator34.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
   </data>
@@ -1479,18 +1326,6 @@
   <data name="toolStripSeparator19.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
   </data>
-  <data name="BT_LogSave.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="BT_LogSave.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="BT_LogSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 32</value>
-  </data>
-  <data name="BT_LogSave.Text" xml:space="preserve">
-    <value>적용</value>
-  </data>
   <data name="toolStripLabel17.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -1505,18 +1340,6 @@
   </data>
   <data name="toolStripSeparator25.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
-  </data>
-  <data name="BT_PDSuctionCheckUse.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="BT_PDSuctionCheckUse.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="BT_PDSuctionCheckUse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 32</value>
-  </data>
-  <data name="BT_PDSuctionCheckUse.Text" xml:space="preserve">
-    <value>OFF</value>
   </data>
   <data name="toolStripSeparator26.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
@@ -1578,18 +1401,6 @@
   <data name="toolStripSeparator28.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
   </data>
-  <data name="BT_PedestalSuctionCheckTest.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="BT_PedestalSuctionCheckTest.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="BT_PedestalSuctionCheckTest.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 32</value>
-  </data>
-  <data name="BT_PedestalSuctionCheckTest.Text" xml:space="preserve">
-    <value>Test</value>
-  </data>
   <data name="toolStripLabel16.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -1604,18 +1415,6 @@
   </data>
   <data name="toolStripSeparator22.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
-  </data>
-  <data name="BT_PlaceTimeSensorUse.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="BT_PlaceTimeSensorUse.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="BT_PlaceTimeSensorUse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 32</value>
-  </data>
-  <data name="BT_PlaceTimeSensorUse.Text" xml:space="preserve">
-    <value>OFF</value>
   </data>
   <data name="toolStripSeparator23.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
@@ -1671,18 +1470,6 @@
   <data name="toolStripSeparator24.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
   </data>
-  <data name="BT_LoadSensorTest.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="BT_LoadSensorTest.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="BT_LoadSensorTest.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 32</value>
-  </data>
-  <data name="BT_LoadSensorTest.Text" xml:space="preserve">
-    <value>Test</value>
-  </data>
   <data name="toolStripLabel9.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -1697,18 +1484,6 @@
   </data>
   <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
-  </data>
-  <data name="BT_EpoxyLifetimeUse.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="BT_EpoxyLifetimeUse.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="BT_EpoxyLifetimeUse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 32</value>
-  </data>
-  <data name="BT_EpoxyLifetimeUse.Text" xml:space="preserve">
-    <value>OFF</value>
   </data>
   <data name="toolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
@@ -1848,30 +1623,6 @@
   <data name="toolStrip6.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
   </data>
-  <data name="toolStrip6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 71</value>
-  </data>
-  <data name="toolStrip6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>569, 38</value>
-  </data>
-  <data name="toolStrip6.TabIndex" type="System.Int32, mscorlib">
-    <value>105</value>
-  </data>
-  <data name="toolStrip6.Text" xml:space="preserve">
-    <value>toolStrip10</value>
-  </data>
-  <data name="&gt;&gt;toolStrip6.Name" xml:space="preserve">
-    <value>toolStrip6</value>
-  </data>
-  <data name="&gt;&gt;toolStrip6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStrip6.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;toolStrip6.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="toolStripLabel19.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -1944,29 +1695,272 @@
   <data name="toolStripSeparator43.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 38</value>
   </data>
-  <data name="BT_PROTECBACKUP.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIISURBVDhPpZP7S1NxGMbPPxKaXVUkMEq8IpKUCoY/hGgI
-        ymqkDYYXcCjDZOANURSjCNGFQUTsl4GXVMxKk62YU4fXQpaIlygHQxBRH8/zwvyaIAYe+HLgnPN8nue9
-        HA3nvDTq63oW/jm13XOwvPTB3DYFY5MH+bXfcN8ygfTSMSSXfESicQDxBqdYHwH29g9w2tnZ3UcguIvN
-        rR3417exuBJE5N1n/wfwLgXEOc38Bc6xNRHb+/y4nm49G0Bnit2zf9H6bkliE/jKuYxrd6oVgDWfjB+K
-        TWeKMyrGEVfowITvD9re/9ABVQrAhh0HHK+ZselMMaN/mvwtDb+aVqkA7HYIwIj3ysfluPTorJnP6Ezx
-        oHsD1s5ZXEktUwCOioB5f1CEPR9+wTG6iuiserTo8dkwng7HT/R+XUPF8xlcTjErAOdMcW6NW8STiwG8
-        7vej8oUPN/PsEv3t8Ao0TZP3T1u8uJRkUgAuSYHtO97oLxmXd5t9Ho8aPTK+GzntqNfrLm2fFoihwYOI
-        xGIF4KjoGBLzY1OrF9k6OOFxnwDC4wxIMX1G0pMhgVyMNyoA13PAtS7OrJk1PrC69LUdQWxuF6IybHrX
-        LRI7JrtZdoDAo1XmbjMyD+tjSXxGcXRmnYg5ttD9QuxDhN0uUgDOmbvNTpPOJaGAo2K36cyaGZvOFIfd
-        KlSA8/zRh9ABIDUG+1JpAAAAAElFTkSuQmCC
-</value>
+  <data name="BT_PROTECBACKUP.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BT_PROTECBACKUP.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
   </data>
   <data name="BT_PROTECBACKUP.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="BT_PROTECBACKUP.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 35</value>
+    <value>120, 35</value>
   </data>
   <data name="BT_PROTECBACKUP.Text" xml:space="preserve">
-    <value>PROTEC BACKUP</value>
+    <value>Backup</value>
+  </data>
+  <data name="toolStrip6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 71</value>
+  </data>
+  <data name="toolStrip6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>576, 38</value>
+  </data>
+  <data name="toolStrip6.TabIndex" type="System.Int32, mscorlib">
+    <value>105</value>
+  </data>
+  <data name="toolStrip6.Text" xml:space="preserve">
+    <value>toolStrip10</value>
+  </data>
+  <data name="&gt;&gt;toolStrip6.Name" xml:space="preserve">
+    <value>toolStrip6</value>
+  </data>
+  <data name="&gt;&gt;toolStrip6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStrip6.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolStrip6.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="BT_UseBondingCountCheck.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BT_UseBondingCountCheck.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_UseBondingCountCheck.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 32</value>
+  </data>
+  <data name="BT_UseBondingCountCheck.Text" xml:space="preserve">
+    <value>OFF</value>
+  </data>
+  <data name="BT_BondingCountReset.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BT_BondingCountReset.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_BondingCountReset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 32</value>
+  </data>
+  <data name="BT_BondingCountReset.Text" xml:space="preserve">
+    <value>초기화</value>
+  </data>
+  <data name="BT_UseWasteCountLimit.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BT_UseWasteCountLimit.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_UseWasteCountLimit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 32</value>
+  </data>
+  <data name="BT_UseWasteCountLimit.Text" xml:space="preserve">
+    <value>OFF</value>
+  </data>
+  <data name="BT_InitWasteCount.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BT_InitWasteCount.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_InitWasteCount.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 32</value>
+  </data>
+  <data name="BT_InitWasteCount.Text" xml:space="preserve">
+    <value>초기화</value>
+  </data>
+  <data name="BT_UsePlaceForceTracking.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BT_UsePlaceForceTracking.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_UsePlaceForceTracking.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 32</value>
+  </data>
+  <data name="BT_UsePlaceForceTracking.Text" xml:space="preserve">
+    <value>OFF</value>
+  </data>
+  <data name="BT_PlaceTimeForceUse.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BT_PlaceTimeForceUse.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_PlaceTimeForceUse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 32</value>
+  </data>
+  <data name="BT_PlaceTimeForceUse.Text" xml:space="preserve">
+    <value>OFF</value>
+  </data>
+  <data name="BT_LastTubeCheckUse.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BT_LastTubeCheckUse.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_LastTubeCheckUse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 32</value>
+  </data>
+  <data name="BT_LastTubeCheckUse.Text" xml:space="preserve">
+    <value>OFF</value>
+  </data>
+  <data name="BT_ForceCompenUse.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BT_ForceCompenUse.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_ForceCompenUse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 32</value>
+  </data>
+  <data name="BT_ForceCompenUse.Text" xml:space="preserve">
+    <value>OFF</value>
+  </data>
+  <data name="BT_ForceCompenTest.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BT_ForceCompenTest.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_ForceCompenTest.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 32</value>
+  </data>
+  <data name="BT_ForceCompenTest.Text" xml:space="preserve">
+    <value>Test</value>
+  </data>
+  <data name="BT_FlatCompenUse.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BT_FlatCompenUse.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_FlatCompenUse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 32</value>
+  </data>
+  <data name="BT_FlatCompenUse.Text" xml:space="preserve">
+    <value>OFF</value>
+  </data>
+  <data name="BT_FlatCompenTest.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BT_FlatCompenTest.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_FlatCompenTest.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 32</value>
+  </data>
+  <data name="BT_FlatCompenTest.Text" xml:space="preserve">
+    <value>Test</value>
+  </data>
+  <data name="BT_RefCompenUse.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BT_RefCompenUse.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_RefCompenUse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 32</value>
+  </data>
+  <data name="BT_RefCompenUse.Text" xml:space="preserve">
+    <value>OFF</value>
+  </data>
+  <data name="BT_RefCompenTest.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BT_RefCompenTest.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_RefCompenTest.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 32</value>
+  </data>
+  <data name="BT_RefCompenTest.Text" xml:space="preserve">
+    <value>Test</value>
+  </data>
+  <data name="BT_LogSave.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BT_LogSave.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_LogSave.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 32</value>
+  </data>
+  <data name="BT_LogSave.Text" xml:space="preserve">
+    <value>적용</value>
+  </data>
+  <data name="BT_PDSuctionCheckUse.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BT_PDSuctionCheckUse.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_PDSuctionCheckUse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 32</value>
+  </data>
+  <data name="BT_PDSuctionCheckUse.Text" xml:space="preserve">
+    <value>OFF</value>
+  </data>
+  <data name="BT_PedestalSuctionCheckTest.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BT_PedestalSuctionCheckTest.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_PedestalSuctionCheckTest.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 32</value>
+  </data>
+  <data name="BT_PedestalSuctionCheckTest.Text" xml:space="preserve">
+    <value>Test</value>
+  </data>
+  <data name="BT_PlaceTimeSensorUse.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BT_PlaceTimeSensorUse.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_PlaceTimeSensorUse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 32</value>
+  </data>
+  <data name="BT_PlaceTimeSensorUse.Text" xml:space="preserve">
+    <value>OFF</value>
+  </data>
+  <data name="BT_LoadSensorTest.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BT_LoadSensorTest.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_LoadSensorTest.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 32</value>
+  </data>
+  <data name="BT_LoadSensorTest.Text" xml:space="preserve">
+    <value>Test</value>
+  </data>
+  <data name="BT_EpoxyLifetimeUse.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BT_EpoxyLifetimeUse.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_EpoxyLifetimeUse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 32</value>
+  </data>
+  <data name="BT_EpoxyLifetimeUse.Text" xml:space="preserve">
+    <value>OFF</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1991,12 +1985,6 @@
   </data>
   <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BT_ForceCompenUse.Name" xml:space="preserve">
-    <value>BT_ForceCompenUse</value>
-  </data>
-  <data name="&gt;&gt;BT_ForceCompenUse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
     <value>toolStripSeparator2</value>
@@ -2058,12 +2046,6 @@
   <data name="&gt;&gt;toolStripSeparator3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;BT_ForceCompenTest.Name" xml:space="preserve">
-    <value>BT_ForceCompenTest</value>
-  </data>
-  <data name="&gt;&gt;BT_ForceCompenTest.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;toolStripLabel4.Name" xml:space="preserve">
     <value>toolStripLabel4</value>
   </data>
@@ -2075,12 +2057,6 @@
   </data>
   <data name="&gt;&gt;toolStripSeparator4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BT_FlatCompenUse.Name" xml:space="preserve">
-    <value>BT_FlatCompenUse</value>
-  </data>
-  <data name="&gt;&gt;BT_FlatCompenUse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator5.Name" xml:space="preserve">
     <value>toolStripSeparator5</value>
@@ -2124,12 +2100,6 @@
   <data name="&gt;&gt;toolStripSeparator8.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;BT_FlatCompenTest.Name" xml:space="preserve">
-    <value>BT_FlatCompenTest</value>
-  </data>
-  <data name="&gt;&gt;BT_FlatCompenTest.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;toolStripLabel8.Name" xml:space="preserve">
     <value>toolStripLabel8</value>
   </data>
@@ -2141,12 +2111,6 @@
   </data>
   <data name="&gt;&gt;toolStripSeparator9.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BT_RefCompenUse.Name" xml:space="preserve">
-    <value>BT_RefCompenUse</value>
-  </data>
-  <data name="&gt;&gt;BT_RefCompenUse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator10.Name" xml:space="preserve">
     <value>toolStripSeparator10</value>
@@ -2190,12 +2154,6 @@
   <data name="&gt;&gt;toolStripSeparator14.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;BT_RefCompenTest.Name" xml:space="preserve">
-    <value>BT_RefCompenTest</value>
-  </data>
-  <data name="&gt;&gt;BT_RefCompenTest.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;toolStripLabel35.Name" xml:space="preserve">
     <value>toolStripLabel35</value>
   </data>
@@ -2207,12 +2165,6 @@
   </data>
   <data name="&gt;&gt;toolStripSeparator50.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BT_UseBondingCountCheck.Name" xml:space="preserve">
-    <value>BT_UseBondingCountCheck</value>
-  </data>
-  <data name="&gt;&gt;BT_UseBondingCountCheck.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator51.Name" xml:space="preserve">
     <value>toolStripSeparator51</value>
@@ -2268,12 +2220,6 @@
   <data name="&gt;&gt;toolStripSeparator55.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;BT_BondingCountReset.Name" xml:space="preserve">
-    <value>BT_BondingCountReset</value>
-  </data>
-  <data name="&gt;&gt;BT_BondingCountReset.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;toolStripLabel34.Name" xml:space="preserve">
     <value>toolStripLabel34</value>
   </data>
@@ -2285,12 +2231,6 @@
   </data>
   <data name="&gt;&gt;toolStripSeparator46.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BT_UsePedestal.Name" xml:space="preserve">
-    <value>BT_UsePedestal</value>
-  </data>
-  <data name="&gt;&gt;BT_UsePedestal.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator49.Name" xml:space="preserve">
     <value>toolStripSeparator49</value>
@@ -2309,12 +2249,6 @@
   </data>
   <data name="&gt;&gt;toolStripSeparator44.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BT_UseWasteCountLimit.Name" xml:space="preserve">
-    <value>BT_UseWasteCountLimit</value>
-  </data>
-  <data name="&gt;&gt;BT_UseWasteCountLimit.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator47.Name" xml:space="preserve">
     <value>toolStripSeparator47</value>
@@ -2357,12 +2291,6 @@
   </data>
   <data name="&gt;&gt;toolStripSeparator48.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BT_InitWasteCount.Name" xml:space="preserve">
-    <value>BT_InitWasteCount</value>
-  </data>
-  <data name="&gt;&gt;BT_InitWasteCount.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripLabel26.Name" xml:space="preserve">
     <value>toolStripLabel26</value>
@@ -2478,12 +2406,6 @@
   <data name="&gt;&gt;toolStripSeparator29.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;BT_UsePlaceForceTracking.Name" xml:space="preserve">
-    <value>BT_UsePlaceForceTracking</value>
-  </data>
-  <data name="&gt;&gt;BT_UsePlaceForceTracking.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;toolStripSeparator32.Name" xml:space="preserve">
     <value>toolStripSeparator32</value>
   </data>
@@ -2501,12 +2423,6 @@
   </data>
   <data name="&gt;&gt;toolStripSeparator35.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BT_PlaceTimeForceUse.Name" xml:space="preserve">
-    <value>BT_PlaceTimeForceUse</value>
-  </data>
-  <data name="&gt;&gt;BT_PlaceTimeForceUse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator36.Name" xml:space="preserve">
     <value>toolStripSeparator36</value>
@@ -2562,12 +2478,6 @@
   <data name="&gt;&gt;toolStripSeparator33.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;BT_LastTubeCheckUse.Name" xml:space="preserve">
-    <value>BT_LastTubeCheckUse</value>
-  </data>
-  <data name="&gt;&gt;BT_LastTubeCheckUse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;toolStripSeparator34.Name" xml:space="preserve">
     <value>toolStripSeparator34</value>
   </data>
@@ -2598,12 +2508,6 @@
   <data name="&gt;&gt;toolStripSeparator19.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;BT_LogSave.Name" xml:space="preserve">
-    <value>BT_LogSave</value>
-  </data>
-  <data name="&gt;&gt;BT_LogSave.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;toolStripLabel17.Name" xml:space="preserve">
     <value>toolStripLabel17</value>
   </data>
@@ -2615,12 +2519,6 @@
   </data>
   <data name="&gt;&gt;toolStripSeparator25.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BT_PDSuctionCheckUse.Name" xml:space="preserve">
-    <value>BT_PDSuctionCheckUse</value>
-  </data>
-  <data name="&gt;&gt;BT_PDSuctionCheckUse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator26.Name" xml:space="preserve">
     <value>toolStripSeparator26</value>
@@ -2670,12 +2568,6 @@
   <data name="&gt;&gt;toolStripSeparator28.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;BT_PedestalSuctionCheckTest.Name" xml:space="preserve">
-    <value>BT_PedestalSuctionCheckTest</value>
-  </data>
-  <data name="&gt;&gt;BT_PedestalSuctionCheckTest.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;toolStripLabel16.Name" xml:space="preserve">
     <value>toolStripLabel16</value>
   </data>
@@ -2687,12 +2579,6 @@
   </data>
   <data name="&gt;&gt;toolStripSeparator22.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BT_PlaceTimeSensorUse.Name" xml:space="preserve">
-    <value>BT_PlaceTimeSensorUse</value>
-  </data>
-  <data name="&gt;&gt;BT_PlaceTimeSensorUse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator23.Name" xml:space="preserve">
     <value>toolStripSeparator23</value>
@@ -2736,12 +2622,6 @@
   <data name="&gt;&gt;toolStripSeparator24.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;BT_LoadSensorTest.Name" xml:space="preserve">
-    <value>BT_LoadSensorTest</value>
-  </data>
-  <data name="&gt;&gt;BT_LoadSensorTest.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;toolStripLabel9.Name" xml:space="preserve">
     <value>toolStripLabel9</value>
   </data>
@@ -2753,12 +2633,6 @@
   </data>
   <data name="&gt;&gt;toolStripSeparator12.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BT_EpoxyLifetimeUse.Name" xml:space="preserve">
-    <value>BT_EpoxyLifetimeUse</value>
-  </data>
-  <data name="&gt;&gt;BT_EpoxyLifetimeUse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator15.Name" xml:space="preserve">
     <value>toolStripSeparator15</value>
@@ -2838,23 +2712,11 @@
   <data name="&gt;&gt;toolStripSeparator13.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;BT_RecipeLoad.Name" xml:space="preserve">
-    <value>BT_RecipeLoad</value>
-  </data>
-  <data name="&gt;&gt;BT_RecipeLoad.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;toolStripSeparator30.Name" xml:space="preserve">
     <value>toolStripSeparator30</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator30.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BT_RecipeSave.Name" xml:space="preserve">
-    <value>BT_RecipeSave</value>
-  </data>
-  <data name="&gt;&gt;BT_RecipeSave.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator31.Name" xml:space="preserve">
     <value>toolStripSeparator31</value>
@@ -2862,22 +2724,154 @@
   <data name="&gt;&gt;toolStripSeparator31.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;BT_RecipeSaveAs.Name" xml:space="preserve">
-    <value>BT_RecipeSaveAs</value>
-  </data>
-  <data name="&gt;&gt;BT_RecipeSaveAs.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;toolStripSeparator43.Name" xml:space="preserve">
     <value>toolStripSeparator43</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator43.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;BT_RecipeLoad.Name" xml:space="preserve">
+    <value>BT_RecipeLoad</value>
+  </data>
+  <data name="&gt;&gt;BT_RecipeLoad.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BT_RecipeSave.Name" xml:space="preserve">
+    <value>BT_RecipeSave</value>
+  </data>
+  <data name="&gt;&gt;BT_RecipeSave.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BT_RecipeSaveAs.Name" xml:space="preserve">
+    <value>BT_RecipeSaveAs</value>
+  </data>
+  <data name="&gt;&gt;BT_RecipeSaveAs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;BT_PROTECBACKUP.Name" xml:space="preserve">
     <value>BT_PROTECBACKUP</value>
   </data>
   <data name="&gt;&gt;BT_PROTECBACKUP.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BT_UseBondingCountCheck.Name" xml:space="preserve">
+    <value>BT_UseBondingCountCheck</value>
+  </data>
+  <data name="&gt;&gt;BT_UseBondingCountCheck.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BT_BondingCountReset.Name" xml:space="preserve">
+    <value>BT_BondingCountReset</value>
+  </data>
+  <data name="&gt;&gt;BT_BondingCountReset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BT_UsePedestal.Name" xml:space="preserve">
+    <value>BT_UsePedestal</value>
+  </data>
+  <data name="&gt;&gt;BT_UsePedestal.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BT_UseWasteCountLimit.Name" xml:space="preserve">
+    <value>BT_UseWasteCountLimit</value>
+  </data>
+  <data name="&gt;&gt;BT_UseWasteCountLimit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BT_InitWasteCount.Name" xml:space="preserve">
+    <value>BT_InitWasteCount</value>
+  </data>
+  <data name="&gt;&gt;BT_InitWasteCount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BT_UsePlaceForceTracking.Name" xml:space="preserve">
+    <value>BT_UsePlaceForceTracking</value>
+  </data>
+  <data name="&gt;&gt;BT_UsePlaceForceTracking.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BT_PlaceTimeForceUse.Name" xml:space="preserve">
+    <value>BT_PlaceTimeForceUse</value>
+  </data>
+  <data name="&gt;&gt;BT_PlaceTimeForceUse.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BT_LastTubeCheckUse.Name" xml:space="preserve">
+    <value>BT_LastTubeCheckUse</value>
+  </data>
+  <data name="&gt;&gt;BT_LastTubeCheckUse.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BT_ForceCompenUse.Name" xml:space="preserve">
+    <value>BT_ForceCompenUse</value>
+  </data>
+  <data name="&gt;&gt;BT_ForceCompenUse.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BT_ForceCompenTest.Name" xml:space="preserve">
+    <value>BT_ForceCompenTest</value>
+  </data>
+  <data name="&gt;&gt;BT_ForceCompenTest.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BT_FlatCompenUse.Name" xml:space="preserve">
+    <value>BT_FlatCompenUse</value>
+  </data>
+  <data name="&gt;&gt;BT_FlatCompenUse.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BT_FlatCompenTest.Name" xml:space="preserve">
+    <value>BT_FlatCompenTest</value>
+  </data>
+  <data name="&gt;&gt;BT_FlatCompenTest.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BT_RefCompenUse.Name" xml:space="preserve">
+    <value>BT_RefCompenUse</value>
+  </data>
+  <data name="&gt;&gt;BT_RefCompenUse.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BT_RefCompenTest.Name" xml:space="preserve">
+    <value>BT_RefCompenTest</value>
+  </data>
+  <data name="&gt;&gt;BT_RefCompenTest.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BT_LogSave.Name" xml:space="preserve">
+    <value>BT_LogSave</value>
+  </data>
+  <data name="&gt;&gt;BT_LogSave.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BT_PDSuctionCheckUse.Name" xml:space="preserve">
+    <value>BT_PDSuctionCheckUse</value>
+  </data>
+  <data name="&gt;&gt;BT_PDSuctionCheckUse.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BT_PedestalSuctionCheckTest.Name" xml:space="preserve">
+    <value>BT_PedestalSuctionCheckTest</value>
+  </data>
+  <data name="&gt;&gt;BT_PedestalSuctionCheckTest.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BT_PlaceTimeSensorUse.Name" xml:space="preserve">
+    <value>BT_PlaceTimeSensorUse</value>
+  </data>
+  <data name="&gt;&gt;BT_PlaceTimeSensorUse.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BT_LoadSensorTest.Name" xml:space="preserve">
+    <value>BT_LoadSensorTest</value>
+  </data>
+  <data name="&gt;&gt;BT_LoadSensorTest.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BT_EpoxyLifetimeUse.Name" xml:space="preserve">
+    <value>BT_EpoxyLifetimeUse</value>
+  </data>
+  <data name="&gt;&gt;BT_EpoxyLifetimeUse.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
