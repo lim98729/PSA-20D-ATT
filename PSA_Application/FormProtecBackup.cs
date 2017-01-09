@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using System.IO;
+using PSA_SystemLibrary;
 
 namespace PSA_Application
 {
@@ -44,8 +45,7 @@ namespace PSA_Application
             string[] files = Directory.GetFiles(sourceFolder);
             string[] folders = Directory.GetDirectories(sourceFolder);
 
-            foreach (string file in files)
-                srcSize++;
+            foreach (string file in files) srcSize++;
 
             foreach (string folder in folders)
             {
@@ -57,40 +57,46 @@ namespace PSA_Application
 
         public void CopyFolder()
         {
-
-            string destFolder = tmpdest;
-            string sourceFolder = tmpsrc;
-
-            if (!Directory.Exists(destFolder))
-                Directory.CreateDirectory(destFolder);
-
-            string[] files = Directory.GetFiles(sourceFolder);
-            string[] folders = Directory.GetDirectories(sourceFolder);
-
-            foreach (string file in files)
+            try
             {
-                string name = Path.GetFileName(file);
-                string dest = Path.Combine(destFolder, name);
-                File.Copy(file, dest);
-                Thread.Sleep(10);
-                SetProgBar(vv);
-                SetLabel();
-                vv++;
+                string destFolder = tmpdest;
+                string sourceFolder = tmpsrc;
 
-                if (vv == srcSize)
+                if (!Directory.Exists(destFolder))
+                    Directory.CreateDirectory(destFolder);
+
+                string[] files = Directory.GetFiles(sourceFolder);
+                string[] folders = Directory.GetDirectories(sourceFolder);
+
+                foreach (string file in files)
                 {
-                    Thread.Sleep(1000);
-                    this.Exit();
+                    string name = Path.GetFileName(file);
+                    string dest = Path.Combine(destFolder, name);
+                    File.Copy(file, dest);
+                    Thread.Sleep(10);
+                    SetProgBar(vv);
+                    SetLabel();
+                    vv++;
+
+                    if (vv == srcSize)
+                    {
+                        Thread.Sleep(1000);
+                        this.Exit();
+                    }
+                }
+
+                foreach (string folder in folders)
+                {
+                    if (folder == "C:\\PROTEC\\Log") continue;
+                    string name = Path.GetFileName(folder);
+                    string dest = Path.Combine(destFolder, name);
+                    tmpsrc = folder; tmpdest = dest;
+                    CopyFolder();
                 }
             }
-
-            foreach (string folder in folders)
+            catch (Exception ex)
             {
-                if (folder == "C:\\PROTEC\\Log") continue;
-                string name = Path.GetFileName(folder);
-                string dest = Path.Combine(destFolder, name);
-                tmpsrc = folder; tmpdest = dest;
-                CopyFolder();
+                mc.message.alarm(ex.Message, "Backup Error");
             }
         }
 
@@ -114,7 +120,7 @@ namespace PSA_Application
             }
             else
             {
-                this.label1.Text = "파일 복사 진행중";
+                this.label1.Text = "Backup Files..";
             }
         }
 

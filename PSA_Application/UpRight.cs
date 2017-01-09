@@ -375,6 +375,12 @@ namespace PSA_Application
         private void UpRight_Load(object sender, EventArgs e)
         {
             RB_ByPassMode.Checked = true;
+
+            if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG)
+            {
+                RB_PressMode.Visible = false;
+                RB_ByPassMode.Location = RB_PressMode.Location;
+            }
         }
 
         private void LB_ErrorReport_MouseDoubleClick(object sender, MouseEventArgs e)

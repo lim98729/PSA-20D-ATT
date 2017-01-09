@@ -50,6 +50,10 @@ namespace PSA_Application
 				try
 				{
 					FormHalconModelTeach ff = new FormHalconModelTeach();
+                    ff.mode = mode;
+                    ff.TopMost = true;
+                    ff.teachCropArea = mc.para.ULC.cropArea.value;
+
                     if (mode == SELECT_FIND_MODEL.ULC_PKG) ff.mode = SELECT_FIND_MODEL.ULC_PKG;
                     else if (mode == SELECT_FIND_MODEL.ULC_LIDC1) ff.mode = SELECT_FIND_MODEL.ULC_LIDC1;
                     else if (mode == SELECT_FIND_MODEL.ULC_LIDC2) ff.mode = SELECT_FIND_MODEL.ULC_LIDC2;
@@ -212,6 +216,10 @@ namespace PSA_Application
 				mc.ulc.LIVE = false;
 				EVENT.hWindow2Display();
 			}
+            if (sender.Equals(TB_CropArea))
+            {
+                mc.para.setting(mc.para.ULC.cropArea, out mc.para.ULC.cropArea);
+            }
 			if (sender.Equals(TB_ULC_RETRYNUM))
 			{
 				mc.para.setting(mc.para.ULC.failretry, out mc.para.ULC.failretry);
@@ -503,6 +511,9 @@ namespace PSA_Application
                     TS_CHECK_CIRCLE.Visible = true;
                     TS_CHECK_ORIENTATION.Visible = true;
                     TS_ALIGN_DIRECTION.Visible = false;
+                    TS_ANGLE_START.Visible = false;
+                    TS_ANGLE_EXTENT.Visible = false;
+                    TS_CROPAREA.Visible = false;
 				}
 				else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
 				{
@@ -514,6 +525,7 @@ namespace PSA_Application
                 else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CORNER)
                 {
                     BT_AlgorismSelect.Text = BT_AlgorismSelect_CornerModel.Text;
+                    TB_CropArea.Text = mc.para.ULC.cropArea.value.ToString();
                     hWC_Model.Visible = false;
                     TS_CORNER_TEACH.Visible = true;
                     //TS_PASSSCORE.Visible = false;
@@ -521,6 +533,9 @@ namespace PSA_Application
                     TS_CHECK_CIRCLE.Visible = false;
                     TS_CHECK_ORIENTATION.Visible = false;
                     TS_ALIGN_DIRECTION.Visible = true;
+                    TS_ANGLE_START.Visible = false;
+                    TS_ANGLE_EXTENT.Visible = false;
+                    TS_CROPAREA.Visible = true;
 
                     if (mode == SELECT_FIND_MODEL.ULC_LIDC1)
                     {

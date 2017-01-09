@@ -224,7 +224,7 @@ namespace PSA_Application
 			if (sender.Equals(BT_PROTECBACKUP))
 			{
 				string src = "C:\\PROTEC\\";
-				string dest = "D:\\BACKUP\\PROTEC\\" + DateTime.Now.Year.ToString("d4") + DateTime.Now.Month.ToString("d2") + DateTime.Now.Day.ToString("d2") + DateTime.Now.Hour.ToString("d2") + DateTime.Now.Minute.ToString("d2") + DateTime.Now.Second.ToString("d2");
+                string dest = "D:\\ProtecBackup\\" + DateTime.Now.Year.ToString("d2") + "\\" + DateTime.Now.Month.ToString("d2") + "\\" + DateTime.Now.Day.ToString("d2") + "\\" + DateTime.Now.Hour.ToString("d2") + DateTime.Now.Minute.ToString("d2");
 
 				FormProtecBackup ff = new FormProtecBackup(src, dest);
 				ff.ShowDialog();

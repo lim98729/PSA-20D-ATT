@@ -210,30 +210,6 @@
   <data name="toolStrip2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
   </data>
-  <data name="toolStrip2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 129</value>
-  </data>
-  <data name="toolStrip2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>427, 35</value>
-  </data>
-  <data name="toolStrip2.TabIndex" type="System.Int32, mscorlib">
-    <value>67</value>
-  </data>
-  <data name="toolStrip2.Text" xml:space="preserve">
-    <value>toolStrip2</value>
-  </data>
-  <data name="&gt;&gt;toolStrip2.Name" xml:space="preserve">
-    <value>toolStrip2</value>
-  </data>
-  <data name="&gt;&gt;toolStrip2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStrip2.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;toolStrip2.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
   <data name="LB_Model.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -251,33 +227,6 @@
   </data>
   <data name="BT_AlgorismSelect.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
-  </data>
-  <data name="BT_AlgorismSelect.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9pt</value>
-  </data>
-  <data name="BT_AlgorismSelect.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIDSURBVDhPpZLrS5NhGMb3j4SWh0oRQVExD4gonkDpg4hG
-        YKxG6WBogkMZKgPNCEVJFBGdGETEvgwyO9DJE5syZw3PIlPEE9pgBCLZ5XvdMB8Ew8gXbl54nuf63dd9
-        0OGSnwCahxbPRNPAPMw9Xpg6ZmF46kZZ0xSKzJPIrhpDWsVnpBhGkKx3nAX8Pv7z1zg8OoY/cITdn4fw
-        bf/C0kYAN3Ma/w3gWfZL5kzTKBxjWyK2DftwI9tyMYCZKXbNHaD91bLYJrDXsYbrWfUKwJrPE9M2M1Oc
-        VzOOpHI7Jr376Hi9ogHqFIANO0/MmmmbmSmm9a8ze+I4MrNWAdjtoJgWcx+PSzg166yZZ8xM8XvXDix9
-        c4jIqFYAjoriBV9AhEPv1mH/sonogha0afbZMMZz+yreTGyhpusHwtNNCsA5U1zS4BLxzJIfg299qO32
-        Ir7UJtZfftyATqeT+8o2D8JSjQrAJblrncYL7ZJ2+bfaFnC/1S1NjL3diRat7qrO7wLRP3HjWsojBeCo
-        mDEo5mNjuweFGvjWg2EBhCbpkW78htSHHwRyNdmgAFzPEee2iFkzayy2OLXzT4gr6UdUnlXrullsxxQ+
-        kx0g8BTA3aZlButjSTyjODq/WcQcW/B/Je4OQhLvKQDnzN1mp0nnkvAhR8VuMzNrpm1mpjgkoVwB/v8D
-        TgDQASA1MVpwzwAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="BT_AlgorismSelect.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="BT_AlgorismSelect.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 32</value>
-  </data>
-  <data name="BT_AlgorismSelect.Text" xml:space="preserve">
-    <value>NCC Model</value>
   </data>
   <data name="BT_AlgorismSelect_NccModel.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial Narrow, 20.25pt, style=Bold</value>
@@ -318,6 +267,33 @@
   <data name="BT_AlgorismSelect_CircleModel.Text" xml:space="preserve">
     <value>Circle Model</value>
   </data>
+  <data name="BT_AlgorismSelect.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9pt</value>
+  </data>
+  <data name="BT_AlgorismSelect.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIDSURBVDhPpZLrS5NhGMb3j4SWh0oRQVExD4gonkDpg4hG
+        YKxG6WBogkMZKgPNCEVJFBGdGETEvgwyO9DJE5syZw3PIlPEE9pgBCLZ5XvdMB8Ew8gXbl54nuf63dd9
+        0OGSnwCahxbPRNPAPMw9Xpg6ZmF46kZZ0xSKzJPIrhpDWsVnpBhGkKx3nAX8Pv7z1zg8OoY/cITdn4fw
+        bf/C0kYAN3Ma/w3gWfZL5kzTKBxjWyK2DftwI9tyMYCZKXbNHaD91bLYJrDXsYbrWfUKwJrPE9M2M1Oc
+        VzOOpHI7Jr376Hi9ogHqFIANO0/MmmmbmSmm9a8ze+I4MrNWAdjtoJgWcx+PSzg166yZZ8xM8XvXDix9
+        c4jIqFYAjoriBV9AhEPv1mH/sonogha0afbZMMZz+yreTGyhpusHwtNNCsA5U1zS4BLxzJIfg299qO32
+        Ir7UJtZfftyATqeT+8o2D8JSjQrAJblrncYL7ZJ2+bfaFnC/1S1NjL3diRat7qrO7wLRP3HjWsojBeCo
+        mDEo5mNjuweFGvjWg2EBhCbpkW78htSHHwRyNdmgAFzPEee2iFkzayy2OLXzT4gr6UdUnlXrullsxxQ+
+        kx0g8BTA3aZlButjSTyjODq/WcQcW/B/Je4OQhLvKQDnzN1mp0nnkvAhR8VuMzNrpm1mpjgkoVwB/v8D
+        TgDQASA1MVpwzwAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="BT_AlgorismSelect.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_AlgorismSelect.Size" type="System.Drawing.Size, System.Drawing">
+    <value>122, 32</value>
+  </data>
+  <data name="BT_AlgorismSelect.Text" xml:space="preserve">
+    <value>NCC Model</value>
+  </data>
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
   </data>
@@ -354,6 +330,30 @@
   <data name="BT_Model_Delect.Text" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="toolStrip2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 129</value>
+  </data>
+  <data name="toolStrip2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>427, 35</value>
+  </data>
+  <data name="toolStrip2.TabIndex" type="System.Int32, mscorlib">
+    <value>67</value>
+  </data>
+  <data name="toolStrip2.Text" xml:space="preserve">
+    <value>toolStrip2</value>
+  </data>
+  <data name="&gt;&gt;toolStrip2.Name" xml:space="preserve">
+    <value>toolStrip2</value>
+  </data>
+  <data name="&gt;&gt;toolStrip2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStrip2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolStrip2.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
   <metadata name="toolStrip8.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 131</value>
   </metadata>
@@ -362,30 +362,6 @@
   </data>
   <data name="toolStrip8.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
-  </data>
-  <data name="toolStrip8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 166</value>
-  </data>
-  <data name="toolStrip8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 35</value>
-  </data>
-  <data name="toolStrip8.TabIndex" type="System.Int32, mscorlib">
-    <value>66</value>
-  </data>
-  <data name="toolStrip8.Text" xml:space="preserve">
-    <value>toolStrip1</value>
-  </data>
-  <data name="&gt;&gt;toolStrip8.Name" xml:space="preserve">
-    <value>toolStrip8</value>
-  </data>
-  <data name="&gt;&gt;toolStrip8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStrip8.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;toolStrip8.ZOrder" xml:space="preserve">
-    <value>14</value>
   </data>
   <data name="LB_PassScore.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -414,6 +390,30 @@
   <data name="TB_PassScore.TextBoxTextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
   </data>
+  <data name="toolStrip8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 166</value>
+  </data>
+  <data name="toolStrip8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 35</value>
+  </data>
+  <data name="toolStrip8.TabIndex" type="System.Int32, mscorlib">
+    <value>66</value>
+  </data>
+  <data name="toolStrip8.Text" xml:space="preserve">
+    <value>toolStrip1</value>
+  </data>
+  <data name="&gt;&gt;toolStrip8.Name" xml:space="preserve">
+    <value>toolStrip8</value>
+  </data>
+  <data name="&gt;&gt;toolStrip8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStrip8.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolStrip8.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
   <metadata name="toolStrip6.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>229, 131</value>
   </metadata>
@@ -422,30 +422,6 @@
   </data>
   <data name="toolStrip6.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
-  </data>
-  <data name="toolStrip6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 203</value>
-  </data>
-  <data name="toolStrip6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 35</value>
-  </data>
-  <data name="toolStrip6.TabIndex" type="System.Int32, mscorlib">
-    <value>64</value>
-  </data>
-  <data name="toolStrip6.Text" xml:space="preserve">
-    <value>toolStrip1</value>
-  </data>
-  <data name="&gt;&gt;toolStrip6.Name" xml:space="preserve">
-    <value>toolStrip6</value>
-  </data>
-  <data name="&gt;&gt;toolStrip6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStrip6.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;toolStrip6.ZOrder" xml:space="preserve">
-    <value>15</value>
   </data>
   <data name="LB_ExposureTime.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -474,6 +450,30 @@
   <data name="TB_ExposureTime.TextBoxTextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
   </data>
+  <data name="toolStrip6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 203</value>
+  </data>
+  <data name="toolStrip6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 35</value>
+  </data>
+  <data name="toolStrip6.TabIndex" type="System.Int32, mscorlib">
+    <value>64</value>
+  </data>
+  <data name="toolStrip6.Text" xml:space="preserve">
+    <value>toolStrip1</value>
+  </data>
+  <data name="&gt;&gt;toolStrip6.Name" xml:space="preserve">
+    <value>toolStrip6</value>
+  </data>
+  <data name="&gt;&gt;toolStrip6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStrip6.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolStrip6.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
   <metadata name="toolStrip5.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>335, 131</value>
   </metadata>
@@ -482,30 +482,6 @@
   </data>
   <data name="toolStrip5.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
-  </data>
-  <data name="toolStrip5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 277</value>
-  </data>
-  <data name="toolStrip5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>307, 35</value>
-  </data>
-  <data name="toolStrip5.TabIndex" type="System.Int32, mscorlib">
-    <value>63</value>
-  </data>
-  <data name="toolStrip5.Text" xml:space="preserve">
-    <value>toolStrip1</value>
-  </data>
-  <data name="&gt;&gt;toolStrip5.Name" xml:space="preserve">
-    <value>toolStrip5</value>
-  </data>
-  <data name="&gt;&gt;toolStrip5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStrip5.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;toolStrip5.ZOrder" xml:space="preserve">
-    <value>16</value>
   </data>
   <data name="LB_Lighting.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -563,6 +539,30 @@
   </data>
   <data name="BT_Lighiting_Jog.Text" xml:space="preserve">
     <value>Jog</value>
+  </data>
+  <data name="toolStrip5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 277</value>
+  </data>
+  <data name="toolStrip5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>307, 35</value>
+  </data>
+  <data name="toolStrip5.TabIndex" type="System.Int32, mscorlib">
+    <value>63</value>
+  </data>
+  <data name="toolStrip5.Text" xml:space="preserve">
+    <value>toolStrip1</value>
+  </data>
+  <data name="&gt;&gt;toolStrip5.Name" xml:space="preserve">
+    <value>toolStrip5</value>
+  </data>
+  <data name="&gt;&gt;toolStrip5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStrip5.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolStrip5.ZOrder" xml:space="preserve">
+    <value>16</value>
   </data>
   <metadata name="toolStrip4.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>547, 131</value>
@@ -690,30 +690,6 @@
   <data name="toolStrip1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 8.25pt</value>
   </data>
-  <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 552</value>
-  </data>
-  <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>293, 39</value>
-  </data>
-  <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>73</value>
-  </data>
-  <data name="toolStrip1.Text" xml:space="preserve">
-    <value>toolStrip11</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.Name" xml:space="preserve">
-    <value>toolStrip1</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
   <data name="LB_PadIndex.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -753,6 +729,30 @@
   <data name="CbB_PadIndexY.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 39</value>
   </data>
+  <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 552</value>
+  </data>
+  <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>293, 39</value>
+  </data>
+  <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>73</value>
+  </data>
+  <data name="toolStrip1.Text" xml:space="preserve">
+    <value>toolStrip11</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.Name" xml:space="preserve">
+    <value>toolStrip1</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
   <metadata name="LB_HDC_RETRY_NUM.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>759, 27</value>
   </metadata>
@@ -761,30 +761,6 @@
   </data>
   <data name="LB_HDC_RETRY_NUM.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
-  </data>
-  <data name="LB_HDC_RETRY_NUM.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 240</value>
-  </data>
-  <data name="LB_HDC_RETRY_NUM.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 35</value>
-  </data>
-  <data name="LB_HDC_RETRY_NUM.TabIndex" type="System.Int32, mscorlib">
-    <value>74</value>
-  </data>
-  <data name="LB_HDC_RETRY_NUM.Text" xml:space="preserve">
-    <value>toolStrip1</value>
-  </data>
-  <data name="&gt;&gt;LB_HDC_RETRY_NUM.Name" xml:space="preserve">
-    <value>LB_HDC_RETRY_NUM</value>
-  </data>
-  <data name="&gt;&gt;LB_HDC_RETRY_NUM.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LB_HDC_RETRY_NUM.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;LB_HDC_RETRY_NUM.ZOrder" xml:space="preserve">
-    <value>8</value>
   </data>
   <data name="toolStripLabel1.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -813,6 +789,30 @@
   <data name="TB_HDC_RETRY_NUM.TextBoxTextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
   </data>
+  <data name="LB_HDC_RETRY_NUM.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 240</value>
+  </data>
+  <data name="LB_HDC_RETRY_NUM.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 35</value>
+  </data>
+  <data name="LB_HDC_RETRY_NUM.TabIndex" type="System.Int32, mscorlib">
+    <value>74</value>
+  </data>
+  <data name="LB_HDC_RETRY_NUM.Text" xml:space="preserve">
+    <value>toolStrip1</value>
+  </data>
+  <data name="&gt;&gt;LB_HDC_RETRY_NUM.Name" xml:space="preserve">
+    <value>LB_HDC_RETRY_NUM</value>
+  </data>
+  <data name="&gt;&gt;LB_HDC_RETRY_NUM.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LB_HDC_RETRY_NUM.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LB_HDC_RETRY_NUM.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
   <metadata name="toolStrip9.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>759, 131</value>
   </metadata>
@@ -821,30 +821,6 @@
   </data>
   <data name="toolStrip9.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
-  </data>
-  <data name="toolStrip9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 314</value>
-  </data>
-  <data name="toolStrip9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 35</value>
-  </data>
-  <data name="toolStrip9.TabIndex" type="System.Int32, mscorlib">
-    <value>75</value>
-  </data>
-  <data name="toolStrip9.Text" xml:space="preserve">
-    <value>toolStrip1</value>
-  </data>
-  <data name="&gt;&gt;toolStrip9.Name" xml:space="preserve">
-    <value>toolStrip9</value>
-  </data>
-  <data name="&gt;&gt;toolStrip9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStrip9.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;toolStrip9.ZOrder" xml:space="preserve">
-    <value>7</value>
   </data>
   <data name="LB_HDC_ImageSave.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -863,6 +839,33 @@
   </data>
   <data name="BT_ImageSave.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <data name="BT_ImageSave_None.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial Narrow, 20.25pt, style=Bold</value>
+  </data>
+  <data name="BT_ImageSave_None.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 36</value>
+  </data>
+  <data name="BT_ImageSave_None.Text" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="BT_ImageSave_Error.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial Narrow, 20.25pt, style=Bold</value>
+  </data>
+  <data name="BT_ImageSave_Error.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 36</value>
+  </data>
+  <data name="BT_ImageSave_Error.Text" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="BT_ImageSave_All.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial Narrow, 20.25pt, style=Bold</value>
+  </data>
+  <data name="BT_ImageSave_All.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 36</value>
+  </data>
+  <data name="BT_ImageSave_All.Text" xml:space="preserve">
+    <value>All</value>
   </data>
   <data name="BT_ImageSave.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
@@ -891,32 +894,29 @@
   <data name="BT_ImageSave.Text" xml:space="preserve">
     <value>None</value>
   </data>
-  <data name="BT_ImageSave_None.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial Narrow, 20.25pt, style=Bold</value>
+  <data name="toolStrip9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 314</value>
   </data>
-  <data name="BT_ImageSave_None.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 36</value>
+  <data name="toolStrip9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 35</value>
   </data>
-  <data name="BT_ImageSave_None.Text" xml:space="preserve">
-    <value>None</value>
+  <data name="toolStrip9.TabIndex" type="System.Int32, mscorlib">
+    <value>75</value>
   </data>
-  <data name="BT_ImageSave_Error.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial Narrow, 20.25pt, style=Bold</value>
+  <data name="toolStrip9.Text" xml:space="preserve">
+    <value>toolStrip1</value>
   </data>
-  <data name="BT_ImageSave_Error.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 36</value>
+  <data name="&gt;&gt;toolStrip9.Name" xml:space="preserve">
+    <value>toolStrip9</value>
   </data>
-  <data name="BT_ImageSave_Error.Text" xml:space="preserve">
-    <value>Error</value>
+  <data name="&gt;&gt;toolStrip9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="BT_ImageSave_All.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial Narrow, 20.25pt, style=Bold</value>
+  <data name="&gt;&gt;toolStrip9.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="BT_ImageSave_All.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 36</value>
-  </data>
-  <data name="BT_ImageSave_All.Text" xml:space="preserve">
-    <value>All</value>
+  <data name="&gt;&gt;toolStrip9.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <metadata name="TS_CROPAREA.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 27</value>
@@ -958,7 +958,7 @@
     <value>1, 415</value>
   </data>
   <data name="TS_CROPAREA.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 35</value>
+    <value>252, 35</value>
   </data>
   <data name="TS_CROPAREA.TabIndex" type="System.Int32, mscorlib">
     <value>76</value>
@@ -1005,6 +1005,24 @@
   <data name="BT_DetectDirection.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="BT_DetectDirection_13.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial Narrow, 20.25pt, style=Bold</value>
+  </data>
+  <data name="BT_DetectDirection_13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 36</value>
+  </data>
+  <data name="BT_DetectDirection_13.Text" xml:space="preserve">
+    <value>C2 -&gt; C4</value>
+  </data>
+  <data name="BT_DetectDirection_24.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial Narrow, 20.25pt, style=Bold</value>
+  </data>
+  <data name="BT_DetectDirection_24.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 36</value>
+  </data>
+  <data name="BT_DetectDirection_24.Text" xml:space="preserve">
+    <value>C1 -&gt; C3</value>
+  </data>
   <data name="BT_DetectDirection.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
   </data>
@@ -1036,7 +1054,7 @@
     <value>261, 415</value>
   </data>
   <data name="TS_DETECT_DIRECT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>252, 35</value>
+    <value>221, 35</value>
   </data>
   <data name="TS_DETECT_DIRECT.TabIndex" type="System.Int32, mscorlib">
     <value>77</value>
@@ -1056,24 +1074,6 @@
   <data name="&gt;&gt;TS_DETECT_DIRECT.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="BT_DetectDirection_13.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial Narrow, 20.25pt, style=Bold</value>
-  </data>
-  <data name="BT_DetectDirection_13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 36</value>
-  </data>
-  <data name="BT_DetectDirection_13.Text" xml:space="preserve">
-    <value>C2 -&gt; C4</value>
-  </data>
-  <data name="BT_DetectDirection_24.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial Narrow, 20.25pt, style=Bold</value>
-  </data>
-  <data name="BT_DetectDirection_24.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 36</value>
-  </data>
-  <data name="BT_DetectDirection_24.Text" xml:space="preserve">
-    <value>C1 -&gt; C3</value>
-  </data>
   <metadata name="toolStrip12.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>243, 170</value>
   </metadata>
@@ -1082,30 +1082,6 @@
   </data>
   <data name="toolStrip12.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
-  </data>
-  <data name="toolStrip12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 475</value>
-  </data>
-  <data name="toolStrip12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>616, 35</value>
-  </data>
-  <data name="toolStrip12.TabIndex" type="System.Int32, mscorlib">
-    <value>78</value>
-  </data>
-  <data name="toolStrip12.Text" xml:space="preserve">
-    <value>toolStrip12</value>
-  </data>
-  <data name="&gt;&gt;toolStrip12.Name" xml:space="preserve">
-    <value>toolStrip12</value>
-  </data>
-  <data name="&gt;&gt;toolStrip12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStrip12.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;toolStrip12.ZOrder" xml:space="preserve">
-    <value>4</value>
   </data>
   <data name="LB_CHAMFER_.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1139,15 +1115,6 @@
   </data>
   <data name="BT_FIDUCIAL_POS.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
-  </data>
-  <data name="BT_FIDUCIAL_POS.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="BT_FIDUCIAL_POS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 32</value>
-  </data>
-  <data name="BT_FIDUCIAL_POS.Text" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="BT_FIDUCIAL_POS1.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1209,38 +1176,20 @@
   <data name="BT_FIDUCIAL_POS4.Text" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="BT_FIDUCIAL_POS.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_FIDUCIAL_POS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 32</value>
+  </data>
+  <data name="BT_FIDUCIAL_POS.Text" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="toolStripSeparator23.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
   </data>
   <data name="BT_FIDUCIAL_METHOD.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
-  </data>
-  <data name="BT_FIDUCIAL_METHOD.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9pt</value>
-  </data>
-  <data name="BT_FIDUCIAL_METHOD.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIDSURBVDhPpZLrS5NhGMb3j4SWh0oRQVExD4gonkDpg4hG
-        YKxG6WBogkMZKgPNCEVJFBGdGETEvgwyO9DJE5syZw3PIlPEE9pgBCLZ5XvdMB8Ew8gXbl54nuf63dd9
-        0OGSnwCahxbPRNPAPMw9Xpg6ZmF46kZZ0xSKzJPIrhpDWsVnpBhGkKx3nAX8Pv7z1zg8OoY/cITdn4fw
-        bf/C0kYAN3Ma/w3gWfZL5kzTKBxjWyK2DftwI9tyMYCZKXbNHaD91bLYJrDXsYbrWfUKwJrPE9M2M1Oc
-        VzOOpHI7Jr376Hi9ogHqFIANO0/MmmmbmSmm9a8ze+I4MrNWAdjtoJgWcx+PSzg166yZZ8xM8XvXDix9
-        c4jIqFYAjoriBV9AhEPv1mH/sonogha0afbZMMZz+yreTGyhpusHwtNNCsA5U1zS4BLxzJIfg299qO32
-        Ir7UJtZfftyATqeT+8o2D8JSjQrAJblrncYL7ZJ2+bfaFnC/1S1NjL3diRat7qrO7wLRP3HjWsojBeCo
-        mDEo5mNjuweFGvjWg2EBhCbpkW78htSHHwRyNdmgAFzPEee2iFkzayy2OLXzT4gr6UdUnlXrullsxxQ+
-        kx0g8BTA3aZlButjSTyjODq/WcQcW/B/Je4OQhLvKQDnzN1mp0nnkvAhR8VuMzNrpm1mpjgkoVwB/v8D
-        TgDQASA1MVpwzwAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="BT_FIDUCIAL_METHOD.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="BT_FIDUCIAL_METHOD.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 32</value>
-  </data>
-  <data name="BT_FIDUCIAL_METHOD.Text" xml:space="preserve">
-    <value>SHAPE</value>
   </data>
   <data name="BT_FIDUCIAL_METHOD_NCC.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial Narrow, 20.25pt, style=Bold</value>
@@ -1271,6 +1220,33 @@
   </data>
   <data name="BT_FIDUCIAL_METHOD_CIRCLE.Text" xml:space="preserve">
     <value>Circle</value>
+  </data>
+  <data name="BT_FIDUCIAL_METHOD.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9pt</value>
+  </data>
+  <data name="BT_FIDUCIAL_METHOD.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIDSURBVDhPpZLrS5NhGMb3j4SWh0oRQVExD4gonkDpg4hG
+        YKxG6WBogkMZKgPNCEVJFBGdGETEvgwyO9DJE5syZw3PIlPEE9pgBCLZ5XvdMB8Ew8gXbl54nuf63dd9
+        0OGSnwCahxbPRNPAPMw9Xpg6ZmF46kZZ0xSKzJPIrhpDWsVnpBhGkKx3nAX8Pv7z1zg8OoY/cITdn4fw
+        bf/C0kYAN3Ma/w3gWfZL5kzTKBxjWyK2DftwI9tyMYCZKXbNHaD91bLYJrDXsYbrWfUKwJrPE9M2M1Oc
+        VzOOpHI7Jr376Hi9ogHqFIANO0/MmmmbmSmm9a8ze+I4MrNWAdjtoJgWcx+PSzg166yZZ8xM8XvXDix9
+        c4jIqFYAjoriBV9AhEPv1mH/sonogha0afbZMMZz+yreTGyhpusHwtNNCsA5U1zS4BLxzJIfg299qO32
+        Ir7UJtZfftyATqeT+8o2D8JSjQrAJblrncYL7ZJ2+bfaFnC/1S1NjL3diRat7qrO7wLRP3HjWsojBeCo
+        mDEo5mNjuweFGvjWg2EBhCbpkW78htSHHwRyNdmgAFzPEee2iFkzayy2OLXzT4gr6UdUnlXrullsxxQ+
+        kx0g8BTA3aZlButjSTyjODq/WcQcW/B/Je4OQhLvKQDnzN1mp0nnkvAhR8VuMzNrpm1mpjgkoVwB/v8D
+        TgDQASA1MVpwzwAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="BT_FIDUCIAL_METHOD.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_FIDUCIAL_METHOD.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 32</value>
+  </data>
+  <data name="BT_FIDUCIAL_METHOD.Text" xml:space="preserve">
+    <value>SHAPE</value>
   </data>
   <data name="toolStripSeparator28.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
@@ -1332,6 +1308,30 @@
   <data name="BT_FIDUCIAL_TEACH.Text" xml:space="preserve">
     <value>Teach</value>
   </data>
+  <data name="toolStrip12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 475</value>
+  </data>
+  <data name="toolStrip12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>616, 35</value>
+  </data>
+  <data name="toolStrip12.TabIndex" type="System.Int32, mscorlib">
+    <value>78</value>
+  </data>
+  <data name="toolStrip12.Text" xml:space="preserve">
+    <value>toolStrip12</value>
+  </data>
+  <data name="&gt;&gt;toolStrip12.Name" xml:space="preserve">
+    <value>toolStrip12</value>
+  </data>
+  <data name="&gt;&gt;toolStrip12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStrip12.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolStrip12.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <metadata name="toolStrip13.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>356, 170</value>
   </metadata>
@@ -1340,30 +1340,6 @@
   </data>
   <data name="toolStrip13.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
-  </data>
-  <data name="toolStrip13.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 510</value>
-  </data>
-  <data name="toolStrip13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>580, 35</value>
-  </data>
-  <data name="toolStrip13.TabIndex" type="System.Int32, mscorlib">
-    <value>79</value>
-  </data>
-  <data name="toolStrip13.Text" xml:space="preserve">
-    <value>toolStrip13</value>
-  </data>
-  <data name="&gt;&gt;toolStrip13.Name" xml:space="preserve">
-    <value>toolStrip13</value>
-  </data>
-  <data name="&gt;&gt;toolStrip13.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStrip13.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;toolStrip13.ZOrder" xml:space="preserve">
-    <value>3</value>
   </data>
   <data name="toolStripLabel4.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1449,6 +1425,30 @@
   <data name="BT_FIDUCIAL_LIGHT_JOG.Text" xml:space="preserve">
     <value>Jog</value>
   </data>
+  <data name="toolStrip13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 510</value>
+  </data>
+  <data name="toolStrip13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>580, 35</value>
+  </data>
+  <data name="toolStrip13.TabIndex" type="System.Int32, mscorlib">
+    <value>79</value>
+  </data>
+  <data name="toolStrip13.Text" xml:space="preserve">
+    <value>toolStrip13</value>
+  </data>
+  <data name="&gt;&gt;toolStrip13.Name" xml:space="preserve">
+    <value>toolStrip13</value>
+  </data>
+  <data name="&gt;&gt;toolStrip13.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStrip13.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolStrip13.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <metadata name="toolStrip14.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>469, 170</value>
   </metadata>
@@ -1457,30 +1457,6 @@
   </data>
   <data name="toolStrip14.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
-  </data>
-  <data name="toolStrip14.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 351</value>
-  </data>
-  <data name="toolStrip14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>203, 35</value>
-  </data>
-  <data name="toolStrip14.TabIndex" type="System.Int32, mscorlib">
-    <value>80</value>
-  </data>
-  <data name="toolStrip14.Text" xml:space="preserve">
-    <value>toolStrip1</value>
-  </data>
-  <data name="&gt;&gt;toolStrip14.Name" xml:space="preserve">
-    <value>toolStrip14</value>
-  </data>
-  <data name="&gt;&gt;toolStrip14.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStrip14.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;toolStrip14.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="toolStripLabel7.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1509,6 +1485,30 @@
   <data name="BT_JOGTEACH_USE.Text" xml:space="preserve">
     <value>OFF</value>
   </data>
+  <data name="toolStrip14.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 351</value>
+  </data>
+  <data name="toolStrip14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 35</value>
+  </data>
+  <data name="toolStrip14.TabIndex" type="System.Int32, mscorlib">
+    <value>80</value>
+  </data>
+  <data name="toolStrip14.Text" xml:space="preserve">
+    <value>toolStrip1</value>
+  </data>
+  <data name="&gt;&gt;toolStrip14.Name" xml:space="preserve">
+    <value>toolStrip14</value>
+  </data>
+  <data name="&gt;&gt;toolStrip14.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStrip14.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolStrip14.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <metadata name="toolStrip15.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>695, 170</value>
   </metadata>
@@ -1517,30 +1517,6 @@
   </data>
   <data name="toolStrip15.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
-  </data>
-  <data name="toolStrip15.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 55</value>
-  </data>
-  <data name="toolStrip15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>431, 35</value>
-  </data>
-  <data name="toolStrip15.TabIndex" type="System.Int32, mscorlib">
-    <value>82</value>
-  </data>
-  <data name="toolStrip15.Text" xml:space="preserve">
-    <value>toolStrip1</value>
-  </data>
-  <data name="&gt;&gt;toolStrip15.Name" xml:space="preserve">
-    <value>toolStrip15</value>
-  </data>
-  <data name="&gt;&gt;toolStrip15.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStrip15.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;toolStrip15.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="toolStripLabel8.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1614,6 +1590,30 @@
   <data name="BT_Dist_P1P2.Text" xml:space="preserve">
     <value>Calc Dist</value>
   </data>
+  <data name="toolStrip15.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 55</value>
+  </data>
+  <data name="toolStrip15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>431, 35</value>
+  </data>
+  <data name="toolStrip15.TabIndex" type="System.Int32, mscorlib">
+    <value>82</value>
+  </data>
+  <data name="toolStrip15.Text" xml:space="preserve">
+    <value>toolStrip1</value>
+  </data>
+  <data name="&gt;&gt;toolStrip15.Name" xml:space="preserve">
+    <value>toolStrip15</value>
+  </data>
+  <data name="&gt;&gt;toolStrip15.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStrip15.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolStrip15.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <metadata name="toolStrip3.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>808, 170</value>
   </metadata>
@@ -1622,30 +1622,6 @@
   </data>
   <data name="toolStrip3.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
-  </data>
-  <data name="toolStrip3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>239, 351</value>
-  </data>
-  <data name="toolStrip3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>314, 35</value>
-  </data>
-  <data name="toolStrip3.TabIndex" type="System.Int32, mscorlib">
-    <value>83</value>
-  </data>
-  <data name="toolStrip3.Text" xml:space="preserve">
-    <value>toolStrip1</value>
-  </data>
-  <data name="&gt;&gt;toolStrip3.Name" xml:space="preserve">
-    <value>toolStrip3</value>
-  </data>
-  <data name="&gt;&gt;toolStrip3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStrip3.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;toolStrip3.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="toolStripLabel9.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1703,6 +1679,30 @@
   </data>
   <data name="TB_VisionErrorSkipCount.TextBoxTextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
+  </data>
+  <data name="toolStrip3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>239, 351</value>
+  </data>
+  <data name="toolStrip3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>314, 35</value>
+  </data>
+  <data name="toolStrip3.TabIndex" type="System.Int32, mscorlib">
+    <value>83</value>
+  </data>
+  <data name="toolStrip3.Text" xml:space="preserve">
+    <value>toolStrip1</value>
+  </data>
+  <data name="&gt;&gt;toolStrip3.Name" xml:space="preserve">
+    <value>toolStrip3</value>
+  </data>
+  <data name="&gt;&gt;toolStrip3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStrip3.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolStrip3.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

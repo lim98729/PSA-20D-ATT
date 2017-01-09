@@ -3756,6 +3756,8 @@ namespace PSA_SystemLibrary
         public halconModelParameter2 modelLIDC4 = new halconModelParameter2();
         public para_member algorism = new para_member();
         public para_member alignDirection = new para_member();
+        public para_member cropArea = new para_member();
+
 		public HTuple saveTuple;
 		public void write(out bool r, string savepath = "C:\\PROTEC\\Data")
 		{
@@ -3834,6 +3836,7 @@ namespace PSA_SystemLibrary
 
                 writeTuple(algorism, i, out i);
                 writeTuple(alignDirection, i, out i);
+                writeTuple(cropArea, i, out i);
 
 				HTuple filePath, fileName;
 				filePath = savepath + "\\Parameter\\";
@@ -3966,6 +3969,7 @@ namespace PSA_SystemLibrary
 
                 readTuple("algorism", out algorism, out fail); if (fail) goto SET_FAIL;
                 readTuple("alignDirection", out alignDirection, out fail); if (fail) goto SET_FAIL;
+                readTuple("cropArea", out cropArea, out fail); if (fail) goto SET_FAIL;
 
 				r = true;
 				return;
@@ -4135,6 +4139,7 @@ namespace PSA_SystemLibrary
 
             setDefault("algorism", out algorism, out fail); if (fail) goto SET_FAIL;
             setDefault("alignDirection", out alignDirection, out fail); if (fail) goto SET_FAIL;
+            setDefault("cropArea", out cropArea, out fail); if (fail) goto SET_FAIL;
 
 			r = true;
 			return;
@@ -4185,7 +4190,7 @@ namespace PSA_SystemLibrary
 
 				id++; if (name == "orientationUse") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "Set Image Save Option");
 				id++; if (name == "modelHSOrientation.isCreate") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelHSOrientation.algorism") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
+				id++; if (name == "modelHSOrientation.algorism") setDefault(out p, name, id, 2, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelHSOrientation.passScore") setDefault(out p, name, id, 70, 30, 90, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelHSOrientation.angleStart") setDefault(out p, name, id, -30, -360, 0, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelHSOrientation.angleExtent") setDefault(out p, name, id, 60, 0, 360, AUTHORITY.MAINTENCE.ToString(), "description");
@@ -4223,6 +4228,7 @@ namespace PSA_SystemLibrary
 
                 id++; if (name == "algorism") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "alignDirection") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "cropArea") setDefault(out p, name, id, 2.5, 0.8, 3.0, AUTHORITY.MAINTENCE.ToString(), "description");
 
 				if (p.id == -1) { fail = true; p = new para_member(); return; }
 				fail = false;

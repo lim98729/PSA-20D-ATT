@@ -69,6 +69,7 @@ namespace PSA_SystemLibrary
                     if (!isActivate) { errorCheck(ERRORCODE.ACTIVATE, sqc, "", ALARM_CODE.E_SYSTEM_SW_VISION_NOT_READY); break; }
 					sqc++; break;
 				case 2:
+                    if (dev.NotExistHW.CAMERA && reqMode != REQMODE.HOMING) { sqc = SQC.STOP; break; }
 					if (reqMode == REQMODE.HOMING) { sqc = SQC.HOMING; break; }
 					if (reqMode == REQMODE.LIVE) { sqc = SQC.LIVE; break; }
 					if (reqMode == REQMODE.GRAB) { sqc = SQC.GRAB; break; }
@@ -124,7 +125,6 @@ namespace PSA_SystemLibrary
 
 				#region LIVE
 				case SQC.LIVE:
-                    if (dev.NotExistHW.CAMERA) {sqc = SQC.STOP; break;}
 					_triggerSource = cam.acq.TriggerSource;
 					cam.acq.TriggerSource = "Software";
 					cam.acq.paraApply();

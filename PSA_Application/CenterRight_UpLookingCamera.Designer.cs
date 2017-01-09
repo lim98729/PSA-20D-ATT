@@ -41,7 +41,7 @@
             this.LB_ExposureTime = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
             this.TB_ExposureTime = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStrip7 = new System.Windows.Forms.ToolStrip();
+            this.TS_ANGLE_EXTENT = new System.Windows.Forms.ToolStrip();
             this.LB_AngleExtent = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
             this.TB_AngleExtent = new System.Windows.Forms.ToolStripTextBox();
@@ -63,7 +63,7 @@
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.BT_Model_Delect = new System.Windows.Forms.ToolStripButton();
             this.hWC_Model = new HalconDotNet.HWindowControl();
-            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
+            this.TS_ANGLE_START = new System.Windows.Forms.ToolStrip();
             this.LB_AngleStart = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.TB_AngleStart = new System.Windows.Forms.ToolStripTextBox();
@@ -147,12 +147,16 @@
             this.BT_AlignDirection = new System.Windows.Forms.ToolStripDropDownButton();
             this.BT_AlignDirection_31 = new System.Windows.Forms.ToolStripMenuItem();
             this.BT_AlignDirection_42 = new System.Windows.Forms.ToolStripMenuItem();
+            this.TS_CROPAREA = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel6 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator32 = new System.Windows.Forms.ToolStripSeparator();
+            this.TB_CropArea = new System.Windows.Forms.ToolStripTextBox();
             this.toolStrip5.SuspendLayout();
             this.toolStrip6.SuspendLayout();
-            this.toolStrip7.SuspendLayout();
+            this.TS_ANGLE_EXTENT.SuspendLayout();
             this.TS_PASSSCORE.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            this.toolStrip3.SuspendLayout();
+            this.TS_ANGLE_START.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.TS_CHECK_CAMFER.SuspendLayout();
             this.toolStrip9.SuspendLayout();
@@ -160,6 +164,7 @@
             this.TS_CHECK_ORIENTATION.SuspendLayout();
             this.TS_CORNER_TEACH.SuspendLayout();
             this.TS_ALIGN_DIRECTION.SuspendLayout();
+            this.TS_CROPAREA.SuspendLayout();
             this.SuspendLayout();
             // 
             // LB_
@@ -184,7 +189,7 @@
             this.TB_Lighiting_Ch2,
             this.toolStripSeparator5,
             this.BT_Lighiting_Jog});
-            this.toolStrip5.Location = new System.Drawing.Point(3, 330);
+            this.toolStrip5.Location = new System.Drawing.Point(3, 352);
             this.toolStrip5.Name = "toolStrip5";
             this.toolStrip5.Size = new System.Drawing.Size(292, 35);
             this.toolStrip5.TabIndex = 54;
@@ -249,7 +254,7 @@
             this.LB_ExposureTime,
             this.toolStripSeparator19,
             this.TB_ExposureTime});
-            this.toolStrip6.Location = new System.Drawing.Point(3, 250);
+            this.toolStrip6.Location = new System.Drawing.Point(3, 278);
             this.toolStrip6.Name = "toolStrip6";
             this.toolStrip6.Size = new System.Drawing.Size(226, 35);
             this.toolStrip6.TabIndex = 55;
@@ -279,20 +284,20 @@
             this.TB_ExposureTime.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.TB_ExposureTime.Click += new System.EventHandler(this.Control_Click);
             // 
-            // toolStrip7
+            // TS_ANGLE_EXTENT
             // 
-            this.toolStrip7.BackColor = System.Drawing.Color.Transparent;
-            this.toolStrip7.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStrip7.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStrip7.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TS_ANGLE_EXTENT.BackColor = System.Drawing.Color.Transparent;
+            this.TS_ANGLE_EXTENT.Dock = System.Windows.Forms.DockStyle.None;
+            this.TS_ANGLE_EXTENT.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TS_ANGLE_EXTENT.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LB_AngleExtent,
             this.toolStripSeparator20,
             this.TB_AngleExtent});
-            this.toolStrip7.Location = new System.Drawing.Point(3, 210);
-            this.toolStrip7.Name = "toolStrip7";
-            this.toolStrip7.Size = new System.Drawing.Size(226, 35);
-            this.toolStrip7.TabIndex = 56;
-            this.toolStrip7.Text = "toolStrip1";
+            this.TS_ANGLE_EXTENT.Location = new System.Drawing.Point(3, 241);
+            this.TS_ANGLE_EXTENT.Name = "TS_ANGLE_EXTENT";
+            this.TS_ANGLE_EXTENT.Size = new System.Drawing.Size(226, 35);
+            this.TS_ANGLE_EXTENT.TabIndex = 56;
+            this.TS_ANGLE_EXTENT.Text = "toolStrip1";
             // 
             // LB_AngleExtent
             // 
@@ -499,20 +504,20 @@
             this.hWC_Model.TabIndex = 60;
             this.hWC_Model.WindowSize = new System.Drawing.Size(205, 205);
             // 
-            // toolStrip3
+            // TS_ANGLE_START
             // 
-            this.toolStrip3.BackColor = System.Drawing.Color.Transparent;
-            this.toolStrip3.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStrip3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TS_ANGLE_START.BackColor = System.Drawing.Color.Transparent;
+            this.TS_ANGLE_START.Dock = System.Windows.Forms.DockStyle.None;
+            this.TS_ANGLE_START.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TS_ANGLE_START.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LB_AngleStart,
             this.toolStripSeparator2,
             this.TB_AngleStart});
-            this.toolStrip3.Location = new System.Drawing.Point(3, 170);
-            this.toolStrip3.Name = "toolStrip3";
-            this.toolStrip3.Size = new System.Drawing.Size(226, 35);
-            this.toolStrip3.TabIndex = 61;
-            this.toolStrip3.Text = "toolStrip1";
+            this.TS_ANGLE_START.Location = new System.Drawing.Point(3, 204);
+            this.TS_ANGLE_START.Name = "TS_ANGLE_START";
+            this.TS_ANGLE_START.Size = new System.Drawing.Size(226, 35);
+            this.TS_ANGLE_START.TabIndex = 61;
+            this.TS_ANGLE_START.Text = "toolStrip1";
             // 
             // LB_AngleStart
             // 
@@ -557,7 +562,7 @@
             this.LB_ULC_RETRY_NUM,
             this.toolStripSeparator6,
             this.TB_ULC_RETRYNUM});
-            this.toolStrip2.Location = new System.Drawing.Point(3, 290);
+            this.toolStrip2.Location = new System.Drawing.Point(3, 315);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(226, 35);
             this.toolStrip2.TabIndex = 63;
@@ -609,7 +614,7 @@
             this.TB_ChamferScore,
             this.toolStripSeparator17,
             this.BT_ChamferNumber});
-            this.TS_CHECK_CAMFER.Location = new System.Drawing.Point(3, 374);
+            this.TS_CHECK_CAMFER.Location = new System.Drawing.Point(3, 398);
             this.TS_CHECK_CAMFER.Name = "TS_CHECK_CAMFER";
             this.TS_CHECK_CAMFER.Size = new System.Drawing.Size(716, 35);
             this.TS_CHECK_CAMFER.TabIndex = 64;
@@ -803,7 +808,7 @@
             this.LB_ULC_ImageSave,
             this.toolStripSeparator10,
             this.BT_ImageSave});
-            this.toolStrip9.Location = new System.Drawing.Point(3, 483);
+            this.toolStrip9.Location = new System.Drawing.Point(3, 507);
             this.toolStrip9.Name = "toolStrip9";
             this.toolStrip9.Size = new System.Drawing.Size(224, 35);
             this.toolStrip9.TabIndex = 65;
@@ -881,7 +886,7 @@
             this.toolStripSeparator18,
             this.LB_CircleScore,
             this.TB_CircleScore});
-            this.TS_CHECK_CIRCLE.Location = new System.Drawing.Point(3, 444);
+            this.TS_CHECK_CIRCLE.Location = new System.Drawing.Point(3, 468);
             this.TS_CHECK_CIRCLE.Name = "TS_CHECK_CIRCLE";
             this.TS_CHECK_CIRCLE.Size = new System.Drawing.Size(456, 35);
             this.TS_CHECK_CIRCLE.TabIndex = 66;
@@ -1033,7 +1038,7 @@
             this.TB_ORIENTATION_PASS_SCORE,
             this.toolStripSeparator29,
             this.BT_ORIENTATION_TEACH});
-            this.TS_CHECK_ORIENTATION.Location = new System.Drawing.Point(3, 409);
+            this.TS_CHECK_ORIENTATION.Location = new System.Drawing.Point(3, 433);
             this.TS_CHECK_ORIENTATION.Name = "TS_CHECK_ORIENTATION";
             this.TS_CHECK_ORIENTATION.Size = new System.Drawing.Size(430, 35);
             this.TS_CHECK_ORIENTATION.TabIndex = 80;
@@ -1245,7 +1250,7 @@
             this.BT_AlignDirection});
             this.TS_ALIGN_DIRECTION.Location = new System.Drawing.Point(3, 130);
             this.TS_ALIGN_DIRECTION.Name = "TS_ALIGN_DIRECTION";
-            this.TS_ALIGN_DIRECTION.Size = new System.Drawing.Size(221, 35);
+            this.TS_ALIGN_DIRECTION.Size = new System.Drawing.Size(226, 35);
             this.TS_ALIGN_DIRECTION.TabIndex = 82;
             this.TS_ALIGN_DIRECTION.Text = "toolStrip1";
             // 
@@ -1254,7 +1259,7 @@
             this.toolStripLabel5.AutoSize = false;
             this.toolStripLabel5.Font = new System.Drawing.Font("Arial", 9F);
             this.toolStripLabel5.Name = "toolStripLabel5";
-            this.toolStripLabel5.Size = new System.Drawing.Size(115, 32);
+            this.toolStripLabel5.Size = new System.Drawing.Size(120, 32);
             this.toolStripLabel5.Text = "Align Direction";
             // 
             // toolStripSeparator25
@@ -1293,11 +1298,51 @@
             this.BT_AlignDirection_42.Text = "C4 -> C2";
             this.BT_AlignDirection_42.Click += new System.EventHandler(this.Control_Click);
             // 
+            // TS_CROPAREA
+            // 
+            this.TS_CROPAREA.BackColor = System.Drawing.Color.Transparent;
+            this.TS_CROPAREA.Dock = System.Windows.Forms.DockStyle.None;
+            this.TS_CROPAREA.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TS_CROPAREA.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel6,
+            this.toolStripSeparator32,
+            this.TB_CropArea});
+            this.TS_CROPAREA.Location = new System.Drawing.Point(3, 167);
+            this.TS_CROPAREA.Name = "TS_CROPAREA";
+            this.TS_CROPAREA.Size = new System.Drawing.Size(226, 35);
+            this.TS_CROPAREA.TabIndex = 83;
+            this.TS_CROPAREA.Text = "toolStrip1";
+            // 
+            // toolStripLabel6
+            // 
+            this.toolStripLabel6.AutoSize = false;
+            this.toolStripLabel6.Font = new System.Drawing.Font("Arial", 9F);
+            this.toolStripLabel6.Name = "toolStripLabel6";
+            this.toolStripLabel6.Size = new System.Drawing.Size(120, 32);
+            this.toolStripLabel6.Text = "Crop Area (0.8 ~ 2.5)";
+            // 
+            // toolStripSeparator32
+            // 
+            this.toolStripSeparator32.Name = "toolStripSeparator32";
+            this.toolStripSeparator32.Size = new System.Drawing.Size(6, 35);
+            // 
+            // TB_CropArea
+            // 
+            this.TB_CropArea.AutoSize = false;
+            this.TB_CropArea.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TB_CropArea.Font = new System.Drawing.Font("Arial", 8.25F);
+            this.TB_CropArea.Name = "TB_CropArea";
+            this.TB_CropArea.ReadOnly = true;
+            this.TB_CropArea.Size = new System.Drawing.Size(86, 20);
+            this.TB_CropArea.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_CropArea.Click += new System.EventHandler(this.Control_Click);
+            // 
             // CenterRight_UpLookingCamera
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.TS_CROPAREA);
             this.Controls.Add(this.TS_ALIGN_DIRECTION);
             this.Controls.Add(this.TS_CORNER_TEACH);
             this.Controls.Add(this.TS_CHECK_ORIENTATION);
@@ -1306,11 +1351,11 @@
             this.Controls.Add(this.TS_CHECK_CAMFER);
             this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.LB_Model_Created);
-            this.Controls.Add(this.toolStrip3);
+            this.Controls.Add(this.TS_ANGLE_START);
             this.Controls.Add(this.hWC_Model);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.TS_PASSSCORE);
-            this.Controls.Add(this.toolStrip7);
+            this.Controls.Add(this.TS_ANGLE_EXTENT);
             this.Controls.Add(this.toolStrip6);
             this.Controls.Add(this.toolStrip5);
             this.Controls.Add(this.LB_);
@@ -1321,14 +1366,14 @@
             this.toolStrip5.PerformLayout();
             this.toolStrip6.ResumeLayout(false);
             this.toolStrip6.PerformLayout();
-            this.toolStrip7.ResumeLayout(false);
-            this.toolStrip7.PerformLayout();
+            this.TS_ANGLE_EXTENT.ResumeLayout(false);
+            this.TS_ANGLE_EXTENT.PerformLayout();
             this.TS_PASSSCORE.ResumeLayout(false);
             this.TS_PASSSCORE.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.toolStrip3.ResumeLayout(false);
-            this.toolStrip3.PerformLayout();
+            this.TS_ANGLE_START.ResumeLayout(false);
+            this.TS_ANGLE_START.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             this.TS_CHECK_CAMFER.ResumeLayout(false);
@@ -1343,6 +1388,8 @@
             this.TS_CORNER_TEACH.PerformLayout();
             this.TS_ALIGN_DIRECTION.ResumeLayout(false);
             this.TS_ALIGN_DIRECTION.PerformLayout();
+            this.TS_CROPAREA.ResumeLayout(false);
+            this.TS_CROPAREA.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1362,7 +1409,7 @@
         private System.Windows.Forms.ToolStripLabel LB_ExposureTime;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator19;
         private System.Windows.Forms.ToolStripTextBox TB_ExposureTime;
-        private System.Windows.Forms.ToolStrip toolStrip7;
+        private System.Windows.Forms.ToolStrip TS_ANGLE_EXTENT;
         private System.Windows.Forms.ToolStripLabel LB_AngleExtent;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator20;
         private System.Windows.Forms.ToolStrip TS_PASSSCORE;
@@ -1377,7 +1424,7 @@
         private System.Windows.Forms.ToolStripMenuItem BT_AlgorismSelect_ShapeModel;
         private HalconDotNet.HWindowControl hWC_Model;
         private System.Windows.Forms.ToolStripTextBox TB_AngleExtent;
-        private System.Windows.Forms.ToolStrip toolStrip3;
+        private System.Windows.Forms.ToolStrip TS_ANGLE_START;
         private System.Windows.Forms.ToolStripLabel LB_AngleStart;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripTextBox TB_AngleStart;
@@ -1468,5 +1515,9 @@
         private System.Windows.Forms.ToolStripDropDownButton BT_AlignDirection;
         private System.Windows.Forms.ToolStripMenuItem BT_AlignDirection_31;
         private System.Windows.Forms.ToolStripMenuItem BT_AlignDirection_42;
+        private System.Windows.Forms.ToolStrip TS_CROPAREA;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel6;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator32;
+        private System.Windows.Forms.ToolStripTextBox TB_CropArea;
     }
 }

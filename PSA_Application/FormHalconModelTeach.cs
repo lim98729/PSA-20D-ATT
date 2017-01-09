@@ -39,7 +39,16 @@ namespace PSA_Application
 			#region BT_AutoTeach
 			if (sender.Equals(BT_AutoTeach))
 			{
-				mc.hdc.cam.edgeIntersection.cropArea = teachCropArea;
+                if (mode == SELECT_FIND_MODEL.ULC_PKG || mode == SELECT_FIND_MODEL.ULC_LIDC1 || mode == SELECT_FIND_MODEL.ULC_LIDC2
+                    || mode == SELECT_FIND_MODEL.ULC_LIDC3 || mode == SELECT_FIND_MODEL.ULC_LIDC4)
+                {
+                    mc.ulc.cam.edgeIntersection.cropArea = teachCropArea;
+                }
+                else
+                {
+                    mc.hdc.cam.edgeIntersection.cropArea = teachCropArea;
+                }
+
 				#region ULC
 				if (mode == SELECT_FIND_MODEL.ULC_PKG)
 				{
@@ -123,6 +132,299 @@ namespace PSA_Application
 					mc.ulc.LIVE = true; mc.ulc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
 				}
 				#endregion
+                #region ULC_LIDC1
+                if (mode == SELECT_FIND_MODEL.ULC_LIDC1)
+                {
+                    mc.ulc.LIVE = false;
+                    mc.ulc.model_delete(mode);
+                    int retry = 0;
+                RETRY:
+                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.FIRST, out ret.b); if (!ret.b) goto EXIT;
+                    #region moving
+                    if ((double)mc.ulc.cam.edgeIntersection.resultX > 2.0 || (double)mc.ulc.cam.edgeIntersection.resultY > 2.0)
+                    {
+                        string showstr;
+                        showstr = "Result X:" + Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2).ToString();
+                        showstr += "\nResult Y:" + Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2).ToString();
+                        showstr += "\nResult is OK?";
+                        DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
+                        if (digrst == DialogResult.No) goto EXIT;
+                    }
+
+                    posX += Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2);
+                    posY += Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2);
+                    mc.hd.tool.jogMoveXY(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                    #endregion
+                    mc.idle(100);
+                    if (retry++ < 5) goto RETRY;
+                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.FIRST, out ret.b); if (!ret.b) goto EXIT;
+
+                    #region auto teach
+                    //halcon_region tmpRegion;
+                    //if (mc.para.ULC.modelLIDC1.algorism.value == (int)MODEL_ALGORISM.NCC)
+                    //{
+                    //    mc.ulc.cam.model[(int)ulc_MODEL.PADC1_NCC].algorism = MODEL_ALGORISM.NCC.ToString();
+                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.15);
+                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.15);
+                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.15);
+                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.15);
+                    //    mc.ulc.cam.createModel((int)ulc_MODEL.PADC1_NCC, tmpRegion);
+
+                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.3);
+                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.3);
+                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.3);
+                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.3);
+                    //    mc.ulc.cam.createFind((int)ulc_MODEL.PADC1_NCC, tmpRegion);
+                    //    mc.idle(500);
+                    //    mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.TRUE;
+                    //    if (mc.ulc.cam.model[(int)ulc_MODEL.PADC1_NCC].isCreate == "false") mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.FALSE;
+                    //}
+                    //if (mc.para.ulc.modelPADC1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+                    //{
+                    //    mc.ulc.cam.model[(int)ulc_MODEL.PADC1_SHAPE].algorism = MODEL_ALGORISM.SHAPE.ToString();
+                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.15);
+                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.15);
+                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.15);
+                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.15);
+                    //    mc.ulc.cam.createModel((int)ulc_MODEL.PADC1_SHAPE, tmpRegion);
+
+                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.3);
+                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.3);
+                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.3);
+                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.3);
+                    //    mc.ulc.cam.createFind((int)ulc_MODEL.PADC1_SHAPE, tmpRegion);
+                    //    mc.idle(500);
+                    //    mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.TRUE;
+                    //    if (mc.ulc.cam.model[(int)ulc_MODEL.PADC1_SHAPE].isCreate == "false") mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.FALSE;
+                    //}
+                    //if (mc.para.ulc.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                    //{
+                    //    mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.TRUE;
+                    //}
+                    #endregion
+                    mc.ulc.LIVE = true; mc.ulc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
+                }
+                #endregion
+                #region ULC_LIDC2
+                if (mode == SELECT_FIND_MODEL.ULC_LIDC2)
+                {
+                    mc.ulc.LIVE = false;
+                    mc.ulc.model_delete(mode);
+                    int retry = 0;
+                RETRY:
+                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.SECOND, out ret.b); if (!ret.b) goto EXIT;
+                    #region moving
+                    if ((double)mc.ulc.cam.edgeIntersection.resultX > 2.0 || (double)mc.ulc.cam.edgeIntersection.resultY > 2.0)
+                    {
+                        string showstr;
+                        showstr = "Result X:" + Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2).ToString();
+                        showstr += "\nResult Y:" + Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2).ToString();
+                        showstr += "\nResult is OK?";
+                        DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
+                        if (digrst == DialogResult.No) goto EXIT;
+                    }
+
+                    posX += Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2);
+                    posY += Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2);
+                    mc.hd.tool.jogMoveXY(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                    #endregion
+                    mc.idle(100);
+                    if (retry++ < 5) goto RETRY;
+                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.SECOND, out ret.b); if (!ret.b) goto EXIT;
+
+                    #region auto teach
+                    //halcon_region tmpRegion;
+                    //if (mc.para.ULC.modelLIDC1.algorism.value == (int)MODEL_ALGORISM.NCC)
+                    //{
+                    //    mc.ulc.cam.model[(int)ulc_MODEL.PADC1_NCC].algorism = MODEL_ALGORISM.NCC.ToString();
+                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.15);
+                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.15);
+                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.15);
+                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.15);
+                    //    mc.ulc.cam.createModel((int)ulc_MODEL.PADC1_NCC, tmpRegion);
+
+                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.3);
+                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.3);
+                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.3);
+                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.3);
+                    //    mc.ulc.cam.createFind((int)ulc_MODEL.PADC1_NCC, tmpRegion);
+                    //    mc.idle(500);
+                    //    mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.TRUE;
+                    //    if (mc.ulc.cam.model[(int)ulc_MODEL.PADC1_NCC].isCreate == "false") mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.FALSE;
+                    //}
+                    //if (mc.para.ulc.modelPADC1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+                    //{
+                    //    mc.ulc.cam.model[(int)ulc_MODEL.PADC1_SHAPE].algorism = MODEL_ALGORISM.SHAPE.ToString();
+                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.15);
+                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.15);
+                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.15);
+                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.15);
+                    //    mc.ulc.cam.createModel((int)ulc_MODEL.PADC1_SHAPE, tmpRegion);
+
+                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.3);
+                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.3);
+                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.3);
+                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.3);
+                    //    mc.ulc.cam.createFind((int)ulc_MODEL.PADC1_SHAPE, tmpRegion);
+                    //    mc.idle(500);
+                    //    mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.TRUE;
+                    //    if (mc.ulc.cam.model[(int)ulc_MODEL.PADC1_SHAPE].isCreate == "false") mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.FALSE;
+                    //}
+                    //if (mc.para.ulc.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                    //{
+                    //    mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.TRUE;
+                    //}
+                    #endregion
+                    mc.ulc.LIVE = true; mc.ulc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
+                }
+                #endregion
+                #region ULC_LIDC3
+                if (mode == SELECT_FIND_MODEL.ULC_LIDC3)
+                {
+                    mc.ulc.LIVE = false;
+                    mc.ulc.model_delete(mode);
+                    int retry = 0;
+                RETRY:
+                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.THIRD, out ret.b); if (!ret.b) goto EXIT;
+                    #region moving
+                    if ((double)mc.ulc.cam.edgeIntersection.resultX > 2.0 || (double)mc.ulc.cam.edgeIntersection.resultY > 2.0)
+                    {
+                        string showstr;
+                        showstr = "Result X:" + Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2).ToString();
+                        showstr += "\nResult Y:" + Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2).ToString();
+                        showstr += "\nResult is OK?";
+                        DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
+                        if (digrst == DialogResult.No) goto EXIT;
+                    }
+
+                    posX += Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2);
+                    posY += Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2);
+                    mc.hd.tool.jogMoveXY(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                    #endregion
+                    mc.idle(100);
+                    if (retry++ < 5) goto RETRY;
+                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.THIRD, out ret.b); if (!ret.b) goto EXIT;
+
+                    #region auto teach
+                    //halcon_region tmpRegion;
+                    //if (mc.para.ULC.modelLIDC1.algorism.value == (int)MODEL_ALGORISM.NCC)
+                    //{
+                    //    mc.ulc.cam.model[(int)ulc_MODEL.PADC1_NCC].algorism = MODEL_ALGORISM.NCC.ToString();
+                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.15);
+                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.15);
+                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.15);
+                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.15);
+                    //    mc.ulc.cam.createModel((int)ulc_MODEL.PADC1_NCC, tmpRegion);
+
+                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.3);
+                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.3);
+                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.3);
+                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.3);
+                    //    mc.ulc.cam.createFind((int)ulc_MODEL.PADC1_NCC, tmpRegion);
+                    //    mc.idle(500);
+                    //    mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.TRUE;
+                    //    if (mc.ulc.cam.model[(int)ulc_MODEL.PADC1_NCC].isCreate == "false") mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.FALSE;
+                    //}
+                    //if (mc.para.ulc.modelPADC1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+                    //{
+                    //    mc.ulc.cam.model[(int)ulc_MODEL.PADC1_SHAPE].algorism = MODEL_ALGORISM.SHAPE.ToString();
+                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.15);
+                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.15);
+                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.15);
+                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.15);
+                    //    mc.ulc.cam.createModel((int)ulc_MODEL.PADC1_SHAPE, tmpRegion);
+
+                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.3);
+                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.3);
+                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.3);
+                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.3);
+                    //    mc.ulc.cam.createFind((int)ulc_MODEL.PADC1_SHAPE, tmpRegion);
+                    //    mc.idle(500);
+                    //    mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.TRUE;
+                    //    if (mc.ulc.cam.model[(int)ulc_MODEL.PADC1_SHAPE].isCreate == "false") mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.FALSE;
+                    //}
+                    //if (mc.para.ulc.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                    //{
+                    //    mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.TRUE;
+                    //}
+                    #endregion
+                    mc.ulc.LIVE = true; mc.ulc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
+                }
+                #endregion
+                #region ULC_LIDC4
+                if (mode == SELECT_FIND_MODEL.ULC_LIDC4)
+                {
+                    mc.ulc.LIVE = false;
+                    mc.ulc.model_delete(mode);
+                    int retry = 0;
+                RETRY:
+                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.FOURTH, out ret.b); if (!ret.b) goto EXIT;
+                    #region moving
+                    if ((double)mc.ulc.cam.edgeIntersection.resultX > 2.0 || (double)mc.ulc.cam.edgeIntersection.resultY > 2.0)
+                    {
+                        string showstr;
+                        showstr = "Result X:" + Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2).ToString();
+                        showstr += "\nResult Y:" + Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2).ToString();
+                        showstr += "\nResult is OK?";
+                        DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
+                        if (digrst == DialogResult.No) goto EXIT;
+                    }
+
+                    posX += Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2);
+                    posY += Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2);
+                    mc.hd.tool.jogMoveXY(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                    #endregion
+                    mc.idle(100);
+                    if (retry++ < 5) goto RETRY;
+                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.FOURTH, out ret.b); if (!ret.b) goto EXIT;
+
+                    #region auto teach
+                    //halcon_region tmpRegion;
+                    //if (mc.para.ULC.modelLIDC1.algorism.value == (int)MODEL_ALGORISM.NCC)
+                    //{
+                    //    mc.ulc.cam.model[(int)ulc_MODEL.PADC1_NCC].algorism = MODEL_ALGORISM.NCC.ToString();
+                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.15);
+                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.15);
+                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.15);
+                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.15);
+                    //    mc.ulc.cam.createModel((int)ulc_MODEL.PADC1_NCC, tmpRegion);
+
+                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.3);
+                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.3);
+                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.3);
+                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.3);
+                    //    mc.ulc.cam.createFind((int)ulc_MODEL.PADC1_NCC, tmpRegion);
+                    //    mc.idle(500);
+                    //    mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.TRUE;
+                    //    if (mc.ulc.cam.model[(int)ulc_MODEL.PADC1_NCC].isCreate == "false") mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.FALSE;
+                    //}
+                    //if (mc.para.ulc.modelPADC1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+                    //{
+                    //    mc.ulc.cam.model[(int)ulc_MODEL.PADC1_SHAPE].algorism = MODEL_ALGORISM.SHAPE.ToString();
+                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.15);
+                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.15);
+                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.15);
+                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.15);
+                    //    mc.ulc.cam.createModel((int)ulc_MODEL.PADC1_SHAPE, tmpRegion);
+
+                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.3);
+                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.3);
+                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.3);
+                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.3);
+                    //    mc.ulc.cam.createFind((int)ulc_MODEL.PADC1_SHAPE, tmpRegion);
+                    //    mc.idle(500);
+                    //    mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.TRUE;
+                    //    if (mc.ulc.cam.model[(int)ulc_MODEL.PADC1_SHAPE].isCreate == "false") mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.FALSE;
+                    //}
+                    //if (mc.para.ulc.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                    //{
+                    //    mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.TRUE;
+                    //}
+                    #endregion
+                    mc.ulc.LIVE = true; mc.ulc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
+                }
+                #endregion
+
 				#region HDC_PADC1
 				if (mode == SELECT_FIND_MODEL.HDC_PADC1)
 				{
@@ -2075,6 +2377,62 @@ namespace PSA_Application
 				else BT_AutoTeach.Visible = false;
 			}
 			#endregion
+            #region ULC_CORNER
+            if (mode == SELECT_FIND_MODEL.ULC_LIDC1 || mode == SELECT_FIND_MODEL.ULC_LIDC2
+                || mode == SELECT_FIND_MODEL.ULC_LIDC3 || mode == SELECT_FIND_MODEL.ULC_LIDC4)
+            {
+                if (mode == SELECT_FIND_MODEL.ULC_LIDC2)
+                {
+                    mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC2.light, mc.para.ULC.modelLIDC2.exposureTime);
+                    posX = mc.hd.tool.tPos.x.LIDC2;
+                    posY = mc.hd.tool.tPos.y.LIDC2;
+                }
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC3)
+                {
+                    mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC3.light, mc.para.ULC.modelLIDC3.exposureTime);
+                    posX = mc.hd.tool.tPos.x.LIDC3;
+                    posY = mc.hd.tool.tPos.y.LIDC3;
+                }
+                else if (mode == SELECT_FIND_MODEL.ULC_LIDC4)
+                {
+                    mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC4.light, mc.para.ULC.modelLIDC4.exposureTime);
+                    posX = mc.hd.tool.tPos.x.LIDC4;
+                    posY = mc.hd.tool.tPos.y.LIDC4;
+                }
+                else 
+                {
+                    mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC1.light, mc.para.ULC.modelLIDC1.exposureTime);
+                    posX = mc.hd.tool.tPos.x.LIDC1;
+                    posY = mc.hd.tool.tPos.y.LIDC1;
+                }
+                EVENT.hWindowLargeDisplay(mc.ulc.cam.acq.grabber.cameraNumber);
+                posZ = mc.hd.tool.tPos.z.ULC_FOCUS_WITH_MT;
+                posT = mc.hd.tool.tPos.t.ZERO;
+                mc.hd.tool.jogMove(posX, posY, posZ, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); this.Close(); }
+                mc.ulc.LIVE = true; mc.ulc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
+
+                _posX = posX;
+                _posY = posY;
+                _posT = posT;
+                dXY = 10; dT = 1;
+
+                BT_Teach.Visible = true;
+                BT_ESC.Visible = true;
+
+                BT_JogT_CCW.Visible = true;
+                BT_JogT_CW.Visible = true;
+                BT_SpeedT.Visible = true;
+
+                BT_Test.Visible = false;
+                if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.NCC || mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.SHAPE 
+                    || mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                {
+                    BT_AutoTeach.Visible = true;
+                    BT_Teach.Visible = false;
+                }
+                else BT_AutoTeach.Visible = false;
+            }
+            #endregion
 			#region HDC_PAD
 			if (mode == SELECT_FIND_MODEL.HDC_PAD)
 			{
@@ -2466,10 +2824,16 @@ namespace PSA_Application
 				interval -= 50; if (interval < 50) interval = 50;
 
 				#region moving
-				if (mode == SELECT_FIND_MODEL.ULC_ORIENTATION || mode == SELECT_FIND_MODEL.ULC_PKG)
-					mc.hd.tool.jogMove(posX, posY, posZ, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-				else
-					mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                if (mode == SELECT_FIND_MODEL.ULC_ORIENTATION || mode == SELECT_FIND_MODEL.ULC_PKG
+                    || mode == SELECT_FIND_MODEL.ULC_LIDC1 || mode == SELECT_FIND_MODEL.ULC_LIDC2
+                     || mode == SELECT_FIND_MODEL.ULC_LIDC3 || mode == SELECT_FIND_MODEL.ULC_LIDC4)
+                {
+                    mc.hd.tool.jogMove(posX, posY, posZ, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                }
+                else
+                {
+                    mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                }
 				#endregion
 				if (bStop) break;
 			}
