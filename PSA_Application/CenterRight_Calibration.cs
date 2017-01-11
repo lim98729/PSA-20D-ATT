@@ -110,9 +110,11 @@ namespace PSA_Application
 				mc.para.CAL.machineRef[(int)unitCodeMachineRef].x.value = ff.dataX.value;
 				mc.para.CAL.machineRef[(int)unitCodeMachineRef].y.value = ff.dataY.value;
 				#region moving
-				posX = mc.hd.tool.tPos.x.WASTE;
-				posY = mc.hd.tool.tPos.y.WASTE;
-				mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                mc.hd.tool.Z.move(mc.hd.tool.tPos.z.XY_MOVING, mc.speed.slowRPM, out ret.message);
+                //mc.hd.tool.X.actualPosition(out posX, out ret.message);
+                //mc.hd.tool.Y.actualPosition(out posY, out ret.message);
+				//posY = mc.hd.tool.tPos.y.WASTE;
+				//mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				#endregion
 			}
 			#endregion
@@ -175,8 +177,8 @@ namespace PSA_Application
 				mc.para.CAL.HDC_LASER.x.value = ff.dataX.value;
 				mc.para.CAL.HDC_LASER.y.value = ff.dataY.value;
 				#region moving
-				posX = mc.hd.tool.tPos.x.WASTE;
-				posY = mc.hd.tool.tPos.y.WASTE;
+				posX = mc.para.CAL.standbyPosition.x.value;
+                posY = mc.para.CAL.standbyPosition.y.value;
 				mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				#endregion
 			}
@@ -189,8 +191,8 @@ namespace PSA_Application
 				#region HD moving
 				if (unitCodePDRef == UnitCodePDRef.P1)
 				{
-                    posX = mc.hd.tool.cPos.x.PAD(padX);
-                    posY = mc.hd.tool.cPos.y.PAD(padY);
+                    posX = mc.hd.tool.cPos.x.PD_P1;
+                    posY = mc.hd.tool.cPos.y.PD_P1;
 					jogMode = JOGMODE.HDC_PD_P1;
 				}
 				else if (unitCodePDRef == UnitCodePDRef.P2)
@@ -219,8 +221,8 @@ namespace PSA_Application
 				if (unitCodePDRef == UnitCodePDRef.P1)
 				{
 					//posX = (double)MP_PD_X.P1_FR; posY = (double)MP_PD_Y.P1;
-                    posX = mc.pd.pos.x.PAD(padX);
-                    posY = mc.pd.pos.y.PAD(padY);
+                    posX = mc.pd.pos.x.P1;
+                    posY = mc.pd.pos.y.P1;
 				}
 				else if (unitCodePDRef == UnitCodePDRef.P2)
 				{
@@ -258,8 +260,8 @@ namespace PSA_Application
 				mc.para.CAL.HDC_PD[(int)unitCodePDRef].x.value = ff.dataX.value;
 				mc.para.CAL.HDC_PD[(int)unitCodePDRef].y.value = ff.dataY.value;
 				#region moving
-				posX = mc.hd.tool.tPos.x.WASTE;
-				posY = mc.hd.tool.tPos.y.WASTE;
+                posX = mc.para.CAL.standbyPosition.x.value;
+                posY = mc.para.CAL.standbyPosition.y.value;
 				mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				#endregion
 			}
@@ -287,9 +289,9 @@ namespace PSA_Application
 				mc.para.CAL.touchProbe.x.value = ff.dataX.value;
 				mc.para.CAL.touchProbe.y.value = ff.dataY.value;
 				#region moving
-				posX = mc.hd.tool.tPos.x.WASTE;
-				posY = mc.hd.tool.tPos.y.WASTE;
-				mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                posX = mc.para.CAL.standbyPosition.x.value;
+                posY = mc.para.CAL.standbyPosition.y.value; 
+                mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				#endregion
 			}
 			#endregion
@@ -315,9 +317,9 @@ namespace PSA_Application
 				mc.para.CAL.loadCell.x.value = ff.dataX.value;
 				mc.para.CAL.loadCell.y.value = ff.dataY.value;
 				#region moving
-				posX = mc.hd.tool.tPos.x.WASTE;
-				posY = mc.hd.tool.tPos.y.WASTE;
-				mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                posX = mc.para.CAL.standbyPosition.x.value;
+                posY = mc.para.CAL.standbyPosition.y.value; 
+                mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				#endregion
 			}
 			#endregion
@@ -348,9 +350,9 @@ namespace PSA_Application
 				mc.para.CAL.pick.x.value = ff.dataX.value;
 				mc.para.CAL.pick.y.value = ff.dataY.value;
 				#region moving
-				posX = mc.hd.tool.tPos.x.WASTE;
-				posY = mc.hd.tool.tPos.y.WASTE;
-				mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                posX = mc.para.CAL.standbyPosition.x.value;
+                posY = mc.para.CAL.standbyPosition.y.value;
+                mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				#endregion
 			}
 			#endregion
@@ -388,8 +390,8 @@ namespace PSA_Application
 				mc.para.CAL.ulc.y.value = ff.dataY.value;
 
 				#region moving ready
-				posX = mc.hd.tool.tPos.x.WASTE;
-				posY = mc.hd.tool.tPos.y.WASTE;
+                posX = mc.para.CAL.standbyPosition.x.value;
+                posY = mc.para.CAL.standbyPosition.y.value; 
 				mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				#endregion
 
@@ -439,9 +441,9 @@ namespace PSA_Application
                 mc.IN.CV.BD_NEAR(out ret.b, out ret.message);
 				if (ret.b) goto 트레이제거;
 				#region moving ready
-				posX = mc.hd.tool.tPos.x.WASTE;
-				posY = mc.hd.tool.tPos.y.WASTE;
-				mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                posX = mc.para.CAL.standbyPosition.x.value;
+                posY = mc.para.CAL.standbyPosition.y.value;
+                mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				#endregion
 			}
 			#endregion
@@ -464,9 +466,9 @@ namespace PSA_Application
 				mc.para.CAL.toolAngleOffset.value = ff.dataX.value;
 				#region moving ready
 				mc.hd.tool.motorEnable(out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-				posX = mc.hd.tool.tPos.x.WASTE;
-				posY = mc.hd.tool.tPos.y.WASTE;
-				posT = mc.hd.tool.tPos.t.ZERO;
+                posX = mc.para.CAL.standbyPosition.x.value;
+                posY = mc.para.CAL.standbyPosition.y.value;
+                posT = mc.hd.tool.tPos.t.ZERO;
 				mc.hd.tool.jogMove(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				#endregion
 			}
@@ -495,9 +497,9 @@ namespace PSA_Application
 					mc.para.CAL.z.ref0.value = ff.dataZ.value;
 					mc.idle(100);
 					#region moving
-					posX = mc.hd.tool.tPos.x.WASTE;
-					posY = mc.hd.tool.tPos.y.WASTE;
-					mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                    posX = mc.para.CAL.standbyPosition.x.value;
+                    posY = mc.para.CAL.standbyPosition.y.value;
+                    mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 					#endregion
 				}
 				#endregion
@@ -524,9 +526,9 @@ namespace PSA_Application
 					EVENT.hWindow2Display();
 					mc.idle(100);
 					#region moving
-					posX = mc.hd.tool.tPos.x.WASTE;
-					posY = mc.hd.tool.tPos.y.WASTE;
-					mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                    posX = mc.para.CAL.standbyPosition.x.value;
+                    posY = mc.para.CAL.standbyPosition.y.value;
+                    mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 					#endregion
 				}
 				#endregion
@@ -547,9 +549,9 @@ namespace PSA_Application
 					mc.para.CAL.z.xyMoving.value = ff.dataZ.value;
 					mc.idle(100);
 					#region moving
-					posX = mc.hd.tool.tPos.x.WASTE;
-					posY = mc.hd.tool.tPos.y.WASTE;
-					mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                    posX = mc.para.CAL.standbyPosition.x.value;
+                    posY = mc.para.CAL.standbyPosition.y.value;
+                    mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 					#endregion
 				}
 				#endregion
@@ -572,9 +574,9 @@ namespace PSA_Application
 					mc.para.CAL.z.doubleDet.value = ff.dataZ.value;
 					mc.idle(100);
 					#region moving
-					posX = mc.hd.tool.tPos.x.WASTE;
-					posY = mc.hd.tool.tPos.y.WASTE;
-					mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                    posX = mc.para.CAL.standbyPosition.x.value;
+                    posY = mc.para.CAL.standbyPosition.y.value;
+                    mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 					#endregion
 					mc.OUT.HD.SUC(ret.b, out ret.message);
 				}
@@ -599,9 +601,9 @@ namespace PSA_Application
 					mc.para.CAL.z.toolChanger.value = ff.dataZ.value;
 					mc.idle(100);
 					#region moving
-					posX = mc.hd.tool.tPos.x.WASTE;
-					posY = mc.hd.tool.tPos.y.WASTE;
-					mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                    posX = mc.para.CAL.standbyPosition.x.value;
+                    posY = mc.para.CAL.standbyPosition.y.value;
+                    mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 					#endregion
 				}
 				#endregion
@@ -631,9 +633,9 @@ namespace PSA_Application
 					mc.OUT.HD.BLW(false, out ret.message);
 					mc.idle(100);
 					#region moving
-					posX = mc.hd.tool.tPos.x.WASTE;
-					posY = mc.hd.tool.tPos.y.WASTE;
-					mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                    posX = mc.para.CAL.standbyPosition.x.value;
+                    posY = mc.para.CAL.standbyPosition.y.value;
+                    mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 					#endregion
 				}
 				#endregion
@@ -662,9 +664,9 @@ namespace PSA_Application
 					mc.para.CAL.z.pedestal.value = ff.dataZ.value;
 					mc.idle(100);
 					#region moving
-					posX = mc.hd.tool.tPos.x.WASTE;
-					posY = mc.hd.tool.tPos.y.WASTE;
-					mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                    posX = mc.para.CAL.standbyPosition.x.value;
+                    posY = mc.para.CAL.standbyPosition.y.value;
+                    mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 					#endregion
 				}
 				#endregion
@@ -687,9 +689,9 @@ namespace PSA_Application
 					mc.para.CAL.z.touchProbe.value = ff.dataZ.value;
 					mc.idle(100);
 					#region moving
-					posX = mc.hd.tool.tPos.x.WASTE;
-					posY = mc.hd.tool.tPos.y.WASTE;
-					mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                    posX = mc.para.CAL.standbyPosition.x.value;
+                    posY = mc.para.CAL.standbyPosition.y.value;
+                    mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 					#endregion
 				}
 				#endregion
@@ -712,9 +714,9 @@ namespace PSA_Application
 					mc.para.CAL.z.loadCell.value = ff.dataZ.value;
 					mc.idle(100);
 					#region moving
-					posX = mc.hd.tool.tPos.x.WASTE;
-					posY = mc.hd.tool.tPos.y.WASTE;
-					mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                    posX = mc.para.CAL.standbyPosition.x.value;
+                    posY = mc.para.CAL.standbyPosition.y.value;
+                    mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 					#endregion
 				}
 				#endregion
@@ -743,9 +745,9 @@ namespace PSA_Application
 						mc.para.CAL.z.sensor2.value = ff.dataZ.value;
 					mc.idle(100);
 					#region move to standby position
-					posX = mc.hd.tool.tPos.x.WASTE;
-					posY = mc.hd.tool.tPos.y.WASTE;
-					mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                    posX = mc.para.CAL.standbyPosition.x.value;
+                    posY = mc.para.CAL.standbyPosition.y.value;
+                    mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 					#endregion
 				}
 				#endregion
@@ -772,9 +774,9 @@ namespace PSA_Application
 				mc.hdc.cam.acq.ResolutionX = mc.para.CAL.HDC_Resolution.x.value;
 				mc.hdc.cam.acq.ResolutionY = mc.para.CAL.HDC_Resolution.y.value;
 				#region moving
-				posX = mc.hd.tool.tPos.x.WASTE;
-				posY = mc.hd.tool.tPos.y.WASTE;
-				mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                posX = mc.para.CAL.standbyPosition.x.value;
+                posY = mc.para.CAL.standbyPosition.y.value;
+                mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				#endregion
 			}
 			#endregion
@@ -794,9 +796,9 @@ namespace PSA_Application
 				mc.para.CAL.HDC_AngleOffset.value = ff.dataX.value;
 				mc.hdc.cam.acq.AngleOffset = mc.para.CAL.HDC_AngleOffset.value;
 				#region moving
-				posX = mc.hd.tool.tPos.x.WASTE;
-				posY = mc.hd.tool.tPos.y.WASTE;
-				mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                posX = mc.para.CAL.standbyPosition.x.value;
+                posY = mc.para.CAL.standbyPosition.y.value;
+                mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				#endregion
 			}
 			#endregion
@@ -822,9 +824,9 @@ namespace PSA_Application
 				mc.ulc.cam.acq.ResolutionY = mc.para.CAL.ULC_Resolution.y.value;
 
 				#region moving
-				posX = mc.hd.tool.tPos.x.WASTE;
-				posY = mc.hd.tool.tPos.y.WASTE;
-				mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                posX = mc.para.CAL.standbyPosition.x.value;
+                posY = mc.para.CAL.standbyPosition.y.value;
+                mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				#endregion
 			}
 			#endregion
@@ -846,9 +848,9 @@ namespace PSA_Application
 				mc.para.CAL.ULC_AngleOffset.value = ff.dataX.value;
 				mc.ulc.cam.acq.AngleOffset = mc.para.CAL.ULC_AngleOffset.value;
 				#region moving
-				posX = mc.hd.tool.tPos.x.WASTE;
-				posY = mc.hd.tool.tPos.y.WASTE;
-				mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                posX = mc.para.CAL.standbyPosition.x.value;
+                posY = mc.para.CAL.standbyPosition.y.value;
+                mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				#endregion
 			}
 			#endregion
@@ -865,9 +867,9 @@ namespace PSA_Application
                 #endregion
 				ff.ShowDialog();
 				#region moving
-				posX = mc.hd.tool.tPos.x.WASTE;
-				posY = mc.hd.tool.tPos.y.WASTE;
-				mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                posX = mc.para.CAL.standbyPosition.x.value;
+                posY = mc.para.CAL.standbyPosition.y.value;
+                mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				#endregion
 			}
 			#endregion
@@ -914,9 +916,9 @@ namespace PSA_Application
 				//#endregion
 				ff.ShowDialog();
 				#region moving
-				posX = mc.hd.tool.tPos.x.WASTE;
-				posY = mc.hd.tool.tPos.y.WASTE;
-				mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                posX = mc.para.CAL.standbyPosition.x.value;
+                posY = mc.para.CAL.standbyPosition.y.value;
+                mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				#endregion
 				mc.hd.tool.F.max(out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarm("Force Error : " + ret.message.ToString()); goto EXIT; }
 			}
@@ -953,9 +955,9 @@ namespace PSA_Application
 				FormPlaceOffsetCalibration ff = new FormPlaceOffsetCalibration();
 				ff.ShowDialog();
 				#region moving
-				posX = mc.hd.tool.tPos.x.WASTE;
-				posY = mc.hd.tool.tPos.y.WASTE;
-				mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                posX = mc.para.CAL.standbyPosition.x.value;
+                posY = mc.para.CAL.standbyPosition.y.value;
+                mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				#endregion
 			}
 			#endregion

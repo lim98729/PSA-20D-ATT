@@ -434,8 +434,8 @@ namespace PSA_Application
 					#region moving
 					//posX = (double)MP_PD_X.P1_FR; 
 					//posY = (double)MP_PD_Y.P1;
-                    posX = mc.pd.pos.x.PAD(3);
-                    posY = mc.pd.pos.y.PAD(1);
+                    posX = mc.pd.pos.x.P1;
+                    posY = mc.pd.pos.y.P1;
 					posX += dataX.value;
 					posY += dataY.value;
 					mc.pd.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }

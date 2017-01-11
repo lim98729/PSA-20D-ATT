@@ -1018,11 +1018,11 @@ namespace PSA_SystemLibrary
 			{
 				if (mc.para.mcType.FrRr == McTypeFrRr.FRONT)
 				{
-					return (double)MP_PD_X.BD_EDGE_FR - 30000;
+                    return (double)MP_PD_X.BD_EDGE_FR + (double)MP_PD_X.P1_FR;
 				}
 				if (mc.para.mcType.FrRr == McTypeFrRr.REAR)
 				{
-					return (double)MP_PD_X.BD_EDGE_RR + 30000;
+                    return (double)MP_PD_X.BD_EDGE_RR + (double)MP_PD_X.P1_RR;
 				}
 				return -1;
 			}
@@ -1033,11 +1033,11 @@ namespace PSA_SystemLibrary
 			{
 				if (mc.para.mcType.FrRr == McTypeFrRr.FRONT)
 				{
-					return (double)MP_PD_X.BD_EDGE_FR - 30000;
+                    return (double)MP_PD_X.BD_EDGE_FR + (double)MP_PD_X.P2_FR;
 				}
 				if (mc.para.mcType.FrRr == McTypeFrRr.REAR)
 				{
-					return (double)MP_PD_X.BD_EDGE_RR + 30000;
+                    return (double)MP_PD_X.BD_EDGE_RR + (double)MP_PD_X.P2_RR;
 				}
 				return -1;
 			}
@@ -1048,11 +1048,11 @@ namespace PSA_SystemLibrary
 			{
 				if (mc.para.mcType.FrRr == McTypeFrRr.FRONT)
 				{
-					return (double)MP_PD_X.BD_EDGE_FR - 200000;
+                    return (double)MP_PD_X.BD_EDGE_FR + (double)MP_PD_X.P3_FR;
 				}
 				if (mc.para.mcType.FrRr == McTypeFrRr.REAR)
 				{
-					return (double)MP_PD_X.BD_EDGE_RR + 200000;
+                    return (double)MP_PD_X.BD_EDGE_RR + (double)MP_PD_X.P3_RR;
 				}
 				return -1;
 			}
@@ -1063,11 +1063,11 @@ namespace PSA_SystemLibrary
 			{
 				if (mc.para.mcType.FrRr == McTypeFrRr.FRONT)
 				{
-					return (double)MP_PD_X.BD_EDGE_FR - 200000;
+                    return (double)MP_PD_X.BD_EDGE_FR + (double)MP_PD_X.P4_FR;
 				}
 				if (mc.para.mcType.FrRr == McTypeFrRr.REAR)
 				{
-					return (double)MP_PD_X.BD_EDGE_RR + 200000;
+                    return (double)MP_PD_X.BD_EDGE_RR + +(double)MP_PD_X.P4_RR;
 				}
 				return -1;
 			}
@@ -1114,28 +1114,28 @@ namespace PSA_SystemLibrary
 		{
 			get
 			{
-				return (double)MP_PD_Y.BD_EDGE + 30000;
+                return (double)MP_PD_Y.BD_EDGE + (double)MP_PD_Y.P1;
 			}
 		}
 		public double P2
 		{
 			get
 			{
-				return (double)MP_PD_Y.BD_EDGE + 100000;
+                return (double)MP_PD_Y.BD_EDGE + (double)MP_PD_Y.P2;
 			}
 		}
 		public double P3
 		{
 			get
 			{
-				return (double)MP_PD_Y.BD_EDGE + 30000;
+                return (double)MP_PD_Y.BD_EDGE + (double)MP_PD_Y.P3;
 			}
 		}
 		public double P4
 		{
 			get
 			{
-				return (double)MP_PD_Y.BD_EDGE + 100000;
+                return (double)MP_PD_Y.BD_EDGE + (double)MP_PD_Y.P4;
 			}
 		}
 	}

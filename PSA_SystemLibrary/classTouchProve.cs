@@ -147,8 +147,6 @@ namespace PSA_SystemLibrary
                 rData = null;
             }
             return true;
-
-
         }
     }
 }

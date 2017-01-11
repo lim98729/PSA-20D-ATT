@@ -22193,7 +22193,7 @@ namespace PSA_SystemLibrary
 			{
 				double tmp;
 				tmp = BD_EDGE;
-				if (mc.para.mcType.FrRr == McTypeFrRr.FRONT) tmp += (double)MP_HD_X.PD_P1_FR;
+                if (mc.para.mcType.FrRr == McTypeFrRr.FRONT) tmp += (double)MP_HD_X.PD_P1_FR;
 				if (mc.para.mcType.FrRr == McTypeFrRr.REAR) tmp += (double)MP_HD_X.PD_P1_RR;
 				return tmp;
 			}
@@ -22430,7 +22430,7 @@ namespace PSA_SystemLibrary
 			{
 				double tmp;
 				tmp = BD_EDGE;
-				tmp += (double)MP_HD_Y.PD_P1;
+                tmp += 60000;// (double)MP_HD_Y.PD_P1;
 				return tmp;
 			}
 		}

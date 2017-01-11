@@ -2502,15 +2502,15 @@ namespace DefineLibrary
 		TOOL_CHANGER_P3 = 388000 - REF1_1,
 		TOOL_CHANGER_P4 = 430000 - REF1_1,
 
-		PD_P1_FR = - 30000,
-		PD_P2_FR = - 30000,
-		PD_P3_FR = - 200000,
-		PD_P4_FR = - 200000,
+        PD_P1_FR = BD_EDGE_FR - 60000,
+        PD_P2_FR = BD_EDGE_FR - 60000,
+        PD_P3_FR = BD_EDGE_FR - 200000,
+        PD_P4_FR = BD_EDGE_FR - 200000,
 
-		PD_P1_RR = 30000,
-		PD_P2_RR = 30000,
-		PD_P3_RR = 200000,
-		PD_P4_RR = 200000,
+        PD_P1_RR = BD_EDGE_RR + 60000,
+        PD_P2_RR = BD_EDGE_RR + 60000,
+        PD_P3_RR = BD_EDGE_RR + 200000,
+        PD_P4_RR = BD_EDGE_RR + 200000,
 	}
 	public enum MP_HD_Y
 	{
@@ -2550,11 +2550,10 @@ namespace DefineLibrary
 		TOOL_CHANGER_P3 = -10000 - REF1_1,
 		TOOL_CHANGER_P4 = -10000 - REF1_1,
 
-	  
-		PD_P1 = 30000,
-		PD_P2 = 100000,
-		PD_P3 = 30000,
-		PD_P4 = 100000,
+        PD_P1 = BD_EDGE + 60000,
+        PD_P2 = BD_EDGE + 100000,
+        PD_P3 = BD_EDGE + 60000,
+        PD_P4 = BD_EDGE + 100000,
 	}
 	public enum MP_HD_Z
 	{
@@ -2580,13 +2579,13 @@ namespace DefineLibrary
 		BD_EDGE_RR = -300500,
 		STROKE = 303500,
 
-		P1_FR = BD_EDGE_FR - 30000,
-		P2_FR = BD_EDGE_FR - 30000,
+		P1_FR = BD_EDGE_FR - 60000,
+		P2_FR = BD_EDGE_FR - 60000,
 		P3_FR = BD_EDGE_FR - 200000,
 		P4_FR = BD_EDGE_FR - 200000,
 
-		P1_RR = BD_EDGE_RR + 30000,
-		P2_RR = BD_EDGE_RR + 30000,
+		P1_RR = BD_EDGE_RR + 60000,
+		P2_RR = BD_EDGE_RR + 60000,
 		P3_RR = BD_EDGE_RR + 200000,
 		P4_RR = BD_EDGE_RR + 200000,
 	}
@@ -2596,10 +2595,10 @@ namespace DefineLibrary
 		BD_EDGE = -141500,
 		STROKE = 128000,
 
-		//P1 = BD_EDGE + 30000,
-		//P2 = BD_EDGE + 100000,
-		//P3 = BD_EDGE + 30000,
-		//P4 = BD_EDGE + 100000,
+        P1 = BD_EDGE + 60000,
+        P2 = BD_EDGE + 100000,
+        P3 = BD_EDGE + 60000,
+        P4 = BD_EDGE + 100000,
 	}
 	public enum MP_PD_Z
 	{
