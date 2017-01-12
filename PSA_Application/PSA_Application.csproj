@@ -264,6 +264,12 @@
     <Compile Include="FormPassword.Designer.cs">
       <DependentUpon>FormPassword.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormPedestalFlatness2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPedestalFlatness2.Designer.cs">
+      <DependentUpon>FormPedestalFlatness2.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormPlaceOffsetCalibration.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -597,6 +603,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormPassword.resx">
       <DependentUpon>FormPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPedestalFlatness2.resx">
+      <DependentUpon>FormPedestalFlatness2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormPlaceOffsetCalibration.resx">
       <DependentUpon>FormPlaceOffsetCalibration.cs</DependentUpon>

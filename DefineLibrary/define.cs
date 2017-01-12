@@ -2560,6 +2560,7 @@ namespace DefineLibrary
 		P_LIMIT = 11100,
 		ULC_FOCUS = 0,
 		XY_MOVING = 6000,
+        XY_MOVING_HIGH = 7000,
 		DOUBLE_DET = 9000,
 		TOOL_CHANGER = -11000,
 		REF = 0,
@@ -2608,6 +2609,7 @@ namespace DefineLibrary
 		XY_MOVING = 90,    //  7.30mm 지점 = 114.26 deg ==>  90 deg로 설정
 		BD_EDGE = 207,              // 13.23mm 지점 = 207.08 deg ==> 207 deg로 설정 
 		BD_UP = 250,                // 14.50mm 지점 = 226.95 deg ==> 250 deg로 설정
+        BD_UP_HIGH = 300,                // 14.50mm 지점 = 226.95 deg ==> 250 deg로 설정
 		P_LIMIT = 270,
 		N_LIMIT = 0,
 	}
@@ -4580,8 +4582,6 @@ namespace DefineLibrary
 		E_SYSTEM_MAIN_VACUUM_ERROR = 37,
 		E_SYSTEM_HW_SYSTEM_NOT_INIT = 38,
 		E_SYSTEM_HW_IO_NOT_WORKING = 39,
-		E_SYSTEM_HW_IONIZER_NOR_WORKING=40,
-		E_SYSTEM_HW_IONIZER_ERROR=41,
 
 		E_MACHINE_RUN_PRESS_TILT_ERROR = 46,
 		E_HDC_P1_FIDUCIAL_CHECKED_FAIL = 47,		// Fiducial이 안보여야 하는데 오히려 보이는 경우

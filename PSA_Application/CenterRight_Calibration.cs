@@ -110,11 +110,9 @@ namespace PSA_Application
 				mc.para.CAL.machineRef[(int)unitCodeMachineRef].x.value = ff.dataX.value;
 				mc.para.CAL.machineRef[(int)unitCodeMachineRef].y.value = ff.dataY.value;
 				#region moving
-                mc.hd.tool.Z.move(mc.hd.tool.tPos.z.XY_MOVING, mc.speed.slowRPM, out ret.message);
-                //mc.hd.tool.X.actualPosition(out posX, out ret.message);
-                //mc.hd.tool.Y.actualPosition(out posY, out ret.message);
-				//posY = mc.hd.tool.tPos.y.WASTE;
-				//mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                posX = mc.para.CAL.standbyPosition.x.value;
+				posY = mc.para.CAL.standbyPosition.y.value;
+				mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				#endregion
 			}
 			#endregion
@@ -145,8 +143,8 @@ namespace PSA_Application
 				mc.para.CAL.HDC_TOOL.x.value = ff.dataX.value;
 				mc.para.CAL.HDC_TOOL.y.value = ff.dataY.value;
 				#region moving
-				posX = mc.hd.tool.tPos.x.WASTE;
-				posY = mc.hd.tool.tPos.y.WASTE;
+                posX = mc.para.CAL.standbyPosition.x.value;
+                posY = mc.para.CAL.standbyPosition.y.value;
 				posT = mc.hd.tool.tPos.t.ZERO;
 				mc.hd.tool.jogMove(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK)
 				{
@@ -497,9 +495,7 @@ namespace PSA_Application
 					mc.para.CAL.z.ref0.value = ff.dataZ.value;
 					mc.idle(100);
 					#region moving
-                    posX = mc.para.CAL.standbyPosition.x.value;
-                    posY = mc.para.CAL.standbyPosition.y.value;
-                    mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                    mc.hd.tool.Z.move(mc.hd.tool.tPos.z.XY_MOVING, mc.speed.slow, out ret.message);					
 					#endregion
 				}
 				#endregion
@@ -514,8 +510,8 @@ namespace PSA_Application
 					mc.hd.tool.jogMove(posX, posY, posZ, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 					#endregion
 					EVENT.hWindowLargeDisplay(mc.ulc.cam.acq.grabber.cameraNumber);
-					//mc.ulc.lighting_exposure(mc.para.ULC.light[(int)LIGHTMODE_ULC.TOOL], mc.para.ULC.exposure[(int)LIGHTMODE_ULC.TOOL]);		// Tool 볼 때의 조명값으로 켠다.
-					mc.ulc.lighting_exposure(mc.para.ULC.model.light, mc.para.ULC.model.exposureTime);
+					mc.ulc.lighting_exposure(mc.para.ULC.light[(int)LIGHTMODE_ULC.TOOL], mc.para.ULC.exposure[(int)LIGHTMODE_ULC.TOOL]);		// Tool 볼 때의 조명값으로 켠다.
+					//mc.ulc.lighting_exposure(mc.para.ULC.model.light, mc.para.ULC.model.exposureTime);
 					mc.ulc.LIVE = true; mc.ulc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
 					FormJogPadZ ff = new FormJogPadZ();
 					ff.mode = unitCodeZAxis;
@@ -889,9 +885,28 @@ namespace PSA_Application
 				posY = mc.hd.tool.lPos.y.PAD(calPosY);
 				mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
                 #endregion
-                PedestalFlatness ff = new PedestalFlatness(calPosX, calPosY);
 
-				ff.ShowDialog();
+                if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.CHIPPAC)
+                {
+                    PedestalFlatness ff = new PedestalFlatness(calPosX, calPosY);
+                    ff.ShowDialog();
+                }
+                else
+                {
+                    FormPedestalFlatness2 ff = new FormPedestalFlatness2(calPosX, calPosY);
+                    ff.ShowDialog();
+                }
+
+                #region moving
+                posX = mc.para.CAL.standbyPosition.x.value;
+                posY = mc.para.CAL.standbyPosition.y.value;
+                mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                posX = mc.pd.pos.x.PAD(calPosX);
+                posY = mc.pd.pos.y.PAD(calPosY);
+                posZ = mc.pd.pos.z.HOME;
+                mc.pd.jogMode = (int)PD_JOGMODE.DOWN_MODE;
+                mc.pd.jogMove(posX, posY, posZ, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                #endregion
 			}
 			#endregion
 			#region BT_Force_Calibration

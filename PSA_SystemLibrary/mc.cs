@@ -758,26 +758,16 @@ namespace PSA_SystemLibrary
                     Z.homing.N_LimitDuration = 0.001;
                     Z.homing.direction = MPIHomingDirect.Plus;
                     Z.homing.maxStroke = (double)MP_HD_Z.STROKE;//(double)MP_HD_Z.P_STOPPER - (double)MP_HD_Z.N_STOPPER;
-                    //if (swcontrol.mechanicalRevision == 0)
-                    //{
-                    //    Z.homing.captureReadyPosition = 5000;
-                    //    Z.homing.dedicatedIn = MPIMotorDedicatedIn.LIMIT_HW_POS;
-                    //    Z.homing.captureDirection = MPIHomingDirect.Plus;
-                    //    Z.homing.captureEdge = MPICaptureEdge.RISING;
-                    //    Z.homing.captureMovingStroke = 10000;
-                    //    Z.homing.capturedPosition = (double)MP_HD_Z.P_LIMIT;
-                    //}
-                    //else
-                    //{
-                        Z.homing.captureReadyPosition = 2000;	// 5000->2000
-                        Z.homing.dedicatedIn = MPIMotorDedicatedIn.INDEX_PRIMARY;	// LIMIT_HW_POS->INDEX_PRIMARY. Sensor에서 Z상으로 변화시킴.
-                        Z.homing.captureDirection = MPIHomingDirect.Minus;	// Plus->Minus
-                        Z.homing.captureEdge = MPICaptureEdge.RISING;
-                        Z.homing.captureMovingStroke = 8000;
-                        Z.homing.capturedPosition = (double)MP_HD_Z.P_LIMIT - 5000;
-                    //}
+                    if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.CHIPPAC) Z.homing.captureReadyPosition = 2000;	// 5000->2000
+					else Z.homing.captureReadyPosition = 1000;	// 5000->2000
+                    Z.homing.dedicatedIn = MPIMotorDedicatedIn.INDEX_PRIMARY;	// LIMIT_HW_POS->INDEX_PRIMARY. Sensor에서 Z상으로 변화시킴.
+                    Z.homing.captureDirection = MPIHomingDirect.Minus;	// Plus->Minus
+                    Z.homing.captureEdge = MPICaptureEdge.RISING;
+                    Z.homing.captureMovingStroke = 8000;
+                    Z.homing.capturedPosition = (double)MP_HD_Z.P_LIMIT - 5000;
                     Z.homing.originOffset = 0.0;     // kenny 130711
-                    Z.homing.homePosition = (double)MP_HD_Z.XY_MOVING;
+                    if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.CHIPPAC) Z.homing.homePosition = (double)MP_HD_Z.XY_MOVING;
+                    else Z.homing.homePosition = (double)MP_HD_Z.XY_MOVING + 2000;
                     Z.homing.timeLimit = 5;
                     Z.homing.captureTimeLimit = 3;
                     Z.homing.speed = mc.speed.homing;
@@ -9032,7 +9022,7 @@ namespace PSA_SystemLibrary
                     if (b)
                     {
                         // Default 상태가 뒤집힌 상태로 변환됨.
-                        detected = v;
+                        detected = !v;
                         retMessage = RetMessage.OK;
                     }
                     else
@@ -9228,7 +9218,20 @@ namespace PSA_SystemLibrary
                         retMessage = RetMessage.INVALID_IO_CONFIG;
                         return;
                     }
-                    mpi.zmp0.MOTOR_GENERAL_IN(axisNumber, bitNumber, out temp, out retMessage);
+                    if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG)
+                    {
+                        UnitCodeSF unitCodeSF;
+                        if (unitCode == UnitCodeSFMG.MG1) unitCodeSF = UnitCodeSF.SF1;
+                        else if (unitCode == UnitCodeSFMG.MG2) unitCodeSF = UnitCodeSF.SF2;
+                        else
+                        {
+                            detected = false;
+                            retMessage = RetMessage.INVALID_IO_CONFIG;
+                            return;
+                        }
+                        TUBE_DET(unitCodeSF, out temp, out retMessage);
+                    }
+                    else mpi.zmp0.MOTOR_GENERAL_IN(axisNumber, bitNumber, out temp, out retMessage);
                     detected = temp;
                 }
 

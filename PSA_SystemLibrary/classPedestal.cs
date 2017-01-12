@@ -1182,7 +1182,8 @@ namespace PSA_SystemLibrary
 			get
 			{
 				double tmp;
-				tmp = (double)MP_PD_Z.BD_UP;
+                if(mc.swcontrol.mechanicalRevision == (int)CUSTOMER.CHIPPAC) tmp = (double)MP_PD_Z.BD_UP;
+                else tmp = (double)MP_PD_Z.BD_UP_HIGH;
 				return tmp;
 			}
 		}
