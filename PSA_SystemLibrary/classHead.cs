@@ -18653,33 +18653,17 @@ namespace PSA_SystemLibrary
 					if (dwell.Elapsed < 1000) break;
 					dwell.Reset();
 					sqc++; break;
-				case 17:
-					mc.touchProbe.getDataS1(out ret.message); 
-					//if (ioCheck(sqc, ret.message)) break;
-					if (ret.message != RetMessage.OK)
-					{
-						errorCheck(ERRORCODE.UTILITY, sqc, ret.message.ToString());
-						break;
-					}
-					dwell.Reset();
-					sqc++;
-					break;
-				case 18:
-					mc.touchProbe.getDataS2(out ret.b);
-					if (ret.b) { sqc++; break; }
-					if (dwell.Elapsed > 500)
-					{
-						comRetryCount++;
-						if (comRetryCount < 3) break;
-						else errorCheck(ERRORCODE.UTILITY, sqc, "Touch Probe Recieve Timeout"); break;
-					}
-					else { comRetryCount = 0; break; }
-				case 19:
-					mc.touchProbe.getDataS3(out ret.d);
-					flatCheckResult[flatCheckIndex] = ret.d;
-					mc.log.trace.write(mc.log.CODE.FLATNESS, String.Format(textResource.LOG_TRACE_HD_TOOL_FLATNESS, flatCheckIndex, ret.d.ToString("f4")));
-					sqc++;
-					break;
+                case 17:
+                    mc.touchProbe.getData(out ret.d, out ret.b);
+                    if (!ret.b)
+                    {
+                        errorCheck(ERRORCODE.HD, sqc, "Touch Probe Communication Failed");
+                        break;
+                    }
+                    flatCheckResult[flatCheckIndex] = ret.d;
+                    mc.log.trace.write(mc.log.CODE.FLATNESS, String.Format(textResource.LOG_TRACE_HD_TOOL_FLATNESS, flatCheckIndex, ret.d.ToString("f4")));
+                    sqc++;
+                    break;
 				case 20:
 					Z.move(tPos.z.XY_MOVING, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
 					dwell.Reset();

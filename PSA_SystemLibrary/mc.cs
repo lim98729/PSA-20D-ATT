@@ -54,7 +54,7 @@ namespace PSA_SystemLibrary
         {
             get
             {
-                return "att20170111A";
+                return "att20170116A";
             }
         }
         //public static bool START;
@@ -8015,101 +8015,171 @@ namespace PSA_SystemLibrary
        
         public class light
         {
-            static classLighting con = new classLighting();
+            //static classLighting con = new classLighting();
+            static SerialPort lightComm = new SerialPort();
             public static bool isActivate;
+
             public static void activate(out bool b, out string s)
             {
-                b = true; s = "";
-                con.activate("COM4", 9600, Parity.None, 8, StopBits.One, out ret.message); if (ret.message != RetMessage.OK) { b = false; s += "light.con1.activate (" + con.comPort.PortName + ") : Fail" + "\n"; return; }
+                try
+                {
+                    if (!isActivate)
+                    {
+                        lightComm = new SerialPort("COM4", 9600, Parity.None, 8, StopBits.One);
+                        lightComm.Open();
+                        lightComm.ReadTimeout = 500;
+                        lightComm.WriteTimeout = 500;
+                    }
+                    b = true; s = "";
+                    isActivate = true;
+                }
+                catch (System.Exception ex)
+                {
+                    isActivate = false;
+                    b = false;
+                    s = "light activate : Fail" + "\n";
+                }
             }
             public static void deactivate(out bool b)
             {
-                con.deactivate(out ret.message); if (ret.message != RetMessage.OK) { b = false; return; }
+                lightComm.Close();
+                isActivate = false;
                 b = true;
             }
-            public static void HDC(int AAA, out bool b)
+            public static void setLight1(int ch, int bright)
             {
-                con.bright_set(1, para.HDC.light[AAA].ch1.value, out ret.message); if (ret.message != RetMessage.OK) { b = false; return; }
-                con.bright_set(2, para.HDC.light[AAA].ch2.value, out ret.message); if (ret.message != RetMessage.OK) { b = false; return; }
-                b = true;
+                string sData = Char.ConvertFromUtf32(2);
+                sData += ch.ToString();
+                if (bright < 0) bright = 0;
+                if (bright > 255) bright = 255;
+                if (bright < 10) sData += "00";
+                else if (bright < 100) sData += "0";
+                sData += bright.ToString();
+                sData += Char.ConvertFromUtf32(3);
+
+                lightComm.WriteLine(sData);
+            }
+
+            public static void setLight2(int ch, int bright)
+            {
+                string sData = Char.ConvertFromUtf32(2);
+                sData += ch.ToString();
+                if (bright < 0) bright = 0;
+                if (bright > 255) bright = 255;
+                if (bright < 10) sData += "00";
+                else if (bright < 100) sData += "0";
+                sData += bright.ToString();
+                sData += Char.ConvertFromUtf32(3);
+
+                lightComm.WriteLine(sData);
+            }
+
+            public static void HDC(int model, out bool b)
+            {
+                if(isActivate)
+                {
+                    setLight1(1, (int)para.HDC.light[model].ch1.value);
+                    setLight1(2, (int)para.HDC.light[model].ch2.value);
+
+                    b = true;
+                }
+                else b = false;
             }
             public static void HDC(light_2channel_paramer bright, out bool b)
             {
-                con.bright_set(1, bright.ch1.value, out ret.message); if (ret.message != RetMessage.OK) { b = false; return; }
-                con.bright_set(2, bright.ch2.value, out ret.message); if (ret.message != RetMessage.OK) { b = false; return; }
-                b = true;
-            }
-            public static void HDC(light_2channel_value bright, out bool b)
-            {
-                con.bright_set(1, bright.ch1, out ret.message); if (ret.message != RetMessage.OK) { b = false; return; }
-                con.bright_set(2, bright.ch2, out ret.message); if (ret.message != RetMessage.OK) { b = false; return; }
-                b = true;
+                if (isActivate)
+                {
+                    setLight1(1, (int)bright.ch1.value);
+                    setLight1(2, (int)bright.ch2.value);
+
+                    b = true;
+                }
+                else b = false;            
             }
 
-            public static void ULC(int AAA, out bool b)
+            public static void ULC(int model, out bool b)
             {
-                con.bright_set(3, para.ULC.light[AAA].ch1.value, out ret.message); if (ret.message != RetMessage.OK) { b = false; return; }
-                con.bright_set(4, para.ULC.light[AAA].ch2.value, out ret.message); if (ret.message != RetMessage.OK) { b = false; return; }
-                b = true;
+                if (isActivate)
+                {
+                    setLight1(3, (int)para.ULC.light[model].ch1.value);
+                    setLight1(4, (int)para.ULC.light[model].ch2.value);
+
+                    b = true;
+                }
+                else b = false;
             }
             public static void ULC(light_2channel_paramer bright, out bool b)
             {
-                con.bright_set(3, bright.ch1.value, out ret.message); if (ret.message != RetMessage.OK) { b = false; return; }
-                con.bright_set(4, bright.ch2.value, out ret.message); if (ret.message != RetMessage.OK) { b = false; return; }
-                b = true;
-            }
-            public static void ULC(light_2channel_value bright, out bool b)
-            {
-                con.bright_set(3, bright.ch1, out ret.message); if (ret.message != RetMessage.OK) { b = false; return; }
-                con.bright_set(4, bright.ch2, out ret.message); if (ret.message != RetMessage.OK) { b = false; return; }
-                b = true;
+                if (isActivate)
+                {
+                    setLight1(1, (int)bright.ch1.value);
+                    setLight2(1, (int)bright.ch2.value);
+
+                    b = true;
+                }
+                else b = false;
             }
         }
+
         public class touchProbe
         {
-            static classTouchProbe com = new classTouchProbe();
-            static QueryTimer dwell = new QueryTimer();
+            static SerialPort probe;
 
             public static bool isActivate;
             public static void activate(out bool r)
             {
-                r = false;
-                com.activate("COM1", 4800, Parity.None, 8, StopBits.One, out ret.message); if (ret.message != RetMessage.OK) return;
-                r = true;
-                isActivate = true;
+                try
+                {
+                    if(!isActivate)
+                    {
+                        probe = new SerialPort("COM1", 4800, Parity.None, 8, StopBits.One);
+                        probe.Open();
+                        probe.ReadTimeout = 500;
+                        probe.WriteTimeout = 500;
+                    }
+                    r = true;
+                    isActivate = true;
+                }
+                catch 
+                {
+                    r = false;
+                    isActivate = false;
+                }
             }
             public static void deactivate(out bool r)
             {
-                com.deactivate(out ret.message); if (ret.message != RetMessage.OK) { r = false; return; }
-                r = true;
+                try
+                {
+                    probe.Close();
+                    r = true;
+                }
+                catch
+                {
+                    r = false;
+                }
             }
             public static void setZero(out bool r)
             {
-                com.zero_set(out ret.message); 
-                if (ret.message != RetMessage.OK) 
+                try
                 {
-                    com.deactivate(out ret.message);
-                    Thread.Sleep(500);
-                    com.activate("COM1", 4800, Parity.None, 8, StopBits.One, out ret.message); if (ret.message != RetMessage.OK) { r = false; return; }
-                    Thread.Sleep(500);
-                    com.zero_set(out ret.message); if (ret.message != RetMessage.OK) { r = false; return; }
+                    probe.Write("Z011" + Char.ConvertFromUtf32(13) + Char.ConvertFromUtf32(10));
+                    r = true;
                 }
-                r = true;
+                catch
+                {
+                    r = false;
+                }
             }
             public static void getData(out double data, out bool r)
             {
-                data = -1; r = false;
-                com.req_data(out ret.message); if (ret.message != RetMessage.OK) return;
-                dwell.Reset();
-                while (true)
-                {
-                    Application.DoEvents(); Thread.Sleep(0);
-                    if (com.dataReceived) break;
-                    if (dwell.Elapsed > 1000) return;
-                }
                 try
                 {
-                    data = Convert.ToDouble(com.rData);
+                    probe.DiscardInBuffer();
+                    probe.DiscardOutBuffer();
+                    probe.Write(">R01" + Char.ConvertFromUtf32(13) + Char.ConvertFromUtf32(10));
+                    mc.idle(500);
+                    string temp = probe.ReadLine().Substring(6, 7);
+                    data = Convert.ToDouble(temp);
                     r = true;
                 }
                 catch
@@ -8117,21 +8187,8 @@ namespace PSA_SystemLibrary
                     data = -1; r = false;
                 }
             }
-            public static void getDataS1(out RetMessage retMsg)
-            {
-                com.req_data(out retMsg);
-            }
-            public static void getDataS2(out bool dataRcv)
-            {
-                if (com.dataReceived) dataRcv = true;
-                else dataRcv = false;
-            }
-            public static void getDataS3(out double retVal)
-            {
-                retVal = Convert.ToDouble(com.rData);
-            }
-
         }
+
         public class loadCell
         {
             //static classLoadCell com = new classLoadCell();

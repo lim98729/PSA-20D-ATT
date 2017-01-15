@@ -84,12 +84,8 @@
     <Compile Include="classConveyor.cs" />
     <Compile Include="ClassFullAuto.cs" />
     <Compile Include="classHead.cs" />
-    <Compile Include="classLighting.cs" />
-    <Compile Include="classLoadCell.cs" />
     <Compile Include="classPedestal.cs" />
-    <Compile Include="classReset.cs" />
     <Compile Include="classStackFeeder.cs" />
-    <Compile Include="classTouchProve.cs" />
     <Compile Include="classVision.cs" />
     <Compile Include="FormJogLighting.cs">
       <SubType>Form</SubType>
