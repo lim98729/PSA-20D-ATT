@@ -8112,8 +8112,8 @@ namespace PSA_SystemLibrary
             {
                 if (isActivate)
                 {
-                    setLight1(1, (int)bright.ch1.value);
-                    setLight2(1, (int)bright.ch2.value);
+                    setLight1(3, (int)bright.ch1.value);
+                    setLight2(4, (int)bright.ch2.value);
 
                     b = true;
                 }

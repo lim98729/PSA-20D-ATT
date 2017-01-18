@@ -3328,7 +3328,7 @@ namespace PSA_SystemLibrary
                         if (mc.para.ULC.modelLIDC1.isCreate.value == (int)BOOL.TRUE
                             && mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3)
                         {
-                            mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
+                            mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
                             mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC1.light, mc.para.ULC.modelLIDC1.exposureTime);
                         }
                         else if (mc.para.ULC.modelLIDC2.isCreate.value == (int)BOOL.TRUE
@@ -3436,7 +3436,7 @@ namespace PSA_SystemLibrary
                         ulcP1X = 0; ulcP1Y = 0; ulcP1T = 0;
                         if (mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3 && mc.para.ULC.modelLIDC3.isCreate.value == (int)BOOL.TRUE)
                         {
-                            mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
+                            mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
                             mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC3.light, mc.para.ULC.modelLIDC3.exposureTime);
                         }
                         else if (mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C2AndC4 && mc.para.ULC.modelLIDC4.isCreate.value == (int)BOOL.TRUE)
@@ -4040,7 +4040,7 @@ namespace PSA_SystemLibrary
 								}
 								else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
 								{
-									mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
+									mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
 								}
 								else mc.hdc.reqMode = REQMODE.GRAB;
 								mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
@@ -4179,7 +4179,7 @@ namespace PSA_SystemLibrary
                                 }
                                 else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
                                 {
-                                    mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
+                                    mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
                                 }
                                 else mc.hdc.reqMode = REQMODE.GRAB;
                                 mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
@@ -4561,7 +4561,7 @@ namespace PSA_SystemLibrary
 								}
 								else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
 								{
-									mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
+									mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
 								}
 								else mc.hdc.reqMode = REQMODE.GRAB;
 								mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
@@ -5585,7 +5585,7 @@ namespace PSA_SystemLibrary
 								}
 								else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
 								{
-									mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
+									mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
 								}
 								else mc.hdc.reqMode = REQMODE.GRAB;
 								mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
@@ -7934,7 +7934,7 @@ namespace PSA_SystemLibrary
 							}
 							else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
 							{
-								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
+								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
@@ -8307,7 +8307,7 @@ namespace PSA_SystemLibrary
 							}
 							else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
 							{
-								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
+								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
@@ -9164,7 +9164,7 @@ namespace PSA_SystemLibrary
                             }
                             else if (mc.para.HS.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
                             {
-                                mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
+                                mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
                             }
                             else mc.hdc.reqMode = REQMODE.GRAB;
                             mc.hdc.lighting_exposure(mc.para.HS.modelPADC1.light, mc.para.HS.modelPADC1.exposureTime);
@@ -9269,7 +9269,7 @@ namespace PSA_SystemLibrary
 							}
 							else if (mc.para.HS.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
 							{
-								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
+								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HS.modelPADC1.light, mc.para.HS.modelPADC1.exposureTime);
@@ -9478,7 +9478,7 @@ namespace PSA_SystemLibrary
 							}
 							else if (mc.para.HS.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
 							{
-								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
+								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HS.modelPADC3.light, mc.para.HS.modelPADC3.exposureTime);
@@ -9862,7 +9862,7 @@ namespace PSA_SystemLibrary
 							}
 							else if (mc.para.HS.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
 							{
-								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
+								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HS.modelPADC3.light, mc.para.HS.modelPADC3.exposureTime);
@@ -10193,7 +10193,7 @@ namespace PSA_SystemLibrary
 						}
 						else if (mc.para.HS.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
 						{
-							mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
+							mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
 						}
 						else mc.hdc.reqMode = REQMODE.GRAB;
 						mc.hdc.lighting_exposure(mc.para.HS.modelPADC1.light, mc.para.HS.modelPADC1.exposureTime);
@@ -10411,7 +10411,7 @@ namespace PSA_SystemLibrary
 						}
 						else if (mc.para.HS.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
 						{
-							mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
+							mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
 						}
 						else mc.hdc.reqMode = REQMODE.GRAB;
 						mc.hdc.lighting_exposure(mc.para.HS.modelPADC3.light, mc.para.HS.modelPADC3.exposureTime);
@@ -10863,7 +10863,7 @@ namespace PSA_SystemLibrary
 							}
 							else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
 							{
-								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
+								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
@@ -10970,7 +10970,7 @@ namespace PSA_SystemLibrary
 							}
 							else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
 							{
-								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
+								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
@@ -11228,7 +11228,7 @@ namespace PSA_SystemLibrary
 							}
 							else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
 							{
-								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
+								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
@@ -11746,7 +11746,7 @@ namespace PSA_SystemLibrary
 							}
 							else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
 							{
-								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
+								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
@@ -13062,7 +13062,7 @@ namespace PSA_SystemLibrary
 						}
 						else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
 						{
-							mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
+							mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
 						}
 						else mc.hdc.reqMode = REQMODE.GRAB;
 						mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
@@ -13324,7 +13324,7 @@ namespace PSA_SystemLibrary
 						}
 						else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
 						{
-							mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
+							mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
 						}
 						else mc.hdc.reqMode = REQMODE.GRAB;
 						mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
@@ -14106,7 +14106,7 @@ namespace PSA_SystemLibrary
 							}
 							else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
 							{
-								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
+								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
@@ -14213,7 +14213,7 @@ namespace PSA_SystemLibrary
 							}
 							else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
 							{
-								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
+								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
@@ -14499,7 +14499,7 @@ namespace PSA_SystemLibrary
 							}
 							else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
 							{
-								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
+								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
@@ -15068,7 +15068,7 @@ namespace PSA_SystemLibrary
 							}
 							else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
 							{
-								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
+								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
@@ -16103,7 +16103,7 @@ namespace PSA_SystemLibrary
 						}
 						else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
 						{
-							mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
+							mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
 						}
 						else mc.hdc.reqMode = REQMODE.GRAB;
 						mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
@@ -16381,7 +16381,7 @@ namespace PSA_SystemLibrary
 						}
 						else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
 						{
-							mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
+							mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
 						}
 						else mc.hdc.reqMode = REQMODE.GRAB;
 						mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
@@ -19077,7 +19077,7 @@ namespace PSA_SystemLibrary
 				case 30:
 					#region HDC.PADC1.req
 					mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
-					mc.hdc.req = true; mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
+					mc.hdc.req = true; mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
 					#endregion
 					dwell.Reset();
 					sqc++; break;
@@ -19129,7 +19129,7 @@ namespace PSA_SystemLibrary
 				case 50:
 					#region HDC.PADC3.req
 					mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
-					mc.hdc.req = true; mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
+					mc.hdc.req = true; mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
 					#endregion
 					dwell.Reset();
 					sqc++; break;
@@ -20771,7 +20771,7 @@ namespace PSA_SystemLibrary
 					tmpLight.ch1.value = 100; tmpLight.ch2.value = 100;
 					tmpExpoure.value = 10000;
 					mc.hdc.lighting_exposure(tmpLight, tmpExpoure);
-					mc.hdc.req = true; mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
+					mc.hdc.req = true; mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
 					hdcX = -1;
 					hdcY = -1;
 					hdcT = -1;
@@ -20813,7 +20813,7 @@ namespace PSA_SystemLibrary
 					if (!X_AT_DONE || !Y_AT_DONE) break;
 					#region HDC.PADC3.req
 					//mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
-					mc.hdc.req = true; mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
+					mc.hdc.req = true; mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
 					#endregion
 					dwell.Reset();
 					sqc++; break;

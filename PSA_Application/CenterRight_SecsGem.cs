@@ -140,7 +140,11 @@ namespace PSA_Application
 
 			if (sender.Equals(TB_MPC_IpAddr)) mc.para.DIAG.ipAddr.description = TB_MPC_IpAddr.Text;
 			if (sender.Equals(TB_MPC_PORT)) mc.para.setting(mc.para.DIAG.portNum, out mc.para.DIAG.portNum);
-			if (sender.Equals(TB_MPC_NAME)) mc.para.DIAG.mpcName.description = TB_MPC_NAME.Text;
+            if (sender.Equals(TB_MPC_NAME))
+            {
+                mc.para.DIAG.mpcName.description = TB_MPC_NAME.Text;
+                mc.commMPC.mpcDomainName = mc.para.DIAG.mpcName.description;
+            }
 
 			bool r;
 			mc.para.write(out r);

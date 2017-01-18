@@ -362,7 +362,7 @@ namespace PSA_SystemLibrary
 		string UserName = "user";
 		string password = "2002";
 		// default mpc name은 'PROTEC-277207F4'로 되어 있다. 물론 이 값은 option에서 변경이 가능하다.
-		public string mpcDomainName = "\\\\" + mc.para.DIAG.mpcName.description;
+		public string mpcDomainName = mc.para.DIAG.mpcName.description;
 
 		public classLOTINFO LOTINFO = new classLOTINFO();
 		#endregion
@@ -371,7 +371,7 @@ namespace PSA_SystemLibrary
 		{
 			WorkData.receipeName = "";
 			sSharePath = "C:\\Data";
-			mpcDomainName = "\\\\" + mc.para.DIAG.mpcName.description;
+			mpcDomainName = mc.para.DIAG.mpcName.description;
 			mDeviceInfom.sRootPath = mc2.savePath + "\\data\\";
 			mDeviceInfom.DeviceNo = 0;
 			mDeviceInfom.sDeviceName = "0000";
@@ -1717,7 +1717,7 @@ namespace PSA_SystemLibrary
 		{
 			try
 			{
-				mpcServer = Network.LogonUser(UserName, password, mpcDomainName);
+				mpcServer = Network.LogonUser(UserName, password, "\\\\" + mpcDomainName);
 				result = true;
 			}
 			catch
@@ -1841,7 +1841,7 @@ namespace PSA_SystemLibrary
 
                 if (mc.para.ETC.preMachine.value == (int)PRE_MC.INSPECTION || mc.para.ETC.preMachine.value == (int)PRE_MC.DISPENSER) machineName = "\\tms\\TMS_ATC.ini";
                 else if (mc.para.ETC.preMachine.value == (int)PRE_MC.ATTACH) machineName = "\\tms\\TMS_POSTATC.ini";
-				filename1 = mpcDomainName + machineName;
+				filename1 = "\\\\" + mpcDomainName + machineName;
 				File.Copy(@tempfile, @filename1, true);
 
 				//logoutMPC(out rst);
@@ -1877,9 +1877,9 @@ namespace PSA_SystemLibrary
 			{
 				if ((mc.swcontrol.hwCheckSkip & 0x02) == 0)
 				{
-					if (mc.para.ETC.preMachine.value == (int)PRE_MC.INSPECTION) filename = mpcDomainName + "\\tms\\" + "TMS_PREISPT.ini";
-					else if(mc.para.ETC.preMachine.value == (int)PRE_MC.DISPENSER) filename = mpcDomainName + "\\tms\\" + "DP2.ini";
-                    else if (mc.para.ETC.preMachine.value == (int)PRE_MC.ATTACH) filename = mpcDomainName + "\\tms\\" + "TMS_ATC.ini";
+					if (mc.para.ETC.preMachine.value == (int)PRE_MC.INSPECTION) filename = "\\\\" + mpcDomainName + "\\tms\\" + "TMS_PREISPT.ini";
+                    else if (mc.para.ETC.preMachine.value == (int)PRE_MC.DISPENSER) filename = "\\\\" + mpcDomainName + "\\tms\\" + "DP2.ini";
+                    else if (mc.para.ETC.preMachine.value == (int)PRE_MC.ATTACH) filename = "\\\\" + mpcDomainName + "\\tms\\" + "TMS_ATC.ini";
 				}
 				else filename = "C:\\data\\" + "TMS_PREISPT_Local.ini";
 			}
