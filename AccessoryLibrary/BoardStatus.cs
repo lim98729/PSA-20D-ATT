@@ -218,8 +218,9 @@ namespace AccessoryLibrary
 
         private Graphics g;
         private Bitmap backBuffer;
-        private Pen blackPen = new Pen(Color.Black, 2);
-        private Pen redPen = new Pen(Color.Red, 2);
+        static float penSize = 2;
+        private Pen blackPen = new Pen(Color.Black, penSize);
+        private Pen redPen = new Pen(Color.Red, penSize);
         private Brush rtColor = new SolidBrush(Color.Gray);
        
         private Point startPoint;
@@ -230,6 +231,8 @@ namespace AccessoryLibrary
         private int padSizeY = 0;
         private int gapX = 0;
         private int gapY = 0;
+        private int gapX2 = 0;
+        private int gapY2 = 0;
         private int tempX = 0;
         private int tempY = 0;
         private BOARD_ZONE boardZone;
@@ -257,10 +260,21 @@ namespace AccessoryLibrary
             FrRr = _FrRr;
             boardZone = zone;
 
-            padSizeX = (this.Width - (countX + 1) * 3) / countX;
-            padSizeY = (this.Height - (countY + 1) * 3) / countY;
-            gapX = (this.Width - (countX - 1) * 3 - (padSizeX * countX)) / 2;
-            gapY = (this.Height - (countY - 1) * 3 - (padSizeY * countY)) / 2;
+            int ratioX = (int)Math.Ceiling(this.Width * 0.05);
+            int ratioY = (int)Math.Ceiling(this.Height * 0.05);
+            gapX = (int)(this.Width * 0.005) + (int)(penSize * 2);
+            gapY = (int)(this.Height * 0.005) + (int)(penSize * 2);
+
+            padSizeX = (this.Width - (ratioX * 2 + gapX * (countX - 1))) / countX;
+            padSizeY = (this.Height - (ratioY * 2 + gapY * (countY - 1))) / countY;
+
+            gapX2 = ratioX + ((this.Width - (ratioX * 2 + gapX * (countX - 1))) % countX) / 2;
+            gapY2 = ratioY + ((this.Height - (ratioY * 2 + gapY * (countY - 1))) % countY) / 2;
+            //padSizeY = (this.Height - countY * (int)(penSize * 2) - ratioY) / countY;
+            //gapX = (this.Width - ratioX - padSizeX * countX) / (countX + 1);
+            //gapY = (this.Height - ratioY - padSizeY * countY) / (countY + 1);
+            //gapX2 = ((this.Width - ratioX - padSizeX * countX) % (countX + 1) + ratioX) / 2;
+            //gapY2 = ((this.Height - ratioY - padSizeY * countY) % (countY + 1) + ratioY) / 2;
         }
 
         private void SetStatus(Rectangle rect)
@@ -272,13 +286,13 @@ namespace AccessoryLibrary
             {
                 for (int idX = 0; idX < countX; idX++)
                 {
-                    posX = (padSizeX + 3) * idX + gapX;
-                    posY = (padSizeY + 3) * idY + gapY;
+                    posX = (padSizeX + (int)(penSize * 2)) * idX + gapX * idX + gapX2;
+                    posY = (padSizeY + (int)(penSize * 2)) * idY + gapY * idY + gapY2;
 
                     if (posX <= rect.X + rect.Width
-                        && (padSizeX + 3) * (idX + 1) + gapX >= rect.X
+                        && (padSizeX + (int)(penSize * 2)) * (idX + 1) + gapX + gapX2 >= rect.X
                         && posY <= rect.Y + rect.Height
-                        && (padSizeY + 3) * (idY + 1) + gapY >= rect.Y)
+                        && (padSizeY + (int)(penSize * 2)) * (idY + 1) + gapY + gapY2 >= rect.Y)
                     {
                         if (FrRr == McTypeFrRr.FRONT)
                         {
@@ -313,13 +327,20 @@ namespace AccessoryLibrary
 
         public void DrawRect()
         {
+            int startX, startY;
+            startX = (padSizeX * countX + gapX * (countX - 1)) / 2;
+            startY = (padSizeY * countY + gapY * (countY - 1)) / 2;
+
             // draw rectangle to screen.
             for (int idY = 0; idY < countY; idY++)
             {
                 for (int idX = 0; idX < countX; idX++)
                 {
-                    tempX = (padSizeX + 3) * idX + gapX;
-                    tempY = (padSizeY + 3) * idY + gapY;
+                    //tempX = (padSizeX + (int)(penSize * 2)) * idX + gapX * idX + gapX2;
+                    //tempY = (padSizeY + (int)(penSize * 2)) * idY + gapY * idY + gapY2;
+                    tempX = this.Width / 2 - startX + (padSizeX + gapX) * idX;
+                    tempY = this.Height / 2 - startY + (padSizeY + gapY) * idY;
+
 
                     g.DrawRectangle(blackPen, tempX, tempY, padSizeX, padSizeY);
                     if (FrRr == McTypeFrRr.FRONT) FillRect(idX, countY - 1 - idY, tempX, tempY);
