@@ -621,16 +621,7 @@ namespace PSA_Application
                     LB_Model_Created.Text = LB_Model_Created_Text;
                     LB_SelectModel.Text = LB_SelectModel_Text;
                 }
-				if (mc.para.ULC.model.isCreate.value == (int)BOOL.TRUE)
-				{
-					LB_Model_Created.BackColor = Color.Transparent;
-					LB_Model_Created.Text = "Model Created";
-				}
-				else
-				{
-					LB_Model_Created.BackColor = Color.Red;
-					LB_Model_Created.Text = "Model Uncreated";
-				}
+				
 				// user parameter -> camera parameter
 				mc.ulc.cam.rectangleCenter.chamferFindFlag = (int)mc.para.ULC.chamferuse.value;
 				mc.ulc.cam.rectangleCenter.chamferFindIndex = (int)mc.para.ULC.chamferindex.value;

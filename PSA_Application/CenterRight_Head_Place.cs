@@ -37,7 +37,6 @@ namespace PSA_Application
 		}
 		#endregion
 		RetValue ret;
-		para_member pressDisplay;
 
 		private void Control_Click(object sender, EventArgs e)
 		{

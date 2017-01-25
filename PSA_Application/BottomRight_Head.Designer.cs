@@ -51,9 +51,9 @@
             this.LB_IN_VAC = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
             this.LB_IN_DOUBLE = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
+            this.TS_IN_ATC_OPEN = new System.Windows.Forms.ToolStripSeparator();
             this.LB_IN_ATC_OPEN = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
+            this.TS_IN_ATC_CLOSE = new System.Windows.Forms.ToolStripSeparator();
             this.LB_IN_ATC_CLOSE = new System.Windows.Forms.ToolStripLabel();
             this.TS_OUT = new System.Windows.Forms.ToolStrip();
             this.LB_OUT = new System.Windows.Forms.ToolStripLabel();
@@ -208,9 +208,9 @@
             this.LB_IN_VAC,
             this.toolStripSeparator14,
             this.LB_IN_DOUBLE,
-            this.toolStripSeparator15,
+            this.TS_IN_ATC_OPEN,
             this.LB_IN_ATC_OPEN,
-            this.toolStripSeparator16,
+            this.TS_IN_ATC_CLOSE,
             this.LB_IN_ATC_CLOSE});
             this.TS_IN.Name = "TS_IN";
             // 
@@ -263,8 +263,8 @@
             // 
             // toolStripSeparator15
             // 
-            resources.ApplyResources(this.toolStripSeparator15, "toolStripSeparator15");
-            this.toolStripSeparator15.Name = "toolStripSeparator15";
+            resources.ApplyResources(this.TS_IN_ATC_OPEN, "TS_IN_ATC_OPEN");
+            this.TS_IN_ATC_OPEN.Name = "TS_IN_ATC_OPEN";
             // 
             // LB_IN_ATC_OPEN
             // 
@@ -274,8 +274,8 @@
             // 
             // toolStripSeparator16
             // 
-            resources.ApplyResources(this.toolStripSeparator16, "toolStripSeparator16");
-            this.toolStripSeparator16.Name = "toolStripSeparator16";
+            resources.ApplyResources(this.TS_IN_ATC_CLOSE, "TS_IN_ATC_CLOSE");
+            this.TS_IN_ATC_CLOSE.Name = "TS_IN_ATC_CLOSE";
             // 
             // LB_IN_ATC_CLOSE
             // 
@@ -787,9 +787,9 @@
         private System.Windows.Forms.ToolStripLabel LB_IN_VAC;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
         private System.Windows.Forms.ToolStripLabel LB_IN_DOUBLE;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
+        private System.Windows.Forms.ToolStripSeparator TS_IN_ATC_OPEN;
         private System.Windows.Forms.ToolStripLabel LB_IN_ATC_OPEN;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
+        private System.Windows.Forms.ToolStripSeparator TS_IN_ATC_CLOSE;
         private System.Windows.Forms.ToolStripLabel LB_IN_ATC_CLOSE;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator18;

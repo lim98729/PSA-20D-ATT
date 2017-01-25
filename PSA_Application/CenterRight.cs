@@ -276,7 +276,6 @@ namespace PSA_Application
         }
         #endregion
         RetValue ret;
-        bool paraChange;
 
 		private void label_Click(object sender, EventArgs e)
 		{

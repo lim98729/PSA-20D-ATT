@@ -34,7 +34,6 @@ namespace PSA_Application
         static para_member[,] placeOffsetResultZ = new para_member[50, 20];
 
 
-        bool valueChanged = false;
         static bool threadAbortFlag;
         static bool reqThreadStop = true;
         static double laserResult = 0;
@@ -427,7 +426,6 @@ namespace PSA_Application
 			refresh();
 		}
 
-		double tmpPlaceOffsetResultX, tmpPlaceOffsetResultY, tmpPlaceOffsetResultZ;
 		private void UpdateTextBox(object sender, EventArgs e)
         {
 			if(LB_LaserResult.Text != laserResult.ToString()) LB_LaserResult.Text = laserResult.ToString();

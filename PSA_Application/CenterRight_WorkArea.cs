@@ -64,12 +64,9 @@ namespace PSA_Application
 
         #endregion EVENT용 delegate 함수
 
-        private RetValue ret;
         private System.Windows.Forms.Button[,] btnPad;
-        private string section = "", key = "", filePath = "", filename = "", msg = "";
         private IniFile inifile = new IniFile();
         private int halfPos = 0;
-        private bool selectedAll = false;
         private int row, col;
 
 		private void CenterRight_WorkArea_Load(object sender, EventArgs e)

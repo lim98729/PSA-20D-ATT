@@ -54,12 +54,12 @@ namespace PSA_Application
 
 		Thread threadForceCalibration;
 
-        static parameterForceFactor tempForce = new parameterForceFactor();
+        parameterForceFactor tempForce;
 		
 		static bool threadAbortFlag;
 		bool calDataChanged;
 
-		static void forceCalibraion()
+		void forceCalibraion()
 		{
 			try
 			{
@@ -143,7 +143,7 @@ namespace PSA_Application
 							retT.d2 = mc.AIN.HeadLoadcell();
 							strainGaugeResult[i] = retT.d2;
 
-							mc.log.debug.write(mc.log.CODE.TRACE, "Volt : " + tempForce.A[j].ToString() + ", VPPM : " + Math.Round(vppmResult[i], 3).ToString() + ", LoadC : " + Math.Round(strainGaugeResult[i], 3).ToString() + ", Count : " + i.ToString() + ", Force : " + autoCheckResult[i].ToString());
+							mc.log.debug.write(mc.log.CODE.TRACE, "Volt : " + tempForce.A[j].value.ToString() + ", VPPM : " + Math.Round(vppmResult[i], 3).ToString() + ", LoadC : " + Math.Round(strainGaugeResult[i], 3).ToString() + ", Count : " + i.ToString() + ", Force : " + autoCheckResult[i].ToString());
 						}
 
 						// loadcell force value 생성
@@ -221,9 +221,11 @@ namespace PSA_Application
 						//mc.log.debug.write(mc.log.CODE.TRACE, "Max[" + maxIndexV.ToString() + "] : " + maxValV.ToString() + ", Min[" + minIndexV.ToString() + "] : " + minValV.ToString() + ", Mean : " + meanVal.ToString() + " [kg], " + Math.Round(meanValV, 3).ToString() + "[V]");
 
 						//mc.para.CAL.force.B[i].value
-						tempForce.B[j].value = Math.Round(meanVal, 3);
-						tempForce.C[j].value = Math.Round(meanValV, 3);
-						tempForce.D[j].value = Math.Round(meanValVSG, 3);
+                        tempForce.B[j].value = Math.Round(meanVal, 3);          // Bottom Loadcell
+						tempForce.C[j].value = Math.Round(meanValV, 3);         // VPPM
+						tempForce.D[j].value = Math.Round(meanValVSG, 3);       // Head Loadcell
+
+                        refresh();
 					}
 					posZ = mc.hd.tool.tPos.z.XY_MOVING;
 					mc.hd.tool.jogMove(posZ, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); break; }
@@ -681,68 +683,68 @@ namespace PSA_Application
 					BT_STOP.Enabled = false;
 					//BT_AutoCalibration.Enabled = true;
 				}
-				TB_Force_FactorX0.Text = tempForce.A[0].ToString();
-				TB_Force_FactorX1.Text = tempForce.A[1].ToString();
-				TB_Force_FactorX2.Text = tempForce.A[2].ToString();
-				TB_Force_FactorX3.Text = tempForce.A[3].ToString();
-				TB_Force_FactorX4.Text = tempForce.A[4].ToString();
-				TB_Force_FactorX5.Text = tempForce.A[5].ToString();
-				TB_Force_FactorX6.Text = tempForce.A[6].ToString();
-				TB_Force_FactorX7.Text = tempForce.A[7].ToString();
-				TB_Force_FactorX8.Text = tempForce.A[8].ToString();
-				TB_Force_FactorX9.Text = tempForce.A[9].ToString();
-				TB_Force_FactorX10.Text = tempForce.A[10].ToString();
-				TB_Force_FactorX11.Text = tempForce.A[11].ToString();
-				TB_Force_FactorX12.Text = tempForce.A[12].ToString();
-				TB_Force_FactorX13.Text = tempForce.A[13].ToString();
-				TB_Force_FactorX14.Text = tempForce.A[14].ToString();
-				TB_Force_FactorX15.Text = tempForce.A[15].ToString();
-				TB_Force_FactorX16.Text = tempForce.A[16].ToString();
-				TB_Force_FactorX17.Text = tempForce.A[17].ToString();
-				TB_Force_FactorX18.Text = tempForce.A[18].ToString();
-				TB_Force_FactorX19.Text = tempForce.A[19].ToString();
+				TB_Force_FactorX0.Text = tempForce.A[0].value.ToString();
+				TB_Force_FactorX1.Text = tempForce.A[1].value.ToString();
+				TB_Force_FactorX2.Text = tempForce.A[2].value.ToString();
+				TB_Force_FactorX3.Text = tempForce.A[3].value.ToString();
+				TB_Force_FactorX4.Text = tempForce.A[4].value.ToString();
+				TB_Force_FactorX5.Text = tempForce.A[5].value.ToString();
+				TB_Force_FactorX6.Text = tempForce.A[6].value.ToString();
+				TB_Force_FactorX7.Text = tempForce.A[7].value.ToString();
+				TB_Force_FactorX8.Text = tempForce.A[8].value.ToString();
+				TB_Force_FactorX9.Text = tempForce.A[9].value.ToString();
+				TB_Force_FactorX10.Text = tempForce.A[10].value.ToString();
+				TB_Force_FactorX11.Text = tempForce.A[11].value.ToString();
+				TB_Force_FactorX12.Text = tempForce.A[12].value.ToString();
+				TB_Force_FactorX13.Text = tempForce.A[13].value.ToString();
+				TB_Force_FactorX14.Text = tempForce.A[14].value.ToString();
+				TB_Force_FactorX15.Text = tempForce.A[15].value.ToString();
+				TB_Force_FactorX16.Text = tempForce.A[16].value.ToString();
+				TB_Force_FactorX17.Text = tempForce.A[17].value.ToString();
+				TB_Force_FactorX18.Text = tempForce.A[18].value.ToString();
+				TB_Force_FactorX19.Text = tempForce.A[19].value.ToString();
 
-				TB_Force_FactorY0.Text = tempForce.B[0].ToString();
-				TB_Force_FactorY1.Text = tempForce.B[1].ToString();
-				TB_Force_FactorY2.Text = tempForce.B[2].ToString();
-				TB_Force_FactorY3.Text = tempForce.B[3].ToString();
-				TB_Force_FactorY4.Text = tempForce.B[4].ToString();
-				TB_Force_FactorY5.Text = tempForce.B[5].ToString();
-				TB_Force_FactorY6.Text = tempForce.B[6].ToString();
-				TB_Force_FactorY7.Text = tempForce.B[7].ToString();
-				TB_Force_FactorY8.Text = tempForce.B[8].ToString();
-				TB_Force_FactorY9.Text = tempForce.B[9].ToString();
-				TB_Force_FactorY10.Text = tempForce.B[10].ToString();
-				TB_Force_FactorY11.Text = tempForce.B[11].ToString();
-				TB_Force_FactorY12.Text = tempForce.B[12].ToString();
-				TB_Force_FactorY13.Text = tempForce.B[13].ToString();
-				TB_Force_FactorY14.Text = tempForce.B[14].ToString();
-				TB_Force_FactorY15.Text = tempForce.B[15].ToString();
-				TB_Force_FactorY16.Text = tempForce.B[16].ToString();
-				TB_Force_FactorY17.Text = tempForce.B[17].ToString();
-				TB_Force_FactorY18.Text = tempForce.B[18].ToString();
-				TB_Force_FactorY19.Text = tempForce.B[19].ToString();
+				TB_Force_FactorY0.Text = tempForce.B[0].value.ToString();
+				TB_Force_FactorY1.Text = tempForce.B[1].value.ToString();
+				TB_Force_FactorY2.Text = tempForce.B[2].value.ToString();
+				TB_Force_FactorY3.Text = tempForce.B[3].value.ToString();
+				TB_Force_FactorY4.Text = tempForce.B[4].value.ToString();
+				TB_Force_FactorY5.Text = tempForce.B[5].value.ToString();
+				TB_Force_FactorY6.Text = tempForce.B[6].value.ToString();
+				TB_Force_FactorY7.Text = tempForce.B[7].value.ToString();
+				TB_Force_FactorY8.Text = tempForce.B[8].value.ToString();
+				TB_Force_FactorY9.Text = tempForce.B[9].value.ToString();
+				TB_Force_FactorY10.Text = tempForce.B[10].value.ToString();
+				TB_Force_FactorY11.Text = tempForce.B[11].value.ToString();
+				TB_Force_FactorY12.Text = tempForce.B[12].value.ToString();
+				TB_Force_FactorY13.Text = tempForce.B[13].value.ToString();
+				TB_Force_FactorY14.Text = tempForce.B[14].value.ToString();
+				TB_Force_FactorY15.Text = tempForce.B[15].value.ToString();
+				TB_Force_FactorY16.Text = tempForce.B[16].value.ToString();
+				TB_Force_FactorY17.Text = tempForce.B[17].value.ToString();
+				TB_Force_FactorY18.Text = tempForce.B[18].value.ToString();
+				TB_Force_FactorY19.Text = tempForce.B[19].value.ToString();
 
-				TB_Force_FactorZ0.Text = tempForce.D[0].ToString();
-				TB_Force_FactorZ1.Text = tempForce.D[1].ToString();
-				TB_Force_FactorZ2.Text = tempForce.D[2].ToString();
-				TB_Force_FactorZ3.Text = tempForce.D[3].ToString();
-				TB_Force_FactorZ4.Text = tempForce.D[4].ToString();
-				TB_Force_FactorZ5.Text = tempForce.D[5].ToString();
-				TB_Force_FactorZ6.Text = tempForce.D[6].ToString();
-				TB_Force_FactorZ7.Text = tempForce.D[7].ToString();
-				TB_Force_FactorZ8.Text = tempForce.D[8].ToString();
-				TB_Force_FactorZ9.Text = tempForce.D[9].ToString();
-				TB_Force_FactorZ10.Text = tempForce.D[10].ToString();
-				TB_Force_FactorZ11.Text = tempForce.D[11].ToString();
-				TB_Force_FactorZ12.Text = tempForce.D[12].ToString();
-				TB_Force_FactorZ13.Text = tempForce.D[13].ToString();
-				TB_Force_FactorZ14.Text = tempForce.D[14].ToString();
-				TB_Force_FactorZ15.Text = tempForce.D[15].ToString();
-				TB_Force_FactorZ16.Text = tempForce.D[16].ToString();
-				TB_Force_FactorZ17.Text = tempForce.D[17].ToString();
-				TB_Force_FactorZ18.Text = tempForce.D[18].ToString();
-				TB_Force_FactorZ19.Text = tempForce.D[19].ToString();
+				TB_Force_FactorZ0.Text = tempForce.D[0].value.ToString();
+				TB_Force_FactorZ1.Text = tempForce.D[1].value.ToString();
+				TB_Force_FactorZ2.Text = tempForce.D[2].value.ToString();
+				TB_Force_FactorZ3.Text = tempForce.D[3].value.ToString();
+				TB_Force_FactorZ4.Text = tempForce.D[4].value.ToString();
+				TB_Force_FactorZ5.Text = tempForce.D[5].value.ToString();
+				TB_Force_FactorZ6.Text = tempForce.D[6].value.ToString();
+				TB_Force_FactorZ7.Text = tempForce.D[7].value.ToString();
+				TB_Force_FactorZ8.Text = tempForce.D[8].value.ToString();
+				TB_Force_FactorZ9.Text = tempForce.D[9].value.ToString();
+				TB_Force_FactorZ10.Text = tempForce.D[10].value.ToString();
+				TB_Force_FactorZ11.Text = tempForce.D[11].value.ToString();
+				TB_Force_FactorZ12.Text = tempForce.D[12].value.ToString();
+				TB_Force_FactorZ13.Text = tempForce.D[13].value.ToString();
+				TB_Force_FactorZ14.Text = tempForce.D[14].value.ToString();
+				TB_Force_FactorZ15.Text = tempForce.D[15].value.ToString();
+				TB_Force_FactorZ16.Text = tempForce.D[16].value.ToString();
+				TB_Force_FactorZ17.Text = tempForce.D[17].value.ToString();
+				TB_Force_FactorZ18.Text = tempForce.D[18].value.ToString();
+				TB_Force_FactorZ19.Text = tempForce.D[19].value.ToString();
 
 				TB_Force_TouchOffset.Text = mc.para.CAL.force.touchOffset.value.ToString();
 
@@ -774,13 +776,49 @@ namespace PSA_Application
 			BT_AutoCalibration.Enabled = true;
 			calDataChanged = false;
 
-			for (int i = 0; i < 20; i++)
-			{
-				tempForce.A[i].value = mc.para.CAL.force.A[i].value;
-				tempForce.B[i].value = mc.para.CAL.force.B[i].value;
-				tempForce.C[i].value = mc.para.CAL.force.C[i].value;
-				tempForce.D[i].value = mc.para.CAL.force.D[i].value;
-			}
+            tempForce = new parameterForceFactor();
+
+            // 아래처럼 하면 포인터로 복사되는듯..
+            tempForce.A = (para_member[])mc.para.CAL.force.A.Clone();
+            tempForce.B = (para_member[])mc.para.CAL.force.B.Clone();
+            tempForce.C = (para_member[])mc.para.CAL.force.C.Clone();
+            tempForce.D = (para_member[])mc.para.CAL.force.D.Clone();
+
+            //double A = 0;
+            //double B = 0;
+            //double C = 0;
+            //double D = 0;
+
+            //for (int i = 0; i < 20; i++)
+            //{
+            //    A = mc.para.CAL.force.A[i].value;
+            //    B = mc.para.CAL.force.B[i].value;
+            //    C = mc.para.CAL.force.C[i].value;
+            //    D = mc.para.CAL.force.D[i].value;
+            //}
+
+            //for (int i = 0; i < 20; i++)
+            //{
+            //    tempForce.A[i].value = A;
+            //    tempForce.A[i].description = mc.para.CAL.force.A[i].description;
+            //    tempForce.A[i].lowerLimit = mc.para.CAL.force.A[i].lowerLimit;
+            //    tempForce.A[i].upperLimit = mc.para.CAL.force.A[i].upperLimit;
+
+            //    tempForce.B[i].value = B;
+            //    tempForce.B[i].description = mc.para.CAL.force.B[i].description;
+            //    tempForce.B[i].lowerLimit = mc.para.CAL.force.B[i].lowerLimit;
+            //    tempForce.B[i].upperLimit = mc.para.CAL.force.B[i].upperLimit;
+
+            //    tempForce.C[i].value = C;
+            //    tempForce.C[i].description = mc.para.CAL.force.C[i].description;
+            //    tempForce.C[i].lowerLimit = mc.para.CAL.force.C[i].lowerLimit;
+            //    tempForce.C[i].upperLimit = mc.para.CAL.force.C[i].upperLimit;
+
+            //    tempForce.D[i].value = D;
+            //    tempForce.D[i].description = mc.para.CAL.force.D[i].description;
+            //    tempForce.D[i].lowerLimit = mc.para.CAL.force.D[i].lowerLimit;
+            //    tempForce.D[i].upperLimit = mc.para.CAL.force.D[i].upperLimit;
+            //}
 
 			refresh();
 		}
@@ -951,6 +989,8 @@ namespace PSA_Application
                 for (int i = 0; i < 20; i++)
                 {
                     tempForce.A[i].value = Math.Round(tempForce.A[0].value + step * i, 2);
+                    mc.log.debug.write(mc.log.CODE.INFO, "temp A : " + tempForce.A[i].value.ToString());
+                    mc.log.debug.write(mc.log.CODE.INFO, "Original A : " + mc.para.CAL.force.A[i].value.ToString());
                 }
             }
             refresh();

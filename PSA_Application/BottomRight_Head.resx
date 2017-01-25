@@ -121,8 +121,8 @@
     <value>BT_PositionSelect_Ref1_2</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="CbB_PadIX_Separator.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
+  <data name="BT_OUT_BLOW.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
   </data>
   <data name="&gt;&gt;LB_IN_LOAD.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -130,18 +130,24 @@
   <data name="&gt;&gt;TS_Manual.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="BT_PositionSelect_Pad.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial Narrow, 18pt, style=Bold</value>
+  <data name="BT_Function_ATC.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAJMSURBVEhL7ZRdSFRRFIXXnUqdLCsRK/Mh8M2IynoIrCjq
+        QcsyDaIhxoiakjFzRkKo7IfEtMJ+oAgpplQoCDToQTQfkiFDRyRNFNQIoh+I6Cb9DRnMal3roZfKmfGt
+        DnxwYJ+z177r7LuB/ysKB4wo7v7laumIH0UdJUhITdTJqZMuZBwZMqdXvCK8j/vgqN8mgZliyuQJSWBn
+        8xfi1BuivCqEos5GrPZkSMAuorbOgGfIvDFCovIdceY9USGhop4PcN49jcSVCyQyLRqhcYGqJ2RO02ei
+        epSo+Uhc0P7oc2KffwSbr+2SwKxIbZPAoHkoQJ7rDUnASv6JuBQkrowR57X3nAjB0daK5aWrIrHNQPGA
+        ub+D9D4i85vHmOL7yiTfNyb4QozzkTH1pP2sSVuuP4h1tTUSmRtOtxlwB0zHA7KgnXQ3j3LZ5ddcVPOC
+        aZXPmHp8mMll/ZxRGKAt594YVhy+peRZYvZEu8zA7oC56T55rFsWeYaIg4PEgX7C3Uu4ugmnLNpQ24X4
+        +TeVtFpsDFOgy1zbQubdfvsjecmAuqiP2NtFbG16idTMBiWsFV6xRswLzyLnQ3O77IktG1ZyCRT2ELnt
+        QSx1NcKIsao+KbaINBEvbBO1xzpnIL/NzKhT97hVdYHsWH/RD3tSnWLWgzrFYjEnnKp/LcBAXosZ5+ok
+        shueInlJvYJXRbHI/GlHzHghEa+sO71I33MdhmH5XC6yxUIxKaPCqitF7BDWoEsXEf+1v/vIWAWShTWu
+        o5o7f3IxCo8jfpx/8eJ39SfvIAKG+B0AAAAASUVORK5CYII=
+</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="CbB_PadIX.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;BT_OUT_ATC.Name" xml:space="preserve">
-    <value>BT_OUT_ATC</value>
-  </data>
-  <data name="&gt;&gt;BT_Manual_StepCycle.Name" xml:space="preserve">
-    <value>BT_Manual_StepCycle</value>
+  <data name="BT_Function_Touchprobe.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 32</value>
   </data>
   <data name="BT_PositionSelect_ULC.Size" type="System.Drawing.Size, System.Drawing">
     <value>218, 34</value>
@@ -152,17 +158,21 @@
   <data name="&gt;&gt;BT_PositionSelect_Pick1.Name" xml:space="preserve">
     <value>BT_PositionSelect_Pick1</value>
   </data>
-  <data name="BT_PositionSelect_Pick2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 34</value>
-  </data>
   <data name="BT_Function_ATC.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 32</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;BT_Manual_PickupCycle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="BT_PositionSelect.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <data name="LB_IN_LOAD2.Text" xml:space="preserve">
+    <value>PRESS HIGH</value>
   </data>
   <data name="&gt;&gt;LB_IN.Name" xml:space="preserve">
     <value>LB_IN</value>
@@ -176,11 +186,8 @@
   <data name="BT_PositionSelect_Pick5.Text" xml:space="preserve">
     <value>PICK5</value>
   </data>
-  <data name="&gt;&gt;BT_Position_ToolMove.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="TS_Manual.Size" type="System.Drawing.Size, System.Drawing">
-    <value>596, 35</value>
+  <data name="LB_IN_DOUBLE.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
   <data name="BT_Function_Touchprobe.Text" xml:space="preserve">
     <value>TouchProbe</value>
@@ -194,17 +201,20 @@
   <data name="&gt;&gt;BT_PositionSelect_Ref0.Name" xml:space="preserve">
     <value>BT_PositionSelect_Ref0</value>
   </data>
-  <data name="&gt;&gt;LB_.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="&gt;&gt;BT_PositionSelect_ATC3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;LB_Manual.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
   </data>
   <data name="BT_PositionSelect_Ref1_1.Text" xml:space="preserve">
     <value>REF1_1</value>
   </data>
-  <data name="BT_Function_Laser.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="&gt;&gt;toolStripSeparator5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="LB_IN_LOAD2.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 32</value>
@@ -218,8 +228,8 @@
   <data name="toolStripSeparator11.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;CbB_PadIY.Name" xml:space="preserve">
-    <value>CbB_PadIY</value>
+  <data name="LB_IN_LOAD.Text" xml:space="preserve">
+    <value>PRESS LOW</value>
   </data>
   <data name="&gt;&gt;CbB_PadIY.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -227,15 +237,20 @@
   <data name="TS_Function.TabIndex" type="System.Int32, mscorlib">
     <value>77</value>
   </data>
-  <data name="&gt;&gt;BT_Manual_SingleCycle.Name" xml:space="preserve">
-    <value>BT_Manual_SingleCycle</value>
+  <data name="TS_IN_ATC_CLOSE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="TS_Function.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>None</value>
+  <data name="BT_PositionSelect_Pad.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial Narrow, 18pt, style=Bold</value>
+  </data>
+  <data name="&gt;&gt;BT_PositionSelect_Pick3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator7.Name" xml:space="preserve">
     <value>toolStripSeparator7</value>
+  </data>
+  <data name="toolStripSeparator13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
   </data>
   <data name="LB_Function.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt, style=Bold</value>
@@ -264,24 +279,18 @@
   <data name="BT_Function_Loadcell.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADr0AAA69AUf7kK0AAAJMSURBVEhL7ZRbSFRRGIXXsfKSZSViZfMQ+GZEZT0EVhT1
-        oGWZBpHEGFGWjJmjhFDZhcS0wi5QxFBMqVAQaNCDaD4kQ4aOSJoojBNBdIGITtJNMpjVOmNPQTHO6JsL
-        Ps4+e//7/w/r7P1jWpHI+POcApX7PSjuLEWCLVFvM8cnJ1HGCZ85u+odUfa8H/kNuzQ1V8wILk6KVGBv
-        yw/i3AeisiaA4q4mrHemayVORGydAafPvOMnUf2JuPCZqFKh4t4vsD88j8S1SxQzKxgXpoIFal6Q2c3f
-        idoRou4rcUXjk6+JQx4/tt/ap7h5IizbVGDIPOYlL/UFVMBK/o24NkrcGCMua+w8E0B+extWl69T/IRt
-        M1AyaB7uJMuekXktY0xx/2SS+xcT3AHGusnoBjLuosmoHM8oNrnqtGehCPm0GXB4zfwnZEEH6WgZ4arr
-        77ms7g1Tq1/RdnqYyRUDnFPkZVT2ozGsOX5PezLF/ODuEGRgv9fc9pg81SOLnD7i6BBxZIBw9BGFPYRd
-        Fm1xdSN+8V3F14qtYiIFus2NrWTu/Y/jyUsHdYr6iYPdxM7mt7BlNCrOJcrEBrFITMAi+1Nzt+yJqRhW
-        chUo6iVyOkaxsrAJRrT11WfFDpEq4kWUCFkG8trN9HqdHoe+ukB2bL7qQVxSvdasH2oXy8UCEVYbMZDb
-        asYWdhFZjS+RvKJBczdFicgQlh3RIoIbnfmgD2kHbsMwLJ8rRZZYKialVVhKEXuE1ejSRNi39l+KEcnC
-        atcR9Z3/aUqSTusvAb8B9SfvILiochkAAAAASUVORK5CYII=
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAJMSURBVEhL7ZRdSFRRFIXXnUqdLCsRK/Mh8M2IynoIrCjq
+        QcsyDaIhxoiakjFzRkKo7IfEtMJ+oAgpplQoCDToQTQfkiFDRyRNFNQIoh+I6Cb9DRnMal3roZfKmfGt
+        DnxwYJ+z177r7LuB/ysKB4wo7v7laumIH0UdJUhITdTJqZMuZBwZMqdXvCK8j/vgqN8mgZliyuQJSWBn
+        8xfi1BuivCqEos5GrPZkSMAuorbOgGfIvDFCovIdceY9USGhop4PcN49jcSVCyQyLRqhcYGqJ2RO02ei
+        epSo+Uhc0P7oc2KffwSbr+2SwKxIbZPAoHkoQJ7rDUnASv6JuBQkrowR57X3nAjB0daK5aWrIrHNQPGA
+        ub+D9D4i85vHmOL7yiTfNyb4QozzkTH1pP2sSVuuP4h1tTUSmRtOtxlwB0zHA7KgnXQ3j3LZ5ddcVPOC
+        aZXPmHp8mMll/ZxRGKAt594YVhy+peRZYvZEu8zA7oC56T55rFsWeYaIg4PEgX7C3Uu4ugmnLNpQ24X4
+        +TeVtFpsDFOgy1zbQubdfvsjecmAuqiP2NtFbG16idTMBiWsFV6xRswLzyLnQ3O77IktG1ZyCRT2ELnt
+        QSx1NcKIsao+KbaINBEvbBO1xzpnIL/NzKhT97hVdYHsWH/RD3tSnWLWgzrFYjEnnKp/LcBAXosZ5+ok
+        shueInlJvYJXRbHI/GlHzHghEa+sO71I33MdhmH5XC6yxUIxKaPCqitF7BDWoEsXEf+1v/vIWAWShTWu
+        o5o7f3IxCo8jfpx/8eJ39SfvIAKG+B0AAAAASUVORK5CYII=
 </value>
-  </data>
-  <data name="&gt;&gt;BT_PositionSelect_ATC4.Name" xml:space="preserve">
-    <value>BT_PositionSelect_ATC4</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
-    <value>toolStripSeparator2</value>
   </data>
   <data name="CbB_PadIY.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial Narrow, 20.25pt, style=Bold</value>
@@ -313,32 +322,29 @@
   <data name="BT_Position_ToolMove.Text" xml:space="preserve">
     <value>Tool</value>
   </data>
-  <data name="&gt;&gt;BT_PositionSelect_ATC.Name" xml:space="preserve">
-    <value>BT_PositionSelect_ATC</value>
-  </data>
   <data name="&gt;&gt;BT_Position_CameraMove.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="BT_Function_Touchprobe.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 32</value>
   </data>
   <data name="BT_OUT_LASER.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
+        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
 </value>
+  </data>
+  <data name="LB_Function.Text" xml:space="preserve">
+    <value>추가 기능</value>
   </data>
   <data name="TS_IN.Text" xml:space="preserve">
     <value>toolStrip11</value>
@@ -349,8 +355,8 @@
   <data name="TS_IN.TabIndex" type="System.Int32, mscorlib">
     <value>76</value>
   </data>
-  <data name="TS_Manual.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9pt</value>
+  <data name="LB_IN_ATC_OPEN.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;BT_PositionSelect_PadC3.Name" xml:space="preserve">
     <value>BT_PositionSelect_PadC3</value>
@@ -358,55 +364,23 @@
   <data name="CbB_PadIX.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial Narrow, 20.25pt, style=Bold</value>
   </data>
-  <data name="&gt;&gt;BT_PositionSelect_Ref.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="BT_OUT_LASER.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
-    <value>toolStripSeparator1</value>
+  <data name="LB_OUT.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="BT_Manual_SingleCycle.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADr0AAA69AUf7kK0AAAJMSURBVEhL7ZRbSFRRGIXXsfKSZSViZfMQ+GZEZT0EVhT1
-        oGWZBpHEGFGWjJmjhFDZhcS0wi5QxFBMqVAQaNCDaD4kQ4aOSJoojBNBdIGITtJNMpjVOmNPQTHO6JsL
-        Ps4+e//7/w/r7P1jWpHI+POcApX7PSjuLEWCLVFvM8cnJ1HGCZ85u+odUfa8H/kNuzQ1V8wILk6KVGBv
-        yw/i3AeisiaA4q4mrHemayVORGydAafPvOMnUf2JuPCZqFKh4t4vsD88j8S1SxQzKxgXpoIFal6Q2c3f
-        idoRou4rcUXjk6+JQx4/tt/ap7h5IizbVGDIPOYlL/UFVMBK/o24NkrcGCMua+w8E0B+extWl69T/IRt
-        M1AyaB7uJMuekXktY0xx/2SS+xcT3AHGusnoBjLuosmoHM8oNrnqtGehCPm0GXB4zfwnZEEH6WgZ4arr
-        77ms7g1Tq1/RdnqYyRUDnFPkZVT2ozGsOX5PezLF/ODuEGRgv9fc9pg81SOLnD7i6BBxZIBw9BGFPYRd
-        Fm1xdSN+8V3F14qtYiIFus2NrWTu/Y/jyUsHdYr6iYPdxM7mt7BlNCrOJcrEBrFITMAi+1Nzt+yJqRhW
-        chUo6iVyOkaxsrAJRrT11WfFDpEq4kWUCFkG8trN9HqdHoe+ukB2bL7qQVxSvdasH2oXy8UCEVYbMZDb
-        asYWdhFZjS+RvKJBczdFicgQlh3RIoIbnfmgD2kHbsMwLJ8rRZZYKialVVhKEXuE1ejSRNi39l+KEcnC
-        atcR9Z3/aUqSTusvAb8B9SfvILiochkAAAAASUVORK5CYII=
-</value>
+  <data name="&gt;&gt;BT_PositionSelect_ATC4.Name" xml:space="preserve">
+    <value>BT_PositionSelect_ATC4</value>
   </data>
   <data name="toolStripButton1.Text" xml:space="preserve">
     <value>Laser</value>
-  </data>
-  <data name="BT_PositionSelect_ATC4.Text" xml:space="preserve">
-    <value>ATC4</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator14.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="LB_IN_VAC.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
-  </data>
-  <data name="BT_Function_ATC.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADr0AAA69AUf7kK0AAAJMSURBVEhL7ZRbSFRRGIXXsfKSZSViZfMQ+GZEZT0EVhT1
-        oGWZBpHEGFGWjJmjhFDZhcS0wi5QxFBMqVAQaNCDaD4kQ4aOSJoojBNBdIGITtJNMpjVOmNPQTHO6JsL
-        Ps4+e//7/w/r7P1jWpHI+POcApX7PSjuLEWCLVFvM8cnJ1HGCZ85u+odUfa8H/kNuzQ1V8wILk6KVGBv
-        yw/i3AeisiaA4q4mrHemayVORGydAafPvOMnUf2JuPCZqFKh4t4vsD88j8S1SxQzKxgXpoIFal6Q2c3f
-        idoRou4rcUXjk6+JQx4/tt/ap7h5IizbVGDIPOYlL/UFVMBK/o24NkrcGCMua+w8E0B+extWl69T/IRt
-        M1AyaB7uJMuekXktY0xx/2SS+xcT3AHGusnoBjLuosmoHM8oNrnqtGehCPm0GXB4zfwnZEEH6WgZ4arr
-        77ms7g1Tq1/RdnqYyRUDnFPkZVT2ozGsOX5PezLF/ODuEGRgv9fc9pg81SOLnD7i6BBxZIBw9BGFPYRd
-        Fm1xdSN+8V3F14qtYiIFus2NrWTu/Y/jyUsHdYr6iYPdxM7mt7BlNCrOJcrEBrFITMAi+1Nzt+yJqRhW
-        chUo6iVyOkaxsrAJRrT11WfFDpEq4kWUCFkG8trN9HqdHoe+ukB2bL7qQVxSvdasH2oXy8UCEVYbMZDb
-        asYWdhFZjS+RvKJBczdFicgQlh3RIoIbnfmgD2kHbsMwLJ8rRZZYKialVVhKEXuE1ejSRNi39l+KEcnC
-        atcR9Z3/aUqSTusvAb8B9SfvILiochkAAAAASUVORK5CYII=
-</value>
   </data>
   <data name="BT_PositionSelect_Pick8.Text" xml:space="preserve">
     <value>PICK8</value>
@@ -417,11 +391,8 @@
   <data name="LB_.Text" xml:space="preserve">
     <value>HEAD</value>
   </data>
-  <data name="&gt;&gt;TS_IN.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="BT_OUT_SUCTION.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 32</value>
+  <data name="BT_PositionSelect_PadC1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 34</value>
   </data>
   <data name="&gt;&gt;BT_Function_Loadcell.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -444,11 +415,14 @@
   <data name="BT_PositionSelect_Ref1_2.Text" xml:space="preserve">
     <value>REF1_2</value>
   </data>
+  <data name="BT_PositionSelect_PadC2.Text" xml:space="preserve">
+    <value>PAD C2</value>
+  </data>
   <data name="BT_Manual_WasteCycle.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator4.Name" xml:space="preserve">
-    <value>toolStripSeparator4</value>
+  <data name="&gt;&gt;BT_PositionSelect_Pick4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="BT_PositionSelect_BDEdge.Size" type="System.Drawing.Size, System.Drawing">
     <value>218, 34</value>
@@ -456,8 +430,8 @@
   <data name="&gt;&gt;TS_OUT.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="LB_IN_LOAD.Text" xml:space="preserve">
-    <value>PRESS LOW</value>
+  <data name="&gt;&gt;BT_PositionSelect_ATC.Name" xml:space="preserve">
+    <value>BT_PositionSelect_ATC</value>
   </data>
   <data name="&gt;&gt;LB_Manual.Name" xml:space="preserve">
     <value>LB_Manual</value>
@@ -477,17 +451,17 @@
   <data name="BT_PositionSelect_PadC4.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 34</value>
   </data>
-  <data name="BT_PositionSelect_Touchprobe.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial Narrow, 18pt, style=Bold</value>
-  </data>
   <data name="BT_Function_Loadcell.Text" xml:space="preserve">
     <value>LoadCell</value>
   </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>665, 293</value>
+  </data>
+  <data name="&gt;&gt;TS_IN_ATC_OPEN.Name" xml:space="preserve">
+    <value>TS_IN_ATC_OPEN</value>
+  </data>
   <data name="&gt;&gt;toolStripSeparator15.Name" xml:space="preserve">
     <value>toolStripSeparator15</value>
-  </data>
-  <data name="LB_IN_ATC_CLOSE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 32</value>
   </data>
   <data name="BT_Function_Touchprobe.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -498,14 +472,20 @@
   <data name="BT_Manual_SingleCycle.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 32</value>
   </data>
+  <data name="toolStripSeparator22.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;BT_PositionSelect_PadC2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BT_PositionSelect_Pick7.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="LB_IN_LOAD2.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;BT_PositionSelect_Pick5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;TS_IN.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 14</value>
@@ -516,41 +496,45 @@
   <data name="&gt;&gt;LB_.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;BT_PositionSelect_ATC1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="BT_PositionSelect_Pick1.Text" xml:space="preserve">
+    <value>PICK1</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator16.Name" xml:space="preserve">
     <value>toolStripSeparator16</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="CbB_PadIY.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
   <data name="&gt;&gt;CbB_PadIX.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;BT_PositionSelect_ULC.Name" xml:space="preserve">
-    <value>BT_PositionSelect_ULC</value>
+  <data name="BT_Function_Laser.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;BT_Function_Loadcell.Name" xml:space="preserve">
     <value>BT_Function_Loadcell</value>
   </data>
+  <data name="&gt;&gt;BT_PositionSelect_ULC.Name" xml:space="preserve">
+    <value>BT_PositionSelect_ULC</value>
+  </data>
   <data name="&gt;&gt;LB_.Name" xml:space="preserve">
     <value>LB_</value>
   </data>
-  <data name="LB_Manual.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 22</value>
+  <data name="&gt;&gt;TS_IN_ATC_CLOSE.Name" xml:space="preserve">
+    <value>TS_IN_ATC_CLOSE</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator13.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="BT_PositionSelect_Pick7.Text" xml:space="preserve">
-    <value>PICK7</value>
   </data>
   <data name="BT_Function_Laser.Text" xml:space="preserve">
     <value>Laser</value>
   </data>
   <data name="CbB_PadIY.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <data name="BT_OUT_ATC.Text" xml:space="preserve">
+    <value>ATC</value>
   </data>
   <data name="&gt;&gt;BT_OUT_ATC.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -560,6 +544,9 @@
   </data>
   <data name="BT_Function_ATC.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <data name="&gt;&gt;BT_PositionSelect_Pick2.Name" xml:space="preserve">
+    <value>BT_PositionSelect_Pick2</value>
   </data>
   <data name="BT_PositionSelect_Ref.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial Narrow, 18pt, style=Bold</value>
@@ -573,8 +560,21 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="toolStripSeparator18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
+  <data name="BT_Position_CameraMove.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAJMSURBVEhL7ZRdSFRRFIXXnUqdLCsRK/Mh8M2IynoIrCjq
+        QcsyDaIhxoiakjFzRkKo7IfEtMJ+oAgpplQoCDToQTQfkiFDRyRNFNQIoh+I6Cb9DRnMal3roZfKmfGt
+        DnxwYJ+z177r7LuB/ysKB4wo7v7laumIH0UdJUhITdTJqZMuZBwZMqdXvCK8j/vgqN8mgZliyuQJSWBn
+        8xfi1BuivCqEos5GrPZkSMAuorbOgGfIvDFCovIdceY9USGhop4PcN49jcSVCyQyLRqhcYGqJ2RO02ei
+        epSo+Uhc0P7oc2KffwSbr+2SwKxIbZPAoHkoQJ7rDUnASv6JuBQkrowR57X3nAjB0daK5aWrIrHNQPGA
+        ub+D9D4i85vHmOL7yiTfNyb4QozzkTH1pP2sSVuuP4h1tTUSmRtOtxlwB0zHA7KgnXQ3j3LZ5ddcVPOC
+        aZXPmHp8mMll/ZxRGKAt594YVhy+peRZYvZEu8zA7oC56T55rFsWeYaIg4PEgX7C3Uu4ugmnLNpQ24X4
+        +TeVtFpsDFOgy1zbQubdfvsjecmAuqiP2NtFbG16idTMBiWsFV6xRswLzyLnQ3O77IktG1ZyCRT2ELnt
+        QSx1NcKIsao+KbaINBEvbBO1xzpnIL/NzKhT97hVdYHsWH/RD3tSnWLWgzrFYjEnnKp/LcBAXosZ5+ok
+        shueInlJvYJXRbHI/GlHzHghEa+sO71I33MdhmH5XC6yxUIxKaPCqitF7BDWoEsXEf+1v/vIWAWShTWu
+        o5o7f3IxCo8jfpx/8eJ39SfvIAKG+B0AAAAASUVORK5CYII=
+</value>
   </data>
   <data name="&gt;&gt;LB_IN.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -582,14 +582,17 @@
   <data name="&gt;&gt;toolStripSeparator5.Name" xml:space="preserve">
     <value>toolStripSeparator5</value>
   </data>
-  <data name="CbB_PadIX.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
+  <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
   </data>
   <data name="&gt;&gt;BT_PositionSelect_Pick8.Name" xml:space="preserve">
     <value>BT_PositionSelect_Pick8</value>
   </data>
-  <data name="&gt;&gt;BT_Manual_PickupCycle.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="BT_Function_Loadcell.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 32</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;BT_PositionSelect_PadC4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -600,11 +603,21 @@
   <data name="&gt;&gt;toolStripSeparator17.Name" xml:space="preserve">
     <value>toolStripSeparator17</value>
   </data>
-  <data name="&gt;&gt;BT_PositionSelect_Pick7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BT_PositionSelect_Loadcell.Name" xml:space="preserve">
-    <value>BT_PositionSelect_Loadcell</value>
+  <data name="LB_IN_LOAD2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
+        AAACCElEQVRIS+2WrU4DURBGK3kG3gESRHkIXqMobEPoQ4BbWVFTx4qKSgxiHQgEAkGCRlShLzmXfpvp
+        zf3bpnU0mex2d7pnvpnZmY5G/59MBrquc9jb54c/Wjt44gTabDZOBlh2FDgPjwFDtXyX4tV65bC9M2Ch
+        Sm3Nw9q2dbIa/x0fC5Wa9dPaNe+Nu365cWc/V944xxavix2Fy3bp5vO5D6AaHoMCBHTuLpPGfRsA4KZp
+        6uCoU02lFGgIPHUXThbeE5w6A8aKNZdajqQohAI7iRjXFYBVjurZw8ynPZtyq5aa2vQCVG1jcK4JPv4e
+        e5UYYCwJVppjalEE9PHr2TdTjXL8gAGd3k7T6Q7B/FAKpFZNllJsVfP7Ztn4NAOm1lHVdhLhIKhVl1Jq
+        A1G9SffkfuKBWbCdwYBtfW0Xl85tnQFP7v4sWecQnHtna+5JcRVYMxjFtsY1oNBnb3BscAwJgMBtqlGe
+        faV0s+3a4phMBRKqVbrp8qrZvY9qms8rNY1VrDPRMG3sVhkKj6XYg7fBZBUDZrVpuNdspz69EaUWnF0Y
+        gJk4mBw5av8CsdarLEBRXawxcK01GwAN0tdQtUwBt8PD+hfBOAiuDaMVR0BqmOLRBJfdUrGItFeZubIh
+        QCmmb6oUh042/SqD1l4fiE2/Oa9+h4dGxoMJIqw/144GDYMs/scaquqQ/r+l1BdWdfIAXAAAAABJRU5E
+        rkJggg==
+</value>
   </data>
   <data name="toolStripSeparator12.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -612,11 +625,17 @@
   <data name="&gt;&gt;toolStripSeparator21.Name" xml:space="preserve">
     <value>toolStripSeparator21</value>
   </data>
-  <data name="BT_OUT_LASER.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="&gt;&gt;LB_IN_LOAD.Name" xml:space="preserve">
+    <value>LB_IN_LOAD</value>
+  </data>
+  <data name="&gt;&gt;LB_Position.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;BT_OUT_BLOW.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BT_PositionSelect_ULC.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="BT_PositionSelect_Pick2.Text" xml:space="preserve">
     <value>PICK2</value>
@@ -630,11 +649,11 @@
   <data name="BT_Manual_StepCycle.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 32</value>
   </data>
-  <data name="BT_Manual_StepCycle.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="LB_IN.Text" xml:space="preserve">
+    <value>입력 신호</value>
   </data>
-  <data name="BT_Function_Laser.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="&gt;&gt;BT_Manual_WasteCycle.Name" xml:space="preserve">
+    <value>BT_Manual_WasteCycle</value>
   </data>
   <data name="&gt;&gt;LB_Function.Name" xml:space="preserve">
     <value>LB_Function</value>
@@ -645,11 +664,14 @@
   <data name="&gt;&gt;toolStripSeparator18.Name" xml:space="preserve">
     <value>toolStripSeparator18</value>
   </data>
-  <data name="LB_IN_LOAD.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+  <data name="&gt;&gt;BT_PositionSelect_ATC2.Name" xml:space="preserve">
+    <value>BT_PositionSelect_ATC2</value>
   </data>
   <data name="TS_Manual.TabIndex" type="System.Int32, mscorlib">
     <value>67</value>
+  </data>
+  <data name="&gt;&gt;BT_PositionSelect_PadC1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="TS_Position.TabIndex" type="System.Int32, mscorlib">
     <value>73</value>
@@ -672,20 +694,20 @@
   <data name="BT_Position_ToolMove.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 32</value>
   </data>
-  <data name="BT_PositionSelect_ATC2.Text" xml:space="preserve">
-    <value>ATC2</value>
-  </data>
   <data name="BT_PositionSelect_ATC3.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 34</value>
   </data>
   <data name="BT_PositionSelect_ATC1.Text" xml:space="preserve">
     <value>ATC1</value>
   </data>
-  <data name="toolStripSeparator14.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
   <data name="TS_OUT.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 90</value>
+  </data>
+  <data name="BT_PositionSelect_ATC2.Text" xml:space="preserve">
+    <value>ATC2</value>
+  </data>
+  <data name="BT_PositionSelect.Text" xml:space="preserve">
+    <value>REF0</value>
   </data>
   <data name="BT_PositionSelect_ATC.Text" xml:space="preserve">
     <value>ATC</value>
@@ -693,8 +715,8 @@
   <data name="&gt;&gt;LB_.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;BT_Manual_WasteCycle.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="BT_PositionSelect_Touchprobe.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial Narrow, 18pt, style=Bold</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator8.Name" xml:space="preserve">
     <value>toolStripSeparator8</value>
@@ -708,23 +730,29 @@
   <data name="LB_IN_ATC_OPEN.Text" xml:space="preserve">
     <value>ATC OPEN</value>
   </data>
+  <data name="LB_IN_ATC_CLOSE.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 32</value>
+  </data>
   <data name="BT_Function_Loadcell.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="LB_IN.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt, style=Bold</value>
   </data>
-  <data name="BT_PositionSelect_Ref.Text" xml:space="preserve">
-    <value>REF</value>
+  <data name="&gt;&gt;LB_.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="BT_OUT_SUCTION.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
   <data name="BT_PositionSelect.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="LB_IN_ATC_OPEN.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="BT_PositionSelect_PadC1.Text" xml:space="preserve">
+    <value>PAD C1</value>
   </data>
-  <data name="&gt;&gt;BT_PositionSelect_PadC1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="LB_OUT.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9pt, style=Bold</value>
   </data>
   <data name="BT_PositionSelect_Pick.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial Narrow, 18pt, style=Bold</value>
@@ -738,26 +766,20 @@
   <data name="LB_IN_LOAD.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="LB_.Size" type="System.Drawing.Size, System.Drawing">
-    <value>665, 23</value>
+  <data name="&gt;&gt;BT_PositionSelect_Pick6.Name" xml:space="preserve">
+    <value>BT_PositionSelect_Pick6</value>
   </data>
   <data name="TS_OUT.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
   </data>
-  <data name="&gt;&gt;TS_Position.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;toolStripSeparator9.Name" xml:space="preserve">
+    <value>toolStripSeparator9</value>
   </data>
   <data name="&gt;&gt;TS_IN.Name" xml:space="preserve">
     <value>TS_IN</value>
   </data>
   <data name="BT_Position_CameraMove.Text" xml:space="preserve">
     <value>Camera</value>
-  </data>
-  <data name="TS_OUT.TabIndex" type="System.Int32, mscorlib">
-    <value>75</value>
-  </data>
-  <data name="BT_PositionSelect_Ref1_1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 34</value>
   </data>
   <data name="TS_Function.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
@@ -771,8 +793,8 @@
   <data name="BT_PositionSelect_PadC2.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 34</value>
   </data>
-  <data name="&gt;&gt;BT_Manual_WasteCycle.Name" xml:space="preserve">
-    <value>BT_Manual_WasteCycle</value>
+  <data name="TS_OUT.Text" xml:space="preserve">
+    <value>toolStrip11</value>
   </data>
   <data name="BT_OUT_ATC.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -783,56 +805,69 @@
   <data name="TS_Function.Text" xml:space="preserve">
     <value>toolStrip11</value>
   </data>
+  <data name="BT_PositionSelect_ULC.Text" xml:space="preserve">
+    <value>ULC</value>
+  </data>
   <data name="BT_Position_ToolMove.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="&gt;&gt;LB_Function.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="BT_Manual_WasteCycle.Text" xml:space="preserve">
+    <value>Waste Cycle</value>
+  </data>
   <data name="&gt;&gt;TS_Function.Name" xml:space="preserve">
     <value>TS_Function</value>
   </data>
-  <data name="BT_PositionSelect_ATC3.Text" xml:space="preserve">
-    <value>ATC3</value>
+  <data name="&gt;&gt;BT_PositionSelect_Pad.Name" xml:space="preserve">
+    <value>BT_PositionSelect_Pad</value>
   </data>
   <data name="BT_PositionSelect_ATC.Size" type="System.Drawing.Size, System.Drawing">
     <value>218, 34</value>
   </data>
-  <data name="&gt;&gt;LB_Position.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;BT_PositionSelect_Ref.Name" xml:space="preserve">
+    <value>BT_PositionSelect_Ref</value>
   </data>
-  <data name="&gt;&gt;BT_OUT_LASER.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="BT_PositionSelect_ATC.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial Narrow, 18pt, style=Bold</value>
   </data>
   <data name="BT_Manual_SingleCycle.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="BT_PositionSelect_PadC1.Text" xml:space="preserve">
-    <value>PAD C1</value>
+  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
   </data>
-  <data name="TS_OUT.Text" xml:space="preserve">
-    <value>toolStrip11</value>
+  <data name="&gt;&gt;toolStripSeparator8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="LB_IN_VAC.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
-        AAAB60lEQVRIS+2VsU7DMBCGO/IMvANIDOUheI0ysVaIPgRsGTt06UaGDh1ZGLrBwMDAgMTM0InZ6DP+
-        o8NcnKSiYuGkT6kT5z6f7bij/yjFZrMJ8PT6Eq+W1OX3QqLtdttAW+xF3ia0sly6Wq8CpObwsFLJ0qNi
-        1HUdRLrVP6xUwvXdOlTPVTh/uAhHH2cRfsPicfFNsqyXYT6fD5N7UoSIjsNpKzy3A0BcVVU/OSJPmksO
-        w0lD/kxy1hkxdK65quVKO5ciOnCwA7CVU/XsZhannXZr2GpZUzu9CGhDLhbqO34fxyoBMSTFz9A0e9VS
-        EcLbt/u4mfpUTj/yIJ1eTtunOxfzopKQFLE2WS60WHG1rOI0I2atoygPhKBNpQS2urZKLaqa6Z5cT6Kw
-        KEZoxVRm5X3ROxJPrr5oXedcrAS7MkgsaNs13oWdxd7BMQQGbsUQRV5IStSbOu5gL2kXebWCXZ7Sl2OX
-        qtlgUeqIiwcJH7o92IfKvSmOpMGktH4g5q9Np40ODk8kmun1pEbceoIRiDlxQB25Ug0gsTRVdkghCkqB
-        XH9rdgBsEJuowRMK0y8m7wrJ2RSCQXDPFXgYaXFzeYGMlzhzhSuxGKFg36SUw8JOv9CASkLo/Q0PDRIz
-        iFzIvb1J8yh+Mn8bo9EnpdQXVpEtIdAAAAAASUVORK5CYII=
+        AAACCElEQVRIS+2WrU4DURBGK3kG3gESRHkIXqMobEPoQ4BbWVFTx4qKSgxiHQgEAkGCRlShLzmXfpvp
+        zf3bpnU0mex2d7pnvpnZmY5G/59MBrquc9jb54c/Wjt44gTabDZOBlh2FDgPjwFDtXyX4tV65bC9M2Ch
+        Sm3Nw9q2dbIa/x0fC5Wa9dPaNe+Nu365cWc/V944xxavix2Fy3bp5vO5D6AaHoMCBHTuLpPGfRsA4KZp
+        6uCoU02lFGgIPHUXThbeE5w6A8aKNZdajqQohAI7iRjXFYBVjurZw8ynPZtyq5aa2vQCVG1jcK4JPv4e
+        e5UYYCwJVppjalEE9PHr2TdTjXL8gAGd3k7T6Q7B/FAKpFZNllJsVfP7Ztn4NAOm1lHVdhLhIKhVl1Jq
+        A1G9SffkfuKBWbCdwYBtfW0Xl85tnQFP7v4sWecQnHtna+5JcRVYMxjFtsY1oNBnb3BscAwJgMBtqlGe
+        faV0s+3a4phMBRKqVbrp8qrZvY9qms8rNY1VrDPRMG3sVhkKj6XYg7fBZBUDZrVpuNdspz69EaUWnF0Y
+        gJk4mBw5av8CsdarLEBRXawxcK01GwAN0tdQtUwBt8PD+hfBOAiuDaMVR0BqmOLRBJfdUrGItFeZubIh
+        QCmmb6oUh042/SqD1l4fiE2/Oa9+h4dGxoMJIqw/144GDYMs/scaquqQ/r+l1BdWdfIAXAAAAABJRU5E
+        rkJggg==
 </value>
+  </data>
+  <data name="&gt;&gt;BT_PositionSelect_Loadcell.Name" xml:space="preserve">
+    <value>BT_PositionSelect_Loadcell</value>
   </data>
   <data name="&gt;&gt;TS_Manual.Name" xml:space="preserve">
     <value>TS_Manual</value>
   </data>
-  <data name="BT_Manual_PickupCycle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 32</value>
+  <data name="&gt;&gt;CbB_PadIY.Name" xml:space="preserve">
+    <value>CbB_PadIY</value>
+  </data>
+  <data name="&gt;&gt;BT_PositionSelect.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;LB_IN_LOAD2.Name" xml:space="preserve">
     <value>LB_IN_LOAD2</value>
@@ -840,8 +875,8 @@
   <data name="&gt;&gt;toolStripSeparator17.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;BT_PositionSelect_Pad.Name" xml:space="preserve">
-    <value>BT_PositionSelect_Pad</value>
+  <data name="BT_PositionSelect_Loadcell.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 34</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator11.Name" xml:space="preserve">
     <value>toolStripSeparator11</value>
@@ -849,26 +884,39 @@
   <data name="BT_PositionSelect_Pick.Text" xml:space="preserve">
     <value>PICK</value>
   </data>
-  <data name="LB_.TabIndex" type="System.Int32, mscorlib">
-    <value>35</value>
+  <data name="&gt;&gt;LB_IN_ATC_CLOSE.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;BT_PositionSelect_ATC2.Name" xml:space="preserve">
-    <value>BT_PositionSelect_ATC2</value>
-  </data>
-  <data name="BT_OUT_BLOW.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="&gt;&gt;BT_OUT_LASER.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
   </data>
+  <data name="BT_PositionSelect_PadC4.Text" xml:space="preserve">
+    <value>PAD C4</value>
+  </data>
   <data name="&gt;&gt;TS_Manual.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;BT_PositionSelect_Ref.Name" xml:space="preserve">
-    <value>BT_PositionSelect_Ref</value>
+  <data name="BT_Position_ToolMove.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAJMSURBVEhL7ZRdSFRRFIXXnUqdLCsRK/Mh8M2IynoIrCjq
+        QcsyDaIhxoiakjFzRkKo7IfEtMJ+oAgpplQoCDToQTQfkiFDRyRNFNQIoh+I6Cb9DRnMal3roZfKmfGt
+        DnxwYJ+z177r7LuB/ysKB4wo7v7laumIH0UdJUhITdTJqZMuZBwZMqdXvCK8j/vgqN8mgZliyuQJSWBn
+        8xfi1BuivCqEos5GrPZkSMAuorbOgGfIvDFCovIdceY9USGhop4PcN49jcSVCyQyLRqhcYGqJ2RO02ei
+        epSo+Uhc0P7oc2KffwSbr+2SwKxIbZPAoHkoQJ7rDUnASv6JuBQkrowR57X3nAjB0daK5aWrIrHNQPGA
+        ub+D9D4i85vHmOL7yiTfNyb4QozzkTH1pP2sSVuuP4h1tTUSmRtOtxlwB0zHA7KgnXQ3j3LZ5ddcVPOC
+        aZXPmHp8mMll/ZxRGKAt594YVhy+peRZYvZEu8zA7oC56T55rFsWeYaIg4PEgX7C3Uu4ugmnLNpQ24X4
+        +TeVtFpsDFOgy1zbQubdfvsjecmAuqiP2NtFbG16idTMBiWsFV6xRswLzyLnQ3O77IktG1ZyCRT2ELnt
+        QSx1NcKIsao+KbaINBEvbBO1xzpnIL/NzKhT97hVdYHsWH/RD3tSnWLWgzrFYjEnnKp/LcBAXosZ5+ok
+        shueInlJvYJXRbHI/GlHzHghEa+sO71I33MdhmH5XC6yxUIxKaPCqitF7BDWoEsXEf+1v/vIWAWShTWu
+        o5o7f3IxCo8jfpx/8eJ39SfvIAKG+B0AAAAASUVORK5CYII=
+</value>
   </data>
-  <data name="&gt;&gt;LB_IN_LOAD.Name" xml:space="preserve">
-    <value>LB_IN_LOAD</value>
+  <data name="BT_PositionSelect.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 32</value>
   </data>
   <data name="&gt;&gt;toolStripButton1.Name" xml:space="preserve">
     <value>toolStripButton1</value>
@@ -888,33 +936,14 @@
   <data name="BT_OUT_LASER.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="toolStripSeparator22.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="&gt;&gt;toolStripSeparator12.Name" xml:space="preserve">
     <value>toolStripSeparator12</value>
   </data>
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
   </data>
-  <data name="BT_Manual_PickupCycle.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADr0AAA69AUf7kK0AAAJMSURBVEhL7ZRbSFRRGIXXsfKSZSViZfMQ+GZEZT0EVhT1
-        oGWZBpHEGFGWjJmjhFDZhcS0wi5QxFBMqVAQaNCDaD4kQ4aOSJoojBNBdIGITtJNMpjVOmNPQTHO6JsL
-        Ps4+e//7/w/r7P1jWpHI+POcApX7PSjuLEWCLVFvM8cnJ1HGCZ85u+odUfa8H/kNuzQ1V8wILk6KVGBv
-        yw/i3AeisiaA4q4mrHemayVORGydAafPvOMnUf2JuPCZqFKh4t4vsD88j8S1SxQzKxgXpoIFal6Q2c3f
-        idoRou4rcUXjk6+JQx4/tt/ap7h5IizbVGDIPOYlL/UFVMBK/o24NkrcGCMua+w8E0B+extWl69T/IRt
-        M1AyaB7uJMuekXktY0xx/2SS+xcT3AHGusnoBjLuosmoHM8oNrnqtGehCPm0GXB4zfwnZEEH6WgZ4arr
-        77ms7g1Tq1/RdnqYyRUDnFPkZVT2ozGsOX5PezLF/ODuEGRgv9fc9pg81SOLnD7i6BBxZIBw9BGFPYRd
-        Fm1xdSN+8V3F14qtYiIFus2NrWTu/Y/jyUsHdYr6iYPdxM7mt7BlNCrOJcrEBrFITMAi+1Nzt+yJqRhW
-        chUo6iVyOkaxsrAJRrT11WfFDpEq4kWUCFkG8trN9HqdHoe+ukB2bL7qQVxSvdasH2oXy8UCEVYbMZDb
-        asYWdhFZjS+RvKJBczdFicgQlh3RIoIbnfmgD2kHbsMwLJ8rRZZYKialVVhKEXuE1ejSRNi39l+KEcnC
-        atcR9Z3/aUqSTusvAb8B9SfvILiochkAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="BT_PositionSelect_Loadcell.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 34</value>
+  <data name="&gt;&gt;BT_Manual_WasteCycle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="CbB_PadIY.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -922,11 +951,20 @@
   <data name="&gt;&gt;CbB_PadIX.Name" xml:space="preserve">
     <value>CbB_PadIX</value>
   </data>
-  <data name="LB_IN_LOAD2.Text" xml:space="preserve">
-    <value>PRESS HIGH</value>
+  <data name="CbB_PadIX.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="&gt;&gt;BT_PositionSelect_Ref.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BT_PositionSelect_Ref1_1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>158, 34</value>
   </data>
   <data name="&gt;&gt;LB_IN_ATC_OPEN.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BT_Function_Touchprobe.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="TS_OUT.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>None</value>
@@ -940,9 +978,6 @@
   <data name="&gt;&gt;BT_Function_Laser.Name" xml:space="preserve">
     <value>BT_Function_Laser</value>
   </data>
-  <data name="BT_Manual_WasteCycle.Text" xml:space="preserve">
-    <value>Waste Cycle</value>
-  </data>
   <data name="BT_PositionSelect_Loadcell.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial Narrow, 18pt, style=Bold</value>
   </data>
@@ -955,14 +990,14 @@
   <data name="BT_PositionSelect_PadC3.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 34</value>
   </data>
-  <data name="BT_OUT_SUCTION.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="&gt;&gt;BT_PositionSelect_ATC1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;BT_PositionSelect_Ref1_1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;TS_IN.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="BT_Position_CameraMove.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 32</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator12.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -973,17 +1008,33 @@
   <data name="&gt;&gt;BT_PositionSelect_BDEdge.Name" xml:space="preserve">
     <value>BT_PositionSelect_BDEdge</value>
   </data>
+  <data name="BT_Manual_PickupCycle.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAJMSURBVEhL7ZRdSFRRFIXXnUqdLCsRK/Mh8M2IynoIrCjq
+        QcsyDaIhxoiakjFzRkKo7IfEtMJ+oAgpplQoCDToQTQfkiFDRyRNFNQIoh+I6Cb9DRnMal3roZfKmfGt
+        DnxwYJ+z177r7LuB/ysKB4wo7v7laumIH0UdJUhITdTJqZMuZBwZMqdXvCK8j/vgqN8mgZliyuQJSWBn
+        8xfi1BuivCqEos5GrPZkSMAuorbOgGfIvDFCovIdceY9USGhop4PcN49jcSVCyQyLRqhcYGqJ2RO02ei
+        epSo+Uhc0P7oc2KffwSbr+2SwKxIbZPAoHkoQJ7rDUnASv6JuBQkrowR57X3nAjB0daK5aWrIrHNQPGA
+        ub+D9D4i85vHmOL7yiTfNyb4QozzkTH1pP2sSVuuP4h1tTUSmRtOtxlwB0zHA7KgnXQ3j3LZ5ddcVPOC
+        aZXPmHp8mMll/ZxRGKAt594YVhy+peRZYvZEu8zA7oC56T55rFsWeYaIg4PEgX7C3Uu4ugmnLNpQ24X4
+        +TeVtFpsDFOgy1zbQubdfvsjecmAuqiP2NtFbG16idTMBiWsFV6xRswLzyLnQ3O77IktG1ZyCRT2ELnt
+        QSx1NcKIsao+KbaINBEvbBO1xzpnIL/NzKhT97hVdYHsWH/RD3tSnWLWgzrFYjEnnKp/LcBAXosZ5+ok
+        shueInlJvYJXRbHI/GlHzHghEa+sO71I33MdhmH5XC6yxUIxKaPCqitF7BDWoEsXEf+1v/vIWAWShTWu
+        o5o7f3IxCo8jfpx/8eJ39SfvIAKG+B0AAAAASUVORK5CYII=
+</value>
+  </data>
   <data name="TS_OUT.Size" type="System.Drawing.Size, System.Drawing">
     <value>563, 35</value>
   </data>
   <data name="LB_IN_DOUBLE.Text" xml:space="preserve">
     <value>DOUBLE</value>
   </data>
-  <data name="BT_PositionSelect_ULC.Text" xml:space="preserve">
-    <value>ULC</value>
-  </data>
   <data name="&gt;&gt;timer.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BT_PositionSelect_Pick5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripButton1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -993,12 +1044,6 @@
   </data>
   <data name="&gt;&gt;BT_OUT_BLOW.Name" xml:space="preserve">
     <value>BT_OUT_BLOW</value>
-  </data>
-  <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="LB_Position.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
@@ -1018,26 +1063,29 @@
   <data name="&gt;&gt;LB_IN_DOUBLE.Name" xml:space="preserve">
     <value>LB_IN_DOUBLE</value>
   </data>
-  <data name="BT_OUT_ATC.Text" xml:space="preserve">
-    <value>ATC</value>
+  <data name="LB_Manual.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 22</value>
   </data>
   <data name="&gt;&gt;TS_OUT.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="BT_PositionSelect_Ref1_2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 34</value>
+  <data name="BT_OUT_SUCTION.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 32</value>
   </data>
-  <data name="CbB_PadIX.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="BT_PositionSelect_Pad.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 34</value>
   </data>
-  <data name="BT_PositionSelect_PadC4.Text" xml:space="preserve">
-    <value>PAD C4</value>
+  <data name="TS_Manual.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9pt</value>
   </data>
-  <data name="BT_Function_Loadcell.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 32</value>
+  <data name="BT_PositionSelect_ULC.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial Narrow, 18pt, style=Bold</value>
   </data>
-  <data name="&gt;&gt;BT_PositionSelect.Name" xml:space="preserve">
-    <value>BT_PositionSelect</value>
+  <data name="TS_Position.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 143</value>
+  </data>
+  <data name="CbB_PadIY.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 39</value>
   </data>
   <data name="&gt;&gt;BT_PositionSelect_Touchprobe.Name" xml:space="preserve">
     <value>BT_PositionSelect_Touchprobe</value>
@@ -1045,44 +1093,20 @@
   <data name="&gt;&gt;BT_PositionSelect_ATC3.Name" xml:space="preserve">
     <value>BT_PositionSelect_ATC3</value>
   </data>
-  <data name="BT_PositionSelect.Text" xml:space="preserve">
-    <value>REF0</value>
-  </data>
-  <data name="BT_PositionSelect_Pick.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 34</value>
-  </data>
-  <data name="BT_Function_Touchprobe.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="&gt;&gt;CbB_PadIX_Separator.Name" xml:space="preserve">
+    <value>CbB_PadIX_Separator</value>
   </data>
   <data name="&gt;&gt;BT_PositionSelect_PadCenter.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CbB_PadIX_Separator.Name" xml:space="preserve">
-    <value>CbB_PadIX_Separator</value>
+  <data name="&gt;&gt;BT_OUT_ATC.Name" xml:space="preserve">
+    <value>BT_OUT_ATC</value>
   </data>
   <data name="LB_Position.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 22</value>
   </data>
-  <data name="LB_IN.Text" xml:space="preserve">
-    <value>입력 신호</value>
-  </data>
-  <data name="BT_PositionSelect_Pick1.Text" xml:space="preserve">
-    <value>PICK1</value>
-  </data>
-  <data name="LB_IN_LOAD2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
-        AAAB60lEQVRIS+2VsU7DMBCGO/IMvANIDOUheI0ysVaIPgRsGTt06UaGDh1ZGLrBwMDAgMTM0InZ6DP+
-        o8NcnKSiYuGkT6kT5z6f7bij/yjFZrMJ8PT6Eq+W1OX3QqLtdttAW+xF3ia0sly6Wq8CpObwsFLJ0qNi
-        1HUdRLrVP6xUwvXdOlTPVTh/uAhHH2cRfsPicfFNsqyXYT6fD5N7UoSIjsNpKzy3A0BcVVU/OSJPmksO
-        w0lD/kxy1hkxdK65quVKO5ciOnCwA7CVU/XsZhannXZr2GpZUzu9CGhDLhbqO34fxyoBMSTFz9A0e9VS
-        EcLbt/u4mfpUTj/yIJ1eTtunOxfzopKQFLE2WS60WHG1rOI0I2atoygPhKBNpQS2urZKLaqa6Z5cT6Kw
-        KEZoxVRm5X3ROxJPrr5oXedcrAS7MkgsaNs13oWdxd7BMQQGbsUQRV5IStSbOu5gL2kXebWCXZ7Sl2OX
-        qtlgUeqIiwcJH7o92IfKvSmOpMGktH4g5q9Np40ODk8kmun1pEbceoIRiDlxQB25Ug0gsTRVdkghCkqB
-        XH9rdgBsEJuowRMK0y8m7wrJ2RSCQXDPFXgYaXFzeYGMlzhzhSuxGKFg36SUw8JOv9CASkLo/Q0PDRIz
-        iFzIvb1J8yh+Mn8bo9EnpdQXVpEtIdAAAAAASUVORK5CYII=
-</value>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>BottomRight_Head</value>
   </data>
   <data name="&gt;&gt;BT_PositionSelect_Pad.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1090,8 +1114,8 @@
   <data name="&gt;&gt;LB_IN_VAC.Name" xml:space="preserve">
     <value>LB_IN_VAC</value>
   </data>
-  <data name="BT_OUT_BLOW.Text" xml:space="preserve">
-    <value>BLOW</value>
+  <data name="TS_Manual.Size" type="System.Drawing.Size, System.Drawing">
+    <value>596, 35</value>
   </data>
   <data name="&gt;&gt;timer.Name" xml:space="preserve">
     <value>timer</value>
@@ -1105,6 +1129,9 @@
   <data name="BT_PositionSelect_Pad.Text" xml:space="preserve">
     <value>PAD</value>
   </data>
+  <data name="BT_Manual_PickupCycle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 32</value>
+  </data>
   <data name="LB_Position.Text" xml:space="preserve">
     <value>이동</value>
   </data>
@@ -1114,14 +1141,14 @@
   <data name="&gt;&gt;BT_Function_Touchprobe.Name" xml:space="preserve">
     <value>BT_Function_Touchprobe</value>
   </data>
-  <data name="LB_OUT.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="&gt;&gt;BT_Function_ATC.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="BT_OUT_SUCTION.Text" xml:space="preserve">
-    <value>VACUUM</value>
+  <data name="BT_PositionSelect_BDEdge.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial Narrow, 18pt, style=Bold</value>
+  </data>
+  <data name="&gt;&gt;BT_PositionSelect_ATC4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="TS_Position.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
@@ -1130,15 +1157,16 @@
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
-        AAAB60lEQVRIS+2VsU7DMBCGO/IMvANIDOUheI0ysVaIPgRsGTt06UaGDh1ZGLrBwMDAgMTM0InZ6DP+
-        o8NcnKSiYuGkT6kT5z6f7bij/yjFZrMJ8PT6Eq+W1OX3QqLtdttAW+xF3ia0sly6Wq8CpObwsFLJ0qNi
-        1HUdRLrVP6xUwvXdOlTPVTh/uAhHH2cRfsPicfFNsqyXYT6fD5N7UoSIjsNpKzy3A0BcVVU/OSJPmksO
-        w0lD/kxy1hkxdK65quVKO5ciOnCwA7CVU/XsZhannXZr2GpZUzu9CGhDLhbqO34fxyoBMSTFz9A0e9VS
-        EcLbt/u4mfpUTj/yIJ1eTtunOxfzopKQFLE2WS60WHG1rOI0I2atoygPhKBNpQS2urZKLaqa6Z5cT6Kw
-        KEZoxVRm5X3ROxJPrr5oXedcrAS7MkgsaNs13oWdxd7BMQQGbsUQRV5IStSbOu5gL2kXebWCXZ7Sl2OX
-        qtlgUeqIiwcJH7o92IfKvSmOpMGktH4g5q9Np40ODk8kmun1pEbceoIRiDlxQB25Ug0gsTRVdkghCkqB
-        XH9rdgBsEJuowRMK0y8m7wrJ2RSCQXDPFXgYaXFzeYGMlzhzhSuxGKFg36SUw8JOv9CASkLo/Q0PDRIz
-        iFzIvb1J8yh+Mn8bo9EnpdQXVpEtIdAAAAAASUVORK5CYII=
+        AAACCElEQVRIS+2WrU4DURBGK3kG3gESRHkIXqMobEPoQ4BbWVFTx4qKSgxiHQgEAkGCRlShLzmXfpvp
+        zf3bpnU0mex2d7pnvpnZmY5G/59MBrquc9jb54c/Wjt44gTabDZOBlh2FDgPjwFDtXyX4tV65bC9M2Ch
+        Sm3Nw9q2dbIa/x0fC5Wa9dPaNe+Nu365cWc/V944xxavix2Fy3bp5vO5D6AaHoMCBHTuLpPGfRsA4KZp
+        6uCoU02lFGgIPHUXThbeE5w6A8aKNZdajqQohAI7iRjXFYBVjurZw8ynPZtyq5aa2vQCVG1jcK4JPv4e
+        e5UYYCwJVppjalEE9PHr2TdTjXL8gAGd3k7T6Q7B/FAKpFZNllJsVfP7Ztn4NAOm1lHVdhLhIKhVl1Jq
+        A1G9SffkfuKBWbCdwYBtfW0Xl85tnQFP7v4sWecQnHtna+5JcRVYMxjFtsY1oNBnb3BscAwJgMBtqlGe
+        faV0s+3a4phMBRKqVbrp8qrZvY9qms8rNY1VrDPRMG3sVhkKj6XYg7fBZBUDZrVpuNdspz69EaUWnF0Y
+        gJk4mBw5av8CsdarLEBRXawxcK01GwAN0tdQtUwBt8PD+hfBOAiuDaMVR0BqmOLRBJfdUrGItFeZubIh
+        QCmmb6oUh042/SqD1l4fiE2/Oa9+h4dGxoMJIqw/144GDYMs/scaquqQ/r+l1BdWdfIAXAAAAABJRU5E
+        rkJggg==
 </value>
   </data>
   <data name="LB_.Location" type="System.Drawing.Point, System.Drawing">
@@ -1147,17 +1175,17 @@
   <data name="BT_Function_Laser.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="BT_PositionSelect_ATC4.Text" xml:space="preserve">
+    <value>ATC4</value>
+  </data>
   <data name="TS_Manual.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 249</value>
   </data>
   <data name="BT_PositionSelect_PadC3.Text" xml:space="preserve">
     <value>PAD C3</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="BT_PositionSelect_PadC1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 34</value>
+  <data name="BT_OUT_BLOW.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;TS_Position.Parent" xml:space="preserve">
     <value>$this</value>
@@ -1171,23 +1199,33 @@
   <data name="&gt;&gt;BT_Position_ToolMove.Name" xml:space="preserve">
     <value>BT_Position_ToolMove</value>
   </data>
-  <data name="BT_Position_CameraMove.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 32</value>
+  <data name="BT_Manual_SingleCycle.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAJMSURBVEhL7ZRdSFRRFIXXnUqdLCsRK/Mh8M2IynoIrCjq
+        QcsyDaIhxoiakjFzRkKo7IfEtMJ+oAgpplQoCDToQTQfkiFDRyRNFNQIoh+I6Cb9DRnMal3roZfKmfGt
+        DnxwYJ+z177r7LuB/ysKB4wo7v7laumIH0UdJUhITdTJqZMuZBwZMqdXvCK8j/vgqN8mgZliyuQJSWBn
+        8xfi1BuivCqEos5GrPZkSMAuorbOgGfIvDFCovIdceY9USGhop4PcN49jcSVCyQyLRqhcYGqJ2RO02ei
+        epSo+Uhc0P7oc2KffwSbr+2SwKxIbZPAoHkoQJ7rDUnASv6JuBQkrowR57X3nAjB0daK5aWrIrHNQPGA
+        ub+D9D4i85vHmOL7yiTfNyb4QozzkTH1pP2sSVuuP4h1tTUSmRtOtxlwB0zHA7KgnXQ3j3LZ5ddcVPOC
+        aZXPmHp8mMll/ZxRGKAt594YVhy+peRZYvZEu8zA7oC56T55rFsWeYaIg4PEgX7C3Uu4ugmnLNpQ24X4
+        +TeVtFpsDFOgy1zbQubdfvsjecmAuqiP2NtFbG16idTMBiWsFV6xRswLzyLnQ3O77IktG1ZyCRT2ELnt
+        QSx1NcKIsao+KbaINBEvbBO1xzpnIL/NzKhT97hVdYHsWH/RD3tSnWLWgzrFYjEnnKp/LcBAXosZ5+ok
+        shueInlJvYJXRbHI/GlHzHghEa+sO71I33MdhmH5XC6yxUIxKaPCqitF7BDWoEsXEf+1v/vIWAWShTWu
+        o5o7f3IxCo8jfpx/8eJ39SfvIAKG+B0AAAAASUVORK5CYII=
+</value>
   </data>
   <data name="&gt;&gt;BT_Function_ATC.Name" xml:space="preserve">
     <value>BT_Function_ATC</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
+  <data name="&gt;&gt;TS_IN.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;LB_IN_VAC.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="LB_.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 8.25pt</value>
+  <data name="&gt;&gt;LB_IN_LOAD2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="TS_Position.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>None</value>
@@ -1207,11 +1245,11 @@
   <data name="&gt;&gt;BT_PositionSelect_Loadcell.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolStripSeparator11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;BT_PositionSelect_Pick.Name" xml:space="preserve">
     <value>BT_PositionSelect_Pick</value>
-  </data>
-  <data name="&gt;&gt;BT_PositionSelect_PadC4.Name" xml:space="preserve">
-    <value>BT_PositionSelect_PadC4</value>
   </data>
   <data name="BT_PositionSelect_Pick5.Size" type="System.Drawing.Size, System.Drawing">
     <value>143, 34</value>
@@ -1222,114 +1260,85 @@
   <data name="BT_PositionSelect_ATC1.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 34</value>
   </data>
-  <data name="&gt;&gt;CbB_PadIY_Separator.Name" xml:space="preserve">
-    <value>CbB_PadIY_Separator</value>
+  <data name="LB_Position.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="LB_IN_ATC_OPEN.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="TS_Position.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 143</value>
-  </data>
-  <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="&gt;&gt;BT_PositionSelect_ATC1.Name" xml:space="preserve">
-    <value>BT_PositionSelect_ATC1</value>
+  <data name="&gt;&gt;BT_PositionSelect_Ref0.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="toolStripButton1.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 32</value>
   </data>
-  <data name="&gt;&gt;BT_PositionSelect_ATC3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="BT_PositionSelect.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 32</value>
+  <data name="&gt;&gt;BT_PositionSelect_PadC4.Name" xml:space="preserve">
+    <value>BT_PositionSelect_PadC4</value>
   </data>
   <data name="LB_IN_ATC_OPEN.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 32</value>
   </data>
-  <data name="BT_Position_CameraMove.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADr0AAA69AUf7kK0AAAJMSURBVEhL7ZRbSFRRGIXXsfKSZSViZfMQ+GZEZT0EVhT1
-        oGWZBpHEGFGWjJmjhFDZhcS0wi5QxFBMqVAQaNCDaD4kQ4aOSJoojBNBdIGITtJNMpjVOmNPQTHO6JsL
-        Ps4+e//7/w/r7P1jWpHI+POcApX7PSjuLEWCLVFvM8cnJ1HGCZ85u+odUfa8H/kNuzQ1V8wILk6KVGBv
-        yw/i3AeisiaA4q4mrHemayVORGydAafPvOMnUf2JuPCZqFKh4t4vsD88j8S1SxQzKxgXpoIFal6Q2c3f
-        idoRou4rcUXjk6+JQx4/tt/ap7h5IizbVGDIPOYlL/UFVMBK/o24NkrcGCMua+w8E0B+extWl69T/IRt
-        M1AyaB7uJMuekXktY0xx/2SS+xcT3AHGusnoBjLuosmoHM8oNrnqtGehCPm0GXB4zfwnZEEH6WgZ4arr
-        77ms7g1Tq1/RdnqYyRUDnFPkZVT2ozGsOX5PezLF/ODuEGRgv9fc9pg81SOLnD7i6BBxZIBw9BGFPYRd
-        Fm1xdSN+8V3F14qtYiIFus2NrWTu/Y/jyUsHdYr6iYPdxM7mt7BlNCrOJcrEBrFITMAi+1Nzt+yJqRhW
-        chUo6iVyOkaxsrAJRrT11WfFDpEq4kWUCFkG8trN9HqdHoe+ukB2bL7qQVxSvdasH2oXy8UCEVYbMZDb
-        asYWdhFZjS+RvKJBczdFicgQlh3RIoIbnfmgD2kHbsMwLJ8rRZZYKialVVhKEXuE1ejSRNi39l+KEcnC
-        atcR9Z3/aUqSTusvAb8B9SfvILiochkAAAAASUVORK5CYII=
-</value>
+  <data name="&gt;&gt;CbB_PadIY_Separator.Name" xml:space="preserve">
+    <value>CbB_PadIY_Separator</value>
+  </data>
+  <data name="&gt;&gt;LB_OUT.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;LB_IN_ATC_OPEN.Name" xml:space="preserve">
     <value>LB_IN_ATC_OPEN</value>
   </data>
-  <data name="BT_PositionSelect_ULC.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial Narrow, 18pt, style=Bold</value>
+  <data name="BT_PositionSelect_Ref.Text" xml:space="preserve">
+    <value>REF</value>
   </data>
   <data name="toolStripButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADr0AAA69AUf7kK0AAAJMSURBVEhL7ZRbSFRRGIXXsfKSZSViZfMQ+GZEZT0EVhT1
-        oGWZBpHEGFGWjJmjhFDZhUSzwi5QxFBMqVAQaNCDaD4kQ4aOSJoojBNBdIGITtJNMpjVOmNPQTHO6JsL
-        Ps4+e//7/w/r7P1jWpHI+POcApX7PSjuLEWCLVFvM8cnJ1HGCZ85u+odUfa8H/kNuzQ1V8wILk6KVGBv
-        yw/i3AeisiaA4q4mrHemayVORGydAafPvOMnUf2JuPCZqFKh4t4vsD+sQeLaJYqZFYwLU8EC51+Q2c3f
-        idoRou4rcUXjk6+JQx4/tt/ap7h5IizbVGDIPOYlL/UFVMBK/o24NkrcGCMua+w8E0B+extWl69T/IRt
-        M1AyaB7uJMuekXktY0xx/2SS+xcT3AHGusnoBjLuosmoHM8oNrnqtGehCPm0GXB4zfwnZEEH6WgZ4arr
-        77ms7g1Tq1/RdnqYyRUDnFPkZVT2ozGsOX5PezLF/ODuEGRgv9fc9pg81SOLnD7i6BBxZIBw9BGFPYRd
-        Fm1xdSN+8V3F14qtYiIFus2NrWTu/Y/jyUsHdYr6iYPdxM7mt7BlNCrOJcrEBrFITMAi+1Nzt+yJqRhW
-        chUo6iVyOkaxsrAJRrT11WfFDpEq4kWUCFkG8trN9HqdHoe+ukB2bL7qQVxSvdasH2oXy8UCEVYbMZDb
-        asYWdhFZjS+RvKJBczdFicgQlh3RIoIbnfmgD2kHbsMwLJ8rRZZYKialVVhKEXuE1ejSRNi39l+KEcnC
-        atcR9Z3/aUqSTusvAb8B7njvH2raxeEAAAAASUVORK5CYII=
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAJMSURBVEhL7ZRdSFRRFIXXnUqdLCsRK/Mh8M2IynoIrCjq
+        QcsyDaIhxoiakjFzRkKo7IdEs8J+oAgpplQoCDToQTQfkiFDRyRNFNQIoh+I6Cb9DRnMal3roZfKmfGt
+        DnxwYJ+z177r7LuB/ysKB4wo7v7laumIH0UdJUhITdTJqZMuZBwZMqdXvCK8j/vgqN8mgZliyuQJSWBn
+        8xfi1BuivCqEos5GrPZkSMAuorbOgGfIvDFCovIdceY9USGhop4PcN6tQuLKBRKZFo3QuMDpJ2RO02ei
+        epSo+Uhc0P7oc2KffwSbr+2SwKxIbZPAoHkoQJ7rDUnASv6JuBQkrowR57X3nAjB0daK5aWrIrHNQPGA
+        ub+D9D4i85vHmOL7yiTfNyb4QozzkTH1pP2sSVuuP4h1tTUSmRtOtxlwB0zHA7KgnXQ3j3LZ5ddcVPOC
+        aZXPmHp8mMll/ZxRGKAt594YVhy+peRZYvZEu8zA7oC56T55rFsWeYaIg4PEgX7C3Uu4ugmnLNpQ24X4
+        +TeVtFpsDFOgy1zbQubdfvsjecmAuqiP2NtFbG16idTMBiWsFV6xRswLzyLnQ3O77IktG1ZyCRT2ELnt
+        QSx1NcKIsao+KbaINBEvbBO1xzpnIL/NzKhT97hVdYHsWH/RD3tSnWLWgzrFYjEnnKp/LcBAXosZ5+ok
+        shueInlJvYJXRbHI/GlHzHghEa+sO71I33MdhmH5XC6yxUIxKaPCqitF7BDWoEsXEf+1v/vIWAWShTWu
+        o5o7f3IxCo8jfpx/8eJ37njvH+MN16YAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="BT_Position_ToolMove.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADr0AAA69AUf7kK0AAAJMSURBVEhL7ZRbSFRRGIXXsfKSZSViZfMQ+GZEZT0EVhT1
-        oGWZBpHEGFGWjJmjhFDZhcS0wi5QxFBMqVAQaNCDaD4kQ4aOSJoojBNBdIGITtJNMpjVOmNPQTHO6JsL
-        Ps4+e//7/w/r7P1jWpHI+POcApX7PSjuLEWCLVFvM8cnJ1HGCZ85u+odUfa8H/kNuzQ1V8wILk6KVGBv
-        yw/i3AeisiaA4q4mrHemayVORGydAafPvOMnUf2JuPCZqFKh4t4vsD88j8S1SxQzKxgXpoIFal6Q2c3f
-        idoRou4rcUXjk6+JQx4/tt/ap7h5IizbVGDIPOYlL/UFVMBK/o24NkrcGCMua+w8E0B+extWl69T/IRt
-        M1AyaB7uJMuekXktY0xx/2SS+xcT3AHGusnoBjLuosmoHM8oNrnqtGehCPm0GXB4zfwnZEEH6WgZ4arr
-        77ms7g1Tq1/RdnqYyRUDnFPkZVT2ozGsOX5PezLF/ODuEGRgv9fc9pg81SOLnD7i6BBxZIBw9BGFPYRd
-        Fm1xdSN+8V3F14qtYiIFus2NrWTu/Y/jyUsHdYr6iYPdxM7mt7BlNCrOJcrEBrFITMAi+1Nzt+yJqRhW
-        chUo6iVyOkaxsrAJRrT11WfFDpEq4kWUCFkG8trN9HqdHoe+ukB2bL7qQVxSvdasH2oXy8UCEVYbMZDb
-        asYWdhFZjS+RvKJBczdFicgQlh3RIoIbnfmgD2kHbsMwLJ8rRZZYKialVVhKEXuE1ejSRNi39l+KEcnC
-        atcR9Z3/aUqSTusvAb8B9SfvILiochkAAAAASUVORK5CYII=
-</value>
+  <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="BT_OUT_SUCTION.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
   </data>
   <data name="BT_Function_Touchprobe.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADr0AAA69AUf7kK0AAAJMSURBVEhL7ZRbSFRRGIXXsfKSZSViZfMQ+GZEZT0EVhT1
-        oGWZBpHEGFGWjJmjhFDZhcS0wi5QxFBMqVAQaNCDaD4kQ4aOSJoojBNBdIGITtJNMpjVOmNPQTHO6JsL
-        Ps4+e//7/w/r7P1jWpHI+POcApX7PSjuLEWCLVFvM8cnJ1HGCZ85u+odUfa8H/kNuzQ1V8wILk6KVGBv
-        yw/i3AeisiaA4q4mrHemayVORGydAafPvOMnUf2JuPCZqFKh4t4vsD88j8S1SxQzKxgXpoIFal6Q2c3f
-        idoRou4rcUXjk6+JQx4/tt/ap7h5IizbVGDIPOYlL/UFVMBK/o24NkrcGCMua+w8E0B+extWl69T/IRt
-        M1AyaB7uJMuekXktY0xx/2SS+xcT3AHGusnoBjLuosmoHM8oNrnqtGehCPm0GXB4zfwnZEEH6WgZ4arr
-        77ms7g1Tq1/RdnqYyRUDnFPkZVT2ozGsOX5PezLF/ODuEGRgv9fc9pg81SOLnD7i6BBxZIBw9BGFPYRd
-        Fm1xdSN+8V3F14qtYiIFus2NrWTu/Y/jyUsHdYr6iYPdxM7mt7BlNCrOJcrEBrFITMAi+1Nzt+yJqRhW
-        chUo6iVyOkaxsrAJRrT11WfFDpEq4kWUCFkG8trN9HqdHoe+ukB2bL7qQVxSvdasH2oXy8UCEVYbMZDb
-        asYWdhFZjS+RvKJBczdFicgQlh3RIoIbnfmgD2kHbsMwLJ8rRZZYKialVVhKEXuE1ejSRNi39l+KEcnC
-        atcR9Z3/aUqSTusvAb8B9SfvILiochkAAAAASUVORK5CYII=
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAJMSURBVEhL7ZRdSFRRFIXXnUqdLCsRK/Mh8M2IynoIrCjq
+        QcsyDaIhxoiakjFzRkKo7IfEtMJ+oAgpplQoCDToQTQfkiFDRyRNFNQIoh+I6Cb9DRnMal3roZfKmfGt
+        DnxwYJ+z177r7LuB/ysKB4wo7v7laumIH0UdJUhITdTJqZMuZBwZMqdXvCK8j/vgqN8mgZliyuQJSWBn
+        8xfi1BuivCqEos5GrPZkSMAuorbOgGfIvDFCovIdceY9USGhop4PcN49jcSVCyQyLRqhcYGqJ2RO02ei
+        epSo+Uhc0P7oc2KffwSbr+2SwKxIbZPAoHkoQJ7rDUnASv6JuBQkrowR57X3nAjB0daK5aWrIrHNQPGA
+        ub+D9D4i85vHmOL7yiTfNyb4QozzkTH1pP2sSVuuP4h1tTUSmRtOtxlwB0zHA7KgnXQ3j3LZ5ddcVPOC
+        aZXPmHp8mMll/ZxRGKAt594YVhy+peRZYvZEu8zA7oC56T55rFsWeYaIg4PEgX7C3Uu4ugmnLNpQ24X4
+        +TeVtFpsDFOgy1zbQubdfvsjecmAuqiP2NtFbG16idTMBiWsFV6xRswLzyLnQ3O77IktG1ZyCRT2ELnt
+        QSx1NcKIsao+KbaINBEvbBO1xzpnIL/NzKhT97hVdYHsWH/RD3tSnWLWgzrFYjEnnKp/LcBAXosZ5+ok
+        shueInlJvYJXRbHI/GlHzHghEa+sO71I33MdhmH5XC6yxUIxKaPCqitF7BDWoEsXEf+1v/vIWAWShTWu
+        o5o7f3IxCo8jfpx/8eJ39SfvIAKG+B0AAAAASUVORK5CYII=
 </value>
   </data>
   <data name="BT_Function_Touchprobe.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
-  </data>
-  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>665, 293</value>
   </data>
   <data name="BT_PositionSelect_ATC2.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 34</value>
   </data>
   <data name="&gt;&gt;TS_OUT.Name" xml:space="preserve">
     <value>TS_OUT</value>
+  </data>
+  <data name="BT_OUT_BLOW.Text" xml:space="preserve">
+    <value>BLOW</value>
   </data>
   <data name="LB_IN_VAC.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 32</value>
@@ -1343,26 +1352,35 @@
   <data name="BT_PositionSelect_Touchprobe.Text" xml:space="preserve">
     <value>TOUCHPROBE</value>
   </data>
-  <data name="&gt;&gt;LB_Manual.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;BT_Position_ToolMove.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;BT_Function_Laser.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="BT_OUT_SUCTION.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+  <data name="BT_PositionSelect_BDEdge.Text" xml:space="preserve">
+    <value>BD EDGE</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator16.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="LB_IN_LOAD2.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="&gt;&gt;BT_PositionSelect_PadC3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="LB_IN_LOAD.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
   </data>
   <data name="LB_IN_ATC_CLOSE.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="BT_PositionSelect_ATC.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial Narrow, 18pt, style=Bold</value>
+  <data name="BT_OUT_SUCTION.Text" xml:space="preserve">
+    <value>VACUUM</value>
+  </data>
+  <data name="TS_IN.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 37</value>
+  </data>
+  <data name="&gt;&gt;BT_PositionSelect_ATC1.Name" xml:space="preserve">
+    <value>BT_PositionSelect_ATC1</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator6.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1373,19 +1391,19 @@
   <data name="BT_OUT_ATC.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
+        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
 </value>
   </data>
   <data name="BT_PositionSelect_Ref0.Text" xml:space="preserve">
@@ -1393,6 +1411,9 @@
   </data>
   <data name="&gt;&gt;BT_PositionSelect_Pick3.Name" xml:space="preserve">
     <value>BT_PositionSelect_Pick3</value>
+  </data>
+  <data name="BT_PositionSelect_Pick.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 34</value>
   </data>
   <data name="BT_Manual_StepCycle.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1406,6 +1427,9 @@
   <data name="&gt;&gt;TS_Position.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="BT_PositionSelect_ATC3.Text" xml:space="preserve">
+    <value>ATC3</value>
+  </data>
   <data name="BT_Manual_WasteCycle.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
@@ -1415,14 +1439,11 @@
   <data name="&gt;&gt;CbB_PadIY_Separator.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;BT_PositionSelect_ATC4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="TS_Function.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 196</value>
   </data>
-  <data name="LB_Function.Text" xml:space="preserve">
-    <value>추가 기능</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>BottomRight_Head</value>
+  <data name="CbB_PadIX.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator7.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1430,8 +1451,8 @@
   <data name="LB_Function.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;BT_PositionSelect_Pick2.Name" xml:space="preserve">
-    <value>BT_PositionSelect_Pick2</value>
+  <data name="BT_Manual_StepCycle.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
   </data>
   <data name="BT_PositionSelect_Pick6.Text" xml:space="preserve">
     <value>PICK6</value>
@@ -1439,23 +1460,29 @@
   <data name="BT_Function_ATC.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
+  <data name="LB_.Size" type="System.Drawing.Size, System.Drawing">
+    <value>665, 23</value>
+  </data>
   <data name="BT_Manual_SingleCycle.Text" xml:space="preserve">
     <value>Single Cycle</value>
   </data>
-  <data name="&gt;&gt;BT_PositionSelect_Pick4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="TS_IN.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9pt</value>
   </data>
   <data name="&gt;&gt;BT_Manual_PickupCycle.Name" xml:space="preserve">
     <value>BT_Manual_PickupCycle</value>
   </data>
-  <data name="CbB_PadIY.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 39</value>
-  </data>
-  <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="toolStripSeparator21.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
   </data>
-  <data name="&gt;&gt;LB_IN_ATC_CLOSE.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;CbB_PadIX_Separator.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TS_IN_ATC_CLOSE.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BT_PositionSelect_Pick2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 34</value>
   </data>
   <data name="&gt;&gt;BT_OUT_SUCTION.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1463,20 +1490,14 @@
   <data name="BT_Position_CameraMove.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="BT_OUT_BLOW.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
+    <value>toolStripSeparator1</value>
   </data>
   <data name="BT_PositionSelect_Pick8.Size" type="System.Drawing.Size, System.Drawing">
     <value>143, 34</value>
   </data>
-  <data name="&gt;&gt;BT_PositionSelect_ATC2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="toolStripSeparator18.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
-  </data>
-  <data name="TS_Function.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 196</value>
   </data>
   <data name="&gt;&gt;TS_Function.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1487,27 +1508,27 @@
   <data name="&gt;&gt;BT_OUT_LASER.Name" xml:space="preserve">
     <value>BT_OUT_LASER</value>
   </data>
-  <data name="&gt;&gt;BT_PositionSelect_Ref0.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="BT_Manual_StepCycle.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADr0AAA69AUf7kK0AAAJMSURBVEhL7ZRbSFRRGIXXsfKSZSViZfMQ+GZEZT0EVhT1
-        oGWZBpHEGFGWjJmjhFDZhcS0wi5QxFBMqVAQaNCDaD4kQ4aOSJoojBNBdIGITtJNMpjVOmNPQTHO6JsL
-        Ps4+e//7/w/r7P1jWpHI+POcApX7PSjuLEWCLVFvM8cnJ1HGCZ85u+odUfa8H/kNuzQ1V8wILk6KVGBv
-        yw/i3AeisiaA4q4mrHemayVORGydAafPvOMnUf2JuPCZqFKh4t4vsD88j8S1SxQzKxgXpoIFal6Q2c3f
-        idoRou4rcUXjk6+JQx4/tt/ap7h5IizbVGDIPOYlL/UFVMBK/o24NkrcGCMua+w8E0B+extWl69T/IRt
-        M1AyaB7uJMuekXktY0xx/2SS+xcT3AHGusnoBjLuosmoHM8oNrnqtGehCPm0GXB4zfwnZEEH6WgZ4arr
-        77ms7g1Tq1/RdnqYyRUDnFPkZVT2ozGsOX5PezLF/ODuEGRgv9fc9pg81SOLnD7i6BBxZIBw9BGFPYRd
-        Fm1xdSN+8V3F14qtYiIFus2NrWTu/Y/jyUsHdYr6iYPdxM7mt7BlNCrOJcrEBrFITMAi+1Nzt+yJqRhW
-        chUo6iVyOkaxsrAJRrT11WfFDpEq4kWUCFkG8trN9HqdHoe+ukB2bL7qQVxSvdasH2oXy8UCEVYbMZDb
-        asYWdhFZjS+RvKJBczdFicgQlh3RIoIbnfmgD2kHbsMwLJ8rRZZYKialVVhKEXuE1ejSRNi39l+KEcnC
-        atcR9Z3/aUqSTusvAb8B9SfvILiochkAAAAASUVORK5CYII=
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAJMSURBVEhL7ZRdSFRRFIXXnUqdLCsRK/Mh8M2IynoIrCjq
+        QcsyDaIhxoiakjFzRkKo7IfEtMJ+oAgpplQoCDToQTQfkiFDRyRNFNQIoh+I6Cb9DRnMal3roZfKmfGt
+        DnxwYJ+z177r7LuB/ysKB4wo7v7laumIH0UdJUhITdTJqZMuZBwZMqdXvCK8j/vgqN8mgZliyuQJSWBn
+        8xfi1BuivCqEos5GrPZkSMAuorbOgGfIvDFCovIdceY9USGhop4PcN49jcSVCyQyLRqhcYGqJ2RO02ei
+        epSo+Uhc0P7oc2KffwSbr+2SwKxIbZPAoHkoQJ7rDUnASv6JuBQkrowR57X3nAjB0daK5aWrIrHNQPGA
+        ub+D9D4i85vHmOL7yiTfNyb4QozzkTH1pP2sSVuuP4h1tTUSmRtOtxlwB0zHA7KgnXQ3j3LZ5ddcVPOC
+        aZXPmHp8mMll/ZxRGKAt594YVhy+peRZYvZEu8zA7oC56T55rFsWeYaIg4PEgX7C3Uu4ugmnLNpQ24X4
+        +TeVtFpsDFOgy1zbQubdfvsjecmAuqiP2NtFbG16idTMBiWsFV6xRswLzyLnQ3O77IktG1ZyCRT2ELnt
+        QSx1NcKIsao+KbaINBEvbBO1xzpnIL/NzKhT97hVdYHsWH/RD3tSnWLWgzrFYjEnnKp/LcBAXosZ5+ok
+        shueInlJvYJXRbHI/GlHzHghEa+sO71I33MdhmH5XC6yxUIxKaPCqitF7BDWoEsXEf+1v/vIWAWShTWu
+        o5o7f3IxCo8jfpx/8eJ39SfvIAKG+B0AAAAASUVORK5CYII=
 </value>
   </data>
   <data name="BT_PositionSelect_Pick1.Size" type="System.Drawing.Size, System.Drawing">
     <value>143, 34</value>
+  </data>
+  <data name="BT_PositionSelect_Ref.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 34</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator15.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1515,8 +1536,8 @@
   <data name="BT_PositionSelect_ATC4.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 34</value>
   </data>
-  <data name="BT_PositionSelect_BDEdge.Text" xml:space="preserve">
-    <value>BD EDGE</value>
+  <data name="CbB_PadIX.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="BT_PositionSelect_Pick4.Text" xml:space="preserve">
     <value>PICK4</value>
@@ -1527,26 +1548,26 @@
   <data name="toolStripSeparator16.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
   </data>
-  <data name="&gt;&gt;BT_PositionSelect_Pick3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;BT_Position_CameraMove.Name" xml:space="preserve">
+    <value>BT_Position_CameraMove</value>
   </data>
   <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator9.Name" xml:space="preserve">
-    <value>toolStripSeparator9</value>
+  <data name="TS_Function.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>None</value>
   </data>
-  <data name="toolStripSeparator21.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
+  <data name="LB_.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 8.25pt</value>
   </data>
-  <data name="&gt;&gt;LB_IN_LOAD2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;BT_Manual_StepCycle.Name" xml:space="preserve">
+    <value>BT_Manual_StepCycle</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="toolStripSeparator13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
+  <data name="LB_.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
   </data>
   <data name="&gt;&gt;BT_PositionSelect_Pick4.Name" xml:space="preserve">
     <value>BT_PositionSelect_Pick4</value>
@@ -1554,11 +1575,8 @@
   <data name="BT_PositionSelect.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;BT_PositionSelect_PadC3.Type" xml:space="preserve">
+  <data name="&gt;&gt;BT_PositionSelect_Ref1_2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="BT_Manual_SingleCycle.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1569,17 +1587,14 @@
   <data name="toolStripSeparator19.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
   </data>
-  <data name="&gt;&gt;BT_Position_CameraMove.Name" xml:space="preserve">
-    <value>BT_Position_CameraMove</value>
-  </data>
-  <data name="&gt;&gt;BT_PositionSelect.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="BT_PositionSelect_Pad.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 34</value>
+  <data name="&gt;&gt;TS_Position.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;BT_PositionSelect_BDEdge.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TS_Manual.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>None</value>
   </data>
   <data name="TS_Position.Text" xml:space="preserve">
     <value>toolStrip11</value>
@@ -1596,56 +1611,53 @@
   <data name="&gt;&gt;toolStripSeparator10.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator19.Name" xml:space="preserve">
     <value>toolStripSeparator19</value>
   </data>
-  <data name="TS_IN.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9pt</value>
-  </data>
   <data name="&gt;&gt;BT_PositionSelect_Pick2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;BT_PositionSelect_ULC.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
+    <value>toolStripSeparator2</value>
   </data>
-  <data name="BT_PositionSelect_Ref.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 34</value>
+  <data name="BT_Function_Laser.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
   </data>
   <data name="BT_OUT_BLOW.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 32</value>
   </data>
-  <data name="&gt;&gt;BT_PositionSelect_Ref1_2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="toolStripSeparator14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="&gt;&gt;BT_PositionSelect.Name" xml:space="preserve">
+    <value>BT_PositionSelect</value>
   </data>
   <data name="toolStripSeparator17.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
   </data>
-  <data name="&gt;&gt;LB_OUT.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;BT_PositionSelect_Pick7.Name" xml:space="preserve">
     <value>BT_PositionSelect_Pick7</value>
   </data>
-  <data name="TS_Manual.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>None</value>
+  <data name="TS_IN_ATC_OPEN.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
   </data>
   <data name="BT_Function_Laser.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADr0AAA69AUf7kK0AAAJMSURBVEhL7ZRbSFRRGIXXsfKSZSViZfMQ+GZEZT0EVhT1
-        oGWZBpHEGFGWjJmjhFDZhUSzwi5QxFBMqVAQaNCDaD4kQ4aOSJoojBNBdIGITtJNMpjVOmNPQTHO6JsL
-        Ps4+e//7/w/r7P1jWpHI+POcApX7PSjuLEWCLVFvM8cnJ1HGCZ85u+odUfa8H/kNuzQ1V8wILk6KVGBv
-        yw/i3AeisiaA4q4mrHemayVORGydAafPvOMnUf2JuPCZqFKh4t4vsD+sQeLaJYqZFYwLU8EC51+Q2c3f
-        idoRou4rcUXjk6+JQx4/tt/ap7h5IizbVGDIPOYlL/UFVMBK/o24NkrcGCMua+w8E0B+extWl69T/IRt
-        M1AyaB7uJMuekXktY0xx/2SS+xcT3AHGusnoBjLuosmoHM8oNrnqtGehCPm0GXB4zfwnZEEH6WgZ4arr
-        77ms7g1Tq1/RdnqYyRUDnFPkZVT2ozGsOX5PezLF/ODuEGRgv9fc9pg81SOLnD7i6BBxZIBw9BGFPYRd
-        Fm1xdSN+8V3F14qtYiIFus2NrWTu/Y/jyUsHdYr6iYPdxM7mt7BlNCrOJcrEBrFITMAi+1Nzt+yJqRhW
-        chUo6iVyOkaxsrAJRrT11WfFDpEq4kWUCFkG8trN9HqdHoe+ukB2bL7qQVxSvdasH2oXy8UCEVYbMZDb
-        asYWdhFZjS+RvKJBczdFicgQlh3RIoIbnfmgD2kHbsMwLJ8rRZZYKialVVhKEXuE1ejSRNi39l+KEcnC
-        atcR9Z3/aUqSTusvAb8B7njvH2raxeEAAAAASUVORK5CYII=
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAJMSURBVEhL7ZRdSFRRFIXXnUqdLCsRK/Mh8M2IynoIrCjq
+        QcsyDaIhxoiakjFzRkKo7IdEs8J+oAgpplQoCDToQTQfkiFDRyRNFNQIoh+I6Cb9DRnMal3roZfKmfGt
+        DnxwYJ+z177r7LuB/ysKB4wo7v7laumIH0UdJUhITdTJqZMuZBwZMqdXvCK8j/vgqN8mgZliyuQJSWBn
+        8xfi1BuivCqEos5GrPZkSMAuorbOgGfIvDFCovIdceY9USGhop4PcN6tQuLKBRKZFo3QuMDpJ2RO02ei
+        epSo+Uhc0P7oc2KffwSbr+2SwKxIbZPAoHkoQJ7rDUnASv6JuBQkrowR57X3nAjB0daK5aWrIrHNQPGA
+        ub+D9D4i85vHmOL7yiTfNyb4QozzkTH1pP2sSVuuP4h1tTUSmRtOtxlwB0zHA7KgnXQ3j3LZ5ddcVPOC
+        aZXPmHp8mMll/ZxRGKAt594YVhy+peRZYvZEu8zA7oC56T55rFsWeYaIg4PEgX7C3Uu4ugmnLNpQ24X4
+        +TeVtFpsDFOgy1zbQubdfvsjecmAuqiP2NtFbG16idTMBiWsFV6xRswLzyLnQ3O77IktG1ZyCRT2ELnt
+        QSx1NcKIsao+KbaINBEvbBO1xzpnIL/NzKhT97hVdYHsWH/RD3tSnWLWgzrFYjEnnKp/LcBAXosZ5+ok
+        shueInlJvYJXRbHI/GlHzHghEa+sO71I33MdhmH5XC6yxUIxKaPCqitF7BDWoEsXEf+1v/vIWAWShTWu
+        o5o7f3IxCo8jfpx/8eJ37njvH+MN16YAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="&gt;&gt;LB_IN_ATC_CLOSE.Name" xml:space="preserve">
@@ -1655,28 +1667,35 @@
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
-        AAAB60lEQVRIS+2VsU7DMBCGO/IMvANIDOUheI0ysVaIPgRsGTt06UaGDh1ZGLrBwMDAgMTM0InZ6DP+
-        o8NcnKSiYuGkT6kT5z6f7bij/yjFZrMJ8PT6Eq+W1OX3QqLtdttAW+xF3ia0sly6Wq8CpObwsFLJ0qNi
-        1HUdRLrVP6xUwvXdOlTPVTh/uAhHH2cRfsPicfFNsqyXYT6fD5N7UoSIjsNpKzy3A0BcVVU/OSJPmksO
-        w0lD/kxy1hkxdK65quVKO5ciOnCwA7CVU/XsZhannXZr2GpZUzu9CGhDLhbqO34fxyoBMSTFz9A0e9VS
-        EcLbt/u4mfpUTj/yIJ1eTtunOxfzopKQFLE2WS60WHG1rOI0I2atoygPhKBNpQS2urZKLaqa6Z5cT6Kw
-        KEZoxVRm5X3ROxJPrr5oXedcrAS7MkgsaNs13oWdxd7BMQQGbsUQRV5IStSbOu5gL2kXebWCXZ7Sl2OX
-        qtlgUeqIiwcJH7o92IfKvSmOpMGktH4g5q9Np40ODk8kmun1pEbceoIRiDlxQB25Ug0gsTRVdkghCkqB
-        XH9rdgBsEJuowRMK0y8m7wrJ2RSCQXDPFXgYaXFzeYGMlzhzhSuxGKFg36SUw8JOv9CASkLo/Q0PDRIz
-        iFzIvb1J8yh+Mn8bo9EnpdQXVpEtIdAAAAAASUVORK5CYII=
+        AAACCElEQVRIS+2WrU4DURBGK3kG3gESRHkIXqMobEPoQ4BbWVFTx4qKSgxiHQgEAkGCRlShLzmXfpvp
+        zf3bpnU0mex2d7pnvpnZmY5G/59MBrquc9jb54c/Wjt44gTabDZOBlh2FDgPjwFDtXyX4tV65bC9M2Ch
+        Sm3Nw9q2dbIa/x0fC5Wa9dPaNe+Nu365cWc/V944xxavix2Fy3bp5vO5D6AaHoMCBHTuLpPGfRsA4KZp
+        6uCoU02lFGgIPHUXThbeE5w6A8aKNZdajqQohAI7iRjXFYBVjurZw8ynPZtyq5aa2vQCVG1jcK4JPv4e
+        e5UYYCwJVppjalEE9PHr2TdTjXL8gAGd3k7T6Q7B/FAKpFZNllJsVfP7Ztn4NAOm1lHVdhLhIKhVl1Jq
+        A1G9SffkfuKBWbCdwYBtfW0Xl85tnQFP7v4sWecQnHtna+5JcRVYMxjFtsY1oNBnb3BscAwJgMBtqlGe
+        faV0s+3a4phMBRKqVbrp8qrZvY9qms8rNY1VrDPRMG3sVhkKj6XYg7fBZBUDZrVpuNdspz69EaUWnF0Y
+        gJk4mBw5av8CsdarLEBRXawxcK01GwAN0tdQtUwBt8PD+hfBOAiuDaMVR0BqmOLRBJfdUrGItFeZubIh
+        QCmmb6oUh042/SqD1l4fiE2/Oa9+h4dGxoMJIqw/144GDYMs/scaquqQ/r+l1BdWdfIAXAAAAABJRU5E
+        rkJggg==
 </value>
+  </data>
+  <data name="&gt;&gt;TS_IN_ATC_OPEN.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="BT_PositionSelect_Pick3.Size" type="System.Drawing.Size, System.Drawing">
     <value>143, 34</value>
   </data>
-  <data name="BT_PositionSelect_PadC2.Text" xml:space="preserve">
-    <value>PAD C2</value>
+  <data name="TS_OUT.TabIndex" type="System.Int32, mscorlib">
+    <value>75</value>
   </data>
-  <data name="&gt;&gt;CbB_PadIX_Separator.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="LB_IN_LOAD2.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="LB_IN_DOUBLE.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+  <data name="&gt;&gt;toolStripSeparator4.Name" xml:space="preserve">
+    <value>toolStripSeparator4</value>
+  </data>
+  <data name="CbB_PadIX_Separator.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
   </data>
   <data name="toolStripButton1.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1684,32 +1703,35 @@
   <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
     <value>toolStripSeparator3</value>
   </data>
-  <data name="TS_IN.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 37</value>
+  <data name="&gt;&gt;BT_Manual_SingleCycle.Name" xml:space="preserve">
+    <value>BT_Manual_SingleCycle</value>
   </data>
-  <data name="BT_PositionSelect_BDEdge.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial Narrow, 18pt, style=Bold</value>
+  <data name="BT_PositionSelect_Ref1_2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>158, 34</value>
   </data>
-  <data name="&gt;&gt;BT_PositionSelect_Pick6.Name" xml:space="preserve">
-    <value>BT_PositionSelect_Pick6</value>
+  <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="LB_OUT.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9pt, style=Bold</value>
+  <data name="BT_PositionSelect_Pick7.Text" xml:space="preserve">
+    <value>PICK7</value>
+  </data>
+  <data name="&gt;&gt;BT_PositionSelect_ATC2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="BT_Manual_WasteCycle.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADr0AAA69AUf7kK0AAAJMSURBVEhL7ZRbSFRRGIXXsfKSZSViZfMQ+GZEZT0EVhT1
-        oGWZBpHEGFGWjJmjhFDZhcS0wi5QxFBMqVAQaNCDaD4kQ4aOSJoojBNBdIGITtJNMpjVOmNPQTHO6JsL
-        Ps4+e//7/w/r7P1jWpHI+POcApX7PSjuLEWCLVFvM8cnJ1HGCZ85u+odUfa8H/kNuzQ1V8wILk6KVGBv
-        yw/i3AeisiaA4q4mrHemayVORGydAafPvOMnUf2JuPCZqFKh4t4vsD88j8S1SxQzKxgXpoIFal6Q2c3f
-        idoRou4rcUXjk6+JQx4/tt/ap7h5IizbVGDIPOYlL/UFVMBK/o24NkrcGCMua+w8E0B+extWl69T/IRt
-        M1AyaB7uJMuekXktY0xx/2SS+xcT3AHGusnoBjLuosmoHM8oNrnqtGehCPm0GXB4zfwnZEEH6WgZ4arr
-        77ms7g1Tq1/RdnqYyRUDnFPkZVT2ozGsOX5PezLF/ODuEGRgv9fc9pg81SOLnD7i6BBxZIBw9BGFPYRd
-        Fm1xdSN+8V3F14qtYiIFus2NrWTu/Y/jyUsHdYr6iYPdxM7mt7BlNCrOJcrEBrFITMAi+1Nzt+yJqRhW
-        chUo6iVyOkaxsrAJRrT11WfFDpEq4kWUCFkG8trN9HqdHoe+ukB2bL7qQVxSvdasH2oXy8UCEVYbMZDb
-        asYWdhFZjS+RvKJBczdFicgQlh3RIoIbnfmgD2kHbsMwLJ8rRZZYKialVVhKEXuE1ejSRNi39l+KEcnC
-        atcR9Z3/aUqSTusvAb8B9SfvILiochkAAAAASUVORK5CYII=
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAJMSURBVEhL7ZRdSFRRFIXXnUqdLCsRK/Mh8M2IynoIrCjq
+        QcsyDaIhxoiakjFzRkKo7IfEtMJ+oAgpplQoCDToQTQfkiFDRyRNFNQIoh+I6Cb9DRnMal3roZfKmfGt
+        DnxwYJ+z177r7LuB/ysKB4wo7v7laumIH0UdJUhITdTJqZMuZBwZMqdXvCK8j/vgqN8mgZliyuQJSWBn
+        8xfi1BuivCqEos5GrPZkSMAuorbOgGfIvDFCovIdceY9USGhop4PcN49jcSVCyQyLRqhcYGqJ2RO02ei
+        epSo+Uhc0P7oc2KffwSbr+2SwKxIbZPAoHkoQJ7rDUnASv6JuBQkrowR57X3nAjB0daK5aWrIrHNQPGA
+        ub+D9D4i85vHmOL7yiTfNyb4QozzkTH1pP2sSVuuP4h1tTUSmRtOtxlwB0zHA7KgnXQ3j3LZ5ddcVPOC
+        aZXPmHp8mMll/ZxRGKAt594YVhy+peRZYvZEu8zA7oC56T55rFsWeYaIg4PEgX7C3Uu4ugmnLNpQ24X4
+        +TeVtFpsDFOgy1zbQubdfvsjecmAuqiP2NtFbG16idTMBiWsFV6xRswLzyLnQ3O77IktG1ZyCRT2ELnt
+        QSx1NcKIsao+KbaINBEvbBO1xzpnIL/NzKhT97hVdYHsWH/RD3tSnWLWgzrFYjEnnKp/LcBAXosZ5+ok
+        shueInlJvYJXRbHI/GlHzHghEa+sO71I33MdhmH5XC6yxUIxKaPCqitF7BDWoEsXEf+1v/vIWAWShTWu
+        o5o7f3IxCo8jfpx/8eJ39SfvIAKG+B0AAAAASUVORK5CYII=
 </value>
   </data>
   <data name="BT_OUT_ATC.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -1721,8 +1743,8 @@
   <data name="toolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 35</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>en-US</value>
   </metadata>
   <metadata name="TS_IN.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>124, 16</value>
@@ -1730,19 +1752,19 @@
   <metadata name="TS_Position.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>295, 18</value>
   </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <metadata name="TS_Manual.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <metadata name="TS_OUT.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>204, 17</value>
   </metadata>
-  <metadata name="timer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>558, 18</value>
-  </metadata>
   <metadata name="TS_Function.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>414, 18</value>
   </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>en-US</value>
+  <metadata name="timer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>558, 18</value>
   </metadata>
 </root>

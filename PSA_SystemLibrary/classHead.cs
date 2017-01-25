@@ -1602,6 +1602,8 @@ namespace PSA_SystemLibrary
 		public double PostForce;
 		public double PostVolt;
 
+        public int comparePos = 1000;
+
 		PAD_STATUS placeResult;
 
 		public bool isActivate
@@ -2798,7 +2800,7 @@ namespace PSA_SystemLibrary
 						mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG1, true, out ret.message);
 						mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG2, true, out ret.message);
 						errorCheck(ERRORCODE.FULL, sqc, "", ALARM_CODE.E_MACHINE_RUN_HEAT_SLUG_EMPTY); break;
-						sqc = 70; break;
+						//sqc = 70; break;
 						//errorCheck(ERRORCODE.SF, sqc, "Stack Feeder Tube Empty"); break;
 						//if (mc.sf.workingTubeNumber == UnitCodeSF.INVALID)
 						//{
@@ -2988,8 +2990,8 @@ namespace PSA_SystemLibrary
 
 				#region case 20 XY.move.REF0
 				case 20:
-					Y.moveCompare(cPos.y.REF0, Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-					X.moveCompare(cPos.x.REF0, Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+					Y.moveCompare(cPos.y.REF0, Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+					X.moveCompare(cPos.x.REF0, Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
 				case 21:
@@ -3224,7 +3226,7 @@ namespace PSA_SystemLibrary
 				case 40:
 					mc.hd.withoutPick = false;
 					mc.log.mcclog.write(mc.log.MCCCODE.HEAD_MOVE_ULC_POS, 0);
-					tmpPos = Math.Max(tPos.z.XY_MOVING - 3000, tPos.z.DOUBLE_DET - 5000);
+					tmpPos = Math.Max(tPos.z.XY_MOVING - comparePos, tPos.z.DOUBLE_DET - 5000);
                     if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
                     {
                         Y.moveCompare(tPos.y.ULC, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
@@ -3801,23 +3803,23 @@ namespace PSA_SystemLibrary
 					Z.move(tPos.z.XY_MOVING, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break; 
 					if (mc.para.HDC.fiducialPos.value == 0) 
 					{
-						Y.moveCompare(cPos.y.PADC1(padY), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;  
-						X.moveCompare(cPos.x.PADC1(padX), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						Y.moveCompare(cPos.y.PADC1(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;  
+						X.moveCompare(cPos.x.PADC1(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					else if (mc.para.HDC.fiducialPos.value == 1)
 					{
-						Y.moveCompare(cPos.y.PADC2(padY), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.moveCompare(cPos.x.PADC2(padX), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						Y.moveCompare(cPos.y.PADC2(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+						X.moveCompare(cPos.x.PADC2(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					else if (mc.para.HDC.fiducialPos.value == 2)
 					{
-						Y.moveCompare(cPos.y.PADC3(padY), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.moveCompare(cPos.x.PADC3(padX), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						Y.moveCompare(cPos.y.PADC3(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+						X.moveCompare(cPos.x.PADC3(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					else
 					{
-						Y.moveCompare(cPos.y.PADC4(padY), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.moveCompare(cPos.x.PADC4(padX), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						Y.moveCompare(cPos.y.PADC4(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+						X.moveCompare(cPos.x.PADC4(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					dwell.Reset();
 					sqc++; break;
@@ -3984,19 +3986,19 @@ namespace PSA_SystemLibrary
 						{
 							if (mc.para.HDC.detectDirection.value == 0)
 							{
-								Y.moveCompare(cPos.y.PADC2(padY), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-								X.moveCompare(cPos.x.PADC2(padX), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+								Y.moveCompare(cPos.y.PADC2(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+								X.moveCompare(cPos.x.PADC2(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 							}
 							else
 							{
-								Y.moveCompare(cPos.y.PADC1(padY), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-								X.moveCompare(cPos.x.PADC1(padX), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+								Y.moveCompare(cPos.y.PADC1(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+								X.moveCompare(cPos.x.PADC1(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 							}
 						}
 						else
 						{
-							Y.moveCompare(cPos.y.M_POS_P1(padY), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.moveCompare(cPos.x.M_POS_P1(padX), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+							Y.moveCompare(cPos.y.M_POS_P1(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							X.moveCompare(cPos.x.M_POS_P1(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 					}
 					dwell.Reset();
@@ -9116,13 +9118,13 @@ namespace PSA_SystemLibrary
 					{
                         if (mc.para.HS.detectDirection.value == 0)
                         {
-                            Y.moveCompare(cPos.y.HSPADC2(padY), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-                            X.moveCompare(cPos.x.HSPADC2(padX), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                            Y.moveCompare(cPos.y.HSPADC2(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                            X.moveCompare(cPos.x.HSPADC2(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
                         }
                         else
                         {
-                            Y.moveCompare(cPos.y.HSPADC1(padY), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-                            X.moveCompare(cPos.x.HSPADC1(padX), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                            Y.moveCompare(cPos.y.HSPADC1(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                            X.moveCompare(cPos.x.HSPADC1(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
                         }
 					}
 					dwell.Reset();
@@ -10640,23 +10642,23 @@ namespace PSA_SystemLibrary
 					Z.move(tPos.z.XY_MOVING, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
 					if (mc.para.HDC.fiducialPos.value == 0)
 					{
-						Y.moveCompare(cPos.y.PADC1(padY), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.moveCompare(cPos.x.PADC1(padX), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						Y.moveCompare(cPos.y.PADC1(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+						X.moveCompare(cPos.x.PADC1(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					else if (mc.para.HDC.fiducialPos.value == 1)
 					{
-						Y.moveCompare(cPos.y.PADC2(padY), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.moveCompare(cPos.x.PADC2(padX), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						Y.moveCompare(cPos.y.PADC2(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+						X.moveCompare(cPos.x.PADC2(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					else if (mc.para.HDC.fiducialPos.value == 2)
 					{
-						Y.moveCompare(cPos.y.PADC3(padY), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.moveCompare(cPos.x.PADC3(padX), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						Y.moveCompare(cPos.y.PADC3(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+						X.moveCompare(cPos.x.PADC3(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					else
 					{
-						Y.moveCompare(cPos.y.PADC4(padY), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.moveCompare(cPos.x.PADC4(padX), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						Y.moveCompare(cPos.y.PADC4(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+						X.moveCompare(cPos.x.PADC4(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					dwell.Reset();
 					sqc++; break;
@@ -10815,13 +10817,13 @@ namespace PSA_SystemLibrary
 					{
 						if (mc.para.HDC.detectDirection.value == 0)
 						{
-							Y.moveCompare(cPos.y.PADC2(padY), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.moveCompare(cPos.x.PADC2(padX), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+							Y.moveCompare(cPos.y.PADC2(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							X.moveCompare(cPos.x.PADC2(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 						else
 						{
-							Y.moveCompare(cPos.y.PADC1(padY), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.moveCompare(cPos.x.PADC1(padX), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+							Y.moveCompare(cPos.y.PADC1(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							X.moveCompare(cPos.x.PADC1(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 					}
 					dwell.Reset();
@@ -13883,23 +13885,23 @@ namespace PSA_SystemLibrary
 					Z.move(tPos.z.XY_MOVING, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
 					if (mc.para.HDC.fiducialPos.value == 0)
 					{
-						Y.moveCompare(cPos.y.PADC1(padY), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.moveCompare(cPos.x.PADC1(padX), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						Y.moveCompare(cPos.y.PADC1(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+						X.moveCompare(cPos.x.PADC1(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					else if (mc.para.HDC.fiducialPos.value == 1)
 					{
-						Y.moveCompare(cPos.y.PADC2(padY), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.moveCompare(cPos.x.PADC2(padX), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						Y.moveCompare(cPos.y.PADC2(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+						X.moveCompare(cPos.x.PADC2(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					else if (mc.para.HDC.fiducialPos.value == 2)
 					{
-						Y.moveCompare(cPos.y.PADC3(padY), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.moveCompare(cPos.x.PADC3(padX), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						Y.moveCompare(cPos.y.PADC3(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+						X.moveCompare(cPos.x.PADC3(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					else
 					{
-						Y.moveCompare(cPos.y.PADC4(padY), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.moveCompare(cPos.x.PADC4(padX), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						Y.moveCompare(cPos.y.PADC4(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+						X.moveCompare(cPos.x.PADC4(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					dwell.Reset();
 					sqc++; break;
@@ -14056,13 +14058,13 @@ namespace PSA_SystemLibrary
 					{
 						if (mc.para.HDC.detectDirection.value == 0)
 						{
-							Y.moveCompare(cPos.y.PADC2(padY), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.moveCompare(cPos.x.PADC2(padX), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+							Y.moveCompare(cPos.y.PADC2(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							X.moveCompare(cPos.x.PADC2(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 						else
 						{
-							Y.moveCompare(cPos.y.PADC1(padY), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.moveCompare(cPos.x.PADC1(padX), Z.config, tPos.z.XY_MOVING - 3000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+							Y.moveCompare(cPos.y.PADC1(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							X.moveCompare(cPos.x.PADC1(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 					}
 					#endregion
@@ -17663,7 +17665,7 @@ namespace PSA_SystemLibrary
 				case 20:
 					double tmpPos;
 					Y.commandPosition(out ret.d, out ret.message);if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-					if (ret.d - tPos.y.PAD(0) < 10000) tmpPos = tPos.z.XY_MOVING - 2000; else tmpPos = tPos.z.XY_MOVING - 3500;
+					if (ret.d - tPos.y.PAD(0) < 10000) tmpPos = tPos.z.XY_MOVING - comparePos; else tmpPos = tPos.z.XY_MOVING - 3500;
 					Y.moveCompare(cPos.y.REF0, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 					X.moveCompare(cPos.x.REF0, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					T.moveCompare(tPos.t.ZERO, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(T.config.axisCode, sqc, ret.message)) break;
@@ -17829,7 +17831,7 @@ namespace PSA_SystemLibrary
 				case 20:
 					double tmpPos;
 					Y.commandPosition(out ret.d, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-					if (ret.d - tPos.y.PAD(0) < 10000) tmpPos = tPos.z.XY_MOVING - 2000; else tmpPos = tPos.z.XY_MOVING - 3500;
+					if (ret.d - tPos.y.PAD(0) < 10000) tmpPos = tPos.z.XY_MOVING - comparePos; else tmpPos = tPos.z.XY_MOVING - 3500;
 					Y.moveCompare(mc.para.CAL.standbyPosition.y.value, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 					X.moveCompare(mc.para.CAL.standbyPosition.x.value, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					T.moveCompare(tPos.t.ZERO, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(T.config.axisCode, sqc, ret.message)) break;
@@ -17999,7 +18001,7 @@ namespace PSA_SystemLibrary
 				case 20:
 					 double tmpPos;
 					Y.commandPosition(out ret.d, out ret.message);if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-					if (ret.d - tPos.y.PAD(0) < 10000) tmpPos = tPos.z.XY_MOVING - 2000; else tmpPos = tPos.z.XY_MOVING - 3500;
+					if (ret.d - tPos.y.PAD(0) < 10000) tmpPos = tPos.z.XY_MOVING - comparePos; else tmpPos = tPos.z.XY_MOVING - 3500;
 					Y.moveCompare(tPos.y.WASTE, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 					X.moveCompare(tPos.x.WASTE, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					T.moveCompare(tPos.t.ZERO, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(T.config.axisCode, sqc, ret.message)) break;
@@ -19056,9 +19058,9 @@ namespace PSA_SystemLibrary
 
 				#region case 20 XY.move.PADC1
 				case 20:
-					Y.moveCompare(cPos.y.PADC1(padY), Z.config, tPos.z.XY_MOVING - 2000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-					X.moveCompare(cPos.x.PADC1(padX), Z.config, tPos.z.XY_MOVING - 2000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-					T.moveCompare(tPos.t.ZERO, Z.config, tPos.z.XY_MOVING - 2000, true, false, out ret.message); if (mpiCheck(T.config.axisCode, sqc, ret.message)) break;
+					Y.moveCompare(cPos.y.PADC1(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+					X.moveCompare(cPos.x.PADC1(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+					T.moveCompare(tPos.t.ZERO, Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(T.config.axisCode, sqc, ret.message)) break;
 					sqc++; break;
 				case 21:
 					if (!Z_AT_TARGET) break;
@@ -19108,9 +19110,9 @@ namespace PSA_SystemLibrary
 
 				#region case 40 XY.move.PADC3
 				case 40:
-					Y.moveCompare(cPos.y.PADC3(padY), Z.config, tPos.z.XY_MOVING - 2000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-					X.moveCompare(cPos.x.PADC3(padX), Z.config, tPos.z.XY_MOVING - 2000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-					T.moveCompare(tPos.t.ZERO, Z.config, tPos.z.XY_MOVING - 2000, true, false, out ret.message); if (mpiCheck(T.config.axisCode, sqc, ret.message)) break;
+					Y.moveCompare(cPos.y.PADC3(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+					X.moveCompare(cPos.x.PADC3(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+					T.moveCompare(tPos.t.ZERO, Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(T.config.axisCode, sqc, ret.message)) break;
 					sqc++; break;
 				case 41:
 					if (!Z_AT_TARGET) break;
@@ -19318,13 +19320,13 @@ namespace PSA_SystemLibrary
 				#region case 20 XY.move.PADC1
 				case 20:
 					// 기존 
-					//Y.moveCompare(lPos.y.PADC1(padY), Z.config, tPos.z.XY_MOVING - 2000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-					//X.moveCompare(lPos.x.PADC1(padX), Z.config, tPos.z.XY_MOVING - 2000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+					//Y.moveCompare(lPos.y.PADC1(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+					//X.moveCompare(lPos.x.PADC1(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 
-					Y.moveCompare(lPos.y.LASER_CHECK_PADC1(padY), Z.config, tPos.z.XY_MOVING - 2000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-					X.moveCompare(lPos.x.LASER_CHECK_PADC1(padX), Z.config, tPos.z.XY_MOVING - 2000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+					Y.moveCompare(lPos.y.LASER_CHECK_PADC1(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+					X.moveCompare(lPos.x.LASER_CHECK_PADC1(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 
-					T.moveCompare(tPos.t.ZERO, Z.config, tPos.z.XY_MOVING - 2000, true, false, out ret.message); if (mpiCheck(T.config.axisCode, sqc, ret.message)) break;
+					T.moveCompare(tPos.t.ZERO, Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(T.config.axisCode, sqc, ret.message)) break;
 					sqc++; break;
 				case 21:
 					if (!Z_AT_TARGET) break;
@@ -19555,13 +19557,13 @@ namespace PSA_SystemLibrary
                 #region case 20 XY.move.PADC1
                 case 20:
                     // 기존 
-                    //Y.moveCompare(lPos.y.PADC1(padY), Z.config, tPos.z.XY_MOVING - 2000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-                    //X.moveCompare(lPos.x.PADC1(padX), Z.config, tPos.z.XY_MOVING - 2000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                    //Y.moveCompare(lPos.y.PADC1(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                    //X.moveCompare(lPos.x.PADC1(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 
-                    Y.moveCompare(lPos.y.LASER_CHECK_PADC1(padY), Z.config, tPos.z.XY_MOVING - 2000, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-                    X.moveCompare(lPos.x.LASER_CHECK_PADC1(padX), Z.config, tPos.z.XY_MOVING - 2000, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                    Y.moveCompare(lPos.y.LASER_CHECK_PADC1(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                    X.moveCompare(lPos.x.LASER_CHECK_PADC1(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 
-                    T.moveCompare(tPos.t.ZERO, Z.config, tPos.z.XY_MOVING - 2000, true, false, out ret.message); if (mpiCheck(T.config.axisCode, sqc, ret.message)) break;
+                    T.moveCompare(tPos.t.ZERO, Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(T.config.axisCode, sqc, ret.message)) break;
                     sqc++; break;
                 case 21:
                     if (!Z_AT_TARGET) break;
@@ -19883,7 +19885,7 @@ namespace PSA_SystemLibrary
 					mc.para.runInfo.startCycleTime();
 					mc.log.mcclog.write(mc.log.MCCCODE.HEAD_MOVE_PICK_POS, 0);
 					Y.commandPosition(out ret.d, out ret.message);if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-					if (ret.d - tPos.y.PAD(0) < 10000) tmpPos = tPos.z.XY_MOVING - 2000; else tmpPos = tPos.z.XY_MOVING - 3500;	// Place Up-Arc Motion인데, Z-Up되는 시간이 Tight하다..이건 Z축 속도를 굉장히 느리게 했을 경우, Conveyor와 Collision이 발생할 가능성이 있다.
+					if (ret.d - tPos.y.PAD(0) < 10000) tmpPos = tPos.z.XY_MOVING - comparePos; else tmpPos = tPos.z.XY_MOVING - 3500;	// Place Up-Arc Motion인데, Z-Up되는 시간이 Tight하다..이건 Z축 속도를 굉장히 느리게 했을 경우, Conveyor와 Collision이 발생할 가능성이 있다.
 					if (mc.sf.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
 					if (mc.sf.RUNING)
 					{
@@ -21657,7 +21659,7 @@ namespace PSA_SystemLibrary
 						if (mc.para.HD.pick.driver.enable.value == (int)ON_OFF.ON) drive = mc.hd.tool.tPos.z.PICK(tubeNum) + mc.para.HD.pick.driver.level.value; else drive = mc.hd.tool.tPos.z.PICK(tubeNum);
 					}
 					if (mc.para.HD.pick.driver2.enable.value == (int)ON_OFF.ON) drive2 = drive + mc.para.HD.pick.driver2.level.value; else drive2 = drive;
-					pos = mc.hd.tool.tPos.z.XY_MOVING - 3000;//drive2 + 300;
+					pos = mc.hd.tool.tPos.z.XY_MOVING - mc.hd.tool.comparePos;//drive2 + 300;
 					if (drive2 >= pos)
 					{
 						mc.log.debug.write(mc.log.CODE.INFO, "Pick Driver Pos is BIGGER than Target Pos - " + drive2.ToString() + ":" + pos.ToString());
@@ -21854,7 +21856,7 @@ namespace PSA_SystemLibrary
 					}
 					if (mc.para.HD.place.driver.enable.value == (int)ON_OFF.ON) drive = mc.hd.tool.tPos.z.PLACE + mc.para.HD.place.driver.level.value; else drive = mc.hd.tool.tPos.z.PLACE;
 					if (mc.para.HD.place.driver2.enable.value == (int)ON_OFF.ON) drive2 = drive + mc.para.HD.place.driver2.level.value; else drive2 = drive;
-					pos = mc.hd.tool.tPos.z.XY_MOVING - 3000;//drive2 + 300;
+					pos = mc.hd.tool.tPos.z.XY_MOVING - mc.hd.tool.comparePos;//drive2 + 300;
 					//pos = drive2 + 300;
 					if (mc.para.HD.place.driver.enable.value == (int)ON_OFF.OFF) { sqc += 2; break; }
 					dwell.Reset();

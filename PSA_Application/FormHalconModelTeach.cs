@@ -1121,6 +1121,45 @@ namespace PSA_Application
 					}
 					mc.ulc.LIVE = true; mc.ulc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
 				}
+                #region ULC_LIDC1
+                if (mode == SELECT_FIND_MODEL.ULC_LIDC1)
+                {
+                    mc.ulc.LIVE = false;
+                    mc.ulc.model_delete(mode);
+                    mc.para.ULC.modelLIDC1.isCreate.value = (int)BOOL.TRUE;
+                    mc.ulc.LIVE = true; mc.ulc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
+                }
+                #endregion
+                #region ULC_LIDC2
+                if (mode == SELECT_FIND_MODEL.ULC_LIDC2)
+                {
+                    mc.ulc.LIVE = false;
+                    mc.ulc.model_delete(mode);
+                    mc.para.ULC.modelLIDC2.isCreate.value = (int)BOOL.TRUE;
+                    mc.ulc.LIVE = true; mc.ulc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
+
+                }
+                #endregion
+                #region ULC_LIDC3
+                if (mode == SELECT_FIND_MODEL.ULC_LIDC3)
+                {
+                    mc.ulc.LIVE = false;
+                    mc.ulc.model_delete(mode);
+                    mc.para.ULC.modelLIDC3.isCreate.value = (int)BOOL.TRUE;
+                    mc.ulc.LIVE = true; mc.ulc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
+                }
+                #endregion
+                #region ULC_LIDC4
+                if (mode == SELECT_FIND_MODEL.ULC_LIDC4)
+                {
+                    mc.ulc.LIVE = false;
+                    mc.ulc.model_delete(mode);
+                    mc.para.ULC.modelLIDC4.isCreate.value = (int)BOOL.TRUE;
+                    mc.ulc.LIVE = true; mc.ulc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
+
+                }
+                #endregion
+
 				#endregion
 				#region HDC_PAD
 				if (mode == SELECT_FIND_MODEL.HDC_PAD)
@@ -1955,7 +1994,6 @@ namespace PSA_Application
 					double rX = 0;
 					double rY = 0;
 					double rT = 0;
-					double rD = 0;	// Diameter
 					if (mc.para.HDC.modelPAD.isCreate.value == (int)BOOL.TRUE)
 					{
 						if (mc.para.HDC.modelPAD.algorism.value == (int)MODEL_ALGORISM.NCC)
@@ -2424,11 +2462,16 @@ namespace PSA_Application
                 BT_SpeedT.Visible = true;
 
                 BT_Test.Visible = false;
-                if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.NCC || mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.SHAPE 
-                    || mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.NCC || mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.SHAPE)
                 {
                     BT_AutoTeach.Visible = true;
                     BT_Teach.Visible = false;
+                }
+                else if(mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                {
+                    BT_AutoTeach.Visible = true;
+                    BT_Teach.Visible = true;
+                    BT_Teach.Text = "SAVE";
                 }
                 else BT_AutoTeach.Visible = false;
             }
@@ -2474,6 +2517,11 @@ namespace PSA_Application
 				BT_Teach.Visible = true;
 				BT_ESC.Visible = true;
 				BT_AutoTeach.Visible = true;
+
+                if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                {
+                    BT_Teach.Text = "SAVE";
+                }
 			}
 			#endregion
 			#region HDC_PADC2
@@ -2495,6 +2543,11 @@ namespace PSA_Application
 				BT_Teach.Visible = true;
 				BT_ESC.Visible = true;
 				BT_AutoTeach.Visible = true;
+
+                if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                {
+                    BT_Teach.Text = "SAVE";
+                }
 			}
 			#endregion
 			#region HDC_PADC3
@@ -2516,6 +2569,11 @@ namespace PSA_Application
 				BT_Teach.Visible = true;
 				BT_ESC.Visible = true;
 				BT_AutoTeach.Visible = true;
+
+                if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                {
+                    BT_Teach.Text = "SAVE";
+                }
 			}
 			#endregion
 			#region HDC_PADC4
@@ -2537,6 +2595,11 @@ namespace PSA_Application
 				BT_Teach.Visible = true;
 				BT_ESC.Visible = true;
 				BT_AutoTeach.Visible = true;
+
+                if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                {
+                    BT_Teach.Text = "SAVE";
+                }
 			}
 			#endregion
 

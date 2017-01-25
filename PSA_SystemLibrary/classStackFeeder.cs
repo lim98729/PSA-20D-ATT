@@ -294,6 +294,27 @@ namespace PSA_SystemLibrary
 			}
 		}
 
+        public void TubeGuide(UnitCodeSF sf, out bool ret, out RetMessage message)
+        {
+            if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.CHIPPAC) mc.IN.SF.TUBE_GUIDE(sf, out ret, out message);
+            else
+            {
+                if (sf == UnitCodeSF.SF1 || sf == UnitCodeSF.SF2)
+                {
+                    mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF1, out ret, out message);
+                }
+                else if (sf == UnitCodeSF.SF3 || sf == UnitCodeSF.SF4)
+                {
+                    mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF2, out ret, out message);
+                }
+                else
+                {
+                    ret = true;
+                    message = RetMessage.INVALID_IO_CONFIG;
+                }
+            }
+        }
+
 		double downPitch, upPitch;
 		axisMotionSpeed sp;
 		MPIState mpiState;
@@ -466,14 +487,14 @@ namespace PSA_SystemLibrary
 
                     if (readyPosition == 0)
                     {
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF1, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF2, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF1, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF2, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
                         Z.IN_P_LIMIT(out limitCheck, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
                     }
                     if (readyPosition == 1)
                     {
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF3, out ret.b3, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF4, out ret.b4, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF3, out ret.b3, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF4, out ret.b4, out ret.message); if (ioCheck(sqc, ret.message)) break;
                         Z2.IN_P_LIMIT(out limitCheck2, out ret.message); if (mpiCheck(Z2.config.axisCode, sqc, ret.message)) break;
                     }
 
@@ -711,13 +732,13 @@ namespace PSA_SystemLibrary
                     }
                     if (readyPosition == 0)
                     {
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF1, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF2, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF1, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF2, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
                     }
                     else
                     {
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF3, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF4, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF3, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF4, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
                     }
                     if (ret.b1 || ret.b2)
                     {
@@ -777,14 +798,14 @@ namespace PSA_SystemLibrary
 
                     if (readyPosition == 0)
                     {
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF1, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF2, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF1, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF2, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
                         Z.IN_P_LIMIT(out ret.b3, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
                     }
                     else
                     {
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF3, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF4, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF3, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF4, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
                         Z2.IN_P_LIMIT(out ret.b3, out ret.message); if (mpiCheck(Z2.config.axisCode, sqc, ret.message)) break;
                     }
 
@@ -941,13 +962,13 @@ namespace PSA_SystemLibrary
 
                     if (readyPosition == 0)
                     {
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF1, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF2, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF1, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF2, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
                     }
                     else
                     {
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF3, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF4, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF3, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF4, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
                     }
                     if (ret.b1 || ret.b2)
                     {
@@ -1057,14 +1078,14 @@ namespace PSA_SystemLibrary
 
                     if (moveSFZ)
                     {
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF1, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF2, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF1, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF2, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
                         Z.IN_P_LIMIT(out limitCheck, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
                     }
                     else if(moveSFZ2)
                     {
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF3, out ret.b3, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF4, out ret.b4, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF3, out ret.b3, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF4, out ret.b4, out ret.message); if (ioCheck(sqc, ret.message)) break;
                         Z2.IN_P_LIMIT(out limitCheck2, out ret.message); if (mpiCheck(Z2.config.axisCode, sqc, ret.message)) break;
                     }
 
@@ -1299,13 +1320,13 @@ namespace PSA_SystemLibrary
                     }
                     if (workingZAxis == 1)
                     {
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF1, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF2, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF1, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF2, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
                     }
                     else
                     {
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF3, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF4, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF3, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF4, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
                     }
                     if (ret.b1 || ret.b2)
                     {
@@ -1372,14 +1393,14 @@ namespace PSA_SystemLibrary
 
                     if (workingZAxis == 1)
                     {
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF1, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF2, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF1, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF2, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
                         Z.IN_P_LIMIT(out ret.b3, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
                     }
                     else
                     {
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF3, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF4, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF3, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF4, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
                         Z2.IN_P_LIMIT(out ret.b3, out ret.message); if (mpiCheck(Z2.config.axisCode, sqc, ret.message)) break;
                     }
 
@@ -1521,13 +1542,13 @@ namespace PSA_SystemLibrary
 
                     if (workingZAxis == 1)
                     {
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF1, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF2, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF1, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF2, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
                     }
                     else
                     {
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF3, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                        mc.IN.SF.TUBE_GUIDE(UnitCodeSF.SF4, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF3, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        TubeGuide(UnitCodeSF.SF4, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
                     }
 					if (ret.b1 || ret.b2)
 					{

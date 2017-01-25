@@ -129,7 +129,7 @@ namespace PSA_Application
                 ret.usrDialog = FormMain.UserMessageBox(DIAG_SEL_MODE.OKCancel, DIAG_ICON_MODE.QUESTION, textResource.MB_HD_PICK_INIT_OFFSET_XYZ);
 				//mc.message.OkCancel("모든 Pick Offset X,Y,Z 값은 초기화 됩니다. 계속 진행할까요?", out ret.dialog);
 				if (ret.usrDialog == DIAG_RESULT.Cancel) goto EXIT;
-				for (int i = 0; i < 8; i++)
+				for (int i = 0; i < 4; i++)
 				{
 					mc.para.setting(ref mc.para.HD.pick.offset[i].x, 0);
 					mc.para.setting(ref mc.para.HD.pick.offset[i].y, 0);

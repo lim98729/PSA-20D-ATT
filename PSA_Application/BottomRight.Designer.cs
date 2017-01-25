@@ -67,7 +67,7 @@
 			// 
 			this.TS_Menu.AutoSize = false;
 			this.TS_Menu.BackColor = System.Drawing.SystemColors.ControlLight;
-			this.TS_Menu.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TS_Menu.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.TS_Menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LB_Menu,
             this.toolStripSeparator2,
@@ -89,7 +89,7 @@
 			// LB_Menu
 			// 
 			this.LB_Menu.AutoSize = false;
-			this.LB_Menu.Font = new System.Drawing.Font("Arial", 9F);
+            this.LB_Menu.Font = new System.Drawing.Font("Arial", 8F);
 			this.LB_Menu.ForeColor = System.Drawing.Color.Green;
 			this.LB_Menu.Name = "LB_Menu";
 			this.LB_Menu.Size = new System.Drawing.Size(90, 22);
@@ -104,11 +104,11 @@
 			// 
 			this.BT_Head.AutoSize = false;
 			this.BT_Head.AutoToolTip = false;
-			this.BT_Head.Font = new System.Drawing.Font("Arial", 9F);
+            this.BT_Head.Font = new System.Drawing.Font("Arial", 8F);
 			this.BT_Head.Image = ((System.Drawing.Image)(resources.GetObject("BT_Head.Image")));
 			this.BT_Head.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.BT_Head.Name = "BT_Head";
-			this.BT_Head.Size = new System.Drawing.Size(100, 35);
+            this.BT_Head.Size = new System.Drawing.Size(95, 30);
 			this.BT_Head.Text = "GANTRY";
 			this.BT_Head.Click += new System.EventHandler(this.Control_Click);
 			// 
@@ -121,11 +121,11 @@
 			// 
 			this.BT_Pedestal.AutoSize = false;
 			this.BT_Pedestal.AutoToolTip = false;
-			this.BT_Pedestal.Font = new System.Drawing.Font("Arial", 9F);
+            this.BT_Pedestal.Font = new System.Drawing.Font("Arial", 8F);
 			this.BT_Pedestal.Image = ((System.Drawing.Image)(resources.GetObject("BT_Pedestal.Image")));
 			this.BT_Pedestal.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.BT_Pedestal.Name = "BT_Pedestal";
-			this.BT_Pedestal.Size = new System.Drawing.Size(100, 35);
+            this.BT_Pedestal.Size = new System.Drawing.Size(95, 30);
 			this.BT_Pedestal.Text = "PEDESTAL";
 			this.BT_Pedestal.Click += new System.EventHandler(this.Control_Click);
 			// 
@@ -138,11 +138,11 @@
 			// 
 			this.BT_StackFeeder.AutoSize = false;
 			this.BT_StackFeeder.AutoToolTip = false;
-			this.BT_StackFeeder.Font = new System.Drawing.Font("Arial", 9F);
+            this.BT_StackFeeder.Font = new System.Drawing.Font("Arial", 8F);
 			this.BT_StackFeeder.Image = ((System.Drawing.Image)(resources.GetObject("BT_StackFeeder.Image")));
 			this.BT_StackFeeder.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.BT_StackFeeder.Name = "BT_StackFeeder";
-			this.BT_StackFeeder.Size = new System.Drawing.Size(100, 35);
+            this.BT_StackFeeder.Size = new System.Drawing.Size(95, 30);
 			this.BT_StackFeeder.Text = "STACK FEED";
 			this.BT_StackFeeder.Click += new System.EventHandler(this.Control_Click);
 			// 
@@ -155,11 +155,11 @@
 			// 
 			this.BT_Conveyor.AutoSize = false;
 			this.BT_Conveyor.AutoToolTip = false;
-			this.BT_Conveyor.Font = new System.Drawing.Font("Arial", 9F);
+            this.BT_Conveyor.Font = new System.Drawing.Font("Arial", 8F);
 			this.BT_Conveyor.Image = ((System.Drawing.Image)(resources.GetObject("BT_Conveyor.Image")));
 			this.BT_Conveyor.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.BT_Conveyor.Name = "BT_Conveyor";
-			this.BT_Conveyor.Size = new System.Drawing.Size(100, 35);
+            this.BT_Conveyor.Size = new System.Drawing.Size(95, 30);
 			this.BT_Conveyor.Text = "CONVEYOR";
 			this.BT_Conveyor.Click += new System.EventHandler(this.Control_Click);
 			// 
@@ -172,11 +172,11 @@
 			// 
 			this.BT_Main.AutoSize = false;
 			this.BT_Main.AutoToolTip = false;
-			this.BT_Main.Font = new System.Drawing.Font("Arial", 9F);
+            this.BT_Main.Font = new System.Drawing.Font("Arial", 8F);
 			this.BT_Main.Image = ((System.Drawing.Image)(resources.GetObject("BT_Main.Image")));
 			this.BT_Main.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.BT_Main.Name = "BT_Main";
-			this.BT_Main.Size = new System.Drawing.Size(100, 35);
+            this.BT_Main.Size = new System.Drawing.Size(95, 30);
 			this.BT_Main.Text = "MAIN";
 			this.BT_Main.Click += new System.EventHandler(this.Control_Click);
 			// 
@@ -227,8 +227,7 @@
 			// 
 			// BottomRight
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.Transparent;
 			this.Controls.Add(this.TS_Menu);
 			this.Controls.Add(this.BottomRight_Conveyor);

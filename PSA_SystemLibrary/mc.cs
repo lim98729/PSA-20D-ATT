@@ -54,7 +54,7 @@ namespace PSA_SystemLibrary
         {
             get
             {
-                return "att20170116A";
+                return "att20170126A";
             }
         }
         //public static bool START;

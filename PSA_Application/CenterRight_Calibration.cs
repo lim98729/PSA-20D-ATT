@@ -618,7 +618,7 @@ namespace PSA_Application
 					mc.hd.tool.jogMove(posX, posY, posZ, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 					#endregion
 					mc.OUT.HD.SUC(true, out ret.message);
-					for(int i = 0; i < 8; i++) mc.para.HD.pick.offset[i].z.value = 0;
+					for(int i = 0; i < 4; i++) mc.para.HD.pick.offset[i].z.value = 0;
 					FormJogPadZ ff = new FormJogPadZ();
 					ff.mode = unitCodeZAxis;
 					ff.dataZ = mc.para.CAL.z.pick;

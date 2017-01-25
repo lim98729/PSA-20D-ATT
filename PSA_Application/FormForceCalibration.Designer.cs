@@ -264,7 +264,7 @@
             this.BT_Force_FactorX7.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_Force_FactorX7.ForeColor = System.Drawing.Color.White;
             this.BT_Force_FactorX7.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BT_Force_FactorX7.Location = new System.Drawing.Point(113, 194);
+            this.BT_Force_FactorX7.Location = new System.Drawing.Point(103, 197);
             this.BT_Force_FactorX7.Name = "BT_Force_FactorX7";
             this.BT_Force_FactorX7.Size = new System.Drawing.Size(36, 22);
             this.BT_Force_FactorX7.TabIndex = 248;
@@ -285,7 +285,7 @@
             this.BT_Force_FactorX6.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_Force_FactorX6.ForeColor = System.Drawing.Color.White;
             this.BT_Force_FactorX6.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BT_Force_FactorX6.Location = new System.Drawing.Point(113, 171);
+            this.BT_Force_FactorX6.Location = new System.Drawing.Point(103, 174);
             this.BT_Force_FactorX6.Name = "BT_Force_FactorX6";
             this.BT_Force_FactorX6.Size = new System.Drawing.Size(36, 22);
             this.BT_Force_FactorX6.TabIndex = 247;
@@ -306,7 +306,7 @@
             this.BT_Force_FactorX5.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_Force_FactorX5.ForeColor = System.Drawing.Color.White;
             this.BT_Force_FactorX5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BT_Force_FactorX5.Location = new System.Drawing.Point(113, 148);
+            this.BT_Force_FactorX5.Location = new System.Drawing.Point(103, 151);
             this.BT_Force_FactorX5.Name = "BT_Force_FactorX5";
             this.BT_Force_FactorX5.Size = new System.Drawing.Size(36, 22);
             this.BT_Force_FactorX5.TabIndex = 246;
@@ -327,7 +327,7 @@
             this.BT_Force_FactorX4.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_Force_FactorX4.ForeColor = System.Drawing.Color.White;
             this.BT_Force_FactorX4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BT_Force_FactorX4.Location = new System.Drawing.Point(113, 125);
+            this.BT_Force_FactorX4.Location = new System.Drawing.Point(103, 128);
             this.BT_Force_FactorX4.Name = "BT_Force_FactorX4";
             this.BT_Force_FactorX4.Size = new System.Drawing.Size(36, 22);
             this.BT_Force_FactorX4.TabIndex = 245;
@@ -340,7 +340,7 @@
             this.TB_Force_FactorY4.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorY4.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorY4.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorY4.Location = new System.Drawing.Point(188, 125);
+            this.TB_Force_FactorY4.Location = new System.Drawing.Point(178, 128);
             this.TB_Force_FactorY4.Name = "TB_Force_FactorY4";
             this.TB_Force_FactorY4.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorY4.TabIndex = 244;
@@ -353,29 +353,29 @@
             this.LB_Force_FactorY4.AutoSize = true;
             this.LB_Force_FactorY4.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorY4.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorY4.Location = new System.Drawing.Point(159, 129);
+            this.LB_Force_FactorY4.Location = new System.Drawing.Point(156, 131);
             this.LB_Force_FactorY4.Name = "LB_Force_FactorY4";
             this.LB_Force_FactorY4.Size = new System.Drawing.Size(23, 16);
             this.LB_Force_FactorY4.TabIndex = 243;
-            this.LB_Force_FactorY4.Text = "Y4";
+            this.LB_Force_FactorY4.Text = "4";
             // 
             // LB_Force_FactorX4
             // 
             this.LB_Force_FactorX4.AutoSize = true;
             this.LB_Force_FactorX4.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorX4.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorX4.Location = new System.Drawing.Point(28, 129);
+            this.LB_Force_FactorX4.Location = new System.Drawing.Point(25, 131);
             this.LB_Force_FactorX4.Name = "LB_Force_FactorX4";
             this.LB_Force_FactorX4.Size = new System.Drawing.Size(24, 16);
             this.LB_Force_FactorX4.TabIndex = 242;
-            this.LB_Force_FactorX4.Text = "X4";
+            this.LB_Force_FactorX4.Text = "4";
             // 
             // TB_Force_FactorX4
             // 
             this.TB_Force_FactorX4.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorX4.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorX4.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorX4.Location = new System.Drawing.Point(58, 125);
+            this.TB_Force_FactorX4.Location = new System.Drawing.Point(48, 128);
             this.TB_Force_FactorX4.Name = "TB_Force_FactorX4";
             this.TB_Force_FactorX4.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorX4.TabIndex = 241;
@@ -388,7 +388,7 @@
             this.TB_Force_FactorY7.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorY7.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorY7.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorY7.Location = new System.Drawing.Point(188, 194);
+            this.TB_Force_FactorY7.Location = new System.Drawing.Point(178, 197);
             this.TB_Force_FactorY7.Name = "TB_Force_FactorY7";
             this.TB_Force_FactorY7.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorY7.TabIndex = 240;
@@ -401,29 +401,29 @@
             this.LB_Force_FactorY7.AutoSize = true;
             this.LB_Force_FactorY7.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorY7.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorY7.Location = new System.Drawing.Point(159, 197);
+            this.LB_Force_FactorY7.Location = new System.Drawing.Point(156, 200);
             this.LB_Force_FactorY7.Name = "LB_Force_FactorY7";
             this.LB_Force_FactorY7.Size = new System.Drawing.Size(23, 16);
             this.LB_Force_FactorY7.TabIndex = 239;
-            this.LB_Force_FactorY7.Text = "Y7";
+            this.LB_Force_FactorY7.Text = "7";
             // 
             // LB_Force_FactorX7
             // 
             this.LB_Force_FactorX7.AutoSize = true;
             this.LB_Force_FactorX7.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorX7.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorX7.Location = new System.Drawing.Point(28, 197);
+            this.LB_Force_FactorX7.Location = new System.Drawing.Point(25, 200);
             this.LB_Force_FactorX7.Name = "LB_Force_FactorX7";
             this.LB_Force_FactorX7.Size = new System.Drawing.Size(24, 16);
             this.LB_Force_FactorX7.TabIndex = 238;
-            this.LB_Force_FactorX7.Text = "X7";
+            this.LB_Force_FactorX7.Text = "7";
             // 
             // TB_Force_FactorX7
             // 
             this.TB_Force_FactorX7.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorX7.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorX7.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorX7.Location = new System.Drawing.Point(58, 194);
+            this.TB_Force_FactorX7.Location = new System.Drawing.Point(48, 197);
             this.TB_Force_FactorX7.Name = "TB_Force_FactorX7";
             this.TB_Force_FactorX7.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorX7.TabIndex = 237;
@@ -436,7 +436,7 @@
             this.TB_Force_FactorY6.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorY6.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorY6.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorY6.Location = new System.Drawing.Point(188, 171);
+            this.TB_Force_FactorY6.Location = new System.Drawing.Point(178, 174);
             this.TB_Force_FactorY6.Name = "TB_Force_FactorY6";
             this.TB_Force_FactorY6.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorY6.TabIndex = 236;
@@ -449,29 +449,29 @@
             this.LB_Force_FactorY6.AutoSize = true;
             this.LB_Force_FactorY6.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorY6.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorY6.Location = new System.Drawing.Point(159, 176);
+            this.LB_Force_FactorY6.Location = new System.Drawing.Point(156, 177);
             this.LB_Force_FactorY6.Name = "LB_Force_FactorY6";
             this.LB_Force_FactorY6.Size = new System.Drawing.Size(23, 16);
             this.LB_Force_FactorY6.TabIndex = 235;
-            this.LB_Force_FactorY6.Text = "Y6";
+            this.LB_Force_FactorY6.Text = "6";
             // 
             // LB_Force_FactorX6
             // 
             this.LB_Force_FactorX6.AutoSize = true;
             this.LB_Force_FactorX6.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorX6.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorX6.Location = new System.Drawing.Point(28, 175);
+            this.LB_Force_FactorX6.Location = new System.Drawing.Point(25, 177);
             this.LB_Force_FactorX6.Name = "LB_Force_FactorX6";
             this.LB_Force_FactorX6.Size = new System.Drawing.Size(24, 16);
             this.LB_Force_FactorX6.TabIndex = 234;
-            this.LB_Force_FactorX6.Text = "X6";
+            this.LB_Force_FactorX6.Text = "6";
             // 
             // TB_Force_FactorX6
             // 
             this.TB_Force_FactorX6.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorX6.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorX6.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorX6.Location = new System.Drawing.Point(58, 171);
+            this.TB_Force_FactorX6.Location = new System.Drawing.Point(48, 174);
             this.TB_Force_FactorX6.Name = "TB_Force_FactorX6";
             this.TB_Force_FactorX6.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorX6.TabIndex = 233;
@@ -484,7 +484,7 @@
             this.TB_Force_FactorY5.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorY5.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorY5.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorY5.Location = new System.Drawing.Point(188, 148);
+            this.TB_Force_FactorY5.Location = new System.Drawing.Point(178, 151);
             this.TB_Force_FactorY5.Name = "TB_Force_FactorY5";
             this.TB_Force_FactorY5.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorY5.TabIndex = 232;
@@ -497,29 +497,29 @@
             this.LB_Force_FactorY5.AutoSize = true;
             this.LB_Force_FactorY5.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorY5.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorY5.Location = new System.Drawing.Point(159, 151);
+            this.LB_Force_FactorY5.Location = new System.Drawing.Point(156, 154);
             this.LB_Force_FactorY5.Name = "LB_Force_FactorY5";
             this.LB_Force_FactorY5.Size = new System.Drawing.Size(23, 16);
             this.LB_Force_FactorY5.TabIndex = 231;
-            this.LB_Force_FactorY5.Text = "Y5";
+            this.LB_Force_FactorY5.Text = "5";
             // 
             // LB_Force_FactorX5
             // 
             this.LB_Force_FactorX5.AutoSize = true;
             this.LB_Force_FactorX5.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorX5.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorX5.Location = new System.Drawing.Point(28, 151);
+            this.LB_Force_FactorX5.Location = new System.Drawing.Point(25, 154);
             this.LB_Force_FactorX5.Name = "LB_Force_FactorX5";
             this.LB_Force_FactorX5.Size = new System.Drawing.Size(24, 16);
             this.LB_Force_FactorX5.TabIndex = 230;
-            this.LB_Force_FactorX5.Text = "X5";
+            this.LB_Force_FactorX5.Text = "5";
             // 
             // TB_Force_FactorX5
             // 
             this.TB_Force_FactorX5.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorX5.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorX5.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorX5.Location = new System.Drawing.Point(58, 148);
+            this.TB_Force_FactorX5.Location = new System.Drawing.Point(48, 151);
             this.TB_Force_FactorX5.Name = "TB_Force_FactorX5";
             this.TB_Force_FactorX5.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorX5.TabIndex = 229;
@@ -540,7 +540,7 @@
             this.BT_Force_FactorX3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_Force_FactorX3.ForeColor = System.Drawing.Color.White;
             this.BT_Force_FactorX3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BT_Force_FactorX3.Location = new System.Drawing.Point(113, 102);
+            this.BT_Force_FactorX3.Location = new System.Drawing.Point(103, 105);
             this.BT_Force_FactorX3.Name = "BT_Force_FactorX3";
             this.BT_Force_FactorX3.Size = new System.Drawing.Size(36, 22);
             this.BT_Force_FactorX3.TabIndex = 228;
@@ -561,7 +561,7 @@
             this.BT_Force_FactorX2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_Force_FactorX2.ForeColor = System.Drawing.Color.White;
             this.BT_Force_FactorX2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BT_Force_FactorX2.Location = new System.Drawing.Point(113, 79);
+            this.BT_Force_FactorX2.Location = new System.Drawing.Point(103, 82);
             this.BT_Force_FactorX2.Name = "BT_Force_FactorX2";
             this.BT_Force_FactorX2.Size = new System.Drawing.Size(36, 22);
             this.BT_Force_FactorX2.TabIndex = 227;
@@ -582,7 +582,7 @@
             this.BT_Force_FactorX1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_Force_FactorX1.ForeColor = System.Drawing.Color.White;
             this.BT_Force_FactorX1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BT_Force_FactorX1.Location = new System.Drawing.Point(113, 56);
+            this.BT_Force_FactorX1.Location = new System.Drawing.Point(103, 59);
             this.BT_Force_FactorX1.Name = "BT_Force_FactorX1";
             this.BT_Force_FactorX1.Size = new System.Drawing.Size(36, 22);
             this.BT_Force_FactorX1.TabIndex = 226;
@@ -603,7 +603,7 @@
             this.BT_Force_FactorX0.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_Force_FactorX0.ForeColor = System.Drawing.Color.White;
             this.BT_Force_FactorX0.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BT_Force_FactorX0.Location = new System.Drawing.Point(113, 33);
+            this.BT_Force_FactorX0.Location = new System.Drawing.Point(103, 36);
             this.BT_Force_FactorX0.Name = "BT_Force_FactorX0";
             this.BT_Force_FactorX0.Size = new System.Drawing.Size(36, 22);
             this.BT_Force_FactorX0.TabIndex = 225;
@@ -616,7 +616,7 @@
             this.TB_Force_FactorY0.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorY0.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorY0.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorY0.Location = new System.Drawing.Point(188, 33);
+            this.TB_Force_FactorY0.Location = new System.Drawing.Point(178, 36);
             this.TB_Force_FactorY0.Name = "TB_Force_FactorY0";
             this.TB_Force_FactorY0.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorY0.TabIndex = 224;
@@ -629,29 +629,29 @@
             this.LB_Force_FactorY0.AutoSize = true;
             this.LB_Force_FactorY0.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorY0.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorY0.Location = new System.Drawing.Point(159, 37);
+            this.LB_Force_FactorY0.Location = new System.Drawing.Point(156, 39);
             this.LB_Force_FactorY0.Name = "LB_Force_FactorY0";
             this.LB_Force_FactorY0.Size = new System.Drawing.Size(23, 16);
             this.LB_Force_FactorY0.TabIndex = 223;
-            this.LB_Force_FactorY0.Text = "Y0";
+            this.LB_Force_FactorY0.Text = "0";
             // 
             // LB_Force_FactorX0
             // 
             this.LB_Force_FactorX0.AutoSize = true;
             this.LB_Force_FactorX0.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorX0.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorX0.Location = new System.Drawing.Point(28, 37);
+            this.LB_Force_FactorX0.Location = new System.Drawing.Point(25, 39);
             this.LB_Force_FactorX0.Name = "LB_Force_FactorX0";
             this.LB_Force_FactorX0.Size = new System.Drawing.Size(24, 16);
             this.LB_Force_FactorX0.TabIndex = 222;
-            this.LB_Force_FactorX0.Text = "X0";
+            this.LB_Force_FactorX0.Text = "0";
             // 
             // TB_Force_FactorX0
             // 
             this.TB_Force_FactorX0.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorX0.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorX0.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorX0.Location = new System.Drawing.Point(58, 33);
+            this.TB_Force_FactorX0.Location = new System.Drawing.Point(48, 36);
             this.TB_Force_FactorX0.Name = "TB_Force_FactorX0";
             this.TB_Force_FactorX0.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorX0.TabIndex = 221;
@@ -664,7 +664,7 @@
             this.TB_Force_FactorY3.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorY3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorY3.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorY3.Location = new System.Drawing.Point(188, 102);
+            this.TB_Force_FactorY3.Location = new System.Drawing.Point(178, 105);
             this.TB_Force_FactorY3.Name = "TB_Force_FactorY3";
             this.TB_Force_FactorY3.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorY3.TabIndex = 220;
@@ -677,29 +677,29 @@
             this.LB_Force_FactorY3.AutoSize = true;
             this.LB_Force_FactorY3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorY3.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorY3.Location = new System.Drawing.Point(159, 105);
+            this.LB_Force_FactorY3.Location = new System.Drawing.Point(156, 108);
             this.LB_Force_FactorY3.Name = "LB_Force_FactorY3";
             this.LB_Force_FactorY3.Size = new System.Drawing.Size(23, 16);
             this.LB_Force_FactorY3.TabIndex = 219;
-            this.LB_Force_FactorY3.Text = "Y3";
+            this.LB_Force_FactorY3.Text = "3";
             // 
             // LB_Force_FactorX3
             // 
             this.LB_Force_FactorX3.AutoSize = true;
             this.LB_Force_FactorX3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorX3.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorX3.Location = new System.Drawing.Point(28, 105);
+            this.LB_Force_FactorX3.Location = new System.Drawing.Point(25, 108);
             this.LB_Force_FactorX3.Name = "LB_Force_FactorX3";
             this.LB_Force_FactorX3.Size = new System.Drawing.Size(24, 16);
             this.LB_Force_FactorX3.TabIndex = 218;
-            this.LB_Force_FactorX3.Text = "X3";
+            this.LB_Force_FactorX3.Text = "3";
             // 
             // TB_Force_FactorX3
             // 
             this.TB_Force_FactorX3.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorX3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorX3.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorX3.Location = new System.Drawing.Point(58, 102);
+            this.TB_Force_FactorX3.Location = new System.Drawing.Point(48, 105);
             this.TB_Force_FactorX3.Name = "TB_Force_FactorX3";
             this.TB_Force_FactorX3.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorX3.TabIndex = 217;
@@ -712,7 +712,7 @@
             this.TB_Force_FactorY2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorY2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorY2.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorY2.Location = new System.Drawing.Point(188, 79);
+            this.TB_Force_FactorY2.Location = new System.Drawing.Point(178, 82);
             this.TB_Force_FactorY2.Name = "TB_Force_FactorY2";
             this.TB_Force_FactorY2.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorY2.TabIndex = 216;
@@ -725,29 +725,29 @@
             this.LB_Force_FactorY2.AutoSize = true;
             this.LB_Force_FactorY2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorY2.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorY2.Location = new System.Drawing.Point(159, 84);
+            this.LB_Force_FactorY2.Location = new System.Drawing.Point(156, 85);
             this.LB_Force_FactorY2.Name = "LB_Force_FactorY2";
             this.LB_Force_FactorY2.Size = new System.Drawing.Size(23, 16);
             this.LB_Force_FactorY2.TabIndex = 215;
-            this.LB_Force_FactorY2.Text = "Y2";
+            this.LB_Force_FactorY2.Text = "2";
             // 
             // LB_Force_FactorX2
             // 
             this.LB_Force_FactorX2.AutoSize = true;
             this.LB_Force_FactorX2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorX2.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorX2.Location = new System.Drawing.Point(28, 83);
+            this.LB_Force_FactorX2.Location = new System.Drawing.Point(25, 85);
             this.LB_Force_FactorX2.Name = "LB_Force_FactorX2";
             this.LB_Force_FactorX2.Size = new System.Drawing.Size(24, 16);
             this.LB_Force_FactorX2.TabIndex = 214;
-            this.LB_Force_FactorX2.Text = "X2";
+            this.LB_Force_FactorX2.Text = "2";
             // 
             // TB_Force_FactorX2
             // 
             this.TB_Force_FactorX2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorX2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorX2.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorX2.Location = new System.Drawing.Point(58, 79);
+            this.TB_Force_FactorX2.Location = new System.Drawing.Point(48, 82);
             this.TB_Force_FactorX2.Name = "TB_Force_FactorX2";
             this.TB_Force_FactorX2.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorX2.TabIndex = 213;
@@ -760,7 +760,7 @@
             this.TB_Force_FactorY1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorY1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorY1.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorY1.Location = new System.Drawing.Point(188, 56);
+            this.TB_Force_FactorY1.Location = new System.Drawing.Point(178, 59);
             this.TB_Force_FactorY1.Name = "TB_Force_FactorY1";
             this.TB_Force_FactorY1.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorY1.TabIndex = 212;
@@ -773,40 +773,41 @@
             this.LB_Force_FactorY1.AutoSize = true;
             this.LB_Force_FactorY1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorY1.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorY1.Location = new System.Drawing.Point(159, 59);
+            this.LB_Force_FactorY1.Location = new System.Drawing.Point(156, 62);
             this.LB_Force_FactorY1.Name = "LB_Force_FactorY1";
             this.LB_Force_FactorY1.Size = new System.Drawing.Size(23, 16);
             this.LB_Force_FactorY1.TabIndex = 211;
-            this.LB_Force_FactorY1.Text = "Y1";
+            this.LB_Force_FactorY1.Text = "1";
             // 
             // LB_Force_FactorX1
             // 
             this.LB_Force_FactorX1.AutoSize = true;
             this.LB_Force_FactorX1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorX1.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorX1.Location = new System.Drawing.Point(28, 59);
+            this.LB_Force_FactorX1.Location = new System.Drawing.Point(25, 62);
             this.LB_Force_FactorX1.Name = "LB_Force_FactorX1";
             this.LB_Force_FactorX1.Size = new System.Drawing.Size(24, 16);
             this.LB_Force_FactorX1.TabIndex = 210;
-            this.LB_Force_FactorX1.Text = "X1";
+            this.LB_Force_FactorX1.Text = "1";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.Black;
-            this.label11.Location = new System.Drawing.Point(149, 13);
+            this.label11.Location = new System.Drawing.Point(149, 1);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(89, 16);
+            this.label11.Size = new System.Drawing.Size(92, 32);
             this.label11.TabIndex = 209;
-            this.label11.Text = "Factor Y (Kg)";
+            this.label11.Text = "CAL\r\nLoadcell (Kg)";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // TB_Force_FactorX1
             // 
             this.TB_Force_FactorX1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorX1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorX1.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorX1.Location = new System.Drawing.Point(58, 56);
+            this.TB_Force_FactorX1.Location = new System.Drawing.Point(48, 59);
             this.TB_Force_FactorX1.Name = "TB_Force_FactorX1";
             this.TB_Force_FactorX1.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorX1.TabIndex = 208;
@@ -819,11 +820,12 @@
             this.LB_Force_FactorX.AutoSize = true;
             this.LB_Force_FactorX.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorX.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorX.Location = new System.Drawing.Point(10, 13);
+            this.LB_Force_FactorX.Location = new System.Drawing.Point(25, 1);
             this.LB_Force_FactorX.Name = "LB_Force_FactorX";
-            this.LB_Force_FactorX.Size = new System.Drawing.Size(123, 16);
+            this.LB_Force_FactorX.Size = new System.Drawing.Size(75, 32);
             this.LB_Force_FactorX.TabIndex = 207;
-            this.LB_Force_FactorX.Text = "Factor X (DA data)";
+            this.LB_Force_FactorX.Text = "VPPM\r\nVoltage (v)";
+            this.LB_Force_FactorX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LB_Force_FactorX.DoubleClick += new System.EventHandler(this.LB_Force_FactorX_DoubleClick);
             // 
             // LB_Force_TouchOffset
@@ -888,7 +890,7 @@
             this.BT_Force_Test_Kilogram2DAValue.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_Force_Test_Kilogram2DAValue.ForeColor = System.Drawing.Color.White;
             this.BT_Force_Test_Kilogram2DAValue.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BT_Force_Test_Kilogram2DAValue.Location = new System.Drawing.Point(483, 459);
+            this.BT_Force_Test_Kilogram2DAValue.Location = new System.Drawing.Point(483, 468);
             this.BT_Force_Test_Kilogram2DAValue.Name = "BT_Force_Test_Kilogram2DAValue";
             this.BT_Force_Test_Kilogram2DAValue.Size = new System.Drawing.Size(36, 32);
             this.BT_Force_Test_Kilogram2DAValue.TabIndex = 251;
@@ -902,7 +904,7 @@
             this.TB_Force_Test_DAValue.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_Test_DAValue.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_Test_DAValue.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_Test_DAValue.Location = new System.Drawing.Point(523, 464);
+            this.TB_Force_Test_DAValue.Location = new System.Drawing.Point(523, 473);
             this.TB_Force_Test_DAValue.Name = "TB_Force_Test_DAValue";
             this.TB_Force_Test_DAValue.ReadOnly = true;
             this.TB_Force_Test_DAValue.Size = new System.Drawing.Size(43, 22);
@@ -917,7 +919,7 @@
             this.TB_Force_Test_Kilogram.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_Test_Kilogram.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_Test_Kilogram.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_Test_Kilogram.Location = new System.Drawing.Point(431, 464);
+            this.TB_Force_Test_Kilogram.Location = new System.Drawing.Point(431, 473);
             this.TB_Force_Test_Kilogram.Name = "TB_Force_Test_Kilogram";
             this.TB_Force_Test_Kilogram.ReadOnly = true;
             this.TB_Force_Test_Kilogram.Size = new System.Drawing.Size(43, 22);
@@ -949,7 +951,7 @@
             this.BT_Force_FactorX9.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_Force_FactorX9.ForeColor = System.Drawing.Color.White;
             this.BT_Force_FactorX9.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BT_Force_FactorX9.Location = new System.Drawing.Point(113, 240);
+            this.BT_Force_FactorX9.Location = new System.Drawing.Point(103, 243);
             this.BT_Force_FactorX9.Name = "BT_Force_FactorX9";
             this.BT_Force_FactorX9.Size = new System.Drawing.Size(36, 22);
             this.BT_Force_FactorX9.TabIndex = 266;
@@ -970,7 +972,7 @@
             this.BT_Force_FactorX8.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_Force_FactorX8.ForeColor = System.Drawing.Color.White;
             this.BT_Force_FactorX8.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BT_Force_FactorX8.Location = new System.Drawing.Point(113, 217);
+            this.BT_Force_FactorX8.Location = new System.Drawing.Point(103, 220);
             this.BT_Force_FactorX8.Name = "BT_Force_FactorX8";
             this.BT_Force_FactorX8.Size = new System.Drawing.Size(36, 22);
             this.BT_Force_FactorX8.TabIndex = 265;
@@ -983,7 +985,7 @@
             this.TB_Force_FactorY9.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorY9.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorY9.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorY9.Location = new System.Drawing.Point(188, 240);
+            this.TB_Force_FactorY9.Location = new System.Drawing.Point(178, 243);
             this.TB_Force_FactorY9.Name = "TB_Force_FactorY9";
             this.TB_Force_FactorY9.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorY9.TabIndex = 264;
@@ -996,29 +998,29 @@
             this.LB_Force_FactorY9.AutoSize = true;
             this.LB_Force_FactorY9.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorY9.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorY9.Location = new System.Drawing.Point(159, 243);
+            this.LB_Force_FactorY9.Location = new System.Drawing.Point(156, 246);
             this.LB_Force_FactorY9.Name = "LB_Force_FactorY9";
             this.LB_Force_FactorY9.Size = new System.Drawing.Size(23, 16);
             this.LB_Force_FactorY9.TabIndex = 263;
-            this.LB_Force_FactorY9.Text = "Y9";
+            this.LB_Force_FactorY9.Text = "9";
             // 
             // LB_Force_FactorX9
             // 
             this.LB_Force_FactorX9.AutoSize = true;
             this.LB_Force_FactorX9.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorX9.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorX9.Location = new System.Drawing.Point(28, 243);
+            this.LB_Force_FactorX9.Location = new System.Drawing.Point(25, 246);
             this.LB_Force_FactorX9.Name = "LB_Force_FactorX9";
             this.LB_Force_FactorX9.Size = new System.Drawing.Size(24, 16);
             this.LB_Force_FactorX9.TabIndex = 262;
-            this.LB_Force_FactorX9.Text = "X9";
+            this.LB_Force_FactorX9.Text = "9";
             // 
             // TB_Force_FactorX9
             // 
             this.TB_Force_FactorX9.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorX9.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorX9.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorX9.Location = new System.Drawing.Point(58, 240);
+            this.TB_Force_FactorX9.Location = new System.Drawing.Point(48, 243);
             this.TB_Force_FactorX9.Name = "TB_Force_FactorX9";
             this.TB_Force_FactorX9.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorX9.TabIndex = 261;
@@ -1031,7 +1033,7 @@
             this.TB_Force_FactorY8.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorY8.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorY8.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorY8.Location = new System.Drawing.Point(188, 217);
+            this.TB_Force_FactorY8.Location = new System.Drawing.Point(178, 220);
             this.TB_Force_FactorY8.Name = "TB_Force_FactorY8";
             this.TB_Force_FactorY8.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorY8.TabIndex = 260;
@@ -1044,29 +1046,29 @@
             this.LB_Force_FactorY8.AutoSize = true;
             this.LB_Force_FactorY8.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorY8.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorY8.Location = new System.Drawing.Point(159, 221);
+            this.LB_Force_FactorY8.Location = new System.Drawing.Point(156, 223);
             this.LB_Force_FactorY8.Name = "LB_Force_FactorY8";
             this.LB_Force_FactorY8.Size = new System.Drawing.Size(23, 16);
             this.LB_Force_FactorY8.TabIndex = 259;
-            this.LB_Force_FactorY8.Text = "Y8";
+            this.LB_Force_FactorY8.Text = "8";
             // 
             // LB_Force_FactorX8
             // 
             this.LB_Force_FactorX8.AutoSize = true;
             this.LB_Force_FactorX8.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorX8.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorX8.Location = new System.Drawing.Point(28, 221);
+            this.LB_Force_FactorX8.Location = new System.Drawing.Point(25, 223);
             this.LB_Force_FactorX8.Name = "LB_Force_FactorX8";
             this.LB_Force_FactorX8.Size = new System.Drawing.Size(24, 16);
             this.LB_Force_FactorX8.TabIndex = 258;
-            this.LB_Force_FactorX8.Text = "X8";
+            this.LB_Force_FactorX8.Text = "8";
             // 
             // TB_Force_FactorX8
             // 
             this.TB_Force_FactorX8.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorX8.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorX8.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorX8.Location = new System.Drawing.Point(58, 217);
+            this.TB_Force_FactorX8.Location = new System.Drawing.Point(48, 220);
             this.TB_Force_FactorX8.Name = "TB_Force_FactorX8";
             this.TB_Force_FactorX8.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorX8.TabIndex = 257;
@@ -1079,18 +1081,19 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(254, 13);
+            this.label1.Location = new System.Drawing.Point(251, 1);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(88, 16);
+            this.label1.Size = new System.Drawing.Size(92, 32);
             this.label1.TabIndex = 267;
-            this.label1.Text = "Factor Z (Kg)";
+            this.label1.Text = "Head\r\nLoadcell (Kg)";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // TB_Force_FactorZ0
             // 
             this.TB_Force_FactorZ0.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorZ0.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorZ0.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorZ0.Location = new System.Drawing.Point(286, 33);
+            this.TB_Force_FactorZ0.Location = new System.Drawing.Point(276, 36);
             this.TB_Force_FactorZ0.Name = "TB_Force_FactorZ0";
             this.TB_Force_FactorZ0.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorZ0.TabIndex = 269;
@@ -1103,18 +1106,18 @@
             this.LB_Force_FactorZ0.AutoSize = true;
             this.LB_Force_FactorZ0.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorZ0.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorZ0.Location = new System.Drawing.Point(257, 37);
+            this.LB_Force_FactorZ0.Location = new System.Drawing.Point(254, 39);
             this.LB_Force_FactorZ0.Name = "LB_Force_FactorZ0";
             this.LB_Force_FactorZ0.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorZ0.TabIndex = 268;
-            this.LB_Force_FactorZ0.Text = "Z0";
+            this.LB_Force_FactorZ0.Text = "0";
             // 
             // TB_Force_FactorZ1
             // 
             this.TB_Force_FactorZ1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorZ1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorZ1.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorZ1.Location = new System.Drawing.Point(286, 56);
+            this.TB_Force_FactorZ1.Location = new System.Drawing.Point(276, 59);
             this.TB_Force_FactorZ1.Name = "TB_Force_FactorZ1";
             this.TB_Force_FactorZ1.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorZ1.TabIndex = 271;
@@ -1127,18 +1130,18 @@
             this.LB_Force_FactorZ1.AutoSize = true;
             this.LB_Force_FactorZ1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorZ1.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorZ1.Location = new System.Drawing.Point(257, 60);
+            this.LB_Force_FactorZ1.Location = new System.Drawing.Point(254, 62);
             this.LB_Force_FactorZ1.Name = "LB_Force_FactorZ1";
             this.LB_Force_FactorZ1.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorZ1.TabIndex = 270;
-            this.LB_Force_FactorZ1.Text = "Z1";
+            this.LB_Force_FactorZ1.Text = "1";
             // 
             // TB_Force_FactorZ3
             // 
             this.TB_Force_FactorZ3.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorZ3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorZ3.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorZ3.Location = new System.Drawing.Point(286, 102);
+            this.TB_Force_FactorZ3.Location = new System.Drawing.Point(276, 105);
             this.TB_Force_FactorZ3.Name = "TB_Force_FactorZ3";
             this.TB_Force_FactorZ3.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorZ3.TabIndex = 275;
@@ -1151,18 +1154,18 @@
             this.LB_Force_FactorZ3.AutoSize = true;
             this.LB_Force_FactorZ3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorZ3.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorZ3.Location = new System.Drawing.Point(257, 106);
+            this.LB_Force_FactorZ3.Location = new System.Drawing.Point(254, 108);
             this.LB_Force_FactorZ3.Name = "LB_Force_FactorZ3";
             this.LB_Force_FactorZ3.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorZ3.TabIndex = 274;
-            this.LB_Force_FactorZ3.Text = "Z3";
+            this.LB_Force_FactorZ3.Text = "3";
             // 
             // TB_Force_FactorZ2
             // 
             this.TB_Force_FactorZ2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorZ2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorZ2.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorZ2.Location = new System.Drawing.Point(286, 79);
+            this.TB_Force_FactorZ2.Location = new System.Drawing.Point(276, 82);
             this.TB_Force_FactorZ2.Name = "TB_Force_FactorZ2";
             this.TB_Force_FactorZ2.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorZ2.TabIndex = 273;
@@ -1175,18 +1178,18 @@
             this.LB_Force_FactorZ2.AutoSize = true;
             this.LB_Force_FactorZ2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorZ2.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorZ2.Location = new System.Drawing.Point(257, 83);
+            this.LB_Force_FactorZ2.Location = new System.Drawing.Point(254, 85);
             this.LB_Force_FactorZ2.Name = "LB_Force_FactorZ2";
             this.LB_Force_FactorZ2.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorZ2.TabIndex = 272;
-            this.LB_Force_FactorZ2.Text = "Z2";
+            this.LB_Force_FactorZ2.Text = "2";
             // 
             // TB_Force_FactorZ7
             // 
             this.TB_Force_FactorZ7.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorZ7.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorZ7.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorZ7.Location = new System.Drawing.Point(286, 194);
+            this.TB_Force_FactorZ7.Location = new System.Drawing.Point(276, 197);
             this.TB_Force_FactorZ7.Name = "TB_Force_FactorZ7";
             this.TB_Force_FactorZ7.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorZ7.TabIndex = 283;
@@ -1199,18 +1202,18 @@
             this.LB_Force_FactorZ7.AutoSize = true;
             this.LB_Force_FactorZ7.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorZ7.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorZ7.Location = new System.Drawing.Point(257, 198);
+            this.LB_Force_FactorZ7.Location = new System.Drawing.Point(254, 200);
             this.LB_Force_FactorZ7.Name = "LB_Force_FactorZ7";
             this.LB_Force_FactorZ7.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorZ7.TabIndex = 282;
-            this.LB_Force_FactorZ7.Text = "Z7";
+            this.LB_Force_FactorZ7.Text = "7";
             // 
             // TB_Force_FactorZ6
             // 
             this.TB_Force_FactorZ6.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorZ6.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorZ6.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorZ6.Location = new System.Drawing.Point(286, 171);
+            this.TB_Force_FactorZ6.Location = new System.Drawing.Point(276, 174);
             this.TB_Force_FactorZ6.Name = "TB_Force_FactorZ6";
             this.TB_Force_FactorZ6.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorZ6.TabIndex = 281;
@@ -1223,18 +1226,18 @@
             this.LB_Force_FactorZ6.AutoSize = true;
             this.LB_Force_FactorZ6.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorZ6.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorZ6.Location = new System.Drawing.Point(257, 175);
+            this.LB_Force_FactorZ6.Location = new System.Drawing.Point(254, 177);
             this.LB_Force_FactorZ6.Name = "LB_Force_FactorZ6";
             this.LB_Force_FactorZ6.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorZ6.TabIndex = 280;
-            this.LB_Force_FactorZ6.Text = "Z6";
+            this.LB_Force_FactorZ6.Text = "6";
             // 
             // TB_Force_FactorZ5
             // 
             this.TB_Force_FactorZ5.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorZ5.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorZ5.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorZ5.Location = new System.Drawing.Point(286, 148);
+            this.TB_Force_FactorZ5.Location = new System.Drawing.Point(276, 151);
             this.TB_Force_FactorZ5.Name = "TB_Force_FactorZ5";
             this.TB_Force_FactorZ5.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorZ5.TabIndex = 279;
@@ -1247,18 +1250,18 @@
             this.LB_Force_FactorZ5.AutoSize = true;
             this.LB_Force_FactorZ5.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorZ5.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorZ5.Location = new System.Drawing.Point(257, 152);
+            this.LB_Force_FactorZ5.Location = new System.Drawing.Point(254, 154);
             this.LB_Force_FactorZ5.Name = "LB_Force_FactorZ5";
             this.LB_Force_FactorZ5.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorZ5.TabIndex = 278;
-            this.LB_Force_FactorZ5.Text = "Z5";
+            this.LB_Force_FactorZ5.Text = "5";
             // 
             // TB_Force_FactorZ4
             // 
             this.TB_Force_FactorZ4.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorZ4.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorZ4.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorZ4.Location = new System.Drawing.Point(286, 125);
+            this.TB_Force_FactorZ4.Location = new System.Drawing.Point(276, 128);
             this.TB_Force_FactorZ4.Name = "TB_Force_FactorZ4";
             this.TB_Force_FactorZ4.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorZ4.TabIndex = 277;
@@ -1271,18 +1274,18 @@
             this.LB_Force_FactorZ4.AutoSize = true;
             this.LB_Force_FactorZ4.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorZ4.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorZ4.Location = new System.Drawing.Point(257, 129);
+            this.LB_Force_FactorZ4.Location = new System.Drawing.Point(254, 131);
             this.LB_Force_FactorZ4.Name = "LB_Force_FactorZ4";
             this.LB_Force_FactorZ4.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorZ4.TabIndex = 276;
-            this.LB_Force_FactorZ4.Text = "Z4";
+            this.LB_Force_FactorZ4.Text = "4";
             // 
             // TB_Force_FactorZ9
             // 
             this.TB_Force_FactorZ9.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorZ9.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorZ9.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorZ9.Location = new System.Drawing.Point(286, 240);
+            this.TB_Force_FactorZ9.Location = new System.Drawing.Point(276, 243);
             this.TB_Force_FactorZ9.Name = "TB_Force_FactorZ9";
             this.TB_Force_FactorZ9.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorZ9.TabIndex = 287;
@@ -1295,18 +1298,18 @@
             this.LB_Force_FactorZ9.AutoSize = true;
             this.LB_Force_FactorZ9.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorZ9.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorZ9.Location = new System.Drawing.Point(257, 244);
+            this.LB_Force_FactorZ9.Location = new System.Drawing.Point(254, 246);
             this.LB_Force_FactorZ9.Name = "LB_Force_FactorZ9";
             this.LB_Force_FactorZ9.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorZ9.TabIndex = 286;
-            this.LB_Force_FactorZ9.Text = "Z9";
+            this.LB_Force_FactorZ9.Text = "9";
             // 
             // TB_Force_FactorZ8
             // 
             this.TB_Force_FactorZ8.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorZ8.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorZ8.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorZ8.Location = new System.Drawing.Point(286, 217);
+            this.TB_Force_FactorZ8.Location = new System.Drawing.Point(276, 220);
             this.TB_Force_FactorZ8.Name = "TB_Force_FactorZ8";
             this.TB_Force_FactorZ8.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorZ8.TabIndex = 285;
@@ -1319,18 +1322,18 @@
             this.LB_Force_FactorZ8.AutoSize = true;
             this.LB_Force_FactorZ8.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorZ8.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorZ8.Location = new System.Drawing.Point(257, 221);
+            this.LB_Force_FactorZ8.Location = new System.Drawing.Point(254, 223);
             this.LB_Force_FactorZ8.Name = "LB_Force_FactorZ8";
             this.LB_Force_FactorZ8.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorZ8.TabIndex = 284;
-            this.LB_Force_FactorZ8.Text = "Z8";
+            this.LB_Force_FactorZ8.Text = "8";
             // 
             // TB_Force_FactorZ19
             // 
             this.TB_Force_FactorZ19.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorZ19.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorZ19.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorZ19.Location = new System.Drawing.Point(286, 470);
+            this.TB_Force_FactorZ19.Location = new System.Drawing.Point(276, 473);
             this.TB_Force_FactorZ19.Name = "TB_Force_FactorZ19";
             this.TB_Force_FactorZ19.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorZ19.TabIndex = 357;
@@ -1343,18 +1346,18 @@
             this.LB_Force_FactorZ19.AutoSize = true;
             this.LB_Force_FactorZ19.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorZ19.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorZ19.Location = new System.Drawing.Point(257, 474);
+            this.LB_Force_FactorZ19.Location = new System.Drawing.Point(247, 476);
             this.LB_Force_FactorZ19.Name = "LB_Force_FactorZ19";
             this.LB_Force_FactorZ19.Size = new System.Drawing.Size(29, 16);
             this.LB_Force_FactorZ19.TabIndex = 356;
-            this.LB_Force_FactorZ19.Text = "Z19";
+            this.LB_Force_FactorZ19.Text = "19";
             // 
             // TB_Force_FactorZ18
             // 
             this.TB_Force_FactorZ18.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorZ18.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorZ18.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorZ18.Location = new System.Drawing.Point(286, 447);
+            this.TB_Force_FactorZ18.Location = new System.Drawing.Point(276, 450);
             this.TB_Force_FactorZ18.Name = "TB_Force_FactorZ18";
             this.TB_Force_FactorZ18.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorZ18.TabIndex = 355;
@@ -1367,18 +1370,18 @@
             this.LB_Force_FactorZ18.AutoSize = true;
             this.LB_Force_FactorZ18.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorZ18.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorZ18.Location = new System.Drawing.Point(257, 451);
+            this.LB_Force_FactorZ18.Location = new System.Drawing.Point(247, 453);
             this.LB_Force_FactorZ18.Name = "LB_Force_FactorZ18";
             this.LB_Force_FactorZ18.Size = new System.Drawing.Size(29, 16);
             this.LB_Force_FactorZ18.TabIndex = 354;
-            this.LB_Force_FactorZ18.Text = "Z18";
+            this.LB_Force_FactorZ18.Text = "18";
             // 
             // TB_Force_FactorZ17
             // 
             this.TB_Force_FactorZ17.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorZ17.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorZ17.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorZ17.Location = new System.Drawing.Point(286, 424);
+            this.TB_Force_FactorZ17.Location = new System.Drawing.Point(276, 427);
             this.TB_Force_FactorZ17.Name = "TB_Force_FactorZ17";
             this.TB_Force_FactorZ17.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorZ17.TabIndex = 353;
@@ -1391,18 +1394,18 @@
             this.LB_Force_FactorZ17.AutoSize = true;
             this.LB_Force_FactorZ17.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorZ17.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorZ17.Location = new System.Drawing.Point(257, 428);
+            this.LB_Force_FactorZ17.Location = new System.Drawing.Point(247, 430);
             this.LB_Force_FactorZ17.Name = "LB_Force_FactorZ17";
             this.LB_Force_FactorZ17.Size = new System.Drawing.Size(29, 16);
             this.LB_Force_FactorZ17.TabIndex = 352;
-            this.LB_Force_FactorZ17.Text = "Z17";
+            this.LB_Force_FactorZ17.Text = "17";
             // 
             // TB_Force_FactorZ16
             // 
             this.TB_Force_FactorZ16.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorZ16.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorZ16.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorZ16.Location = new System.Drawing.Point(286, 401);
+            this.TB_Force_FactorZ16.Location = new System.Drawing.Point(276, 404);
             this.TB_Force_FactorZ16.Name = "TB_Force_FactorZ16";
             this.TB_Force_FactorZ16.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorZ16.TabIndex = 351;
@@ -1415,18 +1418,18 @@
             this.LB_Force_FactorZ16.AutoSize = true;
             this.LB_Force_FactorZ16.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorZ16.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorZ16.Location = new System.Drawing.Point(257, 405);
+            this.LB_Force_FactorZ16.Location = new System.Drawing.Point(247, 407);
             this.LB_Force_FactorZ16.Name = "LB_Force_FactorZ16";
             this.LB_Force_FactorZ16.Size = new System.Drawing.Size(29, 16);
             this.LB_Force_FactorZ16.TabIndex = 350;
-            this.LB_Force_FactorZ16.Text = "Z16";
+            this.LB_Force_FactorZ16.Text = "16";
             // 
             // TB_Force_FactorZ15
             // 
             this.TB_Force_FactorZ15.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorZ15.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorZ15.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorZ15.Location = new System.Drawing.Point(286, 378);
+            this.TB_Force_FactorZ15.Location = new System.Drawing.Point(276, 381);
             this.TB_Force_FactorZ15.Name = "TB_Force_FactorZ15";
             this.TB_Force_FactorZ15.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorZ15.TabIndex = 349;
@@ -1439,18 +1442,18 @@
             this.LB_Force_FactorZ15.AutoSize = true;
             this.LB_Force_FactorZ15.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorZ15.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorZ15.Location = new System.Drawing.Point(257, 382);
+            this.LB_Force_FactorZ15.Location = new System.Drawing.Point(247, 384);
             this.LB_Force_FactorZ15.Name = "LB_Force_FactorZ15";
             this.LB_Force_FactorZ15.Size = new System.Drawing.Size(29, 16);
             this.LB_Force_FactorZ15.TabIndex = 348;
-            this.LB_Force_FactorZ15.Text = "Z15";
+            this.LB_Force_FactorZ15.Text = "15";
             // 
             // TB_Force_FactorZ14
             // 
             this.TB_Force_FactorZ14.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorZ14.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorZ14.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorZ14.Location = new System.Drawing.Point(286, 355);
+            this.TB_Force_FactorZ14.Location = new System.Drawing.Point(276, 358);
             this.TB_Force_FactorZ14.Name = "TB_Force_FactorZ14";
             this.TB_Force_FactorZ14.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorZ14.TabIndex = 347;
@@ -1463,18 +1466,18 @@
             this.LB_Force_FactorZ14.AutoSize = true;
             this.LB_Force_FactorZ14.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorZ14.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorZ14.Location = new System.Drawing.Point(257, 359);
+            this.LB_Force_FactorZ14.Location = new System.Drawing.Point(247, 361);
             this.LB_Force_FactorZ14.Name = "LB_Force_FactorZ14";
             this.LB_Force_FactorZ14.Size = new System.Drawing.Size(29, 16);
             this.LB_Force_FactorZ14.TabIndex = 346;
-            this.LB_Force_FactorZ14.Text = "Z14";
+            this.LB_Force_FactorZ14.Text = "14";
             // 
             // TB_Force_FactorZ13
             // 
             this.TB_Force_FactorZ13.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorZ13.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorZ13.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorZ13.Location = new System.Drawing.Point(286, 332);
+            this.TB_Force_FactorZ13.Location = new System.Drawing.Point(276, 335);
             this.TB_Force_FactorZ13.Name = "TB_Force_FactorZ13";
             this.TB_Force_FactorZ13.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorZ13.TabIndex = 345;
@@ -1487,18 +1490,18 @@
             this.LB_Force_FactorZ13.AutoSize = true;
             this.LB_Force_FactorZ13.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorZ13.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorZ13.Location = new System.Drawing.Point(257, 336);
+            this.LB_Force_FactorZ13.Location = new System.Drawing.Point(247, 338);
             this.LB_Force_FactorZ13.Name = "LB_Force_FactorZ13";
             this.LB_Force_FactorZ13.Size = new System.Drawing.Size(29, 16);
             this.LB_Force_FactorZ13.TabIndex = 344;
-            this.LB_Force_FactorZ13.Text = "Z13";
+            this.LB_Force_FactorZ13.Text = "13";
             // 
             // TB_Force_FactorZ12
             // 
             this.TB_Force_FactorZ12.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorZ12.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorZ12.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorZ12.Location = new System.Drawing.Point(286, 309);
+            this.TB_Force_FactorZ12.Location = new System.Drawing.Point(276, 312);
             this.TB_Force_FactorZ12.Name = "TB_Force_FactorZ12";
             this.TB_Force_FactorZ12.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorZ12.TabIndex = 343;
@@ -1511,18 +1514,18 @@
             this.LB_Force_FactorZ12.AutoSize = true;
             this.LB_Force_FactorZ12.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorZ12.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorZ12.Location = new System.Drawing.Point(257, 313);
+            this.LB_Force_FactorZ12.Location = new System.Drawing.Point(247, 315);
             this.LB_Force_FactorZ12.Name = "LB_Force_FactorZ12";
             this.LB_Force_FactorZ12.Size = new System.Drawing.Size(29, 16);
             this.LB_Force_FactorZ12.TabIndex = 342;
-            this.LB_Force_FactorZ12.Text = "Z12";
+            this.LB_Force_FactorZ12.Text = "12";
             // 
             // TB_Force_FactorZ11
             // 
             this.TB_Force_FactorZ11.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorZ11.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorZ11.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorZ11.Location = new System.Drawing.Point(286, 286);
+            this.TB_Force_FactorZ11.Location = new System.Drawing.Point(276, 289);
             this.TB_Force_FactorZ11.Name = "TB_Force_FactorZ11";
             this.TB_Force_FactorZ11.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorZ11.TabIndex = 341;
@@ -1535,18 +1538,18 @@
             this.LB_Force_FactorZ11.AutoSize = true;
             this.LB_Force_FactorZ11.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorZ11.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorZ11.Location = new System.Drawing.Point(257, 290);
+            this.LB_Force_FactorZ11.Location = new System.Drawing.Point(248, 292);
             this.LB_Force_FactorZ11.Name = "LB_Force_FactorZ11";
             this.LB_Force_FactorZ11.Size = new System.Drawing.Size(28, 16);
             this.LB_Force_FactorZ11.TabIndex = 340;
-            this.LB_Force_FactorZ11.Text = "Z11";
+            this.LB_Force_FactorZ11.Text = "11";
             // 
             // TB_Force_FactorZ10
             // 
             this.TB_Force_FactorZ10.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorZ10.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorZ10.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorZ10.Location = new System.Drawing.Point(286, 263);
+            this.TB_Force_FactorZ10.Location = new System.Drawing.Point(276, 266);
             this.TB_Force_FactorZ10.Name = "TB_Force_FactorZ10";
             this.TB_Force_FactorZ10.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorZ10.TabIndex = 339;
@@ -1559,11 +1562,11 @@
             this.LB_Force_FactorZ10.AutoSize = true;
             this.LB_Force_FactorZ10.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorZ10.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorZ10.Location = new System.Drawing.Point(257, 267);
+            this.LB_Force_FactorZ10.Location = new System.Drawing.Point(247, 269);
             this.LB_Force_FactorZ10.Name = "LB_Force_FactorZ10";
             this.LB_Force_FactorZ10.Size = new System.Drawing.Size(29, 16);
             this.LB_Force_FactorZ10.TabIndex = 338;
-            this.LB_Force_FactorZ10.Text = "Z10";
+            this.LB_Force_FactorZ10.Text = "10";
             // 
             // BT_Force_FactorX19
             // 
@@ -1578,7 +1581,7 @@
             this.BT_Force_FactorX19.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_Force_FactorX19.ForeColor = System.Drawing.Color.White;
             this.BT_Force_FactorX19.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BT_Force_FactorX19.Location = new System.Drawing.Point(113, 470);
+            this.BT_Force_FactorX19.Location = new System.Drawing.Point(103, 473);
             this.BT_Force_FactorX19.Name = "BT_Force_FactorX19";
             this.BT_Force_FactorX19.Size = new System.Drawing.Size(36, 22);
             this.BT_Force_FactorX19.TabIndex = 337;
@@ -1598,7 +1601,7 @@
             this.BT_Force_FactorX18.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_Force_FactorX18.ForeColor = System.Drawing.Color.White;
             this.BT_Force_FactorX18.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BT_Force_FactorX18.Location = new System.Drawing.Point(113, 447);
+            this.BT_Force_FactorX18.Location = new System.Drawing.Point(103, 450);
             this.BT_Force_FactorX18.Name = "BT_Force_FactorX18";
             this.BT_Force_FactorX18.Size = new System.Drawing.Size(36, 22);
             this.BT_Force_FactorX18.TabIndex = 336;
@@ -1610,7 +1613,7 @@
             this.TB_Force_FactorY19.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorY19.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorY19.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorY19.Location = new System.Drawing.Point(188, 470);
+            this.TB_Force_FactorY19.Location = new System.Drawing.Point(178, 473);
             this.TB_Force_FactorY19.Name = "TB_Force_FactorY19";
             this.TB_Force_FactorY19.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorY19.TabIndex = 335;
@@ -1623,29 +1626,29 @@
             this.LB_Force_FactorY19.AutoSize = true;
             this.LB_Force_FactorY19.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorY19.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorY19.Location = new System.Drawing.Point(159, 473);
+            this.LB_Force_FactorY19.Location = new System.Drawing.Point(149, 476);
             this.LB_Force_FactorY19.Name = "LB_Force_FactorY19";
             this.LB_Force_FactorY19.Size = new System.Drawing.Size(30, 16);
             this.LB_Force_FactorY19.TabIndex = 334;
-            this.LB_Force_FactorY19.Text = "Y19";
+            this.LB_Force_FactorY19.Text = "19";
             // 
             // LB_Force_FactorX19
             // 
             this.LB_Force_FactorX19.AutoSize = true;
             this.LB_Force_FactorX19.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorX19.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorX19.Location = new System.Drawing.Point(28, 473);
+            this.LB_Force_FactorX19.Location = new System.Drawing.Point(18, 476);
             this.LB_Force_FactorX19.Name = "LB_Force_FactorX19";
             this.LB_Force_FactorX19.Size = new System.Drawing.Size(31, 16);
             this.LB_Force_FactorX19.TabIndex = 333;
-            this.LB_Force_FactorX19.Text = "X19";
+            this.LB_Force_FactorX19.Text = "19";
             // 
             // TB_Force_FactorX19
             // 
             this.TB_Force_FactorX19.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorX19.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorX19.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorX19.Location = new System.Drawing.Point(58, 470);
+            this.TB_Force_FactorX19.Location = new System.Drawing.Point(48, 473);
             this.TB_Force_FactorX19.Name = "TB_Force_FactorX19";
             this.TB_Force_FactorX19.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorX19.TabIndex = 332;
@@ -1658,7 +1661,7 @@
             this.TB_Force_FactorY18.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorY18.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorY18.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorY18.Location = new System.Drawing.Point(188, 447);
+            this.TB_Force_FactorY18.Location = new System.Drawing.Point(178, 450);
             this.TB_Force_FactorY18.Name = "TB_Force_FactorY18";
             this.TB_Force_FactorY18.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorY18.TabIndex = 331;
@@ -1671,29 +1674,29 @@
             this.LB_Force_FactorY18.AutoSize = true;
             this.LB_Force_FactorY18.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorY18.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorY18.Location = new System.Drawing.Point(159, 451);
+            this.LB_Force_FactorY18.Location = new System.Drawing.Point(149, 453);
             this.LB_Force_FactorY18.Name = "LB_Force_FactorY18";
             this.LB_Force_FactorY18.Size = new System.Drawing.Size(30, 16);
             this.LB_Force_FactorY18.TabIndex = 330;
-            this.LB_Force_FactorY18.Text = "Y18";
+            this.LB_Force_FactorY18.Text = "18";
             // 
             // LB_Force_FactorX18
             // 
             this.LB_Force_FactorX18.AutoSize = true;
             this.LB_Force_FactorX18.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorX18.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorX18.Location = new System.Drawing.Point(28, 451);
+            this.LB_Force_FactorX18.Location = new System.Drawing.Point(18, 453);
             this.LB_Force_FactorX18.Name = "LB_Force_FactorX18";
             this.LB_Force_FactorX18.Size = new System.Drawing.Size(31, 16);
             this.LB_Force_FactorX18.TabIndex = 329;
-            this.LB_Force_FactorX18.Text = "X18";
+            this.LB_Force_FactorX18.Text = "18";
             // 
             // TB_Force_FactorX18
             // 
             this.TB_Force_FactorX18.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorX18.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorX18.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorX18.Location = new System.Drawing.Point(58, 447);
+            this.TB_Force_FactorX18.Location = new System.Drawing.Point(48, 450);
             this.TB_Force_FactorX18.Name = "TB_Force_FactorX18";
             this.TB_Force_FactorX18.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorX18.TabIndex = 328;
@@ -1714,7 +1717,7 @@
             this.BT_Force_FactorX17.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_Force_FactorX17.ForeColor = System.Drawing.Color.White;
             this.BT_Force_FactorX17.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BT_Force_FactorX17.Location = new System.Drawing.Point(113, 424);
+            this.BT_Force_FactorX17.Location = new System.Drawing.Point(103, 427);
             this.BT_Force_FactorX17.Name = "BT_Force_FactorX17";
             this.BT_Force_FactorX17.Size = new System.Drawing.Size(36, 22);
             this.BT_Force_FactorX17.TabIndex = 327;
@@ -1734,7 +1737,7 @@
             this.BT_Force_FactorX16.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_Force_FactorX16.ForeColor = System.Drawing.Color.White;
             this.BT_Force_FactorX16.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BT_Force_FactorX16.Location = new System.Drawing.Point(113, 401);
+            this.BT_Force_FactorX16.Location = new System.Drawing.Point(103, 404);
             this.BT_Force_FactorX16.Name = "BT_Force_FactorX16";
             this.BT_Force_FactorX16.Size = new System.Drawing.Size(36, 22);
             this.BT_Force_FactorX16.TabIndex = 326;
@@ -1754,7 +1757,7 @@
             this.BT_Force_FactorX15.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_Force_FactorX15.ForeColor = System.Drawing.Color.White;
             this.BT_Force_FactorX15.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BT_Force_FactorX15.Location = new System.Drawing.Point(113, 378);
+            this.BT_Force_FactorX15.Location = new System.Drawing.Point(103, 381);
             this.BT_Force_FactorX15.Name = "BT_Force_FactorX15";
             this.BT_Force_FactorX15.Size = new System.Drawing.Size(36, 22);
             this.BT_Force_FactorX15.TabIndex = 325;
@@ -1774,7 +1777,7 @@
             this.BT_Force_FactorX14.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_Force_FactorX14.ForeColor = System.Drawing.Color.White;
             this.BT_Force_FactorX14.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BT_Force_FactorX14.Location = new System.Drawing.Point(113, 355);
+            this.BT_Force_FactorX14.Location = new System.Drawing.Point(103, 358);
             this.BT_Force_FactorX14.Name = "BT_Force_FactorX14";
             this.BT_Force_FactorX14.Size = new System.Drawing.Size(36, 22);
             this.BT_Force_FactorX14.TabIndex = 324;
@@ -1786,7 +1789,7 @@
             this.TB_Force_FactorY14.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorY14.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorY14.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorY14.Location = new System.Drawing.Point(188, 355);
+            this.TB_Force_FactorY14.Location = new System.Drawing.Point(178, 358);
             this.TB_Force_FactorY14.Name = "TB_Force_FactorY14";
             this.TB_Force_FactorY14.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorY14.TabIndex = 323;
@@ -1799,29 +1802,29 @@
             this.LB_Force_FactorY14.AutoSize = true;
             this.LB_Force_FactorY14.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorY14.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorY14.Location = new System.Drawing.Point(159, 359);
+            this.LB_Force_FactorY14.Location = new System.Drawing.Point(149, 361);
             this.LB_Force_FactorY14.Name = "LB_Force_FactorY14";
             this.LB_Force_FactorY14.Size = new System.Drawing.Size(30, 16);
             this.LB_Force_FactorY14.TabIndex = 322;
-            this.LB_Force_FactorY14.Text = "Y14";
+            this.LB_Force_FactorY14.Text = "14";
             // 
             // LB_Force_FactorX14
             // 
             this.LB_Force_FactorX14.AutoSize = true;
             this.LB_Force_FactorX14.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorX14.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorX14.Location = new System.Drawing.Point(28, 359);
+            this.LB_Force_FactorX14.Location = new System.Drawing.Point(18, 361);
             this.LB_Force_FactorX14.Name = "LB_Force_FactorX14";
             this.LB_Force_FactorX14.Size = new System.Drawing.Size(31, 16);
             this.LB_Force_FactorX14.TabIndex = 321;
-            this.LB_Force_FactorX14.Text = "X14";
+            this.LB_Force_FactorX14.Text = "14";
             // 
             // TB_Force_FactorX14
             // 
             this.TB_Force_FactorX14.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorX14.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorX14.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorX14.Location = new System.Drawing.Point(58, 355);
+            this.TB_Force_FactorX14.Location = new System.Drawing.Point(48, 358);
             this.TB_Force_FactorX14.Name = "TB_Force_FactorX14";
             this.TB_Force_FactorX14.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorX14.TabIndex = 320;
@@ -1834,7 +1837,7 @@
             this.TB_Force_FactorY17.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorY17.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorY17.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorY17.Location = new System.Drawing.Point(188, 424);
+            this.TB_Force_FactorY17.Location = new System.Drawing.Point(178, 427);
             this.TB_Force_FactorY17.Name = "TB_Force_FactorY17";
             this.TB_Force_FactorY17.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorY17.TabIndex = 319;
@@ -1847,29 +1850,29 @@
             this.LB_Force_FactorY17.AutoSize = true;
             this.LB_Force_FactorY17.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorY17.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorY17.Location = new System.Drawing.Point(159, 427);
+            this.LB_Force_FactorY17.Location = new System.Drawing.Point(149, 430);
             this.LB_Force_FactorY17.Name = "LB_Force_FactorY17";
             this.LB_Force_FactorY17.Size = new System.Drawing.Size(30, 16);
             this.LB_Force_FactorY17.TabIndex = 318;
-            this.LB_Force_FactorY17.Text = "Y17";
+            this.LB_Force_FactorY17.Text = "17";
             // 
             // LB_Force_FactorX17
             // 
             this.LB_Force_FactorX17.AutoSize = true;
             this.LB_Force_FactorX17.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorX17.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorX17.Location = new System.Drawing.Point(28, 427);
+            this.LB_Force_FactorX17.Location = new System.Drawing.Point(18, 430);
             this.LB_Force_FactorX17.Name = "LB_Force_FactorX17";
             this.LB_Force_FactorX17.Size = new System.Drawing.Size(31, 16);
             this.LB_Force_FactorX17.TabIndex = 317;
-            this.LB_Force_FactorX17.Text = "X17";
+            this.LB_Force_FactorX17.Text = "17";
             // 
             // TB_Force_FactorX17
             // 
             this.TB_Force_FactorX17.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorX17.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorX17.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorX17.Location = new System.Drawing.Point(58, 424);
+            this.TB_Force_FactorX17.Location = new System.Drawing.Point(48, 427);
             this.TB_Force_FactorX17.Name = "TB_Force_FactorX17";
             this.TB_Force_FactorX17.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorX17.TabIndex = 316;
@@ -1882,7 +1885,7 @@
             this.TB_Force_FactorY16.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorY16.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorY16.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorY16.Location = new System.Drawing.Point(188, 401);
+            this.TB_Force_FactorY16.Location = new System.Drawing.Point(178, 404);
             this.TB_Force_FactorY16.Name = "TB_Force_FactorY16";
             this.TB_Force_FactorY16.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorY16.TabIndex = 315;
@@ -1895,29 +1898,29 @@
             this.LB_Force_FactorY16.AutoSize = true;
             this.LB_Force_FactorY16.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorY16.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorY16.Location = new System.Drawing.Point(159, 406);
+            this.LB_Force_FactorY16.Location = new System.Drawing.Point(149, 407);
             this.LB_Force_FactorY16.Name = "LB_Force_FactorY16";
             this.LB_Force_FactorY16.Size = new System.Drawing.Size(30, 16);
             this.LB_Force_FactorY16.TabIndex = 314;
-            this.LB_Force_FactorY16.Text = "Y16";
+            this.LB_Force_FactorY16.Text = "16";
             // 
             // LB_Force_FactorX16
             // 
             this.LB_Force_FactorX16.AutoSize = true;
             this.LB_Force_FactorX16.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorX16.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorX16.Location = new System.Drawing.Point(28, 405);
+            this.LB_Force_FactorX16.Location = new System.Drawing.Point(18, 407);
             this.LB_Force_FactorX16.Name = "LB_Force_FactorX16";
             this.LB_Force_FactorX16.Size = new System.Drawing.Size(31, 16);
             this.LB_Force_FactorX16.TabIndex = 313;
-            this.LB_Force_FactorX16.Text = "X16";
+            this.LB_Force_FactorX16.Text = "16";
             // 
             // TB_Force_FactorX16
             // 
             this.TB_Force_FactorX16.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorX16.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorX16.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorX16.Location = new System.Drawing.Point(58, 401);
+            this.TB_Force_FactorX16.Location = new System.Drawing.Point(48, 404);
             this.TB_Force_FactorX16.Name = "TB_Force_FactorX16";
             this.TB_Force_FactorX16.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorX16.TabIndex = 312;
@@ -1930,7 +1933,7 @@
             this.TB_Force_FactorY15.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorY15.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorY15.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorY15.Location = new System.Drawing.Point(188, 378);
+            this.TB_Force_FactorY15.Location = new System.Drawing.Point(178, 381);
             this.TB_Force_FactorY15.Name = "TB_Force_FactorY15";
             this.TB_Force_FactorY15.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorY15.TabIndex = 311;
@@ -1943,29 +1946,29 @@
             this.LB_Force_FactorY15.AutoSize = true;
             this.LB_Force_FactorY15.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorY15.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorY15.Location = new System.Drawing.Point(159, 381);
+            this.LB_Force_FactorY15.Location = new System.Drawing.Point(149, 384);
             this.LB_Force_FactorY15.Name = "LB_Force_FactorY15";
             this.LB_Force_FactorY15.Size = new System.Drawing.Size(30, 16);
             this.LB_Force_FactorY15.TabIndex = 310;
-            this.LB_Force_FactorY15.Text = "Y15";
+            this.LB_Force_FactorY15.Text = "15";
             // 
             // LB_Force_FactorX15
             // 
             this.LB_Force_FactorX15.AutoSize = true;
             this.LB_Force_FactorX15.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorX15.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorX15.Location = new System.Drawing.Point(28, 381);
+            this.LB_Force_FactorX15.Location = new System.Drawing.Point(18, 384);
             this.LB_Force_FactorX15.Name = "LB_Force_FactorX15";
             this.LB_Force_FactorX15.Size = new System.Drawing.Size(31, 16);
             this.LB_Force_FactorX15.TabIndex = 309;
-            this.LB_Force_FactorX15.Text = "X15";
+            this.LB_Force_FactorX15.Text = "15";
             // 
             // TB_Force_FactorX15
             // 
             this.TB_Force_FactorX15.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorX15.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorX15.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorX15.Location = new System.Drawing.Point(58, 378);
+            this.TB_Force_FactorX15.Location = new System.Drawing.Point(48, 381);
             this.TB_Force_FactorX15.Name = "TB_Force_FactorX15";
             this.TB_Force_FactorX15.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorX15.TabIndex = 308;
@@ -1986,7 +1989,7 @@
             this.BT_Force_FactorX13.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_Force_FactorX13.ForeColor = System.Drawing.Color.White;
             this.BT_Force_FactorX13.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BT_Force_FactorX13.Location = new System.Drawing.Point(113, 332);
+            this.BT_Force_FactorX13.Location = new System.Drawing.Point(103, 335);
             this.BT_Force_FactorX13.Name = "BT_Force_FactorX13";
             this.BT_Force_FactorX13.Size = new System.Drawing.Size(36, 22);
             this.BT_Force_FactorX13.TabIndex = 307;
@@ -2006,7 +2009,7 @@
             this.BT_Force_FactorX12.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_Force_FactorX12.ForeColor = System.Drawing.Color.White;
             this.BT_Force_FactorX12.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BT_Force_FactorX12.Location = new System.Drawing.Point(113, 309);
+            this.BT_Force_FactorX12.Location = new System.Drawing.Point(103, 312);
             this.BT_Force_FactorX12.Name = "BT_Force_FactorX12";
             this.BT_Force_FactorX12.Size = new System.Drawing.Size(36, 22);
             this.BT_Force_FactorX12.TabIndex = 306;
@@ -2026,7 +2029,7 @@
             this.BT_Force_FactorX11.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_Force_FactorX11.ForeColor = System.Drawing.Color.White;
             this.BT_Force_FactorX11.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BT_Force_FactorX11.Location = new System.Drawing.Point(113, 286);
+            this.BT_Force_FactorX11.Location = new System.Drawing.Point(103, 289);
             this.BT_Force_FactorX11.Name = "BT_Force_FactorX11";
             this.BT_Force_FactorX11.Size = new System.Drawing.Size(36, 22);
             this.BT_Force_FactorX11.TabIndex = 305;
@@ -2046,7 +2049,7 @@
             this.BT_Force_FactorX10.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_Force_FactorX10.ForeColor = System.Drawing.Color.White;
             this.BT_Force_FactorX10.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BT_Force_FactorX10.Location = new System.Drawing.Point(113, 263);
+            this.BT_Force_FactorX10.Location = new System.Drawing.Point(103, 266);
             this.BT_Force_FactorX10.Name = "BT_Force_FactorX10";
             this.BT_Force_FactorX10.Size = new System.Drawing.Size(36, 22);
             this.BT_Force_FactorX10.TabIndex = 304;
@@ -2058,7 +2061,7 @@
             this.TB_Force_FactorY10.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorY10.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorY10.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorY10.Location = new System.Drawing.Point(188, 263);
+            this.TB_Force_FactorY10.Location = new System.Drawing.Point(178, 266);
             this.TB_Force_FactorY10.Name = "TB_Force_FactorY10";
             this.TB_Force_FactorY10.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorY10.TabIndex = 303;
@@ -2071,29 +2074,29 @@
             this.LB_Force_FactorY10.AutoSize = true;
             this.LB_Force_FactorY10.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorY10.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorY10.Location = new System.Drawing.Point(159, 267);
+            this.LB_Force_FactorY10.Location = new System.Drawing.Point(149, 269);
             this.LB_Force_FactorY10.Name = "LB_Force_FactorY10";
             this.LB_Force_FactorY10.Size = new System.Drawing.Size(30, 16);
             this.LB_Force_FactorY10.TabIndex = 302;
-            this.LB_Force_FactorY10.Text = "Y10";
+            this.LB_Force_FactorY10.Text = "10";
             // 
             // LB_Force_FactorX10
             // 
             this.LB_Force_FactorX10.AutoSize = true;
             this.LB_Force_FactorX10.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorX10.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorX10.Location = new System.Drawing.Point(28, 267);
+            this.LB_Force_FactorX10.Location = new System.Drawing.Point(18, 269);
             this.LB_Force_FactorX10.Name = "LB_Force_FactorX10";
             this.LB_Force_FactorX10.Size = new System.Drawing.Size(31, 16);
             this.LB_Force_FactorX10.TabIndex = 301;
-            this.LB_Force_FactorX10.Text = "X10";
+            this.LB_Force_FactorX10.Text = "10";
             // 
             // TB_Force_FactorX10
             // 
             this.TB_Force_FactorX10.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorX10.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorX10.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorX10.Location = new System.Drawing.Point(58, 263);
+            this.TB_Force_FactorX10.Location = new System.Drawing.Point(48, 266);
             this.TB_Force_FactorX10.Name = "TB_Force_FactorX10";
             this.TB_Force_FactorX10.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorX10.TabIndex = 300;
@@ -2106,7 +2109,7 @@
             this.TB_Force_FactorY13.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorY13.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorY13.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorY13.Location = new System.Drawing.Point(188, 332);
+            this.TB_Force_FactorY13.Location = new System.Drawing.Point(178, 335);
             this.TB_Force_FactorY13.Name = "TB_Force_FactorY13";
             this.TB_Force_FactorY13.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorY13.TabIndex = 299;
@@ -2119,29 +2122,29 @@
             this.LB_Force_FactorY13.AutoSize = true;
             this.LB_Force_FactorY13.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorY13.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorY13.Location = new System.Drawing.Point(159, 335);
+            this.LB_Force_FactorY13.Location = new System.Drawing.Point(149, 338);
             this.LB_Force_FactorY13.Name = "LB_Force_FactorY13";
             this.LB_Force_FactorY13.Size = new System.Drawing.Size(30, 16);
             this.LB_Force_FactorY13.TabIndex = 298;
-            this.LB_Force_FactorY13.Text = "Y13";
+            this.LB_Force_FactorY13.Text = "13";
             // 
             // LB_Force_FactorX13
             // 
             this.LB_Force_FactorX13.AutoSize = true;
             this.LB_Force_FactorX13.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorX13.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorX13.Location = new System.Drawing.Point(28, 335);
+            this.LB_Force_FactorX13.Location = new System.Drawing.Point(18, 338);
             this.LB_Force_FactorX13.Name = "LB_Force_FactorX13";
             this.LB_Force_FactorX13.Size = new System.Drawing.Size(31, 16);
             this.LB_Force_FactorX13.TabIndex = 297;
-            this.LB_Force_FactorX13.Text = "X13";
+            this.LB_Force_FactorX13.Text = "13";
             // 
             // TB_Force_FactorX13
             // 
             this.TB_Force_FactorX13.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorX13.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorX13.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorX13.Location = new System.Drawing.Point(58, 332);
+            this.TB_Force_FactorX13.Location = new System.Drawing.Point(48, 335);
             this.TB_Force_FactorX13.Name = "TB_Force_FactorX13";
             this.TB_Force_FactorX13.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorX13.TabIndex = 296;
@@ -2154,7 +2157,7 @@
             this.TB_Force_FactorY12.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorY12.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorY12.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorY12.Location = new System.Drawing.Point(188, 309);
+            this.TB_Force_FactorY12.Location = new System.Drawing.Point(178, 312);
             this.TB_Force_FactorY12.Name = "TB_Force_FactorY12";
             this.TB_Force_FactorY12.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorY12.TabIndex = 295;
@@ -2167,29 +2170,29 @@
             this.LB_Force_FactorY12.AutoSize = true;
             this.LB_Force_FactorY12.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorY12.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorY12.Location = new System.Drawing.Point(159, 314);
+            this.LB_Force_FactorY12.Location = new System.Drawing.Point(149, 315);
             this.LB_Force_FactorY12.Name = "LB_Force_FactorY12";
             this.LB_Force_FactorY12.Size = new System.Drawing.Size(30, 16);
             this.LB_Force_FactorY12.TabIndex = 294;
-            this.LB_Force_FactorY12.Text = "Y12";
+            this.LB_Force_FactorY12.Text = "12";
             // 
             // LB_Force_FactorX12
             // 
             this.LB_Force_FactorX12.AutoSize = true;
             this.LB_Force_FactorX12.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorX12.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorX12.Location = new System.Drawing.Point(28, 313);
+            this.LB_Force_FactorX12.Location = new System.Drawing.Point(18, 315);
             this.LB_Force_FactorX12.Name = "LB_Force_FactorX12";
             this.LB_Force_FactorX12.Size = new System.Drawing.Size(31, 16);
             this.LB_Force_FactorX12.TabIndex = 293;
-            this.LB_Force_FactorX12.Text = "X12";
+            this.LB_Force_FactorX12.Text = "12";
             // 
             // TB_Force_FactorX12
             // 
             this.TB_Force_FactorX12.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorX12.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorX12.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorX12.Location = new System.Drawing.Point(58, 309);
+            this.TB_Force_FactorX12.Location = new System.Drawing.Point(48, 312);
             this.TB_Force_FactorX12.Name = "TB_Force_FactorX12";
             this.TB_Force_FactorX12.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorX12.TabIndex = 292;
@@ -2202,7 +2205,7 @@
             this.TB_Force_FactorY11.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorY11.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorY11.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorY11.Location = new System.Drawing.Point(188, 286);
+            this.TB_Force_FactorY11.Location = new System.Drawing.Point(178, 289);
             this.TB_Force_FactorY11.Name = "TB_Force_FactorY11";
             this.TB_Force_FactorY11.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorY11.TabIndex = 291;
@@ -2215,29 +2218,29 @@
             this.LB_Force_FactorY11.AutoSize = true;
             this.LB_Force_FactorY11.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorY11.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorY11.Location = new System.Drawing.Point(159, 289);
+            this.LB_Force_FactorY11.Location = new System.Drawing.Point(150, 292);
             this.LB_Force_FactorY11.Name = "LB_Force_FactorY11";
             this.LB_Force_FactorY11.Size = new System.Drawing.Size(29, 16);
             this.LB_Force_FactorY11.TabIndex = 290;
-            this.LB_Force_FactorY11.Text = "Y11";
+            this.LB_Force_FactorY11.Text = "11";
             // 
             // LB_Force_FactorX11
             // 
             this.LB_Force_FactorX11.AutoSize = true;
             this.LB_Force_FactorX11.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LB_Force_FactorX11.ForeColor = System.Drawing.Color.Black;
-            this.LB_Force_FactorX11.Location = new System.Drawing.Point(28, 289);
+            this.LB_Force_FactorX11.Location = new System.Drawing.Point(19, 292);
             this.LB_Force_FactorX11.Name = "LB_Force_FactorX11";
             this.LB_Force_FactorX11.Size = new System.Drawing.Size(30, 16);
             this.LB_Force_FactorX11.TabIndex = 289;
-            this.LB_Force_FactorX11.Text = "X11";
+            this.LB_Force_FactorX11.Text = "11";
             // 
             // TB_Force_FactorX11
             // 
             this.TB_Force_FactorX11.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.TB_Force_FactorX11.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TB_Force_FactorX11.ForeColor = System.Drawing.Color.Black;
-            this.TB_Force_FactorX11.Location = new System.Drawing.Point(58, 286);
+            this.TB_Force_FactorX11.Location = new System.Drawing.Point(48, 289);
             this.TB_Force_FactorX11.Name = "TB_Force_FactorX11";
             this.TB_Force_FactorX11.Size = new System.Drawing.Size(43, 22);
             this.TB_Force_FactorX11.TabIndex = 288;
@@ -2252,6 +2255,7 @@
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.ClientSize = new System.Drawing.Size(577, 631);
             this.ControlBox = false;
+            this.Controls.Add(this.TB_Result);
             this.Controls.Add(this.TB_Force_FactorZ19);
             this.Controls.Add(this.LB_Force_FactorZ19);
             this.Controls.Add(this.TB_Force_FactorZ18);
@@ -2353,7 +2357,6 @@
             this.Controls.Add(this.LB_Force_FactorY8);
             this.Controls.Add(this.LB_Force_FactorX8);
             this.Controls.Add(this.TB_Force_FactorX8);
-            this.Controls.Add(this.TB_Result);
             this.Controls.Add(this.LB_Force_TouchOffset);
             this.Controls.Add(this.TB_Force_TouchOffset);
             this.Controls.Add(this.LB_Force_Test_DAValue);

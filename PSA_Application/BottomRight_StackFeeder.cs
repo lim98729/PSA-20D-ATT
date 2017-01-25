@@ -163,7 +163,6 @@ namespace PSA_Application
 		}
 		#endregion
 		RetValue ret;
-        string tmpStr = "";
 
 		private void BT_PositionSelect_Click(object sender, EventArgs e)
 		{

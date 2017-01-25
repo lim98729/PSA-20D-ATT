@@ -84,7 +84,6 @@ namespace PSA_Application
 			}
 		}
 		#endregion
-		RetValue ret;
 		int logdisplay;
 		int logdisplaybackup;
 		private void BT_Stop_Click(object sender, EventArgs e)

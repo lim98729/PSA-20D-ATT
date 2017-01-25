@@ -3164,7 +3164,6 @@ namespace DefineLibrary
 			saveTuple[index++] = paraName;
 			tempTuple = new HTuple();
 			tempTuple = tup;
-			int lastIndex = 0;
 
 			for (int i = 0; i < size; i++, index++)
 			{

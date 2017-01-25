@@ -237,17 +237,17 @@ namespace PSA_Application
                     {
                         //ErrorView.Rows[i].Cells[0].EditType = typeof(int);
                         ErrorView.Rows[i].Cells[j].Value = ErrorReportContentStat[i].Count;
-                        if (ErrorView.Rows[i].Cells[j].Value == "") ErrorView.Rows[i].Cells[j].Value = "No-Value";
+                        if (ErrorView.Rows[i].Cells[j].Value.ToString() == "") ErrorView.Rows[i].Cells[j].Value = "No-Value";
                     }
                     else if (j == 1)
                     {
                         ErrorView.Rows[i].Cells[j].Value = ErrorReportContentStat[i].Content;
-                        if (ErrorView.Rows[i].Cells[j].Value == "") ErrorView.Rows[i].Cells[j].Value = "No-Content";
+                        if (ErrorView.Rows[i].Cells[j].Value.ToString() == "") ErrorView.Rows[i].Cells[j].Value = "No-Content";
                     }
                     else if (j == 2)
                     {
                         ErrorView.Rows[i].Cells[j].Value = ErrorReportContentStat[i].Module;
-                        if (ErrorView.Rows[i].Cells[j].Value == "") ErrorView.Rows[i].Cells[j].Value = "RunTime-Error";
+                        if (ErrorView.Rows[i].Cells[j].Value.ToString() == "") ErrorView.Rows[i].Cells[j].Value = "RunTime-Error";
                     }
                 }
             }

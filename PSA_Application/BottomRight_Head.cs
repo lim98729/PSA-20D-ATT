@@ -589,6 +589,11 @@ namespace PSA_Application
 
 		private void BottomRight_Head_Load(object sender, EventArgs e)
 		{
+            TS_Function.Visible = false;
+            LB_IN_ATC_OPEN.Visible = false;
+            LB_IN_ATC_CLOSE.Visible = false;
+            TS_IN_ATC_OPEN.Visible = false;
+            TS_IN_ATC_CLOSE.Visible = false;
 			if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG)
 			{
                 BT_PositionSelect_Pick3.Visible = false;
