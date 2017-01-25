@@ -139,7 +139,7 @@ namespace PSA_Application
                     mc.ulc.model_delete(mode);
                     int retry = 0;
                 RETRY:
-                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.FIRST, out ret.b); if (!ret.b) goto EXIT;
+                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.FIRST, out ret.b, 1); if (!ret.b) goto EXIT;
                     #region moving
                     if ((double)mc.ulc.cam.edgeIntersection.resultX > 2.0 || (double)mc.ulc.cam.edgeIntersection.resultY > 2.0)
                     {
@@ -151,13 +151,13 @@ namespace PSA_Application
                         if (digrst == DialogResult.No) goto EXIT;
                     }
 
-                    posX += Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2);
-                    posY += Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2);
+                    posX -= Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2);
+                    posY -= Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2);
                     mc.hd.tool.jogMoveXY(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
                     #endregion
                     mc.idle(100);
                     if (retry++ < 5) goto RETRY;
-                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.FIRST, out ret.b); if (!ret.b) goto EXIT;
+                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.FIRST, out ret.b, 1); if (!ret.b) goto EXIT;
 
                     #region auto teach
                     //halcon_region tmpRegion;
@@ -212,7 +212,7 @@ namespace PSA_Application
                     mc.ulc.model_delete(mode);
                     int retry = 0;
                 RETRY:
-                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.SECOND, out ret.b); if (!ret.b) goto EXIT;
+                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.SECOND, out ret.b, 1); if (!ret.b) goto EXIT;
                     #region moving
                     if ((double)mc.ulc.cam.edgeIntersection.resultX > 2.0 || (double)mc.ulc.cam.edgeIntersection.resultY > 2.0)
                     {
@@ -224,13 +224,13 @@ namespace PSA_Application
                         if (digrst == DialogResult.No) goto EXIT;
                     }
 
-                    posX += Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2);
-                    posY += Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2);
+                    posX -= Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2);
+                    posY -= Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2);
                     mc.hd.tool.jogMoveXY(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
                     #endregion
                     mc.idle(100);
                     if (retry++ < 5) goto RETRY;
-                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.SECOND, out ret.b); if (!ret.b) goto EXIT;
+                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.SECOND, out ret.b, 1); if (!ret.b) goto EXIT;
 
                     #region auto teach
                     //halcon_region tmpRegion;
@@ -285,7 +285,7 @@ namespace PSA_Application
                     mc.ulc.model_delete(mode);
                     int retry = 0;
                 RETRY:
-                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.THIRD, out ret.b); if (!ret.b) goto EXIT;
+                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.THIRD, out ret.b, 1); if (!ret.b) goto EXIT;
                     #region moving
                     if ((double)mc.ulc.cam.edgeIntersection.resultX > 2.0 || (double)mc.ulc.cam.edgeIntersection.resultY > 2.0)
                     {
@@ -297,13 +297,13 @@ namespace PSA_Application
                         if (digrst == DialogResult.No) goto EXIT;
                     }
 
-                    posX += Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2);
-                    posY += Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2);
+                    posX -= Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2);
+                    posY -= Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2);
                     mc.hd.tool.jogMoveXY(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
                     #endregion
                     mc.idle(100);
                     if (retry++ < 5) goto RETRY;
-                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.THIRD, out ret.b); if (!ret.b) goto EXIT;
+                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.THIRD, out ret.b, 1); if (!ret.b) goto EXIT;
 
                     #region auto teach
                     //halcon_region tmpRegion;
@@ -358,7 +358,7 @@ namespace PSA_Application
                     mc.ulc.model_delete(mode);
                     int retry = 0;
                 RETRY:
-                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.FOURTH, out ret.b); if (!ret.b) goto EXIT;
+                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.FOURTH, out ret.b, 1); if (!ret.b) goto EXIT;
                     #region moving
                     if ((double)mc.ulc.cam.edgeIntersection.resultX > 2.0 || (double)mc.ulc.cam.edgeIntersection.resultY > 2.0)
                     {
@@ -370,13 +370,13 @@ namespace PSA_Application
                         if (digrst == DialogResult.No) goto EXIT;
                     }
 
-                    posX += Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2);
-                    posY += Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2);
+                    posX -= Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2);
+                    posY -= Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2);
                     mc.hd.tool.jogMoveXY(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
                     #endregion
                     mc.idle(100);
                     if (retry++ < 5) goto RETRY;
-                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.FOURTH, out ret.b); if (!ret.b) goto EXIT;
+                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.FOURTH, out ret.b, 1); if (!ret.b) goto EXIT;
 
                     #region auto teach
                     //halcon_region tmpRegion;

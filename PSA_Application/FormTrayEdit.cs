@@ -72,6 +72,7 @@ namespace AccessoryLibrary
                 }
                 IsDisplayed = false;
                 editFlag = false;
+                BoardStatus_WorkArea.SelectMode = true;
                 EVENT.boardStatus(BOARD_ZONE.WORKING, mc.board.padStatus(BOARD_ZONE.WORKING), (int)mc.para.MT.padCount.x.value, (int)mc.para.MT.padCount.y.value);
                 this.Close();
             }
@@ -79,30 +80,35 @@ namespace AccessoryLibrary
             {
                 editFlag = false;
                 padApplyStatus = PAD_STATUS.INVALID;
+                BoardStatus_WorkArea.SelectMode = true;
                 //mc.board.padStatus(BOARD_ZONE.WORKING, indexRow, indexColumn, PAD_STATUS.INVALID, out ret.b);
             }
             if (sender.Equals(BT_Ready))
             {
                 editFlag = true;
                 padApplyStatus = PAD_STATUS.READY;
+                BoardStatus_WorkArea.SelectMode = false;
                 //mc.board.padStatus(BOARD_ZONE.WORKING, indexRow, indexColumn, PAD_STATUS.READY, out ret.b);
             }
             if (sender.Equals(BT_Skip))
             {
                 editFlag = true;
                 padApplyStatus = PAD_STATUS.SKIP;
+                BoardStatus_WorkArea.SelectMode = false;
                 //mc.board.padStatus(BOARD_ZONE.WORKING, indexRow, indexColumn, PAD_STATUS.SKIP, out ret.b);
             }
             if (sender.Equals(BT_AttachDone))
             {
                 editFlag = true;
                 padApplyStatus = PAD_STATUS.ATTACH_DONE;
+                BoardStatus_WorkArea.SelectMode = false;
                 //mc.board.padStatus(BOARD_ZONE.WORKING, indexRow, indexColumn, PAD_STATUS.PLACE, out ret.b);
             }
             if (sender.Equals(BT_AttachFail))
             {
                 editFlag = true;
                 padApplyStatus = PAD_STATUS.ATTACH_FAIL;
+                BoardStatus_WorkArea.SelectMode = false;
                 //mc.board.padStatus(BOARD_ZONE.WORKING, indexRow, indexColumn, PAD_STATUS.PLACE_ERROR, out ret.b);
             }
             if (sender.Equals(BT_PadStatus))
@@ -156,7 +162,7 @@ namespace AccessoryLibrary
 			TB_Row.Text = (indexRow + 1).ToString();
 			TB_Column.Text = (indexColumn + 1).ToString();
 
-			if (padStatus == PAD_STATUS.INVALID) 
+            if (padStatus == PAD_STATUS.INVALID) 
 			{ 
 				BT_PadStatus.BackColor = Color.White; BT_PadStatus.ForeColor = Color.Black; BT_PadStatus.Text = "Select"; 
 			}

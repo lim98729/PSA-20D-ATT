@@ -7172,15 +7172,15 @@ namespace HalconLibrary
 
 				if (quarterNumber == QUARTER_NUMBER.FIRST)
 				{
-					createVColumn1 = ox - shortLength;
-					createVColumn2 = ox + shortLength * cropArea;
-					createVRow1 = oy - longLength;
-					createVRow2 = oy - shortLength;
+                    createVColumn1 = ox - shortLength * cropArea;
+                    createVColumn2 = ox + shortLength;
+                    createVRow1 = oy + shortLength;
+                    createVRow2 = oy + longLength;
 
-					createHColumn1 = ox + shortLength;
-					createHColumn2 = ox + longLength;
-					createHRow1 = oy - shortLength * cropArea;
-					createHRow2 = oy + shortLength;
+                    createHColumn1 = ox - longLength;
+                    createHColumn2 = ox - shortLength;
+                    createHRow1 = oy - shortLength;
+                    createHRow2 = oy + shortLength * cropArea;
 				}
 				else if (quarterNumber == QUARTER_NUMBER.SECOND)
 				{
@@ -7196,15 +7196,15 @@ namespace HalconLibrary
 				}
 				else if (quarterNumber == QUARTER_NUMBER.THIRD)
 				{
-					createVColumn1 = ox - shortLength * cropArea;
-					createVColumn2 = ox + shortLength;
-					createVRow1 = oy + shortLength;
-					createVRow2 = oy + longLength;
+                    createVColumn1 = ox - shortLength;
+                    createVColumn2 = ox + shortLength * cropArea;
+                    createVRow1 = oy - longLength;
+                    createVRow2 = oy - shortLength;
 
-					createHColumn1 = ox - longLength;
-					createHColumn2 = ox - shortLength;
-					createHRow1 = oy - shortLength;
-					createHRow2 = oy + shortLength * cropArea;
+                    createHColumn1 = ox + shortLength;
+                    createHColumn2 = ox + longLength;
+                    createHRow1 = oy - shortLength * cropArea;
+                    createHRow2 = oy + shortLength;
 				}
 				else if (quarterNumber == QUARTER_NUMBER.FOURTH)
 				{

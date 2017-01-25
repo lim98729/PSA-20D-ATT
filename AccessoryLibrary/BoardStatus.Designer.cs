@@ -28,7 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.TT_HelpMsg = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
+            // 
+            // TT_HelpMsg
+            // 
+            this.TT_HelpMsg.AutomaticDelay = 100;
+            this.TT_HelpMsg.AutoPopDelay = 10000;
+            this.TT_HelpMsg.InitialDelay = 100;
+            this.TT_HelpMsg.ReshowDelay = 20;
+            this.TT_HelpMsg.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.TT_HelpMsg.ToolTipTitle = "[Row,Column]";
             // 
             // BoardStatus
             // 
@@ -45,6 +56,8 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.ToolTip TT_HelpMsg;
 
     }
 }

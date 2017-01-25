@@ -78,6 +78,8 @@ namespace AccessoryLibrary
                 if (zone == boardZone)
                 {
                     EditMode = enable;
+                    if (enable) TT_HelpMsg.ToolTipTitle = "CLICK to EDIT[Row,Column]";
+                    else TT_HelpMsg.ToolTipTitle = "[Row,Column]";
                 }
             }
         }
@@ -221,7 +223,9 @@ namespace AccessoryLibrary
         static float penSize = 2;
         private Pen blackPen = new Pen(Color.Black, penSize);
         private Pen redPen = new Pen(Color.Red, penSize);
+        private Pen outLine = new Pen(Color.Red, penSize * 2);
         private Brush rtColor = new SolidBrush(Color.Gray);
+        private Brush fontColor;
        
         private Point startPoint;
 
@@ -235,16 +239,22 @@ namespace AccessoryLibrary
         private int gapY2 = 0;
         private int tempX = 0;
         private int tempY = 0;
+
+        public int selectedPadX, selectedPadY;
+
         private BOARD_ZONE boardZone;
         private McTypeFrRr FrRr;
 
         private bool dragMode;
         private bool EditMode;
+        public bool SelectMode = true;
 
         private Rectangle rect = new Rectangle();
+        private Rectangle[,] curPad;
         private int[,] selectedPad = new int[40, 40];
         private PAD_STATUS[,] state = new PAD_STATUS[40, 40];
 
+    
         public void setCount(int x, int y)
         {
             countX = x;
@@ -254,7 +264,7 @@ namespace AccessoryLibrary
         public void activate(Size size, McTypeFrRr _FrRr, BOARD_ZONE zone, int x, int y)
         {
             setCount(x, y);
-
+            curPad = new Rectangle[countX, countY];
             this.Size = size;
 
             FrRr = _FrRr;
@@ -270,11 +280,22 @@ namespace AccessoryLibrary
 
             gapX2 = ratioX + ((this.Width - (ratioX * 2 + gapX * (countX - 1))) % countX) / 2;
             gapY2 = ratioY + ((this.Height - (ratioY * 2 + gapY * (countY - 1))) % countY) / 2;
-            //padSizeY = (this.Height - countY * (int)(penSize * 2) - ratioY) / countY;
-            //gapX = (this.Width - ratioX - padSizeX * countX) / (countX + 1);
-            //gapY = (this.Height - ratioY - padSizeY * countY) / (countY + 1);
-            //gapX2 = ((this.Width - ratioX - padSizeX * countX) % (countX + 1) + ratioX) / 2;
-            //gapY2 = ((this.Height - ratioY - padSizeY * countY) % (countY + 1) + ratioY) / 2;
+
+            // make rectangles..
+            int startX, startY;
+            startX = (padSizeX * countX + gapX * (countX - 1)) / 2;
+            startY = (padSizeY * countY + gapY * (countY - 1)) / 2;
+
+            for (int idY = 0; idY < countY; idY++)
+            {
+                for (int idX = 0; idX < countX; idX++)
+                {
+                    curPad[idX, idY].X = this.Width / 2 - startX + (padSizeX + gapX) * idX;
+                    curPad[idX, idY].Y = this.Height / 2 - startY + (padSizeY + gapY) * idY;
+                    curPad[idX, idY].Width = padSizeX;
+                    curPad[idX, idY].Height = padSizeY;
+                }
+            } 
         }
 
         private void SetStatus(Rectangle rect)
@@ -282,17 +303,21 @@ namespace AccessoryLibrary
             int posX = 0;
             int posY = 0;
 
+            int startX, startY;
+            startX = (padSizeX * countX + gapX * (countX - 1)) / 2;
+            startY = (padSizeY * countY + gapY * (countY - 1)) / 2;
+
             for (int idY = 0; idY < countY; idY++)
             {
                 for (int idX = 0; idX < countX; idX++)
                 {
-                    posX = (padSizeX + (int)(penSize * 2)) * idX + gapX * idX + gapX2;
-                    posY = (padSizeY + (int)(penSize * 2)) * idY + gapY * idY + gapY2;
+                    posX = this.Width / 2 - startX + (padSizeX + gapX) * idX;
+                    posY = this.Height / 2 - startY + (padSizeY + gapY) * idY;
 
                     if (posX <= rect.X + rect.Width
-                        && (padSizeX + (int)(penSize * 2)) * (idX + 1) + gapX + gapX2 >= rect.X
+                        && this.Width / 2 - startX + (padSizeX + gapX) * (idX + 1) >= rect.X
                         && posY <= rect.Y + rect.Height
-                        && (padSizeY + (int)(penSize * 2)) * (idY + 1) + gapY + gapY2 >= rect.Y)
+                        && this.Height / 2 - startY + (padSizeY + gapY) * (idY + 1) >= rect.Y)
                     {
                         if (FrRr == McTypeFrRr.FRONT)
                         {
@@ -322,7 +347,10 @@ namespace AccessoryLibrary
         private void FillRect(int idX, int idY, int startX, int startY)
         {
             rtColor = new SolidBrush(getColor(idX, idY));
+            fontColor = new SolidBrush(Color.Transparent);
+
             g.FillRectangle(rtColor, startX, startY, padSizeX, padSizeY);
+            g.DrawString(state[idX, idY].ToString(), new Font("Arial", 5F), fontColor, startX + padSizeX / 2, startY + padSizeY / 2);
         }
 
         public void DrawRect()
@@ -336,13 +364,11 @@ namespace AccessoryLibrary
             {
                 for (int idX = 0; idX < countX; idX++)
                 {
-                    //tempX = (padSizeX + (int)(penSize * 2)) * idX + gapX * idX + gapX2;
-                    //tempY = (padSizeY + (int)(penSize * 2)) * idY + gapY * idY + gapY2;
                     tempX = this.Width / 2 - startX + (padSizeX + gapX) * idX;
                     tempY = this.Height / 2 - startY + (padSizeY + gapY) * idY;
 
-
-                    g.DrawRectangle(blackPen, tempX, tempY, padSizeX, padSizeY);
+                    if (idX == selectedPadX && idY == selectedPadY) g.DrawRectangle(outLine, tempX, tempY, padSizeX, padSizeY);
+                    else g.DrawRectangle(blackPen, tempX, tempY, padSizeX, padSizeY);
                     if (FrRr == McTypeFrRr.FRONT) FillRect(idX, countY - 1 - idY, tempX, tempY);
                     else FillRect(countX - 1 - idX, idY, tempX, tempY);
                 }
@@ -351,7 +377,7 @@ namespace AccessoryLibrary
      
         private void BoardStatus_MouseDown(object sender, MouseEventArgs e)
         {
-            if (!dragMode)
+            if (!dragMode && !SelectMode)
             {
                 rect.X = 0;
                 rect.Y = 0;
@@ -366,7 +392,7 @@ namespace AccessoryLibrary
 
         private void BoardStatus_MouseMove(object sender, MouseEventArgs e)
         {
-            if (dragMode)
+            if (dragMode && !SelectMode)
             {
                 int width = e.Location.X - startPoint.X;
                 int height = e.Location.Y - startPoint.Y;
@@ -385,18 +411,45 @@ namespace AccessoryLibrary
                 rect.Width = width;
                 rect.Height = height;
 
-                this.Invalidate();
+                Invalidate();
             }
 
         }
 
         private void BoardStatus_MouseUp(object sender, MouseEventArgs e)
         {
-            if (dragMode)
+            if (dragMode && !SelectMode)
             {
                 dragMode = false;
                 SetStatus(rect);
-                this.Invalidate();
+                Invalidate();
+            }
+
+            //if (SelectMode)
+            {
+                try
+                {
+                    float startX, startY;
+                    startX = (padSizeX * countX + gapX * (countX - 1)) / 2;
+                    startY = (padSizeY * countY + gapY * (countY - 1)) / 2;
+
+                    for (int idY = 0; idY < countY; idY++)
+                    {
+                        for (int idX = 0; idX < countX; idX++)
+                        {
+                            if (curPad[idX, idY].Contains(e.X, e.Y))
+                            {
+                                selectedPadX = idX;
+                                selectedPadY = idY;
+                                Invalidate();
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+
+                }
             }
         }
         

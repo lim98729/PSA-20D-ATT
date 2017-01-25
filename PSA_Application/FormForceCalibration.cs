@@ -54,10 +54,8 @@ namespace PSA_Application
 
 		Thread threadForceCalibration;
 
-		static double[] tmpForceCalDataA = new double[20];
-		static double[] tmpForceCalDataB = new double[20];
-		static double[] tmpForceCalDataC = new double[20];
-		static double[] tmpForceCalDataD = new double[20];
+        static parameterForceFactor tempForce = new parameterForceFactor();
+		
 		static bool threadAbortFlag;
 		bool calDataChanged;
 
@@ -106,13 +104,13 @@ namespace PSA_Application
 							dwellT.Reset();
 							
 							// Contact 시점에는 낮은 압력을 이용한다.
-							if (tmpForceCalDataA[j] < (tmpForceCalDataA[0] + 0.4))
+							if (tempForce.A[j].value < (tempForce.A[0].value + 0.4))
 							{
-								mc.hd.tool.F.voltage(tmpForceCalDataA[j], out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarm("Force Analog Output Error"); break; }
+								mc.hd.tool.F.voltage(tempForce.A[j].value, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarm("Force Analog Output Error"); break; }
 							}
 							else
 							{
-								mc.hd.tool.F.voltage(tmpForceCalDataA[0] + 0.4, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarm("Force Analog Output Error"); break; }
+								mc.hd.tool.F.voltage(tempForce.A[0].value + 0.4, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarm("Force Analog Output Error"); break; }
 							}
 							
 							mc.idle(1500);		// 이 Factor는 안정적으로 가져가야 한다.
@@ -123,7 +121,7 @@ namespace PSA_Application
 							posZ = mc.hd.tool.tPos.z.LOADCELL - mc.para.CAL.force.touchOffset.value;
 							mc.hd.tool.Z.move(posZ, 0.0005, 0.01, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); break; }
 							mc.hd.tool.checkZMoveEnd(out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); break; }
-							mc.hd.tool.F.voltage(tmpForceCalDataA[j], out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarm("Force Analog Output Error"); break; }
+							mc.hd.tool.F.voltage(tempForce.A[j].value, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarm("Force Analog Output Error"); break; }
 							
 							mc.idle(UtilityControl.forceCheckDelay);
 							
@@ -145,7 +143,7 @@ namespace PSA_Application
 							retT.d2 = mc.AIN.HeadLoadcell();
 							strainGaugeResult[i] = retT.d2;
 
-							mc.log.debug.write(mc.log.CODE.TRACE, "Volt : " + tmpForceCalDataA[j].ToString() + ", VPPM : " + Math.Round(vppmResult[i], 3).ToString() + ", LoadC : " + Math.Round(strainGaugeResult[i], 3).ToString() + ", Count : " + i.ToString() + ", Force : " + autoCheckResult[i].ToString());
+							mc.log.debug.write(mc.log.CODE.TRACE, "Volt : " + tempForce.A[j].ToString() + ", VPPM : " + Math.Round(vppmResult[i], 3).ToString() + ", LoadC : " + Math.Round(strainGaugeResult[i], 3).ToString() + ", Count : " + i.ToString() + ", Force : " + autoCheckResult[i].ToString());
 						}
 
 						// loadcell force value 생성
@@ -223,9 +221,9 @@ namespace PSA_Application
 						//mc.log.debug.write(mc.log.CODE.TRACE, "Max[" + maxIndexV.ToString() + "] : " + maxValV.ToString() + ", Min[" + minIndexV.ToString() + "] : " + minValV.ToString() + ", Mean : " + meanVal.ToString() + " [kg], " + Math.Round(meanValV, 3).ToString() + "[V]");
 
 						//mc.para.CAL.force.B[i].value
-						tmpForceCalDataB[j] = Math.Round(meanVal, 3);
-						tmpForceCalDataC[j] = Math.Round(meanValV, 3);
-						tmpForceCalDataD[j] = Math.Round(meanValVSG, 3);
+						tempForce.B[j].value = Math.Round(meanVal, 3);
+						tempForce.C[j].value = Math.Round(meanValV, 3);
+						tempForce.D[j].value = Math.Round(meanValVSG, 3);
 					}
 					posZ = mc.hd.tool.tPos.z.XY_MOVING;
 					mc.hd.tool.jogMove(posZ, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); break; }
@@ -263,8 +261,8 @@ namespace PSA_Application
 
 				for (int i = 0; i < 20; i++)
 				{
-					if (tmpForceCalDataA[i] != mc.para.CAL.force.A[i].value || tmpForceCalDataB[i] != mc.para.CAL.force.B[i].value
-						|| tmpForceCalDataC[i] != mc.para.CAL.force.C[i].value || tmpForceCalDataD[i] != mc.para.CAL.force.D[i].value)
+                    if (tempForce.A[i].value != mc.para.CAL.force.A[i].value || tempForce.B[i].value != mc.para.CAL.force.B[i].value
+                        || tempForce.C[i].value != mc.para.CAL.force.C[i].value || tempForce.D[i].value != mc.para.CAL.force.D[i].value)
 					{
 						calDataChanged = true;
 						break;			// 다른 것이 있는지 없는지 유무만 판단하므로.. 하나라도 다르면 Break;
@@ -285,10 +283,10 @@ namespace PSA_Application
 					{
 						for (int i = 0; i < 20; i++)
 						{
-							mc.para.CAL.force.A[i].value = tmpForceCalDataA[i];
-							mc.para.CAL.force.B[i].value = tmpForceCalDataB[i];
-							mc.para.CAL.force.C[i].value = tmpForceCalDataC[i];
-							mc.para.CAL.force.D[i].value = tmpForceCalDataD[i];
+							mc.para.CAL.force.A[i].value = tempForce.A[i].value;
+							mc.para.CAL.force.B[i].value = tempForce.B[i].value;
+							mc.para.CAL.force.C[i].value = tempForce.C[i].value;
+							mc.para.CAL.force.D[i].value = tempForce.D[i].value;
 						}
 						mc.para.HD.place.placeForceOffset.value = 0;		// clear
 					}
@@ -296,10 +294,10 @@ namespace PSA_Application
 					{
 						for (int i = 0; i < 20; i++)
 						{
-							tmpForceCalDataA[i] = mc.para.CAL.force.A[i].value ;
-							tmpForceCalDataB[i] = mc.para.CAL.force.B[i].value ;
-							tmpForceCalDataC[i] = mc.para.CAL.force.C[i].value ;
-							tmpForceCalDataD[i] = mc.para.CAL.force.D[i].value ;
+							tempForce.A[i].value = mc.para.CAL.force.A[i].value;
+                            tempForce.B[i].value = mc.para.CAL.force.B[i].value;
+                            tempForce.C[i].value = mc.para.CAL.force.C[i].value;
+                            tempForce.D[i].value = mc.para.CAL.force.D[i].value;
 						}
 						this.Close();
 					}
@@ -549,68 +547,68 @@ namespace PSA_Application
 			#endregion
 
 			#region 0~19버튼 이벤트
-			if (sender.Equals(TB_Force_FactorX0)) tmpForceCalDataA[0] = Convert.ToDouble(TB_Force_FactorX0.Text);
-			if (sender.Equals(TB_Force_FactorX1)) tmpForceCalDataA[1] = Convert.ToDouble(TB_Force_FactorX1.Text);
-			if (sender.Equals(TB_Force_FactorX2)) tmpForceCalDataA[2] = Convert.ToDouble(TB_Force_FactorX2.Text);
-			if (sender.Equals(TB_Force_FactorX3)) tmpForceCalDataA[3] = Convert.ToDouble(TB_Force_FactorX3.Text);
-			if (sender.Equals(TB_Force_FactorX4)) tmpForceCalDataA[4] = Convert.ToDouble(TB_Force_FactorX4.Text);
-			if (sender.Equals(TB_Force_FactorX5)) tmpForceCalDataA[5] = Convert.ToDouble(TB_Force_FactorX5.Text);
-			if (sender.Equals(TB_Force_FactorX6)) tmpForceCalDataA[6] = Convert.ToDouble(TB_Force_FactorX6.Text);
-			if (sender.Equals(TB_Force_FactorX7)) tmpForceCalDataA[7] = Convert.ToDouble(TB_Force_FactorX7.Text);
-			if (sender.Equals(TB_Force_FactorX8)) tmpForceCalDataA[8] = Convert.ToDouble(TB_Force_FactorX8.Text);
-			if (sender.Equals(TB_Force_FactorX9)) tmpForceCalDataA[9] = Convert.ToDouble(TB_Force_FactorX9.Text);
-			if (sender.Equals(TB_Force_FactorX10)) tmpForceCalDataA[10] = Convert.ToDouble(TB_Force_FactorX10.Text);
-			if (sender.Equals(TB_Force_FactorX11)) tmpForceCalDataA[11] = Convert.ToDouble(TB_Force_FactorX11.Text);
-			if (sender.Equals(TB_Force_FactorX12)) tmpForceCalDataA[12] = Convert.ToDouble(TB_Force_FactorX12.Text);
-			if (sender.Equals(TB_Force_FactorX13)) tmpForceCalDataA[13] = Convert.ToDouble(TB_Force_FactorX13.Text);
-			if (sender.Equals(TB_Force_FactorX14)) tmpForceCalDataA[14] = Convert.ToDouble(TB_Force_FactorX14.Text);
-			if (sender.Equals(TB_Force_FactorX15)) tmpForceCalDataA[15] = Convert.ToDouble(TB_Force_FactorX15.Text);
-			if (sender.Equals(TB_Force_FactorX16)) tmpForceCalDataA[16] = Convert.ToDouble(TB_Force_FactorX16.Text);
-			if (sender.Equals(TB_Force_FactorX17)) tmpForceCalDataA[17] = Convert.ToDouble(TB_Force_FactorX17.Text);
-			if (sender.Equals(TB_Force_FactorX18)) tmpForceCalDataA[18] = Convert.ToDouble(TB_Force_FactorX18.Text);
-			if (sender.Equals(TB_Force_FactorX19)) tmpForceCalDataA[19] = Convert.ToDouble(TB_Force_FactorX19.Text);
+            if (sender.Equals(TB_Force_FactorX0)) mc.para.setting(tempForce.A[0], out tempForce.A[0]);
+            if (sender.Equals(TB_Force_FactorX1)) mc.para.setting(tempForce.A[1], out tempForce.A[1]);
+            if (sender.Equals(TB_Force_FactorX2)) mc.para.setting(tempForce.A[2], out tempForce.A[2]);
+            if (sender.Equals(TB_Force_FactorX3)) mc.para.setting(tempForce.A[3], out tempForce.A[3]);
+            if (sender.Equals(TB_Force_FactorX4)) mc.para.setting(tempForce.A[4], out tempForce.A[4]);
+            if (sender.Equals(TB_Force_FactorX5)) mc.para.setting(tempForce.A[5], out tempForce.A[5]);
+            if (sender.Equals(TB_Force_FactorX6)) mc.para.setting(tempForce.A[6], out tempForce.A[6]);
+            if (sender.Equals(TB_Force_FactorX7)) mc.para.setting(tempForce.A[7], out tempForce.A[7]);
+            if (sender.Equals(TB_Force_FactorX8)) mc.para.setting(tempForce.A[8], out tempForce.A[8]);
+            if (sender.Equals(TB_Force_FactorX9)) mc.para.setting(tempForce.A[9], out tempForce.A[9]);
+            if (sender.Equals(TB_Force_FactorX10)) mc.para.setting(tempForce.A[10], out tempForce.A[10]);
+            if (sender.Equals(TB_Force_FactorX11)) mc.para.setting(tempForce.A[11], out tempForce.A[11]);
+            if (sender.Equals(TB_Force_FactorX12)) mc.para.setting(tempForce.A[12], out tempForce.A[12]);
+            if (sender.Equals(TB_Force_FactorX13)) mc.para.setting(tempForce.A[13], out tempForce.A[13]);
+            if (sender.Equals(TB_Force_FactorX14)) mc.para.setting(tempForce.A[14], out tempForce.A[14]);
+            if (sender.Equals(TB_Force_FactorX15)) mc.para.setting(tempForce.A[15], out tempForce.A[15]);
+            if (sender.Equals(TB_Force_FactorX16)) mc.para.setting(tempForce.A[16], out tempForce.A[16]);
+            if (sender.Equals(TB_Force_FactorX17)) mc.para.setting(tempForce.A[17], out tempForce.A[17]);
+            if (sender.Equals(TB_Force_FactorX18)) mc.para.setting(tempForce.A[18], out tempForce.A[18]);
+            if (sender.Equals(TB_Force_FactorX19)) mc.para.setting(tempForce.A[19], out tempForce.A[19]);
 
-			if (sender.Equals(TB_Force_FactorY0)) tmpForceCalDataB[0] = Convert.ToDouble(TB_Force_FactorY0.Text);
-			if (sender.Equals(TB_Force_FactorY1)) tmpForceCalDataB[1] = Convert.ToDouble(TB_Force_FactorY1.Text);
-			if (sender.Equals(TB_Force_FactorY2)) tmpForceCalDataB[2] = Convert.ToDouble(TB_Force_FactorY2.Text);
-			if (sender.Equals(TB_Force_FactorY3)) tmpForceCalDataB[3] = Convert.ToDouble(TB_Force_FactorY3.Text);
-			if (sender.Equals(TB_Force_FactorY4)) tmpForceCalDataB[4] = Convert.ToDouble(TB_Force_FactorY4.Text);
-			if (sender.Equals(TB_Force_FactorY5)) tmpForceCalDataB[5] = Convert.ToDouble(TB_Force_FactorY5.Text);
-			if (sender.Equals(TB_Force_FactorY6)) tmpForceCalDataB[6] = Convert.ToDouble(TB_Force_FactorY6.Text);
-			if (sender.Equals(TB_Force_FactorY7)) tmpForceCalDataB[7] = Convert.ToDouble(TB_Force_FactorY7.Text);
-			if (sender.Equals(TB_Force_FactorY8)) tmpForceCalDataB[8] = Convert.ToDouble(TB_Force_FactorY8.Text);
-			if (sender.Equals(TB_Force_FactorY9)) tmpForceCalDataB[9] = Convert.ToDouble(TB_Force_FactorY9.Text);
-			if (sender.Equals(TB_Force_FactorY10)) tmpForceCalDataB[10] = Convert.ToDouble(TB_Force_FactorY10.Text);
-			if (sender.Equals(TB_Force_FactorY11)) tmpForceCalDataB[11] = Convert.ToDouble(TB_Force_FactorY11.Text);
-			if (sender.Equals(TB_Force_FactorY12)) tmpForceCalDataB[12] = Convert.ToDouble(TB_Force_FactorY12.Text);
-			if (sender.Equals(TB_Force_FactorY13)) tmpForceCalDataB[13] = Convert.ToDouble(TB_Force_FactorY13.Text);
-			if (sender.Equals(TB_Force_FactorY14)) tmpForceCalDataB[14] = Convert.ToDouble(TB_Force_FactorY14.Text);
-			if (sender.Equals(TB_Force_FactorY15)) tmpForceCalDataB[15] = Convert.ToDouble(TB_Force_FactorY15.Text);
-			if (sender.Equals(TB_Force_FactorY16)) tmpForceCalDataB[16] = Convert.ToDouble(TB_Force_FactorY16.Text);
-			if (sender.Equals(TB_Force_FactorY17)) tmpForceCalDataB[17] = Convert.ToDouble(TB_Force_FactorY17.Text);
-			if (sender.Equals(TB_Force_FactorY18)) tmpForceCalDataB[18] = Convert.ToDouble(TB_Force_FactorY18.Text);
-			if (sender.Equals(TB_Force_FactorY19)) tmpForceCalDataB[19] = Convert.ToDouble(TB_Force_FactorY19.Text);
+			if (sender.Equals(TB_Force_FactorY0)) mc.para.setting(tempForce.B[0], out tempForce.B[0]);
+			if (sender.Equals(TB_Force_FactorY1)) mc.para.setting(tempForce.B[1], out tempForce.B[1]);
+			if (sender.Equals(TB_Force_FactorY2)) mc.para.setting(tempForce.B[2], out tempForce.B[2]);
+			if (sender.Equals(TB_Force_FactorY3)) mc.para.setting(tempForce.B[3], out tempForce.B[3]);
+			if (sender.Equals(TB_Force_FactorY4)) mc.para.setting(tempForce.B[4], out tempForce.B[4]);
+			if (sender.Equals(TB_Force_FactorY5)) mc.para.setting(tempForce.B[5], out tempForce.B[5]);
+			if (sender.Equals(TB_Force_FactorY6)) mc.para.setting(tempForce.B[6], out tempForce.B[6]);
+			if (sender.Equals(TB_Force_FactorY7)) mc.para.setting(tempForce.B[7], out tempForce.B[7]);
+			if (sender.Equals(TB_Force_FactorY8)) mc.para.setting(tempForce.B[8], out tempForce.B[8]);
+			if (sender.Equals(TB_Force_FactorY9)) mc.para.setting(tempForce.B[9], out tempForce.B[9]);
+			if (sender.Equals(TB_Force_FactorY10)) mc.para.setting(tempForce.B[10], out tempForce.B[10]);
+			if (sender.Equals(TB_Force_FactorY11)) mc.para.setting(tempForce.B[11], out tempForce.B[11]);
+			if (sender.Equals(TB_Force_FactorY12)) mc.para.setting(tempForce.B[12], out tempForce.B[12]);
+			if (sender.Equals(TB_Force_FactorY13)) mc.para.setting(tempForce.B[13], out tempForce.B[13]);
+			if (sender.Equals(TB_Force_FactorY14)) mc.para.setting(tempForce.B[14], out tempForce.B[14]);
+			if (sender.Equals(TB_Force_FactorY15)) mc.para.setting(tempForce.B[15], out tempForce.B[15]);
+			if (sender.Equals(TB_Force_FactorY16)) mc.para.setting(tempForce.B[16], out tempForce.B[16]);
+			if (sender.Equals(TB_Force_FactorY17)) mc.para.setting(tempForce.B[17], out tempForce.B[17]);
+			if (sender.Equals(TB_Force_FactorY18)) mc.para.setting(tempForce.B[18], out tempForce.B[18]);
+			if (sender.Equals(TB_Force_FactorY19)) mc.para.setting(tempForce.B[19], out tempForce.B[19]);
 
-			if (sender.Equals(TB_Force_FactorZ0)) tmpForceCalDataD[0] = Convert.ToDouble(TB_Force_FactorZ0.Text);
-			if (sender.Equals(TB_Force_FactorZ1)) tmpForceCalDataD[1] = Convert.ToDouble(TB_Force_FactorZ1.Text);
-			if (sender.Equals(TB_Force_FactorZ2)) tmpForceCalDataD[2] = Convert.ToDouble(TB_Force_FactorZ2.Text);
-			if (sender.Equals(TB_Force_FactorZ3)) tmpForceCalDataD[3] = Convert.ToDouble(TB_Force_FactorZ3.Text);
-			if (sender.Equals(TB_Force_FactorZ4)) tmpForceCalDataD[4] = Convert.ToDouble(TB_Force_FactorZ4.Text);
-			if (sender.Equals(TB_Force_FactorZ5)) tmpForceCalDataD[5] = Convert.ToDouble(TB_Force_FactorZ5.Text);
-			if (sender.Equals(TB_Force_FactorZ6)) tmpForceCalDataD[6] = Convert.ToDouble(TB_Force_FactorZ6.Text);
-			if (sender.Equals(TB_Force_FactorZ7)) tmpForceCalDataD[7] = Convert.ToDouble(TB_Force_FactorZ7.Text);
-			if (sender.Equals(TB_Force_FactorZ8)) tmpForceCalDataD[8] = Convert.ToDouble(TB_Force_FactorZ8.Text);
-			if (sender.Equals(TB_Force_FactorZ9)) tmpForceCalDataD[9] = Convert.ToDouble(TB_Force_FactorZ9.Text);
-			if (sender.Equals(TB_Force_FactorZ10)) tmpForceCalDataD[10] = Convert.ToDouble(TB_Force_FactorZ10.Text);
-			if (sender.Equals(TB_Force_FactorZ11)) tmpForceCalDataD[11] = Convert.ToDouble(TB_Force_FactorZ11.Text);
-			if (sender.Equals(TB_Force_FactorZ12)) tmpForceCalDataD[12] = Convert.ToDouble(TB_Force_FactorZ12.Text);
-			if (sender.Equals(TB_Force_FactorZ13)) tmpForceCalDataD[13] = Convert.ToDouble(TB_Force_FactorZ13.Text);
-			if (sender.Equals(TB_Force_FactorZ14)) tmpForceCalDataD[14] = Convert.ToDouble(TB_Force_FactorZ14.Text);
-			if (sender.Equals(TB_Force_FactorZ15)) tmpForceCalDataD[15] = Convert.ToDouble(TB_Force_FactorZ15.Text);
-			if (sender.Equals(TB_Force_FactorZ16)) tmpForceCalDataD[16] = Convert.ToDouble(TB_Force_FactorZ16.Text);
-			if (sender.Equals(TB_Force_FactorZ17)) tmpForceCalDataD[17] = Convert.ToDouble(TB_Force_FactorZ17.Text);
-			if (sender.Equals(TB_Force_FactorZ18)) tmpForceCalDataD[18] = Convert.ToDouble(TB_Force_FactorZ18.Text);
-			if (sender.Equals(TB_Force_FactorZ19)) tmpForceCalDataD[19] = Convert.ToDouble(TB_Force_FactorZ19.Text);
+			if (sender.Equals(TB_Force_FactorZ0)) mc.para.setting(tempForce.D[0], out tempForce.D[0]);
+			if (sender.Equals(TB_Force_FactorZ1)) mc.para.setting(tempForce.D[1], out tempForce.D[1]);
+			if (sender.Equals(TB_Force_FactorZ2)) mc.para.setting(tempForce.D[2], out tempForce.D[2]);
+			if (sender.Equals(TB_Force_FactorZ3)) mc.para.setting(tempForce.D[3], out tempForce.D[3]);
+			if (sender.Equals(TB_Force_FactorZ4)) mc.para.setting(tempForce.D[4], out tempForce.D[4]);
+			if (sender.Equals(TB_Force_FactorZ5)) mc.para.setting(tempForce.D[5], out tempForce.D[5]);
+			if (sender.Equals(TB_Force_FactorZ6)) mc.para.setting(tempForce.D[6], out tempForce.D[6]);
+			if (sender.Equals(TB_Force_FactorZ7)) mc.para.setting(tempForce.D[7], out tempForce.D[7]);
+			if (sender.Equals(TB_Force_FactorZ8)) mc.para.setting(tempForce.D[8], out tempForce.D[8]);
+			if (sender.Equals(TB_Force_FactorZ9)) mc.para.setting(tempForce.D[9], out tempForce.D[9]);
+            if (sender.Equals(TB_Force_FactorZ10)) mc.para.setting(tempForce.D[10], out tempForce.D[10]);
+			if (sender.Equals(TB_Force_FactorZ11)) mc.para.setting(tempForce.D[11], out tempForce.D[11]);
+			if (sender.Equals(TB_Force_FactorZ12)) mc.para.setting(tempForce.D[12], out tempForce.D[12]);
+			if (sender.Equals(TB_Force_FactorZ13)) mc.para.setting(tempForce.D[13], out tempForce.D[13]);
+			if (sender.Equals(TB_Force_FactorZ14)) mc.para.setting(tempForce.D[14], out tempForce.D[14]);
+			if (sender.Equals(TB_Force_FactorZ15)) mc.para.setting(tempForce.D[15], out tempForce.D[15]);
+			if (sender.Equals(TB_Force_FactorZ16)) mc.para.setting(tempForce.D[16], out tempForce.D[16]);
+			if (sender.Equals(TB_Force_FactorZ17)) mc.para.setting(tempForce.D[17], out tempForce.D[17]);
+			if (sender.Equals(TB_Force_FactorZ18)) mc.para.setting(tempForce.D[18], out tempForce.D[18]);
+			if (sender.Equals(TB_Force_FactorZ19)) mc.para.setting(tempForce.D[19], out tempForce.D[19]);
 			#endregion
 
 			if (sender.Equals(BT_STOP))
@@ -683,68 +681,68 @@ namespace PSA_Application
 					BT_STOP.Enabled = false;
 					//BT_AutoCalibration.Enabled = true;
 				}
-				TB_Force_FactorX0.Text = tmpForceCalDataA[0].ToString();
-				TB_Force_FactorX1.Text = tmpForceCalDataA[1].ToString();
-				TB_Force_FactorX2.Text = tmpForceCalDataA[2].ToString();
-				TB_Force_FactorX3.Text = tmpForceCalDataA[3].ToString();
-				TB_Force_FactorX4.Text = tmpForceCalDataA[4].ToString();
-				TB_Force_FactorX5.Text = tmpForceCalDataA[5].ToString();
-				TB_Force_FactorX6.Text = tmpForceCalDataA[6].ToString();
-				TB_Force_FactorX7.Text = tmpForceCalDataA[7].ToString();
-				TB_Force_FactorX8.Text = tmpForceCalDataA[8].ToString();
-				TB_Force_FactorX9.Text = tmpForceCalDataA[9].ToString();
-				TB_Force_FactorX10.Text = tmpForceCalDataA[10].ToString();
-				TB_Force_FactorX11.Text = tmpForceCalDataA[11].ToString();
-				TB_Force_FactorX12.Text = tmpForceCalDataA[12].ToString();
-				TB_Force_FactorX13.Text = tmpForceCalDataA[13].ToString();
-				TB_Force_FactorX14.Text = tmpForceCalDataA[14].ToString();
-				TB_Force_FactorX15.Text = tmpForceCalDataA[15].ToString();
-				TB_Force_FactorX16.Text = tmpForceCalDataA[16].ToString();
-				TB_Force_FactorX17.Text = tmpForceCalDataA[17].ToString();
-				TB_Force_FactorX18.Text = tmpForceCalDataA[18].ToString();
-				TB_Force_FactorX19.Text = tmpForceCalDataA[19].ToString();
+				TB_Force_FactorX0.Text = tempForce.A[0].ToString();
+				TB_Force_FactorX1.Text = tempForce.A[1].ToString();
+				TB_Force_FactorX2.Text = tempForce.A[2].ToString();
+				TB_Force_FactorX3.Text = tempForce.A[3].ToString();
+				TB_Force_FactorX4.Text = tempForce.A[4].ToString();
+				TB_Force_FactorX5.Text = tempForce.A[5].ToString();
+				TB_Force_FactorX6.Text = tempForce.A[6].ToString();
+				TB_Force_FactorX7.Text = tempForce.A[7].ToString();
+				TB_Force_FactorX8.Text = tempForce.A[8].ToString();
+				TB_Force_FactorX9.Text = tempForce.A[9].ToString();
+				TB_Force_FactorX10.Text = tempForce.A[10].ToString();
+				TB_Force_FactorX11.Text = tempForce.A[11].ToString();
+				TB_Force_FactorX12.Text = tempForce.A[12].ToString();
+				TB_Force_FactorX13.Text = tempForce.A[13].ToString();
+				TB_Force_FactorX14.Text = tempForce.A[14].ToString();
+				TB_Force_FactorX15.Text = tempForce.A[15].ToString();
+				TB_Force_FactorX16.Text = tempForce.A[16].ToString();
+				TB_Force_FactorX17.Text = tempForce.A[17].ToString();
+				TB_Force_FactorX18.Text = tempForce.A[18].ToString();
+				TB_Force_FactorX19.Text = tempForce.A[19].ToString();
 
-				TB_Force_FactorY0.Text = tmpForceCalDataB[0].ToString();
-				TB_Force_FactorY1.Text = tmpForceCalDataB[1].ToString();
-				TB_Force_FactorY2.Text = tmpForceCalDataB[2].ToString();
-				TB_Force_FactorY3.Text = tmpForceCalDataB[3].ToString();
-				TB_Force_FactorY4.Text = tmpForceCalDataB[4].ToString();
-				TB_Force_FactorY5.Text = tmpForceCalDataB[5].ToString();
-				TB_Force_FactorY6.Text = tmpForceCalDataB[6].ToString();
-				TB_Force_FactorY7.Text = tmpForceCalDataB[7].ToString();
-				TB_Force_FactorY8.Text = tmpForceCalDataB[8].ToString();
-				TB_Force_FactorY9.Text = tmpForceCalDataB[9].ToString();
-				TB_Force_FactorY10.Text = tmpForceCalDataB[10].ToString();
-				TB_Force_FactorY11.Text = tmpForceCalDataB[11].ToString();
-				TB_Force_FactorY12.Text = tmpForceCalDataB[12].ToString();
-				TB_Force_FactorY13.Text = tmpForceCalDataB[13].ToString();
-				TB_Force_FactorY14.Text = tmpForceCalDataB[14].ToString();
-				TB_Force_FactorY15.Text = tmpForceCalDataB[15].ToString();
-				TB_Force_FactorY16.Text = tmpForceCalDataB[16].ToString();
-				TB_Force_FactorY17.Text = tmpForceCalDataB[17].ToString();
-				TB_Force_FactorY18.Text = tmpForceCalDataB[18].ToString();
-				TB_Force_FactorY19.Text = tmpForceCalDataB[19].ToString();
+				TB_Force_FactorY0.Text = tempForce.B[0].ToString();
+				TB_Force_FactorY1.Text = tempForce.B[1].ToString();
+				TB_Force_FactorY2.Text = tempForce.B[2].ToString();
+				TB_Force_FactorY3.Text = tempForce.B[3].ToString();
+				TB_Force_FactorY4.Text = tempForce.B[4].ToString();
+				TB_Force_FactorY5.Text = tempForce.B[5].ToString();
+				TB_Force_FactorY6.Text = tempForce.B[6].ToString();
+				TB_Force_FactorY7.Text = tempForce.B[7].ToString();
+				TB_Force_FactorY8.Text = tempForce.B[8].ToString();
+				TB_Force_FactorY9.Text = tempForce.B[9].ToString();
+				TB_Force_FactorY10.Text = tempForce.B[10].ToString();
+				TB_Force_FactorY11.Text = tempForce.B[11].ToString();
+				TB_Force_FactorY12.Text = tempForce.B[12].ToString();
+				TB_Force_FactorY13.Text = tempForce.B[13].ToString();
+				TB_Force_FactorY14.Text = tempForce.B[14].ToString();
+				TB_Force_FactorY15.Text = tempForce.B[15].ToString();
+				TB_Force_FactorY16.Text = tempForce.B[16].ToString();
+				TB_Force_FactorY17.Text = tempForce.B[17].ToString();
+				TB_Force_FactorY18.Text = tempForce.B[18].ToString();
+				TB_Force_FactorY19.Text = tempForce.B[19].ToString();
 
-				TB_Force_FactorZ0.Text = tmpForceCalDataD[0].ToString();
-				TB_Force_FactorZ1.Text = tmpForceCalDataD[1].ToString();
-				TB_Force_FactorZ2.Text = tmpForceCalDataD[2].ToString();
-				TB_Force_FactorZ3.Text = tmpForceCalDataD[3].ToString();
-				TB_Force_FactorZ4.Text = tmpForceCalDataD[4].ToString();
-				TB_Force_FactorZ5.Text = tmpForceCalDataD[5].ToString();
-				TB_Force_FactorZ6.Text = tmpForceCalDataD[6].ToString();
-				TB_Force_FactorZ7.Text = tmpForceCalDataD[7].ToString();
-				TB_Force_FactorZ8.Text = tmpForceCalDataD[8].ToString();
-				TB_Force_FactorZ9.Text = tmpForceCalDataD[9].ToString();
-				TB_Force_FactorZ10.Text = tmpForceCalDataD[10].ToString();
-				TB_Force_FactorZ11.Text = tmpForceCalDataD[11].ToString();
-				TB_Force_FactorZ12.Text = tmpForceCalDataD[12].ToString();
-				TB_Force_FactorZ13.Text = tmpForceCalDataD[13].ToString();
-				TB_Force_FactorZ14.Text = tmpForceCalDataD[14].ToString();
-				TB_Force_FactorZ15.Text = tmpForceCalDataD[15].ToString();
-				TB_Force_FactorZ16.Text = tmpForceCalDataD[16].ToString();
-				TB_Force_FactorZ17.Text = tmpForceCalDataD[17].ToString();
-				TB_Force_FactorZ18.Text = tmpForceCalDataD[18].ToString();
-				TB_Force_FactorZ19.Text = tmpForceCalDataD[19].ToString();
+				TB_Force_FactorZ0.Text = tempForce.D[0].ToString();
+				TB_Force_FactorZ1.Text = tempForce.D[1].ToString();
+				TB_Force_FactorZ2.Text = tempForce.D[2].ToString();
+				TB_Force_FactorZ3.Text = tempForce.D[3].ToString();
+				TB_Force_FactorZ4.Text = tempForce.D[4].ToString();
+				TB_Force_FactorZ5.Text = tempForce.D[5].ToString();
+				TB_Force_FactorZ6.Text = tempForce.D[6].ToString();
+				TB_Force_FactorZ7.Text = tempForce.D[7].ToString();
+				TB_Force_FactorZ8.Text = tempForce.D[8].ToString();
+				TB_Force_FactorZ9.Text = tempForce.D[9].ToString();
+				TB_Force_FactorZ10.Text = tempForce.D[10].ToString();
+				TB_Force_FactorZ11.Text = tempForce.D[11].ToString();
+				TB_Force_FactorZ12.Text = tempForce.D[12].ToString();
+				TB_Force_FactorZ13.Text = tempForce.D[13].ToString();
+				TB_Force_FactorZ14.Text = tempForce.D[14].ToString();
+				TB_Force_FactorZ15.Text = tempForce.D[15].ToString();
+				TB_Force_FactorZ16.Text = tempForce.D[16].ToString();
+				TB_Force_FactorZ17.Text = tempForce.D[17].ToString();
+				TB_Force_FactorZ18.Text = tempForce.D[18].ToString();
+				TB_Force_FactorZ19.Text = tempForce.D[19].ToString();
 
 				TB_Force_TouchOffset.Text = mc.para.CAL.force.touchOffset.value.ToString();
 
@@ -778,10 +776,10 @@ namespace PSA_Application
 
 			for (int i = 0; i < 20; i++)
 			{
-				tmpForceCalDataA[i] = mc.para.CAL.force.A[i].value;
-				tmpForceCalDataB[i] = mc.para.CAL.force.B[i].value;
-				tmpForceCalDataC[i] = mc.para.CAL.force.C[i].value;
-				tmpForceCalDataD[i] = mc.para.CAL.force.D[i].value;
+				tempForce.A[i].value = mc.para.CAL.force.A[i].value;
+				tempForce.B[i].value = mc.para.CAL.force.B[i].value;
+				tempForce.C[i].value = mc.para.CAL.force.C[i].value;
+				tempForce.D[i].value = mc.para.CAL.force.D[i].value;
 			}
 
 			refresh();
@@ -817,26 +815,26 @@ namespace PSA_Application
 // 			else { mc.message.alarm("unknown Force Factor X Button Click"); goto EXIT; }
 			#endregion
 
-			if (sender.Equals(BT_Force_FactorX0)) factorA = tmpForceCalDataA[1];
-			else if (sender.Equals(BT_Force_FactorX1)) factorA = tmpForceCalDataA[1];
-			else if (sender.Equals(BT_Force_FactorX2)) factorA = tmpForceCalDataA[2];
-			else if (sender.Equals(BT_Force_FactorX3)) factorA = tmpForceCalDataA[3];
-			else if (sender.Equals(BT_Force_FactorX4)) factorA = tmpForceCalDataA[4];
-			else if (sender.Equals(BT_Force_FactorX5)) factorA = tmpForceCalDataA[5];
-			else if (sender.Equals(BT_Force_FactorX6)) factorA = tmpForceCalDataA[6];
-			else if (sender.Equals(BT_Force_FactorX7)) factorA = tmpForceCalDataA[7];
-			else if (sender.Equals(BT_Force_FactorX8)) factorA = tmpForceCalDataA[8];
-			else if (sender.Equals(BT_Force_FactorX9)) factorA = tmpForceCalDataA[9];
-			else if (sender.Equals(BT_Force_FactorX10)) factorA = tmpForceCalDataA[10];
-			else if (sender.Equals(BT_Force_FactorX11)) factorA = tmpForceCalDataA[11];
-			else if (sender.Equals(BT_Force_FactorX12)) factorA = tmpForceCalDataA[12];
-			else if (sender.Equals(BT_Force_FactorX13)) factorA = tmpForceCalDataA[13];
-			else if (sender.Equals(BT_Force_FactorX14)) factorA = tmpForceCalDataA[14];
-			else if (sender.Equals(BT_Force_FactorX15)) factorA = tmpForceCalDataA[15];
-			else if (sender.Equals(BT_Force_FactorX16)) factorA = tmpForceCalDataA[16];
-			else if (sender.Equals(BT_Force_FactorX17)) factorA = tmpForceCalDataA[17];
-			else if (sender.Equals(BT_Force_FactorX18)) factorA = tmpForceCalDataA[18];
-			else if (sender.Equals(BT_Force_FactorX19)) factorA = tmpForceCalDataA[19];
+            if (sender.Equals(BT_Force_FactorX0)) factorA = tempForce.A[1].value;
+            else if (sender.Equals(BT_Force_FactorX1)) factorA = tempForce.A[1].value;
+            else if (sender.Equals(BT_Force_FactorX2)) factorA = tempForce.A[2].value;
+            else if (sender.Equals(BT_Force_FactorX3)) factorA = tempForce.A[3].value;
+            else if (sender.Equals(BT_Force_FactorX4)) factorA = tempForce.A[4].value;
+            else if (sender.Equals(BT_Force_FactorX5)) factorA = tempForce.A[5].value;
+            else if (sender.Equals(BT_Force_FactorX6)) factorA = tempForce.A[6].value;
+            else if (sender.Equals(BT_Force_FactorX7)) factorA = tempForce.A[7].value;
+            else if (sender.Equals(BT_Force_FactorX8)) factorA = tempForce.A[8].value;
+            else if (sender.Equals(BT_Force_FactorX9)) factorA = tempForce.A[9].value;
+			else if (sender.Equals(BT_Force_FactorX10)) factorA = tempForce.A[10].value;
+			else if (sender.Equals(BT_Force_FactorX11)) factorA = tempForce.A[11].value;
+			else if (sender.Equals(BT_Force_FactorX12)) factorA = tempForce.A[12].value;
+			else if (sender.Equals(BT_Force_FactorX13)) factorA = tempForce.A[13].value;
+			else if (sender.Equals(BT_Force_FactorX14)) factorA = tempForce.A[14].value;
+			else if (sender.Equals(BT_Force_FactorX15)) factorA = tempForce.A[15].value;
+			else if (sender.Equals(BT_Force_FactorX16)) factorA = tempForce.A[16].value;
+			else if (sender.Equals(BT_Force_FactorX17)) factorA = tempForce.A[17].value;
+			else if (sender.Equals(BT_Force_FactorX18)) factorA = tempForce.A[18].value;
+			else if (sender.Equals(BT_Force_FactorX19)) factorA = tempForce.A[19].value;
 			else { mc.message.alarm("unknown Force Factor X Button Click"); goto EXIT; }
 
 			#region z moving
@@ -870,26 +868,26 @@ namespace PSA_Application
 			factorB = ret.d;
 			TB_Result.Visible = true;
 
-			if (sender.Equals(BT_Force_FactorX0)) tmpForceCalDataB[0] = factorB;
-			if (sender.Equals(BT_Force_FactorX1)) tmpForceCalDataB[1] = factorB;
-			if (sender.Equals(BT_Force_FactorX2)) tmpForceCalDataB[2] = factorB;
-			if (sender.Equals(BT_Force_FactorX3)) tmpForceCalDataB[3] = factorB;
-			if (sender.Equals(BT_Force_FactorX4)) tmpForceCalDataB[4] = factorB;
-			if (sender.Equals(BT_Force_FactorX5)) tmpForceCalDataB[5] = factorB;
-			if (sender.Equals(BT_Force_FactorX6)) tmpForceCalDataB[6] = factorB;
-			if (sender.Equals(BT_Force_FactorX7)) tmpForceCalDataB[7] = factorB;
-			if (sender.Equals(BT_Force_FactorX8)) tmpForceCalDataB[8] = factorB;
-			if (sender.Equals(BT_Force_FactorX9)) tmpForceCalDataB[9] = factorB;
-			if (sender.Equals(BT_Force_FactorX10)) tmpForceCalDataB[10] = factorB;
-			if (sender.Equals(BT_Force_FactorX11)) tmpForceCalDataB[11] = factorB;
-			if (sender.Equals(BT_Force_FactorX12)) tmpForceCalDataB[12] = factorB;
-			if (sender.Equals(BT_Force_FactorX13)) tmpForceCalDataB[13] = factorB;
-			if (sender.Equals(BT_Force_FactorX14)) tmpForceCalDataB[14] = factorB;
-			if (sender.Equals(BT_Force_FactorX15)) tmpForceCalDataB[15] = factorB;
-			if (sender.Equals(BT_Force_FactorX16)) tmpForceCalDataB[16] = factorB;
-			if (sender.Equals(BT_Force_FactorX17)) tmpForceCalDataB[17] = factorB;
-			if (sender.Equals(BT_Force_FactorX18)) tmpForceCalDataB[18] = factorB;
-			if (sender.Equals(BT_Force_FactorX19)) tmpForceCalDataB[19] = factorB;
+            if (sender.Equals(BT_Force_FactorX0)) tempForce.B[0].value = factorB;
+            if (sender.Equals(BT_Force_FactorX1)) tempForce.B[1].value = factorB;
+            if (sender.Equals(BT_Force_FactorX2)) tempForce.B[2].value = factorB;
+            if (sender.Equals(BT_Force_FactorX3)) tempForce.B[3].value = factorB;
+            if (sender.Equals(BT_Force_FactorX4)) tempForce.B[4].value = factorB;
+            if (sender.Equals(BT_Force_FactorX5)) tempForce.B[5].value = factorB;
+            if (sender.Equals(BT_Force_FactorX6)) tempForce.B[6].value = factorB;
+            if (sender.Equals(BT_Force_FactorX7)) tempForce.B[7].value = factorB;
+            if (sender.Equals(BT_Force_FactorX8)) tempForce.B[8].value = factorB;
+            if (sender.Equals(BT_Force_FactorX9)) tempForce.B[9].value = factorB;
+			if (sender.Equals(BT_Force_FactorX10)) tempForce.B[10].value = factorB;
+			if (sender.Equals(BT_Force_FactorX11)) tempForce.B[11].value = factorB;
+			if (sender.Equals(BT_Force_FactorX12)) tempForce.B[12].value = factorB;
+			if (sender.Equals(BT_Force_FactorX13)) tempForce.B[13].value = factorB;
+			if (sender.Equals(BT_Force_FactorX14)) tempForce.B[14].value = factorB;
+			if (sender.Equals(BT_Force_FactorX15)) tempForce.B[15].value = factorB;
+			if (sender.Equals(BT_Force_FactorX16)) tempForce.B[16].value = factorB;
+			if (sender.Equals(BT_Force_FactorX17)) tempForce.B[17].value = factorB;
+			if (sender.Equals(BT_Force_FactorX18)) tempForce.B[18].value = factorB;
+			if (sender.Equals(BT_Force_FactorX19)) tempForce.B[19].value = factorB;
 
 			#endregion
 		EXIT:
@@ -937,5 +935,25 @@ namespace PSA_Application
 			refresh();
 			this.Enabled = true;
 		}
+
+        private void LB_Force_FactorX_DoubleClick(object sender, EventArgs e)
+        {
+            FormUserMessage ff = new FormUserMessage();
+
+            ff.SetDisplayItems(DIAG_SEL_MODE.YesNo, DIAG_ICON_MODE.QUESTION, "Do you want to calculate force level?");
+            ff.ShowDialog();
+
+            ret.usrDialog = FormUserMessage.diagResult;
+            if (ret.usrDialog == DIAG_RESULT.Yes)
+            {
+                double step = (tempForce.A[19].value - tempForce.A[0].value) / 19;
+
+                for (int i = 0; i < 20; i++)
+                {
+                    tempForce.A[i].value = Math.Round(tempForce.A[0].value + step * i, 2);
+                }
+            }
+            refresh();
+        }
 	}
 }
