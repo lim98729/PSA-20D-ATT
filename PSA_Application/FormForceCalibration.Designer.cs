@@ -183,6 +183,7 @@
             this.LB_Force_FactorY11 = new System.Windows.Forms.Label();
             this.LB_Force_FactorX11 = new System.Windows.Forms.Label();
             this.TB_Force_FactorX11 = new System.Windows.Forms.TextBox();
+            this.BT_SAVEFILE = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BT_AutoCalibration
@@ -355,7 +356,7 @@
             this.LB_Force_FactorY4.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorY4.Location = new System.Drawing.Point(156, 131);
             this.LB_Force_FactorY4.Name = "LB_Force_FactorY4";
-            this.LB_Force_FactorY4.Size = new System.Drawing.Size(23, 16);
+            this.LB_Force_FactorY4.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorY4.TabIndex = 243;
             this.LB_Force_FactorY4.Text = "4";
             // 
@@ -366,7 +367,7 @@
             this.LB_Force_FactorX4.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorX4.Location = new System.Drawing.Point(25, 131);
             this.LB_Force_FactorX4.Name = "LB_Force_FactorX4";
-            this.LB_Force_FactorX4.Size = new System.Drawing.Size(24, 16);
+            this.LB_Force_FactorX4.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorX4.TabIndex = 242;
             this.LB_Force_FactorX4.Text = "4";
             // 
@@ -403,7 +404,7 @@
             this.LB_Force_FactorY7.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorY7.Location = new System.Drawing.Point(156, 200);
             this.LB_Force_FactorY7.Name = "LB_Force_FactorY7";
-            this.LB_Force_FactorY7.Size = new System.Drawing.Size(23, 16);
+            this.LB_Force_FactorY7.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorY7.TabIndex = 239;
             this.LB_Force_FactorY7.Text = "7";
             // 
@@ -414,7 +415,7 @@
             this.LB_Force_FactorX7.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorX7.Location = new System.Drawing.Point(25, 200);
             this.LB_Force_FactorX7.Name = "LB_Force_FactorX7";
-            this.LB_Force_FactorX7.Size = new System.Drawing.Size(24, 16);
+            this.LB_Force_FactorX7.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorX7.TabIndex = 238;
             this.LB_Force_FactorX7.Text = "7";
             // 
@@ -451,7 +452,7 @@
             this.LB_Force_FactorY6.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorY6.Location = new System.Drawing.Point(156, 177);
             this.LB_Force_FactorY6.Name = "LB_Force_FactorY6";
-            this.LB_Force_FactorY6.Size = new System.Drawing.Size(23, 16);
+            this.LB_Force_FactorY6.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorY6.TabIndex = 235;
             this.LB_Force_FactorY6.Text = "6";
             // 
@@ -462,7 +463,7 @@
             this.LB_Force_FactorX6.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorX6.Location = new System.Drawing.Point(25, 177);
             this.LB_Force_FactorX6.Name = "LB_Force_FactorX6";
-            this.LB_Force_FactorX6.Size = new System.Drawing.Size(24, 16);
+            this.LB_Force_FactorX6.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorX6.TabIndex = 234;
             this.LB_Force_FactorX6.Text = "6";
             // 
@@ -499,7 +500,7 @@
             this.LB_Force_FactorY5.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorY5.Location = new System.Drawing.Point(156, 154);
             this.LB_Force_FactorY5.Name = "LB_Force_FactorY5";
-            this.LB_Force_FactorY5.Size = new System.Drawing.Size(23, 16);
+            this.LB_Force_FactorY5.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorY5.TabIndex = 231;
             this.LB_Force_FactorY5.Text = "5";
             // 
@@ -510,7 +511,7 @@
             this.LB_Force_FactorX5.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorX5.Location = new System.Drawing.Point(25, 154);
             this.LB_Force_FactorX5.Name = "LB_Force_FactorX5";
-            this.LB_Force_FactorX5.Size = new System.Drawing.Size(24, 16);
+            this.LB_Force_FactorX5.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorX5.TabIndex = 230;
             this.LB_Force_FactorX5.Text = "5";
             // 
@@ -631,7 +632,7 @@
             this.LB_Force_FactorY0.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorY0.Location = new System.Drawing.Point(156, 39);
             this.LB_Force_FactorY0.Name = "LB_Force_FactorY0";
-            this.LB_Force_FactorY0.Size = new System.Drawing.Size(23, 16);
+            this.LB_Force_FactorY0.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorY0.TabIndex = 223;
             this.LB_Force_FactorY0.Text = "0";
             // 
@@ -642,7 +643,7 @@
             this.LB_Force_FactorX0.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorX0.Location = new System.Drawing.Point(25, 39);
             this.LB_Force_FactorX0.Name = "LB_Force_FactorX0";
-            this.LB_Force_FactorX0.Size = new System.Drawing.Size(24, 16);
+            this.LB_Force_FactorX0.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorX0.TabIndex = 222;
             this.LB_Force_FactorX0.Text = "0";
             // 
@@ -679,7 +680,7 @@
             this.LB_Force_FactorY3.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorY3.Location = new System.Drawing.Point(156, 108);
             this.LB_Force_FactorY3.Name = "LB_Force_FactorY3";
-            this.LB_Force_FactorY3.Size = new System.Drawing.Size(23, 16);
+            this.LB_Force_FactorY3.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorY3.TabIndex = 219;
             this.LB_Force_FactorY3.Text = "3";
             // 
@@ -690,7 +691,7 @@
             this.LB_Force_FactorX3.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorX3.Location = new System.Drawing.Point(25, 108);
             this.LB_Force_FactorX3.Name = "LB_Force_FactorX3";
-            this.LB_Force_FactorX3.Size = new System.Drawing.Size(24, 16);
+            this.LB_Force_FactorX3.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorX3.TabIndex = 218;
             this.LB_Force_FactorX3.Text = "3";
             // 
@@ -727,7 +728,7 @@
             this.LB_Force_FactorY2.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorY2.Location = new System.Drawing.Point(156, 85);
             this.LB_Force_FactorY2.Name = "LB_Force_FactorY2";
-            this.LB_Force_FactorY2.Size = new System.Drawing.Size(23, 16);
+            this.LB_Force_FactorY2.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorY2.TabIndex = 215;
             this.LB_Force_FactorY2.Text = "2";
             // 
@@ -738,7 +739,7 @@
             this.LB_Force_FactorX2.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorX2.Location = new System.Drawing.Point(25, 85);
             this.LB_Force_FactorX2.Name = "LB_Force_FactorX2";
-            this.LB_Force_FactorX2.Size = new System.Drawing.Size(24, 16);
+            this.LB_Force_FactorX2.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorX2.TabIndex = 214;
             this.LB_Force_FactorX2.Text = "2";
             // 
@@ -775,7 +776,7 @@
             this.LB_Force_FactorY1.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorY1.Location = new System.Drawing.Point(156, 62);
             this.LB_Force_FactorY1.Name = "LB_Force_FactorY1";
-            this.LB_Force_FactorY1.Size = new System.Drawing.Size(23, 16);
+            this.LB_Force_FactorY1.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorY1.TabIndex = 211;
             this.LB_Force_FactorY1.Text = "1";
             // 
@@ -786,7 +787,7 @@
             this.LB_Force_FactorX1.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorX1.Location = new System.Drawing.Point(25, 62);
             this.LB_Force_FactorX1.Name = "LB_Force_FactorX1";
-            this.LB_Force_FactorX1.Size = new System.Drawing.Size(24, 16);
+            this.LB_Force_FactorX1.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorX1.TabIndex = 210;
             this.LB_Force_FactorX1.Text = "1";
             // 
@@ -935,7 +936,7 @@
             this.TB_Result.Multiline = true;
             this.TB_Result.Name = "TB_Result";
             this.TB_Result.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TB_Result.Size = new System.Drawing.Size(225, 455);
+            this.TB_Result.Size = new System.Drawing.Size(225, 334);
             this.TB_Result.TabIndex = 256;
             // 
             // BT_Force_FactorX9
@@ -1000,7 +1001,7 @@
             this.LB_Force_FactorY9.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorY9.Location = new System.Drawing.Point(156, 246);
             this.LB_Force_FactorY9.Name = "LB_Force_FactorY9";
-            this.LB_Force_FactorY9.Size = new System.Drawing.Size(23, 16);
+            this.LB_Force_FactorY9.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorY9.TabIndex = 263;
             this.LB_Force_FactorY9.Text = "9";
             // 
@@ -1011,7 +1012,7 @@
             this.LB_Force_FactorX9.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorX9.Location = new System.Drawing.Point(25, 246);
             this.LB_Force_FactorX9.Name = "LB_Force_FactorX9";
-            this.LB_Force_FactorX9.Size = new System.Drawing.Size(24, 16);
+            this.LB_Force_FactorX9.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorX9.TabIndex = 262;
             this.LB_Force_FactorX9.Text = "9";
             // 
@@ -1048,7 +1049,7 @@
             this.LB_Force_FactorY8.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorY8.Location = new System.Drawing.Point(156, 223);
             this.LB_Force_FactorY8.Name = "LB_Force_FactorY8";
-            this.LB_Force_FactorY8.Size = new System.Drawing.Size(23, 16);
+            this.LB_Force_FactorY8.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorY8.TabIndex = 259;
             this.LB_Force_FactorY8.Text = "8";
             // 
@@ -1059,7 +1060,7 @@
             this.LB_Force_FactorX8.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorX8.Location = new System.Drawing.Point(25, 223);
             this.LB_Force_FactorX8.Name = "LB_Force_FactorX8";
-            this.LB_Force_FactorX8.Size = new System.Drawing.Size(24, 16);
+            this.LB_Force_FactorX8.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorX8.TabIndex = 258;
             this.LB_Force_FactorX8.Text = "8";
             // 
@@ -1108,7 +1109,7 @@
             this.LB_Force_FactorZ0.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorZ0.Location = new System.Drawing.Point(254, 39);
             this.LB_Force_FactorZ0.Name = "LB_Force_FactorZ0";
-            this.LB_Force_FactorZ0.Size = new System.Drawing.Size(22, 16);
+            this.LB_Force_FactorZ0.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorZ0.TabIndex = 268;
             this.LB_Force_FactorZ0.Text = "0";
             // 
@@ -1132,7 +1133,7 @@
             this.LB_Force_FactorZ1.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorZ1.Location = new System.Drawing.Point(254, 62);
             this.LB_Force_FactorZ1.Name = "LB_Force_FactorZ1";
-            this.LB_Force_FactorZ1.Size = new System.Drawing.Size(22, 16);
+            this.LB_Force_FactorZ1.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorZ1.TabIndex = 270;
             this.LB_Force_FactorZ1.Text = "1";
             // 
@@ -1156,7 +1157,7 @@
             this.LB_Force_FactorZ3.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorZ3.Location = new System.Drawing.Point(254, 108);
             this.LB_Force_FactorZ3.Name = "LB_Force_FactorZ3";
-            this.LB_Force_FactorZ3.Size = new System.Drawing.Size(22, 16);
+            this.LB_Force_FactorZ3.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorZ3.TabIndex = 274;
             this.LB_Force_FactorZ3.Text = "3";
             // 
@@ -1180,7 +1181,7 @@
             this.LB_Force_FactorZ2.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorZ2.Location = new System.Drawing.Point(254, 85);
             this.LB_Force_FactorZ2.Name = "LB_Force_FactorZ2";
-            this.LB_Force_FactorZ2.Size = new System.Drawing.Size(22, 16);
+            this.LB_Force_FactorZ2.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorZ2.TabIndex = 272;
             this.LB_Force_FactorZ2.Text = "2";
             // 
@@ -1204,7 +1205,7 @@
             this.LB_Force_FactorZ7.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorZ7.Location = new System.Drawing.Point(254, 200);
             this.LB_Force_FactorZ7.Name = "LB_Force_FactorZ7";
-            this.LB_Force_FactorZ7.Size = new System.Drawing.Size(22, 16);
+            this.LB_Force_FactorZ7.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorZ7.TabIndex = 282;
             this.LB_Force_FactorZ7.Text = "7";
             // 
@@ -1228,7 +1229,7 @@
             this.LB_Force_FactorZ6.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorZ6.Location = new System.Drawing.Point(254, 177);
             this.LB_Force_FactorZ6.Name = "LB_Force_FactorZ6";
-            this.LB_Force_FactorZ6.Size = new System.Drawing.Size(22, 16);
+            this.LB_Force_FactorZ6.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorZ6.TabIndex = 280;
             this.LB_Force_FactorZ6.Text = "6";
             // 
@@ -1252,7 +1253,7 @@
             this.LB_Force_FactorZ5.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorZ5.Location = new System.Drawing.Point(254, 154);
             this.LB_Force_FactorZ5.Name = "LB_Force_FactorZ5";
-            this.LB_Force_FactorZ5.Size = new System.Drawing.Size(22, 16);
+            this.LB_Force_FactorZ5.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorZ5.TabIndex = 278;
             this.LB_Force_FactorZ5.Text = "5";
             // 
@@ -1276,7 +1277,7 @@
             this.LB_Force_FactorZ4.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorZ4.Location = new System.Drawing.Point(254, 131);
             this.LB_Force_FactorZ4.Name = "LB_Force_FactorZ4";
-            this.LB_Force_FactorZ4.Size = new System.Drawing.Size(22, 16);
+            this.LB_Force_FactorZ4.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorZ4.TabIndex = 276;
             this.LB_Force_FactorZ4.Text = "4";
             // 
@@ -1300,7 +1301,7 @@
             this.LB_Force_FactorZ9.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorZ9.Location = new System.Drawing.Point(254, 246);
             this.LB_Force_FactorZ9.Name = "LB_Force_FactorZ9";
-            this.LB_Force_FactorZ9.Size = new System.Drawing.Size(22, 16);
+            this.LB_Force_FactorZ9.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorZ9.TabIndex = 286;
             this.LB_Force_FactorZ9.Text = "9";
             // 
@@ -1324,7 +1325,7 @@
             this.LB_Force_FactorZ8.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorZ8.Location = new System.Drawing.Point(254, 223);
             this.LB_Force_FactorZ8.Name = "LB_Force_FactorZ8";
-            this.LB_Force_FactorZ8.Size = new System.Drawing.Size(22, 16);
+            this.LB_Force_FactorZ8.Size = new System.Drawing.Size(15, 16);
             this.LB_Force_FactorZ8.TabIndex = 284;
             this.LB_Force_FactorZ8.Text = "8";
             // 
@@ -1348,7 +1349,7 @@
             this.LB_Force_FactorZ19.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorZ19.Location = new System.Drawing.Point(247, 476);
             this.LB_Force_FactorZ19.Name = "LB_Force_FactorZ19";
-            this.LB_Force_FactorZ19.Size = new System.Drawing.Size(29, 16);
+            this.LB_Force_FactorZ19.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorZ19.TabIndex = 356;
             this.LB_Force_FactorZ19.Text = "19";
             // 
@@ -1372,7 +1373,7 @@
             this.LB_Force_FactorZ18.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorZ18.Location = new System.Drawing.Point(247, 453);
             this.LB_Force_FactorZ18.Name = "LB_Force_FactorZ18";
-            this.LB_Force_FactorZ18.Size = new System.Drawing.Size(29, 16);
+            this.LB_Force_FactorZ18.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorZ18.TabIndex = 354;
             this.LB_Force_FactorZ18.Text = "18";
             // 
@@ -1396,7 +1397,7 @@
             this.LB_Force_FactorZ17.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorZ17.Location = new System.Drawing.Point(247, 430);
             this.LB_Force_FactorZ17.Name = "LB_Force_FactorZ17";
-            this.LB_Force_FactorZ17.Size = new System.Drawing.Size(29, 16);
+            this.LB_Force_FactorZ17.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorZ17.TabIndex = 352;
             this.LB_Force_FactorZ17.Text = "17";
             // 
@@ -1420,7 +1421,7 @@
             this.LB_Force_FactorZ16.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorZ16.Location = new System.Drawing.Point(247, 407);
             this.LB_Force_FactorZ16.Name = "LB_Force_FactorZ16";
-            this.LB_Force_FactorZ16.Size = new System.Drawing.Size(29, 16);
+            this.LB_Force_FactorZ16.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorZ16.TabIndex = 350;
             this.LB_Force_FactorZ16.Text = "16";
             // 
@@ -1444,7 +1445,7 @@
             this.LB_Force_FactorZ15.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorZ15.Location = new System.Drawing.Point(247, 384);
             this.LB_Force_FactorZ15.Name = "LB_Force_FactorZ15";
-            this.LB_Force_FactorZ15.Size = new System.Drawing.Size(29, 16);
+            this.LB_Force_FactorZ15.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorZ15.TabIndex = 348;
             this.LB_Force_FactorZ15.Text = "15";
             // 
@@ -1468,7 +1469,7 @@
             this.LB_Force_FactorZ14.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorZ14.Location = new System.Drawing.Point(247, 361);
             this.LB_Force_FactorZ14.Name = "LB_Force_FactorZ14";
-            this.LB_Force_FactorZ14.Size = new System.Drawing.Size(29, 16);
+            this.LB_Force_FactorZ14.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorZ14.TabIndex = 346;
             this.LB_Force_FactorZ14.Text = "14";
             // 
@@ -1492,7 +1493,7 @@
             this.LB_Force_FactorZ13.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorZ13.Location = new System.Drawing.Point(247, 338);
             this.LB_Force_FactorZ13.Name = "LB_Force_FactorZ13";
-            this.LB_Force_FactorZ13.Size = new System.Drawing.Size(29, 16);
+            this.LB_Force_FactorZ13.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorZ13.TabIndex = 344;
             this.LB_Force_FactorZ13.Text = "13";
             // 
@@ -1516,7 +1517,7 @@
             this.LB_Force_FactorZ12.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorZ12.Location = new System.Drawing.Point(247, 315);
             this.LB_Force_FactorZ12.Name = "LB_Force_FactorZ12";
-            this.LB_Force_FactorZ12.Size = new System.Drawing.Size(29, 16);
+            this.LB_Force_FactorZ12.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorZ12.TabIndex = 342;
             this.LB_Force_FactorZ12.Text = "12";
             // 
@@ -1540,7 +1541,7 @@
             this.LB_Force_FactorZ11.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorZ11.Location = new System.Drawing.Point(248, 292);
             this.LB_Force_FactorZ11.Name = "LB_Force_FactorZ11";
-            this.LB_Force_FactorZ11.Size = new System.Drawing.Size(28, 16);
+            this.LB_Force_FactorZ11.Size = new System.Drawing.Size(21, 16);
             this.LB_Force_FactorZ11.TabIndex = 340;
             this.LB_Force_FactorZ11.Text = "11";
             // 
@@ -1564,7 +1565,7 @@
             this.LB_Force_FactorZ10.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorZ10.Location = new System.Drawing.Point(247, 269);
             this.LB_Force_FactorZ10.Name = "LB_Force_FactorZ10";
-            this.LB_Force_FactorZ10.Size = new System.Drawing.Size(29, 16);
+            this.LB_Force_FactorZ10.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorZ10.TabIndex = 338;
             this.LB_Force_FactorZ10.Text = "10";
             // 
@@ -1628,7 +1629,7 @@
             this.LB_Force_FactorY19.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorY19.Location = new System.Drawing.Point(149, 476);
             this.LB_Force_FactorY19.Name = "LB_Force_FactorY19";
-            this.LB_Force_FactorY19.Size = new System.Drawing.Size(30, 16);
+            this.LB_Force_FactorY19.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorY19.TabIndex = 334;
             this.LB_Force_FactorY19.Text = "19";
             // 
@@ -1639,7 +1640,7 @@
             this.LB_Force_FactorX19.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorX19.Location = new System.Drawing.Point(18, 476);
             this.LB_Force_FactorX19.Name = "LB_Force_FactorX19";
-            this.LB_Force_FactorX19.Size = new System.Drawing.Size(31, 16);
+            this.LB_Force_FactorX19.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorX19.TabIndex = 333;
             this.LB_Force_FactorX19.Text = "19";
             // 
@@ -1676,7 +1677,7 @@
             this.LB_Force_FactorY18.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorY18.Location = new System.Drawing.Point(149, 453);
             this.LB_Force_FactorY18.Name = "LB_Force_FactorY18";
-            this.LB_Force_FactorY18.Size = new System.Drawing.Size(30, 16);
+            this.LB_Force_FactorY18.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorY18.TabIndex = 330;
             this.LB_Force_FactorY18.Text = "18";
             // 
@@ -1687,7 +1688,7 @@
             this.LB_Force_FactorX18.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorX18.Location = new System.Drawing.Point(18, 453);
             this.LB_Force_FactorX18.Name = "LB_Force_FactorX18";
-            this.LB_Force_FactorX18.Size = new System.Drawing.Size(31, 16);
+            this.LB_Force_FactorX18.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorX18.TabIndex = 329;
             this.LB_Force_FactorX18.Text = "18";
             // 
@@ -1804,7 +1805,7 @@
             this.LB_Force_FactorY14.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorY14.Location = new System.Drawing.Point(149, 361);
             this.LB_Force_FactorY14.Name = "LB_Force_FactorY14";
-            this.LB_Force_FactorY14.Size = new System.Drawing.Size(30, 16);
+            this.LB_Force_FactorY14.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorY14.TabIndex = 322;
             this.LB_Force_FactorY14.Text = "14";
             // 
@@ -1815,7 +1816,7 @@
             this.LB_Force_FactorX14.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorX14.Location = new System.Drawing.Point(18, 361);
             this.LB_Force_FactorX14.Name = "LB_Force_FactorX14";
-            this.LB_Force_FactorX14.Size = new System.Drawing.Size(31, 16);
+            this.LB_Force_FactorX14.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorX14.TabIndex = 321;
             this.LB_Force_FactorX14.Text = "14";
             // 
@@ -1852,7 +1853,7 @@
             this.LB_Force_FactorY17.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorY17.Location = new System.Drawing.Point(149, 430);
             this.LB_Force_FactorY17.Name = "LB_Force_FactorY17";
-            this.LB_Force_FactorY17.Size = new System.Drawing.Size(30, 16);
+            this.LB_Force_FactorY17.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorY17.TabIndex = 318;
             this.LB_Force_FactorY17.Text = "17";
             // 
@@ -1863,7 +1864,7 @@
             this.LB_Force_FactorX17.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorX17.Location = new System.Drawing.Point(18, 430);
             this.LB_Force_FactorX17.Name = "LB_Force_FactorX17";
-            this.LB_Force_FactorX17.Size = new System.Drawing.Size(31, 16);
+            this.LB_Force_FactorX17.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorX17.TabIndex = 317;
             this.LB_Force_FactorX17.Text = "17";
             // 
@@ -1900,7 +1901,7 @@
             this.LB_Force_FactorY16.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorY16.Location = new System.Drawing.Point(149, 407);
             this.LB_Force_FactorY16.Name = "LB_Force_FactorY16";
-            this.LB_Force_FactorY16.Size = new System.Drawing.Size(30, 16);
+            this.LB_Force_FactorY16.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorY16.TabIndex = 314;
             this.LB_Force_FactorY16.Text = "16";
             // 
@@ -1911,7 +1912,7 @@
             this.LB_Force_FactorX16.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorX16.Location = new System.Drawing.Point(18, 407);
             this.LB_Force_FactorX16.Name = "LB_Force_FactorX16";
-            this.LB_Force_FactorX16.Size = new System.Drawing.Size(31, 16);
+            this.LB_Force_FactorX16.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorX16.TabIndex = 313;
             this.LB_Force_FactorX16.Text = "16";
             // 
@@ -1948,7 +1949,7 @@
             this.LB_Force_FactorY15.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorY15.Location = new System.Drawing.Point(149, 384);
             this.LB_Force_FactorY15.Name = "LB_Force_FactorY15";
-            this.LB_Force_FactorY15.Size = new System.Drawing.Size(30, 16);
+            this.LB_Force_FactorY15.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorY15.TabIndex = 310;
             this.LB_Force_FactorY15.Text = "15";
             // 
@@ -1959,7 +1960,7 @@
             this.LB_Force_FactorX15.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorX15.Location = new System.Drawing.Point(18, 384);
             this.LB_Force_FactorX15.Name = "LB_Force_FactorX15";
-            this.LB_Force_FactorX15.Size = new System.Drawing.Size(31, 16);
+            this.LB_Force_FactorX15.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorX15.TabIndex = 309;
             this.LB_Force_FactorX15.Text = "15";
             // 
@@ -2076,7 +2077,7 @@
             this.LB_Force_FactorY10.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorY10.Location = new System.Drawing.Point(149, 269);
             this.LB_Force_FactorY10.Name = "LB_Force_FactorY10";
-            this.LB_Force_FactorY10.Size = new System.Drawing.Size(30, 16);
+            this.LB_Force_FactorY10.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorY10.TabIndex = 302;
             this.LB_Force_FactorY10.Text = "10";
             // 
@@ -2087,7 +2088,7 @@
             this.LB_Force_FactorX10.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorX10.Location = new System.Drawing.Point(18, 269);
             this.LB_Force_FactorX10.Name = "LB_Force_FactorX10";
-            this.LB_Force_FactorX10.Size = new System.Drawing.Size(31, 16);
+            this.LB_Force_FactorX10.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorX10.TabIndex = 301;
             this.LB_Force_FactorX10.Text = "10";
             // 
@@ -2124,7 +2125,7 @@
             this.LB_Force_FactorY13.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorY13.Location = new System.Drawing.Point(149, 338);
             this.LB_Force_FactorY13.Name = "LB_Force_FactorY13";
-            this.LB_Force_FactorY13.Size = new System.Drawing.Size(30, 16);
+            this.LB_Force_FactorY13.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorY13.TabIndex = 298;
             this.LB_Force_FactorY13.Text = "13";
             // 
@@ -2135,7 +2136,7 @@
             this.LB_Force_FactorX13.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorX13.Location = new System.Drawing.Point(18, 338);
             this.LB_Force_FactorX13.Name = "LB_Force_FactorX13";
-            this.LB_Force_FactorX13.Size = new System.Drawing.Size(31, 16);
+            this.LB_Force_FactorX13.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorX13.TabIndex = 297;
             this.LB_Force_FactorX13.Text = "13";
             // 
@@ -2172,7 +2173,7 @@
             this.LB_Force_FactorY12.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorY12.Location = new System.Drawing.Point(149, 315);
             this.LB_Force_FactorY12.Name = "LB_Force_FactorY12";
-            this.LB_Force_FactorY12.Size = new System.Drawing.Size(30, 16);
+            this.LB_Force_FactorY12.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorY12.TabIndex = 294;
             this.LB_Force_FactorY12.Text = "12";
             // 
@@ -2183,7 +2184,7 @@
             this.LB_Force_FactorX12.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorX12.Location = new System.Drawing.Point(18, 315);
             this.LB_Force_FactorX12.Name = "LB_Force_FactorX12";
-            this.LB_Force_FactorX12.Size = new System.Drawing.Size(31, 16);
+            this.LB_Force_FactorX12.Size = new System.Drawing.Size(22, 16);
             this.LB_Force_FactorX12.TabIndex = 293;
             this.LB_Force_FactorX12.Text = "12";
             // 
@@ -2220,7 +2221,7 @@
             this.LB_Force_FactorY11.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorY11.Location = new System.Drawing.Point(150, 292);
             this.LB_Force_FactorY11.Name = "LB_Force_FactorY11";
-            this.LB_Force_FactorY11.Size = new System.Drawing.Size(29, 16);
+            this.LB_Force_FactorY11.Size = new System.Drawing.Size(21, 16);
             this.LB_Force_FactorY11.TabIndex = 290;
             this.LB_Force_FactorY11.Text = "11";
             // 
@@ -2231,7 +2232,7 @@
             this.LB_Force_FactorX11.ForeColor = System.Drawing.Color.Black;
             this.LB_Force_FactorX11.Location = new System.Drawing.Point(19, 292);
             this.LB_Force_FactorX11.Name = "LB_Force_FactorX11";
-            this.LB_Force_FactorX11.Size = new System.Drawing.Size(30, 16);
+            this.LB_Force_FactorX11.Size = new System.Drawing.Size(21, 16);
             this.LB_Force_FactorX11.TabIndex = 289;
             this.LB_Force_FactorX11.Text = "11";
             // 
@@ -2248,6 +2249,28 @@
             this.TB_Force_FactorX11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.TB_Force_FactorX11.Click += new System.EventHandler(this.Control_Click);
             // 
+            // BT_SAVEFILE
+            // 
+            this.BT_SAVEFILE.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BT_SAVEFILE.BackgroundImage")));
+            this.BT_SAVEFILE.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BT_SAVEFILE.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.BT_SAVEFILE.FlatAppearance.BorderSize = 0;
+            this.BT_SAVEFILE.FlatAppearance.CheckedBackColor = System.Drawing.Color.Black;
+            this.BT_SAVEFILE.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Orange;
+            this.BT_SAVEFILE.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
+            this.BT_SAVEFILE.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BT_SAVEFILE.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold);
+            this.BT_SAVEFILE.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.BT_SAVEFILE.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.BT_SAVEFILE.Location = new System.Drawing.Point(343, 348);
+            this.BT_SAVEFILE.Name = "BT_SAVEFILE";
+            this.BT_SAVEFILE.Size = new System.Drawing.Size(225, 84);
+            this.BT_SAVEFILE.TabIndex = 382;
+            this.BT_SAVEFILE.TabStop = false;
+            this.BT_SAVEFILE.Text = "Save To File (csv)";
+            this.BT_SAVEFILE.UseVisualStyleBackColor = true;
+            this.BT_SAVEFILE.Click += new System.EventHandler(this.BT_SAVEFILE_Click);
+            // 
             // FormForceCalibration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
@@ -2255,6 +2278,7 @@
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.ClientSize = new System.Drawing.Size(577, 631);
             this.ControlBox = false;
+            this.Controls.Add(this.BT_SAVEFILE);
             this.Controls.Add(this.TB_Result);
             this.Controls.Add(this.TB_Force_FactorZ19);
             this.Controls.Add(this.LB_Force_FactorZ19);
@@ -2576,5 +2600,6 @@
 		private System.Windows.Forms.Label LB_Force_FactorY11;
 		private System.Windows.Forms.Label LB_Force_FactorX11;
 		private System.Windows.Forms.TextBox TB_Force_FactorX11;
+        private System.Windows.Forms.Button BT_SAVEFILE;
     }
 }

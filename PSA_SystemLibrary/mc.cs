@@ -54,7 +54,7 @@ namespace PSA_SystemLibrary
         {
             get
             {
-                return "att20170126A";
+                return "att20170201A";
             }
         }
         //public static bool START;
@@ -1702,10 +1702,12 @@ namespace PSA_SystemLibrary
                 public static bool req;
                 public static bool _alive;
                 public static bool reqPowerOff;
+                static bool oldMCStatus = true;
 
                 static void control()
                 {
                     QueryTimer startFilter = new QueryTimer();
+                    QueryTimer mcFilter = new QueryTimer();
 
                     while (!reqPowerOff)
                     {
@@ -1727,6 +1729,30 @@ namespace PSA_SystemLibrary
                                 log.traceNoise.write(String.Format(textResource.LOG_DEBUG_PUSHED_BTN, "START"));
                                 //req = true;
                                 break;
+                            }
+
+                            mc.IN.MAIN.MC2(out ret.b1, out ret.message);
+                            if (!ret.b1)
+                            {
+                                if (oldMCStatus != ret.b1 && mcFilter.Elapsed > 1000)
+                                {
+                                    oldMCStatus = ret.b1;
+                                    mc.hd.tool.motorDisable(out ret.message);
+                                    mc.hd.tool.motorAbort(out ret.message);
+
+                                    mc.pd.motorDisable(out ret.message);
+                                    mc.pd.motorAbort(out ret.message);
+
+                                    mc.sf.motorDisable(out ret.message);
+                                    mc.sf.motorAbort(out ret.message);
+
+                                    EVENT.refresh();
+                                }
+                            }
+                            else
+                            {
+                                mcFilter.Reset();
+                                oldMCStatus = true;
                             }
                         }
 

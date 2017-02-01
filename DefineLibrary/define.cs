@@ -5179,7 +5179,7 @@ namespace DefineLibrary
 			forceAnalogDataUse = utilconfig.GetInt("AnalogDataUse", 2500);
 			forceZeroPressVoltage = utilconfig.GetDouble("ZeroForceVoltage", 0.6);		// 새로운 Calibration에서 이 값을 사용한다.
 			forcePlaceStartForce = utilconfig.GetDouble("PlaceStartForce", 1.0);		// Place시에 설정된 값으로 Force를 변경한다.
-			forceMaxPressVoltage = utilconfig.GetDouble("MaxForceVoltage", 7.0);		// Idle 상태에서의 최대 출력 전압을 설정한다. 메인압이 떨어지는 경우에는 전압이 높아도 최대 출력값을 가질 수 없으므로 최대 전압을 낮춰야 한다.
+			forceMaxPressVoltage = utilconfig.GetDouble("MaxForceVoltage", 10.0);		// Idle 상태에서의 최대 출력 전압을 설정한다. 메인압이 떨어지는 경우에는 전압이 높아도 최대 출력값을 가질 수 없으므로 최대 전압을 낮춰야 한다.
 			forceTopLoadcellBaseForce = utilconfig.GetInt("TopLoadcellBaseForce", 0);
 		}
 

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DefineLibrary;
 using AccessoryLibrary;
 using PSA_SystemLibrary;
+using System.IO;
 
 namespace PSA_Application
 {
@@ -994,6 +995,37 @@ namespace PSA_Application
                 }
             }
             refresh();
+        }
+
+        private void BT_SAVEFILE_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string filename = "C:\\PROTEC\\DATA\\Calibration\\Force\\CalibData.csv";
+                string dirName = "C:\\PROTEC\\DATA\\Calibration\\Force\\";
+                if (!Directory.Exists(dirName)) Directory.CreateDirectory(dirName);
+                FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
+                StreamWriter sw = new StreamWriter(fs, Encoding.Default);
+
+                string saveData = "InputForce" + "," + "CalForce" + "," + "HeadForce";
+                sw.WriteLine(saveData);
+
+                for (int i = 0; i < 20; i++)
+                {
+                    saveData = null;
+                    saveData = tempForce.A[i].value.ToString() + ","
+                        + tempForce.B[i].value.ToString() + ","
+                        + tempForce.D[i].value.ToString();
+                    sw.WriteLine(saveData);
+                    sw.Flush();
+                }
+                sw.Close();
+                fs.Close();
+            }
+            catch
+            {
+
+            }
         }
 	}
 }

@@ -3330,8 +3330,8 @@ namespace PSA_SystemLibrary
                         if (mc.para.ULC.modelLIDC1.isCreate.value == (int)BOOL.TRUE
                             && mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3)
                         {
-                            mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
-                            mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC1.light, mc.para.ULC.modelLIDC1.exposureTime);
+                            mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
+                            mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC3.light, mc.para.ULC.modelLIDC3.exposureTime);
                         }
                         else if (mc.para.ULC.modelLIDC2.isCreate.value == (int)BOOL.TRUE
                             && mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C2AndC4)
@@ -3438,8 +3438,8 @@ namespace PSA_SystemLibrary
                         ulcP1X = 0; ulcP1Y = 0; ulcP1T = 0;
                         if (mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3 && mc.para.ULC.modelLIDC3.isCreate.value == (int)BOOL.TRUE)
                         {
-                            mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
-                            mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC3.light, mc.para.ULC.modelLIDC3.exposureTime);
+                            mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
+                            mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC1.light, mc.para.ULC.modelLIDC1.exposureTime);
                         }
                         else if (mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C2AndC4 && mc.para.ULC.modelLIDC4.isCreate.value == (int)BOOL.TRUE)
                         {

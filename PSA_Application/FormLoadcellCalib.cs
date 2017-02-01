@@ -250,12 +250,12 @@ namespace PSA_Application
 					checkTargetForce = Convert.ToDouble(TB_RepeatCheckForce.Text);
 					checkRepeatSpeed = Convert.ToDouble(TB_RepeatCheckSpeed.Text);
 					checkRepeatCount = Convert.ToInt32(TB_RepeatCheckCount.Text);
-					if (checkTargetForce < 0.1 || checkTargetForce > 3)
+					if (checkTargetForce < 0.1 || checkTargetForce > 10)
 					{
 						EVENT.userDialogMessage(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.WARNING, "Target Force Range : 0.1 ~ 3");
 						goto EXIT;
 					}
-					if (checkRepeatSpeed < 0.01 || checkRepeatSpeed > 5)
+					if (checkRepeatSpeed < 0.01 || checkRepeatSpeed > 100)
 					{
 						EVENT.userDialogMessage(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.WARNING, "Target Speed Range : 0.01 ~ 5");
 						goto EXIT;

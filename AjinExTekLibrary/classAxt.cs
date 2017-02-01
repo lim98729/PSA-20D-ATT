@@ -8,7 +8,7 @@ namespace AjinExTekLibrary
 {
 	public class classAxt
 	{
-		bool b;
+		bool b = false;
 		//string s;
 		int DI_ModulCount = 0;
 		int DO_ModulCount = 0;

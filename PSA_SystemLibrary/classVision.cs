@@ -81,9 +81,9 @@ namespace PSA_SystemLibrary
 					if (reqMode == REQMODE.FIND_CIRCLE_QUARTER4) { sqc = SQC.FIND_CIRCLE_QUARTER_4; break; }
 					if (reqMode == REQMODE.FIND_CIRCLE) { sqc = SQC.FIND_CIRCLE; break; }
 					if (reqMode == REQMODE.FIND_CORNER) { sqc = SQC.FIND_CORNER; break; }
-					if (reqMode == REQMODE.FIND_EDGE_QUARTER_3) { sqc = SQC.FIND_EDGE_QUARTER_FIRST; break; }
+					if (reqMode == REQMODE.FIND_EDGE_QUARTER_3) { sqc = SQC.FIND_EDGE_QUARTER_THIRD; break; }
 					if (reqMode == REQMODE.FIND_EDGE_QUARTER_2) { sqc = SQC.FIND_EDGE_QUARTER_SECOND; break; }
-					if (reqMode == REQMODE.FIND_EDGE_QUARTER_1) { sqc = SQC.FIND_EDGE_QUARTER_THIRD; break; }
+					if (reqMode == REQMODE.FIND_EDGE_QUARTER_1) { sqc = SQC.FIND_EDGE_QUARTER_FIRST; break; }
 					if (reqMode == REQMODE.FIND_EDGE_QUARTER_4) { sqc = SQC.FIND_EDGE_QUARTER_FOURTH; break; }
 					if (reqMode == REQMODE.FIND_RECTANGLE_HS) { sqc = SQC.FIND_RECTANGLE_HS; break; }
 					if (unitCode == UnitCode.HDC)
