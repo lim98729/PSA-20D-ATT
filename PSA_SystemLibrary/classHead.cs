@@ -730,6 +730,7 @@ namespace PSA_SystemLibrary
 				case (int)SEQ.AUTO + 4:
 					if (mc.sf.RUNING) break;
 					if (mc.sf.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
+                    if (mc2.req == MC_REQ.STOP) { sqc = (int)SEQ.AUTO_PLACE_STANDBY; break; }			// 집기 전에 정지하도록 추가
 					sqc = (int)SEQ.AUTO_CHECK_REVERSE; break;
 					
 				case (int)SEQ.AUTO_CHECK_TMS:
@@ -775,7 +776,6 @@ namespace PSA_SystemLibrary
                 case (int)SEQ.AUTO_HOME_PICK:
 					mc.hd.tool.doublechecked = false;
 					wastedonestop = false;
-					if (mc2.req == MC_REQ.STOP) { sqc = (int)SEQ.AUTO_PLACE_STANDBY; break; }			// 집기 전에 정지하도록 추가
 					mc.OUT.SF.TUBE_BLOW(mc.sf.workingTubeNumber, false, out ret.message);					
 					tool.home_pick();
 					if (tool.RUNING) break;
@@ -923,6 +923,7 @@ namespace PSA_SystemLibrary
 
                 case (int)SEQ.AUTO_CHECK_PAD1:
 					// 여기서 Remaining Point들을 계산한다.
+                    if (mc2.req == MC_REQ.STOP) { sqc = (int)SEQ.AUTO_PLACE_STANDBY; break; }
 					mc.board.padIndex(out tool.padX, out tool.padY, out ret.b);
 					if (!ret.b)
 					{
