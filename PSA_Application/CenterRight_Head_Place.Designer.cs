@@ -205,7 +205,7 @@
             this.toolStripLabel9 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator43 = new System.Windows.Forms.ToolStripSeparator();
             this.TB_autoLaserTiltCheckCount = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStrip15 = new System.Windows.Forms.ToolStrip();
+            this.TS_CHECK_ATTACH_TILT = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel10 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator44 = new System.Windows.Forms.ToolStripSeparator();
             this.BT_PressAfterBonding = new System.Windows.Forms.ToolStripButton();
@@ -225,7 +225,7 @@
             this.toolStrip12.SuspendLayout();
             this.toolStrip13.SuspendLayout();
             this.toolStrip14.SuspendLayout();
-            this.toolStrip15.SuspendLayout();
+            this.TS_CHECK_ATTACH_TILT.SuspendLayout();
             this.SuspendLayout();
             // 
             // LB_
@@ -1642,7 +1642,7 @@
             this.TB_PressTiltLimit});
             this.toolStrip12.Location = new System.Drawing.Point(3, 541);
             this.toolStrip12.Name = "toolStrip12";
-            this.toolStrip12.Size = new System.Drawing.Size(197, 25);
+            this.toolStrip12.Size = new System.Drawing.Size(166, 25);
             this.toolStrip12.TabIndex = 112;
             this.toolStrip12.Text = "toolStrip10";
             // 
@@ -1794,20 +1794,20 @@
             this.TB_autoLaserTiltCheckCount.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.TB_autoLaserTiltCheckCount.Click += new System.EventHandler(this.Control_Click);
             // 
-            // toolStrip15
+            // TS_CHECK_ATTACH_TILT
             // 
-            this.toolStrip15.BackColor = System.Drawing.Color.Transparent;
-            this.toolStrip15.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStrip15.Font = new System.Drawing.Font("Arial", 9F);
-            this.toolStrip15.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TS_CHECK_ATTACH_TILT.BackColor = System.Drawing.Color.Transparent;
+            this.TS_CHECK_ATTACH_TILT.Dock = System.Windows.Forms.DockStyle.None;
+            this.TS_CHECK_ATTACH_TILT.Font = new System.Drawing.Font("Arial", 9F);
+            this.TS_CHECK_ATTACH_TILT.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel10,
             this.toolStripSeparator44,
             this.BT_PressAfterBonding});
-            this.toolStrip15.Location = new System.Drawing.Point(362, 224);
-            this.toolStrip15.Name = "toolStrip15";
-            this.toolStrip15.Size = new System.Drawing.Size(218, 33);
-            this.toolStrip15.TabIndex = 115;
-            this.toolStrip15.Text = "toolStrip15";
+            this.TS_CHECK_ATTACH_TILT.Location = new System.Drawing.Point(362, 224);
+            this.TS_CHECK_ATTACH_TILT.Name = "TS_CHECK_ATTACH_TILT";
+            this.TS_CHECK_ATTACH_TILT.Size = new System.Drawing.Size(249, 33);
+            this.TS_CHECK_ATTACH_TILT.TabIndex = 115;
+            this.TS_CHECK_ATTACH_TILT.Text = "toolStrip15";
             // 
             // toolStripLabel10
             // 
@@ -1838,7 +1838,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.toolStrip15);
+            this.Controls.Add(this.TS_CHECK_ATTACH_TILT);
             this.Controls.Add(this.toolStrip14);
             this.Controls.Add(this.toolStrip13);
             this.Controls.Add(this.toolStrip12);
@@ -1892,8 +1892,8 @@
             this.toolStrip13.PerformLayout();
             this.toolStrip14.ResumeLayout(false);
             this.toolStrip14.PerformLayout();
-            this.toolStrip15.ResumeLayout(false);
-            this.toolStrip15.PerformLayout();
+            this.TS_CHECK_ATTACH_TILT.ResumeLayout(false);
+            this.TS_CHECK_ATTACH_TILT.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2074,7 +2074,7 @@
 		private System.Windows.Forms.ToolStripLabel toolStripLabel9;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator43;
 		private System.Windows.Forms.ToolStripTextBox TB_autoLaserTiltCheckCount;
-		private System.Windows.Forms.ToolStrip toolStrip15;
+		private System.Windows.Forms.ToolStrip TS_CHECK_ATTACH_TILT;
 		private System.Windows.Forms.ToolStripLabel toolStripLabel10;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator44;
 		private System.Windows.Forms.ToolStripButton BT_PressAfterBonding;

@@ -629,6 +629,11 @@ namespace PSA_Application
 					mc.para.HD.place.driver.level.value = 300 - mc.para.HD.place.forceOffset.z.value - mc.para.HD.place.offset.z.value;
 				}
 			}
+
+            if (!mc.swcontrol.useCheckAttachTilt)
+            {
+                TS_CHECK_ATTACH_TILT.Visible = false;
+            }
 		}
 	}
 }

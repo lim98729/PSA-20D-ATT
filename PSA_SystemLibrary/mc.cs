@@ -4448,7 +4448,12 @@ namespace PSA_SystemLibrary
             // 20140612 
             public static int logSave;
             public static bool useDoorControl;
+
+            // 암코 버전
             public static int useUnloaderBuffer;
+            public static bool useCheckLidAlign;
+            public static bool useCheckAttachTilt;
+
             //static string filename = Environment.CurrentDirectory + "\\PSA.INI";
             static string filename = "C:\\PROTEC\\DATA\\PSA.INI";
             static iniUtil swconfig = new iniUtil(filename);
@@ -4561,6 +4566,15 @@ namespace PSA_SystemLibrary
                 temp = swconfig.GetInt("noCheckAir", 2);
                 if (temp == 2) genflag = true;
                 noCheckAir = (temp != 1) ? false : true;
+
+                temp = swconfig.GetInt("useCheckLidAlign", 2);
+                if (temp == 2) genflag = true;
+                useCheckLidAlign = (temp != 1) ? false : true;
+
+                temp = swconfig.GetInt("useCheckAttachTilt", 2);
+                if (temp == 2) genflag = true;
+                useCheckAttachTilt = (temp != 1) ? false : true;
+
                 dev.NotExistHW.ZMP = nousemotion;
                 dev.NotExistHW.AXT = nouseio;
                 dev.NotExistHW.CAMERA = nousecamera;
@@ -4640,13 +4654,20 @@ namespace PSA_SystemLibrary
                 //swconfig.WriteInt("useHwTriger", useHwTriger);
                 swconfig.WriteDouble("forceMeanOffset", forceMeanOffset);
 
-                // 2016.10.24 - Amkor Unloader 옵션 write INI 부분 추가
-                swconfig.WriteInt("useUnloaderBuffer", useUnloaderBuffer);
-
                 temp = useDoorControl ? 1 : 0;
                 swconfig.WriteInt("useDoorControl", temp);
                 temp = noCheckAir ? 1 : 0;
                 swconfig.WriteInt("noCheckAir", temp);
+
+
+                // 2016.10.24 - Amkor Unloader 옵션 write INI 부분 추가
+                swconfig.WriteInt("useUnloaderBuffer", useUnloaderBuffer);
+
+                temp = useCheckLidAlign ? 1 : 0;
+                swconfig.WriteInt("useCheckLidAlign", temp);
+
+                temp = useCheckAttachTilt ? 1 : 0;
+                swconfig.WriteInt("useCheckAttachTilt", temp);
             }
         }
 

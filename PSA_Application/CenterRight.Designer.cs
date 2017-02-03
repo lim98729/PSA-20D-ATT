@@ -42,10 +42,10 @@
             this.BT_Parameter_StackFeeder = new System.Windows.Forms.ToolStripMenuItem();
             this.BT_Parameter_HeadCamera = new System.Windows.Forms.ToolStripMenuItem();
             this.BT_Parameter_UpLookingCamera = new System.Windows.Forms.ToolStripMenuItem();
+            this.BT_Parameter_HeatSlug = new System.Windows.Forms.ToolStripMenuItem();
             this.BT_Parameter_Meterial = new System.Windows.Forms.ToolStripMenuItem();
             this.BT_Parameter_SecsGem = new System.Windows.Forms.ToolStripMenuItem();
             this.BT_Parameter_Advance = new System.Windows.Forms.ToolStripMenuItem();
-            this.BT_Parameter_HeatSlug = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.BT_Machine = new System.Windows.Forms.ToolStripDropDownButton();
             this.BT_Machine_Initial = new System.Windows.Forms.ToolStripMenuItem();
@@ -213,6 +213,14 @@
             this.BT_Parameter_UpLookingCamera.Text = "Up Looking Camera";
             this.BT_Parameter_UpLookingCamera.Click += new System.EventHandler(this.Control_Click);
             // 
+            // BT_Parameter_HeatSlug
+            // 
+            this.BT_Parameter_HeatSlug.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold);
+            this.BT_Parameter_HeatSlug.Name = "BT_Parameter_HeatSlug";
+            this.BT_Parameter_HeatSlug.Size = new System.Drawing.Size(293, 36);
+            this.BT_Parameter_HeatSlug.Text = "HeatSlug";
+            this.BT_Parameter_HeatSlug.Click += new System.EventHandler(this.Control_Click);
+            // 
             // BT_Parameter_Meterial
             // 
             this.BT_Parameter_Meterial.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -236,14 +244,6 @@
             this.BT_Parameter_Advance.Size = new System.Drawing.Size(293, 36);
             this.BT_Parameter_Advance.Text = "Advance";
             this.BT_Parameter_Advance.Click += new System.EventHandler(this.Control_Click);
-            // 
-            // BT_Parameter_HeatSlug
-            // 
-            this.BT_Parameter_HeatSlug.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold);
-            this.BT_Parameter_HeatSlug.Name = "BT_Parameter_HeatSlug";
-            this.BT_Parameter_HeatSlug.Size = new System.Drawing.Size(293, 36);
-            this.BT_Parameter_HeatSlug.Text = "HeatSlug";
-            this.BT_Parameter_HeatSlug.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStripSeparator4
             // 
@@ -521,6 +521,7 @@
             this.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "CenterRight";
             this.Size = new System.Drawing.Size(665, 646);
+            this.Load += new System.EventHandler(this.CenterRight_Load);
             this.TS_Menu.ResumeLayout(false);
             this.TS_Menu.PerformLayout();
             this.ResumeLayout(false);

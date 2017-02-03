@@ -881,7 +881,7 @@ namespace PSA_SystemLibrary
 					}
 
                 case (int)SEQ.AUTO_CHECK_ALIGN_AFTER_BONDING:
-                    if (mc.para.HS.useCheck.value == 0)
+                    if (mc.para.HS.useCheck.value == 0 || !mc.swcontrol.useCheckAttachTilt)
                     {
                         sqc = (int)SEQ.AUTO_CHECK_TILT_AFTER_BONDING; break;
                     }
@@ -894,7 +894,7 @@ namespace PSA_SystemLibrary
                     }
 
                 case (int)SEQ.AUTO_CHECK_TILT_AFTER_BONDING:
-					if (mc.para.ETC.autoLaserTiltCheck.value == 0)
+                    if (mc.para.ETC.autoLaserTiltCheck.value == 0 || !mc.swcontrol.useCheckAttachTilt)
 					{
                         sqc = (int)SEQ.AUTO_CHECK_PAD1; break;
 					}

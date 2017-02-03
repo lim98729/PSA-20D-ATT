@@ -635,5 +635,13 @@ namespace PSA_Application
 
             return false;
         }
+
+        private void CenterRight_Load(object sender, EventArgs e)
+        {
+            if (!mc.swcontrol.useCheckLidAlign)
+            {
+                BT_Parameter_HeatSlug.Visible = false;
+            }
+        }
     }
 }

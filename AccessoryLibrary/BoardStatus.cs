@@ -23,6 +23,7 @@ namespace AccessoryLibrary
             this.SetStyle(ControlStyles.UserPaint, true);
             this.UpdateStyles();
 
+            dragPen.DashStyle = DashStyle.DashDot;
             #region EVENT 등록
 
             EVENT.onAdd_boardStatus += new EVENT.InsertHandler_boardStatus(boardStatus);
@@ -95,8 +96,6 @@ namespace AccessoryLibrary
                 if (WorkAreaControl.workArea[x, y] == 1)
                 {
                     state[x, y] = status;
-                    selectedPadX = x;
-                    selectedPadY = y;
                 }
                 else
                 {
@@ -226,6 +225,7 @@ namespace AccessoryLibrary
         private Pen blackPen = new Pen(Color.Black, penSize);
         private Pen redPen = new Pen(Color.Red, penSize);
         private Pen outLine = new Pen(Color.Maroon, penSize * 2);
+        private Pen dragPen = new Pen(Color.Maroon, penSize * 2);
         private Brush rtColor = new SolidBrush(Color.Gray);
         private Brush fontColor;
        
@@ -363,7 +363,7 @@ namespace AccessoryLibrary
             g.FillRectangle(rtColor, startX, startY, padSizeX, padSizeY);
             g.DrawString(state[idX, idY].ToString(), new Font("Arial", 5F), fontColor, startX + padSizeX / 2, startY + padSizeY / 2);
         }
-
+        
         public void DrawRect()
         {
             int startX, startY;
@@ -376,7 +376,7 @@ namespace AccessoryLibrary
                 for (int idX = 0; idX < countX; idX++)
                 {
                     tempX = this.Width / 2 - startX + (padSizeX + gapX) * idX;
-                    tempY = this.Height - startY - (padSizeY + gapY) * idY;
+                    tempY = this.Height / 2 + startY - padSizeY - (padSizeY + gapY) * idY;
 
                     if (idX == selectedPadX && idY == selectedPadY && EditMode) g.DrawRectangle(outLine, tempX, tempY, padSizeX, padSizeY);
                     else g.DrawRectangle(blackPen, tempX, tempY, padSizeX, padSizeY);
@@ -487,7 +487,7 @@ namespace AccessoryLibrary
 
             if (dragMode && rect != null)
             {
-                e.Graphics.DrawRectangle(blackPen, rect);
+                e.Graphics.DrawRectangle(outLine, rect);
             }
         }
 
