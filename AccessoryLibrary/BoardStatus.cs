@@ -78,8 +78,8 @@ namespace AccessoryLibrary
                 if (zone == boardZone)
                 {
                     EditMode = enable;
-                    if (enable) TT_HelpMsg.ToolTipTitle = "CLICK to EDIT[Row,Column]";
-                    else TT_HelpMsg.ToolTipTitle = "[Row,Column]";
+                    //if (enable) TT_HelpMsg.ToolTipTitle = "CLICK to EDIT[Row,Column]";
+                    //else TT_HelpMsg.ToolTipTitle = "[Row,Column]";
                 }
             }
         }
@@ -95,6 +95,8 @@ namespace AccessoryLibrary
                 if (WorkAreaControl.workArea[x, y] == 1)
                 {
                     state[x, y] = status;
+                    selectedPadX = x;
+                    selectedPadY = y;
                 }
                 else
                 {
@@ -223,7 +225,7 @@ namespace AccessoryLibrary
         static float penSize = 2;
         private Pen blackPen = new Pen(Color.Black, penSize);
         private Pen redPen = new Pen(Color.Red, penSize);
-        private Pen outLine = new Pen(Color.Red, penSize * 2);
+        private Pen outLine = new Pen(Color.Maroon, penSize * 2);
         private Brush rtColor = new SolidBrush(Color.Gray);
         private Brush fontColor;
        
@@ -235,12 +237,10 @@ namespace AccessoryLibrary
         private int padSizeY = 0;
         private int gapX = 0;
         private int gapY = 0;
-        private int gapX2 = 0;
-        private int gapY2 = 0;
         private int tempX = 0;
         private int tempY = 0;
 
-        public int selectedPadX, selectedPadY;
+        private int selectedPadX, selectedPadY;
 
         private BOARD_ZONE boardZone;
         private McTypeFrRr FrRr;
@@ -254,16 +254,19 @@ namespace AccessoryLibrary
         private int[,] selectedPad = new int[40, 40];
         private PAD_STATUS[,] state = new PAD_STATUS[40, 40];
 
-    
-        public void setCount(int x, int y)
+
+        public void setCount(int maxX, int maxY, int selectedX, int selectedY)
         {
-            countX = x;
-            countY = y;
+            countX = maxX;
+            countY = maxY;
+            selectedPadX = selectedX;
+            selectedPadY = selectedY;
         }
 
-        public void activate(Size size, McTypeFrRr _FrRr, BOARD_ZONE zone, int x, int y)
+        public void activate(Size size, McTypeFrRr _FrRr, BOARD_ZONE zone, int max_x, int max_y, int selectedX = 0, int selectedY = 0)
         {
-            setCount(x, y);
+            setCount(max_x, max_y, selectedX, selectedY);
+
             curPad = new Rectangle[countX, countY];
             this.Size = size;
 
@@ -278,9 +281,6 @@ namespace AccessoryLibrary
             padSizeX = (this.Width - (ratioX * 2 + gapX * (countX - 1))) / countX;
             padSizeY = (this.Height - (ratioY * 2 + gapY * (countY - 1))) / countY;
 
-            gapX2 = ratioX + ((this.Width - (ratioX * 2 + gapX * (countX - 1))) % countX) / 2;
-            gapY2 = ratioY + ((this.Height - (ratioY * 2 + gapY * (countY - 1))) % countY) / 2;
-
             // make rectangles..
             int startX, startY;
             startX = (padSizeX * countX + gapX * (countX - 1)) / 2;
@@ -290,12 +290,23 @@ namespace AccessoryLibrary
             {
                 for (int idX = 0; idX < countX; idX++)
                 {
-                    curPad[idX, idY].X = this.Width / 2 - startX + (padSizeX + gapX) * idX;
-                    curPad[idX, idY].Y = this.Height / 2 - startY + (padSizeY + gapY) * idY;
-                    curPad[idX, idY].Width = padSizeX;
-                    curPad[idX, idY].Height = padSizeY;
+                    if (FrRr == McTypeFrRr.FRONT)
+                    {
+                        curPad[idX, countY - 1 - idY].X = this.Width / 2 - startX + (padSizeX + gapX) * idX;
+                        curPad[idX, countY - 1 - idY].Y = this.Height / 2 - startY + (padSizeY + gapY) * idY;
+                        curPad[idX, countY - 1 - idY].Width = padSizeX;
+                        curPad[idX, countY - 1 - idY].Height = padSizeY;
+                    }
+                    else
+                    {
+                        curPad[countX - 1 - idX, idY].X = this.Width / 2 - startX + (padSizeX + gapX) * idX;
+                        curPad[countX - 1 - idX, idY].Y = this.Height / 2 - startY + (padSizeY + gapY) * idY;
+                        curPad[countX - 1 - idX, idY].Width = padSizeX;
+                        curPad[countX - 1 - idX, idY].Height = padSizeY;
+                    }
                 }
-            } 
+            }
+            Invalidate();
         }
 
         private void SetStatus(Rectangle rect)
@@ -312,7 +323,7 @@ namespace AccessoryLibrary
                 for (int idX = 0; idX < countX; idX++)
                 {
                     posX = this.Width / 2 - startX + (padSizeX + gapX) * idX;
-                    posY = this.Height / 2 - startY + (padSizeY + gapY) * idY;
+                    posY = this.Height - startY - (padSizeY + gapY) * idY;
 
                     if (posX <= rect.X + rect.Width
                         && this.Width / 2 - startX + (padSizeX + gapX) * (idX + 1) >= rect.X
@@ -327,7 +338,7 @@ namespace AccessoryLibrary
                                 refresh(backupPadStatus, idX, countY - 1 - idY);
                             }
 
-                            EVENT.padChange(boardZone, idX, countY - 1 - idY);
+                            EVENT.padChange(boardZone, idX, countY - 1 - idY, true);
                         }
                         else
                         {
@@ -337,7 +348,7 @@ namespace AccessoryLibrary
                                 refresh(backupPadStatus, countX - 1 - idX, idY);
                             }
 
-                            EVENT.padChange(boardZone, countX - 1 - idX, idY);
+                            EVENT.padChange(boardZone, countX - 1 - idX, idY, true);
                         }
                     }
                 }
@@ -365,18 +376,20 @@ namespace AccessoryLibrary
                 for (int idX = 0; idX < countX; idX++)
                 {
                     tempX = this.Width / 2 - startX + (padSizeX + gapX) * idX;
-                    tempY = this.Height / 2 - startY + (padSizeY + gapY) * idY;
+                    tempY = this.Height - startY - (padSizeY + gapY) * idY;
 
-                    if (idX == selectedPadX && idY == selectedPadY) g.DrawRectangle(outLine, tempX, tempY, padSizeX, padSizeY);
+                    if (idX == selectedPadX && idY == selectedPadY && EditMode) g.DrawRectangle(outLine, tempX, tempY, padSizeX, padSizeY);
                     else g.DrawRectangle(blackPen, tempX, tempY, padSizeX, padSizeY);
-                    if (FrRr == McTypeFrRr.FRONT) FillRect(idX, countY - 1 - idY, tempX, tempY);
-                    else FillRect(countX - 1 - idX, idY, tempX, tempY);
+                    FillRect(idX, idY, tempX, tempY);
+                    //if (FrRr == McTypeFrRr.FRONT) FillRect(idX, countY - 1 - idY, tempX, tempY);
+                    //else FillRect(countX - 1 - idX, idY, tempX, tempY);
                 }
             }           
         }
      
         private void BoardStatus_MouseDown(object sender, MouseEventArgs e)
         {
+            if (!EditMode) return;
             if (!dragMode && !SelectMode)
             {
                 rect.X = 0;
@@ -392,6 +405,7 @@ namespace AccessoryLibrary
 
         private void BoardStatus_MouseMove(object sender, MouseEventArgs e)
         {
+            if (!EditMode) return;
             if (dragMode && !SelectMode)
             {
                 int width = e.Location.X - startPoint.X;
@@ -418,14 +432,17 @@ namespace AccessoryLibrary
 
         private void BoardStatus_MouseUp(object sender, MouseEventArgs e)
         {
-            if (dragMode && !SelectMode)
+            if (!EditMode) return;
+            if (!SelectMode)
             {
-                dragMode = false;
-                SetStatus(rect);
-                Invalidate();
+                if (dragMode)
+                {
+                    dragMode = false;
+                    SetStatus(rect);
+                    Invalidate();
+                }
             }
-
-            //if (SelectMode)
+            else
             {
                 try
                 {
@@ -441,6 +458,7 @@ namespace AccessoryLibrary
                             {
                                 selectedPadX = idX;
                                 selectedPadY = idY;
+                                EVENT.padChange(boardZone, idX, idY, false);
                                 Invalidate();
                             }
                         }
@@ -448,7 +466,6 @@ namespace AccessoryLibrary
                 }
                 catch
                 {
-
                 }
             }
         }
@@ -471,6 +488,41 @@ namespace AccessoryLibrary
             if (dragMode && rect != null)
             {
                 e.Graphics.DrawRectangle(blackPen, rect);
+            }
+        }
+
+        private void BoardStatus_MouseClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (boardZone != BOARD_ZONE.WORKING && boardZone != BOARD_ZONE.WORKEDIT) return;
+                if (!EditMode && boardZone != BOARD_ZONE.WORKEDIT) return;
+
+                float startX, startY;
+
+                if (boardZone == BOARD_ZONE.WORKEDIT)
+                {
+                    refresh(backupPadStatus, countX, countY);
+                }
+                else
+                {
+                    startX = (padSizeX * countX + gapX * (countX - 1)) / 2;
+                    startY = (padSizeY * countY + gapY * (countY - 1)) / 2;
+
+                    for (int idY = 0; idY < countY; idY++)
+                    {
+                        for (int idX = 0; idX < countX; idX++)
+                        {
+                            if (curPad[idX, idY].Contains(e.X, e.Y))
+                            {
+                                EVENT.padChange(boardZone, idX, idY, false);
+                            }
+                        }
+                    }
+                }
+            }
+            catch
+            {
             }
         }
     }

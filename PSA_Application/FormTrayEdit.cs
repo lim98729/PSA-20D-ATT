@@ -23,8 +23,8 @@ namespace AccessoryLibrary
 		}
 
 		public static bool IsDisplayed;
-		public int indexRow;
-		public int indexColumn;
+		public int indexX;
+		public int indexY;
 		double posX, posY;
 		PAD_STATUS padStatus;
 		PAD_STATUS padApplyStatus;
@@ -74,6 +74,7 @@ namespace AccessoryLibrary
                 editFlag = false;
                 BoardStatus_WorkArea.SelectMode = true;
                 EVENT.boardStatus(BOARD_ZONE.WORKING, mc.board.padStatus(BOARD_ZONE.WORKING), (int)mc.para.MT.padCount.x.value, (int)mc.para.MT.padCount.y.value);
+                EVENT.boardEdit(BOARD_ZONE.WORKEDIT, false);
                 this.Close();
             }
             if (sender.Equals(BT_Empty))
@@ -81,6 +82,10 @@ namespace AccessoryLibrary
                 editFlag = false;
                 padApplyStatus = PAD_STATUS.INVALID;
                 BoardStatus_WorkArea.SelectMode = true;
+                
+                BT_Move.Enabled = true;
+                BT_ReWork.Enabled = true;
+                BT_Repress.Enabled = true;
                 //mc.board.padStatus(BOARD_ZONE.WORKING, indexRow, indexColumn, PAD_STATUS.INVALID, out ret.b);
             }
             if (sender.Equals(BT_Ready))
@@ -88,6 +93,10 @@ namespace AccessoryLibrary
                 editFlag = true;
                 padApplyStatus = PAD_STATUS.READY;
                 BoardStatus_WorkArea.SelectMode = false;
+
+                BT_Move.Enabled = false;
+                BT_ReWork.Enabled = false;
+                BT_Repress.Enabled = false;
                 //mc.board.padStatus(BOARD_ZONE.WORKING, indexRow, indexColumn, PAD_STATUS.READY, out ret.b);
             }
             if (sender.Equals(BT_Skip))
@@ -95,6 +104,10 @@ namespace AccessoryLibrary
                 editFlag = true;
                 padApplyStatus = PAD_STATUS.SKIP;
                 BoardStatus_WorkArea.SelectMode = false;
+
+                BT_Move.Enabled = false;
+                BT_ReWork.Enabled = false;
+                BT_Repress.Enabled = false;
                 //mc.board.padStatus(BOARD_ZONE.WORKING, indexRow, indexColumn, PAD_STATUS.SKIP, out ret.b);
             }
             if (sender.Equals(BT_AttachDone))
@@ -102,6 +115,10 @@ namespace AccessoryLibrary
                 editFlag = true;
                 padApplyStatus = PAD_STATUS.ATTACH_DONE;
                 BoardStatus_WorkArea.SelectMode = false;
+
+                BT_Move.Enabled = false;
+                BT_ReWork.Enabled = false;
+                BT_Repress.Enabled = false;
                 //mc.board.padStatus(BOARD_ZONE.WORKING, indexRow, indexColumn, PAD_STATUS.PLACE, out ret.b);
             }
             if (sender.Equals(BT_AttachFail))
@@ -109,6 +126,10 @@ namespace AccessoryLibrary
                 editFlag = true;
                 padApplyStatus = PAD_STATUS.ATTACH_FAIL;
                 BoardStatus_WorkArea.SelectMode = false;
+
+                BT_Move.Enabled = false;
+                BT_ReWork.Enabled = false;
+                BT_Repress.Enabled = false;
                 //mc.board.padStatus(BOARD_ZONE.WORKING, indexRow, indexColumn, PAD_STATUS.PLACE_ERROR, out ret.b);
             }
             if (sender.Equals(BT_PadStatus))
@@ -134,8 +155,8 @@ namespace AccessoryLibrary
 						}
 						else
 						{
-							if (WorkAreaControl.workArea[indexRow, indexColumn] == 1)		// WorkArea값이 1일때만 업데이트
-								mc.board.padStatus(BOARD_ZONE.WORKEDIT, indexRow, indexColumn, padApplyStatus, out ret.b);
+							if (WorkAreaControl.workArea[indexX, indexY] == 1)		// WorkArea값이 1일때만 업데이트
+								mc.board.padStatus(BOARD_ZONE.WORKEDIT, indexX, indexY, padApplyStatus, out ret.b);
 						}
 						BoardStatus_WorkArea.backupPadStatus = mc.board.padStatus(BOARD_ZONE.WORKEDIT);
 					}
@@ -147,20 +168,20 @@ namespace AccessoryLibrary
 
 		public void UpdateSelectedPad(int x, int y)
 		{
-			if (editFlag)
-			{
-				mc.board.padStatus(BOARD_ZONE.WORKEDIT, x, y, padApplyStatus, out ret.b);
+            if (editFlag)
+            {
+                mc.board.padStatus(BOARD_ZONE.WORKEDIT, x, y, padApplyStatus, out ret.b);
 
-				BoardStatus_WorkArea.backupPadStatus = mc.board.padStatus(BOARD_ZONE.WORKEDIT);
-			}
+                BoardStatus_WorkArea.backupPadStatus = mc.board.padStatus(BOARD_ZONE.WORKEDIT);
+            }
 		}
 
 		public void refresh()
 		{
 			padStatus = padApplyStatus;
 
-			TB_Row.Text = (indexRow + 1).ToString();
-			TB_Column.Text = (indexColumn + 1).ToString();
+			TB_Row.Text = (indexX + 1).ToString();
+			TB_Column.Text = (indexY + 1).ToString();
 
             if (padStatus == PAD_STATUS.INVALID) 
 			{ 
@@ -215,8 +236,15 @@ namespace AccessoryLibrary
 
             mc.board.initialize(BOARD_ZONE.WORKEDIT, out ret.b);
             CopyWorkData();
-            BoardStatus_WorkArea.activate(BoardStatus_WorkArea.Size, mc.para.mcType.FrRr, BOARD_ZONE.WORKEDIT, (int)mc.para.MT.padCount.x.value, (int)mc.para.MT.padCount.y.value);
+            BoardStatus_WorkArea.activate(BoardStatus_WorkArea.Size, mc.para.mcType.FrRr, BOARD_ZONE.WORKEDIT, (int)mc.para.MT.padCount.x.value, (int)mc.para.MT.padCount.y.value, indexX, indexY);
 			EVENT.boardStatus(BOARD_ZONE.WORKEDIT, mc.board.padStatus(BOARD_ZONE.WORKEDIT), (int)mc.para.MT.padCount.x.value, (int)mc.para.MT.padCount.y.value);
+
+            BT_Move.Enabled = true;
+            BT_ReWork.Enabled = true;
+            BT_Repress.Enabled = true;
+
+            EVENT.boardEdit(BOARD_ZONE.WORKEDIT, true);
+
             refresh();
         }
 
@@ -253,15 +281,15 @@ namespace AccessoryLibrary
             if (sender.Equals(BT_Move))
             {
                 ff.SetDisplayItems(DIAG_SEL_MODE.YesNoCancel, DIAG_ICON_MODE.QUESTION, "Do you want to move to PAD("
-                    + (indexRow + 1).ToString() + ", " + (indexColumn + 1).ToString() + ")?");
+                    + (indexX + 1).ToString() + ", " + (indexY + 1).ToString() + ")?");
 			    ff.ShowDialog();
 			    ret.usrDialog = FormUserMessage.diagResult;
 			    if (ret.usrDialog == DIAG_RESULT.Yes)
                 {
                     windowState = true;
                     EVENT.hWindowLargeDisplay(mc.hdc.cam.acq.grabber.cameraNumber);
-                    posX = mc.hd.tool.cPos.x.PAD(indexRow);
-                    posY = mc.hd.tool.cPos.y.PAD(indexColumn);
+                    posX = mc.hd.tool.cPos.x.PAD(indexX);
+                    posY = mc.hd.tool.cPos.y.PAD(indexY);
                     mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
                     mc.hdc.LIVE = true; mc.idle(300); mc.hdc.LIVE = false;
                 }
@@ -269,27 +297,27 @@ namespace AccessoryLibrary
             else if (sender.Equals(BT_Repress))
             {
                 ff.SetDisplayItems(DIAG_SEL_MODE.YesNoCancel, DIAG_ICON_MODE.QUESTION, "Do you want to Repress to PAD("
-                    + (indexRow + 1).ToString() + ", " + (indexColumn + 1).ToString() + ")?");
+                    + (indexX + 1).ToString() + ", " + (indexY + 1).ToString() + ")?");
                 ff.ShowDialog();
                 ret.usrDialog = FormUserMessage.diagResult;
                 {
                     if (windowState) EVENT.hWindow2Display();
-                    mc.para.mmiOption.manualPadX = indexRow;
-                    mc.para.mmiOption.manualPadY = indexColumn;
+                    mc.para.mmiOption.manualPadX = indexX;
+                    mc.para.mmiOption.manualPadY = indexY;
                     mc.hd.req = true; mc.hd.reqMode = REQMODE.PRESS;
                 }
             }
             else if (sender.Equals(BT_ReWork))
             {
                 ff.SetDisplayItems(DIAG_SEL_MODE.YesNoCancel, DIAG_ICON_MODE.QUESTION, "Do you want to Attach to PAD("
-                    + (indexRow + 1).ToString() + ", " + (indexColumn + 1).ToString() + ")?");
+                    + (indexX + 1).ToString() + ", " + (indexY + 1).ToString() + ")?");
                 ff.ShowDialog();
                 ret.usrDialog = FormUserMessage.diagResult;
                 {
                     if (windowState) EVENT.hWindow2Display();
                     mc.para.mmiOption.manualSingleMode = true;
-                    mc.para.mmiOption.manualPadX = indexRow;
-                    mc.para.mmiOption.manualPadY = indexColumn;
+                    mc.para.mmiOption.manualPadX = indexX;
+                    mc.para.mmiOption.manualPadY = indexY;
                     mc.hd.req = true; mc.hd.reqMode = REQMODE.SINGLE;
                 }
             }
@@ -302,7 +330,7 @@ namespace AccessoryLibrary
             mc.para.mmiOption.manualSingleMode = false;
 
 			// update current information
-			mc.board.padStatus(BOARD_ZONE.WORKEDIT, indexRow, indexColumn, mc.board.padStatus(BOARD_ZONE.WORKING, indexRow, indexColumn), out ret.b);
+			mc.board.padStatus(BOARD_ZONE.WORKEDIT, indexX, indexY, mc.board.padStatus(BOARD_ZONE.WORKING, indexX, indexY), out ret.b);
 			mc.check.push(sender, false);
 		}
 	}

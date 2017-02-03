@@ -48,6 +48,7 @@
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.Name = "BoardStatus";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.BoardStatus_Paint);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.BoardStatus_MouseClick);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BoardStatus_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BoardStatus_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BoardStatus_MouseUp);

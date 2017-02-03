@@ -421,32 +421,41 @@ namespace PSA_Application
 				// Kenny Check..2013-07-17 기껏 읽어놓고 초기화는 왜 한다냐?
 				//bool b;
 				//mc.board.initialize(out b);
-				
-				if (zone == BOARD_ZONE.LOADING)
-					BoardStatus_LoadingZone.activate(mc.para.mcType.FrRr, BOARD_ZONE.LOADING, (int)mc.para.MT.padCount.x.value, (int)mc.para.MT.padCount.y.value);
-				if (zone == BOARD_ZONE.WORKING)
-					BoardStatus_WorkingZone.activate(mc.para.mcType.FrRr, BOARD_ZONE.WORKING, (int)mc.para.MT.padCount.x.value, (int)mc.para.MT.padCount.y.value);
+
+                if (zone == BOARD_ZONE.LOADING)
+                {
+                    BoardStatus_LoadingZone.activate(BoardStatus_WorkingZone.Size, mc.para.mcType.FrRr, BOARD_ZONE.LOADING, (int)mc.para.MT.padCount.x.value, (int)mc.para.MT.padCount.y.value);
+                }
+                if (zone == BOARD_ZONE.WORKING)
+                {
+                    //BoardStatus_WorkingZone.activate(mc.para.mcType.FrRr, BOARD_ZONE.WORKING, (int)mc.para.MT.padCount.x.value, (int)mc.para.MT.padCount.y.value);
+                    BoardStatus_WorkingZone.activate(BoardStatus_WorkingZone.Size, mc.para.mcType.FrRr, BOARD_ZONE.WORKING, (int)mc.para.MT.padCount.x.value, (int)mc.para.MT.padCount.y.value);
+
+                }
 				if (zone == BOARD_ZONE.UNLOADING)
-					BoardStatus_UnloadingZone.activate(mc.para.mcType.FrRr, BOARD_ZONE.UNLOADING, (int)mc.para.MT.padCount.x.value, (int)mc.para.MT.padCount.y.value);
+                    BoardStatus_UnloadingZone.activate(BoardStatus_UnloadingZone.Size, mc.para.mcType.FrRr, BOARD_ZONE.UNLOADING, (int)mc.para.MT.padCount.x.value, (int)mc.para.MT.padCount.y.value);
 			}
 		}
 
 		FormTrayEdit ff;
-		delegate void padChange_Call(BOARD_ZONE zone, int x, int y);
-		void padChange(BOARD_ZONE zone, int x, int y)
+		delegate void padChange_Call(BOARD_ZONE zone, int x, int y, bool drag);
+        void padChange(BOARD_ZONE zone, int x, int y, bool drag)
 		{
 			if (this.InvokeRequired)
 			{
 				padChange_Call d = new padChange_Call(padChange);
-				this.BeginInvoke(d, new object[] { zone, x, y });
+				this.BeginInvoke(d, new object[] { zone, x, y, drag });
 			}
 			else
 			{
 				if (FormTrayEdit.IsDisplayed)
 				{
-					ff.UpdateSelectedPad(x, y);
-					ff.indexRow = x;
-					ff.indexColumn = y;
+                    if (!drag)
+                    {
+                        ff.indexX = x;
+                        ff.indexY = y;
+                    }
+                    ff.UpdateSelectedPad(x, y);
 					ff.TopLevel = true;
 					ff.BringToFront();
 					ff.refresh();
@@ -454,8 +463,9 @@ namespace PSA_Application
 				else
 				{
 					ff = new FormTrayEdit();
-					ff.indexRow = x;
-					ff.indexColumn = y;
+					ff.indexX = x;
+					ff.indexY = y;
+                    ff.UpdateSelectedPad(x, y);
 					ff.TopLevel = true;
 					ff.Show();
 				}
@@ -550,30 +560,16 @@ namespace PSA_Application
             EVENT.boardStatus(BOARD_ZONE.LOADING, mc.board.padStatus(BOARD_ZONE.LOADING), (int)mc.para.MT.padCount.x.value, (int)mc.para.MT.padCount.y.value);
 			EVENT.boardStatus(BOARD_ZONE.WORKING, mc.board.padStatus(BOARD_ZONE.WORKING), (int)mc.para.MT.padCount.x.value, (int)mc.para.MT.padCount.y.value);
 			EVENT.boardStatus(BOARD_ZONE.UNLOADING, mc.board.padStatus(BOARD_ZONE.UNLOADING), (int)mc.para.MT.padCount.x.value, (int)mc.para.MT.padCount.y.value);
-
+            
+            BoardStatus_LoadingZone.Visible = false;
+            BoardStatus_WorkingZone.Visible = false;
+            BoardStatus_UnloadingZone.Visible = false;
+            
             TB_PROD_Work_PreForce.ForeColor = Color.RoyalBlue;
             TB_PROD_Work_PostForce.ForeColor = Color.RoyalBlue;
 
             mc.commMPC.WorkData.receipeName = Path.GetFileNameWithoutExtension(mc.para.ETC.recipeName.description);
             mc.commMPC.WorkData.recipePath = Path.GetDirectoryName(mc.para.ETC.recipeName.description);
-		}
-
-		private void Control_Click(object sender, MouseEventArgs e)
-		{
-			if (sender.Equals(BoardStatus_WorkingZone))
-			{
-				FormBoardStatusEdit ff = new FormBoardStatusEdit();
-				ff.ShowDialog();
-			}
-		}
-
-		private void Control_Click(object sender, EventArgs e)
-		{
-			if (sender.Equals(BoardStatus_WorkingZone))
-			{
-				FormBoardStatusEdit ff = new FormBoardStatusEdit();
-				ff.ShowDialog();
-			}
 		}
 
 		private void CL_Timer_Tick(object sender, EventArgs e)

@@ -249,12 +249,16 @@ namespace PSA_Application
             else if (splitterModeUp == SPLITTER_MODE.EXPAND) splitterTargetUp = (int)SPLITTER_MODE.EXPAND;
             else splitterTargetUp = splitterCurrentUp;
 
-            if (splitterModeCenter == SPLITTER_MODE.NORMAL) splitterTargetCenter = (int)SPLITTER_MODE.NORMAL;
+            if (splitterModeCenter == SPLITTER_MODE.NORMAL)
+            {
+                splitterTargetCenter = (int)SPLITTER_MODE.NORMAL;
+                EVENT.refresh();
+            }
             else if (splitterModeCenter == SPLITTER_MODE.EXPAND)
             {
                 splitterTargetCenter = (int)SPLITTER_MODE.EXPAND;
                 mc.user.logInDone = false;
-                EVENT.refresh();
+                //EVENT.refresh();
             }
             else splitterTargetCenter = splitterCurrentCenter;
 

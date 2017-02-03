@@ -790,7 +790,9 @@ namespace DefineLibrary
 
         public delegate void InsertHandler_boardEdit(BOARD_ZONE boardZone, bool enable);
 
-        public delegate void InsertHandler_padChange(BOARD_ZONE boardZone, int x, int y);
+        public delegate void InsertHandler_padChange(BOARD_ZONE boardZone, int x, int y, bool drag);
+        
+        public delegate void InsertHandler_padChange2(BOARD_ZONE boardZone, int x, int y);
 
 		public delegate void InsertHandler_tubeChange();
 
@@ -1041,13 +1043,22 @@ namespace DefineLibrary
 		}
 
 		public static event InsertHandler_padChange onAdd_padChange;
-		public static void padChange(BOARD_ZONE boardZone, int x, int y)
+        public static void padChange(BOARD_ZONE boardZone, int x, int y, bool drag)
 		{
 			if (onAdd_padChange != null)
 			{
-				onAdd_padChange(boardZone, x, y);
+				onAdd_padChange(boardZone, x, y, drag);
 			}
 		}
+
+        public static event InsertHandler_padChange2 onAdd_padChange2;
+        public static void padChange2(BOARD_ZONE boardZone, int x, int y)
+        {
+            if (onAdd_padChange2 != null)
+            {
+                onAdd_padChange2(boardZone, x, y);
+            }
+        }
 
 		public static event InsertHandler_tubeChange onAdd_tubeChange;
 		public static void tubeChange()

@@ -60,10 +60,10 @@ namespace PSA_Application
 					EVENT.boardActivate(BOARD_ZONE.WORKING, (int)mc.para.MT.padCount.x.value, (int)mc.para.MT.padCount.y.value);
 					EVENT.boardActivate(BOARD_ZONE.UNLOADING, (int)mc.para.MT.padCount.x.value, (int)mc.para.MT.padCount.y.value);
 
-					mc.board.reject(BOARD_ZONE.LOADING, out ret.b);
-					mc.board.reject(BOARD_ZONE.WORKING, out ret.b);
-					mc.board.reject(BOARD_ZONE.WORKEDIT, out ret.b);
-					mc.board.reject(BOARD_ZONE.UNLOADING, out ret.b);
+                    mc.board.reject(BOARD_ZONE.LOADING, out ret.b);
+                    mc.board.reject(BOARD_ZONE.WORKING, out ret.b);
+                    mc.board.reject(BOARD_ZONE.WORKEDIT, out ret.b);
+                    mc.board.reject(BOARD_ZONE.UNLOADING, out ret.b);
 
 					EVENT.boardStatus(BOARD_ZONE.LOADING, mc.board.padStatus(BOARD_ZONE.LOADING), (int)mc.para.MT.padCount.x.value, (int)mc.para.MT.padCount.y.value);
 					EVENT.boardStatus(BOARD_ZONE.WORKING, mc.board.padStatus(BOARD_ZONE.WORKING), (int)mc.para.MT.padCount.x.value, (int)mc.para.MT.padCount.y.value);

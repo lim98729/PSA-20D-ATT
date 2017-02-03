@@ -296,7 +296,7 @@ namespace AccessoryLibrary
                 btnArray[x, y].Text = "S";
             }
 
-            EVENT.padChange(boardZone, x, y);
+            EVENT.padChange(boardZone, x, y, false);
 
             //if (boardZone == BOARD_ZONE.WORKING) EVENT.padStatusWorkingZone(x, y, PAD_STATUS.READY);
             //if (boardZone == BOARD_ZONE.LOADING) EVENT.padStatusLoadingZone(x, y, PAD_STATUS.READY);

@@ -106,10 +106,10 @@
             this.LB_OutbufConv = new System.Windows.Forms.Label();
             this.LB_TubeStatus = new System.Windows.Forms.Label();
             this.CL_Timer = new System.Windows.Forms.Timer(this.components);
-            this.BoardStatus_UnloadingZone = new AccessoryLibrary.UserControlBoardStatus();
-            this.BoardStatus_LoadingZone = new AccessoryLibrary.UserControlBoardStatus();
-            this.BoardStatus_WorkingZone = new AccessoryLibrary.UserControlBoardStatus();
             this.hWindow = new HalconLibrary.hWindow();
+            this.BoardStatus_WorkingZone = new AccessoryLibrary.BoardStatus();
+            this.BoardStatus_LoadingZone = new AccessoryLibrary.BoardStatus();
+            this.BoardStatus_UnloadingZone = new AccessoryLibrary.BoardStatus();
             this.stackFeederStatus = new PSA_Application.StackFeederStatus();
             this.TC_.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -1019,36 +1019,6 @@
             this.CL_Timer.Interval = 500;
             this.CL_Timer.Tick += new System.EventHandler(this.CL_Timer_Tick);
             // 
-            // BoardStatus_UnloadingZone
-            // 
-            this.BoardStatus_UnloadingZone.Location = new System.Drawing.Point(304, 313);
-            this.BoardStatus_UnloadingZone.Margin = new System.Windows.Forms.Padding(2);
-            this.BoardStatus_UnloadingZone.Name = "BoardStatus_UnloadingZone";
-            this.BoardStatus_UnloadingZone.Size = new System.Drawing.Size(295, 120);
-            this.BoardStatus_UnloadingZone.TabIndex = 6;
-            this.BoardStatus_UnloadingZone.Visible = false;
-            // 
-            // BoardStatus_LoadingZone
-            // 
-            this.BoardStatus_LoadingZone.Location = new System.Drawing.Point(304, 25);
-            this.BoardStatus_LoadingZone.Margin = new System.Windows.Forms.Padding(2);
-            this.BoardStatus_LoadingZone.Name = "BoardStatus_LoadingZone";
-            this.BoardStatus_LoadingZone.Size = new System.Drawing.Size(295, 120);
-            this.BoardStatus_LoadingZone.TabIndex = 5;
-            this.BoardStatus_LoadingZone.Visible = false;
-            // 
-            // BoardStatus_WorkingZone
-            // 
-            this.BoardStatus_WorkingZone.Location = new System.Drawing.Point(304, 169);
-            this.BoardStatus_WorkingZone.Margin = new System.Windows.Forms.Padding(2);
-            this.BoardStatus_WorkingZone.Name = "BoardStatus_WorkingZone";
-            this.BoardStatus_WorkingZone.Size = new System.Drawing.Size(295, 120);
-            this.BoardStatus_WorkingZone.TabIndex = 4;
-            this.BoardStatus_WorkingZone.Visible = false;
-            this.BoardStatus_WorkingZone.ClientSizeChanged += new System.EventHandler(this.BoardStatus_WorkingZone_ClientSizeChanged);
-            this.BoardStatus_WorkingZone.Click += new System.EventHandler(this.Control_Click);
-            this.BoardStatus_WorkingZone.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Control_Click);
-            // 
             // hWindow
             // 
             this.hWindow.ADVANCE_MODE = false;
@@ -1059,6 +1029,30 @@
             this.hWindow.Size = new System.Drawing.Size(300, 554);
             this.hWindow.TabIndex = 0;
             this.hWindow.Click += new System.EventHandler(this.hWindow_Click);
+            // 
+            // BoardStatus_WorkingZone
+            // 
+            this.BoardStatus_WorkingZone.BackColor = System.Drawing.Color.Gainsboro;
+            this.BoardStatus_WorkingZone.Location = new System.Drawing.Point(304, 170);
+            this.BoardStatus_WorkingZone.Name = "BoardStatus_WorkingZone";
+            this.BoardStatus_WorkingZone.Size = new System.Drawing.Size(295, 120);
+            this.BoardStatus_WorkingZone.TabIndex = 19;
+            // 
+            // BoardStatus_LoadingZone
+            // 
+            this.BoardStatus_LoadingZone.BackColor = System.Drawing.Color.Gainsboro;
+            this.BoardStatus_LoadingZone.Location = new System.Drawing.Point(304, 24);
+            this.BoardStatus_LoadingZone.Name = "BoardStatus_LoadingZone";
+            this.BoardStatus_LoadingZone.Size = new System.Drawing.Size(295, 120);
+            this.BoardStatus_LoadingZone.TabIndex = 20;
+            // 
+            // BoardStatus_UnloadingZone
+            // 
+            this.BoardStatus_UnloadingZone.BackColor = System.Drawing.Color.Gainsboro;
+            this.BoardStatus_UnloadingZone.Location = new System.Drawing.Point(304, 313);
+            this.BoardStatus_UnloadingZone.Name = "BoardStatus_UnloadingZone";
+            this.BoardStatus_UnloadingZone.Size = new System.Drawing.Size(295, 120);
+            this.BoardStatus_UnloadingZone.TabIndex = 21;
             // 
             // stackFeederStatus
             // 
@@ -1076,6 +1070,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
+            this.Controls.Add(this.BoardStatus_UnloadingZone);
+            this.Controls.Add(this.BoardStatus_LoadingZone);
+            this.Controls.Add(this.BoardStatus_WorkingZone);
             this.Controls.Add(this.BT_hWindowAdvanceMode);
             this.Controls.Add(this.LB_TubeStatus);
             this.Controls.Add(this.LB_OutbufConv);
@@ -1083,9 +1080,6 @@
             this.Controls.Add(this.LB_InbufConv);
             this.Controls.Add(this.TC_);
             this.Controls.Add(this.stackFeederStatus);
-            this.Controls.Add(this.BoardStatus_UnloadingZone);
-            this.Controls.Add(this.BoardStatus_LoadingZone);
-            this.Controls.Add(this.BoardStatus_WorkingZone);
             this.Controls.Add(this.hWindow);
             this.Font = new System.Drawing.Font("Arial", 8.25F);
             this.Name = "CenterLeft";
@@ -1115,9 +1109,6 @@
 
         private HalconLibrary.hWindow hWindow;
         private System.Windows.Forms.Button BT_hWindowAdvanceMode;
-        private AccessoryLibrary.UserControlBoardStatus BoardStatus_WorkingZone;
-        private AccessoryLibrary.UserControlBoardStatus BoardStatus_LoadingZone;
-        private AccessoryLibrary.UserControlBoardStatus BoardStatus_UnloadingZone;
         private StackFeederStatus stackFeederStatus;
         private System.Windows.Forms.TabControl TC_;
         private System.Windows.Forms.TabPage tabPage2;
@@ -1195,6 +1186,9 @@
 		public System.Windows.Forms.TextBox TB_PROD_Work_ULC_Score;
 		private System.Windows.Forms.Label label13;
         public System.Windows.Forms.TextBox TB_PROD_Today_TrayCountLimit;
+        private AccessoryLibrary.BoardStatus BoardStatus_WorkingZone;
+        private AccessoryLibrary.BoardStatus BoardStatus_LoadingZone;
+        private AccessoryLibrary.BoardStatus BoardStatus_UnloadingZone;
         //private AccessoryLibrary.UserControlBoardStatus BoardStatusWorkZone;
     }
 }
