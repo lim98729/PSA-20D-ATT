@@ -9112,7 +9112,7 @@ namespace PSA_SystemLibrary
 
                 #region case 200 xy padCenter
                 case 200:
-                    if (mc.para.EPOXY.useCheck.value == (int)ON_OFF.OFF) { sqc = 1; break; }
+                    if (mc.para.EPOXY.useCheck.value == (int)ON_OFF.OFF || !mc.swcontrol.useCheckEpoxy) { sqc = 1; break; }
                     Z.move(tPos.z.XY_MOVING, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
                     Y.moveCompare(cPos.y.PAD(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
                     X.moveCompare(cPos.x.PAD(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;

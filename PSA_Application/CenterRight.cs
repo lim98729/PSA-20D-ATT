@@ -668,6 +668,11 @@ namespace PSA_Application
             {
                 BT_Parameter_HeatSlug.Visible = false;
             }
+
+            if (!mc.swcontrol.useCheckEpoxy)
+            {
+                BT_Parameter_CheckEpoxy.Visible = false;
+            }
         }
     }
 }

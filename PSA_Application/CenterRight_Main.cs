@@ -674,7 +674,7 @@ namespace PSA_Application
 				mc.swcontrol.logSave = 180;
 			else
 				mc.swcontrol.logSave = 365;
-			mc.swcontrol.wrtieconfig();
+			mc.swcontrol.writeETCConfig();
 			mc.check.push(sender, false);
 		}
 

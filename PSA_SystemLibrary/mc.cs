@@ -110,10 +110,6 @@ namespace PSA_SystemLibrary
 
         public static ClassCommMPC commMPC = new ClassCommMPC();
 
-//         public static ClassChangeLanguage loc = new ClassChangeLanguage();
-        
-        // 20140618 ( classStart 선언 
-        
         public static bool deactivate(out string r)
         {
             board.deActivate(out ret.b); if (!ret.b) { r = "board.deActivate : fail"; return false; }
@@ -1325,7 +1321,6 @@ namespace PSA_SystemLibrary
                     }
                 }
             }
-
 
             public static bool req;
             public static int  Esqc;
@@ -4439,7 +4434,7 @@ namespace PSA_SystemLibrary
             public static bool noUseCompPickPosition;
             public static int hwCheckSkip;			// Bit0:Main Air Check, Bit1:Stand-Alone Machine
             public static int removeConveyor;		// Conveyor Homing Skip이 On되어 있는 상태에서 아예 Conveyor Width축에 전원도 인가하지 않음.
-            public static int mechanicalRevision;	// 0:Samsung(SF8ea), 1:ChipPAC(SF4ea:Sensor는 1,2,5,6사용, Loadcell)
+            
             public static int setupMode;	// Graph Display Start Point. 0:from Z Down Start, 1:from 2nd search Start
             //public static int useHwTriger;		// hwTriger 사용 유무
             public static double forceMeanOffset;
@@ -4447,18 +4442,47 @@ namespace PSA_SystemLibrary
 
             // 20140612 
             public static int logSave;
-            public static bool useDoorControl;
-
-            // 암코 버전
+            
+            // SW 기능 옵션
+            public static int mechanicalRevision;	// 0:Samsung(SF8ea), 1:ChipPAC(SF4ea:Sensor는 1,2,5,6사용, Loadcell)
             public static int useUnloaderBuffer;
             public static bool useCheckLidAlign;
             public static bool useCheckAttachTilt;
+            public static bool useCheckEpoxy;
+            public static bool useDoorControl;
+
 
             //static string filename = Environment.CurrentDirectory + "\\PSA.INI";
             static string filename = "C:\\PROTEC\\DATA\\PSA.INI";
             static iniUtil swconfig = new iniUtil(filename);
 
             public static void readconfig()
+            {
+                readETCConfig();
+                readSWConfig();
+
+                dev.NotExistHW.ZMP = nousemotion;
+                dev.NotExistHW.AXT = nouseio;
+                dev.NotExistHW.CAMERA = nousecamera;
+                dev.NotExistHW.LIGHTING = nouselight;
+                dev.NotExistHW.LOADCELL = nouselight;
+                dev.NotExistHW.TOUCHPROBE = nousetouchprobe;
+
+
+                // Simulation Mode
+                if (UtilityControl.simulation)
+                {
+                    dev.debug = true;
+                    dev.NotExistHW.ZMP = true;
+                    dev.NotExistHW.AXT = true;
+                    dev.NotExistHW.CAMERA = true;
+                    dev.NotExistHW.LIGHTING = true;
+                    dev.NotExistHW.LOADCELL = true;
+                    dev.NotExistHW.TOUCHPROBE = true;
+                }
+            }
+
+            public static void readETCConfig()
             {
                 swconfig.sectionName = "SWControl";
 
@@ -4512,13 +4536,6 @@ namespace PSA_SystemLibrary
                 }
                 else removeConveyor = temp;
 
-                temp = swconfig.GetInt("MechanicalRevision", 0);
-                if (temp < 0 || temp > 1)   // Invalid MechanicalRevision Number
-                {
-                    mechanicalRevision = 0;
-                }
-                else mechanicalRevision = temp;
-
                 temp = swconfig.GetInt("SetUpMode", 0);
                 if (temp < 0 || temp > 1)   // Invalid MechanicalRevision Number
                 {
@@ -4534,23 +4551,6 @@ namespace PSA_SystemLibrary
                 }
                 else logSave = temp;
 
-                // 2016.10.24 - Amkor Unloader 옵션 read INI 부분 추가
-                temp = swconfig.GetInt("useUnloaderBuffer", -1);
-                if (temp == -1) genflag = true;
-                if (temp < 0 || temp > 1)
-                {
-                    useUnloaderBuffer = 0;
-                }
-                else useUnloaderBuffer = temp;
-
-                //temp = swconfig.GetInt("useHwTriger", -1);
-                //if (temp == -1) genflag = true;
-                //if (temp < 0 || temp > 1)   // Invalid useHwTriger Number
-                //{
-                //    useHwTriger = 1;		// default value = 1
-                //}
-                //else useHwTriger = temp;
-
                 tempD = swconfig.GetDouble("forceMeanOffset", -1);
                 if (tempD == -1) genflag = true;
                 if (tempD <= -1 || tempD >= 1)
@@ -4559,41 +4559,9 @@ namespace PSA_SystemLibrary
                 }
                 else forceMeanOffset = tempD;
 
-                temp = swconfig.GetInt("useDoorControl", 2);
-                if (temp == 2) genflag = true;
-                useDoorControl = (temp != 1) ? false : true;
-
                 temp = swconfig.GetInt("noCheckAir", 2);
                 if (temp == 2) genflag = true;
                 noCheckAir = (temp != 1) ? false : true;
-
-                temp = swconfig.GetInt("useCheckLidAlign", 2);
-                if (temp == 2) genflag = true;
-                useCheckLidAlign = (temp != 1) ? false : true;
-
-                temp = swconfig.GetInt("useCheckAttachTilt", 2);
-                if (temp == 2) genflag = true;
-                useCheckAttachTilt = (temp != 1) ? false : true;
-
-                dev.NotExistHW.ZMP = nousemotion;
-                dev.NotExistHW.AXT = nouseio;
-                dev.NotExistHW.CAMERA = nousecamera;
-                dev.NotExistHW.LIGHTING = nouselight;
-                dev.NotExistHW.LOADCELL = nouselight;
-                dev.NotExistHW.TOUCHPROBE = nousetouchprobe;
-
-
-                // Simulation Mode
-                if (UtilityControl.simulation)
-                {
-                    dev.debug = true;
-                    dev.NotExistHW.ZMP = true;
-                    dev.NotExistHW.AXT = true;
-                    dev.NotExistHW.CAMERA = true;
-                    dev.NotExistHW.LIGHTING = true;
-                    dev.NotExistHW.LOADCELL = true;
-                    dev.NotExistHW.TOUCHPROBE = true;
-                }
 
                 if (nousemotion)
                 {
@@ -4620,9 +4588,53 @@ namespace PSA_SystemLibrary
                     dev.NotExistHW.TOUCHPROBE = true;
                 }
 
-                if (genflag) wrtieconfig();
+                if (genflag) writeETCConfig();
             }
-            public static void wrtieconfig()
+
+            public static void readSWConfig()
+            {
+                swconfig.sectionName = "S/W Config";
+
+                int temp;
+                double tempD;
+                bool genflag = false;
+
+                temp = swconfig.GetInt("MechanicalRevision", 0);
+                if (temp < 0 || temp > 1)   // Invalid MechanicalRevision Number
+                {
+                    mechanicalRevision = 0;
+                }
+                else mechanicalRevision = temp;
+
+                // 2016.10.24 - Amkor Unloader 옵션 read INI 부분 추가
+                temp = swconfig.GetInt("useUnloaderBuffer", -1);
+                if (temp == -1) genflag = true;
+                if (temp < 0 || temp > 1)
+                {
+                    useUnloaderBuffer = 0;
+                }
+                else useUnloaderBuffer = temp;
+
+                temp = swconfig.GetInt("useDoorControl", 2);
+                if (temp == 2) genflag = true;
+                useDoorControl = (temp != 1) ? false : true;
+
+                temp = swconfig.GetInt("useCheckLidAlign", 2);
+                if (temp == 2) genflag = true;
+                useCheckLidAlign = (temp != 1) ? false : true;
+
+                temp = swconfig.GetInt("useCheckAttachTilt", 2);
+                if (temp == 2) genflag = true;
+                useCheckAttachTilt = (temp != 1) ? false : true;
+
+                temp = swconfig.GetInt("useCheckEpoxy", 2);
+                if (temp == 2) genflag = true;
+                useCheckEpoxy = (temp != 1) ? false : true;
+
+                if (genflag) writeSWConfig();
+            }
+
+            public static void writeETCConfig()
             {
                 swconfig.sectionName = "SWControl";
 
@@ -4647,27 +4659,37 @@ namespace PSA_SystemLibrary
 
                 swconfig.WriteInt("RemoveConveyor", removeConveyor);
 
-                swconfig.WriteInt("MechanicalRevision", mechanicalRevision);
-
                 // 20140612
                 swconfig.WriteInt("LogSave", logSave);
                 //swconfig.WriteInt("useHwTriger", useHwTriger);
                 swconfig.WriteDouble("forceMeanOffset", forceMeanOffset);
 
-                temp = useDoorControl ? 1 : 0;
-                swconfig.WriteInt("useDoorControl", temp);
                 temp = noCheckAir ? 1 : 0;
                 swconfig.WriteInt("noCheckAir", temp);
+            }
 
+            public static void writeSWConfig()
+            {
+                swconfig.sectionName = "S/W Config";
+
+                int temp;
+
+                swconfig.WriteInt("MechanicalRevision", mechanicalRevision);
+
+                temp = useDoorControl ? 1 : 0;
+                swconfig.WriteInt("useDoorControl", temp);
 
                 // 2016.10.24 - Amkor Unloader 옵션 write INI 부분 추가
                 swconfig.WriteInt("useUnloaderBuffer", useUnloaderBuffer);
-
+                
                 temp = useCheckLidAlign ? 1 : 0;
                 swconfig.WriteInt("useCheckLidAlign", temp);
 
                 temp = useCheckAttachTilt ? 1 : 0;
                 swconfig.WriteInt("useCheckAttachTilt", temp);
+
+                temp = useCheckEpoxy ? 1 : 0;
+                swconfig.WriteInt("useCheckEpoxy", temp);
             }
         }
 

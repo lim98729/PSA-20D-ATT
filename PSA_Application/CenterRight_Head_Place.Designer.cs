@@ -1805,7 +1805,7 @@
             this.BT_PressAfterBonding});
             this.TS_CHECK_ATTACH_TILT.Location = new System.Drawing.Point(362, 224);
             this.TS_CHECK_ATTACH_TILT.Name = "TS_CHECK_ATTACH_TILT";
-            this.TS_CHECK_ATTACH_TILT.Size = new System.Drawing.Size(249, 33);
+            this.TS_CHECK_ATTACH_TILT.Size = new System.Drawing.Size(218, 33);
             this.TS_CHECK_ATTACH_TILT.TabIndex = 115;
             this.TS_CHECK_ATTACH_TILT.Text = "toolStrip15";
             // 
