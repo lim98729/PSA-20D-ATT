@@ -75,6 +75,7 @@ namespace PSA_SystemLibrary
 					if (reqMode == REQMODE.GRAB) { sqc = SQC.GRAB; break; }
 					if (reqMode == REQMODE.FIND_MODEL) { sqc = SQC.FIND_MODEL; break; }
 					if (reqMode == REQMODE.FIND_RECTANGLE) { sqc = SQC.FIND_RECTANGLE; break; }
+                    if (reqMode == REQMODE.FIND_EPOXY) { sqc = SQC.FIND_EPOXY; break; }
 					if (reqMode == REQMODE.FIND_CIRCLE_QUARTER1) { sqc = SQC.FIND_CIRCLE_QUARTER_1; break; }
 					if (reqMode == REQMODE.FIND_CIRCLE_QUARTER2) { sqc = SQC.FIND_CIRCLE_QUARTER_2; break; }
 					if (reqMode == REQMODE.FIND_CIRCLE_QUARTER3) { sqc = SQC.FIND_CIRCLE_QUARTER_3; break; }
@@ -257,6 +258,44 @@ namespace PSA_SystemLibrary
 					#endregion
 					sqc = SQC.STOP; break;
 				#endregion
+
+                #region FIND_RECTANGLE
+                case SQC.FIND_EPOXY:
+                    if (cam.refresh_req) break;
+                    #region grab
+                    if (triggerMode == TRIGGERMODE.SOFTWARE)
+                    {
+                        cam.grabSofrwareTrigger(out ret.message, out ret.s); if (ret.message != RetMessage.OK) { sqc = SQC.GRAB_ERROR; break; }
+                    }
+                    else
+                    {
+                        cam.grab(out ret.message, out ret.s); if (ret.message != RetMessage.OK) { sqc = SQC.GRAB_ERROR; break; }
+                    }
+                    #endregion
+
+                    cam.findBlob(cam.epoxyBlob, mc.para.EPOXY.threshold.value, mc.para.EPOXY.minAreaFilter.value, -1, -1, out ret.message, out ret.s, 0);
+                    if (ret.message != RetMessage.OK)
+                    {
+                        if (unitCode == UnitCode.HDC && (int)mc.para.EPOXY.imageSave.value == 1)
+                        {
+                            cam.writeLogGrabImage("Epoxy_Check_Fail");
+                        }
+                        sqc = SQC.FIND_ERROR;
+                        break;
+                    }
+                    else
+                    {
+                        if (unitCode == UnitCode.HDC && (int)mc.para.EPOXY.imageSave.value == 2)
+                        {
+                            cam.writeLogGrabImage("Epoxy_Check_OK");
+                        }
+                    }
+                    #region refresh
+                    cam.refresh_req = true;
+                    cam.refresh_reqMode = REFRESH_REQMODE.FIND_EPOXY;
+                    #endregion
+                    sqc = SQC.STOP; break;
+                #endregion
 
 				#region FIND_RECTANGLE_HS
 				case SQC.FIND_RECTANGLE_HS:
@@ -991,5 +1030,54 @@ namespace PSA_SystemLibrary
                 mc.hdc.cam.model[(int)HDC_MODEL.HEATSLUG_PADC4_SHAPE].delete();
             }
 		}
+
+        public void EpoxyAmountJugement(out RetMessage retMessage, out string errorMessage)
+        {
+            double tempamount;
+            int i, areaCount;
+
+            try
+            {
+                //갯수 검사
+                for (i = 0; i < (int)MAX_COUNT.BLOB; i++)
+                {
+                    if (mc.hdc.cam.epoxyBlob[i].isCreate != "true") continue;
+
+                    areaCount = mc.hdc.cam.epoxyBlob[i].resultArea.TupleLength();
+
+                    if (areaCount > 1)
+                    {
+                        retMessage = RetMessage.FIND_EPOXY_ERROR;
+                        errorMessage = "Epoxy Find Error";
+                        return;
+                    }
+
+                    tempamount = mc.hdc.cam.epoxyBlob[i].resultArea.D / mc.para.EPOXY.baseAmount[i].value * 100;
+                    mc.log.debug.write(mc.log.CODE.INFO, "Epoxy Amount Result : " + Math.Round(tempamount, 1) + "%");
+                     
+                    if (tempamount < mc.para.EPOXY.rateMin.value)
+                    {
+                        retMessage = RetMessage.FIND_EPOXY_ERROR;
+                        errorMessage = "Epoxy Underflow";
+                        return;
+                    }
+                    if (tempamount > mc.para.EPOXY.rateMax.value)
+                    {
+                        retMessage = RetMessage.FIND_EPOXY_ERROR;
+                        errorMessage = "Epoxy Overflow";
+                        return;
+                    }
+                }
+
+                retMessage = RetMessage.OK;
+                errorMessage = "";
+            }
+            catch
+            {
+                retMessage = RetMessage.FIND_EPOXY_ERROR;
+                errorMessage = "Epoxy Find Error";
+                return;
+            }
+        }
 	}
 }

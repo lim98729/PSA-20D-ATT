@@ -1123,7 +1123,7 @@ namespace HalconLibrary
 			#region ModelNum
 			CbB_ModelNum.Items.Clear();
 			int lastModelNum = -1;
-			for (int i = 0; i < hVision.cam1.MODEL_MAX_CNT; i++)
+			for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 			{
 				if (hVision.cam1.model[i].isCreate == "true")
 				{
@@ -1393,7 +1393,7 @@ namespace HalconLibrary
 			#region ModelNum
 			CbB_ModelNum.Items.Clear();
 			int lastModelNum = -1;
-			for (int i = 0; i < hVision.cam2.MODEL_MAX_CNT; i++)
+			for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 			{
 				if (hVision.cam2.model[i].isCreate == "true")
 				{
@@ -1663,7 +1663,7 @@ namespace HalconLibrary
 			#region ModelNum
 			CbB_ModelNum.Items.Clear();
 			int lastModelNum = -1;
-			for (int i = 0; i < hVision.cam3.MODEL_MAX_CNT; i++)
+			for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 			{
 				if (hVision.cam3.model[i].isCreate == "true")
 				{
@@ -1933,7 +1933,7 @@ namespace HalconLibrary
 			#region ModelNum
 			CbB_ModelNum.Items.Clear();
 			int lastModelNum = -1;
-			for (int i = 0; i < hVision.cam4.MODEL_MAX_CNT; i++)
+			for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 			{
 				if (hVision.cam4.model[i].isCreate == "true")
 				{
@@ -2887,6 +2887,8 @@ namespace HalconLibrary
 							hVision.cam1.refreshCircleCenter();
 						if (hVision.cam1.refresh_reqMode == REFRESH_REQMODE.RECTANGLE_CENTER)
 							hVision.cam1.refreshRectangleCenter();
+                        if (hVision.cam1.refresh_reqMode == REFRESH_REQMODE.FIND_EPOXY)
+                            hVision.cam1.refreshFindBlob();
 						if (hVision.cam1.refresh_reqMode == REFRESH_REQMODE.CENTER_CROSS)
 							hVision.cam1.refreshCenterCross();
 						if (hVision.cam1.refresh_reqMode == REFRESH_REQMODE.CALIBRATION)
@@ -3002,7 +3004,7 @@ namespace HalconLibrary
 		{
 			if (hVision.cam1.isActivate)
 			{
-				for (int i = 0; i < hVision.cam1.MODEL_MAX_CNT; i++)
+				for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 				{
 					if (hVision.cam1.model[i].isCreate == "false")
 					{
@@ -3013,7 +3015,7 @@ namespace HalconLibrary
 			}
 			if (hVision.cam2.isActivate)
 			{
-				for (int i = 0; i < hVision.cam2.MODEL_MAX_CNT; i++)
+				for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 				{
 					if (hVision.cam2.model[i].isCreate == "false")
 					{
@@ -3024,7 +3026,7 @@ namespace HalconLibrary
 			}
 			if (hVision.cam3.isActivate)
 			{
-				for (int i = 0; i < hVision.cam3.MODEL_MAX_CNT; i++)
+				for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 				{
 					if (hVision.cam3.model[i].isCreate == "false")
 					{
@@ -3035,7 +3037,7 @@ namespace HalconLibrary
 			}
 			if (hVision.cam4.isActivate)
 			{
-				for (int i = 0; i < hVision.cam4.MODEL_MAX_CNT; i++)
+				for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 				{
 					if (hVision.cam4.model[i].isCreate == "false")
 					{
@@ -3235,7 +3237,7 @@ namespace HalconLibrary
 				hWindowLargeDisplay(1);
 				if (!hVision.cam1.isActivate) goto EXIT;
 				hVision.cam1.still();
-				for (int i = 0; i < hVision.cam1.MODEL_MAX_CNT; i++)
+				for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 				{
 					if (hVision.cam1.model[i].isCreate == "false")
 					{
@@ -3249,7 +3251,7 @@ namespace HalconLibrary
 				hWindowLargeDisplay(2);
 				if (!hVision.cam2.isActivate) goto EXIT;
 				hVision.cam2.still();
-				for (int i = 0; i < hVision.cam2.MODEL_MAX_CNT; i++)
+				for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 				{
 					if (hVision.cam2.model[i].isCreate == "false")
 					{
@@ -3263,7 +3265,7 @@ namespace HalconLibrary
 				hWindowLargeDisplay(3);
 				if (!hVision.cam3.isActivate) goto EXIT;
 				hVision.cam3.still();
-				for (int i = 0; i < hVision.cam3.MODEL_MAX_CNT; i++)
+				for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 				{
 					if (hVision.cam3.model[i].isCreate == "false")
 					{
@@ -3277,7 +3279,7 @@ namespace HalconLibrary
 				hWindowLargeDisplay(4);
 				if (!hVision.cam4.isActivate) goto EXIT;
 				hVision.cam4.still();
-				for (int i = 0; i < hVision.cam4.MODEL_MAX_CNT; i++)
+				for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 				{
 					if (hVision.cam4.model[i].isCreate == "false")
 					{
@@ -3294,7 +3296,7 @@ namespace HalconLibrary
 				if (!hVision.cam1.isActivate) goto EXIT;
 				hWindowLargeDisplay(1);
 				hVision.cam1.grab();
-				for (int i = 0; i < hVision.cam1.MODEL_MAX_CNT; i++)
+				for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 				{
 					if (hVision.cam1.model[i].isCreate == "true")
 					{
@@ -3318,7 +3320,7 @@ namespace HalconLibrary
 				if (!hVision.cam2.isActivate) goto EXIT;
 				hWindowLargeDisplay(2);
 				hVision.cam2.grab();
-				for (int i = 0; i < hVision.cam2.MODEL_MAX_CNT; i++)
+				for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 				{
 					if (hVision.cam2.model[i].isCreate == "true")
 					{
@@ -3342,7 +3344,7 @@ namespace HalconLibrary
 				if (!hVision.cam3.isActivate) goto EXIT;
 				hWindowLargeDisplay(3);
 				hVision.cam3.grab();
-				for (int i = 0; i < hVision.cam3.MODEL_MAX_CNT; i++)
+				for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 				{
 					if (hVision.cam3.model[i].isCreate == "true")
 					{
@@ -3366,7 +3368,7 @@ namespace HalconLibrary
 				if (!hVision.cam4.isActivate) goto EXIT;
 				hWindowLargeDisplay(4);
 				hVision.cam4.grab();
-				for (int i = 0; i < hVision.cam4.MODEL_MAX_CNT; i++)
+				for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 				{
 					if (hVision.cam4.model[i].isCreate == "true")
 					{
@@ -3702,7 +3704,7 @@ namespace HalconLibrary
 			{
 				if (CB_AlgorismShapeCam1.Checked)
 				{
-					for (int i = 0; i < hVision.cam1.MODEL_MAX_CNT; i++)
+					for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 					{
 						if (hVision.cam1.model[i].isCreate == "false")
 						{
@@ -3714,7 +3716,7 @@ namespace HalconLibrary
 				}
 				else
 				{
-					for (int i = 0; i < hVision.cam1.MODEL_MAX_CNT; i++)
+					for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 					{
 						if (hVision.cam1.model[i].isCreate == "false")
 						{
@@ -3729,7 +3731,7 @@ namespace HalconLibrary
 			{
 				if (CB_AlgorismShapeCam2.Checked)
 				{
-					for (int i = 0; i < hVision.cam2.MODEL_MAX_CNT; i++)
+					for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 					{
 						if (hVision.cam2.model[i].isCreate == "false")
 						{
@@ -3741,7 +3743,7 @@ namespace HalconLibrary
 				}
 				else
 				{
-					for (int i = 0; i < hVision.cam2.MODEL_MAX_CNT; i++)
+					for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 					{
 						if (hVision.cam2.model[i].isCreate == "false")
 						{
@@ -3756,7 +3758,7 @@ namespace HalconLibrary
 			{
 				if (CB_AlgorismShapeCam3.Checked)
 				{
-					for (int i = 0; i < hVision.cam3.MODEL_MAX_CNT; i++)
+					for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 					{
 						if (hVision.cam3.model[i].isCreate == "false")
 						{
@@ -3768,7 +3770,7 @@ namespace HalconLibrary
 				}
 				else
 				{
-					for (int i = 0; i < hVision.cam3.MODEL_MAX_CNT; i++)
+					for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 					{
 						if (hVision.cam3.model[i].isCreate == "false")
 						{
@@ -3783,7 +3785,7 @@ namespace HalconLibrary
 			{
 				if (CB_AlgorismShapeCam4.Checked)
 				{
-					for (int i = 0; i < hVision.cam4.MODEL_MAX_CNT; i++)
+					for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 					{
 						if (hVision.cam4.model[i].isCreate == "false")
 						{
@@ -3795,7 +3797,7 @@ namespace HalconLibrary
 				}
 				else
 				{
-					for (int i = 0; i < hVision.cam4.MODEL_MAX_CNT; i++)
+					for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 					{
 						if (hVision.cam4.model[i].isCreate == "false")
 						{

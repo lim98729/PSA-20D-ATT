@@ -3200,6 +3200,308 @@ namespace PSA_SystemLibrary
 		}
 	}
 
+    public class halconBlobParameter
+    {
+        RetValue ret;
+        public UnitCode unitCode;
+
+        public para_member useCheck = new para_member();
+        public para_member exposureTime = new para_member();
+        public light_2channel_paramer light = new light_2channel_paramer();
+        public para_member threshold = new para_member();
+        public para_member minAreaFilter = new para_member();
+
+        public para_member[] baseX = new para_member[(int)MAX_COUNT.BLOB];
+        public para_member[] baseY = new para_member[(int)MAX_COUNT.BLOB];
+        public para_member[] baseAmount = new para_member[(int)MAX_COUNT.BLOB];
+
+        public para_member rateMin = new para_member();
+        public para_member rateMax = new para_member();
+        public para_member posLimit = new para_member();
+        public para_member failRetry = new para_member();
+        public para_member imageSave = new para_member();
+
+        public HTuple saveTuple;
+        public void write(out bool r, string savepath = "C:\\PROTEC\\Data")
+        {
+            try
+            {
+                int i = 0;
+                saveTuple = new HTuple();
+
+                writeTuple(useCheck, i, out i);
+                writeTuple(exposureTime, i, out i);
+                writeTuple(light.ch1, i, out i);
+                writeTuple(light.ch2, i, out i);
+                writeTuple(threshold, i, out i);
+                writeTuple(minAreaFilter, i, out i);
+
+                for (int j = 0; j < (int)MAX_COUNT.BLOB; j++)
+                {
+                    writeTuple(baseX[j], i, out i);
+                    writeTuple(baseY[j], i, out i);
+                    writeTuple(baseAmount[j], i, out i);
+                }
+
+                writeTuple(rateMin, i, out i);
+                writeTuple(rateMax, i, out i);
+                writeTuple(posLimit, i, out i);
+                writeTuple(failRetry, i, out i);
+                writeTuple(imageSave, i, out i);
+
+                HTuple filePath, fileName;
+                filePath = savepath + "\\Parameter\\";
+                if (!Directory.Exists(filePath)) Directory.CreateDirectory(filePath);
+                fileName = filePath + unitCode.ToString();
+                HOperatorSet.WriteTuple(saveTuple, fileName + ".tup");
+                r = true;
+            }
+            catch (HalconException ex)
+            {
+                mcException exception = new mcException();
+                exception.message(ex);
+                r = false;
+            }
+        }
+        public void read(out bool r, string readpath = "C:\\PROTEC\\Data")
+        {
+            try
+            {
+                HTuple filePath, fileName, fileExists;
+                filePath = readpath + "\\Parameter\\";
+                if (!Directory.Exists(filePath)) Directory.CreateDirectory(filePath);
+                fileName = filePath + unitCode.ToString();
+                HOperatorSet.FileExists(fileName + ".tup", out fileExists);
+                if ((int)(fileExists) == 0) goto FAIL;
+                HOperatorSet.ReadTuple(fileName + ".tup", out saveTuple);
+
+                upData(out r);
+                if (!r) goto SET_FAIL;
+                return;
+
+            FAIL:
+                mc.message.alarm(unitCode.ToString() + " Parameter Loading Fail : file miss error");
+                delete(out r);
+                return;
+
+            SET_FAIL:
+                mc.message.alarm(unitCode.ToString() + " Parameter Loading Fail : setDefault error");
+                r = false;
+            }
+            catch (HalconException ex)
+            {
+                mcException exception = new mcException();
+                exception.message(ex);
+
+                DialogResult result;
+                mc.message.alarm(unitCode.ToString() + " : Parameter Loading Fail : Exception Error");
+                mc.message.OkCancel(unitCode.ToString() + " : Default Parameter Loading", out result);
+                if (result == DialogResult.Cancel) r = false;
+                delete(out r);
+            }
+        }
+        public void upData(out bool r)
+        {
+            try
+            {
+                bool fail;
+                
+                readTuple("useCheck", out useCheck, out fail); if (fail) goto SET_FAIL;
+                readTuple("exposureTime", out exposureTime, out fail); if (fail) goto SET_FAIL;
+                readTuple("light.ch1", out light.ch1, out fail); if (fail) goto SET_FAIL;
+                readTuple("light.ch2", out light.ch2, out fail); if (fail) goto SET_FAIL;
+                readTuple("threshold", out threshold, out fail); if (fail) goto SET_FAIL;
+                readTuple("minAreaFilter", out minAreaFilter, out fail); if (fail) goto SET_FAIL;
+
+                for (int j = 0; j < (int)MAX_COUNT.BLOB; j++)
+                {
+                    readTuple("baseX[" + j.ToString() + "]", out baseX[j], out fail); if (fail) goto SET_FAIL;
+                    readTuple("baseY[" + j.ToString() + "]", out baseY[j], out fail); if (fail) goto SET_FAIL;
+                    readTuple("baseAmount[" + j.ToString() + "]", out baseAmount[j], out fail); if (fail) goto SET_FAIL;
+                }
+
+                readTuple("rateMin", out rateMin, out fail); if (fail) goto SET_FAIL;
+                readTuple("rateMax", out rateMax, out fail); if (fail) goto SET_FAIL;
+                readTuple("posLimit", out posLimit, out fail); if (fail) goto SET_FAIL;
+                readTuple("failRetry", out failRetry, out fail); if (fail) goto SET_FAIL;
+                readTuple("imageSave", out imageSave, out fail); if (fail) goto SET_FAIL;
+
+                r = true;
+                return;
+
+            SET_FAIL:
+                mc.message.alarm(unitCode.ToString() + " Parameter Loading Fail : setDefault error");
+                r = false;
+            }
+            catch (HalconException ex)
+            {
+                mcException exception = new mcException();
+                exception.message(ex);
+
+                DialogResult result;
+                mc.message.alarm(unitCode.ToString() + " : Parameter Loading Fail : Exception Error");
+                mc.message.OkCancel(unitCode.ToString() + " : Default Parameter Loading", out result);
+                if (result == DialogResult.Cancel) r = false;
+                delete(out r);
+            }
+        }
+
+        public void loadFormParaSetting()
+        {
+            FormParaList ff = new FormParaList();
+            ff.activate(mc.para.EPOXY.saveTuple);
+            ff.ShowDialog();
+            saveTuple = ff.saveTuple;
+            upData(out ret.b);
+            write(out ret.b);
+        }
+
+        void writeTuple(para_member p, int startIndex, out int endIndex)
+        {
+            int i = startIndex;
+            saveTuple[i++] = p.name;
+            saveTuple[i++] = p.id;
+            saveTuple[i++] = p.value;
+            saveTuple[i++] = p.preValue;
+            saveTuple[i++] = p.defaultValue;
+            saveTuple[i++] = p.lowerLimit;
+            saveTuple[i++] = p.upperLimit;
+            saveTuple[i++] = p.authority;
+            saveTuple[i++] = p.description;
+            endIndex = i;
+        }
+        public void readTuple(string paraName, out para_member p, out bool fail)
+        {
+            HTuple i;
+            fail = false;
+
+            HOperatorSet.TupleFind(saveTuple, paraName, out i); if (i < 0) goto READ_FAIL;
+            p.name = saveTuple[i++];
+            p.id = saveTuple[i++];
+            p.value = saveTuple[i++];
+            p.preValue = saveTuple[i++];
+            p.defaultValue = saveTuple[i++];
+            p.lowerLimit = saveTuple[i++];
+            p.upperLimit = saveTuple[i++];
+            p.authority = saveTuple[i++];
+            p.description = saveTuple[i++];
+            return;
+
+        READ_FAIL:
+            DialogResult result;
+            mc.message.alarm(unitCode.ToString() + " " + paraName + " : Parameter Loading Fail : readTuple error");
+            mc.message.OkCancel(unitCode.ToString() + " " + paraName + " : Default Parameter Loading", out result);
+            if (result == DialogResult.Cancel) { p = new para_member(); fail = true; return; }
+            bool sFail;
+            setDefault(paraName, out p, out sFail);
+            fail = sFail;
+        }
+        void delete(out bool r, string deletepath = "C:\\PROTEC\\Data")
+        {
+            try
+            {
+                HTuple filePath, fileName, fileExists;
+                filePath = deletepath + "\\Parameter\\";
+                if (!Directory.Exists(filePath)) Directory.CreateDirectory(filePath);
+                fileName = filePath + unitCode.ToString();
+                HOperatorSet.FileExists(fileName + ".tup", out fileExists);
+                if ((int)(fileExists) != 0) HOperatorSet.DeleteFile(fileName + ".tup");
+                setDefault(out r);
+            }
+            catch (HalconException ex)
+            {
+                mcException exception = new mcException();
+                exception.message(ex);
+                r = false;
+            }
+        }
+
+        void setDefault(out bool r)
+        {
+            DialogResult result;
+            mc.message.OkCancel(unitCode.ToString() + " Default Parameter Loading", out result);
+            if (result == DialogResult.Cancel) r = false;
+
+            bool fail;
+
+            setDefault("useCheck", out useCheck, out fail); if (fail) goto SET_FAIL;
+            setDefault("exposureTime", out exposureTime, out fail); if (fail) goto SET_FAIL;
+            setDefault("light.ch1", out light.ch1, out fail); if (fail) goto SET_FAIL;
+            setDefault("light.ch2", out light.ch2, out fail); if (fail) goto SET_FAIL;
+            setDefault("threshold", out threshold, out fail); if (fail) goto SET_FAIL;
+            setDefault("minAreaFilter", out minAreaFilter, out fail); if (fail) goto SET_FAIL;
+
+            for (int j = 0; j < (int)MAX_COUNT.BLOB; j++)
+            {
+                setDefault("baseX[" + j.ToString() + "]", out baseX[j], out fail); if (fail) goto SET_FAIL;
+                setDefault("baseY[" + j.ToString() + "]", out baseY[j], out fail); if (fail) goto SET_FAIL;
+                setDefault("baseAmount[" + j.ToString() + "]", out baseAmount[j], out fail); if (fail) goto SET_FAIL;
+            }
+
+            setDefault("rateMin", out rateMin, out fail); if (fail) goto SET_FAIL;
+            setDefault("rateMax", out rateMax, out fail); if (fail) goto SET_FAIL;
+            setDefault("failRetry", out posLimit, out fail); if (fail) goto SET_FAIL;
+            setDefault("retryCount", out failRetry, out fail); if (fail) goto SET_FAIL;
+            setDefault("imageSave", out imageSave, out fail); if (fail) goto SET_FAIL;
+
+            r = true;
+            return;
+
+        SET_FAIL:
+            mc.message.alarm(unitCode.ToString() + " Parameter Loading Fail : set default error");
+            r = false;
+        }
+        void setDefault(HTuple name, out para_member p, out bool fail)
+        {
+            try
+            {
+                p = new para_member(); p.id = -1;
+                int id = -1;
+
+                id++; if (name == "useCheck") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "exposureTime") setDefault(out p, name, id, 5000, 1000, 30000, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "light.ch1") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "light.ch2") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "threshold") setDefault(out p, name, id, 128, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "minAreaFilter") setDefault(out p, name, id, 1000, 0, 99999, AUTHORITY.MAINTENCE.ToString(), "description");
+                
+                for (int j = 0; j < (int)MAX_COUNT.BLOB; j++)
+                {
+                    id++; if (name == "baseX[" + j.ToString() + "]") setDefault(out p, name, id, 0, -999, 999, AUTHORITY.MAINTENCE.ToString(), "description");
+                    id++; if (name == "baseY[" + j.ToString() + "]") setDefault(out p, name, id, 0, -999, 999, AUTHORITY.MAINTENCE.ToString(), "description");
+                    id++; if (name == "baseAmount[" + j.ToString() + "]") setDefault(out p, name, id, 0, 0, 99999, AUTHORITY.MAINTENCE.ToString(), "description");
+                }
+
+                id++; if (name == "rateMin") setDefault(out p, name, id, 60, 0, 100, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "rateMax") setDefault(out p, name, id, 80, 0, 100, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "posLimit") setDefault(out p, name, id, 300, 0, 5000, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "failRetry") setDefault(out p, name, id, 0, 0, 5, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "imageSave") setDefault(out p, name, id, 0, 0, 10, AUTHORITY.MAINTENCE.ToString(), "description");
+
+                if (p.id == -1) { fail = true; p = new para_member(); return; }
+                fail = false;
+            }
+            catch
+            {
+                mc.message.alarm(unitCode.ToString() + " " + name + " Parameter Loading Fail : define miss error");
+                fail = true; p = new para_member();
+            }
+
+        }
+        void setDefault(out para_member p, string name, int id, double value, double lowerLimit, double upperLimit, string authority, string description)
+        {
+            p.name = name;
+            p.id = id;
+            p.value = value;
+            p.preValue = value;
+            p.defaultValue = value;
+            p.lowerLimit = lowerLimit;
+            p.upperLimit = upperLimit;
+            p.authority = authority;
+            p.description = description;
+        }
+    }
+
     // 1121. HeatSlug
     public class HeatSlugParameter
     {

@@ -156,6 +156,12 @@
     <Compile Include="FormChangeStatusColor.designer.cs">
       <DependentUpon>FormChangeStatusColor.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormEpoxyFilter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEpoxyFilter.designer.cs">
+      <DependentUpon>FormEpoxyFilter.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormErrorReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -251,6 +257,18 @@
     </Compile>
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormModifyRegion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormModifyRegion.designer.cs">
+      <DependentUpon>FormModifyRegion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormOK.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOK.designer.cs">
+      <DependentUpon>FormOK.cs</DependentUpon>
     </Compile>
     <Compile Include="FormOriginOffset.cs">
       <SubType>Form</SubType>
@@ -474,6 +492,12 @@
     <Compile Include="CenterRight_HeatSlug.Designer.cs">
       <DependentUpon>CenterRight_HeatSlug.cs</DependentUpon>
     </Compile>
+    <Compile Include="CenterRight_CheckEpoxy.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CenterRight_CheckEpoxy.Designer.cs">
+      <DependentUpon>CenterRight_CheckEpoxy.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="BottomRight_Conveyor.en-US.resx">
       <DependentUpon>BottomRight_Conveyor.cs</DependentUpon>
     </EmbeddedResource>
@@ -546,6 +570,9 @@
     <EmbeddedResource Include="FormChangeStatusColor.resx">
       <DependentUpon>FormChangeStatusColor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormEpoxyFilter.resx">
+      <DependentUpon>FormEpoxyFilter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormErrorReport.en-US.resx">
       <DependentUpon>FormErrorReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -597,6 +624,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormModifyRegion.resx">
+      <DependentUpon>FormModifyRegion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOK.resx">
+      <DependentUpon>FormOK.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormOriginOffset.resx">
       <DependentUpon>FormOriginOffset.cs</DependentUpon>
@@ -734,6 +767,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CenterRight_HeatSlug.resx">
       <DependentUpon>CenterRight_HeatSlug.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_CheckEpoxy.en-US.resx">
+      <DependentUpon>CenterRight_CheckEpoxy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CenterRight_CheckEpoxy.resx">
+      <DependentUpon>CenterRight_CheckEpoxy.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="ErrCode.ini" />

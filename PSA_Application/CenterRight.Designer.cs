@@ -74,6 +74,8 @@
             this.CenterRight_Advance = new PSA_Application.CenterRight_Advance();
             this.CenterRight_ChangeColorCode = new PSA_Application.CenterRight_ColorCode();
             this.CenterRight_HeatSlug = new PSA_Application.CenterRight_HeatSlug();
+            this.CenterRight_CheckEpoxy = new PSA_Application.CenterRight_CheckEpoxy();
+            this.BT_Parameter_CheckEpoxy = new System.Windows.Forms.ToolStripMenuItem();
             this.TS_Menu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -136,9 +138,10 @@
             this.BT_Parameter_StackFeeder,
             this.BT_Parameter_HeadCamera,
             this.BT_Parameter_UpLookingCamera,
-            this.BT_Parameter_HeatSlug,
             this.BT_Parameter_Meterial,
             this.BT_Parameter_SecsGem,
+            this.BT_Parameter_CheckEpoxy,
+            this.BT_Parameter_HeatSlug,
             this.BT_Parameter_Advance});
             this.BT_Parameter.Image = ((System.Drawing.Image)(resources.GetObject("BT_Parameter.Image")));
             this.BT_Parameter.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -493,11 +496,29 @@
             this.CenterRight_HeatSlug.Size = new System.Drawing.Size(158, 22);
             this.CenterRight_HeatSlug.TabIndex = 17;
             // 
+            // centerRight_CheckEpoxy1
+            // 
+            this.CenterRight_CheckEpoxy.BackColor = System.Drawing.Color.Transparent;
+            this.CenterRight_CheckEpoxy.Font = new System.Drawing.Font("Arial", 8.25F);
+            this.CenterRight_CheckEpoxy.Location = new System.Drawing.Point(26, 467);
+            this.CenterRight_CheckEpoxy.Name = "centerRight_CheckEpoxy1";
+            this.CenterRight_CheckEpoxy.Size = new System.Drawing.Size(158, 22);
+            this.CenterRight_CheckEpoxy.TabIndex = 18;
+            // 
+            // BT_Parameter_CheckEpoxy
+            // 
+            this.BT_Parameter_CheckEpoxy.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold);
+            this.BT_Parameter_CheckEpoxy.Name = "BT_Parameter_CheckEpoxy";
+            this.BT_Parameter_CheckEpoxy.Size = new System.Drawing.Size(293, 36);
+            this.BT_Parameter_CheckEpoxy.Text = "Check Epoxy";
+            this.BT_Parameter_CheckEpoxy.Click += new System.EventHandler(this.Control_Click);
+            // 
             // CenterRight
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.Controls.Add(this.CenterRight_CheckEpoxy);
             this.Controls.Add(this.CenterRight_HeatSlug);
             this.Controls.Add(this.CenterRight_ChangeColorCode);
             this.Controls.Add(this.CenterRight_TowerLamp);
@@ -575,5 +596,7 @@
         private System.Windows.Forms.ToolStripMenuItem BT_Parameter_Head_Press;
         private System.Windows.Forms.ToolStripMenuItem BT_Parameter_HeatSlug;
         private CenterRight_HeatSlug CenterRight_HeatSlug;
+        private CenterRight_CheckEpoxy CenterRight_CheckEpoxy;
+        private System.Windows.Forms.ToolStripMenuItem BT_Parameter_CheckEpoxy;
     }
 }

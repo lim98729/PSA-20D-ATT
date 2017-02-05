@@ -23,7 +23,7 @@ namespace AccessoryLibrary
             this.SetStyle(ControlStyles.UserPaint, true);
             this.UpdateStyles();
 
-            dragPen.DashStyle = DashStyle.DashDot;
+            dragPen.DashStyle = DashStyle.Dash;
             #region EVENT 등록
 
             EVENT.onAdd_boardStatus += new EVENT.InsertHandler_boardStatus(boardStatus);
@@ -126,8 +126,8 @@ namespace AccessoryLibrary
                     else if (status == PAD_STATUS.PCB_ERROR) { color = UtilityControl.colorCode[(int)COLORCODE.PCB_SIZE_ERR]; }
                     else if (status == PAD_STATUS.BARCODE_ERROR) { color = UtilityControl.colorCode[(int)COLORCODE.BARCODE_ERR]; }
                     else if (status == PAD_STATUS.EPOXY_NG) { color = UtilityControl.colorCode[(int)COLORCODE.NO_EPOXY]; }
-                    else if (status == PAD_STATUS.EPOXY_UNDER_FILL) { color = UtilityControl.colorCode[(int)COLORCODE.EPOXY_UNDERFLOW]; }
-                    else if (status == PAD_STATUS.EPOXY_OVER_FILL) { color = UtilityControl.colorCode[(int)COLORCODE.EPOXY_OVERFLOW]; }
+                    else if (status == PAD_STATUS.EPOXY_UNDER_FLOW) { color = UtilityControl.colorCode[(int)COLORCODE.EPOXY_UNDERFLOW]; }
+                    else if (status == PAD_STATUS.EPOXY_OVER_FLOW) { color = UtilityControl.colorCode[(int)COLORCODE.EPOXY_OVERFLOW]; }
                     else if (status == PAD_STATUS.EPOXY_POS_ERROR) { color = UtilityControl.colorCode[(int)COLORCODE.EPOXY_POS_ERR]; }
                     else if (status == PAD_STATUS.EPOXY_SHAPE_ERROR) { color = UtilityControl.colorCode[(int)COLORCODE.EPOXY_SHAPE_ERROR]; }
                     else if (status == PAD_STATUS.ATTACH_FAIL) { color = UtilityControl.colorCode[(int)COLORCODE.ATTACH_FAIL]; }
@@ -188,8 +188,8 @@ namespace AccessoryLibrary
                         else if (status[i] == PAD_STATUS.PCB_ERROR.ToString()) sts = PAD_STATUS.PCB_ERROR;
                         else if (status[i] == PAD_STATUS.BARCODE_ERROR.ToString()) sts = PAD_STATUS.BARCODE_ERROR;
                         else if (status[i] == PAD_STATUS.EPOXY_NG.ToString()) sts = PAD_STATUS.EPOXY_NG;
-                        else if (status[i] == PAD_STATUS.EPOXY_UNDER_FILL.ToString()) sts = PAD_STATUS.EPOXY_UNDER_FILL;
-                        else if (status[i] == PAD_STATUS.EPOXY_OVER_FILL.ToString()) sts = PAD_STATUS.EPOXY_OVER_FILL;
+                        else if (status[i] == PAD_STATUS.EPOXY_UNDER_FLOW.ToString()) sts = PAD_STATUS.EPOXY_UNDER_FLOW;
+                        else if (status[i] == PAD_STATUS.EPOXY_OVER_FLOW.ToString()) sts = PAD_STATUS.EPOXY_OVER_FLOW;
                         else if (status[i] == PAD_STATUS.EPOXY_POS_ERROR.ToString()) sts = PAD_STATUS.EPOXY_POS_ERROR;
                         else if (status[i] == PAD_STATUS.EPOXY_SHAPE_ERROR.ToString()) sts = PAD_STATUS.EPOXY_SHAPE_ERROR;
                         else if (status[i] == PAD_STATUS.ATTACH_FAIL.ToString()) sts = PAD_STATUS.ATTACH_FAIL;
@@ -487,7 +487,7 @@ namespace AccessoryLibrary
 
             if (dragMode && rect != null)
             {
-                e.Graphics.DrawRectangle(outLine, rect);
+                e.Graphics.DrawRectangle(dragPen, rect);
             }
         }
 

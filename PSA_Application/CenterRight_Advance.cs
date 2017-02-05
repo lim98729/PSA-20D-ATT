@@ -241,14 +241,14 @@ namespace PSA_Application
 
 					CopyDir.Copy(selected, "C:\\PROTEC\\Data\\Vision");
 
-					for (int i = 0; i < mc.hdc.cam.MODEL_MAX_CNT; i++) mc.hdc.cam.readModel(i);
+					for (int i = 0; i < (int)MAX_COUNT.MODEL; i++) mc.hdc.cam.readModel(i);
 					//mc.hdc.cam.readGrabber();
 					mc.hdc.cam.readIntensity();
 					mc.hdc.cam.readCircleCenter();
 					mc.hdc.cam.readRectangleCenter();
 					mc.hdc.cam.readCornerEdge();
 
-					for (int i = 0; i < mc.ulc.cam.MODEL_MAX_CNT; i++) mc.ulc.cam.readModel(i);
+					for (int i = 0; i < (int)MAX_COUNT.MODEL; i++) mc.ulc.cam.readModel(i);
 					//mc.ulc.cam.readGrabber();
 					mc.ulc.cam.readIntensity();
 					mc.ulc.cam.readCircleCenter();

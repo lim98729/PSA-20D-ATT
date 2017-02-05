@@ -435,7 +435,7 @@ namespace HalconLibrary
                 case 10:
                     if (cam1.model[find1Index].isCreate == "true") { find1ModelNum = find1Index; find1Index++; find1Sqc = 20; break; }
                     find1Index++;
-                    if (find1Index < cam1.MODEL_MAX_CNT) break;
+                    if (find1Index < (int)MAX_COUNT.MODEL) break;
                     find1Sqc++; break;
                 case 11:
                     if (find1ModelNum == -1)
@@ -496,7 +496,7 @@ namespace HalconLibrary
                 case 10:
                     if (cam2.model[find2Index].isCreate == "true") { find2ModelNum = find2Index; find2Index++; find2Sqc = 20; break; }
                     find2Index++;
-                    if (find2Index < cam2.MODEL_MAX_CNT) break;
+                    if (find2Index < (int)MAX_COUNT.MODEL) break;
                     find2Sqc++; break;
                 case 11:
                     if (find2ModelNum == -1)
@@ -557,7 +557,7 @@ namespace HalconLibrary
                 case 10:
                     if (cam3.model[find3Index].isCreate == "true") { find3ModelNum = find3Index; find3Index++; find3Sqc = 20; break; }
                     find3Index++;
-                    if (find3Index < cam3.MODEL_MAX_CNT) break;
+                    if (find3Index < (int)MAX_COUNT.MODEL) break;
                     find3Sqc++; break;
                 case 11:
                     if (find3ModelNum == -1)
@@ -618,7 +618,7 @@ namespace HalconLibrary
                 case 10:
                     if (cam4.model[find4Index].isCreate == "true") { find4ModelNum = find4Index; find4Index++; find4Sqc = 20; break; }
                     find4Index++;
-                    if (find4Index < cam4.MODEL_MAX_CNT) break;
+                    if (find4Index < (int)MAX_COUNT.MODEL) break;
                     find4Sqc++; break;
                 case 11:
                     if (find4ModelNum == -1)

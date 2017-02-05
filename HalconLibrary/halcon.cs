@@ -37,22 +37,15 @@ namespace HalconLibrary
 	/// 
 	public class halcon
 	{
-		public int MODEL_MAX_CNT
-		{
-			get
-			{
-				return _MODEL_MAX_CNT;
-			}
-		}
-		const int _MODEL_MAX_CNT = 50;
 		bool boolReturn;
 		public REFRESH_REQMODE refresh_reqMode;
 		public int refresh_reqModelNumber;
 		public string refresh_errorMessage;
 		public bool refresh_req;
 
-		public halcon_model[] model = new halcon_model[_MODEL_MAX_CNT];
-		public halcon_acquire acq = new halcon_acquire();
+        public halcon_model[] model = new halcon_model[(int)MAX_COUNT.MODEL];
+        public halcon_blob[] epoxyBlob = new halcon_blob[(int)MAX_COUNT.BLOB];
+        public halcon_acquire acq = new halcon_acquire();
 		public halcon_window window = new halcon_window();
 		halcon_gpu_device device = new halcon_gpu_device();
 		public halcon_intensity intensity = new halcon_intensity();
@@ -60,7 +53,7 @@ namespace HalconLibrary
 		public halcon_rectangleCenter rectangleCenter = new halcon_rectangleCenter();
 		public halcon_cornerEdge cornerEdge = new halcon_cornerEdge();
 		public halcon_edgeIntersection edgeIntersection = new halcon_edgeIntersection();
-
+        
 		halcon_display display = new halcon_display();
 		halcon_timer dwell = new halcon_timer();
 
@@ -286,7 +279,7 @@ namespace HalconLibrary
 				
                 #region Initialize local and output iconic variables
                 HOperatorSet.GenEmptyObj(out acq.Image);
-				for (int i = 0; i < MODEL_MAX_CNT; i++)
+				for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 				{
 					HOperatorSet.GenEmptyObj(out model[i].CreateTemplate);
 					HOperatorSet.GenEmptyObj(out model[i].FindImage);
@@ -300,6 +293,25 @@ namespace HalconLibrary
 					HOperatorSet.GenEmptyObj(out model[i].RegionErosion);
 					HOperatorSet.GenEmptyObj(out model[i].RegionDifference);
 				}
+
+                for (int i = 0; i < (int)MAX_COUNT.BLOB; i++)
+                {
+                    HOperatorSet.GenEmptyObj(out epoxyBlob[i].FindRegion);
+                    HOperatorSet.GenEmptyObj(out epoxyBlob[i].FindImageReduced);
+
+                    HOperatorSet.GenEmptyObj(out epoxyBlob[i].FindRegionDynThresh);
+                    HOperatorSet.GenEmptyObj(out epoxyBlob[i].FindRegionEpoxy);
+                    HOperatorSet.GenEmptyObj(out epoxyBlob[i].FindRegionExConnected);
+                    HOperatorSet.GenEmptyObj(out epoxyBlob[i].FindRegionExSelected);
+                    HOperatorSet.GenEmptyObj(out epoxyBlob[i].FindImageMean);
+
+
+                    HOperatorSet.GenEmptyObj(out epoxyBlob[i].FindOpening);
+                    HOperatorSet.GenEmptyObj(out epoxyBlob[i].FindRegionFillUp);
+                    HOperatorSet.GenEmptyObj(out epoxyBlob[i].FindRegionUnion);
+                    HOperatorSet.GenEmptyObj(out epoxyBlob[i].FindClosing);
+                    HOperatorSet.GenEmptyObj(out epoxyBlob[i].FindTrans);
+                }
 
 				HOperatorSet.GenEmptyObj(out intensity.Region);
 				HOperatorSet.GenEmptyObj(out intensity.ImageReduced);
@@ -376,15 +388,17 @@ namespace HalconLibrary
 				//HOperatorSet.GrabImage(out acq.Image, acq.handle);
 				//HOperatorSet.GetImageSize(acq.Image, out acq.width, out acq.height);
 
-				for (int i = 0; i < MODEL_MAX_CNT; i++)
+				for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 				{
 					model[i].setDefault(cameraNumber, i, "NCC", "ALL");
 				}
 				#endregion
 
 
-				for (int i = 0; i < MODEL_MAX_CNT; i++) readModel(i);
-				
+				for (int i = 0; i < (int)MAX_COUNT.MODEL; i++) readModel(i);
+
+                for (int i = 0; i < (int)MAX_COUNT.BLOB; i++) readBlob(i, epoxyBlob);
+
 				readIntensity();
 				readCircleCenter();
 				readRectangleCenter();
@@ -447,7 +461,7 @@ namespace HalconLibrary
 					s = "Deactivate : Already";
 					b = true; return;
 				}
-				//for (int i = 0; i < MODEL_MAX_CNT; i++)
+				//for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 				//{
 				//    if (model[i].isCreate == "true") writeModel(i);
 				//    else deleteModel(i);
@@ -457,7 +471,7 @@ namespace HalconLibrary
 
 				#region HObject Dispose
 				acq.Image.Dispose();
-				for (int i = 0; i < MODEL_MAX_CNT; i++)
+				for (int i = 0; i < (int)MAX_COUNT.MODEL; i++)
 				{
 					model[i].CreateTemplate.Dispose();
 					model[i].FindImage.Dispose();
@@ -1052,6 +1066,87 @@ namespace HalconLibrary
 		}
 		#endregion
 
+        #region createBlob
+        public bool createBlob(HTuple number, halcon_blob[] halconBlob)
+        {
+            try
+            {
+                if (!isActivate) return false;
+
+                messageStatus("Create Area " + number.ToString());
+                HOperatorSet.SetColor(window.handle, "yellow");
+                HOperatorSet.DrawRectangle1(window.handle, out halconBlob[number].findRow1, out halconBlob[number].findColumn1, out halconBlob[number].findRow2, out halconBlob[number].findColumn2);
+                halconBlob[number].FindRegion.Dispose();
+
+                halconBlob[number].findLength1 = (halconBlob[number].findColumn2 - halconBlob[number].findColumn1) / 2;
+                halconBlob[number].findLength2 = (halconBlob[number].findRow2 - halconBlob[number].findRow1) / 2;
+
+                halconBlob[number].findCenterRow = halconBlob[number].findRow1 + halconBlob[number].findLength2;
+                halconBlob[number].findCenterColumn = halconBlob[number].findColumn1 + halconBlob[number].findLength1;
+              
+                HOperatorSet.GenRectangle2(out halconBlob[number].FindRegion, halconBlob[number].findCenterRow, halconBlob[number].findCenterColumn, 0, halconBlob[number].findLength1, halconBlob[number].findLength2);
+
+                halconBlob[number].FindImageReduced.Dispose();
+                HOperatorSet.ReduceDomain(acq.Image, halconBlob[number].FindRegion, out halconBlob[number].FindImageReduced);
+                HOperatorSet.ClearWindow(window.handle);
+                HOperatorSet.DispImage(halconBlob[number].FindImageReduced, window.handle);
+                Thread.Sleep(200);
+
+                HOperatorSet.ClearWindow(window.handle);
+                HOperatorSet.DispImage(acq.Image, window.handle);
+
+
+                halconBlob[number].isCreate = "true";
+                displayBlobTheta(halconBlob);
+
+                return writeBlob(number);
+            }
+            catch (HalconException ex)
+            {
+                model[number].isCreate = "false";
+                deleteModel(number);
+                halcon_exception exception = new halcon_exception();
+                exception.message(window, acq, ex);
+                return false;
+            }
+        }
+
+        public void displayBlobTheta(halcon_blob[] halconBlob)
+        {
+            try
+            {
+                if (!isActivate) return;
+                HOperatorSet.DispObj(acq.Image, window.handle);
+                for (int i = 0; i < (int)MAX_COUNT.BLOB; i++)
+                {
+                    if (halconBlob[i].isCreate == "true")
+                    {
+                        HOperatorSet.SetColor(window.handle, "green");
+
+                        halconBlob[i].FindRegion.Dispose();
+                        halconBlob[i].findLength1 = (halconBlob[i].findColumn2 - halconBlob[i].findColumn1) / 2;
+                        halconBlob[i].findLength2 = (halconBlob[i].findRow2 - halconBlob[i].findRow1) / 2;
+
+                        halconBlob[i].findCenterRow = halconBlob[i].findRow1 + halconBlob[i].findLength2;
+                        halconBlob[i].findCenterColumn = halconBlob[i].findColumn1 + halconBlob[i].findLength1;
+
+                        HOperatorSet.GenRectangle2(out halconBlob[i].FindRegion, halconBlob[i].findCenterRow, halconBlob[i].findCenterColumn, 0, halconBlob[i].findLength1, halconBlob[i].findLength2);
+                        HOperatorSet.DispObj(halconBlob[i].FindRegion, window.handle);
+                        display.message(window.handle, "Box " + i.ToString(), "image", halconBlob[i].findRow1, halconBlob[i].findColumn1, "yellow", "false");
+                    }
+                }
+                return;
+            }
+            catch (HalconException ex)
+            {
+                halcon_exception exception = new halcon_exception();
+                exception.message(window, acq, ex);
+                return;
+            }
+        }
+
+        #endregion
+
 		#region findModel
 		public bool findModel(HTuple number)
 		{
@@ -1316,7 +1411,7 @@ namespace HalconLibrary
 			if (!isActivate) return true;
 			try
 			{
-				for (int i = 0; i < MODEL_MAX_CNT; i++) deleteModel(i);
+				for (int i = 0; i < (int)MAX_COUNT.MODEL; i++) deleteModel(i);
 				return true;
 			}
 			catch (HalconException ex)
@@ -3335,7 +3430,7 @@ namespace HalconLibrary
 			}
 		}
 		#endregion
-		#region findCornerEdge
+        #region findCornerEdge
 		public bool findCornerEdge()
 		{
 			try
@@ -4100,7 +4195,223 @@ namespace HalconLibrary
 		#endregion
 
 
-	 
+        #region findBlob
+        public void findBlob(halcon_blob[] halconBlob, double threshold, double minArea, double dx, double dy, out RetMessage retMessage, out string errorMessage, int LightingMode)
+        {
+            HTuple tTheta;
+            int maxarea;
+            double[] EPOXY_x = new double[50];
+            double[] EPOXY_y = new double[50];
+
+            retMessage = RetMessage.OK; errorMessage = "";
+            try
+            {
+                if (!isActivate)
+                {
+                    errorMessage = acq.DeviceUserID.ToString() + " is not [Activete Stauts]";
+                    retMessage = RetMessage.FIND_EPOXY_ERROR;
+                    return;
+                }
+
+
+                for (int i = 0; i < (int)MAX_COUNT.BLOB; i++)
+                {
+                    halconBlob[i].resultArea = -1;
+                    halconBlob[i].resultColumn = -1;
+                    halconBlob[i].resultRow = -1;
+                    halconBlob[i].resultX = -1;
+                    halconBlob[i].resultY = -1;
+
+                    if (halconBlob[i].isCreate == "true")
+                    {
+                        if (dx != -1)
+                        {
+                            halconBlob[i].findColumn2 += dx;
+                            halconBlob[i].findColumn1 += dx;
+                        }
+                        if (dy != -1)
+                        {
+                            halconBlob[i].findRow2 += dy;
+                            halconBlob[i].findRow1 += dy;
+                        }
+
+                        halconBlob[i].findLength1 = (halconBlob[i].findColumn2 - halconBlob[i].findColumn1) / 2;
+                        halconBlob[i].findLength2 = (halconBlob[i].findRow2 - halconBlob[i].findRow1) / 2;
+
+                        halconBlob[i].findCenterRow = halconBlob[i].findRow1 + halconBlob[i].findLength2;
+                        halconBlob[i].findCenterColumn = halconBlob[i].findColumn1 + halconBlob[i].findLength1;
+
+                        HOperatorSet.TupleRad(halconBlob[i].findTheta, out tTheta);
+
+                        halconBlob[i].FindRegion.Dispose();
+                        halconBlob[i].FindImageReduced.Dispose();
+                        halconBlob[i].FindImageMean.Dispose();
+                        halconBlob[i].FindRegionDynThresh.Dispose();
+                        halconBlob[i].FindRegionExConnected.Dispose();
+                        halconBlob[i].FindRegionExSelected.Dispose();
+                        halconBlob[i].FindRegionEpoxy.Dispose();
+
+                        halconBlob[i].FindOpening.Dispose();
+                        halconBlob[i].FindRegionFillUp.Dispose();
+                        halconBlob[i].FindRegionUnion.Dispose();
+                        halconBlob[i].FindClosing.Dispose();
+                        halconBlob[i].FindTrans.Dispose();
+
+
+                        HOperatorSet.GenRectangle2(out halconBlob[i].FindRegion, halconBlob[i].findCenterRow, halconBlob[i].findCenterColumn, 0, halconBlob[i].findLength1, halconBlob[i].findLength2);
+                        HOperatorSet.ReduceDomain(acq.Image, halconBlob[i].FindRegion, out halconBlob[i].FindImageReduced);
+                        HOperatorSet.GrayOpeningShape(halconBlob[i].FindImageReduced, out halconBlob[i].FindOpening, 10, 10, "rectangle");
+                        HOperatorSet.MeanImage(halconBlob[i].FindOpening, out halconBlob[i].FindImageMean, 70, 70);
+
+                        if (LightingMode == 0) HOperatorSet.DynThreshold(halconBlob[i].FindOpening, halconBlob[i].FindImageMean, out halconBlob[i].FindRegionDynThresh, threshold, "light");
+                        else if (LightingMode == 1) HOperatorSet.DynThreshold(halconBlob[i].FindOpening, halconBlob[i].FindImageMean, out halconBlob[i].FindRegionDynThresh, threshold, "dark");
+                        HOperatorSet.ClosingCircle(halconBlob[i].FindRegionDynThresh, out halconBlob[i].FindClosing, 1.5);
+                        HOperatorSet.Connection(halconBlob[i].FindClosing, out halconBlob[i].FindRegionExConnected);
+                        HOperatorSet.SelectShape(halconBlob[i].FindRegionExConnected, out halconBlob[i].FindRegionExSelected, "area", "and", minArea, 999999);
+                        //20130819. test. kimsong.
+                        //HOperatorSet.FillUp(blob[i].FindRegionExSelected, out blob[i].FindRegionFillUp);
+                        HOperatorSet.FillUpShape(halconBlob[i].FindRegionExSelected, out halconBlob[i].FindRegionFillUp, "area", 0.0, 200.0);
+                        HOperatorSet.Union1(halconBlob[i].FindRegionFillUp, out halconBlob[i].FindRegionUnion);
+
+                        halconBlob[i].FindClosing.Dispose();
+                        HOperatorSet.ClosingCircle(halconBlob[i].FindRegionUnion, out halconBlob[i].FindClosing, 5.5);
+
+                        halconBlob[i].FindRegionExConnected.Dispose();
+                        HOperatorSet.Connection(halconBlob[i].FindClosing, out halconBlob[i].FindRegionExConnected);
+
+                        HOperatorSet.SelectShape(halconBlob[i].FindRegionExConnected, out halconBlob[i].FindRegionEpoxy, "area", "and", minArea, 999999);
+                        HOperatorSet.FillUp(halconBlob[i].FindRegionEpoxy, out halconBlob[i].FindRegionEpoxy);
+                        HOperatorSet.AreaCenter(halconBlob[i].FindRegionEpoxy, out halconBlob[i].resultArea, out halconBlob[i].resultRow, out halconBlob[i].resultColumn);
+
+                        if (halconBlob[i].resultArea == -1)
+                        {
+                            retMessage = RetMessage.FIND_EPOXY_ERROR;
+                            errorMessage = "Cannot Find Epoxy Area";
+                            return;
+                        }
+                        else
+                        {
+                            maxarea = halconBlob[i].resultArea.TupleLength();
+                            if (maxarea > 1)
+                            {
+                                for (int j = 0; j < maxarea; j++)
+                                {
+                                    EPOXY_x[j] = halconBlob[i].resultColumn[j] * acq.ResolutionX;
+                                    EPOXY_y[j] = halconBlob[i].resultRow[j] * acq.ResolutionY;
+                                }
+                                halconBlob[i].resultX = EPOXY_x.Average();
+                                halconBlob[i].resultY = EPOXY_y.Average();
+                                halconBlob[i].tmpresultX = halconBlob[i].resultX;
+                                halconBlob[i].tmpresultY = halconBlob[i].resultY;
+                            }
+                            else
+                            {
+                                halconBlob[i].resultX = halconBlob[i].resultColumn * acq.ResolutionX;
+                                halconBlob[i].resultY = halconBlob[i].resultRow * acq.ResolutionY;
+                                halconBlob[i].tmpresultX = halconBlob[i].resultX;
+                                halconBlob[i].tmpresultY = halconBlob[i].resultY;
+                            }
+                            errorMessage = "";
+                            retMessage = RetMessage.OK;
+
+                        }
+                    }
+                    //return;
+                }
+            }
+            catch (HalconException ex)
+            {
+
+                grabTime = -1;
+                HTuple hv_Exception;
+                ex.ToHTuple(out hv_Exception);
+                errorMessage = acq.DeviceUserID.ToString() + " Epoxy Exception Error : ";
+                for (int i = 0; i < hv_Exception.Length; i++)
+                {
+                    errorMessage += hv_Exception.TupleSelect(i) + "\n";
+                }
+
+
+                retMessage = RetMessage.FIND_EPOXY_ERROR;
+            }
+        }
+        #endregion
+
+        #region writeBlob
+        public bool writeBlob(HTuple number)
+        {
+            try
+            {
+                epoxyBlob[number].number = number;
+                return epoxyBlob[number].write();
+            }
+            catch (HalconException ex)
+            {
+                halcon_exception exception = new halcon_exception();
+                exception.message(window, acq, ex);
+                return false;
+            }
+        }
+        #endregion
+
+        #region readBlob
+        public bool readBlob(HTuple number, halcon_blob[] halconBlob)
+        {
+            try
+            {
+                halconBlob[number].number = number;
+                boolReturn = halconBlob[number].read();
+                if (!boolReturn)
+                {
+                    halconBlob[number].setDefault();
+                    return false;
+                }
+                return boolReturn;
+            }
+            catch (HalconException ex)
+            {
+                halconBlob[number].setDefault();
+                halcon_exception exception = new halcon_exception();
+                exception.message(window, acq, ex);
+                return false;
+            }
+        }
+        #endregion
+
+        #region deleteBlob
+        public bool deleteBlob(HTuple number)
+        {
+            if (!isActivate) return true;
+            try
+            {
+                return epoxyBlob[number].delete();
+            }
+            catch (HalconException ex)
+            {
+                epoxyBlob[number].setDefault();
+                halcon_exception exception = new halcon_exception();
+                exception.message(window, acq, ex);
+                return false;
+            }
+        }
+
+        public bool deleteAllBlob()
+        {
+            if (!isActivate) return true;
+            try
+            {
+                for (int i = 0; i < (int)MAX_COUNT.BLOB; i++) deleteBlob(i);
+                return true;
+            }
+            catch (HalconException ex)
+            {
+                halcon_exception exception = new halcon_exception();
+                exception.message(window, acq, ex);
+                return false;
+            }
+        }
+        #endregion
+
 
 		#region message
 		public bool messageOff;
@@ -4521,6 +4832,47 @@ namespace HalconLibrary
 				return false;
 			}
 		}
+
+        public bool refreshFindBlob()
+        {
+            try
+            {
+                //  if (!isActivate || !refresh_req) return false;
+                HOperatorSet.SetSystem("flush_graphic", "false");
+                HOperatorSet.ClearWindow(window.handle);
+                HOperatorSet.DispObj(acq.Image, window.handle);
+                HOperatorSet.SetDraw(window.handle, "margin");
+                HOperatorSet.SetLineWidth(window.handle, 1);
+                HOperatorSet.SetColor(window.handle, "pink");
+                messageStatus(acq.DeviceUserID);
+
+                HOperatorSet.SetSystem("flush_graphic", "true");
+
+                for (int i = 0; i < (int)MAX_COUNT.BLOB; i++)
+                {
+                    if (epoxyBlob[i].isCreate == "true")
+                    {
+                        HOperatorSet.SetDraw(window.handle, "fill");
+                        HOperatorSet.SetColor(window.handle, "green"); //20131017
+
+                        HOperatorSet.SetLineWidth(window.handle, 1);
+                        HOperatorSet.DispObj(epoxyBlob[i].FindRegionEpoxy, window.handle);
+                        HOperatorSet.SetDraw(window.handle, "margin");
+                    }
+                }
+
+                refresh_req = false;
+                return true;
+            }
+            catch //(HalconException ex)
+            {
+                //halcon_exception exception = new halcon_exception();
+                // exception.message(window, acq, ex);
+                refresh_req = false;
+                return false;
+            }
+        }
+
 		public bool refreshCenterCross()
 		{
 			try
@@ -7092,6 +7444,212 @@ namespace HalconLibrary
 			return true;
 		}
 	}
+
+    public struct halcon_blob
+    {
+        #region parameter define
+
+        public HTuple isCreate;
+        public HTuple number;
+
+        public HTuple findRow1;
+        public HTuple findRow2;
+        public HTuple findColumn1;
+        public HTuple findColumn2;
+        public HTuple findTheta;
+
+        public HTuple findCenterRow;
+        public HTuple findCenterColumn;
+
+        public HTuple findLength1;
+        public HTuple findLength2;
+        public HTuple findRadius;
+
+        public HTuple resultArea;
+        public HTuple resultRow;
+        public HTuple resultColumn;
+        public HTuple resultX;
+        public HTuple resultY;
+
+        public HTuple tmpresultX;
+        public HTuple tmpresultY;  // 0423
+
+        public HObject FindRegion;
+        public HObject FindImageReduced;
+
+        public HObject FindImageMean;
+        public HObject FindRegionDynThresh;
+        public HObject FindRegionExConnected;
+        public HObject FindRegionExSelected;
+
+        public HObject FindOpening; //
+        public HObject FindRegionFillUp; //
+        public HObject FindRegionUnion; //
+        public HObject FindClosing;//
+        public HObject FindTrans;//
+
+        public HObject FindRegionEpoxy;
+
+
+        public HTuple saveTuple;
+        #endregion
+
+        bool writeSaveTuple()
+        {
+            int i = 0;
+            try
+            {
+                saveTuple = new HTuple();
+                saveTuple[i] = "isCreate"; i++; saveTuple[i] = isCreate; i++;
+                saveTuple[i] = "number"; i++; saveTuple[i] = number; i++;
+
+                saveTuple[i] = "findRow1"; i++; saveTuple[i] = findRow1; i++;
+                saveTuple[i] = "findColumn1"; i++; saveTuple[i] = findColumn1; i++;
+                saveTuple[i] = "findRow2"; i++; saveTuple[i] = findRow2; i++;
+                saveTuple[i] = "findColumn2"; i++; saveTuple[i] = findColumn2; i++;
+
+                return true;
+            }
+            catch (HalconException ex)
+            {
+                halcon_exception exception = new halcon_exception();
+                exception.message(ex);
+                return false;
+            }
+        }
+        bool readSaveTuple()
+        {
+            int i = 0;
+            HTuple temp;
+            try
+            {
+                i++;
+                isCreate = saveTuple[i]; i += 2;
+                number = saveTuple[i]; i += 2;
+                findRow1 = saveTuple[i]; i += 2;
+                findColumn1 = saveTuple[i]; i += 2;
+                findRow2 = saveTuple[i]; i += 2;
+                findColumn2 = saveTuple[i]; i += 2;
+
+                temp = saveTuple.TupleFind("isCreate");
+                temp = saveTuple.TupleFind("number");
+                temp = saveTuple.TupleFind("findRow1");
+
+
+                return true;
+            }
+            catch (HalconException ex)
+            {
+                halcon_exception exception = new halcon_exception();
+                exception.message(ex);
+                return false;
+            }
+        }
+
+        public bool write()
+        {
+            try
+            {
+                if (dev.NotExistHW.CAMERA) return false;
+
+                HTuple filePath = new HTuple();
+                HTuple fileName = new HTuple();
+                filePath = mc2.savePath + "\\data\\vision\\blob\\";
+                if (!Directory.Exists(filePath)) Directory.CreateDirectory(filePath);
+
+                fileName = filePath + "Epoxy_Blob_" + number.ToString();
+                writeSaveTuple();
+                HOperatorSet.WriteTuple(saveTuple, fileName + ".tup");
+                isCreate = "true";
+                return true;
+            }
+            catch (HalconException ex)
+            {
+                isCreate = "false";
+                halcon_exception exception = new halcon_exception();
+                exception.message(ex);
+                return false;
+            }
+        }
+        public bool read()
+        {
+            try
+            {
+                HTuple filePath = new HTuple();
+                HTuple fileName = new HTuple();
+                HTuple fileExists = new HTuple();
+
+                filePath = mc2.savePath + "\\data\\vision\\blob\\";
+                if (!Directory.Exists(filePath)) Directory.CreateDirectory(filePath);
+
+                fileName = filePath + "Epoxy_Blob_" + number.ToString();
+                HOperatorSet.FileExists(fileName + ".tup", out fileExists);
+                if ((int)(fileExists) == 0) goto FAIL;
+
+                HOperatorSet.ReadTuple(fileName + ".tup", out saveTuple);
+
+                if (readSaveTuple() == false) goto FAIL;
+                if (isCreate == "false") goto FAIL;
+                return true;
+
+
+            FAIL:
+                delete();
+                return false;
+            }
+            catch (HalconException ex)
+            {
+                setDefault();
+                halcon_exception exception = new halcon_exception();
+                exception.message(ex);
+                return false;
+            }
+        }
+        public bool delete()
+        {
+            try
+            {
+                //if (dev.NotExistHW.CAMERA) return false;
+                HTuple filePath, fileName, fileExists;
+                filePath = mc2.savePath + "\\data\\vision\\blob\\";
+                if (!Directory.Exists(filePath)) Directory.CreateDirectory(filePath);
+                fileName = filePath + "Epoxy_Blob_" + number.ToString();
+                HOperatorSet.FileExists(fileName + ".tup", out fileExists);
+                if ((int)(fileExists) != 0) HOperatorSet.DeleteFile(fileName + ".tup");
+
+                setDefault();
+                return true;
+            }
+            catch (HalconException ex)
+            {
+                setDefault();
+                halcon_exception exception = new halcon_exception();
+                exception.message(ex);
+                return false;
+            }
+        }
+        public bool setDefault()
+        {
+            //if (dev.NotExistHW.CAMERA) return false;
+
+            isCreate = "false";
+
+            findRow1 = -1;
+            findColumn1 = -1;
+            findRow2 = -1;
+            findColumn2 = -1;
+            findTheta = 0;
+            number = 0;
+            resultArea = -1;
+            resultRow = -1;
+            resultColumn = -1;
+
+            FindRegion.Dispose();
+            FindImageReduced.Dispose();
+
+            return true;
+        }
+    }
 
 	public class halcon_edgeIntersection
 	{

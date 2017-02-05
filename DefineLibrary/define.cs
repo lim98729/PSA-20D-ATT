@@ -1305,15 +1305,16 @@ namespace DefineLibrary
 		public const int FIND_RECTANGLE = 3150;
 		public const int FIND_CIRCLE = 3200;
 		public const int FIND_CORNER = 3250;
-        public const int FIND_EDGE_QUARTER_THIRD = 3300;
-        public const int FIND_EDGE_QUARTER_SECOND = 3350;
-        public const int FIND_EDGE_QUARTER_FIRST = 3400;
-        public const int FIND_EDGE_QUARTER_FOURTH = 3450;
-		public const int FIND_CIRCLE_QUARTER_1 = 3500;
-		public const int FIND_CIRCLE_QUARTER_2 = 3510;
-		public const int FIND_CIRCLE_QUARTER_3 = 3520;
-		public const int FIND_CIRCLE_QUARTER_4 = 3530;
-		public const int FIND_RECTANGLE_HS = 3540;
+        public const int FIND_EPOXY = 3300;
+        public const int FIND_EDGE_QUARTER_THIRD = 3400;
+        public const int FIND_EDGE_QUARTER_SECOND = 3450;
+        public const int FIND_EDGE_QUARTER_FIRST = 3500;
+        public const int FIND_EDGE_QUARTER_FOURTH = 3550;
+		public const int FIND_CIRCLE_QUARTER_1 = 3600;
+		public const int FIND_CIRCLE_QUARTER_2 = 3610;
+		public const int FIND_CIRCLE_QUARTER_3 = 3620;
+		public const int FIND_CIRCLE_QUARTER_4 = 3630;
+		public const int FIND_RECTANGLE_HS = 3640;
 
 		public const int READY = 4000;
 		public const int DOWN = 4050;
@@ -1413,6 +1414,11 @@ namespace DefineLibrary
 
 	#region enum
 
+    public enum MAX_COUNT
+    {
+        MODEL = 50,
+        BLOB = 10,
+    }
 	public enum DIAG_SEL_MODE
 	{
 		INVALID = -1,
@@ -1518,6 +1524,7 @@ namespace DefineLibrary
 
         // 1121. HeatSlug
         HEATSLUG,
+        CHECKEPOXY
 	}
 	public enum BOTTOM_RIGHT_PANEL
 	{
@@ -1594,6 +1601,7 @@ namespace DefineLibrary
         HEATSLUG_PADC2,
         HEATSLUG_PADC3,
         HEATSLUG_PADC4,
+        EPOXY,
 	}
 	public enum QUARTER_NUMBER
 	{
@@ -1719,6 +1727,7 @@ namespace DefineLibrary
 		FIND_MODEL,
 		FIND_CIRCLE,
 		FIND_RECTANGLE,
+        FIND_EPOXY,
 		FIND_CIRCLE_QUARTER1,
 		FIND_CIRCLE_QUARTER2,
 		FIND_CIRCLE_QUARTER3,
@@ -1754,6 +1763,7 @@ namespace DefineLibrary
 		CORNER_EDGE,
 		EDGE_INTERSECTION,
 		FIND_MODEL,
+        FIND_EPOXY,
 		//FIND_RECTANGEL,
 		//FIND_CIRCLE,
 		CALIBRATION,
@@ -1876,6 +1886,8 @@ namespace DefineLibrary
         ULC_LIDC2,
         ULC_LIDC3,
         ULC_LIDC4,
+
+        EPOXY,
     }
 
     public enum ALIGN_CORNER
@@ -2013,6 +2025,10 @@ namespace DefineLibrary
 
 		PEDESTAL_DOWN_SENSOR_NOT_CHECKED,
         PEDESTAL_UP_SENSOR_NOT_CHECKED,
+
+        FIND_EPOXY_ERROR,
+        FIND_EPOXY_UNDERFLOW,
+        FIND_EPOXY_OVERFLOW,
 		#endregion
 
 	};
@@ -2419,6 +2435,7 @@ namespace DefineLibrary
         
         // 1121, HeatSlug
         HS,
+        EPOXY,
 	}
 	public enum UnitCodeAxis
 	{
@@ -2812,8 +2829,8 @@ namespace DefineLibrary
 		PCB_ERROR = 'C',
 		BARCODE_ERROR = 'D',
 		EPOXY_NG = 'E',
-		EPOXY_UNDER_FILL = 'F',
-		EPOXY_OVER_FILL = 'G',
+		EPOXY_UNDER_FLOW = 'F',
+		EPOXY_OVER_FLOW = 'G',
 		EPOXY_POS_ERROR = 'H',
 		MAP_UNMATCHED_APEAR_ERROR = 'I',
 		MAP_UNMATCHED_MISS_ERROR = 'J',
@@ -3976,8 +3993,8 @@ namespace DefineLibrary
 				if (status == PAD_STATUS.PCB_ERROR.ToString()) return PAD_STATUS.PCB_ERROR;
 				if (status == PAD_STATUS.BARCODE_ERROR.ToString()) return PAD_STATUS.BARCODE_ERROR;
 				if (status == PAD_STATUS.EPOXY_NG.ToString()) return PAD_STATUS.EPOXY_NG;
-				if (status == PAD_STATUS.EPOXY_UNDER_FILL.ToString()) return PAD_STATUS.EPOXY_UNDER_FILL;
-				if (status == PAD_STATUS.EPOXY_OVER_FILL.ToString()) return PAD_STATUS.EPOXY_OVER_FILL;
+				if (status == PAD_STATUS.EPOXY_UNDER_FLOW.ToString()) return PAD_STATUS.EPOXY_UNDER_FLOW;
+				if (status == PAD_STATUS.EPOXY_OVER_FLOW.ToString()) return PAD_STATUS.EPOXY_OVER_FLOW;
 				if (status == PAD_STATUS.EPOXY_POS_ERROR.ToString()) return PAD_STATUS.EPOXY_POS_ERROR;
 				if (status == PAD_STATUS.EPOXY_SHAPE_ERROR.ToString()) return PAD_STATUS.EPOXY_SHAPE_ERROR;
 
@@ -4084,8 +4101,8 @@ namespace DefineLibrary
 					else if (status == PAD_STATUS.PCB_ERROR) working.tmsInfo.mapInfo[index] = (char)TMSCODE.PCB_ERROR;
 					else if (status == PAD_STATUS.BARCODE_ERROR) working.tmsInfo.mapInfo[index] = (char)TMSCODE.BARCODE_ERROR;
 					else if (status == PAD_STATUS.EPOXY_NG) working.tmsInfo.mapInfo[index] = (char)TMSCODE.EPOXY_NG;
-					else if (status == PAD_STATUS.EPOXY_UNDER_FILL) working.tmsInfo.mapInfo[index] = (char)TMSCODE.EPOXY_UNDER_FILL;
-					else if (status == PAD_STATUS.EPOXY_OVER_FILL) working.tmsInfo.mapInfo[index] = (char)TMSCODE.EPOXY_OVER_FILL;
+					else if (status == PAD_STATUS.EPOXY_UNDER_FLOW) working.tmsInfo.mapInfo[index] = (char)TMSCODE.EPOXY_UNDER_FLOW;
+					else if (status == PAD_STATUS.EPOXY_OVER_FLOW) working.tmsInfo.mapInfo[index] = (char)TMSCODE.EPOXY_OVER_FLOW;
 					else if (status == PAD_STATUS.EPOXY_POS_ERROR) working.tmsInfo.mapInfo[index] = (char)TMSCODE.EPOXY_POS_ERROR;
 					else if (status == PAD_STATUS.EPOXY_SHAPE_ERROR) working.tmsInfo.mapInfo[index] = (char)TMSCODE.EPOXY_SHAPE_ERROR;
 
@@ -4113,8 +4130,8 @@ namespace DefineLibrary
 					else if (status == PAD_STATUS.PCB_ERROR) workingedit.tmsInfo.mapInfo[index] = (char)TMSCODE.PCB_ERROR;
 					else if (status == PAD_STATUS.BARCODE_ERROR) workingedit.tmsInfo.mapInfo[index] = (char)TMSCODE.BARCODE_ERROR;
 					else if (status == PAD_STATUS.EPOXY_NG) workingedit.tmsInfo.mapInfo[index] = (char)TMSCODE.EPOXY_NG;
-					else if (status == PAD_STATUS.EPOXY_UNDER_FILL) workingedit.tmsInfo.mapInfo[index] = (char)TMSCODE.EPOXY_UNDER_FILL;
-					else if (status == PAD_STATUS.EPOXY_OVER_FILL) workingedit.tmsInfo.mapInfo[index] = (char)TMSCODE.EPOXY_OVER_FILL;
+					else if (status == PAD_STATUS.EPOXY_UNDER_FLOW) workingedit.tmsInfo.mapInfo[index] = (char)TMSCODE.EPOXY_UNDER_FLOW;
+					else if (status == PAD_STATUS.EPOXY_OVER_FLOW) workingedit.tmsInfo.mapInfo[index] = (char)TMSCODE.EPOXY_OVER_FLOW;
 					else if (status == PAD_STATUS.EPOXY_POS_ERROR) workingedit.tmsInfo.mapInfo[index] = (char)TMSCODE.EPOXY_POS_ERROR;
 					else if (status == PAD_STATUS.EPOXY_SHAPE_ERROR) workingedit.tmsInfo.mapInfo[index] = (char)TMSCODE.EPOXY_SHAPE_ERROR;
 
@@ -4794,6 +4811,7 @@ namespace DefineLibrary
 
         // 1121. HeatSlug
         HeatSlug, // 19
+        CheckEpoxy, // 20
     }
 
     public enum readTmsNum
@@ -4821,8 +4839,8 @@ namespace DefineLibrary
 		PCB_ERROR = 'C',
 		BARCODE_ERROR = 'D',
 		EPOXY_NG = 'E',
-		EPOXY_UNDER_FILL = 'F',
-		EPOXY_OVER_FILL = 'G',
+		EPOXY_UNDER_FLOW = 'F',
+		EPOXY_OVER_FLOW = 'G',
 		EPOXY_POS_ERROR = 'H',
 		MAP_UNMATCHED_APEAR_ERROR = 'I',
 		MAP_UNMATCHED_MISS_ERROR = 'J',

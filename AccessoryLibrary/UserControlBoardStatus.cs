@@ -114,8 +114,8 @@ namespace AccessoryLibrary
                 else if (status == PAD_STATUS.PCB_ERROR) { color = UtilityControl.colorCode[(int)COLORCODE.PCB_SIZE_ERR]; btnArray[x, y].Text = "PCB Size Error"; }
                 else if (status == PAD_STATUS.BARCODE_ERROR) { color = UtilityControl.colorCode[(int)COLORCODE.BARCODE_ERR]; btnArray[x, y].Text = "Barcode Error"; }
                 else if (status == PAD_STATUS.EPOXY_NG) { color = UtilityControl.colorCode[(int)COLORCODE.NO_EPOXY]; btnArray[x, y].Text = "No Epoxy"; }
-                else if (status == PAD_STATUS.EPOXY_UNDER_FILL) { color = UtilityControl.colorCode[(int)COLORCODE.EPOXY_UNDERFLOW]; btnArray[x, y].Text = "Epoxy Underflow"; }
-                else if (status == PAD_STATUS.EPOXY_OVER_FILL) { color = UtilityControl.colorCode[(int)COLORCODE.EPOXY_OVERFLOW]; btnArray[x, y].Text = "Epoxy Overflow"; }
+                else if (status == PAD_STATUS.EPOXY_UNDER_FLOW) { color = UtilityControl.colorCode[(int)COLORCODE.EPOXY_UNDERFLOW]; btnArray[x, y].Text = "Epoxy Underflow"; }
+                else if (status == PAD_STATUS.EPOXY_OVER_FLOW) { color = UtilityControl.colorCode[(int)COLORCODE.EPOXY_OVERFLOW]; btnArray[x, y].Text = "Epoxy Overflow"; }
                 else if (status == PAD_STATUS.EPOXY_POS_ERROR) { color = UtilityControl.colorCode[(int)COLORCODE.EPOXY_POS_ERR]; btnArray[x, y].Text = "Epoxy Position Error"; }
                 else if (status == PAD_STATUS.EPOXY_SHAPE_ERROR) { color = UtilityControl.colorCode[(int)COLORCODE.EPOXY_SHAPE_ERROR]; btnArray[x, y].Text = "Epoxy Shape Error"; }
                 else if (status == PAD_STATUS.ATTACH_FAIL) { color = UtilityControl.colorCode[(int)COLORCODE.ATTACH_FAIL]; btnArray[x, y].Text = "Attach Fail"; }
@@ -181,8 +181,8 @@ namespace AccessoryLibrary
                         else if (status[i] == PAD_STATUS.PCB_ERROR.ToString()) sts = PAD_STATUS.PCB_ERROR;
                         else if (status[i] == PAD_STATUS.BARCODE_ERROR.ToString()) sts = PAD_STATUS.BARCODE_ERROR;
                         else if (status[i] == PAD_STATUS.EPOXY_NG.ToString()) sts = PAD_STATUS.EPOXY_NG;
-                        else if (status[i] == PAD_STATUS.EPOXY_UNDER_FILL.ToString()) sts = PAD_STATUS.EPOXY_UNDER_FILL;
-                        else if (status[i] == PAD_STATUS.EPOXY_OVER_FILL.ToString()) sts = PAD_STATUS.EPOXY_OVER_FILL;
+                        else if (status[i] == PAD_STATUS.EPOXY_UNDER_FLOW.ToString()) sts = PAD_STATUS.EPOXY_UNDER_FLOW;
+                        else if (status[i] == PAD_STATUS.EPOXY_OVER_FLOW.ToString()) sts = PAD_STATUS.EPOXY_OVER_FLOW;
                         else if (status[i] == PAD_STATUS.EPOXY_POS_ERROR.ToString()) sts = PAD_STATUS.EPOXY_POS_ERROR;
                         else if (status[i] == PAD_STATUS.EPOXY_SHAPE_ERROR.ToString()) sts = PAD_STATUS.EPOXY_SHAPE_ERROR;
                         else if (status[i] == PAD_STATUS.ATTACH_FAIL.ToString()) sts = PAD_STATUS.ATTACH_FAIL;

@@ -1141,5 +1141,12 @@ namespace PSA_Application
 		{
 			mc.OUT.MAIN.TowerLamp(mode, state);
 		}
+
+        private void LB_Status_DoubleClick(object sender, EventArgs e)
+        {
+            mc.check.push(sender, false, (int)SelectedMenu.DEFAULT);
+            mc.check.push(sender, true, (int)SelectedMenu.DEFAULT);
+            mc.check.push(sender, false, (int)SelectedMenu.DEFAULT);
+        }
 	}
 }

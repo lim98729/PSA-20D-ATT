@@ -54,7 +54,7 @@ namespace PSA_SystemLibrary
         {
             get
             {
-                return "att20170201A";
+                return "20170205A";
             }
         }
         //public static bool START;
@@ -6215,6 +6215,7 @@ namespace PSA_SystemLibrary
             public static mechanicalTypeParameter mcType = new mechanicalTypeParameter();
             public static headParameter HD = new headParameter();
             public static headCamearaParameter HDC = new headCamearaParameter();
+            public static halconBlobParameter EPOXY = new halconBlobParameter();
             public static HeatSlugParameter HS = new HeatSlugParameter();
             public static upLookingCamearaParameter ULC = new upLookingCamearaParameter();
             public static calibrationParameter CAL = new calibrationParameter();
@@ -6860,6 +6861,7 @@ namespace PSA_SystemLibrary
 
                 // 1121. HeatSlug
                 HS.unitCode = UnitCode.HS;
+                EPOXY.unitCode = UnitCode.EPOXY;
 
                 DIAG.unitCode = UnitCode.DIAG;
 
@@ -6893,6 +6895,7 @@ namespace PSA_SystemLibrary
 
                 // 1121. HeatSlug
                 HS.write(out ret.b, savepath); if (!ret.b) { r = false; return; }
+                EPOXY.write(out ret.b, savepath); if (!ret.b) { r = false; return; }
 
                 commMPC.writeFDCFile();
 
@@ -6915,6 +6918,7 @@ namespace PSA_SystemLibrary
 
                 // 1121. HeatSlug;
                 HS.read(out ret.b, readpath); if (!ret.b) { r = false; return; }
+                EPOXY.read(out ret.b, readpath); if (!ret.b) { r = false; return; }
 
                 r = true;
             }
@@ -7183,7 +7187,7 @@ namespace PSA_SystemLibrary
 
                     #region Vision
                     #region Model Data
-                    for (int cnt = 0; cnt < ulc.cam.MODEL_MAX_CNT; cnt++)
+                    for (int cnt = 0; cnt < (int)MAX_COUNT.MODEL; cnt++)
                     {
                         HOperatorSet.TupleFind(recipeTuple, "ULC.Vis.Model[" + cnt.ToString() + "].IsCreate", out tuplePos); if (tuplePos < 0) continue;
                         ulc.cam.model[cnt].isCreate = recipeTuple[++tuplePos]; tuplePos++;
@@ -7225,7 +7229,7 @@ namespace PSA_SystemLibrary
                         ulc.cam.model[cnt].findNumLevels = recipeTuple[++tuplePos]; tuplePos++;
                         ulc.cam.model[cnt].findGreediness = recipeTuple[++tuplePos];
                     }
-                    for (int cnt = 0; cnt < hdc.cam.MODEL_MAX_CNT; cnt++)
+                    for (int cnt = 0; cnt < (int)MAX_COUNT.MODEL; cnt++)
                     {
                         HOperatorSet.TupleFind(recipeTuple, "HDC.Vis.Model[" + cnt.ToString() + "].IsCreate", out tuplePos); if (tuplePos < 0) continue;
                         hdc.cam.model[cnt].isCreate = recipeTuple[++tuplePos]; tuplePos++;
@@ -7604,7 +7608,7 @@ namespace PSA_SystemLibrary
 
                     #region Vision
                     #region Model Data
-                    for (int cnt = 0; cnt < ulc.cam.MODEL_MAX_CNT; cnt++)
+                    for (int cnt = 0; cnt < (int)MAX_COUNT.MODEL; cnt++)
                     {
                         if (ulc.cam.model[cnt].isCreate == null) continue;
                         if (ulc.cam.model[cnt].isCreate == "false") continue;
@@ -7647,7 +7651,7 @@ namespace PSA_SystemLibrary
                         recipeTuple[tuplePos] = "ULC.Vis.Model[" + cnt.ToString() + "].FindNumLevels"; tuplePos++; recipeTuple[tuplePos] = ulc.cam.model[cnt].findNumLevels; tuplePos++;
                         recipeTuple[tuplePos] = "ULC.Vis.Model[" + cnt.ToString() + "].FindGreediness"; tuplePos++; recipeTuple[tuplePos] = ulc.cam.model[cnt].findGreediness; tuplePos++;
                     }
-                    for (int cnt = 0; cnt < hdc.cam.MODEL_MAX_CNT; cnt++)
+                    for (int cnt = 0; cnt < (int)MAX_COUNT.MODEL; cnt++)
                     {
                         if (hdc.cam.model[cnt].isCreate == null) continue;
                         if (hdc.cam.model[cnt].isCreate == "false") continue;

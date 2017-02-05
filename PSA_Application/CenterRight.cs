@@ -89,6 +89,7 @@ namespace PSA_Application
                 
                 // 1121. HeatSlug
 			    CenterRight_HeatSlug.Visible = false;
+                CenterRight_CheckEpoxy.Visible = false;
 
 				CenterRight_Initial.Visible = false;
 				CenterRight_TowerLamp.Visible = false;
@@ -203,6 +204,14 @@ namespace PSA_Application
                     CenterRight_HeatSlug.Dock = DockStyle.Fill;
                     CenterRight_HeatSlug.Visible = true;
                     str = String.Format("{0} - {1}", BT_Parameter.Text, BT_Parameter_HeatSlug.Text);
+                    //str = BT_Parameter.Text + " - " + BT_Parameter_HeatSlug.Text;
+                }
+                if (mode == CENTERER_RIGHT_PANEL.CHECKEPOXY)
+                {
+                    mc.user.selectedMenu = CENTERER_RIGHT_PANEL.CHECKEPOXY.ToString();
+                    CenterRight_CheckEpoxy.Dock = DockStyle.Fill;
+                    CenterRight_CheckEpoxy.Visible = true;
+                    str = String.Format("{0} - {1}", BT_Parameter.Text, BT_Parameter_CheckEpoxy.Text);
                     //str = BT_Parameter.Text + " - " + BT_Parameter_HeatSlug.Text;
                 }
 				if (mode == CENTERER_RIGHT_PANEL.INITIAL)
@@ -484,6 +493,21 @@ namespace PSA_Application
 				}
             }
 
+            if (sender.Equals(BT_Parameter_CheckEpoxy))
+            {
+                if (mc.para.selMode != (int)CenterRightSelMode.CheckEpoxy)
+                {
+                    mc.para.savePara((int)CenterRightSelMode.CheckEpoxy);
+                    mc.para.selMode2 = mc.para.selMode;
+                    mc.para.selMode = (int)CenterRightSelMode.CheckEpoxy;
+
+                    if (!checkLogIn()) goto LOGIN_CHECK_END;
+                    else
+                    {
+                        ChangeParameter();
+                    }
+                }
+            }
             // 1121. HeatSlug
             if (sender.Equals(BT_Parameter_HeatSlug))
             {
@@ -599,6 +623,7 @@ namespace PSA_Application
                     else if (mc.para.selMode == (int)CenterRightSelMode.Change_ColorCode) centerRightPanelMode(CENTERER_RIGHT_PANEL.CHANGECOLORCODE);
                     // 1121. HeatSlug
                     else if (mc.para.selMode == (int)CenterRightSelMode.HeatSlug) centerRightPanelMode(CENTERER_RIGHT_PANEL.HEATSLUG);
+                    else if (mc.para.selMode == (int)CenterRightSelMode.CheckEpoxy) centerRightPanelMode(CENTERER_RIGHT_PANEL.CHECKEPOXY);
                 }
             }
             if (mc.para.selMode == (int)CenterRightSelMode.Main) centerRightPanelMode(CENTERER_RIGHT_PANEL.MAIN);
@@ -620,6 +645,7 @@ namespace PSA_Application
             else if (mc.para.selMode == (int)CenterRightSelMode.Change_ColorCode) centerRightPanelMode(CENTERER_RIGHT_PANEL.CHANGECOLORCODE);
             // 1121. HeatSlug
             else if (mc.para.selMode == (int)CenterRightSelMode.HeatSlug) centerRightPanelMode(CENTERER_RIGHT_PANEL.HEATSLUG);
+            else if (mc.para.selMode == (int)CenterRightSelMode.CheckEpoxy) centerRightPanelMode(CENTERER_RIGHT_PANEL.CHECKEPOXY);
         }
 
         private bool checkLogIn()

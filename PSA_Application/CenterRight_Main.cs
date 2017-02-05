@@ -623,6 +623,7 @@ namespace PSA_Application
 					//mc.commMPC.writeRecipeFile(fileName, out ret.b);
 					recipeName = svDlg.FileName;
 					mc.para.ETC.recipeName.description = svDlg.FileName;
+                    mc.commMPC.WorkData.receipeName = fileName;
 					EVENT.userDialogMessage(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.INFORMATION, String.Format(textResource.MB_ETC_FILE_SAVE_OK, "Recipe"));
 					mc.para.write(out ret.b); if (!ret.b) { mc.message.alarm("para write error"); }
 				}

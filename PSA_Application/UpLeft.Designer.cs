@@ -91,6 +91,7 @@
             this.LB_Status.TabIndex = 197;
             this.LB_Status.Text = "Auto Running";
             this.LB_Status.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.LB_Status.DoubleClick += new System.EventHandler(this.LB_Status_DoubleClick);
             // 
             // UpLeft
             // 

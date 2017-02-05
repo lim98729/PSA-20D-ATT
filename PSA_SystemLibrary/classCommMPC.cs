@@ -1986,8 +1986,8 @@ namespace PSA_SystemLibrary
 							else if (tmpMap[tmpindex] == (char)TMSCODE.PCB_ERROR) mc.board.padStatus(BOARD_ZONE.LOADING, indexX, indexY, PAD_STATUS.PCB_ERROR, out ret.b);
 							else if (tmpMap[tmpindex] == (char)TMSCODE.BARCODE_ERROR) mc.board.padStatus(BOARD_ZONE.LOADING, indexX, indexY, PAD_STATUS.BARCODE_ERROR, out ret.b);
 							else if (tmpMap[tmpindex] == (char)TMSCODE.EPOXY_NG) mc.board.padStatus(BOARD_ZONE.LOADING, indexX, indexY, PAD_STATUS.EPOXY_NG, out ret.b);
-							else if (tmpMap[tmpindex] == (char)TMSCODE.EPOXY_UNDER_FILL) mc.board.padStatus(BOARD_ZONE.LOADING, indexX, indexY, PAD_STATUS.EPOXY_UNDER_FILL, out ret.b);
-							else if (tmpMap[tmpindex] == (char)TMSCODE.EPOXY_OVER_FILL) mc.board.padStatus(BOARD_ZONE.LOADING, indexX, indexY, PAD_STATUS.EPOXY_OVER_FILL, out ret.b);
+							else if (tmpMap[tmpindex] == (char)TMSCODE.EPOXY_UNDER_FLOW) mc.board.padStatus(BOARD_ZONE.LOADING, indexX, indexY, PAD_STATUS.EPOXY_UNDER_FLOW, out ret.b);
+							else if (tmpMap[tmpindex] == (char)TMSCODE.EPOXY_OVER_FLOW) mc.board.padStatus(BOARD_ZONE.LOADING, indexX, indexY, PAD_STATUS.EPOXY_OVER_FLOW, out ret.b);
 							else if (tmpMap[tmpindex] == (char)TMSCODE.EPOXY_POS_ERROR) mc.board.padStatus(BOARD_ZONE.LOADING, indexX, indexY, PAD_STATUS.EPOXY_POS_ERROR, out ret.b);
 							else if (tmpMap[tmpindex] == (char)TMSCODE.ATTACH_FAIL) mc.board.padStatus(BOARD_ZONE.LOADING, indexX, indexY, PAD_STATUS.ATTACH_FAIL, out ret.b);
 							else if (tmpMap[tmpindex] == (char)TMSCODE.ATTACH_UNDERPRESS) mc.board.padStatus(BOARD_ZONE.LOADING, indexX, indexY, PAD_STATUS.ATTACH_UNDERPRESS, out ret.b);

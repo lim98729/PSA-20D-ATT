@@ -814,10 +814,15 @@ namespace PSA_SystemLibrary
 
                 case (int)SEQ.AUTO_ULC_PLACE:
 					mc.hd.tool.ulcfailchecked = false;
+                    mc.hd.tool.epoxyfailchecked = false;
 					tool.ulc_place();
 					if (tool.RUNING) break;
 					if (tool.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
-                    if (mc2.req == MC_REQ.STOP) { sqc = (int)SEQ.AUTO_PLACE_STANDBY; break; }
+                    if (mc.hd.tool.epoxyfailchecked)
+                    {
+                        mc.hd.pickDone = false;
+                        sqc = (int)SEQ.AUTO_CHECK_PAD1; break;
+                    }
 					if (mc.hd.tool.ulcfailchecked)
 					{
 						mc.hd.pickDone = false;
@@ -863,6 +868,7 @@ namespace PSA_SystemLibrary
                     tool.DriveUp();
                     if (tool.RUNING) break;
                     if (tool.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
+                    if (mc2.req == MC_REQ.STOP) { sqc = (int)SEQ.AUTO_PLACE_STANDBY; break; }
                     sqc = (int)SEQ.AUTO_PRESS_AFTER_BONDING;
                     break;
 
@@ -943,7 +949,6 @@ namespace PSA_SystemLibrary
 							mc.log.debug.write(mc.log.CODE.TRACE, ret.s1);
 							// 새로운 Point가 Skip Point인 경우, SKIP으로 표시한다.
                             mc.board.padStatus(BOARD_ZONE.WORKING, tool.padX, tool.padY, PAD_STATUS.SKIP, out ret.b); if (!ret.b) { errorCheck(ERRORCODE.HD, sqc, "Auto Mode Error", ALARM_CODE.E_CONV_WORK_TRAY_DATA_SAVE_ERROR); break; }
-
 							break;  // 현재 Step을 계속 진행한다.
 						}
 						else
@@ -952,7 +957,7 @@ namespace PSA_SystemLibrary
                             mc.pd.req = true;
                             mc.pd.reqMode = REQMODE.AUTO;
 
-                            if (tool.attachSkip || mc.hd.tool.VisionErrorSkip)
+                            if (tool.attachSkip || mc.hd.tool.VisionErrorSkip || mc.hd.tool.epoxyfailchecked)
                             {
                                 mc.hd.tool.VisionErrorSkip = false;
                                 tool.attachSkip = false;
@@ -2253,7 +2258,8 @@ namespace PSA_SystemLibrary
 		public double hdcResult;
 		public double fidPX, fidPY, fidPD;
 		public double trayReversePX, trayReversePY, trayReversePT;
-		
+        public double epoxyPX, epoxyPY, epoxyAmount;
+
 		public void move_home()
 		{
 			switch (sqc)
@@ -3507,6 +3513,7 @@ namespace PSA_SystemLibrary
 		}
 		public int ulcfailcount;
 		public bool ulcfailchecked;
+        public bool epoxyfailchecked;
 		public int doublecheckcount;
 		public bool doublechecked;
 		public int ulcchamferfail;
@@ -3794,34 +3801,62 @@ namespace PSA_SystemLibrary
 					realAngle = 0;
 					setJogTeach = false;
 					#endregion
-
-					if (mc.para.HDC.fiducialUse.value == (int)ON_OFF.ON) sqc = 1; 
-					else sqc = 10; 
-					break;
+                    sqc = 200; break;
 
 				#region Check Ficucial Mark
 				case 1:
-					Z.move(tPos.z.XY_MOVING, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break; 
-					if (mc.para.HDC.fiducialPos.value == 0) 
-					{
-						Y.moveCompare(cPos.y.PADC1(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;  
-						X.moveCompare(cPos.x.PADC1(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-					}
-					else if (mc.para.HDC.fiducialPos.value == 1)
-					{
-						Y.moveCompare(cPos.y.PADC2(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.moveCompare(cPos.x.PADC2(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-					}
-					else if (mc.para.HDC.fiducialPos.value == 2)
-					{
-						Y.moveCompare(cPos.y.PADC3(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.moveCompare(cPos.x.PADC3(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-					}
-					else
-					{
-						Y.moveCompare(cPos.y.PADC4(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.moveCompare(cPos.x.PADC4(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-					}
+                    if (mc.para.HDC.fiducialUse.value == (int)ON_OFF.OFF) { sqc = 10; break; }
+
+                    Z.move(tPos.z.XY_MOVING, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
+                    if (mc.para.EPOXY.useCheck.value == (int)ON_OFF.ON)
+                    {
+                        rateY = Y.config.speed.rate; Y.config.speed.rate = Math.Max(rateY * 0.3, 0.1);
+                        rateX = X.config.speed.rate; X.config.speed.rate = Math.Max(rateX * 0.3, 0.1);
+
+                        if (mc.para.HDC.fiducialPos.value == 0)
+                        {
+                            Y.move(cPos.y.PADC1(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                            X.move(cPos.x.PADC1(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                        }
+                        else if (mc.para.HDC.fiducialPos.value == 1)
+                        {
+                            Y.move(cPos.y.PADC2(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                            X.move(cPos.x.PADC2(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                        }
+                        else if (mc.para.HDC.fiducialPos.value == 2)
+                        {
+                            Y.move(cPos.y.PADC3(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                            X.move(cPos.x.PADC3(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                        }
+                        else
+                        {
+                            Y.move(cPos.y.PADC4(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                            X.move(cPos.x.PADC4(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                        }
+                    }
+                    else
+                    {
+                        if (mc.para.HDC.fiducialPos.value == 0)
+                        {
+                            Y.moveCompare(cPos.y.PADC1(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                            X.moveCompare(cPos.x.PADC1(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                        }
+                        else if (mc.para.HDC.fiducialPos.value == 1)
+                        {
+                            Y.moveCompare(cPos.y.PADC2(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                            X.moveCompare(cPos.x.PADC2(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                        }
+                        else if (mc.para.HDC.fiducialPos.value == 2)
+                        {
+                            Y.moveCompare(cPos.y.PADC3(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                            X.moveCompare(cPos.x.PADC3(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                        }
+                        else
+                        {
+                            Y.moveCompare(cPos.y.PADC4(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                            X.moveCompare(cPos.x.PADC4(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                        }
+                    }
 					dwell.Reset();
 					sqc++; break;
 				case 2:
@@ -3829,6 +3864,8 @@ namespace PSA_SystemLibrary
 					if (ret.b)
 					{
 						X.eStop(out ret.message); Y.eStop(out ret.message);
+                        errorCheck(ERRORCODE.HD, sqc, "Z Axis Error at MoveCompare");
+                        break;
 					}
 					if (!Z_AT_TARGET) break;
 					#region HDC.PADC1.req
@@ -3863,7 +3900,6 @@ namespace PSA_SystemLibrary
 					}
 					else mc.hdc.reqMode = REQMODE.GRAB;
 					mc.hdc.lighting_exposure(mc.para.HDC.modelFiducial.light, mc.para.HDC.modelFiducial.exposureTime);
-					//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 					#endregion
 					dwell.Reset();
 					sqc++; break;
@@ -3885,8 +3921,7 @@ namespace PSA_SystemLibrary
 					dwell.Reset();
 					sqc++; break;
 				case 6:
-					if (dwell.Elapsed < 15) break; // head camear delay
-					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
+					if (dwell.Elapsed < 15) break; // head camera delay
                     mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
 					dwell.Reset();
@@ -3958,7 +3993,7 @@ namespace PSA_SystemLibrary
 					mc.log.mcclog.write(mc.log.MCCCODE.HEAD_MOVE_1ST_FIDUCIAL_POS, 0);
 					Z.move(tPos.z.XY_MOVING, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
 
-					if (hdcfailchecked || (mc.para.HDC.fiducialUse.value == (int)ON_OFF.ON))
+                    if (hdcfailchecked || mc.para.HDC.fiducialUse.value == (int)ON_OFF.ON || mc.para.EPOXY.useCheck.value == (int)ON_OFF.ON)
 					{
 						rateY = Y.config.speed.rate; Y.config.speed.rate = Math.Max(rateY * 0.3, 0.1);
 						rateX = X.config.speed.rate; X.config.speed.rate = Math.Max(rateX * 0.3, 0.1);
@@ -4009,6 +4044,8 @@ namespace PSA_SystemLibrary
 					if (ret.b)
 					{
 						X.eStop(out ret.message); Y.eStop(out ret.message);
+                        errorCheck(ERRORCODE.HD, sqc, "Z Axis Error at MoveCompare");
+                        break;
 					}
 					if (!Z_AT_TARGET) break;
 
@@ -9069,6 +9106,92 @@ namespace PSA_SystemLibrary
 					errorCheck(ERRORCODE.HD, sqc, "Force 차이가 너무 큽니다. Head 부하량이 변경되었거나 Force Calibraion 을 확인 하세요. 현재 차이값 : " + (mc.para.HD.place.force.value - placeForceMean) + " (kg)");
 					break;
 					#endregion
+
+
+
+
+                #region case 200 xy padCenter
+                case 200:
+                    if (mc.para.EPOXY.useCheck.value == (int)ON_OFF.OFF) { sqc = 1; break; }
+                    Z.move(tPos.z.XY_MOVING, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
+                    Y.moveCompare(cPos.y.PAD(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                    X.moveCompare(cPos.x.PAD(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                    dwell.Reset();
+                    sqc++; break;
+                case 201:
+                    Z.AT_ERROR(out ret.b, out ret.message);
+                    if (ret.b)
+                    {
+                        X.eStop(out ret.message); Y.eStop(out ret.message);
+                        errorCheck(ERRORCODE.HD, sqc, "Z Axis Error at MoveCompare");
+                        break;
+                    }
+                    if (!Z_AT_TARGET) break;
+
+                    #region HDC.FIND_EPOXY.req
+                    epoxyPX = 0;
+                    epoxyPY = 0;
+                    epoxyAmount = 0;
+                    if (mc.hd.reqMode == REQMODE.DUMY) mc.hdc.reqMode = REQMODE.GRAB;
+                    else
+                    {
+                       mc.hdc.reqMode = REQMODE.FIND_EPOXY;
+                    }
+                    mc.hdc.lighting_exposure(mc.para.EPOXY.light, mc.para.EPOXY.exposureTime);
+                    #endregion
+                    dwell.Reset();
+                    sqc++; break;
+                case 202:
+                    if (!X_AT_TARGET || !Y_AT_TARGET) break;
+                    dwell.Reset();
+                    sqc++; break;
+                case 203:
+                    if (!X_AT_DONE || !Y_AT_DONE || !Z_AT_DONE) break;
+                    if (mc.para.HD.place.forceMode.mode.value == (int)PLACE_FORCE_MODE.LOW_HIGH_MODE)
+                    {
+                        // 설정된 압력으로 미리 변환하여 Place시점에서의 공압 변화 Timing을 줄인다.
+                        mc.hd.tool.F.kilogram(UtilityControl.forcePlaceStartForce, out ret.message);
+                    }
+                    sqc++; break;
+                case 204:
+                    if (mc.pd.RUNING) break;
+                    if (mc.pd.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
+                    sqc = 210; break;
+                #endregion
+
+                #region case 20 triggerHDC
+                case 210:
+                    if (dev.NotExistHW.CAMERA) { sqc = 213; break; }
+                    dwell.Reset();
+                    sqc++; break;
+                case 211:
+                    if (dwell.Elapsed < 15) break; // head camera delay
+                    mc.hdc.req = true;
+                    triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
+                    dwell.Reset();
+                    sqc++; break;
+                case 212:
+                    if (dwell.Elapsed < mc.hdc.cam.acq.ExposureTimeAbs * 0.001 + 2) break;
+                    triggerHDC.output(false, out ret.message); if (mpiCheck(sqc, ret.message)) break;
+                    dwell.Reset();
+                    sqc++; break;
+                case 213:
+                    if (mc.hdc.RUNING) break;
+                    if (mc.hdc.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
+                    
+                    mc.hdc.EpoxyAmountJugement(out ret.message, out ret.s);
+                    if (ret.message == RetMessage.OK) sqc = 1;
+                    else
+                    {
+                        epoxyfailchecked = true;
+                        sqc = SQC.STOP;
+                        if (ret.message == RetMessage.FIND_EPOXY_UNDERFLOW) mc.board.padStatus(BOARD_ZONE.WORKING, padX, padY, PAD_STATUS.EPOXY_UNDER_FLOW, out ret.b);
+                        else if (ret.message == RetMessage.FIND_EPOXY_OVERFLOW) mc.board.padStatus(BOARD_ZONE.WORKING, padX, padY, PAD_STATUS.EPOXY_OVER_FLOW, out ret.b);
+                        else mc.board.padStatus(BOARD_ZONE.WORKING, padX, padY, PAD_STATUS.EPOXY_NG, out ret.b);
+                    }
+                    break;
+                #endregion
+
 
 				case SQC.ERROR:
 					//string dspstr = "HD ulc_place Esqc " + Esqc.ToString();
