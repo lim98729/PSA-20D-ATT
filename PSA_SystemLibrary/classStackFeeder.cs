@@ -177,32 +177,6 @@ namespace PSA_SystemLibrary
 			}
 		}
 
-        void InitSFCompData(UnitCodeSFMG mg)
-        {
-            if (mg == UnitCodeSFMG.MG1)
-            {
-                if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG) tubeNumber = 1;
-                else if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.CHIPPAC) tubeNumber = 2;
-
-                for (int i = 0; i < tubeNumber; i++)        // MGZ#1 이므로 0~3까지(0~1까지)
-                {
-                    mc.para.HD.pick.pickPosComp[i].x.value = 0;
-                    mc.para.HD.pick.pickPosComp[i].y.value = 0;
-                }
-            }
-            else
-            {
-                if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG) tubeNumber = 2;
-                else if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.CHIPPAC) tubeNumber = 4;
-
-                for (int i = tubeNumber / 2; i < tubeNumber; i++)        // MGZ#2
-                {
-                    mc.para.HD.pick.pickPosComp[i].x.value = 0;
-                    mc.para.HD.pick.pickPosComp[i].y.value = 0;
-                }
-            }
-            magazineClear(mg);
-        }
 		// get working tube number(if there is readied tube, change to working tube sequentially
 		public UnitCodeSF workingTubeNumber
 		{
@@ -328,6 +302,7 @@ namespace PSA_SystemLibrary
 		MPIPolarity mpiPole;
         bool limitCheck, limitCheck2;
         int tubeNumber;
+		int retryCount = 0;
 
 		public void control()
 		{
@@ -500,6 +475,13 @@ namespace PSA_SystemLibrary
 
                     if (readyPosition == 0)
                     {
+						if (limitCheck)
+						{
+							Z2.stop(out ret.message);
+							Z.stop(out ret.message);
+							homingZ.req = true;
+							sqc = SQC.READY + 2;
+						}
                         if (ret.b1 || ret.b2)
                         {
                             Z.stop(out ret.message);
@@ -521,17 +503,17 @@ namespace PSA_SystemLibrary
                             }
                             sqc = SQC.READY + 4;
                         }
-                        if (limitCheck)
-                        {
-                            Z2.stop(out ret.message);
-                            Z.stop(out ret.message);
-							homingZ.req = true;
-                            sqc = SQC.READY + 2;
-                            magazineClear(UnitCodeSFMG.MG1);
-                        }
                     }
                     if (readyPosition == 1)
                     {
+						if (limitCheck2)
+                        {
+                            Z2.stop(out ret.message);
+                            Z.stop(out ret.message);
+							homingZ2.req = true;
+                            sqc = SQC.READY + 2;
+							//magazineClear(UnitCodeSFMG.MG2);
+                        }
                         if (ret.b3 || ret.b4)
                         {
                             Z2.stop(out ret.message);
@@ -553,14 +535,6 @@ namespace PSA_SystemLibrary
                             }
                             sqc = SQC.READY + 4;
                         }
-                        if (limitCheck2)
-                        {
-                            Z2.stop(out ret.message);
-                            Z.stop(out ret.message);
-                            homingZ2.req = true;
-                            sqc = SQC.READY + 2;
-                            magazineClear(UnitCodeSFMG.MG2);
-                        }
                     }
                     break;
                 case SQC.READY + 2:
@@ -570,7 +544,8 @@ namespace PSA_SystemLibrary
                         if (homingZ.ERROR) { Esqc = sqc; sqc = SQC.HOMING_ERROR; break; }
 						
 						// tube가 모두 소진되어서 갈아야 하므로 PickPosComp 을 초기화 한다.
-                        InitSFCompData(UnitCodeSFMG.MG1);
+
+						magazineClear(UnitCodeSFMG.MG1);
 
 						Z.reset(out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
 						Z.status(out mpiState, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
@@ -580,7 +555,8 @@ namespace PSA_SystemLibrary
                         if (homingZ2.RUNING) break;
                         if (homingZ2.ERROR) { Esqc = sqc; sqc = SQC.HOMING_ERROR; break; }
 						// tube가 모두 소진되어서 갈아야 하므로 PickPosComp 을 초기화 한다.
-                        InitSFCompData(UnitCodeSFMG.MG2);
+
+						magazineClear(UnitCodeSFMG.MG2);
 
 						Z2.reset(out ret.message); if (mpiCheck(Z2.config.axisCode, sqc, ret.message)) break;
 						Z2.status(out mpiState, out ret.message); if (mpiCheck(Z2.config.axisCode, sqc, ret.message)) break;
@@ -809,6 +785,18 @@ namespace PSA_SystemLibrary
                         Z2.IN_P_LIMIT(out ret.b3, out ret.message); if (mpiCheck(Z2.config.axisCode, sqc, ret.message)) break;
                     }
 
+					if (ret.b3)
+					{
+						if (readyPosition == 0)
+						{
+							homingZ.req = true;
+						}
+						else
+						{
+							homingZ2.req = true;
+						}
+						sqc = SQC.READY + 2;
+					}
                     if (ret.b1 || ret.b2)
                     {
                         if (readyPosition == 0)
@@ -823,21 +811,7 @@ namespace PSA_SystemLibrary
                             dwell.Reset();
                             sqc = SQC.READY + 24; break;
                         }
-                    }
-                    if (ret.b3)
-                    {
-                        if (readyPosition == 0)
-                        {
-                            homingZ.req = true;
-                            magazineClear(UnitCodeSFMG.MG1);
 
-                        }
-                        else
-                        {
-                            homingZ2.req = true;
-                            magazineClear(UnitCodeSFMG.MG2);
-                        }
-                        sqc = SQC.READY + 2;
                     }
                     break;
                 case SQC.READY + 22:
@@ -1001,6 +975,7 @@ namespace PSA_SystemLibrary
                     Z.status(out mpiState, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
                     Z2.reset(out ret.message); if (mpiCheck(Z2.config.axisCode, sqc, ret.message)) break;
                     Z2.status(out mpiState2, out ret.message); if (mpiCheck(Z2.config.axisCode, sqc, ret.message)) break;
+					retryCount = 0;
 
 					if (mpiState != MPIState.IDLE)
 					{
@@ -1091,6 +1066,14 @@ namespace PSA_SystemLibrary
 
 					if (moveSFZ)
 					{
+						if (limitCheck)
+						{
+							mc.log.debug.write(mc.log.CODE.INFO, String.Format(textResource.LOG_DEBUG_SF_READY_DOWN, "MGZ #1"), false);
+							Z2.stop(out ret.message);
+							Z.stop(out ret.message);
+							homingZ.req = true;
+							sqc = SQC.AUTO + 2;
+						}
                         if (ret.b1 || ret.b2)
                         {
                             workingZAxis = 1;
@@ -1111,18 +1094,18 @@ namespace PSA_SystemLibrary
                             }
                             sqc = SQC.AUTO + 4;
                         }
-                        if (limitCheck)
-                        {
-                            mc.log.debug.write(mc.log.CODE.INFO, String.Format(textResource.LOG_DEBUG_SF_READY_DOWN, "MGZ #1"), false);
-                            Z2.stop(out ret.message);
-                            Z.stop(out ret.message);
-							homingZ.req = true;
-                            sqc = SQC.AUTO + 2;
-                            magazineClear(UnitCodeSFMG.MG1);
-                        }
 					}
                     else if (moveSFZ2)
                     {
+						if (limitCheck2)
+                        {
+							mc.log.debug.write(mc.log.CODE.INFO, String.Format(textResource.LOG_DEBUG_SF_READY_DOWN, "MGZ #2"), false);
+                            Z2.stop(out ret.message);
+                            Z.stop(out ret.message);
+							homingZ2.req = true;
+                            sqc = SQC.AUTO + 2;
+							//magazineClear(UnitCodeSFMG.MG2);
+                        }
                         if (ret.b3 || ret.b4)
                         {
                             workingZAxis = 2;
@@ -1143,15 +1126,6 @@ namespace PSA_SystemLibrary
                             }
                             sqc = SQC.AUTO + 4;
                         }
-                        if (limitCheck2)
-                        {
-                            mc.log.debug.write(mc.log.CODE.INFO, String.Format(textResource.LOG_DEBUG_SF_READY_DOWN, "MGZ #2"), false);
-                            Z2.stop(out ret.message);
-                            Z.stop(out ret.message);
-                            homingZ2.req = true;
-                            sqc = SQC.AUTO + 2;
-                            magazineClear(UnitCodeSFMG.MG2);
-                        }
                     }
                     break;
                 case SQC.AUTO + 2:
@@ -1162,7 +1136,7 @@ namespace PSA_SystemLibrary
                         if (homingZ.ERROR) { Esqc = sqc; sqc = SQC.HOMING_ERROR; break; }
 
 						// tube가 모두 소진되어서 갈아야 하므로 PickPosComp 을 초기화 한다.
-                        InitSFCompData(UnitCodeSFMG.MG1);
+						magazineClear(UnitCodeSFMG.MG1);
                     }
                     else if (homingZ2.req)
                     {
@@ -1171,7 +1145,8 @@ namespace PSA_SystemLibrary
                         if (homingZ2.ERROR) { Esqc = sqc; sqc = SQC.HOMING_ERROR; break; }
 
 						// tube가 모두 소진되어서 갈아야 하므로 PickPosComp 을 초기화 한다.
-                        InitSFCompData(UnitCodeSFMG.MG2);
+
+						magazineClear(UnitCodeSFMG.MG2);
                     }
                     sqc = SQC.AUTO; break;
                 case SQC.AUTO + 3:
@@ -1224,7 +1199,7 @@ namespace PSA_SystemLibrary
                     sqc = SQC.AUTO + 10;
                     break;
 				case SQC.AUTO + 10:
-                    if (dwell.Elapsed < 20) break;
+                    if (dwell.Elapsed < 100) break;
 					//downPitch = -3000;
 					downPitch = mc.para.SF.firstDownPitch.value;
                     if (workingZAxis == 1)
@@ -1404,6 +1379,20 @@ namespace PSA_SystemLibrary
                         Z2.IN_P_LIMIT(out ret.b3, out ret.message); if (mpiCheck(Z2.config.axisCode, sqc, ret.message)) break;
                     }
 
+					if (ret.b3)
+					{
+						if (workingZAxis == 1)
+						{
+							mc.log.debug.write(mc.log.CODE.INFO, String.Format(textResource.LOG_DEBUG_SF_READY_DOWN, "MGZ #1"), false);
+							homingZ.req = true;
+						}
+						else
+						{
+							mc.log.debug.write(mc.log.CODE.INFO, String.Format(textResource.LOG_DEBUG_SF_READY_DOWN, "MGZ #2"), false);
+							homingZ2.req = true;
+						}
+						sqc = SQC.AUTO + 2;
+					}
 					if (ret.b1 || ret.b2)
 					{
                         if (workingZAxis == 1)
@@ -1422,21 +1411,45 @@ namespace PSA_SystemLibrary
                         }
                         //if (stopDoneZ && stopDoneZ2) { dwell.Reset(); sqc = SQC.AUTO + 24; break; }
 					}
-                    if (ret.b3)
+
+					if (!ret.b1 && !ret.b2 && !ret.b3)
                     {
                         if (workingZAxis == 1)
                         {
-                            mc.log.debug.write(mc.log.CODE.INFO, String.Format(textResource.LOG_DEBUG_SF_READY_DOWN, "MGZ #1"), false);
-                            homingZ.req = true;
-                            magazineClear(UnitCodeSFMG.MG1);
+							if (Z_AT_DONE)
+							{
+								if (retryCount < 5)
+								{
+									retryCount++;
+									sqc = SQC.AUTO + 14;
+									mc.log.debug.write(mc.log.CODE.FAIL, "StackFeeder Z1 is retry Second up");
+									break;
                         }
                         else
                         {
-                            mc.log.debug.write(mc.log.CODE.INFO, String.Format(textResource.LOG_DEBUG_SF_READY_DOWN, "MGZ #2"), false);
-                            homingZ2.req = true;
-                            magazineClear(UnitCodeSFMG.MG2);
+									errorCheck((int)UnitCodeAxisNumber.SF_Z1, ERRORCODE.SF, sqc, "Second Up", ALARM_CODE.E_AXIS_CHECK_TARGET_MOTION_ERROR);
+									break;
+								}
                         }
-                        sqc = SQC.AUTO + 2;
+						}
+						if (workingZAxis == 2)
+						{
+							if (Z2_AT_DONE)
+							{
+								if (retryCount < 5)
+								{
+									retryCount++;
+									sqc = SQC.AUTO + 14;
+									mc.log.debug.write(mc.log.CODE.FAIL, "StackFeeder Z1 is retry Second up");
+									break;
+								}
+								else
+								{
+									errorCheck((int)UnitCodeAxisNumber.SF_Z2, ERRORCODE.SF, sqc, "Second Up", ALARM_CODE.E_AXIS_CHECK_TARGET_MOTION_ERROR);
+									break;
+								}
+							}
+						}
                     }
                     break;
                 case SQC.AUTO + 22:
@@ -1471,10 +1484,12 @@ namespace PSA_SystemLibrary
                         }
                         break;
                     }
+					dwell.Reset();
                     sqc =  SQC.AUTO + 26; break;
                 case SQC.AUTO + 25:
                     sqc++; break;
                 case SQC.AUTO + 26:
+					if (dwell.Elapsed < 100) break;
                     #region speed set
                     //sp.velocity = 0.01;
                     sp.velocity = mc.para.SF.downVel.value;

@@ -259,7 +259,7 @@ namespace PSA_SystemLibrary
 					sqc = SQC.STOP; break;
 				#endregion
 
-                #region FIND_RECTANGLE
+				#region FIND_EPOXY
                 case SQC.FIND_EPOXY:
                     if (cam.refresh_req) break;
                     #region grab
@@ -280,8 +280,6 @@ namespace PSA_SystemLibrary
                         {
                             cam.writeLogGrabImage("Epoxy_Check_Fail");
                         }
-                        sqc = SQC.FIND_ERROR;
-                        break;
                     }
                     else
                     {
@@ -841,23 +839,38 @@ namespace PSA_SystemLibrary
 		}
 		#endregion
 
-        public void edgeIntersectionFind(QUARTER_NUMBER quarterNumber, out bool b, int mode = 0)
+		public void epoxyFindBlob(halcon_blob[] halconBlob, double tempthreshold, double tempareaminfilter, out RetMessage retMessage)
 		{
-            if(mode == 0)           // hdc
-            {
 			mc.hdc.cam.grabSofrwareTrigger();
-			mc.hdc.cam.edgeIntersection.create(mc.hdc.cam.acq.Image, mc.hdc.cam.window, mc.hdc.cam.acq.ResolutionX, mc.hdc.cam.acq.ResolutionY, quarterNumber, out b); if (!b) return;
-			mc.hdc.cam.edgeIntersection.find(out b); if (!b) return;
-			mc.hdc.cam.refresh_req = true; mc.hdc.cam.refresh_reqMode = REFRESH_REQMODE.EDGE_INTERSECTION;
+
+			mc.hdc.cam.findBlob(halconBlob, tempthreshold, tempareaminfilter, -1, -1, out retMessage, out ret.s, 1); if (ret.message != RetMessage.OK) return;
+			mc.hdc.cam.refresh_req = true; mc.hdc.cam.refresh_reqMode = REFRESH_REQMODE.FIND_EPOXY;
 			dwell.Reset();
 			while (true)
-			{
-				if (dwell.Elapsed > 5000) { mc.hdc.cam.refresh_req = false; b = false; return; }
+		{
+				if (dwell.Elapsed > 5000) { mc.hdc.cam.refresh_req = false; retMessage = RetMessage.INVALID; return; }
 				mc.idle(1);
 				if (!mc.hdc.cam.refresh_req) break;
 			}
-			b = mc.hdc.cam.edgeIntersection.SUCCESS;
 		}
+
+		public void edgeIntersectionFind(QUARTER_NUMBER quarterNumber, out bool b, int cam = 0)
+        {
+            if (cam == 0)
+            {
+			    mc.hdc.cam.grabSofrwareTrigger();
+			    mc.hdc.cam.edgeIntersection.create(mc.hdc.cam.acq.Image, mc.hdc.cam.window, mc.hdc.cam.acq.ResolutionX, mc.hdc.cam.acq.ResolutionY, quarterNumber, out b); if (!b) return;
+			    mc.hdc.cam.edgeIntersection.find(out b); if (!b) return;
+			    mc.hdc.cam.refresh_req = true; mc.hdc.cam.refresh_reqMode = REFRESH_REQMODE.EDGE_INTERSECTION;
+			    dwell.Reset();
+			    while (true)
+			    {
+				    if (dwell.Elapsed > 5000) { mc.hdc.cam.refresh_req = false; b = false; return; }
+				    mc.idle(1);
+				    if (!mc.hdc.cam.refresh_req) break;
+			    }
+			    b = mc.hdc.cam.edgeIntersection.SUCCESS;
+		    }
             else           // ulc
             {
                 mc.ulc.cam.grabSofrwareTrigger();

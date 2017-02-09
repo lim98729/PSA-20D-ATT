@@ -42,6 +42,11 @@
             this.BT_MachineRef_Calibration = new System.Windows.Forms.ToolStripButton();
             this.TS_PICK = new System.Windows.Forms.ToolStrip();
             this.LB_Pick_Offset = new System.Windows.Forms.ToolStripLabel();
+            this.BT_PICK_PosSelect = new System.Windows.Forms.ToolStripDropDownButton();
+            this.BT_PICK_PosSelect_1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.BT_PICK_PosSelect_2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.BT_PICK_PosSelect_3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.BT_PICK_PosSelect_4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.TB_Pick_OffsetX = new System.Windows.Forms.ToolStripTextBox();
             this.TB_Pick_OffsetY = new System.Windows.Forms.ToolStripTextBox();
@@ -322,6 +327,7 @@
             this.TS_PICK.Font = new System.Drawing.Font("Arial", 9F);
             this.TS_PICK.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LB_Pick_Offset,
+            this.BT_PICK_PosSelect,
             this.toolStripSeparator5,
             this.TB_Pick_OffsetX,
             this.TB_Pick_OffsetY,
@@ -329,7 +335,7 @@
             this.BT_Pick_Calibration});
             this.TS_PICK.Location = new System.Drawing.Point(3, 226);
             this.TS_PICK.Name = "TS_PICK";
-            this.TS_PICK.Size = new System.Drawing.Size(462, 29);
+            this.TS_PICK.Size = new System.Drawing.Size(493, 29);
             this.TS_PICK.TabIndex = 52;
             this.TS_PICK.Text = "toolStrip1";
             // 
@@ -337,9 +343,57 @@
             // 
             this.LB_Pick_Offset.AutoSize = false;
             this.LB_Pick_Offset.Name = "LB_Pick_Offset";
-            this.LB_Pick_Offset.Size = new System.Drawing.Size(250, 22);
+            this.LB_Pick_Offset.Size = new System.Drawing.Size(170, 22);
             this.LB_Pick_Offset.Text = "Pick Position Offset";
             this.LB_Pick_Offset.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // BT_PICK_PosSelect
+            // 
+            this.BT_PICK_PosSelect.AutoSize = false;
+            this.BT_PICK_PosSelect.AutoToolTip = false;
+            this.BT_PICK_PosSelect.BackColor = System.Drawing.Color.LightGray;
+            this.BT_PICK_PosSelect.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.BT_PICK_PosSelect_1,
+            this.BT_PICK_PosSelect_2,
+            this.BT_PICK_PosSelect_3,
+            this.BT_PICK_PosSelect_4});
+            this.BT_PICK_PosSelect.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BT_PICK_PosSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.BT_PICK_PosSelect.Name = "BT_PICK_PosSelect";
+            this.BT_PICK_PosSelect.Size = new System.Drawing.Size(80, 26);
+            this.BT_PICK_PosSelect.Text = "SF1";
+            // 
+            // BT_PICK_PosSelect_1
+            // 
+            this.BT_PICK_PosSelect_1.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BT_PICK_PosSelect_1.Name = "BT_PICK_PosSelect_1";
+            this.BT_PICK_PosSelect_1.Size = new System.Drawing.Size(152, 36);
+            this.BT_PICK_PosSelect_1.Text = "SF1";
+            this.BT_PICK_PosSelect_1.Click += new System.EventHandler(this.NonControl_Click);
+            // 
+            // BT_PICK_PosSelect_2
+            // 
+            this.BT_PICK_PosSelect_2.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BT_PICK_PosSelect_2.Name = "BT_PICK_PosSelect_2";
+            this.BT_PICK_PosSelect_2.Size = new System.Drawing.Size(152, 36);
+            this.BT_PICK_PosSelect_2.Text = "SF2";
+            this.BT_PICK_PosSelect_2.Click += new System.EventHandler(this.NonControl_Click);
+            // 
+            // BT_PICK_PosSelect_3
+            // 
+            this.BT_PICK_PosSelect_3.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BT_PICK_PosSelect_3.Name = "BT_PICK_PosSelect_3";
+            this.BT_PICK_PosSelect_3.Size = new System.Drawing.Size(152, 36);
+            this.BT_PICK_PosSelect_3.Text = "SF3";
+            this.BT_PICK_PosSelect_3.Click += new System.EventHandler(this.NonControl_Click);
+            // 
+            // BT_PICK_PosSelect_4
+            // 
+            this.BT_PICK_PosSelect_4.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BT_PICK_PosSelect_4.Name = "BT_PICK_PosSelect_4";
+            this.BT_PICK_PosSelect_4.Size = new System.Drawing.Size(152, 36);
+            this.BT_PICK_PosSelect_4.Text = "SF4";
+            this.BT_PICK_PosSelect_4.Click += new System.EventHandler(this.NonControl_Click);
             // 
             // toolStripSeparator5
             // 
@@ -1374,7 +1428,7 @@
             this.BT_Z_Axis_Calibration});
             this.TS_Z_Axis.Location = new System.Drawing.Point(3, 346);
             this.TS_Z_Axis.Name = "TS_Z_Axis";
-            this.TS_Z_Axis.Size = new System.Drawing.Size(492, 29);
+            this.TS_Z_Axis.Size = new System.Drawing.Size(461, 29);
             this.TS_Z_Axis.TabIndex = 69;
             this.TS_Z_Axis.Text = "toolStrip1";
             // 
@@ -1687,6 +1741,7 @@
             this.Font = new System.Drawing.Font("Arial", 8.25F);
             this.Name = "CenterRight_Calibration";
             this.Size = new System.Drawing.Size(665, 600);
+            this.Load += new System.EventHandler(this.CenterRight_Calibration_Load);
             this.TS_MachineRef.ResumeLayout(false);
             this.TS_MachineRef.PerformLayout();
             this.TS_PICK.ResumeLayout(false);
@@ -1878,5 +1933,10 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator39;
 		private System.Windows.Forms.ToolStripButton BT_LoadcellForce_Calibration;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator40;
+		private System.Windows.Forms.ToolStripDropDownButton BT_PICK_PosSelect;
+		private System.Windows.Forms.ToolStripMenuItem BT_PICK_PosSelect_1;
+		private System.Windows.Forms.ToolStripMenuItem BT_PICK_PosSelect_2;
+		private System.Windows.Forms.ToolStripMenuItem BT_PICK_PosSelect_3;
+        private System.Windows.Forms.ToolStripMenuItem BT_PICK_PosSelect_4;
     }
 }

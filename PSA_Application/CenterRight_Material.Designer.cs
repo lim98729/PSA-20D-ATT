@@ -84,6 +84,11 @@
 			this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
 			this.TB_ToolSizeX = new System.Windows.Forms.ToolStripTextBox();
 			this.TB_ToolSizeY = new System.Windows.Forms.ToolStripTextBox();
+			this.toolStrip3 = new System.Windows.Forms.ToolStrip();
+			this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
+			this.toolStripLabel7 = new System.Windows.Forms.ToolStripLabel();
+			this.TB_PAD_CHECK_THETALIMIT = new System.Windows.Forms.ToolStripTextBox();
+			this.toolStripLabel6 = new System.Windows.Forms.ToolStripLabel();
 			this.TS_PadCount.SuspendLayout();
 			this.TS_PadPitch.SuspendLayout();
 			this.TS_EdgeToPadCenter.SuspendLayout();
@@ -92,6 +97,7 @@
 			this.TS_PadSize.SuspendLayout();
 			this.toolStrip1.SuspendLayout();
 			this.toolStrip2.SuspendLayout();
+			this.toolStrip3.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// LB_
@@ -325,7 +331,7 @@
             this.toolStripSeparator8,
             this.toolStripLabel1,
             this.TB_LID_CHECK_LIMIT});
-			this.TS_LidSize.Location = new System.Drawing.Point(3, 272);
+			this.TS_LidSize.Location = new System.Drawing.Point(3, 297);
 			this.TS_LidSize.Name = "TS_LidSize";
 			this.TS_LidSize.Size = new System.Drawing.Size(636, 25);
 			this.TS_LidSize.TabIndex = 59;
@@ -568,7 +574,7 @@
             this.toolStripSeparator11,
             this.TB_PedestalSizeX,
             this.TB_PedestalSizeY});
-			this.toolStrip1.Location = new System.Drawing.Point(3, 317);
+			this.toolStrip1.Location = new System.Drawing.Point(3, 342);
 			this.toolStrip1.Name = "toolStrip1";
 			this.toolStrip1.Size = new System.Drawing.Size(291, 25);
 			this.toolStrip1.TabIndex = 112;
@@ -619,9 +625,9 @@
             this.toolStripSeparator12,
             this.TB_ToolSizeX,
             this.TB_ToolSizeY});
-			this.toolStrip2.Location = new System.Drawing.Point(3, 359);
+			this.toolStrip2.Location = new System.Drawing.Point(3, 384);
 			this.toolStrip2.Name = "toolStrip2";
-			this.toolStrip2.Size = new System.Drawing.Size(291, 25);
+			this.toolStrip2.Size = new System.Drawing.Size(322, 25);
 			this.toolStrip2.TabIndex = 113;
 			this.toolStrip2.Text = "toolStrip3";
 			// 
@@ -660,11 +666,62 @@
 			this.TB_ToolSizeY.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
 			this.TB_ToolSizeY.Click += new System.EventHandler(this.Control_Click);
 			// 
+			// toolStrip3
+			// 
+			this.toolStrip3.BackColor = System.Drawing.Color.Transparent;
+			this.toolStrip3.Dock = System.Windows.Forms.DockStyle.None;
+			this.toolStrip3.Font = new System.Drawing.Font("Arial", 8.25F);
+			this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel6,
+            this.toolStripSeparator15,
+            this.toolStripLabel7,
+            this.TB_PAD_CHECK_THETALIMIT});
+			this.toolStrip3.Location = new System.Drawing.Point(3, 252);
+			this.toolStrip3.Name = "toolStrip3";
+			this.toolStrip3.Size = new System.Drawing.Size(636, 25);
+			this.toolStrip3.TabIndex = 114;
+			this.toolStrip3.Text = "toolStrip3";
+			// 
+			// toolStripSeparator15
+			// 
+			this.toolStripSeparator15.Name = "toolStripSeparator15";
+			this.toolStripSeparator15.Size = new System.Drawing.Size(6, 25);
+			// 
+			// toolStripLabel7
+			// 
+			this.toolStripLabel7.AutoSize = false;
+			this.toolStripLabel7.Font = new System.Drawing.Font("Arial", 9F);
+			this.toolStripLabel7.Name = "toolStripLabel7";
+			this.toolStripLabel7.Size = new System.Drawing.Size(95, 22);
+			this.toolStripLabel7.Text = "Theta Limit(º)";
+			this.toolStripLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// TB_PAD_CHECK_THETALIMIT
+			// 
+			this.TB_PAD_CHECK_THETALIMIT.AutoSize = false;
+			this.TB_PAD_CHECK_THETALIMIT.BackColor = System.Drawing.SystemColors.Control;
+			this.TB_PAD_CHECK_THETALIMIT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.TB_PAD_CHECK_THETALIMIT.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.TB_PAD_CHECK_THETALIMIT.Name = "TB_PAD_CHECK_THETALIMIT";
+			this.TB_PAD_CHECK_THETALIMIT.ReadOnly = true;
+			this.TB_PAD_CHECK_THETALIMIT.Size = new System.Drawing.Size(50, 21);
+			this.TB_PAD_CHECK_THETALIMIT.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.TB_PAD_CHECK_THETALIMIT.Click += new System.EventHandler(this.Control_Click);
+			// 
+			// toolStripLabel6
+			// 
+			this.toolStripLabel6.AutoSize = false;
+			this.toolStripLabel6.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.toolStripLabel6.Name = "toolStripLabel6";
+			this.toolStripLabel6.Size = new System.Drawing.Size(471, 22);
+			this.toolStripLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
 			// CenterRight_Material
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.Transparent;
+			this.Controls.Add(this.toolStrip3);
 			this.Controls.Add(this.toolStrip2);
 			this.Controls.Add(this.toolStrip1);
 			this.Controls.Add(this.TS_PadSize);
@@ -694,6 +751,8 @@
 			this.toolStrip1.PerformLayout();
 			this.toolStrip2.ResumeLayout(false);
 			this.toolStrip2.PerformLayout();
+			this.toolStrip3.ResumeLayout(false);
+			this.toolStrip3.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -757,5 +816,10 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
         private System.Windows.Forms.ToolStripTextBox TB_ToolSizeX;
         private System.Windows.Forms.ToolStripTextBox TB_ToolSizeY;
+		private System.Windows.Forms.ToolStrip toolStrip3;
+		private System.Windows.Forms.ToolStripLabel toolStripLabel6;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
+		private System.Windows.Forms.ToolStripLabel toolStripLabel7;
+		private System.Windows.Forms.ToolStripTextBox TB_PAD_CHECK_THETALIMIT;
     }
 }

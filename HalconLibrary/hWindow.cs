@@ -2918,6 +2918,8 @@ namespace HalconLibrary
 							hVision.cam2.refreshCircleCenter();
 						if (hVision.cam2.refresh_reqMode == REFRESH_REQMODE.RECTANGLE_CENTER)
 							hVision.cam2.refreshRectangleCenter();
+						if (hVision.cam2.refresh_reqMode == REFRESH_REQMODE.FIND_EPOXY)
+							hVision.cam2.refreshFindBlob();
 						if (hVision.cam2.refresh_reqMode == REFRESH_REQMODE.CENTER_CROSS)
 							hVision.cam2.refreshCenterCross();
 						if (hVision.cam2.refresh_reqMode == REFRESH_REQMODE.CALIBRATION)
@@ -2947,6 +2949,8 @@ namespace HalconLibrary
 							hVision.cam3.refreshCircleCenter();
 						if (hVision.cam3.refresh_reqMode == REFRESH_REQMODE.RECTANGLE_CENTER)
 							hVision.cam3.refreshRectangleCenter();
+						if (hVision.cam3.refresh_reqMode == REFRESH_REQMODE.FIND_EPOXY)
+							hVision.cam3.refreshFindBlob();
 						if (hVision.cam3.refresh_reqMode == REFRESH_REQMODE.CENTER_CROSS)
 							hVision.cam3.refreshCenterCross();
 						if (hVision.cam3.refresh_reqMode == REFRESH_REQMODE.CALIBRATION)
@@ -2977,6 +2981,8 @@ namespace HalconLibrary
 							hVision.cam4.refreshCircleCenter();
 						if (hVision.cam4.refresh_reqMode == REFRESH_REQMODE.RECTANGLE_CENTER)
 							hVision.cam4.refreshRectangleCenter();
+						if (hVision.cam4.refresh_reqMode == REFRESH_REQMODE.FIND_EPOXY)
+							hVision.cam4.refreshFindBlob();
 						if (hVision.cam4.refresh_reqMode == REFRESH_REQMODE.CENTER_CROSS)
 							hVision.cam4.refreshCenterCross();
 						if (hVision.cam4.refresh_reqMode == REFRESH_REQMODE.CALIBRATION)

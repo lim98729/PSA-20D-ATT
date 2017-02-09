@@ -127,9 +127,7 @@ namespace PSA_SystemLibrary
 		public bool stepCycleExit = false;
 		public bool cycleMode = false;
 		public int padCount = 0;
-		public bool pickDone = false;
-        public bool noUseSlugAlignment = false;
-		public bool withoutPick = false;	// home_pic과 place_pick에서 pedestal을 올리기 때문에 pick을 안하는 경우 pick_ulc에서 pedestal request를 보낸다.
+        public bool noUseSlugAlignment = false;             // Auto Press용 Flag
         public int pickedPosition = 0;
 		public int tmp_autoLaserTiltCheckCount = 0;
 // 		long currentMemory;
@@ -183,7 +181,6 @@ namespace PSA_SystemLibrary
 					sqc++; break;
 				case 2:
 					cycleMode = false;
-					mc.hd.tool.placeForceMean = 0;
 					if (reqMode == REQMODE.HOMING) { sqc = SQC.HOMING; break; }
 					if (reqMode == REQMODE.STEP) { cycleMode = true; sqc = SQC.STEP; break; }
 					if (reqMode == REQMODE.PICKUP) { sqc = SQC.PICKUP; break; }
@@ -640,7 +637,7 @@ namespace PSA_SystemLibrary
 					mc.hd.tool.doublecheckcount = 0;
 					tool.attachSkip = false;
 					padCount = 0;
-                    pickDone = false;
+                    tool.pickDone = false;
 					mc.cv.toWorking.checkTrayType(1, out ret.b);    // read from working conveyor information
                     if (mc.hd.reqMode != REQMODE.DUMY)
                     {
@@ -702,21 +699,28 @@ namespace PSA_SystemLibrary
 						mc.OUT.HD.LS.ON(true, out ret.message);
 					}
 
-					// 맨 처음에 Vacuum 검사해서 부품이 있으면 그냥 Vision 검사로 이동할 것.
-					mc.IN.HD.VAC_CHK(out ret.b, out ret.message); if (ioCheck(sqc, ret.message)) break;
-
-					if (!ret.b) { pickDone = false; sqc = (int)SEQ.AUTO + 3; }		// 없으면 건너뛰기
-					else sqc = (int)SEQ.AUTO + 3;
-					break;		                                    // 있으면 버리기
+                    // 맨 처음에 Vacuum 검사해서 부품이 있으면 그냥 Vision 검사로 이동할 것.
+                    mc.IN.HD.VAC_CHK(out ret.b, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                    if (!ret.b)
+                    {
+                        tool.pickDone = false;
+                        sqc = (int)SEQ.AUTO + 3;
+                    }		// 없으면 건너뛰기
+                    else
+                    {
+                        tool.pickDone = true;
+                        sqc = (int)SEQ.AUTO + 5;
+                    }
+                    break;		                                    // 있으면 버리기
 
 				case (int)SEQ.AUTO + 2:		// 최초 부품을 버리는 step은 나중에 필요에 의해 사용하도록 한다.
-					tool.move_waste();
-					if (tool.RUNING) break;
-					if (tool.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
+                    //tool.move_waste();
+                    //if (tool.RUNING) break;
+                    //if (tool.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
 					sqc = (int)SEQ.AUTO + 3; break;
 				case (int)SEQ.AUTO + 3:
 					#region mc.sf.req
-                    if (mc2.req == MC_REQ.STOP) { sqc = (int)SEQ.AUTO_WASTE_DONE_STOP; break; }
+                    if (mc2.req == MC_REQ.STOP) { sqc = (int)SEQ.AUTO_PLACE_STANDBY; break; }
 					if (mc.sf.workingTubeNumber == UnitCodeSF.INVALID)
 					{
 						mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG1, true, out ret.message); if (ioCheck(sqc, ret.message)) break;
@@ -730,7 +734,7 @@ namespace PSA_SystemLibrary
 				case (int)SEQ.AUTO + 4:
 					if (mc.sf.RUNING) break;
 					if (mc.sf.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
-                    if (mc2.req == MC_REQ.STOP) { sqc = (int)SEQ.AUTO_PLACE_STANDBY; break; }			// 집기 전에 정지하도록 추가
+                    if (mc2.req == MC_REQ.STOP) { sqc = (int)SEQ.AUTO_PLACE_STANDBY; break; }
 					sqc = (int)SEQ.AUTO_CHECK_REVERSE; break;
 					
 				case (int)SEQ.AUTO_CHECK_TMS:
@@ -756,7 +760,12 @@ namespace PSA_SystemLibrary
 						else
 						{
 							mc.log.mcclog.write(mc.log.MCCCODE.ATTACH_WORK, 0);
-                            if (pickDone) { withoutPick = true; sqc = (int)SEQ.AUTO_PICK_ULC; }
+                            mc.pd.req = true;
+                            mc.pd.reqMode = REQMODE.AUTO;
+                            if (tool.pickDone)
+                            {
+                                sqc = (int)SEQ.AUTO_PICK_ULC; 
+                            }
                             else sqc = (int)SEQ.AUTO_HOME_PICK;
 							break;
 						}
@@ -781,12 +790,12 @@ namespace PSA_SystemLibrary
 					if (tool.RUNING) break;
 					if (tool.ERROR) 
 					{
-						pickDone = false;		// 집다가 에러 났으니 false
 						mc.OUT.SF.TUBE_BLOW(mc.sf.workingTubeNumber, false, out ret.message);
 						Esqc = sqc; 
 						sqc = SQC.ERROR; 
 						break; 
 					}
+                    // temp : wastedonestop이 뭔지 알아보자.
                     if (wastedonestop) { sqc = (int)SEQ.AUTO_WASTE_DONE_STOP; break; }
 					sqc = (int)SEQ.AUTO_PICK_ULC; break;
                 case (int)SEQ.AUTO_PICK_ULC:
@@ -794,22 +803,20 @@ namespace PSA_SystemLibrary
 					if (tool.RUNING) break;
 					if (tool.ERROR) 
 					{
-						pickDone = false;		// 집고 ulc 가던 도중 에러이므로 false
 						mc.OUT.SF.TUBE_BLOW(mc.sf.workingTubeNumber, false, out ret.message);
 						Esqc = sqc; 
 						sqc = SQC.ERROR; 
 						break; 
 					}
-					if (mc2.req == MC_REQ.STOP) { sqc = (int)SEQ.AUTO_PLACE_STANDBY; break; }			// 집고 나서 정지 가능토록 추가
 					if (mc.hd.tool.doublechecked)
 					{
-							mc.sf.reqTubeNumber = mc.sf.workingTubeNumber;
-							mc.sf.req = true;
-							// move to waste position
-							mc.hd.tool.doublecheckcount++;
-                            sqc = (int)SEQ.AUTO_WASTE; break;
-						//}
+						mc.sf.reqTubeNumber = mc.sf.workingTubeNumber;
+						mc.sf.req = true;
+						// move to waste position
+						mc.hd.tool.doublecheckcount++;
+                        sqc = (int)SEQ.AUTO_WASTE; break;
 					}
+                    if (mc2.req == MC_REQ.STOP) { sqc = (int)SEQ.AUTO_PLACE_STANDBY; break; }			// 집고 나서 정지 가능토록 추가
 					sqc = (int)SEQ.AUTO_ULC_PLACE; break;
 
                 case (int)SEQ.AUTO_ULC_PLACE:
@@ -820,12 +827,11 @@ namespace PSA_SystemLibrary
 					if (tool.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
                     if (mc.hd.tool.epoxyfailchecked)
                     {
-                        mc.hd.pickDone = false;
+                        //mc.hd.pickDone = false;
                         sqc = (int)SEQ.AUTO_CHECK_PAD1; break;
                     }
 					if (mc.hd.tool.ulcfailchecked)
 					{
-						mc.hd.pickDone = false;
 						if (mc.hd.tool.ulcfailcount < mc.para.ULC.failretry.value)
 						{
 							// move to waste position
@@ -868,6 +874,7 @@ namespace PSA_SystemLibrary
                     tool.DriveUp();
                     if (tool.RUNING) break;
                     if (tool.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
+                    tool.pickDone = false;          // Attach 끝났으니 Flag Off
                     if (mc2.req == MC_REQ.STOP) { sqc = (int)SEQ.AUTO_PLACE_STANDBY; break; }
                     sqc = (int)SEQ.AUTO_PRESS_AFTER_BONDING;
                     break;
@@ -957,10 +964,11 @@ namespace PSA_SystemLibrary
                             mc.pd.req = true;
                             mc.pd.reqMode = REQMODE.AUTO;
 
-                            if (tool.attachSkip || mc.hd.tool.VisionErrorSkip || mc.hd.tool.epoxyfailchecked)
+							if (tool.attachSkip || mc.hd.tool.VisionErrorSkip || tool.epoxyfailchecked)
                             {
                                 mc.hd.tool.VisionErrorSkip = false;
                                 tool.attachSkip = false;
+								tool.epoxyfailchecked = false;
                                 sqc = (int)SEQ.AUTO_ULC_PLACE; break;
                             }
                             else
@@ -1015,6 +1023,7 @@ namespace PSA_SystemLibrary
 					tool.move_waste();
 					if (tool.RUNING) break;
 					if (tool.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
+                    tool.pickDone = false;			        //버렸으니 Flag Off
 					sqc=(int)SEQ.AUTO_HOME_PICK; break;
 
 				case (int)SEQ.AUTO_CHECK_REVERSE:
@@ -1255,15 +1264,7 @@ namespace PSA_SystemLibrary
                         mc.OUT.HD.LS.ON(true, out ret.message);
                     }
                     // 맨 처음에 Vacuum 검사해서 부품이 있으면 그냥 Vision 검사로 이동할 것.
-                    mc.IN.HD.VAC_CHK(out ret.b, out ret.message); if (ioCheck(sqc, ret.message)) break;
-
-                    if (!ret.b) { pickDone = false; sqc += 2; break; }		// 없으면 건너뛰기
-                    else
-                    {
-                        if (pickDone) sqc += 2;
-                        else sqc++;
-                    }
-                    break;		// 있으면 버리기
+                    sqc++; break;
 
                 case SQC.AUTOPRESS + 2:		// 최초 부품을 버리는 step은 나중에 필요에 의해 사용하도록 한다.
                     tool.move_waste();
@@ -1297,7 +1298,7 @@ namespace PSA_SystemLibrary
                         else
                         {
                             mc.log.mcclog.write(mc.log.MCCCODE.ATTACH_WORK, 0);
-                            if (pickDone) { withoutPick = true; sqc += 2; }
+                            if (tool.pickDone) { sqc += 2; }
                             else sqc++;
                             break;
                         }
@@ -1332,7 +1333,7 @@ namespace PSA_SystemLibrary
                     if (mc2.req == MC_REQ.STOP) { sqc = SQC.AUTOPRESS + 11; break; }
                     if (mc.hd.tool.ulcfailchecked)
                     {
-                        mc.hd.pickDone = false;
+                        tool.pickDone = false;
                         if (mc.hd.tool.ulcfailcount < mc.para.ULC.failretry.value)
                         {
                             // move to waste position
@@ -2315,6 +2316,7 @@ namespace PSA_SystemLibrary
 			{
 				case 0:
 					Esqc = 0;
+                    waste = false;
 					sqc = 10; break;
 
 				case 10:
@@ -2324,16 +2326,19 @@ namespace PSA_SystemLibrary
 				case 11:
 					if (!Z_AT_TARGET) break;
 					mc.hd.tool.F.req = true; mc.hd.tool.F.reqMode = REQMODE.F_2M;
-                    if (mc.hd.reqMode != REQMODE.STEP && mc.hd.reqMode != REQMODE.PICKUP && mc.hd.reqMode != REQMODE.WASTE)
-                    {
-                        if (!mc.pd.ERROR) { mc.pd.req = true; mc.pd.reqMode = REQMODE.READY; }
-                        else
-                        {
-                            mc.log.debug.write(mc.log.CODE.ERROR, textResource.LOG_ERROR_PEDESTAL_NOT_READY);
-                            Esqc = sqc; sqc = SQC.ERROR;
-                            break;
-                        }
-                    }
+                    
+                    // jhlim : 왜 Pedestal을 Ready로 바꿀까...?
+                    // 아래 경우에는 Auto, Single 밖에 없는거 같은데..
+                    //if (mc.hd.reqMode != REQMODE.STEP && mc.hd.reqMode != REQMODE.PICKUP && mc.hd.reqMode != REQMODE.WASTE)
+                    //{
+                    //    if (!mc.pd.ERROR) { mc.pd.req = true; mc.pd.reqMode = REQMODE.READY; }
+                    //    else
+                    //    {
+                    //        mc.log.debug.write(mc.log.CODE.ERROR, textResource.LOG_ERROR_PEDESTAL_NOT_READY);
+                    //        Esqc = sqc; sqc = SQC.ERROR;
+                    //        break;
+                    //    }
+                    //}
 					dwell.Reset();
 					sqc++; break;
 				case 12:
@@ -2364,22 +2369,43 @@ namespace PSA_SystemLibrary
 				case 14:
 					if (!X_AT_DONE || !Y_AT_DONE) break;
 					mc.IN.HD.VAC_CHK(out ret.b, out ret.message); if(ioCheck(sqc, ret.message)) break;
-					mc.OUT.HD.SUC(false, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                    if (ret.b) waste = true;
+                    mc.OUT.HD.SUC(false, out ret.message); if (ioCheck(sqc, ret.message)) break;
 					mc.OUT.HD.BLW(true, out ret.message); if (ioCheck(sqc, ret.message)) break;
-					if (ret.b) mc.para.ETC.wasteCount.value += 1;
 					dwell.Reset();
 					sqc++; break;
 				case 15:
 					if (dwell.Elapsed < Math.Max(mc.para.HD.pick.wasteDelay.value, 15)) break;
 					mc.OUT.HD.BLW(false, out ret.message); if (ioCheck(sqc, ret.message)) break;
-					mc.hd.pickDone = false;			//버렸기 때문에 다시 집어야 한다.
 					sqc++; break;
 				case 16:
-					if (mc.pd.RUNING || mc.hd.tool.F.RUNING) break;
-					if (mc.hd.tool.F.ERROR) { sqc = SQC.ERROR; break; }
-                    if (mc.pd.ERROR && ((mc.hd.reqMode != REQMODE.STEP && mc.hd.reqMode != REQMODE.PICKUP && mc.hd.reqMode != REQMODE.WASTE))) 
-                    { sqc = SQC.ERROR; break; }
-					sqc = SQC.STOP; break;
+                    if (mc.hd.tool.F.RUNING) break;
+                    if (mc.hd.tool.F.ERROR) { sqc = SQC.ERROR; break; }
+                    mc.IN.HD.VAC_CHK(out ret.b, out ret.message); if(ioCheck(sqc, ret.message)) break;
+                    if (!ret.b)
+                    {
+                        if (waste) mc.para.setting(ref mc.para.ETC.wasteCount, mc.para.ETC.wasteCount.value + 1);
+                        sqc = SQC.STOP;
+                    }
+                    else
+                    {
+                        // 버렸는데도 남아있는 경우..
+                        mc.pd.reqMode = REQMODE.READY; mc.pd.req = true;
+                        sqc++;
+                    }
+                    break;
+                case 17:
+                    if (mc.pd.RUNING || mc.hd.tool.F.RUNING) break;
+					if (mc.pd.ERROR || mc.hd.tool.F.ERROR) { sqc = SQC.ERROR; break; }
+                    errorCheck(ERRORCODE.HD, sqc, "Waste Failed");
+                    break;
+
+
+					//if (mc.pd.RUNING || mc.hd.tool.F.RUNING) break;
+					
+                    //if (mc.pd.ERROR && ((mc.hd.reqMode != REQMODE.STEP && mc.hd.reqMode != REQMODE.PICKUP && mc.hd.reqMode != REQMODE.WASTE))) 
+                    //{ sqc = SQC.ERROR; break; }
+					
 
 				case 20:
 					X.commandPosition(out ret.d1, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
@@ -2548,21 +2574,12 @@ namespace PSA_SystemLibrary
 			}
 			#endregion
 
-			mc.hd.pickDone = true;
-			mc.hd.withoutPick = false;
 			switch (sqc)
 			{
 				case 0:
 					Esqc = 0;
 					sqc++; break;
 				case 1:
-					if (mc.hd.reqMode == REQMODE.AUTO || mc.hd.reqMode == REQMODE.STEP || mc.hd.reqMode == REQMODE.DUMY) { mc.pd.req = true; mc.pd.reqMode = REQMODE.AUTO; }    // 20131022. Tray 첫 Point에서 underpress되는 현상.
-					if (mc.hd.reqMode == REQMODE.SINGLE)
-					{
-						mc.pd.req = true;
-						mc.pd.reqMode = REQMODE.AUTO;   // 20131022
-						//if (dev.debug) mc.pd.reqMode = REQMODE.DUMY;
-					}
 					#region pos set
 					if (mc.hd.reqMode == REQMODE.DUMY)
 						posZ = tPos.z.DRYRUNPICK(mc.sf.workingTubeNumber);
@@ -2794,7 +2811,7 @@ namespace PSA_SystemLibrary
 					}
 					if (!mc.sf.nextTubeChange)
 					{
-						mc.sf.req = true; mc.sf.reqMode = REQMODE.DOWN;
+						//mc.sf.req = true; mc.sf.reqMode = REQMODE.DOWN;
 						//mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG1, true, out ret.message);
 						//mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG2, true, out ret.message);
 						sqc = 70; break;
@@ -2803,7 +2820,7 @@ namespace PSA_SystemLibrary
 					#region mc.sf.req
 					if (mc.sf.workingTubeNumber == UnitCodeSF.INVALID)
 					{
-						mc.sf.req = true; mc.sf.reqMode = REQMODE.DOWN;
+						//mc.sf.req = true; mc.sf.reqMode = REQMODE.DOWN;
 						mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG1, true, out ret.message);
 						mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG2, true, out ret.message);
 						errorCheck(ERRORCODE.FULL, sqc, "", ALARM_CODE.E_MACHINE_RUN_HEAT_SLUG_EMPTY); break;
@@ -2817,8 +2834,8 @@ namespace PSA_SystemLibrary
 						//    errorCheck(ERRORCODE.SF, sqc, "", ALARM_CODE.E_MACHINE_RUN_HEAT_SLUG_EMPTY); break;
 						//}
 					}
-					mc.sf.reqTubeNumber = mc.sf.workingTubeNumber;
-					mc.sf.req = true;
+                    //mc.sf.reqTubeNumber = mc.sf.workingTubeNumber;
+                    //mc.sf.req = true;
 					#endregion
 					sqc++; break;
 				case 62:
@@ -2840,8 +2857,8 @@ namespace PSA_SystemLibrary
 					sqc++; break;
 				case 72:
 					if (dwell.Elapsed < 1000) break;
-					mc.sf.reqTubeNumber = mc.sf.workingTubeNumber;
-					mc.sf.req = true;
+                    //mc.sf.reqTubeNumber = mc.sf.workingTubeNumber;
+                    //mc.sf.req = true;
 					sqc++; break;
 				case 73:
 					if (mc.sf.RUNING) break;
@@ -3030,16 +3047,19 @@ namespace PSA_SystemLibrary
 		int shakeCount;
 		double tmpPos;
 		public void pick_ulc()
-		{
-			mc.hd.pickDone = true;		// 일단 집어 왔으므로 true, 여기서 바꾸는 이유는 중간에 에러날 경우 갱신이 안 되기 때문..
-			
+		{	
 			switch (sqc)
 			{
 				case 0:
 					Esqc = 0;
 					sqc++; break;
 				case 1:
-					if (mc.hd.withoutPick) { mc.pd.req = true; mc.pd.reqMode = REQMODE.AUTO; sqc = 40;  break;}		// Home Pick 을 안 가는 경우..
+					if (pickDone) 
+					{
+						mc.log.debug.write(mc.log.CODE.INFO, "Jump sqc to 40, Because head has lid");
+						Z.move(tPos.z.XY_MOVING, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
+						sqc = 40;   break;
+					}		// Home Pick 을 안 가는 경우..
 
 					#region pos set
 					Z.commandPosition(out posZ, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
@@ -3124,6 +3144,7 @@ namespace PSA_SystemLibrary
 					else sqc = 30;
 					break;
 				#endregion
+
 				#region case 20 Z Shaking Motion
 				// 일단 아래방향으로 떤다.
 				// DOUBLE_DET 대신 Blow Position값을 입력해야 할 필요가 생길 수도 있다.
@@ -3161,6 +3182,7 @@ namespace PSA_SystemLibrary
 					else sqc = 30;
 					break;
 				#endregion
+
 				#region case 30 Slug Double Check
 				case 30:
 					Z.move(tPos.z.DOUBLE_DET, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
@@ -3231,7 +3253,6 @@ namespace PSA_SystemLibrary
 
 				#region case 40 XYZ.move.ULC
 				case 40:
-					mc.hd.withoutPick = false;
 					mc.log.mcclog.write(mc.log.MCCCODE.HEAD_MOVE_ULC_POS, 0);
 					tmpPos = Math.Max(tPos.z.XY_MOVING - comparePos, tPos.z.DOUBLE_DET - 5000);
                     if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
@@ -3252,12 +3273,16 @@ namespace PSA_SystemLibrary
                             X.moveCompare(tPos.x.LIDC2, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
                         }
                     }
-					mc.ulc.cam.grabClear(out ret.message, out ret.s);	// clear grab image 20140829
+					//mc.ulc.cam.grabClear(out ret.message, out ret.s);	// clear grab image 20140829
 					dwell.Reset();
 					sqc++; break;
 				case 41:
 					if (!Y_AT_TARGET || !X_AT_TARGET) break;
-					if (mc.hd.reqMode != REQMODE.DUMY) mc.sf.req = true;
+                    if (mc.hd.reqMode == REQMODE.AUTO)
+                    {
+                        mc.sf.reqTubeNumber = mc.sf.workingTubeNumber;
+                        mc.sf.req = true;
+                    }
 					dwell.Reset();
 					sqc++; break;
 				case 42:
@@ -3558,15 +3583,11 @@ namespace PSA_SystemLibrary
 
 		int placeForceCheckCount;
 
-		// Place Force 평균 구하기 위한 용도
-		public double placeForceMean;
-		double placeForceSumCount;
-		double placeForceMin;
-		double placeForceMax;
-		double placeForceSum;
 		StringBuilder tempSb = new StringBuilder();
 		double cosTheta, sinTheta;
 		double tmpDistX, tmpDistY;
+        public bool pickDone = false;                             // Pick 후 정지한 다음 재 시작 시 ULC로 바로 가기 위한 Flag
+        bool waste = false;
 
         QueryTimer placeSuctionTime = new QueryTimer();
         QueryTimer placeBlowTime = new QueryTimer();
@@ -3771,8 +3792,6 @@ namespace PSA_SystemLibrary
             }
             #endregion
             #endregion
-
-			mc.hd.pickDone = true;
 			
 			switch (sqc)
 			{
@@ -4275,7 +4294,6 @@ namespace PSA_SystemLibrary
 					sqc++; break;
 				case 14:
 					if (mc.pd.RUNING) break;
-					if (mc.hd.withoutPick) mc.hd.withoutPick = false;
 					if (mc.pd.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
 					mc.log.mcclog.write(mc.log.MCCCODE.HEAD_MOVE_1ST_FIDUCIAL_POS, 1);
 					sqc = 20; break;
@@ -6139,10 +6157,6 @@ namespace PSA_SystemLibrary
                                 tempSb.AppendFormat("LID Chk Fail(X Limit-Rst[{0}]Lmt[{1}])-PadX[{2}],PadY[{3}],FailCnt[{4}]", Math.Round(ulcX), Math.Round(mc.para.MT.lidCheckLimit.value), (padX + 1), (padY + 1), mc.hd.tool.ulcfailcount);
                                 //string str = "LID Chk Fail(X Limit-Rst[" + Math.Round(ulcX).ToString() + "]Lmt[" + Math.Round(mc.para.MT.lidCheckLimit.value).ToString() + "])-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]";
                                 mc.log.debug.write(mc.log.CODE.EVENT, tempSb.ToString());
-                                if (!hdcfailchecked && mc.hd.reqMode != REQMODE.DUMY)
-                                {
-                                    if (Math.Abs(ulcX) < 500) mc.para.HD.pick.pickPosComp[mc.hd.pickedPosition].x.value += ulcX;
-                                }
                                 if (mc.para.ULC.failretry.value > 0 && mc.hd.tool.ulcfailcount < mc.para.ULC.failretry.value)
                                 {
                                     //EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
@@ -6169,10 +6183,6 @@ namespace PSA_SystemLibrary
                                 //string str = "LID Chk Fail(Y Limit-Rst[" + Math.Round(ulcY).ToString() + "]Lmt[" + Math.Round(mc.para.MT.lidCheckLimit.value).ToString() + "])-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]";
                                 //string str = "LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]";
                                 mc.log.debug.write(mc.log.CODE.EVENT, tempSb.ToString());
-                                if (!hdcfailchecked && mc.hd.reqMode != REQMODE.DUMY)
-                                {
-                                    if (Math.Abs(ulcY) < 500) mc.para.HD.pick.pickPosComp[mc.hd.pickedPosition].y.value += ulcY;
-                                }
                                 if (mc.para.ULC.failretry.value > 0 && mc.hd.tool.ulcfailcount < mc.para.ULC.failretry.value)
                                 {
                                     //EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
@@ -6236,11 +6246,6 @@ namespace PSA_SystemLibrary
 
                                 //string str = "LID Chk Fail(X Limit-Rst[" + Math.Round(ulcX).ToString() + "]Lmt[" + Math.Round(mc.para.MT.lidCheckLimit.value).ToString() + "])-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]";
                                 mc.log.debug.write(mc.log.CODE.EVENT, tempSb.ToString());
-
-                                if (!hdcfailchecked && mc.hd.reqMode != REQMODE.DUMY)
-                                {
-                                    if (Math.Abs(ulcX) < 500) mc.para.HD.pick.pickPosComp[mc.hd.pickedPosition].x.value += ulcX;
-                                }
                                 if (mc.para.ULC.failretry.value > 0 && mc.hd.tool.ulcfailcount < mc.para.ULC.failretry.value)
                                 {
                                     //EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
@@ -6266,10 +6271,6 @@ namespace PSA_SystemLibrary
                                 tempSb.AppendFormat("LID Chk Fail(Y Limit-Rst[{0}]Lmt[{1}])-PadX[{2}],PadY[{3}],FailCnt[{4}]", Math.Round(ulcY), Math.Round(mc.para.MT.lidCheckLimit.value), (padX + 1), (padY + 1), mc.hd.tool.ulcfailcount);
                                 //string str = "LID Chk Fail(Y Limit-Rst[" + Math.Round(ulcY).ToString() + "]Lmt[" + Math.Round(mc.para.MT.lidCheckLimit.value).ToString() + "])-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]";
                                 mc.log.debug.write(mc.log.CODE.EVENT, tempSb.ToString());
-                                if (!hdcfailchecked && mc.hd.reqMode != REQMODE.DUMY)
-                                {
-                                    if (Math.Abs(ulcY) < 500) mc.para.HD.pick.pickPosComp[mc.hd.pickedPosition].y.value += ulcY;
-                                }
                                 if (mc.para.ULC.failretry.value > 0 && mc.hd.tool.ulcfailcount < mc.para.ULC.failretry.value)
                                 {
                                     //EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
@@ -6361,14 +6362,6 @@ namespace PSA_SystemLibrary
                                 //string str = "PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "]";
                                 errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_ULC_VISION_PROCESS_FAIL); break;
                             }
-                        }
-                        //-------------------------------------------------------------------------------------------------------------
-
-                        // 자동 보상을 해주기 위하여 검사 결과를 저장한다.
-                        if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.CHIPPAC && !hdcfailchecked && mc.hd.reqMode != REQMODE.DUMY)
-                        {
-                            if (Math.Abs(ulcX) < 500) mc.para.HD.pick.pickPosComp[mc.hd.pickedPosition].x.value += ulcX;
-                            if (Math.Abs(ulcY) < 500) mc.para.HD.pick.pickPosComp[mc.hd.pickedPosition].y.value += ulcY;
                         }
                         #endregion
                     }
@@ -7155,6 +7148,29 @@ namespace PSA_SystemLibrary
 								}
 							}
 						}
+						if (Math.Abs(hdcT) > mc.para.MT.padCheckThetaLimit.value)
+						{
+							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC Package T Angle Limit Error : {0:F1}um", hdcT));
+							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+							{
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_Packege_TPos_Over");
+								sqc = 120; break;
+							}
+							else
+							{
+								if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+								{
+									sqc = 130; break;
+								}
+								else
+								{
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_Packege_TPos_Over");
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PadX[{0}],PadY[{1}] - Package Angle T: {2:F2}, Limit: {3:F2}", (padX + 1), (padY + 1), hdcT, mc.para.MT.padCheckThetaLimit.value);
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_PACKAGE_THETA_TRESULT_OVER); break;
+								}
+							}
+						}
 					}
 					else
 					{
@@ -7336,11 +7352,6 @@ namespace PSA_SystemLibrary
 					placeSensorForceOver = false;
 					placeSensorForceUnder = false;
 					
-					placeForceSumCount = 0;
-					placeForceSum = 0;
-					placeForceMin = 0;
-					placeForceMax = 0;
-
 					if (levelS1 != 0)
 					{
 						Z.move(posZ + levelS1 + levelS2, -velS1, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
@@ -7485,30 +7496,15 @@ namespace PSA_SystemLibrary
 
 					if (mc.para.HD.place.forceMode.mode.value == (int)PLACE_FORCE_MODE.LOW_HIGH_MODE)
 					{
-						if (mc.hd.reqMode != REQMODE.DUMY && mc.para.ETC.usePlaceForceTracking.value == 1)
-						{
-							if (UtilityControl.forceTopLoadcellBaseForce == 0)
-							{
-								mc.hd.tool.F.kilogram(mc.para.HD.place.force.value + mc.para.HD.place.placeForceOffset.value, out ret.message); if (ioCheck(sqc, ret.message)) break;
-							}
-							else
-							{
-								mc.hd.tool.F.kilogram(mc.para.HD.place.force.value + mc.para.HD.place.placeForceOffset.value, out ret.message, true); if (ioCheck(sqc, ret.message)) break;
-							}
+                        if (UtilityControl.forceTopLoadcellBaseForce == 0)
+                        {
 
-						}
-						else
-						{
-							if (UtilityControl.forceTopLoadcellBaseForce == 0)
-							{
-
-								mc.hd.tool.F.kilogram(mc.para.HD.place.force.value, out ret.message); if (ioCheck(sqc, ret.message)) break;
-							}
-							else
-							{
-								mc.hd.tool.F.kilogram(mc.para.HD.place.force.value, out ret.message, true); if (ioCheck(sqc, ret.message)) break;
-							}
-						}
+                            mc.hd.tool.F.kilogram(mc.para.HD.place.force.value, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        }
+                        else
+                        {
+                            mc.hd.tool.F.kilogram(mc.para.HD.place.force.value, out ret.message, true); if (ioCheck(sqc, ret.message)) break;
+                        }
 					}
 
 					dwell.Reset();
@@ -7817,43 +7813,6 @@ namespace PSA_SystemLibrary
 
 					mc.board.write(BOARD_ZONE.WORKING, out ret.b);
 					if (!ret.b) { errorCheck(ERRORCODE.HD, sqc, "board.padStatus update fail"); break; }
-
-					mc.hd.pickDone = false;				// 일단 Attach 했기 때문에 다시 집어야 한다.
-					// 일단 Attach 끝난 다음 판단 하여 Map에 안 쓰는 경우를 방지해야 한다.
-					if (attachError == 0 && mc.para.ETC.usePlaceForceTracking.value == 1 && mc.full.reqMode == REQMODE.AUTO)
-					{
-						placeForceMean = Math.Round((placeForceSum - (placeForceMax + placeForceMin)) / (placeForceSumCount - 2), 3) + mc.swcontrol.forceMeanOffset;		// min, max 를 빼고 평균값을 구한다.
-
-						if (placeForceSum < 0.1 || placeForceMean < 0.1)
-						{
-							tempSb.Clear(); tempSb.Length = 0;
-							tempSb.AppendFormat("Force Check Value Error - Sum:{0}, Mean{1}", placeForceSum, placeForceMean);
-							placeForceMean = mc.para.HD.place.force.value;
-							mc.log.debug.write(mc.log.CODE.ERROR, tempSb.ToString());
-						}
-						if (Math.Abs(mc.para.HD.place.force.value - placeForceMean) >= 0.1)			// Offset 값이 0 아니며 0.1 kg 차이나면 진짜 에러(0일 경우는 보정 리셋인 경우이므로 무시)
-						{	// 0일 경우는 Under / Over Press 일 경우..
-							mc.para.HD.place.placeForceOffset.value = 0;
-                            mc.log.debug.write(mc.log.CODE.FAIL, textResource.LOG_DEBUG_HD_FORCE_TRACKING_INIT, false);
-							sqc = 150;
-							break;
-						}
-						if (Math.Abs((mc.para.HD.place.force.value - placeForceMean) * 0.5) >= 0.01)		// offset 값이 20g(10gx2) 이하로 차이날 경우에는 무시.
-						{
-							tempSb.Clear(); tempSb.Length = 0;
-							mc.para.HD.place.placeForceOffset.value += Math.Round((mc.para.HD.place.force.value - placeForceMean) / 2, 3);		// 차이의 절반을 기존값에 더한다.
-							tempSb.AppendFormat("Force Mean : {0}[kg] Force Offset : {0}[kg]", placeForceMean, mc.para.HD.place.placeForceOffset.value);
-							//mc.log.debug.write(mc.log.CODE.FORCE, "Force Mean : " + Math.Round(placeForceMean, 3) + " (kg)/" + "Force Offset : " + mc.para.HD.place.placeForceOffset.value + " (kg)");
-							mc.log.debug.write(mc.log.CODE.FORCE, tempSb.ToString(), false);
-						}
-						else
-						{
-							tempSb.Clear(); tempSb.Length = 0;
-							tempSb.AppendFormat("Force Offset 값이 너무 작아서 무시 합니다. 현재값 : {0}[kg]", mc.para.HD.place.placeForceOffset.value);
-							mc.log.debug.write(mc.log.CODE.FORCE, tempSb.ToString(), false);
-						}
-						//placeForceMean = 0;		// clear
-					}
 					sqc++; break;
 				case 73:
 					if (mc.hd.tool.F.RUNING) break;
@@ -7875,7 +7834,6 @@ namespace PSA_SystemLibrary
 					}
 					break;
 				case 74:	// Move Z Up to Safety Position
-					mc.para.HD.place.placeForceOffset.value = 0;
 					mc.log.mcclog.write(mc.log.MCCCODE.Z_AXIS_MOVE_UP, 0);
 					Z.move(tPos.z.XY_MOVING, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
 					dwell.Reset();
@@ -9086,30 +9044,6 @@ namespace PSA_SystemLibrary
 					else sqc = 80;
 					break;
 			
-					#region Error 발생하여 Z축 Up 한 다음 알람 띄우기
-				case 150:
-					mc.OUT.HD.SUC(false, out ret.message); if(ioCheck(sqc, ret.message)) break;
-					mc.OUT.HD.BLW(true, out ret.message); if(ioCheck(sqc, ret.message)) break;
-					dwell.Reset();
-					sqc++; break;
-				case 151:
-					if (dwell.Elapsed < 500) break;
-					Z.move(mc.hd.tool.tPos.z.XY_MOVING, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
-					dwell.Reset();
-					sqc++; break;
-				case 152:
-					if (!Z_AT_DONE) break;
-					dwell.Reset();
-					sqc++; break;
-				case 153:
-					if (!Z_AT_TARGET) break;
-					errorCheck(ERRORCODE.HD, sqc, "Force 차이가 너무 큽니다. Head 부하량이 변경되었거나 Force Calibraion 을 확인 하세요. 현재 차이값 : " + (mc.para.HD.place.force.value - placeForceMean) + " (kg)");
-					break;
-					#endregion
-
-
-
-
                 #region case 200 xy padCenter
                 case 200:
                     if (mc.para.EPOXY.useCheck.value == (int)ON_OFF.OFF || !mc.swcontrol.useCheckEpoxy) { sqc = 1; break; }
@@ -9185,9 +9119,21 @@ namespace PSA_SystemLibrary
                     {
                         epoxyfailchecked = true;
                         sqc = SQC.STOP;
-                        if (ret.message == RetMessage.FIND_EPOXY_UNDERFLOW) mc.board.padStatus(BOARD_ZONE.WORKING, padX, padY, PAD_STATUS.EPOXY_UNDER_FLOW, out ret.b);
-                        else if (ret.message == RetMessage.FIND_EPOXY_OVERFLOW) mc.board.padStatus(BOARD_ZONE.WORKING, padX, padY, PAD_STATUS.EPOXY_OVER_FLOW, out ret.b);
-                        else mc.board.padStatus(BOARD_ZONE.WORKING, padX, padY, PAD_STATUS.EPOXY_NG, out ret.b);
+						if (ret.message == RetMessage.FIND_EPOXY_UNDERFLOW)
+						{
+							mc.board.padStatus(BOARD_ZONE.WORKING, padX, padY, PAD_STATUS.EPOXY_UNDER_FLOW, out ret.b);
+							mc.hdc.displayUserMessage("EPOXY UNDERFLOW");
+						}
+						else if (ret.message == RetMessage.FIND_EPOXY_OVERFLOW)
+						{
+							mc.board.padStatus(BOARD_ZONE.WORKING, padX, padY, PAD_STATUS.EPOXY_OVER_FLOW, out ret.b);
+							mc.hdc.displayUserMessage("EPOXY OVERFLOW");
+						}
+						else
+						{
+							mc.board.padStatus(BOARD_ZONE.WORKING, padX, padY, PAD_STATUS.EPOXY_NG, out ret.b);
+							mc.hdc.displayUserMessage("EPOXY CHECK FAIL");
+						}
                     }
                     break;
                 #endregion
@@ -12059,10 +12005,6 @@ namespace PSA_SystemLibrary
 							mc.ulc.displayUserMessage("X RESULT OVER FAIL");
 							string str = "LID Chk Fail(X Limit-Rst[" + Math.Round(ulcX).ToString() + "]Lmt[" + Math.Round(mc.para.MT.lidCheckLimit.value).ToString() + "])-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]";
 							mc.log.debug.write(mc.log.CODE.EVENT, str);
-                            if (!hdcfailchecked && mc.hd.reqMode != REQMODE.DUMY)
-                            {
-                                if (Math.Abs(ulcX) < 500) mc.para.HD.pick.pickPosComp[mc.hd.pickedPosition].x.value += ulcX;
-                            }
 							if (mc.para.ULC.failretry.value > 0 && mc.hd.tool.ulcfailcount < mc.para.ULC.failretry.value)
 							{
 								//EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
@@ -12085,10 +12027,6 @@ namespace PSA_SystemLibrary
 							string str = "LID Chk Fail(Y Limit-Rst[" + Math.Round(ulcY).ToString() + "]Lmt[" + Math.Round(mc.para.MT.lidCheckLimit.value).ToString() + "])-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]";
 							//string str = "LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]";
 							mc.log.debug.write(mc.log.CODE.EVENT, str);
-                            if (!hdcfailchecked && mc.hd.reqMode != REQMODE.DUMY)
-                            {
-                                if (Math.Abs(ulcY) < 500) mc.para.HD.pick.pickPosComp[mc.hd.pickedPosition].y.value += ulcY;
-                            }
 							if (mc.para.ULC.failretry.value > 0 && mc.hd.tool.ulcfailcount < mc.para.ULC.failretry.value)
 							{
 								//EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
@@ -12137,10 +12075,6 @@ namespace PSA_SystemLibrary
 							mc.ulc.displayUserMessage("X RESULT OVER FAIL");
 							string str = "LID Chk Fail(X Limit-Rst[" + Math.Round(ulcX).ToString() + "]Lmt[" + Math.Round(mc.para.MT.lidCheckLimit.value).ToString() + "])-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]";
 							mc.log.debug.write(mc.log.CODE.EVENT, str);
-                            if (!hdcfailchecked && mc.hd.reqMode != REQMODE.DUMY)
-                            {
-                                if (Math.Abs(ulcX) < 500) mc.para.HD.pick.pickPosComp[mc.hd.pickedPosition].x.value += ulcX;
-                            }
 							if (mc.para.ULC.failretry.value > 0 && mc.hd.tool.ulcfailcount < mc.para.ULC.failretry.value)
 							{
 								//EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
@@ -12162,10 +12096,6 @@ namespace PSA_SystemLibrary
 							mc.ulc.displayUserMessage("Y RESULT OVER FAIL");
 							string str = "LID Chk Fail(Y Limit-Rst[" + Math.Round(ulcY).ToString() + "]Lmt[" + Math.Round(mc.para.MT.lidCheckLimit.value).ToString() + "])-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]";
 							mc.log.debug.write(mc.log.CODE.EVENT, str);
-                            if (!hdcfailchecked && mc.hd.reqMode != REQMODE.DUMY)
-                            {
-                                if (Math.Abs(ulcY) < 500) mc.para.HD.pick.pickPosComp[mc.hd.pickedPosition].y.value += ulcY;
-                            }
 							if (mc.para.ULC.failretry.value > 0 && mc.hd.tool.ulcfailcount < mc.para.ULC.failretry.value)
 							{
 								//EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
@@ -12206,12 +12136,6 @@ namespace PSA_SystemLibrary
 						if (mc.hd.reqMode != REQMODE.DUMY) mc.log.debug.write(mc.log.CODE.TRACE, "ULC - X: " + Math.Round(ulcX, 2).ToString("f2") + ", Y:  " + Math.Round(ulcY, 2).ToString("f2") + " , T: " + Math.Round(ulcT, 2).ToString("f2") + ", W: " + Math.Round(ulcW, 2).ToString("f2") + ", H: " + Math.Round(ulcH, 2).ToString("f2"));
 						//EVENT.statusDisplay("ULC : " + Math.Round(ulcX, 2).ToString() + "  " + Math.Round(ulcY, 2).ToString() + "  " + Math.Round(ulcT, 2).ToString());
 					}
-					// 자동 보상을 해주기 위하여 검사 결과를 저장한다.
-                    if (!hdcfailchecked && mc.hd.reqMode != REQMODE.DUMY)
-                    {
-                        if (Math.Abs(ulcX) < 500) mc.para.HD.pick.pickPosComp[mc.hd.pickedPosition].x.value += ulcX;
-                        if (Math.Abs(ulcY) < 500) mc.para.HD.pick.pickPosComp[mc.hd.pickedPosition].y.value += ulcY;
-                    }
 
 					//double cosTheta, sinTheta;
 					//cosTheta = Math.Cos(-ulcT * Math.PI / 180);
@@ -13725,7 +13649,6 @@ namespace PSA_SystemLibrary
 						mc.OUT.HD.BLW(out ret.b, out ret.message);
 						if (useForceCheck && !ret.b)
 						{
-							if (mc.para.ETC.usePlaceForceTracking.value == 1) calcPlaceForce(sgaugeForce);
 							checkOverUnderForce(sgaugeForce);
 						}
 					}
@@ -13743,7 +13666,6 @@ namespace PSA_SystemLibrary
 						if (!ret.b)
 						{
 							if (useForceCheck) checkOverUnderForce(sgaugeForce);
-							if (useForceTracking) if (mc.para.ETC.usePlaceForceTracking.value == 1) calcPlaceForce(sgaugeForce);
 						}
 
 					}
@@ -13793,14 +13715,6 @@ namespace PSA_SystemLibrary
 				}
 			}
 			placeForceCheckCount++;
-		}
-
-		void calcPlaceForce(double checkForce)
-		{
-			if (placeForceMin > checkForce) placeForceMin = checkForce;
-			if (placeForceMax < checkForce) placeForceMax = checkForce;
-			placeForceSum += checkForce;
-			placeForceSumCount++;
 		}
 
 		bool findAutoTrackStartTime()
@@ -20255,7 +20169,7 @@ namespace PSA_SystemLibrary
 					}
 					if (!mc.sf.nextTubeChange)
 					{
-						mc.sf.req = true; mc.sf.reqMode = REQMODE.DOWN;
+						//mc.sf.req = true; mc.sf.reqMode = REQMODE.DOWN;
 						mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG1, true, out ret.message);
 						mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG2, true, out ret.message);
 						sqc = 70; break;
@@ -20264,14 +20178,14 @@ namespace PSA_SystemLibrary
 					#region mc.sf.req
 					if (mc.sf.workingTubeNumber == UnitCodeSF.INVALID)
 					{
-						mc.sf.req = true; mc.sf.reqMode = REQMODE.DOWN;
+						//mc.sf.req = true; mc.sf.reqMode = REQMODE.DOWN;
 						mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG1, true, out ret.message);
 						mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG2, true, out ret.message);
 						sqc = 70; break;
 						//errorCheck(ERRORCODE.SF, sqc, "Stack Feeder Tube Empty"); break;
 					}
-					mc.sf.reqTubeNumber = mc.sf.workingTubeNumber;
-					mc.sf.req = true;
+					//mc.sf.reqTubeNumber = mc.sf.workingTubeNumber;
+					//mc.sf.req = true;
 					#endregion
 					sqc++; break;
 				case 62:
@@ -20290,8 +20204,8 @@ namespace PSA_SystemLibrary
 					sqc++; break;
 				case 72:
 					if (dwell.Elapsed < 2000) break;
-					mc.sf.reqTubeNumber = mc.sf.workingTubeNumber;  // 20130816
-					mc.sf.req = true;
+                    //mc.sf.reqTubeNumber = mc.sf.workingTubeNumber;  // 20130816
+                    //mc.sf.req = true;
 					sqc++; break;
 				case 73:
 					if (mc.sf.RUNING) break;
@@ -22281,7 +22195,8 @@ namespace PSA_SystemLibrary
 				else if (tubeNumber == UnitCodeSF.SF4) tmp += (double)MP_HD_X.SF_TUBE4_4SLOT;
 				else tmp += (double)MP_HD_X.SF_TUBE1_4SLOT;
 			}
-			tmp += mc.para.CAL.pick.x.value;
+			double tmpPos = mc.para.CAL.pick[(int)tubeNumber].x.value;
+			tmp += tmpPos;
 			#endregion
 			return tmp;
 		}
@@ -22518,7 +22433,8 @@ namespace PSA_SystemLibrary
 			else if (tubeNumber == UnitCodeSF.SF3) tmp += (double)MP_HD_Y.SF_TUBE3;
 			else if (tubeNumber == UnitCodeSF.SF4) tmp += (double)MP_HD_Y.SF_TUBE4;
 			else tmp += (double)MP_HD_Y.SF_TUBE1;
-			tmp += mc.para.CAL.pick.y.value;
+			double tmpPos = mc.para.CAL.pick[(int)tubeNumber].y.value;
+			tmp += tmpPos;
 			#endregion
 			return tmp;
 		}
@@ -22763,15 +22679,7 @@ namespace PSA_SystemLibrary
 				else if (tubeNumber == UnitCodeSF.SF4) tmp += (double)MP_HD_X.SF_TUBE4_4SLOT + mc.para.HD.pick.offset[(int)UnitCodeSF.SF4].x.value;
 				else tmp += (double)MP_HD_X.SF_TUBE1_4SLOT + mc.para.HD.pick.offset[(int)UnitCodeSF.SF1].x.value;
 			}
-			tmp += mc.para.CAL.pick.x.value;
-
-			if (!mc.swcontrol.noUseCompPickPosition)
-			{
-				if (tubeNumber == UnitCodeSF.SF1) tmp += mc.para.HD.pick.pickPosComp[(int)UnitCodeSF.SF1].x.value;
-				else if (tubeNumber == UnitCodeSF.SF2) tmp += mc.para.HD.pick.pickPosComp[(int)UnitCodeSF.SF2].x.value;
-				else if (tubeNumber == UnitCodeSF.SF3) tmp += mc.para.HD.pick.pickPosComp[(int)UnitCodeSF.SF3].x.value;
-				else if (tubeNumber == UnitCodeSF.SF4) tmp += mc.para.HD.pick.pickPosComp[(int)UnitCodeSF.SF4].x.value;
-			}
+			tmp += mc.para.CAL.pick[(int)tubeNumber].x.value;
 			#endregion
 			return tmp;
 		}
@@ -22984,15 +22892,7 @@ namespace PSA_SystemLibrary
 			else if (tubeNumber == UnitCodeSF.SF3) tmp += (double)MP_HD_Y.SF_TUBE3 + mc.para.HD.pick.offset[(int)UnitCodeSF.SF3].y.value;
 			else if (tubeNumber == UnitCodeSF.SF4) tmp += (double)MP_HD_Y.SF_TUBE4 + mc.para.HD.pick.offset[(int)UnitCodeSF.SF4].y.value;
 			else tmp += (double)MP_HD_Y.SF_TUBE1;
-			tmp += mc.para.CAL.pick.y.value;
-
-			if (!mc.swcontrol.noUseCompPickPosition)
-			{
-				if (tubeNumber == UnitCodeSF.SF1) tmp += mc.para.HD.pick.pickPosComp[(int)UnitCodeSF.SF1].y.value;
-				else if (tubeNumber == UnitCodeSF.SF2) tmp += mc.para.HD.pick.pickPosComp[(int)UnitCodeSF.SF2].y.value;
-				else if (tubeNumber == UnitCodeSF.SF3) tmp += mc.para.HD.pick.pickPosComp[(int)UnitCodeSF.SF3].y.value;
-				else if (tubeNumber == UnitCodeSF.SF4) tmp += mc.para.HD.pick.pickPosComp[(int)UnitCodeSF.SF4].y.value;
-			}
+			tmp += mc.para.CAL.pick[(int)tubeNumber].y.value;
 			#endregion
 			return tmp;
 		}

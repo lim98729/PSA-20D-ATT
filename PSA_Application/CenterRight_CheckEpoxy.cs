@@ -84,7 +84,7 @@ namespace PSA_Application
 				#endregion
 
                 mc.hdc.lighting_exposure(mc.para.EPOXY.light, mc.para.EPOXY.exposureTime);
-                EVENT.hWindowLargeDisplay(mc.hdc.cam.acq.grabber.cameraNumber);
+				EVENT.hWindow2Display();
                 posX = mc.hd.tool.cPos.x.PAD(padIndexX);
                 posY = mc.hd.tool.cPos.y.PAD(padIndexY);
                
@@ -100,7 +100,7 @@ namespace PSA_Application
                 
                 mc.hdc.LIVE = false;
 
-                mc.hdc.cam.findBlob(mc.hdc.cam.epoxyBlob, mc.para.EPOXY.threshold.value, mc.para.EPOXY.minAreaFilter.value, -1, -1, out ret.message, out ret.s, 0);
+                mc.hdc.cam.findBlob(mc.hdc.cam.epoxyBlob, mc.para.EPOXY.threshold.value, mc.para.EPOXY.minAreaFilter.value, -1, -1, out ret.message, out ret.s, 1);
                 QueryTimer dwell = new QueryTimer();
                 if (ret.message == RetMessage.OK)
                 {
@@ -131,6 +131,53 @@ namespace PSA_Application
 			if (sender.Equals(BT_Model_Delete))
 			{
                 //mc.hdc.cam.epoxyBlob[0].delete();
+			}
+			if (sender.Equals(BT_EPOXY_FIND))
+			{
+				padIndexX = CbB_PadIndexX.SelectedIndex;
+				padIndexY = CbB_PadIndexY.SelectedIndex;
+
+				mc.ulc.lighting_exposure(mc.para.EPOXY.light, mc.para.EPOXY.exposureTime);
+				EVENT.hWindow2Display();
+
+				#region pd moving
+				mc.OUT.PD.SUC(true, out ret.message);
+				posX = mc.pd.pos.x.PAD(padIndexX);
+				posY = mc.pd.pos.y.PAD(padIndexY);
+				mc.pd.jogMode = (int)PD_JOGMODE.UP_MODE;
+				posZ = mc.pd.pos.z.BD_UP;
+
+				mc.pd.jogMove(posX, posY, posZ, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+				#endregion
+				mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PAD(padIndexX), mc.hd.tool.cPos.y.PAD(padIndexY), mc.para.CAL.toolAngleOffset.value, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+
+				mc.hdc.epoxyFindBlob(mc.hdc.cam.epoxyBlob, (double)mc.para.EPOXY.threshold.value, (double)mc.para.EPOXY.minAreaFilter.value, out ret.message);
+
+				if (ret.message == RetMessage.OK)
+				{
+					double rX = mc.hdc.cam.epoxyBlob[0].resultX;
+					double rY = mc.hdc.cam.epoxyBlob[0].resultY;
+					double rArea = mc.hdc.cam.epoxyBlob[0].resultArea;
+
+					mc.hdc.EpoxyAmountJugement(out ret.message, out ret.s);
+					if (ret.message == RetMessage.OK) mc.log.debug.write(mc.log.CODE.ETC, "Epoxy Check Result(x, y, area) : " + rX + ", " + rY + ", " + rArea);
+					else
+					{
+						mc.message.alarm(ret.s);
+					}
+				}
+				else
+				{
+					mc.message.alarm(ret.message.ToString());
+				}
+				#region pd moving
+				//mc.OUT.PD.SUC(false, out ret.message);
+				mc.pd.jogMode = (int)PD_JOGMODE.DOWN_MODE;
+				posX = mc.pd.pos.x.PAD(padIndexX);
+				posY = mc.pd.pos.y.PAD(padIndexY);
+				posZ = mc.pd.pos.z.XY_MOVING;
+				mc.pd.jogMove(posX, posY, posZ, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+				#endregion
 			}
 			if (sender.Equals(TB_ExposureTime))
 			{
@@ -191,9 +238,41 @@ namespace PSA_Application
             }
             if (sender.Equals(BT_EPOXY_Threshold_Jog) || sender.Equals(BT_EPOXY_MinAreaFilter_Jog))
             {
-                FormEpoxyFilter ff = new FormEpoxyFilter();
-                ff.ShowDialog();
+				padIndexX = CbB_PadIndexX.SelectedIndex;
+				padIndexY = CbB_PadIndexY.SelectedIndex;
+
+				#region pd moving
+				mc.OUT.PD.SUC(true, out ret.message);
+				posX = mc.pd.pos.x.PAD(padIndexX);
+				posY = mc.pd.pos.y.PAD(padIndexY);
+				mc.pd.jogMode = (int)PD_JOGMODE.UP_MODE;
+				posZ = mc.pd.pos.z.BD_UP;
+
+				mc.pd.jogMove(posX, posY, posZ, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+				#endregion
+				mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PAD(padIndexX), mc.hd.tool.cPos.y.PAD(padIndexY), mc.para.CAL.toolAngleOffset.value, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+
+				FormEpoxyFilter ff = new FormEpoxyFilter();
+				ff.ShowDialog();
+
+				EVENT.hWindow2Display();
+				#region pd moving
+				//mc.OUT.PD.SUC(false, out ret.message);
+				mc.pd.jogMode = (int)PD_JOGMODE.DOWN_MODE;
+				posX = mc.pd.pos.x.PAD(padIndexX);
+				posY = mc.pd.pos.y.PAD(padIndexY);
+				posZ = mc.pd.pos.z.XY_MOVING;
+				mc.pd.jogMove(posX, posY, posZ, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+				#endregion
             }
+			if (sender.Equals(TB_EPOXY_Rate_Min))
+			{
+				mc.para.setting(mc.para.EPOXY.rateMin, out mc.para.EPOXY.rateMin);
+			}
+			if (sender.Equals(TB_EPOXY_Rate_Max))
+			{
+				mc.para.setting(mc.para.EPOXY.rateMax, out mc.para.EPOXY.rateMax);
+			}
 			if (sender.Equals(BT_ImageSave_None))
 			{
                 mc.para.setting(ref mc.para.EPOXY.imageSave, 0);
@@ -242,11 +321,25 @@ namespace PSA_Application
                 TB_EPOXY_Threshold.Text = mc.para.EPOXY.threshold.value.ToString();
                 TB_EPOXY_MinAreaFilter.Text = mc.para.EPOXY.minAreaFilter.value.ToString();
                 TB_EPOXY_RETRY_NUM.Text = mc.para.EPOXY.failRetry.value.ToString();
+				TB_EPOXY_Rate_Min.Text = mc.para.EPOXY.rateMin.value.ToString();
+				TB_EPOXY_Rate_Max.Text = mc.para.EPOXY.rateMax.value.ToString();
 
                 if (mc.para.EPOXY.imageSave.value == 0) BT_ImageSave.Text = BT_ImageSave_None.Text;
                 else if (mc.para.EPOXY.imageSave.value == 1) BT_ImageSave.Text = BT_ImageSave_Error.Text;
                 else BT_ImageSave.Text = BT_ImageSave_All.Text;
 
+				//if (!mc.main.THREAD_RUNNING)
+				//{
+				//    mc.hdc.cam.displayBlobTheta(mc.hdc.cam.epoxyBlob);
+				//}
+				InitListview();
+				for (int i = 0; i < (int)MAX_COUNT.BLOB; i++)
+				{
+					if (mc.hdc.cam.epoxyBlob[i].isCreate == "true")
+					{
+						AddColumnList("Box" + i.ToString());
+					}
+				}
 //                string passScore = null;
 //                string angleStart = null;
 //                string angelExtent = null;
@@ -798,7 +891,9 @@ namespace PSA_Application
                     mc.hd.tool.padX = padIndexX;
                     mc.hd.tool.padY = padIndexY;
                     mc.hdc.LIVE = false;
-                    
+
+					mc.hdc.cam.grabSofrwareTrigger();
+
                     count = LV_Area_List.Items.Count;
                     int[] nextCount = new int[count];
                     if (count > 9)

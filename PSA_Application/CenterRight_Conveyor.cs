@@ -248,6 +248,7 @@ namespace PSA_Application
 					double rX = 0;
 					double rY = 0;
 					double rT = 0;
+					double rScore = 0;
 					mc.hdc.LIVE = false;
 					#region HDC.req
 					if (mc.para.HDC.modelTrayReversePattern1.isCreate.value == (int)BOOL.TRUE)
@@ -271,7 +272,15 @@ namespace PSA_Application
 						rX = mc.hdc.cam.model[(int)HDC_MODEL.TRAY_REVERSE_SHAPE1].resultX;
 						rY = mc.hdc.cam.model[(int)HDC_MODEL.TRAY_REVERSE_SHAPE1].resultY;
 						rT = mc.hdc.cam.model[(int)HDC_MODEL.TRAY_REVERSE_SHAPE1].resultAngle;
+						rScore = mc.hdc.cam.model[(int)HDC_MODEL.TRAY_REVERSE_SHAPE1].resultScore;
 						mc.log.debug.write(mc.log.CODE.ETC, "X : " + Math.Round(rX, 3).ToString() + ", Y : " + Math.Round(rY, 3).ToString());
+						if (rScore * 100 < mc.para.HDC.modelTrayReversePattern1.passScore.value)
+						{
+							string tmpStr = "";
+							mc.cv.directErrorCheck(out tmpStr, ERRORCODE.CV, ALARM_CODE.E_MACHINE_RUN_TRAY_REVERSE);
+							mc.error.set(mc.error.CV, ALARM_CODE.E_MACHINE_RUN_TRAY_REVERSE, tmpStr, false);
+							mc.error.CHECK();
+						}
 					}
 					else
 					{

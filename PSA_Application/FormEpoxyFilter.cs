@@ -27,14 +27,14 @@ namespace PSA_Application
             {
 				mc.para.setting(ref  mc.para.EPOXY.threshold, tempthreshold);
 				mc.para.setting(ref  mc.para.EPOXY.minAreaFilter, tempareaminfilter);
-				
+				mc.hdc.LIVE = false;
 				this.Close();
             }
             if (sender.Equals(BT_ESC))
             {
                 tempthreshold = (int)mc.para.EPOXY.threshold.value;
 				tempareaminfilter = (int)mc.para.EPOXY.minAreaFilter.value;
-
+				mc.hdc.LIVE = false;
 				this.Close();
             }
             if (sender.Equals(BT_Refresh))
@@ -61,20 +61,14 @@ namespace PSA_Application
         {
             if (mc.hdc.cam.refresh_req == true) return;
 
-            mc.hdc.lighting_exposure(mc.para.EPOXY.light, mc.para.EPOXY.exposureTime);
-            mc.hdc.cam.grabSofrwareTrigger();
-            mc.hdc.cam.findBlob(mc.hdc.cam.epoxyBlob, (double)tempthreshold, (double)tempareaminfilter, -1, -1, out ret.message, out ret.s, 0); if (ret.message != RetMessage.OK) return;
-            mc.hdc.cam.refresh_reqMode = REFRESH_REQMODE.FIND_EPOXY;
-      		mc.hdc.cam.refresh_req = true;
+			mc.idle(500);
 
-            mc.main.Thread_Polling();
-            dwell.Reset();
-            while (true)
-            {
-                mc.idle(0);
-                if (dwell.Elapsed > 10000) { mc.hdc.cam.refresh_req = false; return; }
-                if (mc.hdc.cam.refresh_req == false) break;
-            }
+			mc.hdc.liveMode = REFRESH_REQMODE.FIND_EPOXY;
+			//mc.hdc.LIVE = true;
+            //mc.hdc.lighting_exposure(mc.para.EPOXY.light, mc.para.EPOXY.exposureTime);
+
+			mc.hdc.epoxyFindBlob(mc.hdc.cam.epoxyBlob, tempthreshold, tempareaminfilter, out ret.message);
+            
 
             LB_AreaFilterMinValue.Text = tempareaminfilter.ToString();
             LB_ThresholdValue.Text = tempthreshold.ToString();   
@@ -95,9 +89,16 @@ namespace PSA_Application
 
 
             SB_AreaFilterMin.Value = (int)tempareaminfilter;
-            SB_Threshold.Value = (int)tempthreshold;		
+            SB_Threshold.Value = (int)tempthreshold;
 
-            control();
+			LB_AreaFilterMinValue.Text = tempareaminfilter.ToString();
+			LB_ThresholdValue.Text = tempthreshold.ToString();   
+
+			mc.ulc.lighting_exposure(mc.para.EPOXY.light, mc.para.EPOXY.exposureTime);
+			EVENT.hWindowLargeDisplay(mc.hdc.cam.acq.grabber.cameraNumber);
+			mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
+            
+			//control();
         }
     }
 }

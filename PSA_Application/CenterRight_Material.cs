@@ -105,6 +105,7 @@ namespace PSA_Application
 			
 			if (sender.Equals(TB_PAD_CHECK_LIMIT)) mc.para.setting(mc.para.MT.padCheckLimit, out mc.para.MT.padCheckLimit);
 			if (sender.Equals(TB_PAD_CHECK_CENTERLIMIT)) mc.para.setting(mc.para.MT.padCheckCenterLimit, out mc.para.MT.padCheckCenterLimit);
+			if (sender.Equals(TB_PAD_CHECK_THETALIMIT)) mc.para.setting(mc.para.MT.padCheckThetaLimit, out mc.para.MT.padCheckThetaLimit);
 			if (sender.Equals(TB_LID_CHECK_SIZELIMIT)) mc.para.setting(mc.para.MT.lidSizeLimit, out mc.para.MT.lidSizeLimit);
 			if (sender.Equals(TB_LID_CHECK_LIMIT)) mc.para.setting(mc.para.MT.lidCheckLimit, out mc.para.MT.lidCheckLimit);
             if (sender.Equals(TB_PedestalSizeX)) mc.para.setting(mc.para.MT.pedestalSize.x, out mc.para.MT.pedestalSize.x);
@@ -153,6 +154,7 @@ namespace PSA_Application
 				
 				TB_PAD_CHECK_LIMIT.Text = mc.para.MT.padCheckLimit.value.ToString();
 				TB_PAD_CHECK_CENTERLIMIT.Text = mc.para.MT.padCheckCenterLimit.value.ToString();
+				TB_PAD_CHECK_THETALIMIT.Text = mc.para.MT.padCheckThetaLimit.value.ToString();
 				TB_LID_CHECK_SIZELIMIT.Text = mc.para.MT.lidSizeLimit.value.ToString();
 				TB_LID_CHECK_LIMIT.Text = mc.para.MT.lidCheckLimit.value.ToString();
 

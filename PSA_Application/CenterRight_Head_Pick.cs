@@ -145,11 +145,6 @@ namespace PSA_Application
 				ret.usrDialog = FormUserMessage.diagResult;
 				if (ret.usrDialog == DIAG_RESULT.Yes)
 				{
-					for (int i = 0; i < 8; i++)
-					{
-						mc.para.HD.pick.pickPosComp[i].x.value = 0;
-						mc.para.HD.pick.pickPosComp[i].y.value = 0;
-					}
                     ff.SetDisplayItems(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.INFORMATION, textResource.MB_HD_PICK_INIT_FINISH);
 					ff.ShowDialog();
 				}

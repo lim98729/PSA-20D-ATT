@@ -143,6 +143,11 @@ namespace PSA_Application
 				light_para = mc.para.HDC.modelManualTeach.paraP2.light;
 				exposure_para = mc.para.HDC.modelManualTeach.paraP2.exposureTime;
 			}
+			if (mode == LIGHTEXPOSUREMODE.EPOXY)
+			{
+				light_para = mc.para.EPOXY.light;
+				exposure_para = mc.para.EPOXY.exposureTime;
+			}
 
 			SB_Channel1.Maximum = 255 + 9;
             SB_Channel2.Maximum = 255 + 9;
@@ -173,7 +178,7 @@ namespace PSA_Application
             // 1121. HeatSlug
             if (mode == LIGHTEXPOSUREMODE.HDC_PAD || mode == LIGHTEXPOSUREMODE.HDC_PADC1 || mode == LIGHTEXPOSUREMODE.HDC_PADC2 || mode == LIGHTEXPOSUREMODE.HDC_PADC3 || mode == LIGHTEXPOSUREMODE.HDC_PADC4 ||
 		        mode == LIGHTEXPOSUREMODE.HEATSLUG_PAD || mode == LIGHTEXPOSUREMODE.HEATSLUG_PADC1 || mode == LIGHTEXPOSUREMODE.HEATSLUG_PADC2 ||
-                mode == LIGHTEXPOSUREMODE.HEATSLUG_PADC3 || mode == LIGHTEXPOSUREMODE.HEATSLUG_PADC4) 
+                mode == LIGHTEXPOSUREMODE.HEATSLUG_PADC3 || mode == LIGHTEXPOSUREMODE.HEATSLUG_PADC4 || mode == LIGHTEXPOSUREMODE.EPOXY) 
             {
                 mc.light.HDC(light_para, out ret.b);
                 if (!ret.b) mc.message.alarm(String.Format(textResource.MB_ETC_COMM_ERROR, "Lighting Controller"));
@@ -348,6 +353,11 @@ namespace PSA_Application
 					mc.para.HDC.modelManualTeach.paraP2.light = light_para;
 					mc.para.HDC.modelManualTeach.paraP2.exposureTime = exposure_para;
 				}
+				if (mode == LIGHTEXPOSUREMODE.EPOXY)
+				{
+					mc.para.EPOXY.light = light_para;
+					mc.para.EPOXY.exposureTime = exposure_para;
+				}
 			}
             if (sender.Equals(BT_ESC))
             {
@@ -450,6 +460,11 @@ namespace PSA_Application
 				{
 					light_para = mc.para.HDC.modelManualTeach.paraP2.light;
 					exposure_para = mc.para.HDC.modelManualTeach.paraP2.exposureTime;
+				}
+				if (mode == LIGHTEXPOSUREMODE.EPOXY)
+				{
+					light_para = mc.para.EPOXY.light;
+					exposure_para = mc.para.EPOXY.exposureTime;
 				}
             }
             control();

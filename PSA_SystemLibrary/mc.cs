@@ -4431,7 +4431,6 @@ namespace PSA_SystemLibrary
             public static bool nouseloadcell;
             public static bool nousetouchprobe;
             public static bool noUsePDUpSensor;
-            public static bool noUseCompPickPosition;
             public static int hwCheckSkip;			// Bit0:Main Air Check, Bit1:Stand-Alone Machine
             public static int removeConveyor;		// Conveyor Homing Skip이 On되어 있는 상태에서 아예 Conveyor Width축에 전원도 인가하지 않음.
             
@@ -4517,10 +4516,6 @@ namespace PSA_SystemLibrary
                 temp = swconfig.GetInt("noUsePDUpSensor", 2);
                 if (temp == 2) genflag = true;
                 noUsePDUpSensor = (temp != 1) ? false : true;
-
-                temp = swconfig.GetInt("noUseCompPickPosition", 2);
-                if (temp == 2) genflag = true;
-                noUseCompPickPosition = (temp != 1) ? false : true;
 
                 temp = swconfig.GetInt("HWCheckSkip", 0);
                 if (temp < 0 || temp > 3)   // Invalid HWCheckSkip Number
@@ -4654,8 +4649,6 @@ namespace PSA_SystemLibrary
                 swconfig.WriteInt("NouseTouchprobe", temp);
                 temp = noUsePDUpSensor ? 1 : 0;
                 swconfig.WriteInt("noUsePDUpSensor", temp);
-                temp = noUseCompPickPosition ? 1 : 0;
-                swconfig.WriteInt("noUseCompPickPosition", temp);
 
                 swconfig.WriteInt("RemoveConveyor", removeConveyor);
 
@@ -4753,10 +4746,7 @@ namespace PSA_SystemLibrary
                     tmp_ETC.pedestalSuctionCheckUse.value = ETC.pedestalSuctionCheckUse.value;
                     tmp_ETC.pedestalSuctionCheckMethod.value = ETC.pedestalSuctionCheckMethod.value;
                     tmp_ETC.pedestalSuctionCheckLevel.value = ETC.pedestalSuctionCheckLevel.value;
-
                     tmp_ETC.lastTubeAlarmUse.value = ETC.lastTubeAlarmUse.value;
-
-                    tmp_ETC.usePlaceForceTracking.value = ETC.usePlaceForceTracking.value;
 
                     tmp_ETC.useBondingCountCheck.value = ETC.useBondingCountCheck.value;
                     tmp_ETC.BondingTrayCountLimit.value = ETC.BondingTrayCountLimit.value;
@@ -5004,6 +4994,7 @@ namespace PSA_SystemLibrary
                 #region Up_Looking_Camera
                 else if (mode == (int)CenterRightSelMode.UpLooking_Camera)
                 {
+                    tmp_ULC.algorism.value = ULC.algorism.value;
                     tmp_ULC.model.angleStart.value = ULC.model.angleStart.value;
                     tmp_ULC.model.angleExtent.value = ULC.model.angleExtent.value;
                     tmp_ULC.model.exposureTime.value = ULC.model.exposureTime.value;
@@ -5185,8 +5176,6 @@ namespace PSA_SystemLibrary
                     if (tmp_ETC.pedestalSuctionCheckLevel.value != ETC.pedestalSuctionCheckLevel.value) { b = true; return b; }
 
                     if (tmp_ETC.lastTubeAlarmUse.value != ETC.lastTubeAlarmUse.value) { b = true; return b; }
-
-                    if (tmp_ETC.usePlaceForceTracking.value != ETC.usePlaceForceTracking.value) { b = true; return b; }
 
                     if (tmp_ETC.useBondingCountCheck.value != ETC.useBondingCountCheck.value) { b = true; return b; }
                     if (tmp_ETC.BondingTrayCountLimit.value != ETC.BondingTrayCountLimit.value) { b = true; return b; }
@@ -5438,6 +5427,7 @@ namespace PSA_SystemLibrary
                 #region UP_Looking_Camera
                 else if (mode == (int)CenterRightSelMode.UpLooking_Camera)
                 {
+                    if (ULC.algorism.value != tmp_ULC.algorism.value) { b = true; return b; }
                     if (ULC.model.angleStart.value != tmp_ULC.model.angleStart.value) { b = true; return b; }
                     if (ULC.model.angleExtent.value != tmp_ULC.model.angleExtent.value) { b = true; return b; }
                     if (ULC.model.exposureTime.value != tmp_ULC.model.exposureTime.value) { b = true; return b; }
@@ -5622,8 +5612,6 @@ namespace PSA_SystemLibrary
                     ETC.pedestalSuctionCheckLevel.value = tmp_ETC.pedestalSuctionCheckLevel.value;
 
                     ETC.lastTubeAlarmUse.value = tmp_ETC.lastTubeAlarmUse.value;
-
-                    ETC.usePlaceForceTracking.value = tmp_ETC.usePlaceForceTracking.value;
 
                     ETC.useBondingCountCheck.value = tmp_ETC.useBondingCountCheck.value;
                     ETC.BondingTrayCountLimit.value = tmp_ETC.BondingTrayCountLimit.value;
@@ -5882,6 +5870,7 @@ namespace PSA_SystemLibrary
                 #region Up_Looking_Camera
                 else if (mode == (int)CenterRightSelMode.UpLooking_Camera)
                 {
+                    ULC.algorism.value = tmp_ULC.algorism.value;
                     ULC.model.angleStart.value = tmp_ULC.model.angleStart.value;
                     ULC.model.angleExtent.value = tmp_ULC.model.angleExtent.value;
                     ULC.model.exposureTime.value = tmp_ULC.model.exposureTime.value;

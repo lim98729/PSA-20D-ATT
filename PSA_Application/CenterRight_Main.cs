@@ -125,17 +125,6 @@ namespace PSA_Application
 					BT_LastTubeCheckUse.Image = Properties.Resources.Yellow_LED;
 				}
 
-				if (mc.para.ETC.usePlaceForceTracking.value == 0)
-				{
-					BT_UsePlaceForceTracking.Text = "OFF";
-					BT_UsePlaceForceTracking.Image = Properties.Resources.YellowLED_OFF;
-				}
-				else
-				{
-					BT_UsePlaceForceTracking.Text = "ON";
-					BT_UsePlaceForceTracking.Image = Properties.Resources.Yellow_LED;
-				}
-
 				if (mc.para.ETC.useWasteCountLimit.value == 0) { BT_UseWasteCountLimit.Text = "OFF"; BT_UseWasteCountLimit.Image = Properties.Resources.YellowLED_OFF; }
 				else { BT_UseWasteCountLimit.Text = "ON"; BT_UseWasteCountLimit.Image = Properties.Resources.Yellow_LED; }
 
@@ -454,17 +443,6 @@ namespace PSA_Application
 					mc.para.setting(ref mc.para.ETC.lastTubeAlarmUse, 1);
 				else
 					mc.para.setting(ref mc.para.ETC.lastTubeAlarmUse, 0);
-			}
-
-			if (sender.Equals(BT_UsePlaceForceTracking))
-			{
-				if ((int)mc.para.ETC.usePlaceForceTracking.value == 0)
-				{
-					mc.para.setting(ref mc.para.ETC.usePlaceForceTracking, 1);
-					mc.para.HD.place.placeForceOffset.value = 0;		// clear
-				}
-				else
-					mc.para.setting(ref mc.para.ETC.usePlaceForceTracking, 0);
 			}
 
 			if (sender.Equals(BT_UseWasteCountLimit))

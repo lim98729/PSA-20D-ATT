@@ -41,6 +41,7 @@ namespace PSA_Application
 		UnitCodeMachineRef unitCodeMachineRef = UnitCodeMachineRef.REF0;
 		UnitCodePDRef unitCodePDRef = UnitCodePDRef.P1;
 		MP_HD_Z_MODE unitCodeZAxis = MP_HD_Z_MODE.REF;
+		UnitCodeSF unitCodeSF = UnitCodeSF.SF1;
 
 		double posX, posY, posZ, posT;
 		JOGMODE jogMode;
@@ -336,17 +337,18 @@ namespace PSA_Application
 				}
 				#endregion
 				#region moving
-				posX = mc.hd.tool.cPos.x.PICK(UnitCodeSF.SF1);
-				posY = mc.hd.tool.cPos.y.PICK(UnitCodeSF.SF1);
+				posX = mc.hd.tool.cPos.x.PICK(unitCodeSF);
+				posY = mc.hd.tool.cPos.y.PICK(unitCodeSF);
 				mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				#endregion
 				FormJogPad ff = new FormJogPad();
 				ff.jogMode = JOGMODE.HDC_PICK;
-				ff.dataX = mc.para.CAL.pick.x;
-				ff.dataY = mc.para.CAL.pick.y;
+				ff.unitCodeSF = unitCodeSF;
+				ff.dataX = mc.para.CAL.pick[(int)unitCodeSF].x;
+				ff.dataY = mc.para.CAL.pick[(int)unitCodeSF].y;
 				ff.ShowDialog();
-				mc.para.CAL.pick.x.value = ff.dataX.value;
-				mc.para.CAL.pick.y.value = ff.dataY.value;
+				mc.para.CAL.pick[(int)unitCodeSF].x.value = ff.dataX.value;
+				mc.para.CAL.pick[(int)unitCodeSF].y.value = ff.dataY.value;
 				#region moving
                 posX = mc.para.CAL.standbyPosition.x.value;
                 posY = mc.para.CAL.standbyPosition.y.value;
@@ -606,9 +608,9 @@ namespace PSA_Application
 				#region PICK
 				if (unitCodeZAxis == MP_HD_Z_MODE.PICK)
 				{
-                    ret.usrDialog = FormMain.UserMessageBox(DIAG_SEL_MODE.OKCancel, DIAG_ICON_MODE.QUESTION, textResource.MB_HD_PICK_INIT_OFFSET_Z);
+                    //ret.usrDialog = FormMain.UserMessageBox(DIAG_SEL_MODE.OKCancel, DIAG_ICON_MODE.QUESTION, textResource.MB_HD_PICK_INIT_OFFSET_Z);
 					//mc.message.OkCancel("모든 Pick Offset Z 값은 초기화 됩니다. 계속 진행할까요?", out ret.dialog);
-					if (ret.usrDialog == DIAG_RESULT.Cancel) goto EXIT;
+					//if (ret.usrDialog == DIAG_RESULT.Cancel) goto EXIT;
 					mc.hd.tool.F.max(out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarm("Force Error : " + ret.message.ToString()); goto EXIT; }
 					#region moving
 					posX = mc.hd.tool.tPos.x.PICK(UnitCodeSF.SF1);
@@ -1023,7 +1025,7 @@ namespace PSA_Application
 			{
 				BT_MachineRefSelect.Text = unitCodeMachineRef.ToString();
 				BT_HDC_PDSelelct.Text = unitCodePDRef.ToString();
-
+				BT_PICK_PosSelect.Text = unitCodeSF.ToString();
 				TB_MachineRef_OffsetX.Text = mc.para.CAL.machineRef[(int)unitCodeMachineRef].x.value.ToString();
 				TB_MachineRef_OffsetY.Text = mc.para.CAL.machineRef[(int)unitCodeMachineRef].y.value.ToString();
 
@@ -1045,8 +1047,8 @@ namespace PSA_Application
 				TB_ULC_OffsetX.Text = mc.para.CAL.ulc.x.value.ToString();
 				TB_ULC_OffsetY.Text = mc.para.CAL.ulc.y.value.ToString();
 
-				TB_Pick_OffsetX.Text = mc.para.CAL.pick.x.value.ToString();
-				TB_Pick_OffsetY.Text = mc.para.CAL.pick.y.value.ToString();
+				TB_Pick_OffsetX.Text = mc.para.CAL.pick[(int)unitCodeSF].x.value.ToString();
+				TB_Pick_OffsetY.Text = mc.para.CAL.pick[(int)unitCodeSF].y.value.ToString();
 
 				TB_ConveyorEdge_OffsetX.Text = mc.para.CAL.conveyorEdge.x.value.ToString();
 				TB_ConveyorEdge_OffsetY.Text = mc.para.CAL.conveyorEdge.y.value.ToString();
@@ -1125,6 +1127,11 @@ namespace PSA_Application
 			if (sender.Equals(BT_Z_AxisSelect_LoadCell)) unitCodeZAxis = MP_HD_Z_MODE.LOADCELL;
 			if (sender.Equals(BT_Z_AxisSelect_LoadSensor1)) unitCodeZAxis = MP_HD_Z_MODE.SENSOR1;
 			if (sender.Equals(BT_Z_AxisSelect_LoadSensor2)) unitCodeZAxis = MP_HD_Z_MODE.SENSOR2;
+
+			if (sender.Equals(BT_PICK_PosSelect_1)) unitCodeSF = UnitCodeSF.SF1;
+			if (sender.Equals(BT_PICK_PosSelect_2)) unitCodeSF = UnitCodeSF.SF2;
+			if (sender.Equals(BT_PICK_PosSelect_3)) unitCodeSF = UnitCodeSF.SF3;
+			if (sender.Equals(BT_PICK_PosSelect_4)) unitCodeSF = UnitCodeSF.SF4;
 			#endregion
 
 			#region TextBox
@@ -1149,8 +1156,9 @@ namespace PSA_Application
 			if (sender.Equals(TB_ULC_OffsetX)) mc.para.setting(mc.para.CAL.ulc.x, out mc.para.CAL.ulc.x);
 			if (sender.Equals(TB_ULC_OffsetY)) mc.para.setting(mc.para.CAL.ulc.y, out mc.para.CAL.ulc.y);
 
-			if (sender.Equals(TB_Pick_OffsetX)) mc.para.setting(mc.para.CAL.pick.x, out mc.para.CAL.pick.x);
-			if (sender.Equals(TB_Pick_OffsetY)) mc.para.setting(mc.para.CAL.pick.y, out mc.para.CAL.pick.y);
+// temp
+			if (sender.Equals(TB_Pick_OffsetX)) mc.para.setting(mc.para.CAL.pick[(int)unitCodeSF].x, out mc.para.CAL.pick[(int)unitCodeSF].x);
+			if (sender.Equals(TB_Pick_OffsetY)) mc.para.setting(mc.para.CAL.pick[(int)unitCodeSF].y, out mc.para.CAL.pick[(int)unitCodeSF].y);
 
 			if (sender.Equals(TB_ConveyorEdge_OffsetX)) mc.para.setting(mc.para.CAL.conveyorEdge.x, out mc.para.CAL.conveyorEdge.x);
 			if (sender.Equals(TB_ConveyorEdge_OffsetY)) mc.para.setting(mc.para.CAL.conveyorEdge.y, out mc.para.CAL.conveyorEdge.y);
@@ -1229,6 +1237,15 @@ namespace PSA_Application
 			refresh();
 			mc.error.CHECK();
 			mc.check.push(sender, false);
+		}	  
+		private void CenterRight_Calibration_Load(object sender, EventArgs e)
+		{
+		    // temp
+			if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG)
+			{
+				BT_PICK_PosSelect_3.Visible = false;
+				BT_PICK_PosSelect_4.Visible = false;
+			}
 		}	  
 	}
 }

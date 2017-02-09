@@ -1758,23 +1758,13 @@ namespace PSA_SystemLibrary
 				writeTuple(pick.doubleCheck.enable, i, out i);
 				writeTuple(pick.doubleCheck.offset, i, out i);
 				writeTuple(pick.doubleCheck.retry, i, out i);
-
 				writeTuple(pick.shake.enable, i, out i);
 				writeTuple(pick.shake.count, i, out i);
 				writeTuple(pick.shake.level, i, out i);
 				writeTuple(pick.shake.speed, i, out i);
 				writeTuple(pick.shake.delay, i, out i);
-
 				writeTuple(pick.wasteDelay, i, out i);
 
-				writeTuple(pick.pickPosComp[0].x, i, out i);
-                writeTuple(pick.pickPosComp[0].y, i, out i);
-                writeTuple(pick.pickPosComp[1].x, i, out i);
-                writeTuple(pick.pickPosComp[1].y, i, out i);
-                writeTuple(pick.pickPosComp[2].x, i, out i);
-                writeTuple(pick.pickPosComp[2].y, i, out i);
-                writeTuple(pick.pickPosComp[3].x, i, out i);
-                writeTuple(pick.pickPosComp[3].y, i, out i);
 
 				#endregion
 				#region place
@@ -1834,7 +1824,6 @@ namespace PSA_SystemLibrary
 				writeTuple(place.autoTrack.enable, i, out i);
 				
 				writeTuple(place.pressTiltLimit, i, out i);
-				writeTuple(place.placeForceOffset, i, out i);
 				writeTuple(place.PressAfterBonding, i, out i);
 				#endregion
 				#region press
@@ -1947,24 +1936,12 @@ namespace PSA_SystemLibrary
 				readTuple("pick.doubleCheck.enable", out pick.doubleCheck.enable, out fail); if (fail) goto SET_FAIL;
 				readTuple("pick.doubleCheck.offset", out pick.doubleCheck.offset, out fail); if (fail) goto SET_FAIL;
 				readTuple("pick.doubleCheck.retry", out pick.doubleCheck.retry, out fail); if (fail) goto SET_FAIL;
-
 				readTuple("pick.shake.enable", out pick.shake.enable, out fail); if (fail) goto SET_FAIL;
 				readTuple("pick.shake.count", out pick.shake.count, out fail); if (fail) goto SET_FAIL;
 				readTuple("pick.shake.level", out pick.shake.level, out fail); if (fail) goto SET_FAIL;
 				readTuple("pick.shake.speed", out pick.shake.speed, out fail); if (fail) goto SET_FAIL;
 				readTuple("pick.shake.delay", out pick.shake.delay, out fail); if (fail) goto SET_FAIL;
-
 				readTuple("pick.wasteDelay", out pick.wasteDelay, out fail); if (fail) goto SET_FAIL;
-
-				readTuple("pick.pickPosComp[0].x", out pick.pickPosComp[0].x, out fail); if (fail) goto SET_FAIL;
-				readTuple("pick.pickPosComp[0].y", out pick.pickPosComp[0].y, out fail); if (fail) goto SET_FAIL;
-                readTuple("pick.pickPosComp[1].x", out pick.pickPosComp[1].x, out fail); if (fail) goto SET_FAIL;
-                readTuple("pick.pickPosComp[1].y", out pick.pickPosComp[1].y, out fail); if (fail) goto SET_FAIL;
-                readTuple("pick.pickPosComp[2].x", out pick.pickPosComp[2].x, out fail); if (fail) goto SET_FAIL;
-                readTuple("pick.pickPosComp[2].y", out pick.pickPosComp[2].y, out fail); if (fail) goto SET_FAIL;
-                readTuple("pick.pickPosComp[3].x", out pick.pickPosComp[3].x, out fail); if (fail) goto SET_FAIL;
-                readTuple("pick.pickPosComp[3].y", out pick.pickPosComp[3].y, out fail); if (fail) goto SET_FAIL;
-
 				#endregion
 				#region place
 				readTuple("place.forceMode.mode", out place.forceMode.mode, out fail); if (fail) goto SET_FAIL;
@@ -2019,7 +1996,6 @@ namespace PSA_SystemLibrary
 				readTuple("place.preForce.enable", out place.preForce.enable, out fail); if (fail) goto SET_FAIL;
 				readTuple("place.autoTrack.enable", out place.autoTrack.enable, out fail); if (fail) goto SET_FAIL;
 				readTuple("place.pressTiltLimit", out place.pressTiltLimit, out fail); if (fail) goto SET_FAIL;
-				readTuple("place.placeForceOffset", out place.placeForceOffset, out fail); if (fail) goto SET_FAIL;
 				readTuple("place.PressAfterBonding", out place.PressAfterBonding, out fail); if (fail) goto SET_FAIL;
 				#endregion
 				#region press
@@ -2174,23 +2150,12 @@ namespace PSA_SystemLibrary
 			setDefault("pick.doubleCheck.enable", out pick.doubleCheck.enable, out fail); if (fail) goto SET_FAIL;
 			setDefault("pick.doubleCheck.offset", out pick.doubleCheck.offset, out fail); if (fail) goto SET_FAIL;
 			setDefault("pick.doubleCheck.retry", out pick.doubleCheck.retry, out fail); if (fail) goto SET_FAIL;
-
 			setDefault("pick.shake.enable", out pick.shake.enable, out fail); if (fail) goto SET_FAIL;
 			setDefault("pick.shake.count", out pick.shake.count, out fail); if (fail) goto SET_FAIL;
 			setDefault("pick.shake.level", out pick.shake.level, out fail); if (fail) goto SET_FAIL;
 			setDefault("pick.shake.speed", out pick.shake.speed, out fail); if (fail) goto SET_FAIL;
 			setDefault("pick.shake.delay", out pick.shake.delay, out fail); if (fail) goto SET_FAIL;
-
 			setDefault("pick.wasteDelay", out pick.wasteDelay, out fail); if (fail) goto SET_FAIL;
-
-			setDefault("pick.pickPosComp[0].x", out pick.pickPosComp[0].x, out fail); if (fail) goto SET_FAIL;
-			setDefault("pick.pickPosComp[0].y", out pick.pickPosComp[0].y, out fail); if (fail) goto SET_FAIL;
-            setDefault("pick.pickPosComp[1].x", out pick.pickPosComp[1].x, out fail); if (fail) goto SET_FAIL;
-            setDefault("pick.pickPosComp[1].y", out pick.pickPosComp[1].y, out fail); if (fail) goto SET_FAIL;
-            setDefault("pick.pickPosComp[2].x", out pick.pickPosComp[2].x, out fail); if (fail) goto SET_FAIL;
-            setDefault("pick.pickPosComp[2].y", out pick.pickPosComp[2].y, out fail); if (fail) goto SET_FAIL;
-            setDefault("pick.pickPosComp[3].x", out pick.pickPosComp[3].x, out fail); if (fail) goto SET_FAIL;
-            setDefault("pick.pickPosComp[3].y", out pick.pickPosComp[3].y, out fail); if (fail) goto SET_FAIL;
 			#endregion
 			#region place
 			setDefault("place.forceMode.mode", out place.forceMode.mode, out fail); if (fail) goto SET_FAIL;
@@ -2244,7 +2209,6 @@ namespace PSA_SystemLibrary
 			setDefault("place.preForce.enable", out place.preForce.enable, out fail); if (fail) goto SET_FAIL;
 			setDefault("place.autoTrack.enable", out place.autoTrack.enable, out fail); if (fail) goto SET_FAIL;
 			setDefault("place.pressTiltLimit", out place.pressTiltLimit, out fail); if (fail) goto SET_FAIL;
-			setDefault("place.placeForceOffset", out place.placeForceOffset, out fail); if (fail) goto SET_FAIL;
 			setDefault("place.PressAfterBonding", out place.PressAfterBonding, out fail); if (fail) goto SET_FAIL;
 			#endregion
 			#region press
@@ -2323,17 +2287,8 @@ namespace PSA_SystemLibrary
 				id++; if (name == "pick.shake.level") setDefault(out p, name, id, 0, 10, 2000, AUTHORITY.MAINTENCE.ToString(), "Pick-Up Shaking Distance[um]");
 				id++; if (name == "pick.shake.speed") setDefault(out p, name, id, 0, 0.01, 1000, AUTHORITY.MAINTENCE.ToString(), "Pick-Up Shaking Speed[mm/sec]");
 				id++; if (name == "pick.shake.delay") setDefault(out p, name, id, 0, 0, 1000, AUTHORITY.MAINTENCE.ToString(), "Pick-Up Shaking Motion Delay after Motion Done");
-
 				id++; if (name == "pick.wasteDelay") setDefault(out p, name, id, 300, 0, 10000, AUTHORITY.MAINTENCE.ToString(), "Blow Time on Waste Position[mSec]");
-				
-				id++; if (name == "pick.pickPosComp[0].x") setDefault(out p, name, id, 0, -5000, 5000, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "pick.pickPosComp[0].y") setDefault(out p, name, id, 0, -5000, 5000, AUTHORITY.MAINTENCE.ToString(), "description");
-                id++; if (name == "pick.pickPosComp[1].x") setDefault(out p, name, id, 0, -5000, 5000, AUTHORITY.MAINTENCE.ToString(), "description");
-                id++; if (name == "pick.pickPosComp[1].y") setDefault(out p, name, id, 0, -5000, 5000, AUTHORITY.MAINTENCE.ToString(), "description");
-                id++; if (name == "pick.pickPosComp[2].x") setDefault(out p, name, id, 0, -5000, 5000, AUTHORITY.MAINTENCE.ToString(), "description");
-                id++; if (name == "pick.pickPosComp[2].y") setDefault(out p, name, id, 0, -5000, 5000, AUTHORITY.MAINTENCE.ToString(), "description");
-                id++; if (name == "pick.pickPosComp[3].x") setDefault(out p, name, id, 0, -5000, 5000, AUTHORITY.MAINTENCE.ToString(), "description");
-                id++; if (name == "pick.pickPosComp[3].y") setDefault(out p, name, id, 0, -5000, 5000, AUTHORITY.MAINTENCE.ToString(), "description");
+
 				#endregion
 				#region place
 				id++; if (name == "place.forceMode.mode") setDefault(out p, name, id, 0, 0, 2, AUTHORITY.MAINTENCE.ToString(), "Select Force Control Mode. High->Low/Low->High/Spring");
@@ -2391,7 +2346,6 @@ namespace PSA_SystemLibrary
 				id++; if (name == "place.autoTrack.enable") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "Automatically Tracking Usage Option for Target Force");		// 사용하지 않음. Place Force Mode로 기능 변경함. 항목만 추가되어 있음. 삭제했을 경우, 이전 버전과의 호환성을 이유로 보존.
 
 				id++; if (name == "place.pressTiltLimit") setDefault(out p, name, id, 100, 0, 5000, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "place.placeForceOffset") setDefault(out p, name, id, 0, -10000, 10000, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "place.PressAfterBonding") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
 				#endregion
 				#region press
@@ -3441,7 +3395,7 @@ namespace PSA_SystemLibrary
             setDefault("rateMin", out rateMin, out fail); if (fail) goto SET_FAIL;
             setDefault("rateMax", out rateMax, out fail); if (fail) goto SET_FAIL;
             setDefault("failRetry", out posLimit, out fail); if (fail) goto SET_FAIL;
-            setDefault("retryCount", out failRetry, out fail); if (fail) goto SET_FAIL;
+            setDefault("failRetry", out failRetry, out fail); if (fail) goto SET_FAIL;
             setDefault("imageSave", out imageSave, out fail); if (fail) goto SET_FAIL;
 
             r = true;
@@ -3473,7 +3427,7 @@ namespace PSA_SystemLibrary
                 }
 
                 id++; if (name == "rateMin") setDefault(out p, name, id, 60, 0, 100, AUTHORITY.MAINTENCE.ToString(), "description");
-                id++; if (name == "rateMax") setDefault(out p, name, id, 80, 0, 100, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "rateMax") setDefault(out p, name, id, 80, 0, 200, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "posLimit") setDefault(out p, name, id, 300, 0, 5000, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "failRetry") setDefault(out p, name, id, 0, 0, 5, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "imageSave") setDefault(out p, name, id, 0, 0, 10, AUTHORITY.MAINTENCE.ToString(), "description");
@@ -5099,7 +5053,6 @@ namespace PSA_SystemLibrary
         public para_member pedestalSuctionCheckLevel; 
 
         public para_member lastTubeAlarmUse;
-        public para_member usePlaceForceTracking;
 
         public para_member useWasteCountLimit;
         public para_member wasteCountLimit;
@@ -5173,7 +5126,6 @@ namespace PSA_SystemLibrary
 				writeTuple(preMachine, i, out i);
 
 				writeTuple(lastTubeAlarmUse, i, out i);
-				writeTuple(usePlaceForceTracking, i, out i);
 
                 writeTuple(wasteCount, i, out i);
                 writeTuple(wasteCountLimit, i, out i);
@@ -5298,7 +5250,6 @@ namespace PSA_SystemLibrary
                 readTuple("preMachine", out preMachine, out fail); if (fail) goto SET_FAIL;
 
 				readTuple("lastTubeAlarmUse", out lastTubeAlarmUse, out fail); if (fail) goto SET_FAIL;
-				readTuple("usePlaceForceTracking", out usePlaceForceTracking, out fail); if (fail) goto SET_FAIL;
 
                 readTuple("wasteCountLimit", out wasteCountLimit, out fail); if (fail) goto SET_FAIL;
                 readTuple("useWasteCountLimit", out useWasteCountLimit, out fail); if (fail) goto SET_FAIL;
@@ -5458,7 +5409,6 @@ namespace PSA_SystemLibrary
             setDefault("preMachine", out preMachine, out fail); if (fail) goto SET_FAIL;
 
 			setDefault("lastTubeAlarmUse", out lastTubeAlarmUse, out fail); if (fail) goto SET_FAIL;
-			setDefault("usePlaceForceTracking", out usePlaceForceTracking, out fail); if (fail) goto SET_FAIL;
 
             setDefault("wasteCountLimit", out wasteCountLimit, out fail); if (fail) goto SET_FAIL;
             setDefault("useWasteCountLimit", out useWasteCountLimit, out fail); if (fail) goto SET_FAIL;
@@ -5536,7 +5486,6 @@ namespace PSA_SystemLibrary
                 id++; if (name == "preMachine") setDefault(out p, name, id, 0, 0, 2, AUTHORITY.MAINTENCE.ToString(), "description");
 
 				id++; if (name == "lastTubeAlarmUse") setDefault(out p, name, id, 1, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "usePlaceForceTracking") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
 
                 id++; if (name == "wasteCountLimit") setDefault(out p, name, id, 40, 0, 10000, AUTHORITY.MAINTENCE.ToString(), "description");
                 id++; if (name == "useWasteCountLimit") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
@@ -6410,7 +6359,7 @@ namespace PSA_SystemLibrary
 		public parameterXY[] HDC_PD = new parameterXY[4];
 		public parameterXY touchProbe = new parameterXY();
 		public parameterXY loadCell = new parameterXY();
-		public parameterXY pick = new parameterXY();
+		public parameterXY[] pick = new parameterXY[4];
 		public parameterXYZ[,] place = new parameterXYZ[50,20];
 		public parameterXY ulc = new parameterXY();
 		public parameterXY conveyorEdge = new parameterXY();
@@ -6461,7 +6410,11 @@ namespace PSA_SystemLibrary
 				writeTuple(touchProbe.x, i, out i); writeTuple(touchProbe.y, i, out i);
 				writeTuple(loadCell.x, i, out i); writeTuple(loadCell.y, i, out i);
 
-				writeTuple(pick.x, i, out i); writeTuple(pick.y, i, out i);
+				for (int ix = 0; ix < 4; ix++ )
+				{
+					writeTuple(pick[ix].x, i, out i);
+					writeTuple(pick[ix].y, i, out i);
+				}
 
 				for (int ix = 0; ix < 50; ix++)
 				{
@@ -6599,8 +6552,11 @@ namespace PSA_SystemLibrary
 				readTuple("loadCell.x", out loadCell.x, out fail); if (fail) goto SET_FAIL;
 				readTuple("loadCell.y", out loadCell.y, out fail); if (fail) goto SET_FAIL;
 
-				readTuple("pick.x", out pick.x, out fail); if (fail) goto SET_FAIL;
-				readTuple("pick.y", out pick.y, out fail); if (fail) goto SET_FAIL;
+				for (int i = 0; i < 4; i++)
+				{
+					readTuple("pick[" + i.ToString() + "].x", out pick[i].x, out fail); if (fail) goto SET_FAIL;
+					readTuple("pick[" + i.ToString() + "].y", out pick[i].y, out fail); if (fail) goto SET_FAIL;
+				}
 				for (int ix = 0; ix < 50; ix++)
 				{
 					for (int iy = 0; iy < 20; iy++)
@@ -6785,8 +6741,11 @@ namespace PSA_SystemLibrary
 			setDefault("loadCell.x", out loadCell.x, out fail); if (fail) goto SET_FAIL;
 			setDefault("loadCell.y", out loadCell.y, out fail); if (fail) goto SET_FAIL;
 
-			setDefault("pick.x", out pick.x, out fail); if (fail) goto SET_FAIL;
-			setDefault("pick.y", out pick.y, out fail); if (fail) goto SET_FAIL;
+			for (int ix = 0; ix < 4; ix++ )
+			{
+				setDefault("pick[" + ix.ToString() + "].x", out pick[ix].x, out fail); if (fail) goto SET_FAIL;
+				setDefault("pick[" + ix.ToString() + "].y", out pick[ix].y, out fail); if (fail) goto SET_FAIL;
+			}
 
 			for (int ix = 0; ix < 50; ix++)
 			{
@@ -6899,9 +6858,11 @@ namespace PSA_SystemLibrary
 				id++; if (name == "loadCell.y") setDefault(out p, name, id, 0, lowLimitXY, highLimitXY, AUTHORITY.MAINTENCE.ToString(), "description");
 
 
-				id++; if (name == "pick.x") setDefault(out p, name, id, 0, lowLimitXY, highLimitXY, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "pick.y") setDefault(out p, name, id, 0, lowLimitXY, highLimitXY, AUTHORITY.MAINTENCE.ToString(), "description");
-
+				for (int ix = 0; ix < 4; ix++)
+				{
+					id++; if (name == "pick[" + ix.ToString() + "].x") setDefault(out p, name, id, 800, lowLimitXY, highLimitXY, AUTHORITY.MAINTENCE.ToString(), "description");
+					id++; if (name == "pick[" + ix.ToString() + "].y") setDefault(out p, name, id, 14000, lowLimitXY, highLimitXY, AUTHORITY.MAINTENCE.ToString(), "description");
+				}
 
 				for (int ix = 0; ix < 50; ix++)
 				{
@@ -7086,6 +7047,7 @@ namespace PSA_SystemLibrary
 		public parameterXY pedestalSize = new parameterXY();
 		public para_member padCheckLimit;
 		public para_member padCheckCenterLimit;
+		public para_member padCheckThetaLimit;
 		public para_member lidCheckLimit;
 		public para_member lidSizeLimit;
 		public parameterXYH lidSize = new parameterXYH();
@@ -7120,6 +7082,7 @@ namespace PSA_SystemLibrary
 				
 				writeTuple(padCheckLimit, i, out i);
 				writeTuple(padCheckCenterLimit, i, out i); 
+				writeTuple(padCheckThetaLimit, i, out i); 
 				writeTuple(lidCheckLimit, i, out i); 
 				writeTuple(lidSizeLimit, i, out i);
 				writeTuple(epoxyHeight.z, i, out i);
@@ -7212,6 +7175,7 @@ namespace PSA_SystemLibrary
 
 				readTuple("padCheckLimit", out padCheckLimit, out fail); if (fail) goto SET_FAIL;
 				readTuple("padCheckCenterLimit", out padCheckCenterLimit, out fail); if (fail) goto SET_FAIL;
+				readTuple("padCheckThetaLimit", out padCheckThetaLimit, out fail); if (fail) goto SET_FAIL;
 				readTuple("lidCheckLimit", out lidCheckLimit, out fail); if (fail) goto SET_FAIL;
 				readTuple("lidSizeLimit", out lidSizeLimit, out fail); if (fail) goto SET_FAIL;
 				readTuple("epoxyHeight", out epoxyHeight.z, out fail); if (fail) goto SET_FAIL;
@@ -7346,6 +7310,7 @@ namespace PSA_SystemLibrary
 
 			setDefault("padCheckLimit", out padCheckLimit, out fail); if (fail) goto SET_FAIL;
 			setDefault("padCheckCenterLimit", out padCheckCenterLimit, out fail); if (fail) goto SET_FAIL;
+			setDefault("padCheckThetaLimit", out padCheckThetaLimit, out fail); if (fail) goto SET_FAIL;
 			setDefault("lidCheckLimit", out lidCheckLimit, out fail); if (fail) goto SET_FAIL;
 			setDefault("lidSizeLimit", out lidSizeLimit, out fail); if (fail) goto SET_FAIL;
 			setDefault("epoxyHeight", out epoxyHeight.z, out fail); if (fail) goto SET_FAIL;
@@ -7394,6 +7359,7 @@ namespace PSA_SystemLibrary
 
 				id++; if (name == "padCheckLimit") setDefault(out p, name, id, 200, 1, 2000, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "padCheckCenterLimit") setDefault(out p, name, id, 500, 1, 3000, AUTHORITY.MAINTENCE.ToString(), "Package Center Position Limit[um]");
+				id++; if (name == "padCheckThetaLimit") setDefault(out p, name, id, 0.5, 0, 10, AUTHORITY.MAINTENCE.ToString(), "Package Center Position Limit[um]");
 				id++; if (name == "lidCheckLimit") setDefault(out p, name, id, 200, 1, 2000, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "lidSizeLimit") setDefault(out p, name, id, 500, 1, 2000, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "epoxyHeight") setDefault(out p, name, id, 0.1, 0, 5, AUTHORITY.MAINTENCE.ToString(), "description");
@@ -7714,8 +7680,6 @@ namespace PSA_SystemLibrary
         public parameterPickDoubleCheck doubleCheck = new parameterPickDoubleCheck(); public parameterPickDoubleCheck _doubleCheck = new parameterPickDoubleCheck();
         public parameterPickShake shake = new parameterPickShake(); public parameterPickShake _shake = new parameterPickShake();
         public para_member wasteDelay = new para_member(); public para_member _wasteDelay = new para_member();
-
-		public parameterXY[] pickPosComp = new parameterXY[4];				// 내부적으로 Pick Position Offset 을 이용하여 Pick Position 을 자동 보정 한다.
 	}
 	public class place_parameter
 	{
@@ -7738,7 +7702,6 @@ namespace PSA_SystemLibrary
 		public parameterPlaceAutoTrack autoTrack = new parameterPlaceAutoTrack();
 
 		public para_member pressTiltLimit = new para_member();
-		public para_member placeForceOffset = new para_member();
 		public para_member PressAfterBonding = new para_member();
 	}
 

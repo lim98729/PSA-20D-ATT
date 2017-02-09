@@ -21,6 +21,7 @@ namespace PSA_Application
 		}
 
 		public JOGMODE jogMode;
+		public UnitCodeSF unitCodeSF = UnitCodeSF.SF1;
 		public para_member dataX, dataY;
 		para_member _dataX, _dataY;
 
@@ -489,10 +490,10 @@ namespace PSA_Application
 				if (jogMode == JOGMODE.HDC_PICK)
 				{
 					#region moving
-					mc.para.CAL.pick.x.value = dataX.value;
-					mc.para.CAL.pick.y.value = dataY.value;
-					posX = mc.hd.tool.cPos.x.PICK(UnitCodeSF.SF1);
-					posY = mc.hd.tool.cPos.y.PICK(UnitCodeSF.SF1);
+					mc.para.CAL.pick[(int)unitCodeSF].x.value = dataX.value;
+					mc.para.CAL.pick[(int)unitCodeSF].y.value = dataY.value;
+					posX = mc.hd.tool.cPos.x.PICK(unitCodeSF);
+					posY = mc.hd.tool.cPos.y.PICK(unitCodeSF);
 					mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 					#endregion
 				}

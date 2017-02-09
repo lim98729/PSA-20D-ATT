@@ -31,6 +31,8 @@ namespace PSA_SystemLibrary
         MPIAction mpiAct;
         MPIPolarity mpiPole;
         QueryTimer limitCheckTime = new QueryTimer();
+		double rateX = 0;
+		double rateZ = 0;
 
 		public bool isActivate
 		{
@@ -384,7 +386,8 @@ namespace PSA_SystemLibrary
 						//break;
 					}
 					// 161101-JHY, PD Down 속도 느려서 Up이랑 동일하게 변경.
-					Z.move(pos.z.READY, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
+					rateZ = Z.config.speed.rate; Z.config.speed.rate = 0.3;
+					Z.move(pos.z.READY, out ret.message); Z.config.speed.rate = rateZ; if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
 				case SQC.AUTO + 2:

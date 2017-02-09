@@ -291,7 +291,6 @@ namespace PSA_Application
 							mc.para.CAL.force.C[i].value = tempForce.C[i].value;
 							mc.para.CAL.force.D[i].value = tempForce.D[i].value;
 						}
-						mc.para.HD.place.placeForceOffset.value = 0;		// clear
 					}
 					else if (ret.usrDialog == DIAG_RESULT.No)
 					{
