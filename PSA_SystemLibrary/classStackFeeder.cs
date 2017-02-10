@@ -538,7 +538,7 @@ namespace PSA_SystemLibrary
                     }
                     break;
                 case SQC.READY + 2:
-                    if (homingZ.req)
+                    if (readyPosition == 0)
                     {
                         if (homingZ.RUNING) break;
                         if (homingZ.ERROR) { Esqc = sqc; sqc = SQC.HOMING_ERROR; break; }
@@ -550,7 +550,7 @@ namespace PSA_SystemLibrary
 						Z.reset(out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
 						Z.status(out mpiState, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
                     }
-                    else if (homingZ2.req)
+                    else if (readyPosition == 1)
                     {
                         if (homingZ2.RUNING) break;
                         if (homingZ2.ERROR) { Esqc = sqc; sqc = SQC.HOMING_ERROR; break; }
@@ -1129,21 +1129,19 @@ namespace PSA_SystemLibrary
                     }
                     break;
                 case SQC.AUTO + 2:
-                    if (homingZ.req)
+                    if (moveSFZ)
                     {
-                        moveSFZ = false;
                         if (homingZ.RUNING) break;
                         if (homingZ.ERROR) { Esqc = sqc; sqc = SQC.HOMING_ERROR; break; }
-
+                        moveSFZ = false;
 						// tube가 모두 소진되어서 갈아야 하므로 PickPosComp 을 초기화 한다.
 						magazineClear(UnitCodeSFMG.MG1);
                     }
-                    else if (homingZ2.req)
+                    else if (moveSFZ2)
                     {
-                        moveSFZ2 = false;
                         if (homingZ2.RUNING) break;
                         if (homingZ2.ERROR) { Esqc = sqc; sqc = SQC.HOMING_ERROR; break; }
-
+                        moveSFZ2 = false;
 						// tube가 모두 소진되어서 갈아야 하므로 PickPosComp 을 초기화 한다.
 
 						magazineClear(UnitCodeSFMG.MG2);

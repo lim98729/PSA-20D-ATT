@@ -3711,20 +3711,18 @@ namespace PSA_SystemLibrary
 
             public enum CODE
             {
+                // Code 정리할 필요가 있을듯한데...
                 ERROR,
-// 				YIELD,
                 TRACE,
                 INFO,
                 FAIL,
 
                 START,
                 STOP,
-// 				RESUME,
                 ABORT,
 
                 PARA,
                 EVENT,
-// 				ALARM,
                 WARN,
                 LOGIN,
 

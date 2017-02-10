@@ -151,6 +151,8 @@ namespace PSA_Application
 			}
 			if (sender.Equals(BT_PickOffsetZCal))
 			{
+                goto EXIT;
+
 				mc.log.debug.write(mc.log.CODE.CAL, "Pick Z Offset Calibration START");
 				double posX, posY, posZ, posT;
 				int moveCase;
