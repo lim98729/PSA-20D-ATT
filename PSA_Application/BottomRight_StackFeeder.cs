@@ -163,6 +163,7 @@ namespace PSA_Application
 		}
 		#endregion
 		RetValue ret;
+        UnitCodeSFMG unitCodeSFMG = UnitCodeSFMG.MG1;
 
 		private void BT_PositionSelect_Click(object sender, EventArgs e)
 		{
@@ -171,7 +172,7 @@ namespace PSA_Application
 			#region PositionSelect
             if (sender.Equals(BT_PositionSelect_MGZ1)) 
             {
-                if (mc.para.SF.useMGZ1.value == 1) { BT_PositionSelect.Text = BT_PositionSelect_MGZ1.Text; mc.sf.readyPosition = 0; }
+                if (mc.para.SF.useMGZ1.value == 1) { BT_PositionSelect.Text = BT_PositionSelect_MGZ1.Text; }
                 else
                 {
                     FormUserMessage ff = new FormUserMessage();
@@ -181,7 +182,7 @@ namespace PSA_Application
             }
             if (sender.Equals(BT_PositionSelect_MGZ2))
             {
-                if (mc.para.SF.useMGZ2.value == 1) { BT_PositionSelect.Text = BT_PositionSelect_MGZ2.Text; mc.sf.readyPosition = 1; }
+                if (mc.para.SF.useMGZ2.value == 1) { BT_PositionSelect.Text = BT_PositionSelect_MGZ2.Text; }
                 else
                 {
                     FormUserMessage ff = new FormUserMessage();
@@ -200,9 +201,9 @@ namespace PSA_Application
 			mc.check.push(sender, true, (int)SelectedMenu.BOTTOM_RIGHT);
 			#region PICK
             if (mc.init.success.SF) mc.sf.clear();
-			mc.sf.req = true; mc.sf.reqMode = REQMODE.READY;
-            if (BT_PositionSelect.Text == BT_PositionSelect_MGZ2.Text) mc.sf.reqTubeNumber = UnitCodeSF.SF3;
-            else mc.sf.reqTubeNumber = UnitCodeSF.SF1;
+            if (sender.Equals(BT_PositionSelect_MGZ1)) unitCodeSFMG = UnitCodeSFMG.MG1;
+            if (sender.Equals(BT_PositionSelect_MGZ2)) unitCodeSFMG = UnitCodeSFMG.MG2;
+            mc.sf.reqMGNumber = unitCodeSFMG; mc.sf.reqMode = REQMODE.READY; mc.sf.req = true;
             #endregion
 			mc.main.Thread_Polling();
 			mc.check.push(sender, false);
@@ -214,9 +215,9 @@ namespace PSA_Application
 			mc.check.push(sender, true, (int)SelectedMenu.BOTTOM_RIGHT);
 			#region READY
             if (mc.init.success.SF) mc.sf.clear();
-			mc.sf.req = true; mc.sf.reqMode = REQMODE.DOWN;
-            if (BT_PositionSelect.Text == BT_PositionSelect_MGZ2.Text) mc.sf.reqTubeNumber = UnitCodeSF.SF3;
-            else mc.sf.reqTubeNumber = UnitCodeSF.SF1;
+            if (sender.Equals(BT_PositionSelect_MGZ1)) unitCodeSFMG = UnitCodeSFMG.MG1;
+            if (sender.Equals(BT_PositionSelect_MGZ2)) unitCodeSFMG = UnitCodeSFMG.MG2;
+            mc.sf.reqMGNumber = unitCodeSFMG; mc.sf.reqMode = REQMODE.DOWN; mc.sf.req = true;
 			#endregion
 			mc.main.Thread_Polling();
 			mc.check.push(sender, false);
@@ -273,7 +274,6 @@ namespace PSA_Application
 
 		private void BottomRight_StackFeeder_Load(object sender, EventArgs e)
 		{
-            mc.sf.readyPosition = 0;
 			if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG)
 			{
                 LB_IN_GUIDE3.Visible = false;

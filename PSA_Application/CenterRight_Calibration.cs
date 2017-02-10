@@ -65,8 +65,8 @@ namespace PSA_Application
 					if (!mc.pd.Y.config.write()) { mc.message.alarm("Pedestal Y homing para write error"); }
 					if (!mc.pd.Z.config.write()) { mc.message.alarm("Pedestal Z homing para write error"); }
 
-					if (!mc.sf.Z2.config.write()) { mc.message.alarm("Stack Feeder Z2 homing para write error"); }
-					if (!mc.sf.Z.config.write()) { mc.message.alarm("Stack Feeder Z homing para write error"); }
+					if (!mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.write()) { mc.message.alarm("Stack Feeder Z2 homing para write error"); }
+                    if (!mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.write()) { mc.message.alarm("Stack Feeder Z homing para write error"); }
 
 					if (!mc.cv.W.config.write()) { mc.message.alarm("Conveyor W homing para write error"); }
 				}

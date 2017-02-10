@@ -54,7 +54,7 @@ namespace PSA_SystemLibrary
         {
             get
             {
-                return "20170205A";
+                return "20170210A";
             }
         }
         //public static bool START;
@@ -1625,8 +1625,8 @@ namespace PSA_SystemLibrary
                 pd.Z.eStop(out ret.message);
 
                 // stack feeder
-                sf.Z.eStop(out ret.message);
-                sf.Z2.eStop(out ret.message);
+                sf.feeder[(int)UnitCodeSFMG.MG1].Z.eStop(out ret.message);
+                sf.feeder[(int)UnitCodeSFMG.MG2].Z.eStop(out ret.message);
 
                 // conveyor
                 cv.W.eStop(out ret.message);
@@ -2184,8 +2184,8 @@ namespace PSA_SystemLibrary
                         pd.homingZ.control();
 
                         sf.control();
-                        sf.homingZ.control();
-                        sf.homingZ2.control();
+                        sf.feeder[(int)UnitCodeSFMG.MG1].homingZ.control();
+                        sf.feeder[(int)UnitCodeSFMG.MG2].homingZ.control();
 
                         cv.control();
                         cv.homingW.control();
@@ -2276,7 +2276,7 @@ namespace PSA_SystemLibrary
                         sf.ret.alarmCode = ALARM_CODE.E_ALL_OK;
                         sf.ret.SecsGemReport = false;
                     }
-                    if (sf.homingZ.ret.errorCode != ERRORCODE.NONE)
+                    if (sf.feeder[(int)UnitCodeSFMG.MG1].homingZ.ret.errorCode != ERRORCODE.NONE)
                     {
                         //string str = "errorCode [" + sf.homingZ.ret.errorCode.ToString() + "] ";
                         //if (sf.homingZ.ret.axisCode != UnitCodeAxis.INVALID) str += "axisCode [" + sf.homingZ.ret.axisCode.ToString() + "] ";
@@ -2285,12 +2285,12 @@ namespace PSA_SystemLibrary
                         //if (sf.homingZ.ret.errorString != "") str += ": " + sf.homingZ.ret.errorString;
                         //error.set(error.SF, str);
                         //error.axisMapping(error.SF, sf.homingZ.ret.axisCode, ref sf.homingZ.ret.alarmCode);
-                        error.set(error.SF, sf.homingZ.ret.alarmCode, sf.homingZ.ret.errorString, sf.homingZ.ret.SecsGemReport);
-                        sf.homingZ.ret.errorCode = ERRORCODE.NONE;
-                        sf.homingZ.ret.alarmCode = ALARM_CODE.E_ALL_OK;
-                        sf.homingZ.ret.SecsGemReport = false;
+                        error.set(error.SF, sf.feeder[(int)UnitCodeSFMG.MG1].homingZ.ret.alarmCode, sf.feeder[(int)UnitCodeSFMG.MG1].homingZ.ret.errorString, sf.feeder[(int)UnitCodeSFMG.MG1].homingZ.ret.SecsGemReport);
+                        sf.feeder[(int)UnitCodeSFMG.MG1].homingZ.ret.errorCode = ERRORCODE.NONE;
+                        sf.feeder[(int)UnitCodeSFMG.MG1].homingZ.ret.alarmCode = ALARM_CODE.E_ALL_OK;
+                        sf.feeder[(int)UnitCodeSFMG.MG1].homingZ.ret.SecsGemReport = false;
                     }
-                    if (sf.homingZ2.ret.errorCode != ERRORCODE.NONE)
+                    if (sf.feeder[(int)UnitCodeSFMG.MG2].homingZ.ret.errorCode != ERRORCODE.NONE)
                     {
                         //string str = "errorCode [" + sf.homingX.ret.errorCode.ToString() + "] ";
                         //if (sf.homingX.ret.axisCode != UnitCodeAxis.INVALID) str += "axisCode [" + sf.homingX.ret.axisCode.ToString() + "] ";
@@ -2299,10 +2299,10 @@ namespace PSA_SystemLibrary
                         //if (sf.homingX.ret.errorString != "") str += ": " + sf.homingX.ret.errorString;
                         //error.set(error.SF, str);
                         //error.axisMapping(error.SF, sf.homingZ2.ret.axisCode, ref sf.homingZ2.ret.alarmCode);
-                        error.set(error.SF, sf.homingZ2.ret.alarmCode, sf.homingZ2.ret.errorString, sf.homingZ2.ret.SecsGemReport);
-                        sf.homingZ2.ret.errorCode = ERRORCODE.NONE;
-                        sf.homingZ2.ret.alarmCode = ALARM_CODE.E_ALL_OK;
-                        sf.homingZ2.ret.SecsGemReport = false;
+                        error.set(error.SF, sf.feeder[(int)UnitCodeSFMG.MG2].homingZ.ret.alarmCode, sf.feeder[(int)UnitCodeSFMG.MG2].homingZ.ret.errorString, sf.feeder[(int)UnitCodeSFMG.MG2].homingZ.ret.SecsGemReport);
+                        sf.feeder[(int)UnitCodeSFMG.MG2].homingZ.ret.errorCode = ERRORCODE.NONE;
+                        sf.feeder[(int)UnitCodeSFMG.MG2].homingZ.ret.alarmCode = ALARM_CODE.E_ALL_OK;
+                        sf.feeder[(int)UnitCodeSFMG.MG2].homingZ.ret.SecsGemReport = false;
                     }
 
                     if (cv.ret.errorCode != ERRORCODE.NONE)
@@ -2413,8 +2413,8 @@ namespace PSA_SystemLibrary
                         if (pd.homingZ.RUNING) return true;
 
                         if (sf.RUNING) return true;
-                        if (sf.homingZ.RUNING) return true;
-                        if (sf.homingZ2.RUNING) return true;
+                        if (sf.feeder[(int)UnitCodeSFMG.MG1].homingZ.RUNING) return true;
+                        if (sf.feeder[(int)UnitCodeSFMG.MG2].homingZ.RUNING) return true;
 
                         if (cv.RUNING) return true;
                         if (cv.homingW.RUNING) return true;
@@ -4909,7 +4909,8 @@ namespace PSA_SystemLibrary
                     tmp_SF.useMGZ1.value = SF.useMGZ1.value;
                     tmp_SF.useMGZ2.value = SF.useMGZ2.value;
 
-                    mc.sf._FeederZ = mc.sf.Z.config.speed.rate;
+                    mc.sf.feeder[(int)UnitCodeSFMG.MG1]._FeederZ = mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.speed.rate;
+                    mc.sf.feeder[(int)UnitCodeSFMG.MG2]._FeederZ = mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.speed.rate;
 
                     tmp_SF.firstDownPitch.value = SF.firstDownPitch.value;
                     tmp_SF.firstDownVel.value = SF.firstDownVel.value;
@@ -5069,8 +5070,8 @@ namespace PSA_SystemLibrary
                     mc.pd._Y = mc.pd.Y.config.speed.rate;
                     mc.pd._Z = mc.pd.Z.config.speed.rate;
 
-                    mc.sf._Z = mc.sf.Z.config.speed.rate;
-                    mc.sf._Z2 = mc.sf.Z2.config.speed.rate;
+                    mc.sf.feeder[(int)UnitCodeSFMG.MG1]._Z = mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.speed.rate;
+                    mc.sf.feeder[(int)UnitCodeSFMG.MG2]._Z = mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.speed.rate;
 
                     mc.cv._W = mc.cv.W.config.speed.rate;
                 }
@@ -5339,7 +5340,8 @@ namespace PSA_SystemLibrary
                     if (tmp_SF.useMGZ1.value != SF.useMGZ1.value) { b = true; return b; }
                     if (tmp_SF.useMGZ2.value != SF.useMGZ2.value) { b = true; return b; }
 
-                    if( mc.sf._FeederZ != mc.sf.Z.config.speed.rate) { b= true; return b; }
+                    if (mc.sf.feeder[(int)UnitCodeSFMG.MG1]._FeederZ != mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.speed.rate) { b = true; return b; }
+                    if (mc.sf.feeder[(int)UnitCodeSFMG.MG2]._FeederZ != mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.speed.rate) { b = true; return b; }
 
                     if (tmp_SF.firstDownPitch.value != SF.firstDownPitch.value) { b = true; return b; }
                     if (tmp_SF.firstDownVel.value != SF.firstDownVel.value) { b = true; return b; }
@@ -5505,8 +5507,8 @@ namespace PSA_SystemLibrary
                     if (mc.pd.Y.config.speed.rate != mc.pd._Y) { b = true; return b; }
                     if (mc.pd.Z.config.speed.rate != mc.pd._Z) { b = true; return b; }
 
-                    if (mc.sf.Z.config.speed.rate != mc.sf._Z) { b = true; return b; }
-                    if (mc.sf.Z2.config.speed.rate != mc.sf._Z2) { b = true; return b; }
+                    if (mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.speed.rate != mc.sf.feeder[(int)UnitCodeSFMG.MG1]._Z) { b = true; return b; }
+                    if (mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.speed.rate != mc.sf.feeder[(int)UnitCodeSFMG.MG2]._Z) { b = true; return b; }
 
                     if (mc.cv.W.config.speed.rate != mc.cv._W) { b = true; return b; }
                 }
@@ -5782,7 +5784,8 @@ namespace PSA_SystemLibrary
                     SF.useMGZ1.value = tmp_SF.useMGZ1.value;
                     SF.useMGZ2.value = tmp_SF.useMGZ2.value;
 
-                    mc.sf.Z.config.speed.rate =  mc.sf._FeederZ;
+                    mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.speed.rate = mc.sf.feeder[(int)UnitCodeSFMG.MG1]._FeederZ;
+                    mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.speed.rate = mc.sf.feeder[(int)UnitCodeSFMG.MG2]._FeederZ;
 
                     SF.firstDownPitch.value = tmp_SF.firstDownPitch.value;
                     SF.firstDownVel.value = tmp_SF.firstDownVel.value;
@@ -5968,8 +5971,8 @@ namespace PSA_SystemLibrary
                     mc.pd.Y.config.speed.rate = mc.pd._Y;
                     mc.pd.Z.config.speed.rate = mc.pd._Z; ;
 
-                    mc.sf.Z.config.speed.rate = mc.sf._Z;
-                    mc.sf.Z2.config.speed.rate = mc.sf._Z2;
+                    mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.speed.rate = mc.sf.feeder[(int)UnitCodeSFMG.MG1]._Z;
+                    mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.speed.rate = mc.sf.feeder[(int)UnitCodeSFMG.MG2]._Z;
 
                     mc.cv.W.config.speed.rate = mc.cv._W;
 
@@ -6105,17 +6108,17 @@ namespace PSA_SystemLibrary
                 {
                     if (axisCode == UnitCodeAxis.Z)
                     {
-                        p.value = mc.sf.Z.config.speed.rate;
+                        p.value = mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.speed.rate;
                         mc.para.setting(p, out p);
-                        mc.sf.Z.config.speed.rate = p.value;
-                        mc.sf.Z.config.write();
+                        mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.speed.rate = p.value;
+                        mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.write();
                     }
                     if (axisCode == UnitCodeAxis.Z2)
                     {
-                        p.value = mc.sf.Z2.config.speed.rate;
+                        p.value = mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.speed.rate;
                         mc.para.setting(p, out p);
-                        mc.sf.Z2.config.speed.rate = p.value;
-                        mc.sf.Z2.config.write();
+                        mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.speed.rate = p.value;
+                        mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.write();
                     }
                 }
                 if (unitCode == UnitCode.CV)
@@ -6169,12 +6172,12 @@ namespace PSA_SystemLibrary
                 }
                 if (unitCode == UnitCode.SF)
                 {
-                    p.value = mc.sf.Z.config.speed.rate * 100;
+                    p.value = mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.speed.rate * 100;
                     mc.para.setting(p, out p);
-                    mc.sf.Z.config.speed.rate = p.value * 0.01;
-                    mc.sf.Z2.config.speed.rate = p.value * 0.01;
-                    mc.sf.Z.config.write();
-                    mc.sf.Z2.config.write();
+                    mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.speed.rate = p.value * 0.01;
+                    mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.speed.rate = p.value * 0.01;
+                    mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.write();
+                    mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.write();
                 }
                 if (unitCode == UnitCode.CV)
                 {
@@ -9462,22 +9465,22 @@ namespace PSA_SystemLibrary
                 {
                     public static void Z(out bool detected, out RetMessage retMessage)
                     {
-                        sf.Z.IN_P_LIMIT(out detected, out retMessage);
+                        sf.feeder[(int)UnitCodeSFMG.MG1].Z.IN_P_LIMIT(out detected, out retMessage);
                     }
                     public static void Z2(out bool detected, out RetMessage retMessage)
                     {
-                        sf.Z2.IN_P_LIMIT(out detected, out retMessage);
+                        sf.feeder[(int)UnitCodeSFMG.MG2].Z.IN_P_LIMIT(out detected, out retMessage);
                     }
                 }
                 public struct N_LIMIT
                 {
                     public static void Z(out bool detected, out RetMessage retMessage)
                     {
-                        sf.Z.IN_N_LIMIT(out detected, out retMessage);
+                        sf.feeder[(int)UnitCodeSFMG.MG1].Z.IN_N_LIMIT(out detected, out retMessage);
                     }
                     public static void Z2(out bool detected, out RetMessage retMessage)
                     {
-                        sf.Z2.IN_N_LIMIT(out detected, out retMessage);
+                        sf.feeder[(int)UnitCodeSFMG.MG2].Z.IN_N_LIMIT(out detected, out retMessage);
                     }
                 }
             }
@@ -11051,8 +11054,8 @@ namespace PSA_SystemLibrary
                 mc.pd.Y.MOTOR_ENABLE(out state, out ret.message); if (state == false) { retMessage = RetMessage.SERVO_OFF; detected = false; return; }
                 mc.pd.Z.MOTOR_ENABLE(out state, out ret.message); if (state == false) { retMessage = RetMessage.SERVO_OFF; detected = false; return; }
 
-                mc.sf.Z.MOTOR_ENABLE(out state, out ret.message); if (state == false) { retMessage = RetMessage.SERVO_OFF; detected = false; return; }
-                mc.sf.Z2.MOTOR_ENABLE(out state, out ret.message); if (state == false) { retMessage = RetMessage.SERVO_OFF; detected = false; return; }
+                mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.MOTOR_ENABLE(out state, out ret.message); if (state == false) { retMessage = RetMessage.SERVO_OFF; detected = false; return; }
+                mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.MOTOR_ENABLE(out state, out ret.message); if (state == false) { retMessage = RetMessage.SERVO_OFF; detected = false; return; }
                     
                 mc.cv.W.MOTOR_ENABLE(out state, out ret.message); if (state == false) { retMessage = RetMessage.SERVO_OFF; detected = false; return; }
             }

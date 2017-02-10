@@ -410,8 +410,8 @@ namespace PSA_SystemLibrary
 					sqc++; break;
 				case SQC.STEP + 3:
 					#region mc.sf.req
-					mc.sf.reqTubeNumber = mc.sf.workingTubeNumber;
-					mc.sf.req = true;
+					//mc.sf.reqTubeNumber = mc.sf.workingTubeNumber;
+                    mc.sf.reqMode = REQMODE.AUTO; mc.sf.req = true;
 					#endregion
 					sqc++; break;
 				case SQC.STEP + 4:
@@ -494,8 +494,8 @@ namespace PSA_SystemLibrary
 						mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG2, true, out ret.message); if (ioCheck(sqc, ret.message)) break;
 						errorCheck(ERRORCODE.FULL, sqc, "", ALARM_CODE.E_MACHINE_RUN_HEAT_SLUG_EMPTY); break;
 					}
-					mc.sf.reqTubeNumber = mc.sf.workingTubeNumber;
-					mc.sf.req = true;
+					//mc.sf.reqTubeNumber = mc.sf.workingTubeNumber;
+					mc.sf.reqMode = REQMODE.AUTO; mc.sf.req = true;
 					#endregion
 					sqc++; break;
 				case SQC.PICKUP + 3:
@@ -557,8 +557,8 @@ namespace PSA_SystemLibrary
 						mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG2, true, out ret.message); if (ioCheck(sqc, ret.message)) break;
 						errorCheck(ERRORCODE.FULL, sqc, "", ALARM_CODE.E_MACHINE_RUN_HEAT_SLUG_EMPTY); break;
 					}
-					mc.sf.reqTubeNumber = mc.sf.workingTubeNumber;
-					mc.sf.req = true;
+					//mc.sf.reqTubeNumber = mc.sf.workingTubeNumber;
+					mc.sf.reqMode = REQMODE.AUTO; mc.sf.req = true;
 					#endregion
 					sqc++; break;
 				case SQC.SINGLE + 4:
@@ -727,8 +727,8 @@ namespace PSA_SystemLibrary
 						mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG2, true, out ret.message); if (ioCheck(sqc, ret.message)) break;
 						errorCheck(ERRORCODE.FULL, sqc, "", ALARM_CODE.E_MACHINE_RUN_HEAT_SLUG_EMPTY); break;
 					}
-					mc.sf.reqTubeNumber = mc.sf.workingTubeNumber;			
-                    mc.sf.req = true;
+					//mc.sf.reqTubeNumber = mc.sf.workingTubeNumber;			
+                    mc.sf.reqMode = REQMODE.AUTO; mc.sf.req = true;
 					#endregion
 					sqc = (int)SEQ.AUTO + 4; break;
 				case (int)SEQ.AUTO + 4:
@@ -810,8 +810,8 @@ namespace PSA_SystemLibrary
 					}
 					if (mc.hd.tool.doublechecked)
 					{
-						mc.sf.reqTubeNumber = mc.sf.workingTubeNumber;
-						mc.sf.req = true;
+						//mc.sf.reqTubeNumber = mc.sf.workingTubeNumber;
+                        mc.sf.reqMode = REQMODE.AUTO; mc.sf.req = true;
 						// move to waste position
 						mc.hd.tool.doublecheckcount++;
                         sqc = (int)SEQ.AUTO_WASTE; break;
@@ -2809,7 +2809,7 @@ namespace PSA_SystemLibrary
 					{
 						mc.OUT.SF.TUBE_BLOW(mc.sf.workingTubeNumber, false, out ret.message);
 					}
-					if (!mc.sf.nextTubeChange)
+					//if (!mc.sf.nextTubeChange)
 					{
 						//mc.sf.req = true; mc.sf.reqMode = REQMODE.DOWN;
 						//mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG1, true, out ret.message);
@@ -3280,8 +3280,8 @@ namespace PSA_SystemLibrary
 					if (!Y_AT_TARGET || !X_AT_TARGET) break;
                     if (mc.hd.reqMode == REQMODE.AUTO)
                     {
-                        mc.sf.reqTubeNumber = mc.sf.workingTubeNumber;
-                        mc.sf.req = true;
+                        //mc.sf.reqTubeNumber = mc.sf.workingTubeNumber;
+                        mc.sf.reqMode = REQMODE.AUTO; mc.sf.req = true;
                     }
 					dwell.Reset();
 					sqc++; break;
@@ -20167,7 +20167,7 @@ namespace PSA_SystemLibrary
 					{
 						mc.OUT.SF.TUBE_BLOW(mc.sf.workingTubeNumber, false, out ret.message);
 					}
-					if (!mc.sf.nextTubeChange)
+                    //if (!mc.sf.nextTubeChange)
 					{
 						//mc.sf.req = true; mc.sf.reqMode = REQMODE.DOWN;
 						mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG1, true, out ret.message);

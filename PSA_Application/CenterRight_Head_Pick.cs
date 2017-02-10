@@ -153,144 +153,144 @@ namespace PSA_Application
 			{
                 goto EXIT;
 
-				mc.log.debug.write(mc.log.CODE.CAL, "Pick Z Offset Calibration START");
-				double posX, posY, posZ, posT;
-				int moveCase;
-				double startZPos, sensor1Pos, sensor2Pos;
-				bool pos1Done;
-				bool pos2Done;
-				bool teachDone = false;
-				double[] tempval = new double[5];
-				int stackFeedNum = 8;
-				int sfTemp = 0;
+                //mc.log.debug.write(mc.log.CODE.CAL, "Pick Z Offset Calibration START");
+                //double posX, posY, posZ, posT;
+                //int moveCase;
+                //double startZPos, sensor1Pos, sensor2Pos;
+                //bool pos1Done;
+                //bool pos2Done;
+                //bool teachDone = false;
+                //double[] tempval = new double[5];
+                //int stackFeedNum = 8;
+                //int sfTemp = 0;
 				
-                if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG) stackFeedNum = 2;
-                else stackFeedNum = 4;
+                //if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG) stackFeedNum = 2;
+                //else stackFeedNum = 4;
 
-				for (int i = 0; i < stackFeedNum; i++)
-				{
-                    sfTemp = i;
-					mc.log.debug.write(mc.log.CODE.CAL, String.Format("Stack Feeder Move to {0} position", sfTemp + 1));
-                    for (int k = 0; k < 5; k++)
-					{
-						#region move stack feeder
-						mc.sf.req = true; mc.sf.reqMode = REQMODE.READY;
-						mc.sf.reqTubeNumber = (UnitCodeSF)sfTemp;
-						mc.main.Thread_Polling();	// make stack feeder to be ready for picking
-						if (mc.sf.ERROR)
-						{
-							mc.log.debug.write(mc.log.CODE.ERROR, "CANNOT run calibration process. Stack Feeder Error");
-							goto EXIT;
-						}
-						#endregion
+                //for (int i = 0; i < stackFeedNum; i++)
+                //{
+                //    sfTemp = i;
+                //    mc.log.debug.write(mc.log.CODE.CAL, String.Format("Stack Feeder Move to {0} position", sfTemp + 1));
+                //    for (int k = 0; k < 5; k++)
+                //    {
+                //        #region move stack feeder
+                //        mc.sf.req = true; mc.sf.reqMode = REQMODE.READY;
+                //        mc.sf.reqTubeNumber = (UnitCodeSF)sfTemp;
+                //        mc.main.Thread_Polling();	// make stack feeder to be ready for picking
+                //        if (mc.sf.ERROR)
+                //        {
+                //            mc.log.debug.write(mc.log.CODE.ERROR, "CANNOT run calibration process. Stack Feeder Error");
+                //            goto EXIT;
+                //        }
+                //        #endregion
 
-						#region move to pick position
-						posX = mc.hd.tool.tPos.x.PICK((UnitCodeSF)sfTemp);
-						posY = mc.hd.tool.tPos.y.PICK((UnitCodeSF)sfTemp);
-						posZ = mc.hd.tool.tPos.z.RAWPICK;
-						posT = mc.hd.tool.tPos.t.ZERO;
+                //        #region move to pick position
+                //        posX = mc.hd.tool.tPos.x.PICK((UnitCodeSF)sfTemp);
+                //        posY = mc.hd.tool.tPos.y.PICK((UnitCodeSF)sfTemp);
+                //        posZ = mc.hd.tool.tPos.z.RAWPICK;
+                //        posT = mc.hd.tool.tPos.t.ZERO;
 
-						mc.hd.tool.jogMove(posX, posY, posZ, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-						mc.idle(100);
-						#endregion
+                //        mc.hd.tool.jogMove(posX, posY, posZ, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                //        mc.idle(100);
+                //        #endregion
 
-						#region sensor check
-						mc.IN.HD.LOAD_CHK(out ret.b1, out ret.message);
-						mc.IN.HD.LOAD_CHK2(out ret.b2, out ret.message);
+                //        #region sensor check
+                //        mc.IN.HD.LOAD_CHK(out ret.b1, out ret.message);
+                //        mc.IN.HD.LOAD_CHK2(out ret.b2, out ret.message);
 
-						if (ret.b1 == false && ret.b2 == true) moveCase = 0;		// touch가 안되어 있거나 살짝 눌린 상태
-						else if (ret.b1 == true && ret.b2 == true) moveCase = 1;	// 200~350um 눌린 상태
-						else if (ret.b1 == true && ret.b2 == false) moveCase = 2;	// 350um이상 눌린 상태
-						else
-						{
-							moveCase = 3;  // 몰라...이런 상태는 없어...
-							mc.message.alarm("Load Sensor Error : Sensor ALL OFF"); goto EXIT;
-						}
-						#endregion
+                //        if (ret.b1 == false && ret.b2 == true) moveCase = 0;		// touch가 안되어 있거나 살짝 눌린 상태
+                //        else if (ret.b1 == true && ret.b2 == true) moveCase = 1;	// 200~350um 눌린 상태
+                //        else if (ret.b1 == true && ret.b2 == false) moveCase = 2;	// 350um이상 눌린 상태
+                //        else
+                //        {
+                //            moveCase = 3;  // 몰라...이런 상태는 없어...
+                //            mc.message.alarm("Load Sensor Error : Sensor ALL OFF"); goto EXIT;
+                //        }
+                //        #endregion
 
-						if (moveCase > 0)
-						{
-							FormMain.UserMessageBox(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.FAILURE, "Pick Position이 너무 낮습니다.\nPick Position값을 먼저 설정해 주세요.");
-							//mc.message.alarm("Pick Position is too LOW. Please change pick position."); goto EXIT;
-						}
+                //        if (moveCase > 0)
+                //        {
+                //            FormMain.UserMessageBox(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.FAILURE, "Pick Position이 너무 낮습니다.\nPick Position값을 먼저 설정해 주세요.");
+                //            //mc.message.alarm("Pick Position is too LOW. Please change pick position."); goto EXIT;
+                //        }
 
-						mc.hd.tool.Z.actualPosition(out startZPos, out ret.message);
-						teachDone = false;
+                //        mc.hd.tool.Z.actualPosition(out startZPos, out ret.message);
+                //        teachDone = false;
 
-						for (int j = 0; j < 3; j++)
-						{
-							if (teachDone) break;
+                //        for (int j = 0; j < 3; j++)
+                //        {
+                //            if (teachDone) break;
 
-							mc.hd.tool.Z.move(posZ - 600 * (j + 1), mc.speed.checkSpeed, out ret.message);
+                //            mc.hd.tool.Z.move(posZ - 600 * (j + 1), mc.speed.checkSpeed, out ret.message);
 
-							dwell.Reset();
-							sensor1Pos = 0;
-							sensor2Pos = 0;
-							pos1Done = false;
-							pos2Done = false;
-							while (true)
-							{
-								mc.IN.HD.LOAD_CHK(out ret.b1, out ret.message);
-								mc.IN.HD.LOAD_CHK2(out ret.b2, out ret.message);
-								if (ret.b1 && !pos1Done)
-								{
-									mc.hd.tool.Z.actualPosition(out sensor1Pos, out ret.message);
-									pos1Done = true;
-								}
-								if (ret.b1 && !ret.b2 && !pos2Done)
-								{
-									mc.hd.tool.Z.actualPosition(out sensor2Pos, out ret.message);
-									pos2Done = true;
-								}
-								mc.hd.tool.Z.AT_TARGET(out ret.b, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-								if (ret.b) break;
-								if (dwell.Elapsed > 20000) { ret.message = RetMessage.TIMEOUT; mc.message.alarmMotion(ret.message); goto EXIT; }
-							}
-							if (sensor1Pos == 0)
-							{
-								mc.log.debug.write(mc.log.CODE.TRACE, "Cannot find in search " + (j + 1).ToString());
-							}
-							else
-							{
-								mc.log.debug.write(mc.log.CODE.TRACE, "1st Pos : " + Math.Round((startZPos - sensor1Pos), 3).ToString("f3") + ", 2nd Pos : " + Math.Round((startZPos - sensor2Pos), 3).ToString("f3"));
-							}
-							dwell.Reset();
-							while (true)
-							{
-								if (dwell.Elapsed > 500) { ret.message = RetMessage.TIMEOUT; mc.message.alarmMotion(ret.message); goto EXIT; }
-								mc.hd.tool.Z.AT_DONE(out ret.b, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-								if (ret.b) break;
-							}
-							if (sensor1Pos != 0)
-							{
-								double offset = Math.Round(sensor1Pos - startZPos) - mc.para.CAL.z.sensor1.value;
-								mc.log.debug.write(mc.log.CODE.CAL, "SF" + (sfTemp + 1).ToString() + " Offset: " + offset.ToString() + "[um]");
-								tempval[k] = offset;
-								teachDone = true;
-								break;
-							}
-							else
-							{
-								mc.idle(100);
-							}
-						}
-						posZ = mc.hd.tool.tPos.z.XY_MOVING;
-						mc.hd.tool.jogMove(posZ, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                //            dwell.Reset();
+                //            sensor1Pos = 0;
+                //            sensor2Pos = 0;
+                //            pos1Done = false;
+                //            pos2Done = false;
+                //            while (true)
+                //            {
+                //                mc.IN.HD.LOAD_CHK(out ret.b1, out ret.message);
+                //                mc.IN.HD.LOAD_CHK2(out ret.b2, out ret.message);
+                //                if (ret.b1 && !pos1Done)
+                //                {
+                //                    mc.hd.tool.Z.actualPosition(out sensor1Pos, out ret.message);
+                //                    pos1Done = true;
+                //                }
+                //                if (ret.b1 && !ret.b2 && !pos2Done)
+                //                {
+                //                    mc.hd.tool.Z.actualPosition(out sensor2Pos, out ret.message);
+                //                    pos2Done = true;
+                //                }
+                //                mc.hd.tool.Z.AT_TARGET(out ret.b, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                //                if (ret.b) break;
+                //                if (dwell.Elapsed > 20000) { ret.message = RetMessage.TIMEOUT; mc.message.alarmMotion(ret.message); goto EXIT; }
+                //            }
+                //            if (sensor1Pos == 0)
+                //            {
+                //                mc.log.debug.write(mc.log.CODE.TRACE, "Cannot find in search " + (j + 1).ToString());
+                //            }
+                //            else
+                //            {
+                //                mc.log.debug.write(mc.log.CODE.TRACE, "1st Pos : " + Math.Round((startZPos - sensor1Pos), 3).ToString("f3") + ", 2nd Pos : " + Math.Round((startZPos - sensor2Pos), 3).ToString("f3"));
+                //            }
+                //            dwell.Reset();
+                //            while (true)
+                //            {
+                //                if (dwell.Elapsed > 500) { ret.message = RetMessage.TIMEOUT; mc.message.alarmMotion(ret.message); goto EXIT; }
+                //                mc.hd.tool.Z.AT_DONE(out ret.b, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                //                if (ret.b) break;
+                //            }
+                //            if (sensor1Pos != 0)
+                //            {
+                //                double offset = Math.Round(sensor1Pos - startZPos) - mc.para.CAL.z.sensor1.value;
+                //                mc.log.debug.write(mc.log.CODE.CAL, "SF" + (sfTemp + 1).ToString() + " Offset: " + offset.ToString() + "[um]");
+                //                tempval[k] = offset;
+                //                teachDone = true;
+                //                break;
+                //            }
+                //            else
+                //            {
+                //                mc.idle(100);
+                //            }
+                //        }
+                //        posZ = mc.hd.tool.tPos.z.XY_MOVING;
+                //        mc.hd.tool.jogMove(posZ, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 
-						double curSFZPos;
-						mc.sf.Z.actualPosition(out curSFZPos, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-						mc.sf.jogMoveZ(curSFZPos - 300, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-					}
-					mc.log.debug.write(mc.log.CODE.TRACE, "1st[" + tempval[0].ToString() + "], 2nd[" + tempval[1].ToString() + "], 3rd[" + tempval[2].ToString() + "], 4th[" + tempval[3].ToString() + "], 5th[" + tempval[4].ToString() + "]");
-					double sum = tempval[0] + tempval[1] + tempval[2] + tempval[3] + tempval[4];
-					mc.log.debug.write(mc.log.CODE.CAL, "SF" + (sfTemp + 1).ToString() + " Offset RESULT : " + Math.Round(sum / 5).ToString());
+                //        double curSFZPos;
+                //        mc.sf.Z.actualPosition(out curSFZPos, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                //        mc.sf.jogMoveZ(curSFZPos - 300, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                //    }
+                //    mc.log.debug.write(mc.log.CODE.TRACE, "1st[" + tempval[0].ToString() + "], 2nd[" + tempval[1].ToString() + "], 3rd[" + tempval[2].ToString() + "], 4th[" + tempval[3].ToString() + "], 5th[" + tempval[4].ToString() + "]");
+                //    double sum = tempval[0] + tempval[1] + tempval[2] + tempval[3] + tempval[4];
+                //    mc.log.debug.write(mc.log.CODE.CAL, "SF" + (sfTemp + 1).ToString() + " Offset RESULT : " + Math.Round(sum / 5).ToString());
 
-					mc.para.setting(ref mc.para.HD.pick.offset[sfTemp].z, Math.Round(sum / 5));
-				}
-				mc.sf.req = true; mc.sf.reqMode = REQMODE.DOWN;
-				mc.sf.reqTubeNumber = UnitCodeSF.SF1;
-				mc.main.Thread_Polling();
-				mc.log.debug.write(mc.log.CODE.CAL, "Pick Z Offset Calibration END");
+                //    mc.para.setting(ref mc.para.HD.pick.offset[sfTemp].z, Math.Round(sum / 5));
+                //}
+                //mc.sf.req = true; mc.sf.reqMode = REQMODE.DOWN;
+                //mc.sf.reqTubeNumber = UnitCodeSF.SF1;
+                //mc.main.Thread_Polling();
+                //mc.log.debug.write(mc.log.CODE.CAL, "Pick Z Offset Calibration END");
 			}
 			if (sender.Equals(TB_PickOffsetZ1)) mc.para.setting(mc.para.HD.pick.offset[0].z, out mc.para.HD.pick.offset[0].z);
 			if (sender.Equals(TB_PickOffsetZ2)) mc.para.setting(mc.para.HD.pick.offset[1].z, out mc.para.HD.pick.offset[1].z);

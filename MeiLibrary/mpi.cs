@@ -410,14 +410,13 @@ namespace MeiLibrary
 
 		public void activate(axisConfig _config, out RetMessage retMessage)
 		{
-			if (dev.NotExistHW.ZMP) { retMessage = RetMessage.OK; return; }
 			config = _config;
+            if (dev.NotExistHW.ZMP) { retMessage = RetMessage.OK; return; }
 			retMessage = (RetMessage)motion.activate(config.controlNumber, config.axisNumber);
 			config.write();
 		}
 		public void activate(UnitCodeAxis axisCode, int controlNumber, int axisNumber, out RetMessage retMessage)
 		{
-			if (dev.NotExistHW.ZMP) { retMessage = RetMessage.OK; return; }
 			config.controlNumber = controlNumber;
 			config.axisCode = axisCode;
 			config.axisNumber = axisNumber;
@@ -433,6 +432,7 @@ namespace MeiLibrary
 			config.speed.jerkPercent = 0;
 			//config.speed.finalVelocity = 0;
 			//config.speed.delay = 0;
+            if (dev.NotExistHW.ZMP) { retMessage = RetMessage.OK; return; }
 			retMessage = (RetMessage)motion.activate(controlNumber, axisNumber);
 		}
 		public void deactivate(out RetMessage retMessage)
