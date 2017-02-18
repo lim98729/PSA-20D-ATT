@@ -111,6 +111,7 @@
             this.BoardStatus_LoadingZone = new AccessoryLibrary.BoardStatus();
             this.BoardStatus_UnloadingZone = new AccessoryLibrary.BoardStatus();
             this.stackFeederStatus = new PSA_Application.StackFeederStatus();
+            this.BT_MOVE_STANDBY = new System.Windows.Forms.Button();
             this.TC_.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.GB_OutputTray.SuspendLayout();
@@ -1065,11 +1066,27 @@
             this.stackFeederStatus.TabIndex = 7;
             this.stackFeederStatus.Visible = false;
             // 
+            // BT_MOVE_STANDBY
+            // 
+            this.BT_MOVE_STANDBY.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BT_MOVE_STANDBY.ForeColor = System.Drawing.Color.Black;
+            this.BT_MOVE_STANDBY.Image = global::PSA_Application.Properties.Resources.Checked;
+            this.BT_MOVE_STANDBY.Location = new System.Drawing.Point(185, 556);
+            this.BT_MOVE_STANDBY.Name = "BT_MOVE_STANDBY";
+            this.BT_MOVE_STANDBY.Size = new System.Drawing.Size(118, 44);
+            this.BT_MOVE_STANDBY.TabIndex = 22;
+            this.BT_MOVE_STANDBY.Tag = "";
+            this.BT_MOVE_STANDBY.Text = "Move Standby";
+            this.BT_MOVE_STANDBY.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.BT_MOVE_STANDBY.UseVisualStyleBackColor = true;
+            this.BT_MOVE_STANDBY.Click += new System.EventHandler(this.BT_MOVE_STANDBY_Click);
+            // 
             // CenterLeft
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
+            this.Controls.Add(this.BT_MOVE_STANDBY);
             this.Controls.Add(this.BoardStatus_UnloadingZone);
             this.Controls.Add(this.BoardStatus_LoadingZone);
             this.Controls.Add(this.BoardStatus_WorkingZone);
@@ -1189,6 +1206,7 @@
         private AccessoryLibrary.BoardStatus BoardStatus_WorkingZone;
         private AccessoryLibrary.BoardStatus BoardStatus_LoadingZone;
         private AccessoryLibrary.BoardStatus BoardStatus_UnloadingZone;
+        private System.Windows.Forms.Button BT_MOVE_STANDBY;
         //private AccessoryLibrary.UserControlBoardStatus BoardStatusWorkZone;
     }
 }

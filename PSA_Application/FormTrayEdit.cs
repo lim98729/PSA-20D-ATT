@@ -280,7 +280,7 @@ namespace AccessoryLibrary
 
             if (sender.Equals(BT_Move))
             {
-                ff.SetDisplayItems(DIAG_SEL_MODE.YesNoCancel, DIAG_ICON_MODE.QUESTION, "Do you want to move to PAD("
+                ff.SetDisplayItems(DIAG_SEL_MODE.YesNo, DIAG_ICON_MODE.QUESTION, "Do you want to move to PAD("
                     + (indexX + 1).ToString() + ", " + (indexY + 1).ToString() + ")?");
 			    ff.ShowDialog();
 			    ret.usrDialog = FormUserMessage.diagResult;
@@ -296,10 +296,11 @@ namespace AccessoryLibrary
             }
             else if (sender.Equals(BT_Repress))
             {
-                ff.SetDisplayItems(DIAG_SEL_MODE.YesNoCancel, DIAG_ICON_MODE.QUESTION, "Do you want to Repress to PAD("
+                ff.SetDisplayItems(DIAG_SEL_MODE.YesNo, DIAG_ICON_MODE.QUESTION, "Do you want to Repress to PAD("
                     + (indexX + 1).ToString() + ", " + (indexY + 1).ToString() + ")?");
                 ff.ShowDialog();
                 ret.usrDialog = FormUserMessage.diagResult;
+                if (ret.usrDialog == DIAG_RESULT.Yes)
                 {
                     if (windowState) EVENT.hWindow2Display();
                     mc.para.mmiOption.manualPadX = indexX;
@@ -309,10 +310,11 @@ namespace AccessoryLibrary
             }
             else if (sender.Equals(BT_ReWork))
             {
-                ff.SetDisplayItems(DIAG_SEL_MODE.YesNoCancel, DIAG_ICON_MODE.QUESTION, "Do you want to Attach to PAD("
+                ff.SetDisplayItems(DIAG_SEL_MODE.YesNo, DIAG_ICON_MODE.QUESTION, "Do you want to Attach to PAD("
                     + (indexX + 1).ToString() + ", " + (indexY + 1).ToString() + ")?");
                 ff.ShowDialog();
                 ret.usrDialog = FormUserMessage.diagResult;
+                if(ret.usrDialog == DIAG_RESULT.Yes)
                 {
                     if (windowState) EVENT.hWindow2Display();
                     mc.para.mmiOption.manualSingleMode = true;

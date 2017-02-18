@@ -620,5 +620,29 @@ namespace PSA_Application
 		{
 
 		}
+
+        private void BT_MOVE_STANDBY_Click(object sender, EventArgs e)
+        {
+            if (mc.main.THREAD_RUNNING) return;
+            if (!mc.init.success.HD) return;
+            mc.check.push(sender, true);
+
+            RetValue retval;
+            mc.hd.tool.jogMove(mc.hd.tool.tPos.z.XY_MOVING, out retval.message); 
+            if (retval.message != RetMessage.OK) 
+            {
+                mc.message.alarmMotion(retval.message);
+                mc.check.push(sender, false);
+                return;
+            }
+            mc.hd.tool.jogMove(mc.para.CAL.standbyPosition.x.value, mc.para.CAL.standbyPosition.y.value, out retval.message); 
+            if (retval.message != RetMessage.OK)
+            {
+                mc.message.alarmMotion(retval.message);
+                mc.check.push(sender, false);
+                return;
+            }
+            mc.check.push(sender, false);
+        }
 	}
 }

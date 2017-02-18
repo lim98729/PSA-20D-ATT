@@ -128,7 +128,6 @@ namespace PSA_SystemLibrary
 		public bool cycleMode = false;
 		public int padCount = 0;
         public bool noUseSlugAlignment = false;             // Auto Press용 Flag
-        public int pickedPosition = 0;
 		public int tmp_autoLaserTiltCheckCount = 0;
 // 		long currentMemory;
 // 		Process currentProc = new Process();
@@ -295,7 +294,6 @@ namespace PSA_SystemLibrary
 					if (tool.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
 					sqc++; break;
 				case SQC.DUMY + 4:
-                    if (mc.sf.workingTubeNumber == UnitCodeSF.INVALID) mc.hd.pickedPosition = (int)UnitCodeSF.SF1;
 					tool.pick_ulc();
 					if (tool.RUNING) break;
 					if (tool.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
@@ -2539,8 +2537,6 @@ namespace PSA_SystemLibrary
 					if (!Z_AT_DONE) break;
 					sqc = 20; break;
 				case 20:
-                    if (mc.sf.workingTubeNumber == UnitCodeSF.INVALID) mc.hd.pickedPosition = (int)UnitCodeSF.SF1;
-                    else mc.hd.pickedPosition = (int)mc.sf.workingTubeNumber;
 					Y.move(tPos.y.PICK(mc.sf.workingTubeNumber), out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 					X.move(tPos.x.PICK(mc.sf.workingTubeNumber), out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 
@@ -2658,11 +2654,8 @@ namespace PSA_SystemLibrary
 
 				#region case 20 XY.move.PICK
 				case 20:
-                    if (mc.sf.workingTubeNumber == UnitCodeSF.INVALID) mc.hd.pickedPosition = (int)UnitCodeSF.SF1;
-                    else mc.hd.pickedPosition = (int)mc.sf.workingTubeNumber;
 					Y.move(tPos.y.PICK(mc.sf.workingTubeNumber), out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 					X.move(tPos.x.PICK(mc.sf.workingTubeNumber), out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-
 					dwell.Reset();
 					sqc++; break;
 				case 21:
@@ -18344,8 +18337,6 @@ namespace PSA_SystemLibrary
 					}
 					else
 					{
-                        if (mc.sf.workingTubeNumber == UnitCodeSF.INVALID) mc.hd.pickedPosition = (int)UnitCodeSF.SF1;
-                        mc.hd.pickedPosition = (int)mc.sf.workingTubeNumber;
 						Y.moveCompare(tPos.y.PICK(mc.sf.workingTubeNumber), Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 						X.moveCompare(tPos.x.PICK(mc.sf.workingTubeNumber), Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						T.moveCompare(tPos.t.ZERO, Z.config, tmpPos, true, false, out ret.message); if (mpiCheck(T.config.axisCode, sqc, ret.message)) break;
@@ -18362,8 +18353,6 @@ namespace PSA_SystemLibrary
 				case 22:
 					if (mc.sf.RUNING) break;
 					if (mc.sf.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
-                    if (mc.sf.workingTubeNumber == UnitCodeSF.INVALID) mc.hd.pickedPosition = (int)UnitCodeSF.SF1;
-                    mc.hd.pickedPosition = (int)mc.sf.workingTubeNumber;
 					Y.move(tPos.y.PICK(mc.sf.workingTubeNumber), out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 					X.move(tPos.x.PICK(mc.sf.workingTubeNumber), out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 

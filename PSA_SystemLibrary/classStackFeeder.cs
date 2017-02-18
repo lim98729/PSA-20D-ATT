@@ -242,7 +242,7 @@ namespace PSA_SystemLibrary
         //}
 
         public UnitCodeSFMG reqMGNumber = UnitCodeSFMG.MG1;
-
+        
 		public void control()
 		{
 			if (!req) return;
@@ -296,7 +296,8 @@ namespace PSA_SystemLibrary
 
                 #region READY
                 case SQC.READY:
-                    feeder[(int)reqMGNumber].feaderReady();
+                    feeder[(int)reqMGNumber].manualControl = true;
+                    feeder[(int)reqMGNumber].feederReady();
                     if (feeder[(int)reqMGNumber].RUNING) break;
 					if (feeder[(int)reqMGNumber].ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
                     if (feeder[(int)reqMGNumber].feederEmpty)
@@ -306,10 +307,20 @@ namespace PSA_SystemLibrary
                     sqc = SQC.STOP; break;
                 #endregion
 
+                #region DOWN
+                case SQC.DOWN:
+                    feeder[(int)reqMGNumber].feederDown();
+                    if (feeder[(int)reqMGNumber].RUNING) break;
+                    if (feeder[(int)reqMGNumber].ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
+                    sqc = SQC.STOP; break;
+                #endregion
+
                 #region AUTO
                 case SQC.AUTO:
                     feeder[(int)UnitCodeSFMG.MG1].readyDone = false;
                     feeder[(int)UnitCodeSFMG.MG2].readyDone = false;
+                    feeder[(int)UnitCodeSFMG.MG1].manualControl = false;
+                    feeder[(int)UnitCodeSFMG.MG2].manualControl = false;
                     sqc++; break;
                 case SQC.AUTO + 1:
                     if (workingTubeNumber == UnitCodeSF.INVALID) 
@@ -317,8 +328,8 @@ namespace PSA_SystemLibrary
                         errorCheck(ERRORCODE.SF, sqc, "", ALARM_CODE.E_MACHINE_RUN_HEAT_SLUG_EMPTY);
                         break; 
                     }
-                    if (mc.para.SF.useMGZ1.value == 1) feeder[(int)UnitCodeSFMG.MG1].feaderReady();
-                    if (mc.para.SF.useMGZ2.value == 1) feeder[(int)UnitCodeSFMG.MG2].feaderReady();
+                    if (mc.para.SF.useMGZ1.value == 1) feeder[(int)UnitCodeSFMG.MG1].feederReady();
+                    if (mc.para.SF.useMGZ2.value == 1) feeder[(int)UnitCodeSFMG.MG2].feederReady();
 
                     if (!feeder[(int)UnitCodeSFMG.MG1].readyDone || !feeder[(int)UnitCodeSFMG.MG2].readyDone) break;
                     if (feeder[(int)UnitCodeSFMG.MG1].ERROR || feeder[(int)UnitCodeSFMG.MG2].ERROR)
@@ -429,19 +440,28 @@ namespace PSA_SystemLibrary
         MPIState mpiState;
         bool motorAbortSkip;
         bool limitCheck;
+        public bool manualControl = false;
+        int retryCount = 0;     // First Up 시 노이즈 필터링 용도를 위한 Flag
+        int retryCount2 = 0;     // Second Up 시 노이즈 필터링 용도를 위한 Flag
+        const int retryMax = 3;
 
-        public void feaderReady()
+        public void feederReady()
         {
             switch (sqc)
             {
                 case 0:
                     Esqc = 0;
+                    retryCount = 0;
+                    retryCount2 = 0;
                     feederEmpty = false;
                     sqc = 10; break;
                 case 10:
-                    if (mc.sf.tubeStatus(unitCodeSF1) == SF_TUBE_STATUS.INVALID && mc.sf.tubeStatus(unitCodeSF2) == SF_TUBE_STATUS.INVALID)
+                    if (!manualControl)
                     {
-                        sqc = SQC.STOP; break;
+                        if (mc.sf.tubeStatus(unitCodeSF1) == SF_TUBE_STATUS.INVALID && mc.sf.tubeStatus(unitCodeSF2) == SF_TUBE_STATUS.INVALID)
+                        {
+                            sqc = SQC.STOP; break;
+                        }
                     }
                     if (UtilityControl.simulation)
                     {
@@ -478,22 +498,27 @@ namespace PSA_SystemLibrary
                     }
                     if (ret.b1 || ret.b2)
                     {
-                        Z.stop(out ret.message);
-                        if (mc.sf.workingTubeNumber == unitCodeSF1 || mc.sf.workingTubeNumber == unitCodeSF2)
+                        if (retryCount > retryMax)
                         {
-                            if (ret.b1)
+                            Z.stop(out ret.message);
+                            if (mc.sf.workingTubeNumber == unitCodeSF1 || mc.sf.workingTubeNumber == unitCodeSF2)
                             {
-                                mc.sf.tubeStatus(unitCodeSF1, SF_TUBE_STATUS.WORKING);
-                                mc.sf.tubeStatus(unitCodeSF2, SF_TUBE_STATUS.READY);
+                                if (ret.b1)
+                                {
+                                    mc.sf.tubeStatus(unitCodeSF1, SF_TUBE_STATUS.WORKING);
+                                    mc.sf.tubeStatus(unitCodeSF2, SF_TUBE_STATUS.READY);
+                                }
+                                else if (ret.b2)
+                                {
+                                    mc.sf.tubeStatus(unitCodeSF1, SF_TUBE_STATUS.READY);
+                                    mc.sf.tubeStatus(unitCodeSF2, SF_TUBE_STATUS.WORKING);
+                                }
                             }
-                            else if (ret.b2)
-                            {
-                                mc.sf.tubeStatus(unitCodeSF1, SF_TUBE_STATUS.READY);
-                                mc.sf.tubeStatus(unitCodeSF2, SF_TUBE_STATUS.WORKING);
-                            }
+                            dwell.Reset(); sqc++; break;
                         }
-                        dwell.Reset(); sqc++; break;
+                        else retryCount++;
                     }
+                    else retryCount = 0;
                     break;
                 case 12:
                     if (dwell.Elapsed < 500) break;
@@ -540,12 +565,7 @@ namespace PSA_SystemLibrary
                     dwell.Reset();
                     sqc++; break;
                 case 21:
-                    if (!Z_AT_TARGET) break;
-                    dwell.Reset();
-                    sqc++; break;
-                case 22:
                     if (!Z_AT_DONE) break;
-
                     TubeGuide(unitCodeSF1, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
                     TubeGuide(unitCodeSF2, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;                   
                     if (ret.b1 || ret.b2)
@@ -592,10 +612,15 @@ namespace PSA_SystemLibrary
                     }
                     if (ret.b1 || ret.b2)
                     {
-                        Z.stop(out ret.message);
-                        dwell.Reset();
-                        sqc++; break;
+                        if (retryCount2 > retryMax)
+                        {
+                            Z.stop(out ret.message);
+                            dwell.Reset();
+                            sqc++; break;
+                        }
+                        else retryCount2++;
                     }
+                    else retryCount2 = 0;
                     break;
                 case 27:
                     if (dwell.Elapsed < 500) break;
@@ -620,10 +645,6 @@ namespace PSA_SystemLibrary
                     dwell.Reset();
                     sqc++; break;
                 case 31:
-                    if (!Z_AT_TARGET) break;
-                    dwell.Reset();
-                    sqc++; break;
-                case 32:
                     if (!Z_AT_DONE) break;
                     TubeGuide(unitCodeSF1, out ret.b1, out ret.message); if (ioCheck(sqc, ret.message)) break;
                     TubeGuide(unitCodeSF2, out ret.b2, out ret.message); if (ioCheck(sqc, ret.message)) break;
@@ -646,10 +667,6 @@ namespace PSA_SystemLibrary
                     dwell.Reset();
                     sqc++; break;
                 case 51:
-                    if (!Z_AT_TARGET) break;
-                    dwell.Reset();
-                    sqc++; break;
-                case 52:
                     if (!Z_AT_DONE) break;
                     Z.reset(out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
                     Z.status(out mpiState, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
@@ -666,43 +683,34 @@ namespace PSA_SystemLibrary
             }
         }
 
-        #region AT_TARGET , AT_DONE
-        bool Z_AT_TARGET
+        public void feederDown()
         {
-            get
+            switch (sqc)
             {
-                Z.AT_ERROR(out ret.b, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) return false;
-                if (ret.b)
-                {
-                    Z.checkAlarmStatus(out ret.s, out ret.message);
-                    errorCheck((int)UnitCodeAxisNumber.SF_Z1, ERRORCODE.SF, sqc, ret.s, ALARM_CODE.E_AXIS_CHECK_TARGET_MOTION_ERROR);
-                    return false;
-                }
-                Z.AT_MOVING(out ret.b, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) return false;
-                if (ret.b)
-                {
-                    if (dwell.Elapsed > 30000)
-                    {
-                        Z.checkAlarmStatus(out ret.s, out ret.message);
-                        errorCheck((int)UnitCodeAxisNumber.SF_Z1, ERRORCODE.SF, sqc, ret.s, ALARM_CODE.E_AXIS_CHECK_TARGET_MOTION_TIMEOUT);
-                    }
-                    //timeCheck(UnitCodeAxis.Z, sqc, 30);
-                    return false;
-                }
-                Z.AT_TARGET(out ret.b, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) return false;
-                if (!ret.b)
-                {
-                    if (dwell.Elapsed > 30000)
-                    {
-                        Z.checkAlarmStatus(out ret.s, out ret.message);
-                        errorCheck((int)UnitCodeAxisNumber.SF_Z1, ERRORCODE.SF, sqc, ret.s, ALARM_CODE.E_AXIS_CHECK_TARGET_MOVE_DONE_MOTION_TIMEOUT);
-                    }
-                    //timeCheck(UnitCodeAxis.Z, sqc, 30);
-                    return false;
-                }
-                return true;
+                case 0:
+                    Esqc = 0;
+                    sqc = 10; break;
+               
+                case 10:
+                    Z.move(pos.z.DOWN, out ret.message);
+                    dwell.Reset();
+                    sqc++; break;
+                case 11:
+                    if (!Z_AT_DONE) break;
+                    Z.reset(out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
+                    Z.status(out mpiState, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
+                    sqc = SQC.STOP; break;
+
+                case SQC.ERROR:
+                    mc.log.debug.write(mc.log.CODE.ERROR, String.Format("Feeder Down Esqc {0}", Esqc));
+                    sqc = SQC.STOP; break;
+
+                case SQC.STOP:
+                    sqc = SQC.END; break;
             }
         }
+
+        #region AT_DONE
         bool Z_AT_DONE
         {
             get
@@ -711,16 +719,27 @@ namespace PSA_SystemLibrary
                 if (ret.b)
                 {
                     Z.checkAlarmStatus(out ret.s, out ret.message);
-                    errorCheck((int)UnitCodeAxisNumber.SF_Z1, ERRORCODE.SF, sqc, ret.s, ALARM_CODE.E_AXIS_CHECK_DONE_MOTION_ERROR);
+                    errorCheck((int)UnitCodeAxisNumber.SF_Z1 + (int)unitCodeSFMG, ERRORCODE.SF, sqc, ret.s, ALARM_CODE.E_AXIS_CHECK_DONE_MOTION_ERROR);
+                    return false;
+                }
+                Z.AT_MOVING(out ret.b, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) return false;
+                if (ret.b)
+                {
+                    if (dwell.Elapsed > 30000)
+                    {
+                        Z.checkAlarmStatus(out ret.s, out ret.message);
+                        errorCheck((int)UnitCodeAxisNumber.SF_Z1 + (int)unitCodeSFMG, ERRORCODE.SF, sqc, ret.s, ALARM_CODE.E_AXIS_CHECK_TARGET_MOTION_TIMEOUT);
+                    }
+                    //timeCheck(UnitCodeAxis.Z, sqc, 30);
                     return false;
                 }
                 Z.AT_DONE(out ret.b, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) return false;
                 if (!ret.b)
                 {
-                    if (dwell.Elapsed > 500)
+                    if (dwell.Elapsed > 30000)
                     {
                         Z.checkAlarmStatus(out ret.s, out ret.message);
-                        errorCheck((int)UnitCodeAxisNumber.SF_Z2, ERRORCODE.SF, sqc, ret.s, ALARM_CODE.E_AXIS_CHECK_DONE_MOTION_TIMEOUT);
+                        errorCheck((int)UnitCodeAxisNumber.SF_Z1 + (int)unitCodeSFMG, ERRORCODE.SF, sqc, ret.s, ALARM_CODE.E_AXIS_CHECK_DONE_MOTION_TIMEOUT);
                     }
                     //timeCheck(UnitCodeAxis.Z, sqc, 0.5);
                     return false;
@@ -734,7 +753,6 @@ namespace PSA_SystemLibrary
 	public class classStackFeederPosition
 	{
 		public classStackFeederPositionZ z = new classStackFeederPositionZ();
-        public classStackFeederPositionZ z2 = new classStackFeederPositionZ();
 	}
 
 	public class classStackFeederPositionZ
