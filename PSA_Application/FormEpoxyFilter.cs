@@ -63,7 +63,7 @@ namespace PSA_Application
 
 			mc.idle(500);
 
-			mc.hdc.liveMode = REFRESH_REQMODE.FIND_EPOXY;
+			//mc.hdc.liveMode = REFRESH_REQMODE.FIND_EPOXY;
 			//mc.hdc.LIVE = true;
             //mc.hdc.lighting_exposure(mc.para.EPOXY.light, mc.para.EPOXY.exposureTime);
 
@@ -94,9 +94,10 @@ namespace PSA_Application
 			LB_AreaFilterMinValue.Text = tempareaminfilter.ToString();
 			LB_ThresholdValue.Text = tempthreshold.ToString();   
 
-			mc.ulc.lighting_exposure(mc.para.EPOXY.light, mc.para.EPOXY.exposureTime);
+			mc.hdc.lighting_exposure(mc.para.EPOXY.light, mc.para.EPOXY.exposureTime);
 			EVENT.hWindowLargeDisplay(mc.hdc.cam.acq.grabber.cameraNumber);
-			mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
+			//mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
+			//mc.hdc.cam.grabSofrwareTrigger();
             
 			//control();
         }

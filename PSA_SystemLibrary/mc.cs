@@ -54,7 +54,7 @@ namespace PSA_SystemLibrary
         {
             get
             {
-                return "20170210A";
+                return "20170219A";
             }
         }
         //public static bool START;
@@ -2575,7 +2575,6 @@ namespace PSA_SystemLibrary
                 get
                 {
                     if (dev.NotExistHW.AXT) return true;
-                    if (mc.swcontrol.noCheckAir == true) return true;
                     mc.IN.MAIN.AIR_MET(out ret.b, out ret.message);
                     if ((!ret.b || ret.message != RetMessage.OK) && (swcontrol.hwCheckSkip & 0x01) == 0)
                     {
@@ -2900,7 +2899,7 @@ namespace PSA_SystemLibrary
                     else log.debug.write(log.CODE.BUTTON, String.Format(textResource.LOG_CLICK_BUTTON_IO, user.selectedIOMenu.ToString(), controlText, userName)); 
                 }
 
-                EVENT.refresh();
+                //EVENT.refresh();
 
                 if (sender.GetType().Name == "Button" || sender.GetType().Name == "TextBox" || sender.GetType().Name == "CheckBox")
                 {
@@ -3331,9 +3330,8 @@ namespace PSA_SystemLibrary
 
             public class debug
             {
-                public static string dbgStrDir = String.Format("{0}\\Log\\Debug\\", mc2.savePath);
-                //public static string dbgStrFile = "debug-" + DateTime.Now.Year.ToString() + "." + DateTime.Now.Month.ToString() + "." + DateTime.Now.Day.ToString() + ".Log";
-                public static StringBuilder dbgSb = new StringBuilder(1023);
+                static string dbgStrDir = String.Format("{0}\\Log\\Debug\\", mc2.savePath);
+                static StringBuilder dbgSb = new StringBuilder(1023);
 
                 public static void write(CODE code, string msg, bool viewMsg = true)
                 {
@@ -3473,37 +3471,26 @@ namespace PSA_SystemLibrary
                 }
             }
 
-            public class momoryDebug
+            public class ETC
             {
-                public static string strDir = String.Format("{0}\\Log\\memory\\", mc2.savePath);
-                public static StringBuilder memSb = new StringBuilder(255);
+                static string strDir = String.Format("{0}\\Log\\ETC\\", mc2.savePath);
+                static StringBuilder etcSb = new StringBuilder(255);
 
-                public static void write(CODE code, string msg)
+                public static void write(string msg)
                 {
                     try
                     {
-                        memSb.Clear(); memSb.Length = 0;
-                        memSb.AppendFormat("{0}{1:d2}{2:d2}.log", DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
-                        //string strFile = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString("d2") + DateTime.Now.Day.ToString("d2") + ".Log";
-
+                        etcSb.Clear(); etcSb.Length = 0;
+                        etcSb.AppendFormat("{0}{1:d2}{2:d2}.log", DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
                         if (!Directory.Exists(strDir)) Directory.CreateDirectory(strDir);
-
-                        StreamWriter sw = new StreamWriter(String.Format("{0}{1}", strDir, memSb.ToString()), true);
-
-                        memSb.Clear(); memSb.Length = 0;
-                        memSb.AppendFormat("[{0:d2}{1:d2}{2:d2}.{3:d3}] [{4}] {5}", DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second, DateTime.Now.Millisecond, code, msg);
-                        //string strFullLog = "[" + DateTime.Now.Hour.ToString("d2") + ":" + DateTime.Now.Minute.ToString("d2") + ":" + DateTime.Now.Second.ToString("d2") + "." + DateTime.Now.Millisecond.ToString("d3") + "] [" +
-                        //                    code.ToString() + "] " +
-                        //                    msg;
-
-                        //EVENT.log(strFullLog);
-
-                        sw.WriteLine(memSb);
+                        StreamWriter sw = new StreamWriter(String.Format("{0}{1}", strDir, etcSb.ToString()), true);
+                        etcSb.Clear(); etcSb.Length = 0;
+                        etcSb.AppendFormat("[{0:d2}:{1:d2}:{2:d2}.{3:d3}] {4}", DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second, DateTime.Now.Millisecond, msg);
+                        sw.WriteLine(etcSb);
                         sw.Close();
                     }
                     catch
                     {
-                        //MessageBox.Show(code.ToString() + "\n" + msg, ">> log.debug.write() <<", MessageBoxButtons.OK);
                     }
 
 
@@ -4422,6 +4409,8 @@ namespace PSA_SystemLibrary
 
         public class swcontrol
         {
+            public static bool genflag = false;
+
             public static bool nousemotion;
             public static bool nouseio;
             public static bool nousecamera;
@@ -4430,12 +4419,9 @@ namespace PSA_SystemLibrary
             public static bool nousetouchprobe;
             public static bool noUsePDUpSensor;
             public static int hwCheckSkip;			// Bit0:Main Air Check, Bit1:Stand-Alone Machine
-            public static int removeConveyor;		// Conveyor Homing Skip이 On되어 있는 상태에서 아예 Conveyor Width축에 전원도 인가하지 않음.
-            
+            public static int removeConveyor;		// Conveyor Homing Skip이 On되어 있는 상태에서 아예 Conveyor Width축에 전원도 인가하지 않음.           
             public static int setupMode;	// Graph Display Start Point. 0:from Z Down Start, 1:from 2nd search Start
             //public static int useHwTriger;		// hwTriger 사용 유무
-            public static double forceMeanOffset;
-            public static bool noCheckAir;
 
             // 20140612 
             public static int logSave;
@@ -4455,8 +4441,10 @@ namespace PSA_SystemLibrary
 
             public static void readconfig()
             {
-                readETCConfig();
+                genflag = false;
+
                 readSWConfig();
+                readETCConfig();
 
                 dev.NotExistHW.ZMP = nousemotion;
                 dev.NotExistHW.AXT = nouseio;
@@ -4477,15 +4465,23 @@ namespace PSA_SystemLibrary
                     dev.NotExistHW.LOADCELL = true;
                     dev.NotExistHW.TOUCHPROBE = true;
                 }
+
+                if (genflag) writeConfig();
             }
 
+            public static void writeConfig()
+            {
+                if (File.Exists(filename)) File.Delete(filename);
+
+                writeSWConfig();
+                writeETCConfig();
+            }
             public static void readETCConfig()
             {
                 swconfig.sectionName = "SWControl";
 
                 int temp;
                 double tempD;
-                bool genflag = false;
 
                 temp = swconfig.GetInt("NouseMotion", 2);
                 if (temp == 2) genflag = true;
@@ -4544,18 +4540,6 @@ namespace PSA_SystemLibrary
                 }
                 else logSave = temp;
 
-                tempD = swconfig.GetDouble("forceMeanOffset", -1);
-                if (tempD == -1) genflag = true;
-                if (tempD <= -1 || tempD >= 1)
-                {
-                    forceMeanOffset = 0.01;
-                }
-                else forceMeanOffset = tempD;
-
-                temp = swconfig.GetInt("noCheckAir", 2);
-                if (temp == 2) genflag = true;
-                noCheckAir = (temp != 1) ? false : true;
-
                 if (nousemotion)
                 {
                     dev.NotExistHW.ZMP = true;
@@ -4580,8 +4564,6 @@ namespace PSA_SystemLibrary
                 {
                     dev.NotExistHW.TOUCHPROBE = true;
                 }
-
-                if (genflag) writeETCConfig();
             }
 
             public static void readSWConfig()
@@ -4590,7 +4572,6 @@ namespace PSA_SystemLibrary
 
                 int temp;
                 double tempD;
-                bool genflag = false;
 
                 temp = swconfig.GetInt("MechanicalRevision", 0);
                 if (temp < 0 || temp > 1)   // Invalid MechanicalRevision Number
@@ -4623,8 +4604,6 @@ namespace PSA_SystemLibrary
                 temp = swconfig.GetInt("useCheckEpoxy", 2);
                 if (temp == 2) genflag = true;
                 useCheckEpoxy = (temp != 1) ? false : true;
-
-                if (genflag) writeSWConfig();
             }
 
             public static void writeETCConfig()
@@ -4653,10 +4632,6 @@ namespace PSA_SystemLibrary
                 // 20140612
                 swconfig.WriteInt("LogSave", logSave);
                 //swconfig.WriteInt("useHwTriger", useHwTriger);
-                swconfig.WriteDouble("forceMeanOffset", forceMeanOffset);
-
-                temp = noCheckAir ? 1 : 0;
-                swconfig.WriteInt("noCheckAir", temp);
             }
 
             public static void writeSWConfig()

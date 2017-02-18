@@ -27,7 +27,14 @@ namespace PSA_Application
 		para_member testKilogram;
 		RetValue ret;
 		QueryTimer dwell = new QueryTimer();
+        //PictureBox[] status.pic = new PictureBox[20];
+        calibrationStatus[] status = new calibrationStatus[20];
 
+        struct calibrationStatus
+        {
+            public PictureBox pic;
+            public bool isDone;
+        };
 // 		bool threadAlive = false;
 
 		static double[] autoCheckResult = new double[20];
@@ -60,6 +67,30 @@ namespace PSA_Application
 		static bool threadAbortFlag;
 		bool calDataChanged;
 
+        void ShowPicture()
+        {
+            int index;
+            for (index = 0; index < 20; index++)
+            {
+                status[index].pic = new PictureBox();
+                status[index].pic.Width = 15;
+                status[index].pic.Height = 15;
+
+                if (index == 0)
+                {
+                    status[index].pic.Left = 18;
+                    status[index].pic.Top = 40;
+                }
+                else
+                {
+                    status[index].pic.Left = 18;
+                    status[index].pic.Top = status[index - 1].pic.Top + 23;
+                }
+                this.Controls.Add(status[index].pic);
+                status[index].isDone = true;
+            }
+        }
+
 		void forceCalibraion()
 		{
 			try
@@ -79,153 +110,158 @@ namespace PSA_Application
 							break;		// 매 동작을 시작하기 전에 Stop 신호 검사
 						}
 						mc.idle(1);
-						
-						for (int i = 0; i < 5; i++)	// 동일 Force에 대해 5회 측정 : 10 -> 5
-						{
-							if (reqThreadStop == true)
-							{
-								threadAbortFlag = true;
-								break;		// 매 동작을 시작하기 전에 Stop 신호 검사
-							}
-							mc.idle(1);
 
-							// move XY to loadcell posision
-							posZ = mc.hd.tool.tPos.z.XY_MOVING;
-							mc.hd.tool.jogMove(posZ, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); break; }
-							mc.hd.tool.F.max(out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarm("Force Analog Output Error"); break; }
-							mc.idle(100);
-							
-							// Z move down to loadcell position
-							posZ = mc.hd.tool.tPos.z.LOADCELL + 1000;
-							mc.hd.tool.jogMove(posZ, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); break; }
-							
-							mc.idle(100);
-							posZ = mc.hd.tool.tPos.z.LOADCELL + 50;
-							mc.hd.tool.jogMove(posZ, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); break; }
-							dwellT.Reset();
-							
-							// Contact 시점에는 낮은 압력을 이용한다.
-							if (tempForce.A[j].value < (tempForce.A[0].value + 0.4))
-							{
-								mc.hd.tool.F.voltage(tempForce.A[j].value, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarm("Force Analog Output Error"); break; }
-							}
-							else
-							{
-								mc.hd.tool.F.voltage(tempForce.A[0].value + 0.4, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarm("Force Analog Output Error"); break; }
-							}
-							
-							mc.idle(1500);		// 이 Factor는 안정적으로 가져가야 한다.
-							
-							// Z축이 Loadcell을 Touch한 위치에서 화면상의 Offset값 만큼 더 내린다.
-							// 1V에 500g을 기준으로 한 높이에 Offset만큼 더 내린다.
-							// Default Offset은 250um * 입력 전압
-							posZ = mc.hd.tool.tPos.z.LOADCELL - mc.para.CAL.force.touchOffset.value;
-							mc.hd.tool.Z.move(posZ, 0.0005, 0.01, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); break; }
-							mc.hd.tool.checkZMoveEnd(out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); break; }
-							mc.hd.tool.F.voltage(tempForce.A[j].value, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarm("Force Analog Output Error"); break; }
-							
-							mc.idle(UtilityControl.forceCheckDelay);
-							
-							// read loadcell data
-							retT.d = mc.loadCell.getData(0);		// 무조건 바닥 loadcell이 기준이 되어야 한다.
-							if (retT.d > -1)
-							{
-								autoCheckResult[i] = retT.d;	
-								autoCheckResult[i] += (UtilityControl.forceOffsetGram / 1000.0);
-							}
-							else
-								autoCheckResult[i] = -1;
-							
-							// read analog data from VPPM
-							retT.d1 = mc.AIN.VPPM();
-							vppmResult[i] = retT.d1;
+                        if (!UtilityControl.simulation)
+                        {
+                            for (int i = 0; i < 5; i++)	// 동일 Force에 대해 5회 측정 : 10 -> 5
+                            {
+                                if (reqThreadStop == true)
+                                {
+                                    threadAbortFlag = true;
+                                    break;		// 매 동작을 시작하기 전에 Stop 신호 검사
+                                }
+                                mc.idle(1);
 
-							// read analog data from Strain Gauge
-							retT.d2 = mc.AIN.HeadLoadcell();
-							strainGaugeResult[i] = retT.d2;
+                                // move XY to loadcell posision
+                                posZ = mc.hd.tool.tPos.z.XY_MOVING;
+                                mc.hd.tool.jogMove(posZ, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); break; }
+                                mc.hd.tool.F.max(out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarm("Force Analog Output Error"); break; }
+                                mc.idle(100);
 
-							mc.log.debug.write(mc.log.CODE.TRACE, "Volt : " + tempForce.A[j].value.ToString() + ", VPPM : " + Math.Round(vppmResult[i], 3).ToString() + ", LoadC : " + Math.Round(strainGaugeResult[i], 3).ToString() + ", Count : " + i.ToString() + ", Force : " + autoCheckResult[i].ToString());
-						}
+                                // Z move down to loadcell position
+                                posZ = mc.hd.tool.tPos.z.LOADCELL + 1000;
+                                mc.hd.tool.jogMove(posZ, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); break; }
 
-						// loadcell force value 생성
-						maxVal = -100;
-						minVal = 100;
-						for (int i = 0; i < 5; i++)
-						{
-							if (autoCheckResult[i] > maxVal) { maxVal = autoCheckResult[i]; maxIndex = i; }
-							if (autoCheckResult[i] < minVal) { minVal = autoCheckResult[i]; minIndex = i; }
-						}
-						if (maxIndex == minIndex)
-						{
-							maxIndex = minIndex + 1;
-						}
-						sumVal = 0;
-						for (int i = 0; i < 5; i++)
-						{
-							if (i == maxIndex || i == minIndex) continue;
-							else
-							{
-								sumVal += autoCheckResult[i];
-							}
-						}
-						meanVal = sumVal / 3.0;
+                                mc.idle(100);
+                                posZ = mc.hd.tool.tPos.z.LOADCELL + 50;
+                                mc.hd.tool.jogMove(posZ, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); break; }
+                                dwellT.Reset();
 
-						// VPPM voltage value 생성
-						maxValV = -100;
-						minValV = 100;
-						for (int i = 0; i < 5; i++)
-						{
-							if (vppmResult[i] > maxValV) { maxValV = vppmResult[i]; maxIndexV = i; }
-							if (vppmResult[i] < minValV) { minValV = vppmResult[i]; minIndexV = i; }
-						}
-						if (maxIndexV == minIndexV)
-						{
-							maxIndexV = minIndexV + 1;
-						}
-						sumValV = 0;
-						for (int i = 0; i < 5; i++)
-						{
-							if (i == maxIndexV || i == minIndexV) continue;
-							else
-							{
-								sumValV += vppmResult[i];
-								//mc.log.debug.write(mc.log.CODE.TRACE, "Index : " + i.ToString() + ", Val : " + vppmResult[i].ToString() + ", Sum : " + sumValV.ToString());
-							}
-						}
-						meanValV = sumValV / 3.0;
+                                // Contact 시점에는 낮은 압력을 이용한다.
+                                if (tempForce.A[j].value < (tempForce.A[0].value + 0.4))
+                                {
+                                    mc.hd.tool.F.voltage(tempForce.A[j].value, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarm("Force Analog Output Error"); break; }
+                                }
+                                else
+                                {
+                                    mc.hd.tool.F.voltage(tempForce.A[0].value + 0.4, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarm("Force Analog Output Error"); break; }
+                                }
 
-						// strain gauge loadcell voltage value 생성
-						maxValVSG = -100;
-						minValVSG = 100;
-						for (int i = 0; i < 5; i++)
-						{
-							if (strainGaugeResult[i] > maxValVSG) { maxValVSG = strainGaugeResult[i]; maxIndexVSG = i; }
-							if (strainGaugeResult[i] < minValVSG) { minValVSG = strainGaugeResult[i]; minIndexVSG = i; }
-						}
-						if (maxIndexVSG == minIndexVSG)
-						{
-							maxIndexVSG = minIndexVSG + 1;
-						}
-						sumValVSG = 0;
-						for (int i = 0; i < 5; i++)
-						{
-							if (i == maxIndexVSG || i == minIndexVSG) continue;
-							else
-							{
-								sumValVSG += strainGaugeResult[i];
-								//mc.log.debug.write(mc.log.CODE.TRACE, "Index : " + i.ToString() + ", Val : " + vppmResult[i].ToString() + ", Sum : " + sumValV.ToString());
-							}
-						}
-						meanValVSG = sumValVSG / 3.0;
+                                mc.idle(1500);		// 이 Factor는 안정적으로 가져가야 한다.
 
-						mc.log.debug.write(mc.log.CODE.TRACE, "Max[" + maxIndex.ToString() + "] : " + maxVal.ToString() + ", Min[" + minIndex.ToString() + "] : " + minVal.ToString() + ", Mean : " + meanVal.ToString() + " [kg], VPPM: " + Math.Round(meanValV, 3).ToString() + "[V], LD:" + Math.Round(meanValVSG, 3).ToString() + "[V]");
-						//mc.log.debug.write(mc.log.CODE.TRACE, "Max[" + maxIndexV.ToString() + "] : " + maxValV.ToString() + ", Min[" + minIndexV.ToString() + "] : " + minValV.ToString() + ", Mean : " + meanVal.ToString() + " [kg], " + Math.Round(meanValV, 3).ToString() + "[V]");
+                                // Z축이 Loadcell을 Touch한 위치에서 화면상의 Offset값 만큼 더 내린다.
+                                // 1V에 500g을 기준으로 한 높이에 Offset만큼 더 내린다.
+                                // Default Offset은 250um * 입력 전압
+                                posZ = mc.hd.tool.tPos.z.LOADCELL - mc.para.CAL.force.touchOffset.value;
+                                mc.hd.tool.Z.move(posZ, 0.0005, 0.01, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); break; }
+                                mc.hd.tool.checkZMoveEnd(out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); break; }
+                                mc.hd.tool.F.voltage(tempForce.A[j].value, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarm("Force Analog Output Error"); break; }
 
-						//mc.para.CAL.force.B[i].value
-                        tempForce.B[j].value = Math.Round(meanVal, 3);          // Bottom Loadcell
-						tempForce.C[j].value = Math.Round(meanValV, 3);         // VPPM
-						tempForce.D[j].value = Math.Round(meanValVSG, 3);       // Head Loadcell
+                                mc.idle(UtilityControl.forceCheckDelay);
 
+                                // read loadcell data
+                                retT.d = mc.loadCell.getData(0);		// 무조건 바닥 loadcell이 기준이 되어야 한다.
+                                if (retT.d > -1)
+                                {
+                                    autoCheckResult[i] = retT.d;
+                                    autoCheckResult[i] += (UtilityControl.forceOffsetGram / 1000.0);
+                                }
+                                else
+                                    autoCheckResult[i] = -1;
+
+                                // read analog data from VPPM
+                                retT.d1 = mc.AIN.VPPM();
+                                vppmResult[i] = retT.d1;
+
+                                // read analog data from Strain Gauge
+                                retT.d2 = mc.AIN.HeadLoadcell();
+                                strainGaugeResult[i] = retT.d2;
+
+                                mc.log.debug.write(mc.log.CODE.TRACE, "Volt : " + tempForce.A[j].value.ToString() + ", VPPM : " + Math.Round(vppmResult[i], 3).ToString() + ", LoadC : " + Math.Round(strainGaugeResult[i], 3).ToString() + ", Count : " + i.ToString() + ", Force : " + autoCheckResult[i].ToString());
+                            }
+
+                            // loadcell force value 생성
+                            maxVal = -100;
+                            minVal = 100;
+                            for (int i = 0; i < 5; i++)
+                            {
+                                if (autoCheckResult[i] > maxVal) { maxVal = autoCheckResult[i]; maxIndex = i; }
+                                if (autoCheckResult[i] < minVal) { minVal = autoCheckResult[i]; minIndex = i; }
+                            }
+                            if (maxIndex == minIndex)
+                            {
+                                maxIndex = minIndex + 1;
+                            }
+                            sumVal = 0;
+                            for (int i = 0; i < 5; i++)
+                            {
+                                if (i == maxIndex || i == minIndex) continue;
+                                else
+                                {
+                                    sumVal += autoCheckResult[i];
+                                }
+                            }
+                            meanVal = sumVal / 3.0;
+
+                            // VPPM voltage value 생성
+                            maxValV = -100;
+                            minValV = 100;
+                            for (int i = 0; i < 5; i++)
+                            {
+                                if (vppmResult[i] > maxValV) { maxValV = vppmResult[i]; maxIndexV = i; }
+                                if (vppmResult[i] < minValV) { minValV = vppmResult[i]; minIndexV = i; }
+                            }
+                            if (maxIndexV == minIndexV)
+                            {
+                                maxIndexV = minIndexV + 1;
+                            }
+                            sumValV = 0;
+                            for (int i = 0; i < 5; i++)
+                            {
+                                if (i == maxIndexV || i == minIndexV) continue;
+                                else
+                                {
+                                    sumValV += vppmResult[i];
+                                    //mc.log.debug.write(mc.log.CODE.TRACE, "Index : " + i.ToString() + ", Val : " + vppmResult[i].ToString() + ", Sum : " + sumValV.ToString());
+                                }
+                            }
+                            meanValV = sumValV / 3.0;
+
+                            // strain gauge loadcell voltage value 생성
+                            maxValVSG = -100;
+                            minValVSG = 100;
+                            for (int i = 0; i < 5; i++)
+                            {
+                                if (strainGaugeResult[i] > maxValVSG) { maxValVSG = strainGaugeResult[i]; maxIndexVSG = i; }
+                                if (strainGaugeResult[i] < minValVSG) { minValVSG = strainGaugeResult[i]; minIndexVSG = i; }
+                            }
+                            if (maxIndexVSG == minIndexVSG)
+                            {
+                                maxIndexVSG = minIndexVSG + 1;
+                            }
+                            sumValVSG = 0;
+                            for (int i = 0; i < 5; i++)
+                            {
+                                if (i == maxIndexVSG || i == minIndexVSG) continue;
+                                else
+                                {
+                                    sumValVSG += strainGaugeResult[i];
+                                    //mc.log.debug.write(mc.log.CODE.TRACE, "Index : " + i.ToString() + ", Val : " + vppmResult[i].ToString() + ", Sum : " + sumValV.ToString());
+                                }
+                            }
+                            meanValVSG = sumValVSG / 3.0;
+
+                            mc.log.debug.write(mc.log.CODE.TRACE, "Max[" + maxIndex.ToString() + "] : " + maxVal.ToString() + ", Min[" + minIndex.ToString() + "] : " + minVal.ToString() + ", Mean : " + meanVal.ToString() + " [kg], VPPM: " + Math.Round(meanValV, 3).ToString() + "[V], LD:" + Math.Round(meanValVSG, 3).ToString() + "[V]");
+                            //mc.log.debug.write(mc.log.CODE.TRACE, "Max[" + maxIndexV.ToString() + "] : " + maxValV.ToString() + ", Min[" + minIndexV.ToString() + "] : " + minValV.ToString() + ", Mean : " + meanVal.ToString() + " [kg], " + Math.Round(meanValV, 3).ToString() + "[V]");
+
+                            //mc.para.CAL.force.B[i].value
+                            tempForce.B[j].value = Math.Round(meanVal, 3);          // Bottom Loadcell
+                            tempForce.C[j].value = Math.Round(meanValV, 3);         // VPPM
+                            tempForce.D[j].value = Math.Round(meanValVSG, 3);       // Head Loadcell
+                        }
+                        else mc.idle(1000);
+
+                        status[j].isDone = true;
                         refresh();
 					}
 					posZ = mc.hd.tool.tPos.z.XY_MOVING;
@@ -294,13 +330,13 @@ namespace PSA_Application
 					}
 					else if (ret.usrDialog == DIAG_RESULT.No)
 					{
-						for (int i = 0; i < 20; i++)
-						{
-							tempForce.A[i].value = mc.para.CAL.force.A[i].value;
-                            tempForce.B[i].value = mc.para.CAL.force.B[i].value;
-                            tempForce.C[i].value = mc.para.CAL.force.C[i].value;
-                            tempForce.D[i].value = mc.para.CAL.force.D[i].value;
-						}
+                        //for (int i = 0; i < 20; i++)
+                        //{
+                        //    tempForce.A[i].value = mc.para.CAL.force.A[i].value;
+                        //    tempForce.B[i].value = mc.para.CAL.force.B[i].value;
+                        //    tempForce.C[i].value = mc.para.CAL.force.C[i].value;
+                        //    tempForce.D[i].value = mc.para.CAL.force.D[i].value;
+                        //}
 						this.Close();
 					}
 					else  goto EXIT;
@@ -320,10 +356,13 @@ namespace PSA_Application
 						return;
 					}
 				}
-				calDataChanged = true;
-
+                int i = 0;
+                for (i = 0; i < 20; i++)
+                {
+                    status[i].isDone = false;
+                }
+                calDataChanged = true;
 				reqThreadStop = false;
-
 				BT_STOP.Enabled = true;
 				BT_AutoCalibration.Enabled = false;
 
@@ -549,68 +588,71 @@ namespace PSA_Application
 			#endregion
 
 			#region 0~19버튼 이벤트
-            if (sender.Equals(TB_Force_FactorX0)) mc.para.setting(tempForce.A[0], out tempForce.A[0]);
-            if (sender.Equals(TB_Force_FactorX1)) mc.para.setting(tempForce.A[1], out tempForce.A[1]);
-            if (sender.Equals(TB_Force_FactorX2)) mc.para.setting(tempForce.A[2], out tempForce.A[2]);
-            if (sender.Equals(TB_Force_FactorX3)) mc.para.setting(tempForce.A[3], out tempForce.A[3]);
-            if (sender.Equals(TB_Force_FactorX4)) mc.para.setting(tempForce.A[4], out tempForce.A[4]);
-            if (sender.Equals(TB_Force_FactorX5)) mc.para.setting(tempForce.A[5], out tempForce.A[5]);
-            if (sender.Equals(TB_Force_FactorX6)) mc.para.setting(tempForce.A[6], out tempForce.A[6]);
-            if (sender.Equals(TB_Force_FactorX7)) mc.para.setting(tempForce.A[7], out tempForce.A[7]);
-            if (sender.Equals(TB_Force_FactorX8)) mc.para.setting(tempForce.A[8], out tempForce.A[8]);
-            if (sender.Equals(TB_Force_FactorX9)) mc.para.setting(tempForce.A[9], out tempForce.A[9]);
-            if (sender.Equals(TB_Force_FactorX10)) mc.para.setting(tempForce.A[10], out tempForce.A[10]);
-            if (sender.Equals(TB_Force_FactorX11)) mc.para.setting(tempForce.A[11], out tempForce.A[11]);
-            if (sender.Equals(TB_Force_FactorX12)) mc.para.setting(tempForce.A[12], out tempForce.A[12]);
-            if (sender.Equals(TB_Force_FactorX13)) mc.para.setting(tempForce.A[13], out tempForce.A[13]);
-            if (sender.Equals(TB_Force_FactorX14)) mc.para.setting(tempForce.A[14], out tempForce.A[14]);
-            if (sender.Equals(TB_Force_FactorX15)) mc.para.setting(tempForce.A[15], out tempForce.A[15]);
-            if (sender.Equals(TB_Force_FactorX16)) mc.para.setting(tempForce.A[16], out tempForce.A[16]);
-            if (sender.Equals(TB_Force_FactorX17)) mc.para.setting(tempForce.A[17], out tempForce.A[17]);
-            if (sender.Equals(TB_Force_FactorX18)) mc.para.setting(tempForce.A[18], out tempForce.A[18]);
-            if (sender.Equals(TB_Force_FactorX19)) mc.para.setting(tempForce.A[19], out tempForce.A[19]);
+            if (threadForceCalibration == null || !threadForceCalibration.IsAlive)
+            {
+                if (sender.Equals(TB_Force_FactorX0)) mc.para.setting(tempForce.A[0], out tempForce.A[0]);
+                if (sender.Equals(TB_Force_FactorX1)) mc.para.setting(tempForce.A[1], out tempForce.A[1]);
+                if (sender.Equals(TB_Force_FactorX2)) mc.para.setting(tempForce.A[2], out tempForce.A[2]);
+                if (sender.Equals(TB_Force_FactorX3)) mc.para.setting(tempForce.A[3], out tempForce.A[3]);
+                if (sender.Equals(TB_Force_FactorX4)) mc.para.setting(tempForce.A[4], out tempForce.A[4]);
+                if (sender.Equals(TB_Force_FactorX5)) mc.para.setting(tempForce.A[5], out tempForce.A[5]);
+                if (sender.Equals(TB_Force_FactorX6)) mc.para.setting(tempForce.A[6], out tempForce.A[6]);
+                if (sender.Equals(TB_Force_FactorX7)) mc.para.setting(tempForce.A[7], out tempForce.A[7]);
+                if (sender.Equals(TB_Force_FactorX8)) mc.para.setting(tempForce.A[8], out tempForce.A[8]);
+                if (sender.Equals(TB_Force_FactorX9)) mc.para.setting(tempForce.A[9], out tempForce.A[9]);
+                if (sender.Equals(TB_Force_FactorX10)) mc.para.setting(tempForce.A[10], out tempForce.A[10]);
+                if (sender.Equals(TB_Force_FactorX11)) mc.para.setting(tempForce.A[11], out tempForce.A[11]);
+                if (sender.Equals(TB_Force_FactorX12)) mc.para.setting(tempForce.A[12], out tempForce.A[12]);
+                if (sender.Equals(TB_Force_FactorX13)) mc.para.setting(tempForce.A[13], out tempForce.A[13]);
+                if (sender.Equals(TB_Force_FactorX14)) mc.para.setting(tempForce.A[14], out tempForce.A[14]);
+                if (sender.Equals(TB_Force_FactorX15)) mc.para.setting(tempForce.A[15], out tempForce.A[15]);
+                if (sender.Equals(TB_Force_FactorX16)) mc.para.setting(tempForce.A[16], out tempForce.A[16]);
+                if (sender.Equals(TB_Force_FactorX17)) mc.para.setting(tempForce.A[17], out tempForce.A[17]);
+                if (sender.Equals(TB_Force_FactorX18)) mc.para.setting(tempForce.A[18], out tempForce.A[18]);
+                if (sender.Equals(TB_Force_FactorX19)) mc.para.setting(tempForce.A[19], out tempForce.A[19]);
 
-			if (sender.Equals(TB_Force_FactorY0)) mc.para.setting(tempForce.B[0], out tempForce.B[0]);
-			if (sender.Equals(TB_Force_FactorY1)) mc.para.setting(tempForce.B[1], out tempForce.B[1]);
-			if (sender.Equals(TB_Force_FactorY2)) mc.para.setting(tempForce.B[2], out tempForce.B[2]);
-			if (sender.Equals(TB_Force_FactorY3)) mc.para.setting(tempForce.B[3], out tempForce.B[3]);
-			if (sender.Equals(TB_Force_FactorY4)) mc.para.setting(tempForce.B[4], out tempForce.B[4]);
-			if (sender.Equals(TB_Force_FactorY5)) mc.para.setting(tempForce.B[5], out tempForce.B[5]);
-			if (sender.Equals(TB_Force_FactorY6)) mc.para.setting(tempForce.B[6], out tempForce.B[6]);
-			if (sender.Equals(TB_Force_FactorY7)) mc.para.setting(tempForce.B[7], out tempForce.B[7]);
-			if (sender.Equals(TB_Force_FactorY8)) mc.para.setting(tempForce.B[8], out tempForce.B[8]);
-			if (sender.Equals(TB_Force_FactorY9)) mc.para.setting(tempForce.B[9], out tempForce.B[9]);
-			if (sender.Equals(TB_Force_FactorY10)) mc.para.setting(tempForce.B[10], out tempForce.B[10]);
-			if (sender.Equals(TB_Force_FactorY11)) mc.para.setting(tempForce.B[11], out tempForce.B[11]);
-			if (sender.Equals(TB_Force_FactorY12)) mc.para.setting(tempForce.B[12], out tempForce.B[12]);
-			if (sender.Equals(TB_Force_FactorY13)) mc.para.setting(tempForce.B[13], out tempForce.B[13]);
-			if (sender.Equals(TB_Force_FactorY14)) mc.para.setting(tempForce.B[14], out tempForce.B[14]);
-			if (sender.Equals(TB_Force_FactorY15)) mc.para.setting(tempForce.B[15], out tempForce.B[15]);
-			if (sender.Equals(TB_Force_FactorY16)) mc.para.setting(tempForce.B[16], out tempForce.B[16]);
-			if (sender.Equals(TB_Force_FactorY17)) mc.para.setting(tempForce.B[17], out tempForce.B[17]);
-			if (sender.Equals(TB_Force_FactorY18)) mc.para.setting(tempForce.B[18], out tempForce.B[18]);
-			if (sender.Equals(TB_Force_FactorY19)) mc.para.setting(tempForce.B[19], out tempForce.B[19]);
+                if (sender.Equals(TB_Force_FactorY0)) mc.para.setting(tempForce.B[0], out tempForce.B[0]);
+                if (sender.Equals(TB_Force_FactorY1)) mc.para.setting(tempForce.B[1], out tempForce.B[1]);
+                if (sender.Equals(TB_Force_FactorY2)) mc.para.setting(tempForce.B[2], out tempForce.B[2]);
+                if (sender.Equals(TB_Force_FactorY3)) mc.para.setting(tempForce.B[3], out tempForce.B[3]);
+                if (sender.Equals(TB_Force_FactorY4)) mc.para.setting(tempForce.B[4], out tempForce.B[4]);
+                if (sender.Equals(TB_Force_FactorY5)) mc.para.setting(tempForce.B[5], out tempForce.B[5]);
+                if (sender.Equals(TB_Force_FactorY6)) mc.para.setting(tempForce.B[6], out tempForce.B[6]);
+                if (sender.Equals(TB_Force_FactorY7)) mc.para.setting(tempForce.B[7], out tempForce.B[7]);
+                if (sender.Equals(TB_Force_FactorY8)) mc.para.setting(tempForce.B[8], out tempForce.B[8]);
+                if (sender.Equals(TB_Force_FactorY9)) mc.para.setting(tempForce.B[9], out tempForce.B[9]);
+                if (sender.Equals(TB_Force_FactorY10)) mc.para.setting(tempForce.B[10], out tempForce.B[10]);
+                if (sender.Equals(TB_Force_FactorY11)) mc.para.setting(tempForce.B[11], out tempForce.B[11]);
+                if (sender.Equals(TB_Force_FactorY12)) mc.para.setting(tempForce.B[12], out tempForce.B[12]);
+                if (sender.Equals(TB_Force_FactorY13)) mc.para.setting(tempForce.B[13], out tempForce.B[13]);
+                if (sender.Equals(TB_Force_FactorY14)) mc.para.setting(tempForce.B[14], out tempForce.B[14]);
+                if (sender.Equals(TB_Force_FactorY15)) mc.para.setting(tempForce.B[15], out tempForce.B[15]);
+                if (sender.Equals(TB_Force_FactorY16)) mc.para.setting(tempForce.B[16], out tempForce.B[16]);
+                if (sender.Equals(TB_Force_FactorY17)) mc.para.setting(tempForce.B[17], out tempForce.B[17]);
+                if (sender.Equals(TB_Force_FactorY18)) mc.para.setting(tempForce.B[18], out tempForce.B[18]);
+                if (sender.Equals(TB_Force_FactorY19)) mc.para.setting(tempForce.B[19], out tempForce.B[19]);
 
-			if (sender.Equals(TB_Force_FactorZ0)) mc.para.setting(tempForce.D[0], out tempForce.D[0]);
-			if (sender.Equals(TB_Force_FactorZ1)) mc.para.setting(tempForce.D[1], out tempForce.D[1]);
-			if (sender.Equals(TB_Force_FactorZ2)) mc.para.setting(tempForce.D[2], out tempForce.D[2]);
-			if (sender.Equals(TB_Force_FactorZ3)) mc.para.setting(tempForce.D[3], out tempForce.D[3]);
-			if (sender.Equals(TB_Force_FactorZ4)) mc.para.setting(tempForce.D[4], out tempForce.D[4]);
-			if (sender.Equals(TB_Force_FactorZ5)) mc.para.setting(tempForce.D[5], out tempForce.D[5]);
-			if (sender.Equals(TB_Force_FactorZ6)) mc.para.setting(tempForce.D[6], out tempForce.D[6]);
-			if (sender.Equals(TB_Force_FactorZ7)) mc.para.setting(tempForce.D[7], out tempForce.D[7]);
-			if (sender.Equals(TB_Force_FactorZ8)) mc.para.setting(tempForce.D[8], out tempForce.D[8]);
-			if (sender.Equals(TB_Force_FactorZ9)) mc.para.setting(tempForce.D[9], out tempForce.D[9]);
-            if (sender.Equals(TB_Force_FactorZ10)) mc.para.setting(tempForce.D[10], out tempForce.D[10]);
-			if (sender.Equals(TB_Force_FactorZ11)) mc.para.setting(tempForce.D[11], out tempForce.D[11]);
-			if (sender.Equals(TB_Force_FactorZ12)) mc.para.setting(tempForce.D[12], out tempForce.D[12]);
-			if (sender.Equals(TB_Force_FactorZ13)) mc.para.setting(tempForce.D[13], out tempForce.D[13]);
-			if (sender.Equals(TB_Force_FactorZ14)) mc.para.setting(tempForce.D[14], out tempForce.D[14]);
-			if (sender.Equals(TB_Force_FactorZ15)) mc.para.setting(tempForce.D[15], out tempForce.D[15]);
-			if (sender.Equals(TB_Force_FactorZ16)) mc.para.setting(tempForce.D[16], out tempForce.D[16]);
-			if (sender.Equals(TB_Force_FactorZ17)) mc.para.setting(tempForce.D[17], out tempForce.D[17]);
-			if (sender.Equals(TB_Force_FactorZ18)) mc.para.setting(tempForce.D[18], out tempForce.D[18]);
-			if (sender.Equals(TB_Force_FactorZ19)) mc.para.setting(tempForce.D[19], out tempForce.D[19]);
+                if (sender.Equals(TB_Force_FactorZ0)) mc.para.setting(tempForce.D[0], out tempForce.D[0]);
+                if (sender.Equals(TB_Force_FactorZ1)) mc.para.setting(tempForce.D[1], out tempForce.D[1]);
+                if (sender.Equals(TB_Force_FactorZ2)) mc.para.setting(tempForce.D[2], out tempForce.D[2]);
+                if (sender.Equals(TB_Force_FactorZ3)) mc.para.setting(tempForce.D[3], out tempForce.D[3]);
+                if (sender.Equals(TB_Force_FactorZ4)) mc.para.setting(tempForce.D[4], out tempForce.D[4]);
+                if (sender.Equals(TB_Force_FactorZ5)) mc.para.setting(tempForce.D[5], out tempForce.D[5]);
+                if (sender.Equals(TB_Force_FactorZ6)) mc.para.setting(tempForce.D[6], out tempForce.D[6]);
+                if (sender.Equals(TB_Force_FactorZ7)) mc.para.setting(tempForce.D[7], out tempForce.D[7]);
+                if (sender.Equals(TB_Force_FactorZ8)) mc.para.setting(tempForce.D[8], out tempForce.D[8]);
+                if (sender.Equals(TB_Force_FactorZ9)) mc.para.setting(tempForce.D[9], out tempForce.D[9]);
+                if (sender.Equals(TB_Force_FactorZ10)) mc.para.setting(tempForce.D[10], out tempForce.D[10]);
+                if (sender.Equals(TB_Force_FactorZ11)) mc.para.setting(tempForce.D[11], out tempForce.D[11]);
+                if (sender.Equals(TB_Force_FactorZ12)) mc.para.setting(tempForce.D[12], out tempForce.D[12]);
+                if (sender.Equals(TB_Force_FactorZ13)) mc.para.setting(tempForce.D[13], out tempForce.D[13]);
+                if (sender.Equals(TB_Force_FactorZ14)) mc.para.setting(tempForce.D[14], out tempForce.D[14]);
+                if (sender.Equals(TB_Force_FactorZ15)) mc.para.setting(tempForce.D[15], out tempForce.D[15]);
+                if (sender.Equals(TB_Force_FactorZ16)) mc.para.setting(tempForce.D[16], out tempForce.D[16]);
+                if (sender.Equals(TB_Force_FactorZ17)) mc.para.setting(tempForce.D[17], out tempForce.D[17]);
+                if (sender.Equals(TB_Force_FactorZ18)) mc.para.setting(tempForce.D[18], out tempForce.D[18]);
+                if (sender.Equals(TB_Force_FactorZ19)) mc.para.setting(tempForce.D[19], out tempForce.D[19]);
+            }
 			#endregion
 
 			if (sender.Equals(BT_STOP))
@@ -683,7 +725,14 @@ namespace PSA_Application
 					BT_STOP.Enabled = false;
 					//BT_AutoCalibration.Enabled = true;
 				}
-				TB_Force_FactorX0.Text = tempForce.A[0].value.ToString();
+
+                for (int i = 0; i < 20; i++)
+                {
+                    if (!status[i].isDone) status[i].pic.Image = Properties.Resources.small_fail;
+                    else status[i].pic.Image = Properties.Resources.small_complete;
+                }
+
+                TB_Force_FactorX0.Text = tempForce.A[0].value.ToString();
 				TB_Force_FactorX1.Text = tempForce.A[1].value.ToString();
 				TB_Force_FactorX2.Text = tempForce.A[2].value.ToString();
 				TB_Force_FactorX3.Text = tempForce.A[3].value.ToString();
@@ -819,6 +868,7 @@ namespace PSA_Application
             //    tempForce.D[i].lowerLimit = mc.para.CAL.force.D[i].lowerLimit;
             //    tempForce.D[i].upperLimit = mc.para.CAL.force.D[i].upperLimit;
             //}
+            ShowPicture();
 
 			refresh();
 		}

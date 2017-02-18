@@ -206,6 +206,7 @@ namespace AccessoryLibrary
 
                     state[ix, iy] = sts;
                 }
+                Invalidate();
             }
             catch (HalconException ex)
             {
@@ -286,6 +287,8 @@ namespace AccessoryLibrary
             startX = (padSizeX * countX + gapX * (countX - 1)) / 2;
             startY = (padSizeY * countY + gapY * (countY - 1)) / 2;
 
+            // 그리는 순서는 좌상단 부터 그리지만
+            // 사각형 배열을 장비 좌표에 맞게 뒤집어 저장한다.
             for (int idY = 0; idY < countY; idY++)
             {
                 for (int idX = 0; idX < countX; idX++)
@@ -323,7 +326,7 @@ namespace AccessoryLibrary
                 for (int idX = 0; idX < countX; idX++)
                 {
                     posX = this.Width / 2 - startX + (padSizeX + gapX) * idX;
-                    posY = this.Height - startY - (padSizeY + gapY) * idY;
+                    posY = this.Height / 2 - startY + (padSizeY + gapY) * idY;
 
                     if (posX <= rect.X + rect.Width
                         && this.Width / 2 - startX + (padSizeX + gapX) * (idX + 1) >= rect.X
@@ -358,31 +361,39 @@ namespace AccessoryLibrary
         private void FillRect(int idX, int idY, int startX, int startY)
         {
             rtColor = new SolidBrush(getColor(idX, idY));
-            fontColor = new SolidBrush(Color.Transparent);
+            //fontColor = new SolidBrush(Color.Transparent);
 
             g.FillRectangle(rtColor, startX, startY, padSizeX, padSizeY);
-            g.DrawString(state[idX, idY].ToString(), new Font("Arial", 5F), fontColor, startX + padSizeX / 2, startY + padSizeY / 2);
+            //g.DrawString(state[idX, idY].ToString(), new Font("Arial", 5F), fontColor, startX + padSizeX / 2, startY + padSizeY / 2);
         }
-        
+
+        private void FillRect(int idX, int idY, Rectangle rt)
+        {
+            rtColor = new SolidBrush(getColor(idX, idY));
+            g.FillRectangle(rtColor, rt);
+        }
+
         public void DrawRect()
         {
-            int startX, startY;
-            startX = (padSizeX * countX + gapX * (countX - 1)) / 2;
-            startY = (padSizeY * countY + gapY * (countY - 1)) / 2;
+            int centerX, centerY;
+
+            centerX = (padSizeX * countX + gapX * (countX - 1)) / 2;
+            centerY = (padSizeY * countY + gapY * (countY - 1)) / 2;
 
             // draw rectangle to screen.
             for (int idY = 0; idY < countY; idY++)
             {
                 for (int idX = 0; idX < countX; idX++)
                 {
-                    tempX = this.Width / 2 - startX + (padSizeX + gapX) * idX;
-                    tempY = this.Height / 2 + startY - padSizeY - (padSizeY + gapY) * idY;
+                    tempX = this.Width / 2 - centerX + (padSizeX + gapX) * idX;
+                    tempY = this.Height / 2 - centerY + (padSizeY + gapY) * idY;
 
-                    if (idX == selectedPadX && idY == selectedPadY && EditMode) g.DrawRectangle(outLine, tempX, tempY, padSizeX, padSizeY);
-                    else g.DrawRectangle(blackPen, tempX, tempY, padSizeX, padSizeY);
-                    FillRect(idX, idY, tempX, tempY);
-                    //if (FrRr == McTypeFrRr.FRONT) FillRect(idX, countY - 1 - idY, tempX, tempY);
-                    //else FillRect(countX - 1 - idX, idY, tempX, tempY);
+                    if (idX == selectedPadX && idY == selectedPadY && EditMode) g.DrawRectangle(outLine, curPad[idX, idY]);
+                    else g.DrawRectangle(blackPen, curPad[idX, idY]);
+                    
+                    if (FrRr == McTypeFrRr.FRONT) FillRect(idX,idY, curPad[idX, idY]);
+                    else FillRect(idX, idY, curPad[idX, idY]);
+
                 }
             }           
         }
@@ -458,7 +469,7 @@ namespace AccessoryLibrary
                             {
                                 selectedPadX = idX;
                                 selectedPadY = idY;
-                                EVENT.padChange(boardZone, idX, idY, false);
+                                EVENT.padChange(boardZone, selectedPadX, selectedPadY, false);
                                 Invalidate();
                             }
                         }

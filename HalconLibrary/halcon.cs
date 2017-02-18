@@ -2887,6 +2887,14 @@ namespace HalconLibrary
 				}
 				#endregion
 
+                #region Orientation find
+                if (rectangleCenter.orientationFindFlag > 0)
+                {
+                    HTuple number = rectangleCenter.orientationModelNumber;
+                    findModel(number);//, out ret.message, out ret.s);
+                }
+                #endregion
+                
 				rectangleCenter.resultTime = Math.Round(dwell.Elapsed, 2);
 				refresh_req = true; refresh_reqMode = REFRESH_REQMODE.RECTANGLE_CENTER;
 				errorMessage = "";
@@ -4384,6 +4392,7 @@ namespace HalconLibrary
             if (!isActivate) return true;
             try
             {
+				epoxyBlob[number].isCreate = "false";
                 return epoxyBlob[number].delete();
             }
             catch (HalconException ex)
@@ -4803,6 +4812,30 @@ namespace HalconLibrary
 					HOperatorSet.SetColor(window.handle, "green");
 					HOperatorSet.DispCross(window.handle, rectangleCenter.findRow, rectangleCenter.findColumn, 30, 0);
 					HOperatorSet.DispObj(rectangleCenter.Rectangle, window.handle);
+
+                    if (rectangleCenter.orientationFindFlag > 0)
+                    {
+                        if ((double)model[rectangleCenter.orientationModelNumber].resultScore != -1)
+                        {
+                            for (int i = 0; i < model[rectangleCenter.orientationModelNumber].resultScore.Length; i++)
+                            {
+                                HOperatorSet.SetColor(window.handle, "green");
+                                HOperatorSet.DispCross(window.handle, model[rectangleCenter.orientationModelNumber].resultRow.TupleSelect(i), model[rectangleCenter.orientationModelNumber].resultColumn.TupleSelect(i), 30, 0);
+                                HOperatorSet.DispRectangle2(window.handle, model[rectangleCenter.orientationModelNumber].resultRow.TupleSelect(i), model[rectangleCenter.orientationModelNumber].resultColumn.TupleSelect(i), model[rectangleCenter.orientationModelNumber].resultAngle.TupleSelect(i), (model[rectangleCenter.orientationModelNumber].createColumn2 - model[rectangleCenter.orientationModelNumber].createColumn1) / 2, (model[rectangleCenter.orientationModelNumber].createRow2 - model[rectangleCenter.orientationModelNumber].createRow1) / 2);
+                                if (model[rectangleCenter.orientationModelNumber].algorism == "SHAPE")
+                                {
+                                    HOperatorSet.SetColor(window.handle, "yellow");
+                                    HOperatorSet.HomMat2dIdentity(out model[rectangleCenter.orientationModelNumber].homMat);
+                                    HOperatorSet.HomMat2dRotate(model[rectangleCenter.orientationModelNumber].homMat, model[rectangleCenter.orientationModelNumber].resultAngle.TupleSelect(i), 0, 0, out model[rectangleCenter.orientationModelNumber].homMat);
+                                    HOperatorSet.HomMat2dTranslate(model[rectangleCenter.orientationModelNumber].homMat, model[rectangleCenter.orientationModelNumber].resultRow.TupleSelect(i), model[rectangleCenter.orientationModelNumber].resultColumn.TupleSelect(i), out model[rectangleCenter.orientationModelNumber].homMat);
+                                    model[rectangleCenter.orientationModelNumber].TransContours.Dispose();
+                                    HOperatorSet.AffineTransContourXld(model[rectangleCenter.orientationModelNumber].Contours, out model[rectangleCenter.orientationModelNumber].TransContours, model[rectangleCenter.orientationModelNumber].homMat);
+                                    HOperatorSet.DispObj(model[rectangleCenter.orientationModelNumber].TransContours, window.handle);
+                                }
+                            }
+                            HOperatorSet.TupleDeg(model[rectangleCenter.orientationModelNumber].resultAngle, out model[rectangleCenter.orientationModelNumber].resultAngle);
+                        }
+                    }
 				}
 				else
 				{
@@ -4826,8 +4859,6 @@ namespace HalconLibrary
 			}
 			catch //(HalconException ex)
 			{
-				//halcon_exception exception = new halcon_exception();
-				//exception.message(window, acq, ex);
 				refresh_req = false;
 				return false;
 			}
@@ -4848,6 +4879,9 @@ namespace HalconLibrary
 
                 HOperatorSet.SetSystem("flush_graphic", "true");
 
+				string str;
+				str = "Epoxy" + "\n";
+
                 for (int i = 0; i < (int)MAX_COUNT.BLOB; i++)
                 {
                     if (epoxyBlob[i].isCreate == "true")
@@ -4858,9 +4892,16 @@ namespace HalconLibrary
                         HOperatorSet.SetLineWidth(window.handle, 1);
                         HOperatorSet.DispObj(epoxyBlob[i].FindRegionEpoxy, window.handle);
                         HOperatorSet.SetDraw(window.handle, "margin");
+
+						#region messageResult
+						if (epoxyBlob[i].baseArea.D != -1)
+						{
+							str += "Amount [" + i.ToString() + "]: " + Math.Round((epoxyBlob[i].resultArea.D / epoxyBlob[i].baseArea.D * 100), 2).ToString() + "%\n";
+						}
                     }
                 }
-
+				messageResult(str);
+				#endregion
                 refresh_req = false;
                 return true;
             }
@@ -7058,6 +7099,8 @@ namespace HalconLibrary
 		public double chamferFindLength;
 		public double chamferFindDiameter;
 		public int bottomCircleFindFlag;
+        public int orientationFindFlag;
+        public int orientationModelNumber;
 		public int bottomCirclePos;		// 0: corner, 1:side
 		public double bottomCircleDiameter;
 		public int bottomCircleCount;
@@ -7465,6 +7508,7 @@ namespace HalconLibrary
         public HTuple findLength2;
         public HTuple findRadius;
 
+		public HTuple baseArea;
         public HTuple resultArea;
         public HTuple resultRow;
         public HTuple resultColumn;
@@ -7507,6 +7551,7 @@ namespace HalconLibrary
                 saveTuple[i] = "findColumn1"; i++; saveTuple[i] = findColumn1; i++;
                 saveTuple[i] = "findRow2"; i++; saveTuple[i] = findRow2; i++;
                 saveTuple[i] = "findColumn2"; i++; saveTuple[i] = findColumn2; i++;
+				saveTuple[i] = "baseArea"; i++; saveTuple[i] = baseArea; i++;
 
                 return true;
             }
@@ -7530,12 +7575,7 @@ namespace HalconLibrary
                 findColumn1 = saveTuple[i]; i += 2;
                 findRow2 = saveTuple[i]; i += 2;
                 findColumn2 = saveTuple[i]; i += 2;
-
-                temp = saveTuple.TupleFind("isCreate");
-                temp = saveTuple.TupleFind("number");
-                temp = saveTuple.TupleFind("findRow1");
-
-
+				baseArea = saveTuple[i]; i += 2;
                 return true;
             }
             catch (HalconException ex)
@@ -7640,6 +7680,7 @@ namespace HalconLibrary
             findColumn2 = -1;
             findTheta = 0;
             number = 0;
+			baseArea = -1;
             resultArea = -1;
             resultRow = -1;
             resultColumn = -1;

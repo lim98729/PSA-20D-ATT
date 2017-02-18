@@ -581,6 +581,7 @@ namespace DefineLibrary
 
 		public bool ioCheck(int errorSqc, RetMessage retMessage, string errorString = "", bool SecsGemReport = true)
 		{
+            if (dev.NotExistHW.AXT) return false;
 			if (retMessage == RetMessage.OK) return false;
 			ret.axisCode = UnitCodeAxis.INVALID;
 			ret.errorCode = ERRORCODE.IO;
@@ -598,6 +599,7 @@ namespace DefineLibrary
 		}
 		public bool ioCheck(int errorSqc, double resultCheck, string errorString = "", bool SecsGemReport = true)
 		{
+            if (dev.NotExistHW.AXT) return false;
 			if (resultCheck > -10.0) return false;
 			ret.axisCode = UnitCodeAxis.INVALID;
 			ret.errorCode = ERRORCODE.IO;
@@ -615,6 +617,7 @@ namespace DefineLibrary
 		}
 		public bool mpiCheck(int errorSqc, RetMessage retMessage, string errorString = "", bool SecsGemReport = false)
 		{
+            if (dev.NotExistHW.ZMP) return false;
 			if (retMessage == RetMessage.OK) return false;
 			ret.axisCode = UnitCodeAxis.INVALID;
 			ret.errorCode = ERRORCODE.MPI;
@@ -632,6 +635,7 @@ namespace DefineLibrary
 		}
 		public bool mpiCheck(UnitCodeAxis axisCode, int errorSqc, RetMessage retMessage, string errorString = "", bool SecsGemReport = false)
 		{
+            if (dev.NotExistHW.ZMP) return false;
 			if (retMessage == RetMessage.OK) return false;
 			ret.axisCode = axisCode;
 			ret.errorCode = ERRORCODE.MPI;
@@ -649,6 +653,7 @@ namespace DefineLibrary
 		}
 		public bool motorCheck(UnitCodeAxis axisCode, int errorSqc, bool errorStatue, string errorString = "", ALARM_CODE alarmCode = ALARM_CODE.E_ALL_OK, bool SecsGemReport = true)
 		{
+            if (dev.NotExistHW.ZMP) return false;
 			if (!errorStatue) return false;
 			ret.axisCode = axisCode;
 			ret.errorCode = ERRORCODE.MOTOR;
@@ -1429,6 +1434,7 @@ namespace DefineLibrary
 		NextCancel,			// Step Cycle용
 		RetryAbortSkip,		// Vision Error 떴을 때 메시지박스용
 		TmsManualPressCancel,
+		Sel1Sel2Sel3,
 	}
 
 	public enum DIAG_ICON_MODE
@@ -1454,6 +1460,9 @@ namespace DefineLibrary
 		Tms,
 		Manual,
 		Press,
+		Sel1,
+		Sel2,
+		Sel3,
 	}
 
 	public enum PICK_PARA_MODE
@@ -1632,7 +1641,13 @@ namespace DefineLibrary
 		OFF,
 		ON,
 	}
-
+    public enum STATUS_LAMP
+    {
+        INVALID = -1,
+        OFF,
+        ON,
+        Flicker,
+    }
 	public enum MC_STS
 	{
 		INVALID = -1,
@@ -1733,11 +1748,10 @@ namespace DefineLibrary
 		FIND_CIRCLE_QUARTER3,
 		FIND_CIRCLE_QUARTER4,
 		FIND_CORNER,
-        FIND_EDGE_QUARTER_1,
-        FIND_EDGE_QUARTER_2,
-        FIND_EDGE_QUARTER_3,
-        FIND_EDGE_QUARTER_4,
-		FIND_RECTANGLE_HS,
+		FIND_EDGE_QUARTER_1,
+		FIND_EDGE_QUARTER_2,
+		FIND_EDGE_QUARTER_3,
+		FIND_EDGE_QUARTER_4,
 		
 		READY,
 		DOWN,
@@ -4609,6 +4623,8 @@ namespace DefineLibrary
 		E_SYSTEM_MAIN_VACUUM_ERROR = 37,
 		E_SYSTEM_HW_SYSTEM_NOT_INIT = 38,
 		E_SYSTEM_HW_IO_NOT_WORKING = 39,
+		E_SYSTEM_HW_IONIZER_NOR_WORKING=40,
+		E_SYSTEM_HW_IONIZER_ERROR=41,
 
 		E_MACHINE_RUN_PRESS_TILT_ERROR = 46,
 		E_HDC_P1_FIDUCIAL_CHECKED_FAIL = 47,		// Fiducial이 안보여야 하는데 오히려 보이는 경우

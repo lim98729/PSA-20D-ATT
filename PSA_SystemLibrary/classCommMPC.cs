@@ -1883,7 +1883,7 @@ namespace PSA_SystemLibrary
 				}
 				else filename = "C:\\data\\" + "TMS_PREISPT_Local.ini";
 			}
-			if (autoCtl == 0 || autoCtl == 2)
+			if (!UtilityControl.simulation && (autoCtl == 0 || autoCtl == 2))
 			{
 				try
 				{

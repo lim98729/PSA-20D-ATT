@@ -159,6 +159,8 @@ namespace PSA_Application
                 BT_OUT_TUBEBLOW4.Image = image;
 
 				#endregion
+
+                BT_PositionSelect.Text = unitCodeSFMG.ToString();
 			}
 		}
 		#endregion
@@ -172,23 +174,11 @@ namespace PSA_Application
 			#region PositionSelect
             if (sender.Equals(BT_PositionSelect_MGZ1)) 
             {
-                if (mc.para.SF.useMGZ1.value == 1) { BT_PositionSelect.Text = BT_PositionSelect_MGZ1.Text; }
-                else
-                {
-                    FormUserMessage ff = new FormUserMessage();
-                    ff.SetDisplayItems(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.WARNING, String.Format(textResource.MB_SF_ONOFF, "MGZ#1"));
-                    ff.ShowDialog();
-                }
+                unitCodeSFMG = UnitCodeSFMG.MG1;
             }
             if (sender.Equals(BT_PositionSelect_MGZ2))
             {
-                if (mc.para.SF.useMGZ2.value == 1) { BT_PositionSelect.Text = BT_PositionSelect_MGZ2.Text; }
-                else
-                {
-                    FormUserMessage ff = new FormUserMessage();
-                    ff.SetDisplayItems(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.WARNING, String.Format(textResource.MB_SF_ONOFF, "MGZ#2"));
-                    ff.ShowDialog();
-                }
+                unitCodeSFMG = UnitCodeSFMG.MG2;
             }
 			#endregion
 			mc.main.Thread_Polling();
@@ -200,9 +190,12 @@ namespace PSA_Application
 			if (!mc.check.READY_AUTORUN(sender)) return;
 			mc.check.push(sender, true, (int)SelectedMenu.BOTTOM_RIGHT);
 			#region PICK
-            if (mc.init.success.SF) mc.sf.clear();
-            if (sender.Equals(BT_PositionSelect_MGZ1)) unitCodeSFMG = UnitCodeSFMG.MG1;
-            if (sender.Equals(BT_PositionSelect_MGZ2)) unitCodeSFMG = UnitCodeSFMG.MG2;
+            if (mc.init.success.SF)
+            {
+                mc.sf.clear();
+                mc.sf.feeder[(int)UnitCodeSFMG.MG1].clear();
+                mc.sf.feeder[(int)UnitCodeSFMG.MG2].clear();
+            }
             mc.sf.reqMGNumber = unitCodeSFMG; mc.sf.reqMode = REQMODE.READY; mc.sf.req = true;
             #endregion
 			mc.main.Thread_Polling();
@@ -214,9 +207,12 @@ namespace PSA_Application
 			if (!mc.check.READY_AUTORUN(sender)) return;
 			mc.check.push(sender, true, (int)SelectedMenu.BOTTOM_RIGHT);
 			#region READY
-            if (mc.init.success.SF) mc.sf.clear();
-            if (sender.Equals(BT_PositionSelect_MGZ1)) unitCodeSFMG = UnitCodeSFMG.MG1;
-            if (sender.Equals(BT_PositionSelect_MGZ2)) unitCodeSFMG = UnitCodeSFMG.MG2;
+            if (mc.init.success.SF)
+            {
+                mc.sf.clear();
+                mc.sf.feeder[(int)UnitCodeSFMG.MG1].clear();
+                mc.sf.feeder[(int)UnitCodeSFMG.MG2].clear();
+            }
             mc.sf.reqMGNumber = unitCodeSFMG; mc.sf.reqMode = REQMODE.DOWN; mc.sf.req = true;
 			#endregion
 			mc.main.Thread_Polling();

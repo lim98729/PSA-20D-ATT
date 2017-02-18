@@ -1609,7 +1609,7 @@ namespace PSA_Application
 						}
 						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
 						{
-							mc.ulc.reqMode = REQMODE.FIND_RECTANGLE_HS;
+							mc.ulc.reqMode = REQMODE.FIND_RECTANGLE;
 						}
 						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
 						{
@@ -1801,7 +1801,7 @@ namespace PSA_Application
 						}
 						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
 						{
-							mc.ulc.reqMode = REQMODE.FIND_RECTANGLE_HS;
+							mc.ulc.reqMode = REQMODE.FIND_RECTANGLE;
 						}
 						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
 						{

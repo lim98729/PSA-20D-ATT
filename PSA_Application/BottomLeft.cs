@@ -345,5 +345,11 @@ namespace PSA_Application
 		{
 			UtilityControl.readGraphConfig();
 		}
+
+        private void tabPage3_DoubleClick(object sender, EventArgs e)
+        {
+            mc.sf.tubeStatus(UnitCodeSF.SF1, SF_TUBE_STATUS.READY);
+            mc.sf.tubeStatus(UnitCodeSF.SF2, SF_TUBE_STATUS.READY);
+        }
 	}
 }

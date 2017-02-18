@@ -103,6 +103,8 @@ namespace PSA_SystemLibrary
                     mc.hd.tool.clear();
                     mc.pd.clear();
                     mc.sf.clear();
+                    mc.sf.feeder[(int)UnitCodeSFMG.MG1].clear();
+                    mc.sf.feeder[(int)UnitCodeSFMG.MG2].clear();
                     mc.cv.clear();
                     mc.hdc.clear();
 
@@ -438,6 +440,11 @@ namespace PSA_SystemLibrary
 					sqc++; break;
 				case 11:
 					if (mc2.req == MC_REQ.STOP) { sqc = SQC.STOP; break; }
+                    if (dev.NotExistHW.ZMP)
+                    {
+                        sqc = 13;
+                        break;
+                    }
 					if (dwell.Elapsed < 100) break;
 					mc.IN.CV.SMEMA_NEXT(out ret.b, out ret.message);
 					if (!ret.b) { dwell.Reset(); break; }

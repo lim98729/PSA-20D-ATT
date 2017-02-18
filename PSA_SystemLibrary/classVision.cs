@@ -86,7 +86,6 @@ namespace PSA_SystemLibrary
 					if (reqMode == REQMODE.FIND_EDGE_QUARTER_2) { sqc = SQC.FIND_EDGE_QUARTER_SECOND; break; }
 					if (reqMode == REQMODE.FIND_EDGE_QUARTER_1) { sqc = SQC.FIND_EDGE_QUARTER_FIRST; break; }
 					if (reqMode == REQMODE.FIND_EDGE_QUARTER_4) { sqc = SQC.FIND_EDGE_QUARTER_FOURTH; break; }
-					if (reqMode == REQMODE.FIND_RECTANGLE_HS) { sqc = SQC.FIND_RECTANGLE_HS; break; }
 					if (unitCode == UnitCode.HDC)
 					{
 						errorCheck(ERRORCODE.HDC, sqc, "요청 모드[" + reqMode.ToString() + "]", ALARM_CODE.E_SYSTEM_SW_HDC_LIST_NONE); break;
@@ -294,65 +293,6 @@ namespace PSA_SystemLibrary
                     #endregion
                     sqc = SQC.STOP; break;
                 #endregion
-
-				#region FIND_RECTANGLE_HS
-				case SQC.FIND_RECTANGLE_HS:
-					if (cam.refresh_req) break;
-					#region grab
-					if (triggerMode == TRIGGERMODE.SOFTWARE)
-					{
-						cam.grabSofrwareTrigger(out ret.message, out ret.s); if (ret.message != RetMessage.OK) { sqc = SQC.GRAB_ERROR; break; }
-					}
-					else
-					{
-						cam.grab(out ret.message, out ret.s); if (ret.message != RetMessage.OK) { sqc = SQC.GRAB_ERROR; break; }
-					}
-					//cam.writeGrabImage("FIND_RECTANGLE");
-					#endregion
-					cam.findRectangleCenter(out ret.message, out ret.s);
-					if (ret.message != RetMessage.OK)
-					{
-						if (unitCode == UnitCode.ULC && (int)mc.para.ULC.imageSave.value == 1)
-						{
-							cam.writeLogGrabImage("ULC_Process_Fail");
-						}
-						sqc = SQC.FIND_ERROR;
-						break;
-					}
-					else
-					{
-						if (mc.para.ULC.orientationUse.value == 1)
-						{
-							if (mc.para.ULC.modelHSOrientation.algorism.value == 0)
-								cam.findModel((int)ULC_MODEL.PKG_ORIENTATION_NCC, out ret.message, out ret.s);
-							if (mc.para.ULC.modelHSOrientation.algorism.value == 1)
-								cam.findModel((int)ULC_MODEL.PKG_ORIENTATION_SHAPE, out ret.message, out ret.s);
-							if (ret.message != RetMessage.OK)
-							{
-								if (unitCode == UnitCode.ULC && (int)mc.para.ULC.imageSave.value == 1)
-								{
-									//mc.log.debug.write(mc.log.CODE.TRACE, "ULC Fail Image Save");
-									cam.writeLogGrabImage("ULC_Process_Fail");
-								}
-								sqc = SQC.FIND_ERROR;
-								break;
-							}
-							else
-							{
-								if (unitCode == UnitCode.ULC && (int)mc.para.ULC.imageSave.value == 2)
-								{
-									//mc.log.debug.write(mc.log.CODE.TRACE, "ULC All Image Save");
-									cam.writeLogGrabImage("ULC_Process_OK");
-								}
-							}
-						}
-					}
-					#region refresh
-					cam.refresh_req = true;
-					cam.refresh_reqMode = REFRESH_REQMODE.RECTANGLE_CENTER;
-					#endregion
-					sqc = SQC.STOP; break;
-				#endregion
 
 				#region FIND_CIRCLE
 				case SQC.FIND_CIRCLE_QUARTER_1:
@@ -841,10 +781,28 @@ namespace PSA_SystemLibrary
 
 		public void epoxyFindBlob(halcon_blob[] halconBlob, double tempthreshold, double tempareaminfilter, out RetMessage retMessage)
 		{
-			mc.hdc.cam.grabSofrwareTrigger();
+			cam.grabSofrwareTrigger();
 
-			mc.hdc.cam.findBlob(halconBlob, tempthreshold, tempareaminfilter, -1, -1, out retMessage, out ret.s, 1); if (ret.message != RetMessage.OK) return;
-			mc.hdc.cam.refresh_req = true; mc.hdc.cam.refresh_reqMode = REFRESH_REQMODE.FIND_EPOXY;
+			cam.findBlob(halconBlob, tempthreshold, tempareaminfilter, -1, -1, out retMessage, out ret.s, 1); if (ret.message != RetMessage.OK) return;
+			cam.refresh_req = true; mc.hdc.cam.refresh_reqMode = REFRESH_REQMODE.FIND_EPOXY;
+
+			EpoxyAmountJugement(out ret.message, out ret.s);
+			if (ret.message != RetMessage.OK)
+			{
+				if (ret.message == RetMessage.FIND_EPOXY_UNDERFLOW)
+				{
+					mc.hdc.displayUserMessage("EPOXY UNDERFLOW");
+				}
+				else if (ret.message == RetMessage.FIND_EPOXY_OVERFLOW)
+				{
+					mc.hdc.displayUserMessage("EPOXY OVERFLOW");
+				}
+				else
+				{
+					mc.hdc.displayUserMessage("EPOXY CHECK FAIL");
+				}
+			}
+
 			dwell.Reset();
 			while (true)
 		{
@@ -1065,22 +1023,22 @@ namespace PSA_SystemLibrary
                         return;
                     }
 
-                    tempamount = mc.hdc.cam.epoxyBlob[i].resultArea.D / mc.para.EPOXY.baseAmount[i].value * 100;
-                    mc.log.debug.write(mc.log.CODE.INFO, "Epoxy Amount Result : " + Math.Round(tempamount, 1) + "%");
-                     
-                    if (tempamount < mc.para.EPOXY.rateMin.value)
-                    {
-                        retMessage = RetMessage.FIND_EPOXY_ERROR;
-                        errorMessage = "Epoxy Underflow";
-                        return;
-                    }
-                    if (tempamount > mc.para.EPOXY.rateMax.value)
-                    {
-                        retMessage = RetMessage.FIND_EPOXY_ERROR;
-                        errorMessage = "Epoxy Overflow";
-                        return;
-                    }
-                }
+					tempamount = mc.hdc.cam.epoxyBlob[i].resultArea.D / mc.para.EPOXY.baseAmount[i].value * 100;
+					mc.log.debug.write(mc.log.CODE.INFO, "Epoxy Amount Result : " + Math.Round(tempamount, 1) + "%");
+
+					if (tempamount < mc.para.EPOXY.rateMin.value)
+					{
+						retMessage = RetMessage.FIND_EPOXY_UNDERFLOW;
+						errorMessage = "Epoxy Underflow";
+						return;
+					}
+					if (tempamount > mc.para.EPOXY.rateMax.value)
+					{
+						retMessage = RetMessage.FIND_EPOXY_OVERFLOW;
+						errorMessage = "Epoxy Overflow";
+						return;
+					}
+				}
 
                 retMessage = RetMessage.OK;
                 errorMessage = "";

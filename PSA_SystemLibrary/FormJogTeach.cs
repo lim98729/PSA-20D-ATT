@@ -34,7 +34,7 @@ namespace PSA_SystemLibrary
         public FormUserMessage userMessageBox = new FormUserMessage();
         private void Control_Click(object sender, EventArgs e)
         {
-            mc.OUT.MAIN.UserBuzzerCtl(false);
+            mc.OUT.MAIN.UserRedBuzzerCtl(false);
 
             #region Move\
             if (sender.Equals(BT_Corner_Move1)) // 첫번쨰 버튼 누르면 

@@ -199,6 +199,8 @@ namespace PSA_Application
                 mc.cv.clear();
                 mc.pd.clear();
                 mc.sf.clear();
+                mc.sf.feeder[(int)UnitCodeSFMG.MG1].clear();
+                mc.sf.feeder[(int)UnitCodeSFMG.MG2].clear();
                 mc.hdc.clear();
                 mc.ulc.clear();
             }

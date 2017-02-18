@@ -258,7 +258,7 @@ namespace PSA_Application
             {
                 splitterTargetCenter = (int)SPLITTER_MODE.EXPAND;
                 mc.user.logInDone = false;
-                //EVENT.refresh();
+                EVENT.refresh();
             }
             else splitterTargetCenter = splitterCurrentCenter;
 

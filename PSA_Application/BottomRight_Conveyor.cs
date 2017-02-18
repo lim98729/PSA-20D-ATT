@@ -215,37 +215,40 @@ namespace PSA_Application
 			if (sender.Equals(BT_Feeding_ToLoadingZone)) 
 			{
 				// board 상태 확인..
-				bool instate, bufstate;
-				RetValue ret;
-				mc.IN.CV.BD_IN(out instate, out ret.message);
-				mc.IN.CV.BD_BUF(out bufstate, out ret.message);
-				if (instate == true && bufstate == true)
-				{
-					// board 두장 감지
-					mc.OUT.MAIN.T_BUZZER(true, out ret.message);
-                    FormMain.UserMessageBox(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.WARNING, textResource.MB_CV_TRAY_EXIST_SENSOR);
-					//mc.message.alarm("[입구]와 [버퍼] 센서가 동시에 감지되었습니다.\n상태 확인후 다시 시도하세요!");
-					mc.OUT.MAIN.T_BUZZER(false, out ret.message);
-					mc.check.push(sender, false);
-					return;
-				}
-				if (instate == false && bufstate == false)
-				{
-					// board 없음
-					// 앞장비로부터 SMEMA로 보드를 받을 수 있도록 구성되어 있으므로..에러를 발생시키지 않는다.
-					// 그런데, 수동으로 앞장비에서 보드를 받아도 되나? 뭐 필요하면 받을 수도 있겠지..Test도 가능하니까..
-					// 다만, 확인하도록 messagebox하나는 띄워주자.
-					mc.OUT.MAIN.T_BUZZER(true, out ret.message);
-					Thread.Sleep(300);
-					mc.OUT.MAIN.T_BUZZER(false, out ret.message);
-                    ret.usrDialog = FormMain.UserMessageBox(DIAG_SEL_MODE.OKCancel, DIAG_ICON_MODE.QUESTION, textResource.MB_CV_TRAY_TRANSFER);
-					//mc.message.OkCancel("컨베이어 상에 트레이가 감지되지 않았습니다.\n이전 장비로부터 이송을 시도할까요?", out ret.dialog);
-					if (ret.usrDialog == DIAG_RESULT.Cancel) { mc.check.push(sender, false); return; }
-				}
-				if (bufstate == true)
-				{
-					// sequence내에서 TMS file을 읽는 부분이 있으므로 그냥 구동한다.
-				}
+                bool instate, bufstate;
+                RetValue ret;
+                if (!UtilityControl.simulation)
+                {
+                    mc.IN.CV.BD_IN(out instate, out ret.message);
+                    mc.IN.CV.BD_BUF(out bufstate, out ret.message);
+                    if (instate == true && bufstate == true)
+                    {
+                        // board 두장 감지
+                        mc.OUT.MAIN.T_BUZZER(true, out ret.message);
+                        FormMain.UserMessageBox(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.WARNING, textResource.MB_CV_TRAY_EXIST_SENSOR);
+                        //mc.message.alarm("[입구]와 [버퍼] 센서가 동시에 감지되었습니다.\n상태 확인후 다시 시도하세요!");
+                        mc.OUT.MAIN.T_BUZZER(false, out ret.message);
+                        mc.check.push(sender, false);
+                        return;
+                    }
+                    if (instate == false && bufstate == false)
+                    {
+                        // board 없음
+                        // 앞장비로부터 SMEMA로 보드를 받을 수 있도록 구성되어 있으므로..에러를 발생시키지 않는다.
+                        // 그런데, 수동으로 앞장비에서 보드를 받아도 되나? 뭐 필요하면 받을 수도 있겠지..Test도 가능하니까..
+                        // 다만, 확인하도록 messagebox하나는 띄워주자.
+                        mc.OUT.MAIN.T_BUZZER(true, out ret.message);
+                        Thread.Sleep(300);
+                        mc.OUT.MAIN.T_BUZZER(false, out ret.message);
+                        ret.usrDialog = FormMain.UserMessageBox(DIAG_SEL_MODE.OKCancel, DIAG_ICON_MODE.QUESTION, textResource.MB_CV_TRAY_TRANSFER);
+                        //mc.message.OkCancel("컨베이어 상에 트레이가 감지되지 않았습니다.\n이전 장비로부터 이송을 시도할까요?", out ret.dialog);
+                        if (ret.usrDialog == DIAG_RESULT.Cancel) { mc.check.push(sender, false); return; }
+                    }
+                    if (bufstate == true)
+                    {
+                        // sequence내에서 TMS file을 읽는 부분이 있으므로 그냥 구동한다.
+                    }
+                }
                 ret.usrDialog = FormMain.UserMessageBox2(DIAG_SEL_MODE.TmsManualPressCancel, DIAG_ICON_MODE.QUESTION, textResource.MB_CV_TRAY_LOADING_INFO);
 				//mc.message.YesNoCancel("PAD 장착 정보를 읽는 경로를 선택해 주세요.\n(YES) -> TMS File\n(NO) -> 초기화 상태.", out ret.dialog);
 				if (ret.usrDialog == DIAG_RESULT.Cancel) { mc.check.push(sender, false); return; }

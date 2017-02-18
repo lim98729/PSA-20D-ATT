@@ -478,6 +478,7 @@ namespace PSA_SystemLibrary
 				#region PICKUP
 				case SQC.PICKUP:
 					if (tool.RUNING) { Esqc = sqc; sqc = SQC.ERROR; break; }
+                    tool.placeDone = false;
 					mc.IN.HD.VAC_CHK(out ret.b, out ret.message); if (ioCheck(sqc, ret.message)) break;
 					if (!ret.b) { sqc += 2; break; }
 					sqc++; break;
@@ -527,6 +528,7 @@ namespace PSA_SystemLibrary
 
 				#region SINGLE
 				case SQC.SINGLE:
+                    tool.placeDone = false;
 					if (mc.para.mmiOption.manualSingleMode == false)
 					{
 						mc.board.padIndex(out tool.padX, out tool.padY, out ret.b);
@@ -638,6 +640,7 @@ namespace PSA_SystemLibrary
 					tool.attachSkip = false;
 					padCount = 0;
                     tool.pickDone = false;
+                    tool.placeDone = false;
 					mc.cv.toWorking.checkTrayType(1, out ret.b);    // read from working conveyor information
                     if (mc.hd.reqMode != REQMODE.DUMY)
                     {
@@ -2245,13 +2248,15 @@ namespace PSA_SystemLibrary
 		double rateX, rateY;
 		double placeX, placeY, placeT;
 		public double ulcX, ulcY, ulcT, ulcW, ulcH;
-        public double ulcP1X, ulcP1Y, ulcP1T;
-        public double ulcP2X, ulcP2Y, ulcP2T;
-		double tmpX, tmpY, tmpT;
+		double tmpX, tmpY, tmpT, tmpScore;
 		public double ulcWDif, ulcHDif;
 		public double hdcX, hdcY, hdcT;
 		public double hdcP1X, hdcP1Y, hdcP1T, hdcPassScoreP1;
 		public double hdcP2X, hdcP2Y, hdcP2T, hdcPassScoreP2;
+        public double ulcP1X, ulcP1Y, ulcP1T;
+        public double ulcP2X, ulcP2Y, ulcP2T;
+        public double epoxyPX, epoxyPY, epoxyAmount = 0;
+		public bool epoxyfailchecked = false;
         // 1121. HeatSlug
         public double HSX, HSY, HST;
         public double HSP1X, HSP1Y, HSP1T;
@@ -2259,8 +2264,7 @@ namespace PSA_SystemLibrary
 		public double hdcResult;
 		public double fidPX, fidPY, fidPD;
 		public double trayReversePX, trayReversePY, trayReversePT;
-        public double epoxyPX, epoxyPY, epoxyAmount;
-
+		
 		public void move_home()
 		{
 			switch (sqc)
@@ -2619,6 +2623,22 @@ namespace PSA_SystemLibrary
 				case 10:
 					mc.para.runInfo.startCycleTime();
 					mc.log.mcclog.write(mc.log.MCCCODE.HEAD_MOVE_PICK_POS, 0);
+                    if (placeDone)
+                    {
+                        if (mc.para.HD.place.missCheck.enable.value == (int)ON_OFF.ON)
+                        {
+                            mc.IN.HD.VAC_CHK(out ret.b, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                            if (ret.b)
+                            {
+                                errorCheck(ERRORCODE.HD, sqc, "Vac Check Time:" + Math.Round(placeMissCheckTime.Elapsed).ToString(), ALARM_CODE.E_HD_PLACE_MISSCHECK);
+                                break;
+                            }
+                            if (mc.para.HD.pick.suction.mode.value != (int)PICK_SUCTION_MODE.MOVING_LEVEL_ON)
+                            {
+                                mc.OUT.HD.SUC(false, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                            }
+                        }
+                    }
 					if (mc.para.HD.pick.suction.mode.value == (int)PICK_SUCTION_MODE.MOVING_LEVEL_ON)
 					{
 						mc.OUT.HD.SUC(true, out ret.message); if (ioCheck(sqc, ret.message)) break;
@@ -3341,7 +3361,7 @@ namespace PSA_SystemLibrary
                             else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
                             {
                                 ulcX = 0; ulcY = 0; ulcT = 0; ulcW = 0; ulcH = 0;
-                                mc.ulc.reqMode = REQMODE.FIND_RECTANGLE_HS;
+                                mc.ulc.reqMode = REQMODE.FIND_RECTANGLE;
                                 mc.ulc.lighting_exposure(mc.para.ULC.model.light, mc.para.ULC.model.exposureTime);
                             }
                             else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
@@ -3538,7 +3558,6 @@ namespace PSA_SystemLibrary
 		}
 		public int ulcfailcount;
 		public bool ulcfailchecked;
-        public bool epoxyfailchecked;
 		public int doublecheckcount;
 		public bool doublechecked;
 		public int ulcchamferfail;
@@ -3587,6 +3606,7 @@ namespace PSA_SystemLibrary
 		double cosTheta, sinTheta;
 		double tmpDistX, tmpDistY;
         public bool pickDone = false;                             // Pick 후 정지한 다음 재 시작 시 ULC로 바로 가기 위한 Flag
+        public bool placeDone = false;                             // Place 후 MissCheck 할 때 판단 여부를 위한 Flag
         bool waste = false;
 
         QueryTimer placeSuctionTime = new QueryTimer();
@@ -4436,163 +4456,84 @@ namespace PSA_SystemLibrary
 											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_VISION_PROCESS_FAIL); break;
 										}
 									}
-								}
-								if (dev.debug)
+								}								
+								#region HDC Position Check
+                                if (Math.Abs(hdcP1X) > 1000)
 								{
-									if (Math.Abs(hdcP1X) > 2000)
+									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
+									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
-										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
+										sqc = 120; break;
+									}
+									else
+									{
+										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+										{
+											//JogTeachMode = jogTeachCornerMode.Corner13;
+											sqc = 130; break;
+										}
+										else
 										{
 											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-											sqc = 120; break;
-										}
-										else
-										{
-											if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-											{
-												////JogTeachMode = jogTeachCornerMode.Corner13;
-												sqc = 130; break;
-											}
-											else
-											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-												tempSb.Clear(); tempSb.Length = 0;
-												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
-												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-												errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
-											}
-										}
-									}
-									if (Math.Abs(hdcP1Y) > 2000)
-									{
-										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
-										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-											sqc = 120; break;
-										}
-										else
-										{
-											if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-											{
-												////JogTeachMode = jogTeachCornerMode.Corner13;
-												sqc = 130; break;
-											}
-											else
-											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-												tempSb.Clear(); tempSb.Length = 0;
-												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
-												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-												errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
-											}
-										}
-									}
-									if (Math.Abs(hdcP1T) > 10)
-									{
-										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
-										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-											sqc = 120; break;
-										}
-										else
-										{
-											if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-											{
-												//JogTeachMode = jogTeachCornerMode.Corner13;
-												sqc = 130; break;
-											}
-											else
-											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-												tempSb.Clear(); tempSb.Length = 0;
-												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
-												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-												errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
-											}
+											tempSb.Clear(); tempSb.Length = 0;
+											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
+											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
+											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
 										}
 									}
 								}
-								else
+								if (Math.Abs(hdcP1Y) > 1000)
 								{
-									if (Math.Abs(hdcP1X) > 1000)
+									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
+									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
-										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
+										sqc = 120; break;
+									}
+									else
+									{
+										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-											sqc = 120; break;
+											////JogTeachMode = jogTeachCornerMode.Corner13;
+											sqc = 130; break;
 										}
 										else
-										{
-											if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-											{
-												//JogTeachMode = jogTeachCornerMode.Corner13;
-												sqc = 130; break;
-											}
-											else
-											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-												tempSb.Clear(); tempSb.Length = 0;
-												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
-												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-												errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
-											}
-										}
-									}
-									if (Math.Abs(hdcP1Y) > 1000)
-									{
-										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
-										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 										{
 											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-											sqc = 120; break;
-										}
-										else
-										{
-											if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-											{
-												////JogTeachMode = jogTeachCornerMode.Corner13;
-												sqc = 130; break;
-											}
-											else
-											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-												tempSb.Clear(); tempSb.Length = 0;
-												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
-												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-												errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
-											}
-										}
-									}
-									if (Math.Abs(hdcP1T) > 5)
-									{
-										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
-										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-											sqc = 120; break;
-										}
-										else
-										{
-											if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-											{
-												//JogTeachMode = jogTeachCornerMode.Corner13;
-												sqc = 130; break;
-											}
-											else
-											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-												tempSb.Clear(); tempSb.Length = 0;
-												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
-												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-												errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
-											}
+											tempSb.Clear(); tempSb.Length = 0;
+											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
+											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
+											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
 										}
 									}
 								}
+								if (Math.Abs(hdcP1T) > 5)
+								{
+									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
+									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+									{
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
+										sqc = 120; break;
+									}
+									else
+									{
+										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+										{
+											//JogTeachMode = jogTeachCornerMode.Corner13;
+											sqc = 130; break;
+										}
+										else
+										{
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
+											tempSb.Clear(); tempSb.Length = 0;
+											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
+											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
+											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
+										}
+									}
+								}
+                                #endregion
 								#endregion
 								#region HDC.PADC3.req
 								hdcP2X = 0;
@@ -4679,166 +4620,87 @@ namespace PSA_SystemLibrary
 											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_VISION_PROCESS_FAIL); break;
 										}
 									}
-								}
-								if (dev.debug)
+								}								
+								#region HDC Position Check
+                                if (Math.Abs(hdcP1X) > 1000)
 								{
-									if (Math.Abs(hdcP1X) > 2000)
+									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0} um", hdcP1X));
+									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
-										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
+										sqc = 120; break;
+									}
+									else
+									{
+										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+										{
+											//JogTeachMode = jogTeachCornerMode.Corner24;
+											sqc = 130; break;
+										}
+										else
 										{
 											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-											sqc = 120; break;
-										}
-										else
-										{
-											if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-											{
-												//JogTeachMode = jogTeachCornerMode.Corner24;
-												sqc = 130; break;
-											}
-											else
-											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-												tempSb.Clear(); tempSb.Length = 0;
-												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
-												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-												errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
-											}
-										}
-									}
-									if (Math.Abs(hdcP1Y) > 2000)
-									{
-										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0} um", hdcP1Y));
-										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
-											sqc = 120; break;
-										}
-										else
-										{
-											if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-											{
-												//JogTeachMode = jogTeachCornerMode.Corner24;
-												sqc = 130; break;
-											}
-											else
-											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
-												tempSb.Clear(); tempSb.Length = 0;
-												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
-												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-												errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
-											}
-										}
-									}
-									if (Math.Abs(hdcP1T) > 10)
-									{
-										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
-										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-											sqc = 120; break;
-										}
-										else
-										{
-											if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-											{
-												//JogTeachMode = jogTeachCornerMode.Corner24;
-												sqc = 130; break;
-											}
-											else
-											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-												tempSb.Clear(); tempSb.Length = 0;
-												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
-												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-												errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
-											}
+											tempSb.Clear(); tempSb.Length = 0;
+											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
+											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
+											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
 										}
 									}
 								}
-								else
+								if (Math.Abs(hdcP1Y) > 1000)
 								{
-									if (Math.Abs(hdcP1X) > 1000)
+									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
+									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0} um", hdcP1X));
-										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-											sqc = 120; break;
-										}
-										else
-										{
-											if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-											{
-												//JogTeachMode = jogTeachCornerMode.Corner24;
-												sqc = 130; break;
-											}
-											else
-											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-												tempSb.Clear(); tempSb.Length = 0;
-												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
-												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-												errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
-											}
-										}
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
+										sqc = 120; break;
 									}
-									if (Math.Abs(hdcP1Y) > 1000)
+									else
 									{
-										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
-										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
-											sqc = 120; break;
+											//JogTeachMode = jogTeachCornerMode.Corner24;
+											sqc = 130; break;
 										}
 										else
 										{
-											if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-											{
-												//JogTeachMode = jogTeachCornerMode.Corner24;
-												sqc = 130; break;
-											}
-											else
-											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C21_Y_Limit");
-												tempSb.Clear(); tempSb.Length = 0;
-												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
-												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-												errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
-											}
-										}
-									}
-									if (Math.Abs(hdcP1T) > 5)
-									{
-										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
-										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-											sqc = 120; break;
-										}
-										else
-										{
-											if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-											{
-												//JogTeachMode = jogTeachCornerMode.Corner24;
-												sqc = 130; break;
-											}
-											else
-											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-												tempSb.Clear(); tempSb.Length = 0;
-												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
-												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-												errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
-											}
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C21_Y_Limit");
+											tempSb.Clear(); tempSb.Length = 0;
+											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
+											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
+											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
 										}
 									}
 								}
-								#endregion
-								#region HDC.PADC4.req
-								hdcP2X = 0;
+								if (Math.Abs(hdcP1T) > 5)
+								{
+									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
+									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+									{
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
+										sqc = 120; break;
+									}
+									else
+									{
+										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+										{
+											//JogTeachMode = jogTeachCornerMode.Corner24;
+											sqc = 130; break;
+										}
+										else
+										{
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
+											tempSb.Clear(); tempSb.Length = 0;
+											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
+											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
+											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
+										}
+									}
+                                }
+                                #endregion
+                                #endregion
+                                #region HDC.PADC4.req
+                                hdcP2X = 0;
 								hdcP2Y = 0;
 								hdcP2T = 0;
 								if (mc.hd.reqMode == REQMODE.DUMY) mc.hdc.reqMode = REQMODE.GRAB;
@@ -4920,191 +4782,59 @@ namespace PSA_SystemLibrary
 										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_VISION_PROCESS_FAIL); break;
 									}
 								}
-							}
-							if (dev.debug)
+                            }
+                            #region #region HDC Position Check
+                            if (Math.Abs(hdcP1X) > 1000)
 							{
-								#region DebugMode
-								if (Math.Abs(hdcP1X) > 2000)
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
+									sqc = 120; break;
+								}
+								else
+								{
+									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+									{
+										//JogTeachMode = jogTeachCornerMode.Corner13;
+										sqc = 130; break;
+									}
+									else
 									{
 										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner13;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
-										}
+										tempSb.Clear(); tempSb.Length = 0;
+										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
+										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
+										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
 									}
 								}
-								if (Math.Abs(hdcP1Y) > 2000)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner13;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
-										}
-									}
-								}
-// 								if (Math.Abs(hdcP1T) > 10)
-// 								{
-// 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
-// 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-// 									{
-// 										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
-// 										sqc = 120; break;
-// 									}
-// 									else
-// 									{
-// 										if (mc.para.HDC.jogTeachUse.value == 1)
-// 										{
-// 											//JogTeachMode = jogTeachCornerMode.Corner13;
-// 											sqc = 130; break;
-// 										}
-// 										else
-// 										{
-// 											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
-// 											tempSb.Clear(); tempSb.Length = 0;
-// 											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
-// 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-// 											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
-// 										}
-// 									}
-								// 								}
-								if (hdcPassScoreP1 > hdcResult)
- 								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Score Limit Error : {0:F1}%", hdcResult));
- 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
- 									{
- 										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
- 										sqc = 120; break;
- 									}
- 									else
- 									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
- 										{
- 											//JogTeachMode = jogTeachCornerMode.Corner13;
- 											sqc = 130; break;
- 										}
- 										else
- 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
- 											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}], P1: Score[{2}%]", (padX + 1), (padY + 1), Math.Round(hdcResult, 2));
- 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
- 											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
- 										}
- 									}
-								}
-								#endregion
 							}
-							else
+							if (Math.Abs(hdcP1Y) > 1000)
 							{
-								if (Math.Abs(hdcP1X) > 1000)
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
+									sqc = 120; break;
+								}
+								else
+								{
+									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-										sqc = 120; break;
+										//JogTeachMode = jogTeachCornerMode.Corner13;
+										sqc = 130; break;
 									}
 									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner13;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
-										}
-									}
-								}
-								if (Math.Abs(hdcP1Y) > 1000)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
 										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner13;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
-										}
+										tempSb.Clear(); tempSb.Length = 0;
+										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
+										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
+										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
 									}
 								}
-// 								if (Math.Abs(hdcP1T) > 5)
-// 								{
-// 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
-// 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-// 									{
-// 										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
-// 										sqc = 120; break;
-// 									}
-// 									else
-// 									{
-// 										if (mc.para.HDC.jogTeachUse.value == 1)
-// 										{
-// 											//JogTeachMode = jogTeachCornerMode.Corner13;
-// 											sqc = 130; break;
-// 										}
-// 										else
-// 										{
-// 											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
-// 											tempSb.Clear(); tempSb.Length = 0;
-// 											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
-// 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-// 											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
-// 										}
-// 									}
-// 								}
 							}
-							if (hdcPassScoreP1 > hdcResult)
+                            if (hdcPassScoreP1 > hdcResult)
 							{
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Score Limit Error : {0:F1}%", hdcResult));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
@@ -5129,6 +4859,7 @@ namespace PSA_SystemLibrary
 									}
 								}
 							}
+                            #endregion
 							#endregion
 							#region HDC.modelManualTeach.paraP2.req
 							hdcP2X = 0;
@@ -5217,163 +4948,84 @@ namespace PSA_SystemLibrary
 											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_VISION_PROCESS_FAIL); break;
 										}
 									}
-								}
-								if (dev.debug)
+                                }
+                                #region #region HDC Position Check
+                                if (Math.Abs(hdcP1X) > 1000)
 								{
-									if (Math.Abs(hdcP1X) > 2000)
+									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
+									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
-										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
+										sqc = 120; break;
+									}
+									else
+									{
+										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+										{
+											//JogTeachMode = jogTeachCornerMode.Corner24;
+											sqc = 130; break;
+										}
+										else
 										{
 											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-											sqc = 120; break;
-										}
-										else
-										{
-											if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-											{
-												//JogTeachMode = jogTeachCornerMode.Corner24;
-												sqc = 130; break;
-											}
-											else
-											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-												tempSb.Clear(); tempSb.Length = 0;
-												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
-												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-												errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
-											}
-										}
-									}
-									if (Math.Abs(hdcP1Y) > 2000)
-									{
-										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
-										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
-											sqc = 120; break;
-										}
-										else
-										{
-											if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-											{
-												//JogTeachMode = jogTeachCornerMode.Corner24;
-												sqc = 130; break;
-											}
-											else
-											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
-												tempSb.Clear(); tempSb.Length = 0;
-												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
-												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-												errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
-											}
-										}
-									}
-									if (Math.Abs(hdcP1T) > 10)
-									{
-										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
-										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-											sqc = 120; break;
-										}
-										else
-										{
-											if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-											{
-												//JogTeachMode = jogTeachCornerMode.Corner24;
-												sqc = 130; break;
-											}
-											else
-											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-												tempSb.Clear(); tempSb.Length = 0;
-												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
-												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-												errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
-											}
+											tempSb.Clear(); tempSb.Length = 0;
+											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
+											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
+											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
 										}
 									}
 								}
-								else
+								if (Math.Abs(hdcP1Y) > 1000)
 								{
-									if (Math.Abs(hdcP1X) > 1000)
+									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
+									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
-										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-											sqc = 120; break;
-										}
-										else
-										{
-											if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-											{
-												//JogTeachMode = jogTeachCornerMode.Corner24;
-												sqc = 130; break;
-											}
-											else
-											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-												tempSb.Clear(); tempSb.Length = 0;
-												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
-												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-												errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
-											}
-										}
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
+										sqc = 120; break;
 									}
-									if (Math.Abs(hdcP1Y) > 1000)
+									else
 									{
-										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
-										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
-											sqc = 120; break;
+											//JogTeachMode = jogTeachCornerMode.Corner24;
+											sqc = 130; break;
 										}
 										else
 										{
-											if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-											{
-												//JogTeachMode = jogTeachCornerMode.Corner24;
-												sqc = 130; break;
-											}
-											else
-											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C21_Y_Limit");
-												tempSb.Clear(); tempSb.Length = 0;
-												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
-												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-												errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
-											}
-										}
-									}
-									if (Math.Abs(hdcP1T) > 5)
-									{
-										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
-										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-											sqc = 120; break;
-										}
-										else
-										{
-											if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-											{
-												//JogTeachMode = jogTeachCornerMode.Corner24;
-												sqc = 130; break;
-											}
-											else
-											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-												tempSb.Clear(); tempSb.Length = 0;
-												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
-												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-												errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
-											}
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C21_Y_Limit");
+											tempSb.Clear(); tempSb.Length = 0;
+											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
+											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
+											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
 										}
 									}
 								}
+								if (Math.Abs(hdcP1T) > 5)
+								{
+									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
+									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+									{
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
+										sqc = 120; break;
+									}
+									else
+									{
+										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+										{
+											//JogTeachMode = jogTeachCornerMode.Corner24;
+											sqc = 130; break;
+										}
+										else
+										{
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
+											tempSb.Clear(); tempSb.Length = 0;
+											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
+											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
+											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
+										}
+									}
+								}
+                                #endregion
 								#endregion
 								#region HDC.PADC4.req
 								hdcP2X = 0;
@@ -5460,163 +5112,84 @@ namespace PSA_SystemLibrary
 											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_VISION_PROCESS_FAIL); break;
 										}
 									}
-								}
-								if (dev.debug)
+								}			
+								#region #region HDC Position Check
+                                if (Math.Abs(hdcP1X) > 1000)
 								{
-									if (Math.Abs(hdcP1X) > 2000)
+									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
+									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
-										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
+										sqc = 120; break;
+									}
+									else
+									{
+										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+										{
+											//JogTeachMode = jogTeachCornerMode.Corner13;
+											sqc = 130; break;
+										}
+										else
 										{
 											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-											sqc = 120; break;
-										}
-										else
-										{
-											if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-											{
-												//JogTeachMode = jogTeachCornerMode.Corner13;
-												sqc = 130; break;
-											}
-											else
-											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-												tempSb.Clear(); tempSb.Length = 0;
-												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
-												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-												errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
-											}
-										}
-									}
-									if (Math.Abs(hdcP1Y) > 2000)
-									{
-										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
-										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-											sqc = 120; break;
-										}
-										else
-										{
-											if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-											{
-												//JogTeachMode = jogTeachCornerMode.Corner13;
-												sqc = 130; break;
-											}
-											else
-											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-												tempSb.Clear(); tempSb.Length = 0;
-												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
-												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-												errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
-											}
-										}
-									}
-									if (Math.Abs(hdcP1T) > 10)
-									{
-										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
-										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-											sqc = 120; break;
-										}
-										else
-										{
-											if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-											{
-												//JogTeachMode = jogTeachCornerMode.Corner13;
-												sqc = 130; break;
-											}
-											else
-											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-												tempSb.Clear(); tempSb.Length = 0;
-												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
-												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-												errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
-											}
+											tempSb.Clear(); tempSb.Length = 0;
+											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
+											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
+											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
 										}
 									}
 								}
-								else
+								if (Math.Abs(hdcP1Y) > 1000)
 								{
-									if (Math.Abs(hdcP1X) > 1000)
+									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
+									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
-										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
-										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
+										sqc = 120; break;
+									}
+									else
+									{
+										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
 										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-											sqc = 120; break;
+											//JogTeachMode = jogTeachCornerMode.Corner13;
+											sqc = 130; break;
 										}
 										else
-										{
-											if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-											{
-												//JogTeachMode = jogTeachCornerMode.Corner13;
-												sqc = 130; break;
-											}
-											else
-											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-												tempSb.Clear(); tempSb.Length = 0;
-												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
-												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-												errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
-											}
-										}
-									}
-									if (Math.Abs(hdcP1Y) > 1000)
-									{
-										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
-										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 										{
 											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-											sqc = 120; break;
-										}
-										else
-										{
-											if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-											{
-												//JogTeachMode = jogTeachCornerMode.Corner13;
-												sqc = 130; break;
-											}
-											else
-											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-												tempSb.Clear(); tempSb.Length = 0;
-												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
-												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-												errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
-											}
-										}
-									}
-									if (Math.Abs(hdcP1T) > 5)
-									{
-										mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
-										if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-											sqc = 120; break;
-										}
-										else
-										{
-											if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-											{
-												//JogTeachMode = jogTeachCornerMode.Corner13;
-												sqc = 130; break;
-											}
-											else
-											{
-												if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-												tempSb.Clear(); tempSb.Length = 0;
-												tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
-												//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-												errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
-											}
+											tempSb.Clear(); tempSb.Length = 0;
+											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
+											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
+											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
 										}
 									}
 								}
+								if (Math.Abs(hdcP1T) > 5)
+								{
+									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
+									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+									{
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
+										sqc = 120; break;
+									}
+									else
+									{
+										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+										{
+											//JogTeachMode = jogTeachCornerMode.Corner13;
+											sqc = 130; break;
+										}
+										else
+										{
+											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
+											tempSb.Clear(); tempSb.Length = 0;
+											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
+											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
+											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
+										}
+									}
+								}
+                                #endregion
 								#endregion
 								#region HDC.PADC3.req
 								hdcP2X = 0;
@@ -5703,213 +5276,85 @@ namespace PSA_SystemLibrary
 										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_VISION_PROCESS_FAIL); break;
 									}
 								}
-							}
-							if (dev.debug)
+                            }
+                            #region #region HDC Position Check
+                            if (Math.Abs(hdcP1X) > 1000)
 							{
-								if (Math.Abs(hdcP1X) > 2000)
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
+									sqc = 120; break;
+								}
+								else
+								{
+									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+									{
+										//JogTeachMode = jogTeachCornerMode.Corner13;
+										sqc = 130; break;
+									}
+									else
 									{
 										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner13;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
-										}
-									}
-								}
-								if (Math.Abs(hdcP1Y) > 2000)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner13;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
-										}
-									}
-								}
-								// 								if (Math.Abs(hdcP1T) > 10)
-								// 								{
-								// 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
-								// 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								// 									{
-								// 										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
-								// 										sqc = 120; break;
-								// 									}
-								// 									else
-								// 									{
-								// 										if (mc.para.HDC.jogTeachUse.value == 1)
-								// 										{
-								// 											//JogTeachMode = jogTeachCornerMode.Corner13;
-								// 											sqc = 130; break;
-								// 										}
-								// 										else
-								// 										{
-								// 											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
-								// 											tempSb.Clear(); tempSb.Length = 0;
-								// 											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
-								// 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-								// 											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
-								// 										}
-								// 									}
-								// 								}
-								if (hdcPassScoreP1 > hdcResult)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Score Limit Error : {0:F1}%", hdcResult));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner13;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}], P1: Score[{2}%]", (padX + 1), (padY + 1), Math.Round(hdcResult, 2));
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
-										}
+										tempSb.Clear(); tempSb.Length = 0;
+										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
+										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
+										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
 									}
 								}
 							}
-							else
+							if (Math.Abs(hdcP1Y) > 1000)
 							{
-								if (Math.Abs(hdcP1X) > 1000)
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
+									sqc = 120; break;
+								}
+								else
+								{
+									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-										sqc = 120; break;
+										//JogTeachMode = jogTeachCornerMode.Corner13;
+										sqc = 130; break;
 									}
 									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner13;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
-										}
-									}
-								}
-								if (Math.Abs(hdcP1Y) > 1000)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
 										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner13;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
-										}
-									}
-								}
-								// 								if (Math.Abs(hdcP1T) > 5)
-								// 								{
-								// 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
-								// 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								// 									{
-								// 										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
-								// 										sqc = 120; break;
-								// 									}
-								// 									else
-								// 									{
-								// 										if (mc.para.HDC.jogTeachUse.value == 1)
-								// 										{
-								// 											//JogTeachMode = jogTeachCornerMode.Corner13;
-								// 											sqc = 130; break;
-								// 										}
-								// 										else
-								// 										{
-								// 											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
-								// 											tempSb.Clear(); tempSb.Length = 0;
-								// 											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
-								// 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-								// 											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
-								// 										}
-								// 									}
-								// 								}
-								if (hdcPassScoreP1 > hdcResult)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Score Limit Error : {0:F1}%", hdcResult));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner13;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}], P1: Score[{2}%]", (padX + 1), (padY + 1), Math.Round(hdcResult, 2));
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
-										}
+										tempSb.Clear(); tempSb.Length = 0;
+										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
+										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
+										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
 									}
 								}
 							}
+							
+							if (hdcPassScoreP1 > hdcResult)
+							{
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Score Limit Error : {0:F1}%", hdcResult));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+								{
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
+									sqc = 120; break;
+								}
+								else
+								{
+									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+									{
+										//JogTeachMode = jogTeachCornerMode.Corner13;
+										sqc = 130; break;
+									}
+									else
+									{
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
+										tempSb.Clear(); tempSb.Length = 0;
+										tempSb.AppendFormat("PadX[{0}],PadY[{1}], P1: Score[{2}%]", (padX + 1), (padY + 1), Math.Round(hdcResult, 2));
+										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
+										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
+									}
+								}
+							}
+#endregion
 							#endregion
 							#region HDC.modelManualTeach.paraP2.req
 							hdcP2X = 0;
@@ -6148,221 +5593,133 @@ namespace PSA_SystemLibrary
                                 }
                             }
                         }
-                        if (dev.debug)
-                        {
-                            if (Math.Abs(ulcX) > mc.para.MT.lidCheckLimit.value)
-                            {
-                                mc.ulc.displayUserMessage("X RESULT OVER FAIL");
-                                tempSb.Clear(); tempSb.Length = 0;
-                                tempSb.AppendFormat("LID Chk Fail(X Limit-Rst[{0}]Lmt[{1}])-PadX[{2}],PadY[{3}],FailCnt[{4}]", Math.Round(ulcX), Math.Round(mc.para.MT.lidCheckLimit.value), (padX + 1), (padY + 1), mc.hd.tool.ulcfailcount);
-                                //string str = "LID Chk Fail(X Limit-Rst[" + Math.Round(ulcX).ToString() + "]Lmt[" + Math.Round(mc.para.MT.lidCheckLimit.value).ToString() + "])-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]";
-                                mc.log.debug.write(mc.log.CODE.EVENT, tempSb.ToString());
-                                if (mc.para.ULC.failretry.value > 0 && mc.hd.tool.ulcfailcount < mc.para.ULC.failretry.value)
-                                {
-                                    //EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
-                                    ulcfailchecked = true;
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_X_Limit_Fail");
-                                    mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
-                                    sqc = SQC.END; break;
-                                }
-                                else
-                                {
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_X_Limit_Fail");
-                                    mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
-                                    tempSb.Clear(); tempSb.Length = 0;
-                                    tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(ulcX));
-                                    //str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(ulcX).ToString() + "]";
-                                    errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_ULC_HEAT_SLUG_X_RESULT_OVER); break;
-                                }
-                            }
-                            if (Math.Abs(ulcY) > mc.para.MT.lidCheckLimit.value)
-                            {
-                                mc.ulc.displayUserMessage("Y RESULT OVER FAIL");
-                                tempSb.Clear(); tempSb.Length = 0;
-                                tempSb.AppendFormat("LID Chk Fail(Y Limit-Rst[{0}]Lmt[{1}])-PadX[{2}],PadY[{3}],FailCnt[{4}]", Math.Round(ulcY), Math.Round(mc.para.MT.lidCheckLimit.value), (padX + 1), (padY + 1), mc.hd.tool.ulcfailcount);
-                                //string str = "LID Chk Fail(Y Limit-Rst[" + Math.Round(ulcY).ToString() + "]Lmt[" + Math.Round(mc.para.MT.lidCheckLimit.value).ToString() + "])-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]";
-                                //string str = "LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]";
-                                mc.log.debug.write(mc.log.CODE.EVENT, tempSb.ToString());
-                                if (mc.para.ULC.failretry.value > 0 && mc.hd.tool.ulcfailcount < mc.para.ULC.failretry.value)
-                                {
-                                    //EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
-                                    ulcfailchecked = true;
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_Y_Limit_Fail");
-                                    mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
-                                    sqc = SQC.END; break;
-                                }
-                                else
-                                {
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_Y_Limit_Fail");
-                                    mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
-                                    tempSb.Clear(); tempSb.Length = 0;
-                                    tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(ulcY));
-                                    //str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(ulcY).ToString() + "]";
-                                    errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_ULC_HEAT_SLUG_Y_RESULT_OVER); break;
-                                }
-                            }
-                            if (Math.Abs(ulcT) > 30)
-                            {
-                                mc.ulc.displayUserMessage("R RESULT OVER FAIL");
-                                tempSb.Clear(); tempSb.Length = 0;
-                                tempSb.AppendFormat("LID Chk Fail(T Limit-Rst[{0}]Lmt[{1}])-PadX[{2}],PadY[{3}],FailCnt[{4}]", Math.Round(ulcT), Math.Round(mc.para.MT.lidCheckLimit.value), (padX + 1), (padY + 1), mc.hd.tool.ulcfailcount);
-                                //string str = "LID Chk Fail(T Limit-Rst[" + Math.Round(ulcT).ToString() + "]Lmt[" + Math.Round(30.0).ToString() + "])-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]";
-                                //string str = "LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]";
-                                mc.log.debug.write(mc.log.CODE.EVENT, tempSb.ToString());
-                                if (mc.para.ULC.failretry.value > 0 && mc.hd.tool.ulcfailcount < mc.para.ULC.failretry.value)
-                                {
-                                    //EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
-                                    ulcfailchecked = true;
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_T_Limit_Fail");
-                                    mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
-                                    sqc = SQC.END; break;
-                                }
-                                else
-                                {
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_T_Limit_Fail");
-                                    mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
-                                    tempSb.Clear(); tempSb.Length = 0;
-                                    tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(ulcT));
-                                    //str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(ulcT).ToString() + "]";
-                                    errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_ULC_HEAT_SLUG_T_RESULT_OVER); break;
-                                }
-                            }
-                            if (mc.hd.reqMode != REQMODE.DUMY)
-                            {
-                                tempSb.Clear(); tempSb.Length = 0;
-                                tempSb.AppendFormat("ULC - X:{0}, Y:{1}, T:{2}, W:{3}, H:{4}", Math.Round(ulcX, 2), Math.Round(ulcY, 2), Math.Round(ulcT, 2), Math.Round(ulcW, 2), Math.Round(ulcH, 2));
-                                mc.log.debug.write(mc.log.CODE.TRACE, tempSb.ToString());
-                            }
-                            //EVENT.statusDisplay("ULC : " + Math.Round(ulcX, 2).ToString() + "  " + Math.Round(ulcY, 2).ToString() + "  " + Math.Round(ulcT, 2).ToString());
-                        }
-                        else
-                        {
-                            // Center Limit Check 
-                            if (Math.Abs(ulcX) > mc.para.MT.lidCheckLimit.value)
-                            {
-                                mc.ulc.displayUserMessage("X RESULT OVER FAIL");
-                                tempSb.Clear(); tempSb.Length = 0;
-                                tempSb.AppendFormat("LID Chk Fail(X Limit-Rst[{0}]Lmt[{1}])-PadX[{2}],PadY[{3}],FailCnt[{4}]", Math.Round(ulcX), Math.Round(mc.para.MT.lidCheckLimit.value), (padX + 1), (padY + 1), mc.hd.tool.ulcfailcount);
 
-                                //string str = "LID Chk Fail(X Limit-Rst[" + Math.Round(ulcX).ToString() + "]Lmt[" + Math.Round(mc.para.MT.lidCheckLimit.value).ToString() + "])-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]";
-                                mc.log.debug.write(mc.log.CODE.EVENT, tempSb.ToString());
-                                if (mc.para.ULC.failretry.value > 0 && mc.hd.tool.ulcfailcount < mc.para.ULC.failretry.value)
-                                {
-                                    //EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
-                                    ulcfailchecked = true;
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_X_Limit_Fail");
-                                    mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
-                                    sqc = SQC.END; break;
-                                }
-                                else
-                                {
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_X_Limit_Fail");
-                                    mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
-                                    tempSb.Clear(); tempSb.Length = 0;
-                                    tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(ulcX));
-                                    //str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(ulcX).ToString() + "]";
-                                    errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_ULC_HEAT_SLUG_X_RESULT_OVER); break;
-                                }
-                            }
-                            if (Math.Abs(ulcY) > mc.para.MT.lidCheckLimit.value)
-                            {
-                                mc.ulc.displayUserMessage("Y RESULT OVER FAIL");
-                                tempSb.Clear(); tempSb.Length = 0;
-                                tempSb.AppendFormat("LID Chk Fail(Y Limit-Rst[{0}]Lmt[{1}])-PadX[{2}],PadY[{3}],FailCnt[{4}]", Math.Round(ulcY), Math.Round(mc.para.MT.lidCheckLimit.value), (padX + 1), (padY + 1), mc.hd.tool.ulcfailcount);
-                                //string str = "LID Chk Fail(Y Limit-Rst[" + Math.Round(ulcY).ToString() + "]Lmt[" + Math.Round(mc.para.MT.lidCheckLimit.value).ToString() + "])-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]";
-                                mc.log.debug.write(mc.log.CODE.EVENT, tempSb.ToString());
-                                if (mc.para.ULC.failretry.value > 0 && mc.hd.tool.ulcfailcount < mc.para.ULC.failretry.value)
-                                {
-                                    //EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
-                                    ulcfailchecked = true;
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_Y_Limit_Fail");
-                                    mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
-                                    sqc = SQC.END; break;
-                                }
-                                else
-                                {
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_Y_Limit_Fail");
-                                    mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
-                                    tempSb.Clear(); tempSb.Length = 0;
-                                    tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(ulcY));
-                                    //str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(ulcY).ToString() + "]";
-                                    errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_ULC_HEAT_SLUG_Y_RESULT_OVER); break;
-                                }
-                            }
-                            if (Math.Abs(ulcT) > 10)
-                            {
-                                mc.ulc.displayUserMessage("R RESULT OVER FAIL");
-                                tempSb.Clear(); tempSb.Length = 0;
-                                tempSb.AppendFormat("LID Chk Fail(T Limit-Rst[{0}]Lmt[{1}])-PadX[{2}],PadY[{3}],FailCnt[{4}]", Math.Round(ulcT), 10.0, (padX + 1), (padY + 1), mc.hd.tool.ulcfailcount);
-                                //string str = "LID Chk Fail(T Limit-Rst[" + Math.Round(ulcT).ToString() + "]Lmt[" + Math.Round(10.0).ToString() + "])-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]";
-                                mc.log.debug.write(mc.log.CODE.EVENT, tempSb.ToString());
-                                if (mc.para.ULC.failretry.value > 0 && mc.hd.tool.ulcfailcount < mc.para.ULC.failretry.value)
-                                {
-                                    //EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
-                                    ulcfailchecked = true;
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_T_Limit_Fail");
-                                    mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
-                                    sqc = SQC.END; break;
-                                }
-                                else
-                                {
-                                    if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_T_Limit_Fail");
-                                    mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
-                                    tempSb.Clear(); tempSb.Length = 0;
-                                    tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(ulcT));
-                                    //str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(ulcT).ToString() + "]";
-                                    errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_ULC_HEAT_SLUG_T_RESULT_OVER); break;
-                                }
-                            }
-                            if (mc.hd.reqMode != REQMODE.DUMY)
-                            {
-                                tempSb.Clear(); tempSb.Length = 0;
-                                tempSb.AppendFormat("ULC - X:{0}, Y:{1}, T:{2}, W:{3}, H:{4}", Math.Round(ulcX, 2), Math.Round(ulcY, 2), Math.Round(ulcT, 2), Math.Round(ulcW, 2), Math.Round(ulcH, 2));
-                                mc.log.debug.write(mc.log.CODE.TRACE, tempSb.ToString());
-                            }
-                            //EVENT.statusDisplay("ULC : " + Math.Round(ulcX, 2).ToString() + "  " + Math.Round(ulcY, 2).ToString() + "  " + Math.Round(ulcT, 2).ToString());
-                        }
-
-                        // 여기에 오리엔테이션 체크 추가해야함-------------------------------------------------------------------------------------
+                        #region ULC Orientation Check
                         if (mc.hd.reqMode == REQMODE.DUMY) { }
-                        else if (mc.para.ULC.algorism.value != (int)MODEL_ALGORISM.CORNER && mc.para.ULC.orientationUse.value == 1 && mc.para.ULC.modelHSOrientation.isCreate.value == (int)BOOL.TRUE)
+                        else if (mc.para.ULC.orientationUse.value == 1 && mc.para.ULC.modelHSOrientation.isCreate.value == (int)BOOL.TRUE)
                         {
                             if (mc.para.ULC.modelHSOrientation.algorism.value == (int)MODEL_ALGORISM.NCC)
                             {
                                 tmpX = mc.ulc.cam.model[(int)ULC_MODEL.PKG_ORIENTATION_NCC].resultX;
                                 tmpY = mc.ulc.cam.model[(int)ULC_MODEL.PKG_ORIENTATION_NCC].resultY;
                                 tmpT = mc.ulc.cam.model[(int)ULC_MODEL.PKG_ORIENTATION_NCC].resultAngle;
+                                tmpScore = mc.ulc.cam.model[(int)ULC_MODEL.PKG_ORIENTATION_NCC].resultScore.D * 100;
                             }
                             else if (mc.para.ULC.modelHSOrientation.algorism.value == (int)MODEL_ALGORISM.SHAPE)
                             {
                                 tmpX = mc.ulc.cam.model[(int)ULC_MODEL.PKG_ORIENTATION_SHAPE].resultX;
                                 tmpY = mc.ulc.cam.model[(int)ULC_MODEL.PKG_ORIENTATION_SHAPE].resultY;
                                 tmpT = mc.ulc.cam.model[(int)ULC_MODEL.PKG_ORIENTATION_SHAPE].resultAngle;
+                                tmpScore = mc.ulc.cam.model[(int)ULC_MODEL.PKG_ORIENTATION_SHAPE].resultScore.D * 100;
+                            }
+                            if (tmpX == -1 || tmpY == -1 || tmpT == -1 || tmpScore < mc.para.ULC.modelHSOrientation.passScore.value) // ULC Vision Result Error
+                            {
+                                mc.ulc.displayUserMessage("LID ORIENT CHECK FAIL");
+                                if (mc.para.ULC.failretry.value > 0 && mc.hd.tool.ulcfailcount < mc.para.ULC.failretry.value)
+                                {
+                                    tempSb.Clear(); tempSb.Length = 0;
+                                    tempSb.AppendFormat("LID Orientation Chk Fail(Processing ERROR)-PadX[{0}],PadY[{1}],FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.ulcfailcount);
+                                    mc.log.debug.write(mc.log.CODE.ERROR, tempSb.ToString());
+                                    ulcfailchecked = true;
+                                    mc.para.runInfo.writePickInfo(PickCodeInfo.VISIONERR);
+                                    sqc = SQC.END; break;
+                                }
+                                else
+                                {
+                                    mc.para.runInfo.writePickInfo(PickCodeInfo.VISIONERR);
+                                    tempSb.Clear(); tempSb.Length = 0;
+                                    tempSb.AppendFormat("LID Orientation Chk Fail(Processing ERROR)-PadX[{0}],PadY[{1}],FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.ulcfailcount);
+                                    errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_ULC_VISION_PROCESS_FAIL); break;
+                                }
                             }
                         }
-                        if (mc.para.ULC.algorism.value != (int)MODEL_ALGORISM.CORNER && mc.para.ULC.orientationUse.value == 1 && tmpX == -1 && tmpY == -1 && tmpT == -1) // ULC Vision Result Error
+                        #endregion
+
+                        #region LID Position Limit Check
+                        if (Math.Abs(ulcX) > mc.para.MT.lidCheckLimit.value)
                         {
-                            mc.ulc.displayUserMessage("LID ORIENTATION CHECK FAIL");
+                            mc.ulc.displayUserMessage("X RESULT OVER FAIL");
+                            tempSb.Clear(); tempSb.Length = 0;
+                            tempSb.AppendFormat("LID Chk Fail(X Limit-Rst[{0}]Lmt[{1}])-PadX[{2}],PadY[{3}],FailCnt[{4}]", Math.Round(ulcX), Math.Round(mc.para.MT.lidCheckLimit.value), (padX + 1), (padY + 1), mc.hd.tool.ulcfailcount);
+
+                            //string str = "LID Chk Fail(X Limit-Rst[" + Math.Round(ulcX).ToString() + "]Lmt[" + Math.Round(mc.para.MT.lidCheckLimit.value).ToString() + "])-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]";
+                            mc.log.debug.write(mc.log.CODE.EVENT, tempSb.ToString());
+
                             if (mc.para.ULC.failretry.value > 0 && mc.hd.tool.ulcfailcount < mc.para.ULC.failretry.value)
                             {
-                                tempSb.Clear(); tempSb.Length = 0;
-                                tempSb.AppendFormat("LID Orientation Chk Fail(Processing ERROR)-PadX[{0}],PadY[{1}],FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.ulcfailcount);
-                                //string str = "LID Chk Fail(Processing ERROR)-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]";
-                                mc.log.debug.write(mc.log.CODE.ERROR, tempSb.ToString());
                                 //EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
                                 ulcfailchecked = true;
-                                mc.para.runInfo.writePickInfo(PickCodeInfo.VISIONERR);
+                                if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_X_Limit_Fail");
+                                mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
                                 sqc = SQC.END; break;
                             }
                             else
                             {
-                                mc.para.runInfo.writePickInfo(PickCodeInfo.VISIONERR);
+                                if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_X_Limit_Fail");
+                                mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
                                 tempSb.Clear(); tempSb.Length = 0;
-                                tempSb.AppendFormat("LID Orientation Chk Fail(Processing ERROR)-PadX[{0}],PadY[{1}],FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.ulcfailcount);
-                                //string str = "PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "]";
-                                errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_ULC_VISION_PROCESS_FAIL); break;
+                                tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(ulcX));
+                                //str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(ulcX).ToString() + "]";
+                                errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_ULC_HEAT_SLUG_X_RESULT_OVER); break;
                             }
                         }
+                        if (Math.Abs(ulcY) > mc.para.MT.lidCheckLimit.value)
+                        {
+                            mc.ulc.displayUserMessage("Y RESULT OVER FAIL");
+                            tempSb.Clear(); tempSb.Length = 0;
+                            tempSb.AppendFormat("LID Chk Fail(Y Limit-Rst[{0}]Lmt[{1}])-PadX[{2}],PadY[{3}],FailCnt[{4}]", Math.Round(ulcY), Math.Round(mc.para.MT.lidCheckLimit.value), (padX + 1), (padY + 1), mc.hd.tool.ulcfailcount);
+                            //string str = "LID Chk Fail(Y Limit-Rst[" + Math.Round(ulcY).ToString() + "]Lmt[" + Math.Round(mc.para.MT.lidCheckLimit.value).ToString() + "])-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]";
+                            mc.log.debug.write(mc.log.CODE.EVENT, tempSb.ToString());
+                            if (mc.para.ULC.failretry.value > 0 && mc.hd.tool.ulcfailcount < mc.para.ULC.failretry.value)
+                            {
+                                //EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
+                                ulcfailchecked = true;
+                                if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_Y_Limit_Fail");
+                                mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
+                                sqc = SQC.END; break;
+                            }
+                            else
+                            {
+                                if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_Y_Limit_Fail");
+                                mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
+                                tempSb.Clear(); tempSb.Length = 0;
+                                tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(ulcY));
+                                //str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(ulcY).ToString() + "]";
+                                errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_ULC_HEAT_SLUG_Y_RESULT_OVER); break;
+                            }
+                        }
+                        if (Math.Abs(ulcT) > 10)
+                        {
+                            mc.ulc.displayUserMessage("R RESULT OVER FAIL");
+                            tempSb.Clear(); tempSb.Length = 0;
+                            tempSb.AppendFormat("LID Chk Fail(T Limit-Rst[{0}]Lmt[{1}])-PadX[{2}],PadY[{3}],FailCnt[{4}]", Math.Round(ulcT), 10.0, (padX + 1), (padY + 1), mc.hd.tool.ulcfailcount);
+                            //string str = "LID Chk Fail(T Limit-Rst[" + Math.Round(ulcT).ToString() + "]Lmt[" + Math.Round(10.0).ToString() + "])-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]";
+                            mc.log.debug.write(mc.log.CODE.EVENT, tempSb.ToString());
+                            if (mc.para.ULC.failretry.value > 0 && mc.hd.tool.ulcfailcount < mc.para.ULC.failretry.value)
+                            {
+                                //EVENT.statusDisplay("LID Chk Fail-PadX[" + (padX + 1).ToString() + "],PadY:[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.ulcfailcount.ToString() + "]");
+                                ulcfailchecked = true;
+                                if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_T_Limit_Fail");
+                                mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
+                                sqc = SQC.END; break;
+                            }
+                            else
+                            {
+                                if (mc.para.ULC.imageSave.value == 1) mc.ulc.cam.writeLogGrabImage("ULC_T_Limit_Fail");
+                                mc.para.runInfo.writePickInfo(PickCodeInfo.POSERR);
+                                tempSb.Clear(); tempSb.Length = 0;
+                                tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(ulcT));
+                                //str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(ulcT).ToString() + "]";
+                                errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_ULC_HEAT_SLUG_T_RESULT_OVER); break;
+                            }
+                        }
+                        if (mc.hd.reqMode != REQMODE.DUMY)
+                        {
+                            tempSb.Clear(); tempSb.Length = 0;
+                            tempSb.AppendFormat("ULC - X:{0}, Y:{1}, T:{2}, W:{3}, H:{4}", Math.Round(ulcX, 2), Math.Round(ulcY, 2), Math.Round(ulcT, 2), Math.Round(ulcW, 2), Math.Round(ulcH, 2));
+                            mc.log.debug.write(mc.log.CODE.TRACE, tempSb.ToString());
+                        }
+                        #endregion
                         #endregion
                     }
                     else
@@ -6536,225 +5893,115 @@ namespace PSA_SystemLibrary
 									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_VISION_PROCESS_FAIL); break;
 								}
 							}
-						}
-						if (dev.debug)
+                        }
+                        #region #region HDC Position Check
+                        if (Math.Abs(hdcP2X) > 1000)
 						{
-							if (Math.Abs(hdcP2X) > 2000)
+							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1} um", hdcP2X));
+							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1} um", hdcP2X));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
+								sqc = 120; break;
+							}
+							else
+							{
+								if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+								{
+									//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
+									//else //JogTeachMode = jogTeachCornerMode.Corner13;
+									sqc = 130; break;
+								}
+								else
 								{
 									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//if (mc.para.HDC.detectDirection.value == 0) JogTeachMode = jogTeachCornerMode.Corner24;
-										//else JogTeachMode = jogTeachCornerMode.Corner13;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2X);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2X).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
-									}
-								}
-							}
-							if (Math.Abs(hdcP2Y) > 2000)
-							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1} um", hdcP2Y));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//if (mc.para.HDC.detectDirection.value == 0) JogTeachMode = jogTeachCornerMode.Corner24;
-										//else JogTeachMode = jogTeachCornerMode.Corner13;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2Y);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2Y).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
-									}
-								}
-							}
-							if (Math.Abs(hdcP2T) > 10)
-							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1} degree", hdcP2T));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_T_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//if (mc.para.HDC.detectDirection.value == 0) JogTeachMode = jogTeachCornerMode.Corner24;
-										//else JogTeachMode = jogTeachCornerMode.Corner13;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_T_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2T);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2T).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
-									}
-								}
-							}
-							if (Math.Abs(hdcP1X - hdcP2X) > mc.para.MT.padCheckLimit.value || Math.Abs(hdcP1Y - hdcP2Y) > mc.para.MT.padCheckLimit.value)
-							{
-								tempSb.Clear(); tempSb.Length = 0;
-								tempSb.AppendFormat("PadX[{0}],PadY[{1}] - P1-P2 : {2:F2}, {3:F2}", (padX + 1), (padY + 1), hdcP1X - hdcP2X, hdcP1Y - hdcP2Y);
-								//string str = "HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString();
-								mc.log.debug.write(mc.log.CODE.EVENT, tempSb.ToString());
-								//EVENT.statusDisplay("HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString());
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
-										//else //JogTeachMode = jogTeachCornerMode.Corner13;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
-										//str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y - hdcP2T).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_PAD_SIZE_OVER); break;
-									}
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2X);
+									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2X).ToString() + "]";
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
 								}
 							}
 						}
-						else
+						if (Math.Abs(hdcP2Y) > 1000)
 						{
-							if (Math.Abs(hdcP2X) > 1000)
+							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1} um", hdcP2Y));
+							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1} um", hdcP2X));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
+								sqc = 120; break;
+							}
+							else
+							{
+								if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
-									sqc = 120; break;
+									//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
+									//else //JogTeachMode = jogTeachCornerMode.Corner13;
+									sqc = 130; break;
 								}
 								else
-								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
-										//else //JogTeachMode = jogTeachCornerMode.Corner13;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2X);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2X).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
-									}
-								}
-							}
-							if (Math.Abs(hdcP2Y) > 1000)
-							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1} um", hdcP2Y));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
 									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
-										//else //JogTeachMode = jogTeachCornerMode.Corner13;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2Y);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2Y).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
-									}
-								}
-							}
-							if (Math.Abs(hdcP2T) > 5)
-							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1} degree", hdcP2T));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_T_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
-										//else //JogTeachMode = jogTeachCornerMode.Corner13;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_T_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2T);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2T).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
-									}
-								}
-							}
-							if (Math.Abs(hdcP1X - hdcP2X) > mc.para.MT.padCheckLimit.value || Math.Abs(hdcP1Y - hdcP2Y) > mc.para.MT.padCheckLimit.value)
-							{
-								tempSb.Clear(); tempSb.Length = 0;
-								tempSb.AppendFormat("PadX[{0}],PadY[{1}] - P1-P2 : {2:F2}, {3:F2}", (padX + 1), (padY + 1), hdcP1X - hdcP2X, hdcP1Y - hdcP2Y);
-								//string str = "HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString();
-								mc.log.debug.write(mc.log.CODE.EVENT, tempSb.ToString());
-								//EVENT.statusDisplay("HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString());
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
-										//else //JogTeachMode = jogTeachCornerMode.Corner13;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
-										//str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y - hdcP2T).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_PAD_SIZE_OVER); break;
-									}
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2Y);
+									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2Y).ToString() + "]";
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
 								}
 							}
 						}
+						if (Math.Abs(hdcP2T) > 5)
+						{
+							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1} degree", hdcP2T));
+							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+							{
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_T_Limit");
+								sqc = 120; break;
+							}
+							else
+							{
+								if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+								{
+									//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
+									//else //JogTeachMode = jogTeachCornerMode.Corner13;
+									sqc = 130; break;
+								}
+								else
+								{
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_T_Limit");
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2T);
+									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2T).ToString() + "]";
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
+								}
+							}
+						}
+						if (Math.Abs(hdcP1X - hdcP2X) > mc.para.MT.padCheckLimit.value || Math.Abs(hdcP1Y - hdcP2Y) > mc.para.MT.padCheckLimit.value)
+						{
+							tempSb.Clear(); tempSb.Length = 0;
+							tempSb.AppendFormat("PadX[{0}],PadY[{1}] - P1-P2 : {2:F2}, {3:F2}", (padX + 1), (padY + 1), hdcP1X - hdcP2X, hdcP1Y - hdcP2Y);
+							//string str = "HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString();
+							mc.log.debug.write(mc.log.CODE.EVENT, tempSb.ToString());
+							//EVENT.statusDisplay("HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString());
+							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+							{
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
+								sqc = 120; break;
+							}
+							else
+							{
+								if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+								{
+									//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
+									//else //JogTeachMode = jogTeachCornerMode.Corner13;
+									sqc = 130; break;
+								}
+								else
+								{
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
+									//str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y - hdcP2T).ToString() + "]";
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_PAD_SIZE_OVER); break;
+								}
+							}
+						}
+						#endregion
 						#endregion
 					}
 					else
@@ -6786,275 +6033,114 @@ namespace PSA_SystemLibrary
 									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_VISION_PROCESS_FAIL); break;
 								}
 							}
-						}
-						if (dev.debug)
+						}					
+						#region #region HDC Position Check
+                        if (Math.Abs(hdcP2X) > 1000)
 						{
-							if (Math.Abs(hdcP2X) > 2000)
+							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1} um", hdcP2X));
+							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1} um", hdcP2X));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
+								sqc = 120; break;
+							}
+							else
+							{
+								if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+								{
+									//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
+									//else //JogTeachMode = jogTeachCornerMode.Corner13;
+									sqc = 130; break;
+								}
+								else
 								{
 									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
-										//else //JogTeachMode = jogTeachCornerMode.Corner13;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2X);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2X).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
-									}
-								}
-							}
-							if (Math.Abs(hdcP2Y) > 2000)
-							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1} um", hdcP2Y));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
-										//else //JogTeachMode = jogTeachCornerMode.Corner13;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2Y);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2Y).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
-									}
-								}
-							}
-// 							if (Math.Abs(hdcP2T) > 10)
-// 							{
-// 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1} degree", hdcP2T));
-// 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-// 								{
-// 									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_T_Limit");
-// 									sqc = 120; break;
-// 								}
-// 								else
-// 								{
-// 									if (mc.para.HDC.jogTeachUse.value == 1)
-// 									{
-// 										if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
-// 										else //JogTeachMode = jogTeachCornerMode.Corner13;
-// 										sqc = 130; break;
-// 									}
-// 									else
-// 									{
-// 										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_T_Limit");
-// 										tempSb.Clear(); tempSb.Length = 0;
-// 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2T);
-// 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2T).ToString() + "]";
-// 										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
-// 									}
-// 								}
-// 							}
-							if (hdcPassScoreP2 > hdcResult)
-							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Score Limit Error : {0:F1}%", hdcResult));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P2_Score_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//JogTeachMode = jogTeachCornerMode.Corner13;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P2_Score_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}], P2: Score[{2}%]", (padX + 1), (padY + 1), Math.Round(hdcResult, 2));
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
-									}
-								}
-							}
-							if (Math.Abs(hdcP1X - hdcP2X) > mc.para.MT.padCheckLimit.value || Math.Abs(hdcP1Y - hdcP2Y) > mc.para.MT.padCheckLimit.value)
-							{
-								tempSb.Clear(); tempSb.Length = 0;
-								tempSb.AppendFormat("PadX[{0}],PadY[{1}] - P1-P2 : {2:F2}, {3:F2}", (padX + 1), (padY + 1), hdcP1X - hdcP2X, hdcP1Y - hdcP2Y);
-								//string str = "HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString();
-								mc.log.debug.write(mc.log.CODE.EVENT, tempSb.ToString());
-								//EVENT.statusDisplay("HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString());
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
-										//else //JogTeachMode = jogTeachCornerMode.Corner13;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
-										//str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y - hdcP2T).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_PAD_SIZE_OVER); break;
-									}
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2X);
+									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2X).ToString() + "]";
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
 								}
 							}
 						}
-						else
+						if (Math.Abs(hdcP2Y) > 1000)
 						{
-							if (Math.Abs(hdcP2X) > 1000)
+							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1} um", hdcP2Y));
+							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1} um", hdcP2X));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
+								sqc = 120; break;
+							}
+							else
+							{
+								if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
-									sqc = 120; break;
+									//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
+									//else //JogTeachMode = jogTeachCornerMode.Corner13;
+									sqc = 130; break;
 								}
 								else
-								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
-										//else //JogTeachMode = jogTeachCornerMode.Corner13;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2X);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2X).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
-									}
-								}
-							}
-							if (Math.Abs(hdcP2Y) > 1000)
-							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1} um", hdcP2Y));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
 									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
-										//else //JogTeachMode = jogTeachCornerMode.Corner13;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2Y);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2Y).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
-									}
-								}
-							}
-// 							if (Math.Abs(hdcP2T) > 5)
-// 							{
-// 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1} degree", hdcP2T));
-// 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-// 								{
-// 									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_T_Limit");
-// 									sqc = 120; break;
-// 								}
-// 								else
-// 								{
-// 									if (mc.para.HDC.jogTeachUse.value == 1)
-// 									{
-// 										if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
-// 										else //JogTeachMode = jogTeachCornerMode.Corner13;
-// 										sqc = 130; break;
-// 									}
-// 									else
-// 									{
-// 										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C3_T_Limit");
-// 										tempSb.Clear(); tempSb.Length = 0;
-// 										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2T);
-// 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2T).ToString() + "]";
-// 										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
-// 									}
-// 								}
-// 							}
-							if (hdcPassScoreP2 > hdcResult)
-							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Score Limit Error : {0:F1}%", hdcResult));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P2_Score_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//JogTeachMode = jogTeachCornerMode.Corner13;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P2_Score_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}], P2: Score[{2}%]", (padX + 1), (padY + 1), Math.Round(hdcResult, 2));
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
-									}
-								}
-							}
-							if (Math.Abs(hdcP1X - hdcP2X) > mc.para.MT.padCheckLimit.value || Math.Abs(hdcP1Y - hdcP2Y) > mc.para.MT.padCheckLimit.value)
-							{
-								tempSb.Clear(); tempSb.Length = 0;
-								tempSb.AppendFormat("PadX[{0}],PadY[{1}] - P1-P2 : {2:F2}, {3:F2}", (padX + 1), (padY + 1), hdcP1X - hdcP2X, hdcP1Y - hdcP2Y);
-								//string str = "HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString();
-								mc.log.debug.write(mc.log.CODE.EVENT, tempSb.ToString());
-								//EVENT.statusDisplay("HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString());
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
-										//else //JogTeachMode = jogTeachCornerMode.Corner13;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
-										//str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y - hdcP2T).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_PAD_SIZE_OVER); break;
-									}
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2Y);
+									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2Y).ToString() + "]";
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
 								}
 							}
 						}
+						if (hdcPassScoreP2 > hdcResult)
+						{
+							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Score Limit Error : {0:F1}%", hdcResult));
+							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+							{
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P2_Score_Limit");
+								sqc = 120; break;
+							}
+							else
+							{
+								if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+								{
+									//JogTeachMode = jogTeachCornerMode.Corner13;
+									sqc = 130; break;
+								}
+								else
+								{
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P2_Score_Limit");
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PadX[{0}],PadY[{1}], P2: Score[{2}%]", (padX + 1), (padY + 1), Math.Round(hdcResult, 2));
+									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
+								}
+							}
+						}
+						if (Math.Abs(hdcP1X - hdcP2X) > mc.para.MT.padCheckLimit.value || Math.Abs(hdcP1Y - hdcP2Y) > mc.para.MT.padCheckLimit.value)
+						{
+							tempSb.Clear(); tempSb.Length = 0;
+							tempSb.AppendFormat("PadX[{0}],PadY[{1}] - P1-P2 : {2:F2}, {3:F2}", (padX + 1), (padY + 1), hdcP1X - hdcP2X, hdcP1Y - hdcP2Y);
+							//string str = "HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString();
+							mc.log.debug.write(mc.log.CODE.EVENT, tempSb.ToString());
+							//EVENT.statusDisplay("HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString());
+							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+							{
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
+								sqc = 120; break;
+							}
+							else
+							{
+								if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+								{
+									//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
+									//else //JogTeachMode = jogTeachCornerMode.Corner13;
+									sqc = 130; break;
+								}
+								else
+								{
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
+									//str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y - hdcP2T).ToString() + "]";
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_PAD_SIZE_OVER); break;
+								}
+							}
+						}
+                        #endregion
 						#endregion
 					}
                     sqc++; break;
@@ -7094,6 +6180,7 @@ namespace PSA_SystemLibrary
 
 					if (setJogTeach == false)
 					{
+						tempSb.Clear(); tempSb.Length = 0;
 						tempSb.AppendFormat("HDC[{0},{1}] Package X,Y,T : {2}, {3}, {4}", padX, padY, Math.Round(hdcX), Math.Round(hdcY), Math.Round(hdcT));
 						mc.log.debug.write(mc.log.CODE.INFO, tempSb.ToString());
 						if (Math.Abs(hdcX) > mc.para.MT.padCheckCenterLimit.value)
@@ -7807,7 +6894,7 @@ namespace PSA_SystemLibrary
 						mc.board.padStatus(BOARD_ZONE.WORKING, padX, padY, PAD_STATUS.ATTACH_DONE, out ret.b);
 						if (!ret.b) { errorCheck(ERRORCODE.HD, sqc, "board.padStatus update fail"); break; }
 					}
-
+                    placeDone = true;
 					// SVID Send..
 					mc.commMPC.SVIDReport();
 
@@ -8123,162 +7210,83 @@ namespace PSA_SystemLibrary
 									}
 								}
 							}
-							if (dev.debug)
+							#region HDC Position Check
+                            if (Math.Abs(hdcP1X) > 1000)
 							{
-								if (Math.Abs(hdcP1X) > 2000)
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
+									sqc = 120; break;
+								}
+								else
+								{
+									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+									{
+										//JogTeachMode = jogTeachCornerMode.Corner13;
+										sqc = 130; break;
+									}
+									else
 									{
 										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner13;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
-										}
-									}
-								}
-								if (Math.Abs(hdcP1Y) > 2000)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner13;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
-										}
-									}
-								}
-								if (Math.Abs(hdcP1T) > 10)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner13;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
-										}
+										tempSb.Clear(); tempSb.Length = 0;
+										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
+										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
+										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
 									}
 								}
 							}
-							else
+							if (Math.Abs(hdcP1Y) > 1000)
 							{
-								if (Math.Abs(hdcP1X) > 1000)
+								mc.log.debug.write(mc.log.CODE.ERROR, "HDC P1-Y Compensation Amount Limit Error : " + Math.Round(hdcP1Y).ToString() + " um");
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
+									sqc = 120; break;
+								}
+								else
+								{
+									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-										sqc = 120; break;
+										//JogTeachMode = jogTeachCornerMode.Corner13;
+										sqc = 130; break;
 									}
 									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner13;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
-										}
-									}
-								}
-								if (Math.Abs(hdcP1Y) > 1000)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, "HDC P1-Y Compensation Amount Limit Error : " + Math.Round(hdcP1Y).ToString() + " um");
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 									{
 										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner13;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
-										}
-									}
-								}
-								if (Math.Abs(hdcP1T) > 5)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner13;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
-										}
+										tempSb.Clear(); tempSb.Length = 0;
+										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
+										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
+										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
 									}
 								}
 							}
+							if (Math.Abs(hdcP1T) > 5)
+							{
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+								{
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
+									sqc = 120; break;
+								}
+								else
+								{
+									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+									{
+										//JogTeachMode = jogTeachCornerMode.Corner13;
+										sqc = 130; break;
+									}
+									else
+									{
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
+										tempSb.Clear(); tempSb.Length = 0;
+										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
+										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
+										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
+									}
+								}
+							}
+                            #endregion
 							#endregion
 							#region HDC.PADC3.req
 							hdcP2X = 0;
@@ -8365,163 +7373,84 @@ namespace PSA_SystemLibrary
 										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_VISION_PROCESS_FAIL); break;
 									}
 								}
-							}
-							if (dev.debug)
+                            }
+                            #region HDC Position Check
+                            if (Math.Abs(hdcP1X) > 1000)
 							{
-								if (Math.Abs(hdcP1X) > 2000)
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
+									sqc = 120; break;
+								}
+								else
+								{
+									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+									{
+										//JogTeachMode = jogTeachCornerMode.Corner24;
+										sqc = 130; break;
+									}
+									else
 									{
 										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner24;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
-										}
-									}
-								}
-								if (Math.Abs(hdcP1Y) > 2000)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner24;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
-										}
-									}
-								}
-								if (Math.Abs(hdcP1T) > 10)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner24;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
-										}
+										tempSb.Clear(); tempSb.Length = 0;
+										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
+										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
+										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
 									}
 								}
 							}
-							else
+							if (Math.Abs(hdcP1Y) > 1000)
 							{
-								if (Math.Abs(hdcP1X) > 1000)
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner24;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
-										}
-									}
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
+									sqc = 120; break;
 								}
-								if (Math.Abs(hdcP1Y) > 1000)
+								else
 								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
-										sqc = 120; break;
+										//JogTeachMode = jogTeachCornerMode.Corner24;
+										sqc = 130; break;
 									}
 									else
 									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner24;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C21_Y_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
-										}
-									}
-								}
-								if (Math.Abs(hdcP1T) > 5)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner24;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
-										}
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C21_Y_Limit");
+										tempSb.Clear(); tempSb.Length = 0;
+										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
+										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
+										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
 									}
 								}
 							}
+							if (Math.Abs(hdcP1T) > 5)
+							{
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+								{
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
+									sqc = 120; break;
+								}
+								else
+								{
+									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+									{
+										//JogTeachMode = jogTeachCornerMode.Corner24;
+										sqc = 130; break;
+									}
+									else
+									{
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
+										tempSb.Clear(); tempSb.Length = 0;
+										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
+										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
+										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
+									}
+								}
+							}
+                            #endregion
 							#endregion
 							#region HDC.PADC4.req
 							hdcP2X = 0;
@@ -8608,113 +7537,9 @@ namespace PSA_SystemLibrary
 									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_VISION_PROCESS_FAIL); break;
 								}
 							}
-						}
-						if (dev.debug)
-						{
-							if (Math.Abs(hdcP1X) > 2000)
-							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//JogTeachMode = jogTeachCornerMode.Corner13;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
-									}
-								}
-							}
-							if (Math.Abs(hdcP1Y) > 2000)
-							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//JogTeachMode = jogTeachCornerMode.Corner13;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
-									}
-								}
-							}
-							// 								if (Math.Abs(hdcP1T) > 10)
-							// 								{
-							// 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
-							// 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-							// 									{
-							// 										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
-							// 										sqc = 120; break;
-							// 									}
-							// 									else
-							// 									{
-							// 										if (mc.para.HDC.jogTeachUse.value == 1)
-							// 										{
-							// 											//JogTeachMode = jogTeachCornerMode.Corner13;
-							// 											sqc = 130; break;
-							// 										}
-							// 										else
-							// 										{
-							// 											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
-							// 											tempSb.Clear(); tempSb.Length = 0;
-							// 											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
-							// 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-							// 											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
-							// 										}
-							// 									}
-							// 								}
-							if (hdcPassScoreP1 > hdcResult)
-							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Score Limit Error : {0:F1}%", hdcResult));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//JogTeachMode = jogTeachCornerMode.Corner13;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}], P1: Score[{2}%]", (padX + 1), (padY + 1), Math.Round(hdcResult, 2));
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
-									}
-								}
-							}
-						}
-						else
-						{
-							if (Math.Abs(hdcP1X) > 1000)
+                        }
+                        #region HDC Position Check
+                        if (Math.Abs(hdcP1X) > 1000)
 							{
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
@@ -8764,31 +7589,6 @@ namespace PSA_SystemLibrary
 									}
 								}
 							}
-							// 								if (Math.Abs(hdcP1T) > 5)
-							// 								{
-							// 									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
-							// 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-							// 									{
-							// 										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
-							// 										sqc = 120; break;
-							// 									}
-							// 									else
-							// 									{
-							// 										if (mc.para.HDC.jogTeachUse.value == 1)
-							// 										{
-							// 											//JogTeachMode = jogTeachCornerMode.Corner13;
-							// 											sqc = 130; break;
-							// 										}
-							// 										else
-							// 										{
-							// 											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrapImage("HDC_C1_T_Limit");
-							// 											tempSb.Clear(); tempSb.Length = 0;
-							// 											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
-							// 											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-							// 											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
-							// 										}
-							// 									}
-							// 								}
 							if (hdcPassScoreP1 > hdcResult)
 							{
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Score Limit Error : {0:F1}%", hdcResult));
@@ -8814,7 +7614,7 @@ namespace PSA_SystemLibrary
 									}
 								}
 							}
-						}
+                        #endregion
 						#endregion
 						#region HDC.modelManualTeach.paraP2.req
 						hdcP2X = 0;
@@ -8924,13 +7724,13 @@ namespace PSA_SystemLibrary
 							jogTeach.Corner13Teach = false;
 						}
 						#endregion
-						mc.OUT.MAIN.UserBuzzerCtl(true);
+                        mc.OUT.MAIN.UserRedBuzzerCtl(true);
 						jogTeach.ShowDialog();
 						mc.hdc.SetLive(false);
 					}
-					// 꺼져 있으면 Cancel 누른것처럼.. 
 					else
 					{
+					    // 꺼져 있으면 Cancel 누른것처럼.. 
 						jogTeachCancel = true;
 						mc.hdc.SetLive(false);
 					}
@@ -9110,6 +7910,7 @@ namespace PSA_SystemLibrary
                     dwell.Reset();
                     sqc++; break;
                 case 213:
+					if (dwell.Elapsed < 100) break;
                     if (mc.hdc.RUNING) break;
                     if (mc.hdc.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
                     
@@ -9117,23 +7918,87 @@ namespace PSA_SystemLibrary
                     if (ret.message == RetMessage.OK) sqc = 1;
                     else
                     {
-                        epoxyfailchecked = true;
-                        sqc = SQC.STOP;
-						if (ret.message == RetMessage.FIND_EPOXY_UNDERFLOW)
+						mc.OUT.MAIN.UserRedBuzzerCtl(true);
+						FormUserMessage epoxySelect = new FormUserMessage();
+						epoxySelect.SetDisplayItems(DIAG_SEL_MODE.Sel1Sel2Sel3, DIAG_ICON_MODE.WARNING, "Epoxy Error! Do you want to..", "Error", "Skip", "Work");
+						epoxySelect.ShowDialog();
+						ret.usrDialog = FormUserMessage.diagResult;
+						mc.OUT.MAIN.UserRedBuzzerCtl(false);
+						// ERROR!
+						if (ret.usrDialog == DIAG_RESULT.Sel1)
 						{
-							mc.board.padStatus(BOARD_ZONE.WORKING, padX, padY, PAD_STATUS.EPOXY_UNDER_FLOW, out ret.b);
-							mc.hdc.displayUserMessage("EPOXY UNDERFLOW");
+							// Error
+							if (ret.message == RetMessage.FIND_EPOXY_UNDERFLOW)
+							{
+								mc.board.padStatus(BOARD_ZONE.WORKING, padX, padY, PAD_STATUS.EPOXY_UNDER_FLOW, out ret.b);
+								mc.hdc.displayUserMessage("EPOXY UNDERFLOW");
+								errorCheck(ERRORCODE.HD, sqc, "Epoxy UnderFlow");
+							}
+							else if (ret.message == RetMessage.FIND_EPOXY_OVERFLOW)
+							{
+								mc.board.padStatus(BOARD_ZONE.WORKING, padX, padY, PAD_STATUS.EPOXY_OVER_FLOW, out ret.b);
+								mc.hdc.displayUserMessage("EPOXY OVERFLOW");
+								errorCheck(ERRORCODE.HD, sqc, "Epoxy OverFlow");
+							}
+							else
+							{
+								mc.board.padStatus(BOARD_ZONE.WORKING, padX, padY, PAD_STATUS.EPOXY_NG, out ret.b);
+								mc.hdc.displayUserMessage("EPOXY CHECK FAIL");
+								errorCheck(ERRORCODE.HD, sqc, "Epoxy Check Fail");
+							}
+							break;
 						}
-						else if (ret.message == RetMessage.FIND_EPOXY_OVERFLOW)
+						else if (ret.usrDialog == DIAG_RESULT.Sel2)
 						{
-							mc.board.padStatus(BOARD_ZONE.WORKING, padX, padY, PAD_STATUS.EPOXY_OVER_FLOW, out ret.b);
-							mc.hdc.displayUserMessage("EPOXY OVERFLOW");
+							// Skip
+							epoxyfailchecked = true;
+							sqc = SQC.STOP;
+							if (ret.message == RetMessage.FIND_EPOXY_UNDERFLOW)
+							{
+								mc.board.padStatus(BOARD_ZONE.WORKING, padX, padY, PAD_STATUS.EPOXY_UNDER_FLOW, out ret.b);
+								mc.hdc.displayUserMessage("EPOXY UNDERFLOW");
+							}
+							else if (ret.message == RetMessage.FIND_EPOXY_OVERFLOW)
+							{
+								mc.board.padStatus(BOARD_ZONE.WORKING, padX, padY, PAD_STATUS.EPOXY_OVER_FLOW, out ret.b);
+								mc.hdc.displayUserMessage("EPOXY OVERFLOW");
+							}
+							else
+							{
+								mc.board.padStatus(BOARD_ZONE.WORKING, padX, padY, PAD_STATUS.EPOXY_NG, out ret.b);
+								mc.hdc.displayUserMessage("EPOXY CHECK FAIL");
+							}
+							break;
 						}
+						else if (ret.usrDialog == DIAG_RESULT.Sel3) { sqc = 1; break; }
 						else
 						{
-							mc.board.padStatus(BOARD_ZONE.WORKING, padX, padY, PAD_STATUS.EPOXY_NG, out ret.b);
-							mc.hdc.displayUserMessage("EPOXY CHECK FAIL");
+							errorCheck(ERRORCODE.HD, sqc, "Select Error!");
+							break;
 						}
+						// Ignore!
+
+
+                        //epoxyfailchecked = true;
+						//sqc = SQC.STOP;
+						//if (ret.message == RetMessage.FIND_EPOXY_UNDERFLOW)
+						//{
+						//    mc.board.padStatus(BOARD_ZONE.WORKING, padX, padY, PAD_STATUS.EPOXY_UNDER_FLOW, out ret.b);
+						//    mc.hdc.displayUserMessage("EPOXY UNDERFLOW");
+						//    errorCheck(ERRORCODE.HD, sqc, "Epoxy UnderFlow");
+						//}
+						//else if (ret.message == RetMessage.FIND_EPOXY_OVERFLOW)
+						//{
+						//    mc.board.padStatus(BOARD_ZONE.WORKING, padX, padY, PAD_STATUS.EPOXY_OVER_FLOW, out ret.b);
+						//    mc.hdc.displayUserMessage("EPOXY OVERFLOW");
+						//    errorCheck(ERRORCODE.HD, sqc, "Epoxy OverFlow");
+						//}
+						//else
+						//{
+						//    mc.board.padStatus(BOARD_ZONE.WORKING, padX, padY, PAD_STATUS.EPOXY_NG, out ret.b);
+						//    mc.hdc.displayUserMessage("EPOXY CHECK FAIL");
+						//    errorCheck(ERRORCODE.HD, sqc, "Epoxy Check Fail");
+						//}
                     }
                     break;
                 #endregion
@@ -10532,57 +9397,6 @@ namespace PSA_SystemLibrary
 								tempSb.Clear(); tempSb.Length = 0;
 								tempSb.AppendFormat("PadX[{0}],PadY[{1}]", (padX + 1), (padY + 1));
 								errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
-							}
-						}
-						if (dev.debug)
-						{
-							if (Math.Abs(HSP1X) > 2000)
-							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HS P2-X Compensation Amount Limit Error : {0:F1}um", HSP1X));
-								if (mc.para.HS.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HS.failretry.value)
-								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C2_X_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C2_X_Limit");
-									tempSb.Clear(); tempSb.Length = 0;
-									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), HSP1X);
-									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
-								}
-							}
-							if (Math.Abs(HSP1Y) > 2000)
-							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HS P2-Y Compensation Amount Limit Error : {0:F1}um", HSP1Y));
-								if (mc.para.HS.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HS.failretry.value)
-								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C2_Y_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C2_Y_Limit");
-									tempSb.Clear(); tempSb.Length = 0;
-									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), HSP1Y);
-									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
-                                }
-							}
-							if (Math.Abs(HSP1T) > 10)
-							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HS P2-T Compensation Amount Limit Error : {0:F1}degree", HSP1T));
-								if (mc.para.HS.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HS.failretry.value)
-								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C2_T_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HS.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HS_C2_T_Limit");
-									tempSb.Clear(); tempSb.Length = 0;
-									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), HSP1T);
-									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
-								}
 							}
 						}
 						#endregion
@@ -14397,121 +13211,63 @@ namespace PSA_SystemLibrary
 									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "]";
 									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_VISION_PROCESS_FAIL); break;
 								}
-							}
-							if (dev.debug)
+                            }
+                            #region HDC Position Check
+                            if (Math.Abs(hdcP1X) > 1000)
 							{
-								if (Math.Abs(hdcP1X) > 2000)
+								mc.hdc.displayUserMessage("X RESULT OVER FAIL");
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									mc.hdc.displayUserMessage("X RESULT OVER FAIL");
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
-									}
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
+									sqc = 120; break;
 								}
-								if (Math.Abs(hdcP1Y) > 2000)
+								else
 								{
-									mc.hdc.displayUserMessage("Y RESULT OVER FAIL");
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
-									}
-								}
-								if (Math.Abs(hdcP1T) > 10)
-								{
-									mc.hdc.displayUserMessage("R RESULT OVER FAIL");
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
-									}
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
+									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
 								}
 							}
-							else
+							if (Math.Abs(hdcP1Y) > 1000)
 							{
-								if (Math.Abs(hdcP1X) > 1000)
+								mc.hdc.displayUserMessage("Y RESULT OVER FAIL");
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									mc.hdc.displayUserMessage("X RESULT OVER FAIL");
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
-									}
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
+									sqc = 120; break;
 								}
-								if (Math.Abs(hdcP1Y) > 1000)
+								else
 								{
-									mc.hdc.displayUserMessage("Y RESULT OVER FAIL");
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
-									}
-								}
-								if (Math.Abs(hdcP1T) > 5)
-								{
-									mc.hdc.displayUserMessage("R RESULT OVER FAIL");
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
-									}
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
+									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
 								}
 							}
+							if (Math.Abs(hdcP1T) > 5)
+							{
+								mc.hdc.displayUserMessage("R RESULT OVER FAIL");
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+								{
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
+									sqc = 120; break;
+								}
+								else
+								{
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
+									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
+								}
+							}
+#endregion
 							#endregion
 
 							#region HDC.PADC3.req
@@ -14591,115 +13347,60 @@ namespace PSA_SystemLibrary
 									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "]";
 									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_VISION_PROCESS_FAIL); break;
 								}
-							}
-							if (dev.debug)
+                            }
+                            #region HDC Position Check
+                            if (Math.Abs(hdcP1X) > 1000)
 							{
-								if (Math.Abs(hdcP1X) > 2000)
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
-									}
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
+									sqc = 120; break;
 								}
-								if (Math.Abs(hdcP1Y) > 2000)
+								else
 								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
-									}
-								}
-								if (Math.Abs(hdcP1T) > 10)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
-									}
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
+									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
 								}
 							}
-							else
+							if (Math.Abs(hdcP1Y) > 1000)
 							{
-								if (Math.Abs(hdcP1X) > 1000)
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
-									}
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
+									sqc = 120; break;
 								}
-								if (Math.Abs(hdcP1Y) > 1000)
+								else
 								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C21_Y_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
-									}
-								}
-								if (Math.Abs(hdcP1T) > 5)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
-										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
-									}
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C21_Y_Limit");
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
+									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
 								}
 							}
+							if (Math.Abs(hdcP1T) > 5)
+							{
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+								{
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
+									sqc = 120; break;
+								}
+								else
+								{
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
+									string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
+								}
+							}
+#endregion
 							#endregion
 
 							#region HDC.PADC4.req
@@ -14784,114 +13485,59 @@ namespace PSA_SystemLibrary
 									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_VISION_PROCESS_FAIL); break;
 								}
 							}
-							if (dev.debug)
+							#region HDC Position Check
+                            if (Math.Abs(hdcP1X) > 1000)
 							{
-								if (Math.Abs(hdcP1X) > 2000)
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
-									}
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
+									sqc = 120; break;
 								}
-								if (Math.Abs(hdcP1Y) > 2000)
+								else
 								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
-									}
-								}
-								if (Math.Abs(hdcP1T) > 10)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
-									}
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
+									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
 								}
 							}
-							else
+							if (Math.Abs(hdcP1Y) > 1000)
 							{
-								if (Math.Abs(hdcP1X) > 1000)
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
-									}
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
+									sqc = 120; break;
 								}
-								if (Math.Abs(hdcP1Y) > 1000)
+								else
 								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C21_Y_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
-									}
-								}
-								if (Math.Abs(hdcP1T) > 5)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
-									}
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C21_Y_Limit");
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
+									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
 								}
 							}
+							if (Math.Abs(hdcP1T) > 5)
+							{
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+								{
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
+									sqc = 120; break;
+								}
+								else
+								{
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
+									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
+								}
+							}
+                            #endregion
 							#endregion
 
 							#region HDC.PADC4.req
@@ -14973,114 +13619,59 @@ namespace PSA_SystemLibrary
 									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_VISION_PROCESS_FAIL); break;
 								}
 							}
-							if (dev.debug)
+							#region HDC Position Check
+                            if (Math.Abs(hdcP1X) > 1000)
 							{
-								if (Math.Abs(hdcP1X) > 2000)
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
-									}
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
+									sqc = 120; break;
 								}
-								if (Math.Abs(hdcP1Y) > 2000)
+								else
 								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
-									}
-								}
-								if (Math.Abs(hdcP1T) > 10)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
-										string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
-									}
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
+									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
 								}
 							}
-							else
+							if (Math.Abs(hdcP1Y) > 1000)
 							{
-								if (Math.Abs(hdcP1X) > 1000)
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
-									}
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
+									sqc = 120; break;
 								}
-								if (Math.Abs(hdcP1Y) > 1000)
+								else
 								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
-									}
-								}
-								if (Math.Abs(hdcP1T) > 5)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
-									}
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
+									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
 								}
 							}
+							if (Math.Abs(hdcP1T) > 5)
+							{
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+								{
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
+									sqc = 120; break;
+								}
+								else
+								{
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
+									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
+								}
+							}
+                            #endregion
 							#endregion
 
 							#region HDC.PADC3.req
@@ -15253,153 +13844,80 @@ namespace PSA_SystemLibrary
 							//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "]";
 							errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_VISION_PROCESS_FAIL); break;
 						}
-					}
-					if (dev.debug)
+					}					
+                    #region HDC Position Check
+					if (Math.Abs(hdcP2X) > 1000)
 					{
-						if (Math.Abs(hdcP2X) > 2000)
+						mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1}um", hdcP2X));
+						if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 						{
-							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1}um", hdcP2X));
-							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
-								sqc = 120; break;
-							}
-							else
-							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
-								tempSb.Clear(); tempSb.Length = 0;
-								tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2X);
-								//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2X).ToString() + "]";
-								errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
-							}
+							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
+							sqc = 120; break;
 						}
-						if (Math.Abs(hdcP2Y) > 2000)
+						else
 						{
-							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1}um", hdcP2Y));
-							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
-								sqc = 120; break;
-							}
-							else
-							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
-								tempSb.Clear(); tempSb.Length = 0;
-								tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2Y);
-								//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2Y).ToString() + "]";
-								errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
-							}
-						}
-						if (Math.Abs(hdcP2T) > 10)
-						{
-							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1}degree", hdcP2T));
-							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_T_Limit");
-								sqc = 120; break;
-							}
-							else
-							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_T_Limit");
-								tempSb.Clear(); tempSb.Length = 0;
-								tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2T);
-								//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2T).ToString() + "]";
-								errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
-							}
-						}
-						if (Math.Abs(hdcP1X - hdcP2X) > mc.para.MT.padCheckLimit.value || Math.Abs(hdcP1Y - hdcP2Y) > mc.para.MT.padCheckLimit.value)
-						{
+							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
 							tempSb.Clear(); tempSb.Length = 0;
-							tempSb.AppendFormat("PadX[{0}],PadY[{1}] - P1-P2 : {2:F2}, {3:F2}", (padX + 1), (padY + 1), hdcP1X - hdcP2X, hdcP1Y - hdcP2Y);
-							//string str = "HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString();
-							mc.log.debug.write(mc.log.CODE.EVENT, tempSb.ToString());
-							//EVENT.statusDisplay("HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString());
-							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
-								sqc = 120; break;
-							}
-							else
-							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
-								//str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y - hdcP2T).ToString() + "]";
-								errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_PAD_SIZE_OVER); break;
-							}
+							tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2X);
+							//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2X).ToString() + "]";
+							errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
 						}
 					}
-					else
+					if (Math.Abs(hdcP2Y) > 1000)
 					{
-						if (Math.Abs(hdcP2X) > 1000)
+						mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1}um", hdcP2Y));
+						if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 						{
-							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1}um", hdcP2X));
-							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
-								sqc = 120; break;
-							}
-							else
-							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
-								tempSb.Clear(); tempSb.Length = 0;
-								tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2X);
-								//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2X).ToString() + "]";
-								errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
-							}
+							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
+							sqc = 120; break;
 						}
-						if (Math.Abs(hdcP2Y) > 1000)
+						else
 						{
-							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1}um", hdcP2Y));
-							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
-								sqc = 120; break;
-							}
-							else
-							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
-								tempSb.Clear(); tempSb.Length = 0;
-								tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2Y);
-								//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2Y).ToString() + "]";
-								errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
-							}
-						}
-						if (Math.Abs(hdcP2T) > 5)
-						{
-							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1}degree", hdcP2T));
-							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_T_Limit");
-								sqc = 120; break;
-							}
-							else
-							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_T_Limit");
-								tempSb.Clear(); tempSb.Length = 0;
-								tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2T);
-								//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2T).ToString() + "]";
-								errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
-							}
-						}
-						if (Math.Abs(hdcP1X - hdcP2X) > mc.para.MT.padCheckLimit.value || Math.Abs(hdcP1Y - hdcP2Y) > mc.para.MT.padCheckLimit.value)
-						{
+							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
 							tempSb.Clear(); tempSb.Length = 0;
-							tempSb.AppendFormat("PadX[{0}],PadY[{1}] - P1-P2 : {2:F2}, {3:F2}", (padX + 1), (padY + 1), hdcP1X - hdcP2X, hdcP1Y - hdcP2Y);
-							//string str = "HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString();
-							mc.log.debug.write(mc.log.CODE.EVENT, tempSb.ToString());
-							//EVENT.statusDisplay("HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString());
-							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
-								sqc = 120; break;
-							}
-							else
-							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
-								//str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y - hdcP2T).ToString() + "]";
-								errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_PAD_SIZE_OVER); break;
-							}
+							tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2Y);
+							//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2Y).ToString() + "]";
+							errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
 						}
 					}
+					if (Math.Abs(hdcP2T) > 5)
+					{
+						mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1}degree", hdcP2T));
+						if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+						{
+							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_T_Limit");
+							sqc = 120; break;
+						}
+						else
+						{
+							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_T_Limit");
+							tempSb.Clear(); tempSb.Length = 0;
+							tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2T);
+							//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2T).ToString() + "]";
+							errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
+						}
+					}
+					if (Math.Abs(hdcP1X - hdcP2X) > mc.para.MT.padCheckLimit.value || Math.Abs(hdcP1Y - hdcP2Y) > mc.para.MT.padCheckLimit.value)
+					{
+						tempSb.Clear(); tempSb.Length = 0;
+						tempSb.AppendFormat("PadX[{0}],PadY[{1}] - P1-P2 : {2:F2}, {3:F2}", (padX + 1), (padY + 1), hdcP1X - hdcP2X, hdcP1Y - hdcP2Y);
+						//string str = "HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString();
+						mc.log.debug.write(mc.log.CODE.EVENT, tempSb.ToString());
+						//EVENT.statusDisplay("HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString());
+						if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+						{
+							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
+							sqc = 120; break;
+						}
+						else
+						{
+							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
+							//str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y - hdcP2T).ToString() + "]";
+							errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_PAD_SIZE_OVER); break;
+						}
+					}
+                    #endregion
+
 					hdcX = (hdcP1X + hdcP2X) / 2;
 					hdcY = (hdcP1Y + hdcP2Y) / 2;
 					hdcT = (hdcP1T + hdcP2T) / 2;
@@ -16286,115 +14804,60 @@ namespace PSA_SystemLibrary
 								//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "]";
 								errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_VISION_PROCESS_FAIL); break;
 							}
-						}
-						if (dev.debug)
+                        }
+                        #region HDC Position Check
+                        if (Math.Abs(hdcP1X) > 1000)
 						{
-							if (Math.Abs(hdcP1X) > 2000)
+							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
+							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-									tempSb.Clear(); tempSb.Length = 0;
-									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
-									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
-								}
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
+								sqc = 120; break;
 							}
-							if (Math.Abs(hdcP1Y) > 2000)
+							else
 							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-									tempSb.Clear(); tempSb.Length = 0;
-									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
-									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
-								}
-							}
-							if (Math.Abs(hdcP1T) > 10)
-							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-									tempSb.Clear(); tempSb.Length = 0;
-									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
-									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
-								}
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
+								tempSb.Clear(); tempSb.Length = 0;
+								tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
+								//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
+								errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
 							}
 						}
-						else
+						if (Math.Abs(hdcP1Y) > 1000)
 						{
-							if (Math.Abs(hdcP1X) > 1000)
+							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
+							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-									tempSb.Clear(); tempSb.Length = 0;
-									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
-									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
-								}
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
+								sqc = 120; break;
 							}
-							if (Math.Abs(hdcP1Y) > 1000)
+							else
 							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-									tempSb.Clear(); tempSb.Length = 0;
-									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
-									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
-								}
-							}
-							if (Math.Abs(hdcP1T) > 5)
-							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-									tempSb.Clear(); tempSb.Length = 0;
-									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
-									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
-								}
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
+								tempSb.Clear(); tempSb.Length = 0;
+								tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
+								//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
+								errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
 							}
 						}
+						if (Math.Abs(hdcP1T) > 5)
+						{
+							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
+							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+							{
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
+								sqc = 120; break;
+							}
+							else
+							{
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
+								tempSb.Clear(); tempSb.Length = 0;
+								tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
+								//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
+								errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
+							}
+						}
+                        #endregion
 						#endregion
 						#region HDC.PADC3.req
 						hdcP2X = 0;
@@ -16473,115 +14936,60 @@ namespace PSA_SystemLibrary
 								//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "]";
 								errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_VISION_PROCESS_FAIL); break;
 							}
-						}
-						if (dev.debug)
+						}						
+                        #region HDC Position Check
+						if (Math.Abs(hdcP1X) > 1000)
 						{
-							if (Math.Abs(hdcP1X) > 2000)
+							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
+							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-									tempSb.Clear(); tempSb.Length = 0;
-									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
-									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
-								}
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
+								sqc = 120; break;
 							}
-							if (Math.Abs(hdcP1Y) > 2000)
+							else
 							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
-									tempSb.Clear(); tempSb.Length = 0;
-									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
-									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
-								}
-							}
-							if (Math.Abs(hdcP1T) > 10)
-							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-									tempSb.Clear(); tempSb.Length = 0;
-									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
-									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
-								}
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
+								tempSb.Clear(); tempSb.Length = 0;
+								tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
+								//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
+								errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
 							}
 						}
-						else
+						if (Math.Abs(hdcP1Y) > 1000)
 						{
-							if (Math.Abs(hdcP1X) > 1000)
+							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
+							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-									tempSb.Clear(); tempSb.Length = 0;
-									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
-									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
-								}
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
+								sqc = 120; break;
 							}
-							if (Math.Abs(hdcP1Y) > 1000)
+							else
 							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C21_Y_Limit");
-									tempSb.Clear(); tempSb.Length = 0;
-									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
-									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
-								}
-							}
-							if (Math.Abs(hdcP1T) > 5)
-							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-									tempSb.Clear(); tempSb.Length = 0;
-									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
-									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
-								}
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C21_Y_Limit");
+								tempSb.Clear(); tempSb.Length = 0;
+								tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
+								//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
+								errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
 							}
 						}
+						if (Math.Abs(hdcP1T) > 5)
+						{
+							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
+							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+							{
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
+								sqc = 120; break;
+							}
+							else
+							{
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
+								tempSb.Clear(); tempSb.Length = 0;
+								tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
+								//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
+								errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
+							}
+						}
+                        #endregion
 						#endregion
 						#region HDC.PADC4.req
 						hdcP2X = 0;
@@ -18096,6 +16504,7 @@ namespace PSA_SystemLibrary
 					Esqc = 0;
 					sqc++; break;
 				case 1:
+                    if (UtilityControl.simulation) { sqc = SQC.STOP; break; }
 					#region Set method
 					if ((int)mc.para.CV.trayReverseCheckMethod1.value == 0) sqc = 10;
 					else sqc = 20;
@@ -18296,6 +16705,7 @@ namespace PSA_SystemLibrary
 					Esqc = 0;
 					sqc++; break;
 				case 1:
+                    if (UtilityControl.simulation) { sqc = SQC.STOP; break; }
 					#region Set method
 					if ((int)mc.para.CV.trayReverseCheckMethod2.value == 0) sqc = 10;
 					else sqc = 20;
@@ -20452,7 +18862,7 @@ namespace PSA_SystemLibrary
 					tmpRegion.column2 = mc.ulc.cam.acq.width * 0.9;
 					mc.ulc.cam.createRectangleCenter(tmpRegion);
 					mc.ulc.lighting_exposure(mc.para.ULC.model.light, mc.para.ULC.model.exposureTime);
-					mc.ulc.req = true; mc.ulc.reqMode = REQMODE.FIND_RECTANGLE_HS;
+					mc.ulc.req = true; mc.ulc.reqMode = REQMODE.FIND_RECTANGLE;
 					#endregion
 					dwell.Reset();
 					sqc++; break;
@@ -20665,7 +19075,7 @@ namespace PSA_SystemLibrary
 					tmpRegion.column2 = mc.ulc.cam.acq.width * 0.9;
 					mc.ulc.cam.createRectangleCenter(tmpRegion);
 					mc.ulc.lighting_exposure(mc.para.ULC.model.light, mc.para.ULC.model.exposureTime);
-					mc.ulc.req = true; mc.ulc.reqMode = REQMODE.FIND_RECTANGLE_HS;
+					mc.ulc.req = true; mc.ulc.reqMode = REQMODE.FIND_RECTANGLE;
 					#endregion
 					dwell.Reset();
 					sqc++; break;
@@ -21026,7 +19436,7 @@ namespace PSA_SystemLibrary
 						}
 						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
 						{
-							mc.ulc.reqMode = REQMODE.FIND_RECTANGLE_HS;
+							mc.ulc.reqMode = REQMODE.FIND_RECTANGLE;
 						}
 						else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CIRCLE)
 						{
@@ -22195,8 +20605,10 @@ namespace PSA_SystemLibrary
 				else if (tubeNumber == UnitCodeSF.SF4) tmp += (double)MP_HD_X.SF_TUBE4_4SLOT;
 				else tmp += (double)MP_HD_X.SF_TUBE1_4SLOT;
 			}
-			double tmpPos = mc.para.CAL.pick[(int)tubeNumber].x.value;
-			tmp += tmpPos;
+            if (tubeNumber == UnitCodeSF.SF2) tmp += mc.para.CAL.pick[(int)UnitCodeSF.SF2].x.value;
+            else if (tubeNumber == UnitCodeSF.SF3) tmp += mc.para.CAL.pick[(int)UnitCodeSF.SF3].x.value;
+            else if (tubeNumber == UnitCodeSF.SF4) tmp += mc.para.CAL.pick[(int)UnitCodeSF.SF4].x.value;
+            else tmp += mc.para.CAL.pick[(int)UnitCodeSF.SF1].x.value;
 			#endregion
 			return tmp;
 		}
@@ -22433,8 +20845,11 @@ namespace PSA_SystemLibrary
 			else if (tubeNumber == UnitCodeSF.SF3) tmp += (double)MP_HD_Y.SF_TUBE3;
 			else if (tubeNumber == UnitCodeSF.SF4) tmp += (double)MP_HD_Y.SF_TUBE4;
 			else tmp += (double)MP_HD_Y.SF_TUBE1;
-			double tmpPos = mc.para.CAL.pick[(int)tubeNumber].y.value;
-			tmp += tmpPos;
+
+            if (tubeNumber == UnitCodeSF.SF2) tmp += mc.para.CAL.pick[(int)UnitCodeSF.SF2].y.value;
+            else if (tubeNumber == UnitCodeSF.SF3) tmp += mc.para.CAL.pick[(int)UnitCodeSF.SF3].y.value;
+            else if (tubeNumber == UnitCodeSF.SF4) tmp += mc.para.CAL.pick[(int)UnitCodeSF.SF4].y.value;
+            else tmp += mc.para.CAL.pick[(int)UnitCodeSF.SF1].y.value;
 			#endregion
 			return tmp;
 		}
@@ -22679,7 +21094,11 @@ namespace PSA_SystemLibrary
 				else if (tubeNumber == UnitCodeSF.SF4) tmp += (double)MP_HD_X.SF_TUBE4_4SLOT + mc.para.HD.pick.offset[(int)UnitCodeSF.SF4].x.value;
 				else tmp += (double)MP_HD_X.SF_TUBE1_4SLOT + mc.para.HD.pick.offset[(int)UnitCodeSF.SF1].x.value;
 			}
-			tmp += mc.para.CAL.pick[(int)tubeNumber].x.value;
+            if (tubeNumber == UnitCodeSF.SF2) tmp += mc.para.CAL.pick[(int)UnitCodeSF.SF2].x.value;
+            else if (tubeNumber == UnitCodeSF.SF3) tmp += mc.para.CAL.pick[(int)UnitCodeSF.SF3].x.value;
+            else if (tubeNumber == UnitCodeSF.SF4) tmp += mc.para.CAL.pick[(int)UnitCodeSF.SF4].x.value;
+            else tmp += mc.para.CAL.pick[(int)UnitCodeSF.SF1].x.value;
+			
 			#endregion
 			return tmp;
 		}
@@ -22892,7 +21311,10 @@ namespace PSA_SystemLibrary
 			else if (tubeNumber == UnitCodeSF.SF3) tmp += (double)MP_HD_Y.SF_TUBE3 + mc.para.HD.pick.offset[(int)UnitCodeSF.SF3].y.value;
 			else if (tubeNumber == UnitCodeSF.SF4) tmp += (double)MP_HD_Y.SF_TUBE4 + mc.para.HD.pick.offset[(int)UnitCodeSF.SF4].y.value;
 			else tmp += (double)MP_HD_Y.SF_TUBE1;
-			tmp += mc.para.CAL.pick[(int)tubeNumber].y.value;
+            if (tubeNumber == UnitCodeSF.SF2) tmp += mc.para.CAL.pick[(int)UnitCodeSF.SF2].y.value;
+            else if (tubeNumber == UnitCodeSF.SF3) tmp += mc.para.CAL.pick[(int)UnitCodeSF.SF3].y.value;
+            else if (tubeNumber == UnitCodeSF.SF4) tmp += mc.para.CAL.pick[(int)UnitCodeSF.SF4].y.value;
+            else tmp += mc.para.CAL.pick[(int)UnitCodeSF.SF1].y.value;
 			#endregion
 			return tmp;
 		}

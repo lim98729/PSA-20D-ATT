@@ -771,22 +771,30 @@ namespace PSA_SystemLibrary
 
 			if (sqc > 100 && sqc < 200)
 			{
-				mc.IN.CV.BD_OUT(out ret.b, out ret.message);
-				if (ret.b)
-				{
-					if (setTime.Elapsed > 50) sqc = 200;	// 100 msec filter
-				}
-				else
-				{
-					setTime.Reset();
-				}
+                if (dev.NotExistHW.ZMP)
+                {
+                    mc.idle(2000);
+                    sqc = 200;
+                }
+                else
+                {
+                    mc.IN.CV.BD_OUT(out ret.b, out ret.message);
+                    if (ret.b)
+                    {
+                        if (setTime.Elapsed > 50) sqc = 200;	// 100 msec filter
+                    }
+                    else
+                    {
+                        setTime.Reset();
+                    }
+                }
 			}
 
 			switch (sqc)
 			{
 				case 0:
-					Esqc = 0;
-					sqc++; break;
+                    Esqc = 0;
+                    sqc++; break;
 				case 1:
 					if (reqMode == REQMODE.DUMY) { sqc = 10; break; }
 					if (reqMode == REQMODE.AUTO) { sqc = 100; break; }
@@ -922,8 +930,16 @@ namespace PSA_SystemLibrary
 			switch (sqc)
 			{
 				case 0:
-					Esqc = 0;
-					sqc++; break;
+                    if (dev.NotExistHW.ZMP)
+                    {
+                        sqc = 201;
+                        break;
+                    }
+                    else
+                    {
+                        Esqc = 0;
+                        sqc++; break;
+                    }
 				case 1:
 					if (reqMode == REQMODE.DUMY) { sqc = 10; break; }
 					if (reqMode == REQMODE.AUTO) { sqc = 100; break; }

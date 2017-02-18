@@ -104,6 +104,18 @@ namespace PSA_Application
                 QueryTimer dwell = new QueryTimer();
                 if (ret.message == RetMessage.OK)
                 {
+					for (int i = 0; i < (int)MAX_COUNT.BLOB; i++)
+					{
+						if (mc.hdc.cam.epoxyBlob[i].isCreate == "true")
+						{
+							mc.para.setting(ref  mc.para.EPOXY.baseX[i], mc.hdc.cam.epoxyBlob[i].resultX);
+							mc.para.setting(ref  mc.para.EPOXY.baseY[i], mc.hdc.cam.epoxyBlob[i].resultY);
+							mc.para.setting(ref  mc.para.EPOXY.baseAmount[i], mc.hdc.cam.epoxyBlob[i].resultArea);
+							mc.hdc.cam.epoxyBlob[i].baseArea = mc.para.EPOXY.baseAmount[i].value;
+							mc.hdc.cam.writeBlob(i);
+						}
+					}
+					
                     mc.hdc.cam.refresh_reqMode = REFRESH_REQMODE.FIND_EPOXY;
                     mc.hdc.cam.refresh_req = true;
                     mc.main.Thread_Polling();
@@ -119,18 +131,11 @@ namespace PSA_Application
                         }
                         if (mc.hdc.cam.refresh_req == false) break;
                     }
-
-                    for (int i = 0; i < (int)MAX_COUNT.BLOB; i++)
-                    {
-                        mc.para.setting(ref  mc.para.EPOXY.baseX[i], mc.hdc.cam.epoxyBlob[i].resultX);
-                        mc.para.setting(ref  mc.para.EPOXY.baseY[i], mc.hdc.cam.epoxyBlob[i].resultY);
-                        mc.para.setting(ref  mc.para.EPOXY.baseAmount[i], mc.hdc.cam.epoxyBlob[i].resultArea);
-                    }
                 }
             }
 			if (sender.Equals(BT_Model_Delete))
 			{
-                //mc.hdc.cam.epoxyBlob[0].delete();
+                mc.hdc.cam.epoxyBlob[0].delete();
 			}
 			if (sender.Equals(BT_EPOXY_FIND))
 			{
@@ -163,6 +168,7 @@ namespace PSA_Application
 					if (ret.message == RetMessage.OK) mc.log.debug.write(mc.log.CODE.ETC, "Epoxy Check Result(x, y, area) : " + rX + ", " + rY + ", " + rArea);
 					else
 					{
+						mc.hdc.displayUserMessage(ret.s);
 						mc.message.alarm(ret.s);
 					}
 				}
@@ -335,7 +341,7 @@ namespace PSA_Application
 				InitListview();
 				for (int i = 0; i < (int)MAX_COUNT.BLOB; i++)
 				{
-					if (mc.hdc.cam.epoxyBlob[i].isCreate == "true")
+                    if (mc.hdc.cam.epoxyBlob[i].isCreate != null && mc.hdc.cam.epoxyBlob[i].isCreate == "true")
 					{
 						AddColumnList("Box" + i.ToString());
 					}
@@ -892,7 +898,7 @@ namespace PSA_Application
                     mc.hd.tool.padY = padIndexY;
                     mc.hdc.LIVE = false;
 
-					mc.hdc.cam.grabSofrwareTrigger();
+					//mc.hdc.cam.grabSofrwareTrigger();
 
                     count = LV_Area_List.Items.Count;
                     int[] nextCount = new int[count];
@@ -922,6 +928,8 @@ namespace PSA_Application
                     while (true) { mc.idle(100); if (ff.IsDisposed) break; }
 
                     this.Enabled = true;
+
+					//mc.hdc.LIVE = false;
                 }
                 catch (Exception err)
                 {
@@ -949,22 +957,6 @@ namespace PSA_Application
                 {
                 }
             }
-            if (sender.Equals(BT_EPOXY_Delete))
-            {
-                int temp;
-
-                try
-                {
-                    temp = LV_Area_List.SelectedItems[0].Index;
-                    temp = Convert.ToInt32(LV_Area_List.Items[temp].Text.Remove(0, 3));
-                    mc.hdc.cam.deleteBlob(temp);
-                    LV_Area_List.SelectedItems[0].Remove();
-                }
-                catch
-                {
-                    MessageBox.Show("Please select item");
-                }
-            }
             if (sender.Equals(BT_EPOXY_Delete_All))
             {
                 try
@@ -988,6 +980,24 @@ namespace PSA_Application
             
             mc.error.CHECK();
             mc.check.push(sender, false);
-        }
+		}
+
+		private void BT_EPOXY_Delete_Click(object sender, EventArgs e)
+		{
+			int temp;
+
+			try
+			{
+				temp = LV_Area_List.SelectedItems[0].Index;
+				temp = Convert.ToInt32(LV_Area_List.Items[temp].Text.Remove(0, 3));
+				mc.hdc.cam.deleteBlob(temp);
+				LV_Area_List.SelectedItems[0].Remove();
+			}
+			catch
+			{
+				MessageBox.Show("Please select item");
+			}
+			refresh();
+		}
 	}
 }

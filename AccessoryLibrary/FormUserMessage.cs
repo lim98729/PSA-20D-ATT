@@ -20,12 +20,16 @@ namespace AccessoryLibrary
 		DIAG_SEL_MODE dialogMode;
 		public static DIAG_RESULT diagResult;
 
-		public void SetDisplayItems(DIAG_SEL_MODE dlgMode, DIAG_ICON_MODE iconMode, string dispMessage)
+		public void SetDisplayItems(DIAG_SEL_MODE dlgMode, DIAG_ICON_MODE iconMode, string dispMessage, string text1 = "", string text2 = "", string text3 = "")
 		{
 			if (iconMode == DIAG_ICON_MODE.FAILURE) PB_InformImage.Image = Properties.Resources.Failure;
 			else if (iconMode == DIAG_ICON_MODE.INFORMATION) PB_InformImage.Image = Properties.Resources.Information;
 			else if (iconMode == DIAG_ICON_MODE.QUESTION) PB_InformImage.Image = Properties.Resources.Question;
 			else if (iconMode == DIAG_ICON_MODE.WARNING) PB_InformImage.Image = Properties.Resources.Warning;
+
+			BT_SELECT1.Text = text1;
+			BT_SELECT2.Text = text2;
+			BT_SELECT3.Text = text3;
 
 			if (dlgMode == DIAG_SEL_MODE.OK)
 			{
@@ -76,7 +80,15 @@ namespace AccessoryLibrary
 				BT_SELECT3.Text = "그냥 작업";
 				BT_SELECT3.Visible = true;
 			}
-
+			else if (dlgMode == DIAG_SEL_MODE.Sel1Sel2Sel3)
+			{
+				BT_SELECT1.Text = text1;
+				BT_SELECT1.Visible = true;
+				BT_SELECT2.Text = text2;
+				BT_SELECT2.Visible = true;
+				BT_SELECT3.Text = text3;
+				BT_SELECT3.Visible = true;
+			}
 			LB_InformMessage.Text = dispMessage;
 
 			dialogMode = dlgMode;
@@ -92,6 +104,7 @@ namespace AccessoryLibrary
 				else if (dialogMode == DIAG_SEL_MODE.YesNoCancel) diagResult = DIAG_RESULT.Yes;
 				else if (dialogMode == DIAG_SEL_MODE.NextCancel) diagResult = DIAG_RESULT.Next;
 				else if (dialogMode == DIAG_SEL_MODE.RetryAbortSkip) diagResult = DIAG_RESULT.Retry;
+				else if (dialogMode == DIAG_SEL_MODE.Sel1Sel2Sel3) diagResult = DIAG_RESULT.Sel1;
 				this.Close();
 			}
 			if (sender.Equals(BT_SELECT2))
@@ -102,6 +115,7 @@ namespace AccessoryLibrary
 				else if (dialogMode == DIAG_SEL_MODE.YesNoCancel) diagResult = DIAG_RESULT.No;
 				else if (dialogMode == DIAG_SEL_MODE.NextCancel) diagResult = DIAG_RESULT.INVALID;
 				else if (dialogMode == DIAG_SEL_MODE.RetryAbortSkip) diagResult = DIAG_RESULT.Abort;
+				else if (dialogMode == DIAG_SEL_MODE.Sel1Sel2Sel3) diagResult = DIAG_RESULT.Sel2;
 				this.Close();
 			}
 			if (sender.Equals(BT_SELECT3))
@@ -112,6 +126,7 @@ namespace AccessoryLibrary
 				else if (dialogMode == DIAG_SEL_MODE.YesNoCancel) diagResult = DIAG_RESULT.Cancel;
 				else if (dialogMode == DIAG_SEL_MODE.NextCancel) diagResult = DIAG_RESULT.Cancel;
 				else if (dialogMode == DIAG_SEL_MODE.RetryAbortSkip) diagResult = DIAG_RESULT.Skip;
+				else if (dialogMode == DIAG_SEL_MODE.Sel1Sel2Sel3) diagResult = DIAG_RESULT.Sel3;
 				this.Close();
 			}
 		}

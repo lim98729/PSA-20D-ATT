@@ -1140,6 +1140,7 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "ETC";
             this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabPage3.DoubleClick += new System.EventHandler(this.tabPage3_DoubleClick);
             // 
             // timerRefresh
             // 

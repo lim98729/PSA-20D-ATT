@@ -76,28 +76,28 @@ namespace PSA_Application
 				for (int i = 0; i < mc.para.TWR.MAX_CTL_VALUE; i++)
 				{
 					str = GV_TowerLamp.Rows[i].Cells[1].Value.ToString();
-					if (str == "OFF") tempVal = 0;
-					else if (str == "ON") tempVal = 1;
-					else if (str == "Flicker") tempVal = 2;
+                    if (str == STATUS_LAMP.OFF.ToString()) tempVal = (int)STATUS_LAMP.OFF;
+                    else if (str == STATUS_LAMP.ON.ToString()) tempVal = (int)STATUS_LAMP.ON;
+                    else if (str == STATUS_LAMP.Flicker.ToString()) tempVal = (int)STATUS_LAMP.Flicker;
 					else { resultFlag = false; break; }
 					mc.para.TWR.ctlValue[i].red.value = tempVal;
 					str = GV_TowerLamp.Rows[i].Cells[2].Value.ToString();
-					if (str == "OFF") tempVal = 0;
-					else if (str == "ON") tempVal = 1;
-					else if (str == "Flicker") tempVal = 2;
-					else { resultFlag = false; break; }
+                    if (str == STATUS_LAMP.OFF.ToString()) tempVal = (int)STATUS_LAMP.OFF;
+                    else if (str == STATUS_LAMP.ON.ToString()) tempVal = (int)STATUS_LAMP.ON;
+                    else if (str == STATUS_LAMP.Flicker.ToString()) tempVal = (int)STATUS_LAMP.Flicker; 
+                    else { resultFlag = false; break; }
 					mc.para.TWR.ctlValue[i].yellow.value = tempVal;
 					str = GV_TowerLamp.Rows[i].Cells[3].Value.ToString();
-					if (str == "OFF") tempVal = 0;
-					else if (str == "ON") tempVal = 1;
-					else if (str == "Flicker") tempVal = 2;
-					else { resultFlag = false; break; }
+                    if (str == STATUS_LAMP.OFF.ToString()) tempVal = (int)STATUS_LAMP.OFF;
+                    else if (str == STATUS_LAMP.ON.ToString()) tempVal = (int)STATUS_LAMP.ON;
+                    else if (str == STATUS_LAMP.Flicker.ToString()) tempVal = (int)STATUS_LAMP.Flicker; 
+                    else { resultFlag = false; break; }
 					mc.para.TWR.ctlValue[i].green.value = tempVal;
 					str = GV_TowerLamp.Rows[i].Cells[4].Value.ToString();
-					if (str == "OFF") tempVal = 0;
-					else if (str == "ON") tempVal = 1;
-					else if (str == "Flicker") tempVal = 2;
-					else { resultFlag = false; break; }
+                    if (str == STATUS_LAMP.OFF.ToString()) tempVal = (int)STATUS_LAMP.OFF;
+                    else if (str == STATUS_LAMP.ON.ToString()) tempVal = (int)STATUS_LAMP.ON;
+                    else if (str == STATUS_LAMP.Flicker.ToString()) tempVal = (int)STATUS_LAMP.Flicker; 
+                    else { resultFlag = false; break; }
 					mc.para.TWR.ctlValue[i].buzzer.value = tempVal;
 				}
 				if (resultFlag)

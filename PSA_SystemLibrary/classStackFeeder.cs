@@ -308,6 +308,10 @@ namespace PSA_SystemLibrary
 
                 #region AUTO
                 case SQC.AUTO:
+                    feeder[(int)UnitCodeSFMG.MG1].readyDone = false;
+                    feeder[(int)UnitCodeSFMG.MG2].readyDone = false;
+                    sqc++; break;
+                case SQC.AUTO + 1:
                     if (workingTubeNumber == UnitCodeSF.INVALID) 
                     {
                         errorCheck(ERRORCODE.SF, sqc, "", ALARM_CODE.E_MACHINE_RUN_HEAT_SLUG_EMPTY);
@@ -316,14 +320,16 @@ namespace PSA_SystemLibrary
                     if (mc.para.SF.useMGZ1.value == 1) feeder[(int)UnitCodeSFMG.MG1].feaderReady();
                     if (mc.para.SF.useMGZ2.value == 1) feeder[(int)UnitCodeSFMG.MG2].feaderReady();
 
-                    if (feeder[(int)UnitCodeSFMG.MG1].RUNING || feeder[(int)UnitCodeSFMG.MG2].RUNING) break;
+                    if (!feeder[(int)UnitCodeSFMG.MG1].readyDone || !feeder[(int)UnitCodeSFMG.MG2].readyDone) break;
                     if (feeder[(int)UnitCodeSFMG.MG1].ERROR || feeder[(int)UnitCodeSFMG.MG2].ERROR)
                     {
-                        Esqc = sqc; sqc = SQC.HOMING_ERROR; break; 
+                        Esqc = sqc; sqc = SQC.ERROR; break; 
                     }
                     if (feeder[(int)UnitCodeSFMG.MG1].feederEmpty) magazineClear(UnitCodeSFMG.MG1);
                     if (feeder[(int)UnitCodeSFMG.MG2].feederEmpty) magazineClear(UnitCodeSFMG.MG2);
                     sqc = SQC.STOP; break;
+                case SQC.AUTO + 2:
+                    break;
                 #endregion
 
                 case SQC.ERROR:
@@ -347,7 +353,7 @@ namespace PSA_SystemLibrary
         public double _FeederZ = new double();
         public double _Z = new double();
         public bool feederEmpty = false;
-
+        public bool readyDone = false;
         public captureHoming homingZ = new captureHoming();
         
         public classStackFeederPosition pos = new classStackFeederPosition();
@@ -433,6 +439,19 @@ namespace PSA_SystemLibrary
                     feederEmpty = false;
                     sqc = 10; break;
                 case 10:
+                    if (mc.sf.tubeStatus(unitCodeSF1) == SF_TUBE_STATUS.INVALID && mc.sf.tubeStatus(unitCodeSF2) == SF_TUBE_STATUS.INVALID)
+                    {
+                        sqc = SQC.STOP; break;
+                    }
+                    if (UtilityControl.simulation)
+                    {
+                        if (mc.sf.workingTubeNumber == unitCodeSF1 || mc.sf.workingTubeNumber == unitCodeSF2)
+                        {
+                            mc.sf.tubeStatus(unitCodeSF1, SF_TUBE_STATUS.WORKING);
+                            mc.sf.tubeStatus(unitCodeSF2, SF_TUBE_STATUS.READY);
+                        }
+                        sqc = SQC.STOP; break;
+                    }
                     Z.move(pos.z.FULL_STROKE, out ret.message);
                     dwell.Reset();
                     sqc++; break;
@@ -451,21 +470,27 @@ namespace PSA_SystemLibrary
 
                     if (limitCheck)
                     {
-                        homingZ.req = true;
+                        mc.sf.tubeStatus(unitCodeSF1, SF_TUBE_STATUS.INVALID);
+                        mc.sf.tubeStatus(unitCodeSF2, SF_TUBE_STATUS.INVALID);
+                        Z.move(pos.z.DOWN, out ret.message);
+                        //homingZ.req = true;
                         sqc = 50; break;
                     }
                     if (ret.b1 || ret.b2)
                     {
                         Z.stop(out ret.message);
-                        if (ret.b1)
+                        if (mc.sf.workingTubeNumber == unitCodeSF1 || mc.sf.workingTubeNumber == unitCodeSF2)
                         {
-                            mc.sf.tubeStatus(unitCodeSF1, SF_TUBE_STATUS.WORKING);
-                            mc.sf.tubeStatus(unitCodeSF2, SF_TUBE_STATUS.READY);
-                        }
-                        else if (ret.b2)
-                        {
-                            mc.sf.tubeStatus(unitCodeSF1, SF_TUBE_STATUS.READY);
-                            mc.sf.tubeStatus(unitCodeSF2, SF_TUBE_STATUS.WORKING);
+                            if (ret.b1)
+                            {
+                                mc.sf.tubeStatus(unitCodeSF1, SF_TUBE_STATUS.WORKING);
+                                mc.sf.tubeStatus(unitCodeSF2, SF_TUBE_STATUS.READY);
+                            }
+                            else if (ret.b2)
+                            {
+                                mc.sf.tubeStatus(unitCodeSF1, SF_TUBE_STATUS.READY);
+                                mc.sf.tubeStatus(unitCodeSF2, SF_TUBE_STATUS.WORKING);
+                            }
                         }
                         dwell.Reset(); sqc++; break;
                     }
@@ -559,7 +584,10 @@ namespace PSA_SystemLibrary
 
                     if (limitCheck)
                     {
-                        homingZ.req = true;
+                        mc.sf.tubeStatus(unitCodeSF1, SF_TUBE_STATUS.INVALID);
+                        mc.sf.tubeStatus(unitCodeSF2, SF_TUBE_STATUS.INVALID);
+                        Z.move(pos.z.DOWN, out ret.message);
+                        //homingZ.req = true;
                         sqc = 50;
                     }
                     if (ret.b1 || ret.b2)
@@ -615,12 +643,26 @@ namespace PSA_SystemLibrary
                     sqc = SQC.STOP; break;
 
                 case 50:
-                    if (homingZ.RUNING) break;
-                    if (homingZ.ERROR) { Esqc = sqc; sqc = SQC.HOMING_ERROR; break; }
+                    dwell.Reset();
+                    sqc++; break;
+                case 51:
+                    if (!Z_AT_TARGET) break;
+                    dwell.Reset();
+                    sqc++; break;
+                case 52:
+                    if (!Z_AT_DONE) break;
                     Z.reset(out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
                     Z.status(out mpiState, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
                     feederEmpty = true;
                     sqc = SQC.STOP; break;
+
+                case SQC.ERROR:
+                    mc.log.debug.write(mc.log.CODE.ERROR, String.Format("Feeder Ready Esqc {0}", Esqc));
+                    sqc = SQC.STOP; break;
+
+                case SQC.STOP:
+                    readyDone = true;
+                    sqc = SQC.END; break;
             }
         }
 

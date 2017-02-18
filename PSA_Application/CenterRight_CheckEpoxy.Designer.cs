@@ -522,7 +522,7 @@
 			// 
 			resources.ApplyResources(this.BT_EPOXY_Delete, "BT_EPOXY_Delete");
 			this.BT_EPOXY_Delete.Name = "BT_EPOXY_Delete";
-			this.BT_EPOXY_Delete.Click += new System.EventHandler(this.EpoxyEditorControl_Click);
+			this.BT_EPOXY_Delete.Click += new System.EventHandler(this.BT_EPOXY_Delete_Click);
 			// 
 			// BT_EPOXY_Delete_All
 			// 
