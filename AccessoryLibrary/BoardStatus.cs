@@ -228,12 +228,12 @@ namespace AccessoryLibrary
         private Pen outLine = new Pen(Color.Maroon, penSize * 2);
         private Pen dragPen = new Pen(Color.Maroon, penSize * 2);
         private Brush rtColor = new SolidBrush(Color.Gray);
-        private Brush fontColor;
+        //private Brush fontColor;
        
         private Point startPoint;
 
-        private int countX;
-        private int countY;
+        private int countX = 15;
+        private int countY = 6;
         private int padSizeX = 0;
         private int padSizeY = 0;
         private int gapX = 0;
@@ -255,18 +255,14 @@ namespace AccessoryLibrary
         private int[,] selectedPad = new int[40, 40];
         private PAD_STATUS[,] state = new PAD_STATUS[40, 40];
 
-
-        public void setCount(int maxX, int maxY, int selectedX, int selectedY)
+        public void activate(Size size, McTypeFrRr _FrRr, BOARD_ZONE zone, int max_x = 15, int max_y = 6, int selectedX = 0, int selectedY = 0)
         {
-            countX = maxX;
-            countY = maxY;
-            selectedPadX = selectedX;
-            selectedPadY = selectedY;
-        }
-
-        public void activate(Size size, McTypeFrRr _FrRr, BOARD_ZONE zone, int max_x, int max_y, int selectedX = 0, int selectedY = 0)
-        {
-            setCount(max_x, max_y, selectedX, selectedY);
+            try
+            {
+                countX = max_x;
+                countY = max_y;
+                selectedPadX = selectedX;
+                selectedPadY = selectedY;
 
             curPad = new Rectangle[countX, countY];
             this.Size = size;
@@ -287,29 +283,34 @@ namespace AccessoryLibrary
             startX = (padSizeX * countX + gapX * (countX - 1)) / 2;
             startY = (padSizeY * countY + gapY * (countY - 1)) / 2;
 
-            // 그리는 순서는 좌상단 부터 그리지만
-            // 사각형 배열을 장비 좌표에 맞게 뒤집어 저장한다.
-            for (int idY = 0; idY < countY; idY++)
-            {
-                for (int idX = 0; idX < countX; idX++)
+                // 그리는 순서는 좌상단 부터 그리지만
+                // 사각형 배열을 장비 좌표에 맞게 뒤집어 저장한다.
+                for (int idY = 0; idY < countY; idY++)
                 {
-                    if (FrRr == McTypeFrRr.FRONT)
+                    for (int idX = 0; idX < countX; idX++)
                     {
-                        curPad[idX, countY - 1 - idY].X = this.Width / 2 - startX + (padSizeX + gapX) * idX;
-                        curPad[idX, countY - 1 - idY].Y = this.Height / 2 - startY + (padSizeY + gapY) * idY;
-                        curPad[idX, countY - 1 - idY].Width = padSizeX;
-                        curPad[idX, countY - 1 - idY].Height = padSizeY;
-                    }
-                    else
-                    {
-                        curPad[countX - 1 - idX, idY].X = this.Width / 2 - startX + (padSizeX + gapX) * idX;
-                        curPad[countX - 1 - idX, idY].Y = this.Height / 2 - startY + (padSizeY + gapY) * idY;
-                        curPad[countX - 1 - idX, idY].Width = padSizeX;
-                        curPad[countX - 1 - idX, idY].Height = padSizeY;
+                        if (FrRr == McTypeFrRr.FRONT)
+                        {
+                            curPad[idX, countY - 1 - idY].X = this.Width / 2 - startX + (padSizeX + gapX) * idX;
+                            curPad[idX, countY - 1 - idY].Y = this.Height / 2 - startY + (padSizeY + gapY) * idY;
+                            curPad[idX, countY - 1 - idY].Width = padSizeX;
+                            curPad[idX, countY - 1 - idY].Height = padSizeY;
+                        }
+                        else
+                        {
+                            curPad[countX - 1 - idX, idY].X = this.Width / 2 - startX + (padSizeX + gapX) * idX;
+                            curPad[countX - 1 - idX, idY].Y = this.Height / 2 - startY + (padSizeY + gapY) * idY;
+                            curPad[countX - 1 - idX, idY].Width = padSizeX;
+                            curPad[countX - 1 - idX, idY].Height = padSizeY;
+                        }
                     }
                 }
+                Invalidate();
             }
-            Invalidate();
+            catch
+            {
+
+            }
         }
 
         private void SetStatus(Rectangle rect)

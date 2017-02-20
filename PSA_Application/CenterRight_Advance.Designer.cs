@@ -28,139 +28,139 @@
         /// </summary>
         private void InitializeComponent()
         {
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CenterRight_Advance));
-			this.LB_ = new System.Windows.Forms.Label();
-			this.toolStrip5 = new System.Windows.Forms.ToolStrip();
-			this.LB_Parameter = new System.Windows.Forms.ToolStripLabel();
-			this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-			this.BT_Parameter_HD = new System.Windows.Forms.ToolStripButton();
-			this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-			this.BT_Parameter_PD = new System.Windows.Forms.ToolStripButton();
-			this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-			this.BT_Parameter_CV = new System.Windows.Forms.ToolStripButton();
-			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-			this.BT_Parameter_SF = new System.Windows.Forms.ToolStripButton();
-			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-			this.BT_Parameter_HDC = new System.Windows.Forms.ToolStripButton();
-			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-			this.BT_Parameter_ULC = new System.Windows.Forms.ToolStripButton();
-			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-			this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-			this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-			this.TB_HD = new System.Windows.Forms.ToolStripTextBox();
-			this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-			this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
-			this.TB_HD_X = new System.Windows.Forms.ToolStripTextBox();
-			this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-			this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
-			this.TB_HD_Y = new System.Windows.Forms.ToolStripTextBox();
-			this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
-			this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
-			this.TB_HD_T = new System.Windows.Forms.ToolStripTextBox();
-			this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-			this.toolStripLabel6 = new System.Windows.Forms.ToolStripLabel();
-			this.TB_HD_Z = new System.Windows.Forms.ToolStripTextBox();
-			this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-			this.toolStripLabel7 = new System.Windows.Forms.ToolStripLabel();
-			this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
-			this.toolStripLabel8 = new System.Windows.Forms.ToolStripLabel();
-			this.TB_PD = new System.Windows.Forms.ToolStripTextBox();
-			this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
-			this.toolStripLabel9 = new System.Windows.Forms.ToolStripLabel();
-			this.TB_PD_X = new System.Windows.Forms.ToolStripTextBox();
-			this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
-			this.toolStripLabel10 = new System.Windows.Forms.ToolStripLabel();
-			this.TB_PD_Y = new System.Windows.Forms.ToolStripTextBox();
-			this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
-			this.toolStripLabel12 = new System.Windows.Forms.ToolStripLabel();
-			this.TB_PD_Z = new System.Windows.Forms.ToolStripTextBox();
-			this.toolStrip4 = new System.Windows.Forms.ToolStrip();
-			this.toolStripLabel11 = new System.Windows.Forms.ToolStripLabel();
-			this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
-			this.toolStripLabel13 = new System.Windows.Forms.ToolStripLabel();
-			this.TB_SF = new System.Windows.Forms.ToolStripTextBox();
-			this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
-			this.toolStripLabel14 = new System.Windows.Forms.ToolStripLabel();
-			this.TB_SF_Z = new System.Windows.Forms.ToolStripTextBox();
-			this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
-			this.toolStripLabel16 = new System.Windows.Forms.ToolStripLabel();
-			this.TB_SF_Z2 = new System.Windows.Forms.ToolStripTextBox();
-			this.toolStrip6 = new System.Windows.Forms.ToolStrip();
-			this.toolStripLabel15 = new System.Windows.Forms.ToolStripLabel();
-			this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
-			this.toolStripLabel17 = new System.Windows.Forms.ToolStripLabel();
-			this.TB_CV = new System.Windows.Forms.ToolStripTextBox();
-			this.toolStripSeparator24 = new System.Windows.Forms.ToolStripSeparator();
-			this.toolStripLabel18 = new System.Windows.Forms.ToolStripLabel();
-			this.TB_CV_W = new System.Windows.Forms.ToolStripTextBox();
-			this.toolStrip3 = new System.Windows.Forms.ToolStrip();
-			this.toolStripLabel19 = new System.Windows.Forms.ToolStripLabel();
-			this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
-			this.BT_Parameter_Load = new System.Windows.Forms.ToolStripButton();
-			this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
-			this.BT_Parameter_Save = new System.Windows.Forms.ToolStripButton();
-			this.toolStripSeparator27 = new System.Windows.Forms.ToolStripSeparator();
-			this.BT_UpdateConfig = new System.Windows.Forms.ToolStripButton();
-			this.toolStrip7 = new System.Windows.Forms.ToolStrip();
-			this.toolStripLabel20 = new System.Windows.Forms.ToolStripLabel();
-			this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
-			this.BT_AutoDoorLockUse = new System.Windows.Forms.ToolStripButton();
-			this.toolStrip8 = new System.Windows.Forms.ToolStrip();
-			this.toolStripLabel21 = new System.Windows.Forms.ToolStripLabel();
-			this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
-			this.BT_DoorServoControlUse = new System.Windows.Forms.ToolStripButton();
-			this.toolStrip9 = new System.Windows.Forms.ToolStrip();
-			this.toolStripLabel22 = new System.Windows.Forms.ToolStripLabel();
-			this.toolStripSeparator25 = new System.Windows.Forms.ToolStripSeparator();
-			this.BT_PasswordProtect = new System.Windows.Forms.ToolStripButton();
-			this.toolStrip10 = new System.Windows.Forms.ToolStrip();
-			this.toolStripLabel23 = new System.Windows.Forms.ToolStripLabel();
-			this.toolStripSeparator26 = new System.Windows.Forms.ToolStripSeparator();
-			this.BT_MCCLogUse = new System.Windows.Forms.ToolStripButton();
-			this.toolStrip12 = new System.Windows.Forms.ToolStrip();
-			this.toolStripLabel25 = new System.Windows.Forms.ToolStripLabel();
-			this.toolStripSeparator29 = new System.Windows.Forms.ToolStripSeparator();
-			this.BT_LANGUAGE = new System.Windows.Forms.ToolStripDropDownButton();
-			this.BT_LAN_KOREAN = new System.Windows.Forms.ToolStripMenuItem();
-			this.BT_LAN_ENGLISH = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStrip13 = new System.Windows.Forms.ToolStrip();
-			this.toolStripLabel26 = new System.Windows.Forms.ToolStripLabel();
-			this.toolStripSeparator30 = new System.Windows.Forms.ToolStripSeparator();
-			this.BT_PRE_MC = new System.Windows.Forms.ToolStripDropDownButton();
-			this.BT_PREMC_ISP = new System.Windows.Forms.ToolStripMenuItem();
-			this.BT_PREMC_ATTACH = new System.Windows.Forms.ToolStripMenuItem();
-			this.BT_PREMC_DISPENSOR = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStrip11 = new System.Windows.Forms.ToolStrip();
-			this.toolStripLabel24 = new System.Windows.Forms.ToolStripLabel();
-			this.toolStripSeparator28 = new System.Windows.Forms.ToolStripSeparator();
-			this.BT_autoLaserTiltCheck = new System.Windows.Forms.ToolStripButton();
-			this.toolStripSeparator31 = new System.Windows.Forms.ToolStripSeparator();
-			this.toolStrip5.SuspendLayout();
-			this.toolStrip1.SuspendLayout();
-			this.toolStrip2.SuspendLayout();
-			this.toolStrip4.SuspendLayout();
-			this.toolStrip6.SuspendLayout();
-			this.toolStrip3.SuspendLayout();
-			this.toolStrip7.SuspendLayout();
-			this.toolStrip8.SuspendLayout();
-			this.toolStrip9.SuspendLayout();
-			this.toolStrip10.SuspendLayout();
-			this.toolStrip12.SuspendLayout();
-			this.toolStrip13.SuspendLayout();
-			this.toolStrip11.SuspendLayout();
-			this.SuspendLayout();
-			// 
-			// LB_
-			// 
-			resources.ApplyResources(this.LB_, "LB_");
-			this.LB_.Name = "LB_";
-			// 
-			// toolStrip5
-			// 
-			this.toolStrip5.BackColor = System.Drawing.Color.Transparent;
-			resources.ApplyResources(this.toolStrip5, "toolStrip5");
-			this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CenterRight_Advance));
+            this.LB_ = new System.Windows.Forms.Label();
+            this.toolStrip5 = new System.Windows.Forms.ToolStrip();
+            this.LB_Parameter = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.BT_Parameter_HD = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.BT_Parameter_PD = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.BT_Parameter_CV = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.BT_Parameter_SF = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.BT_Parameter_HDC = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.BT_Parameter_ULC = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.TB_HD = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.TB_HD_X = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
+            this.TB_HD_Y = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
+            this.TB_HD_T = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel6 = new System.Windows.Forms.ToolStripLabel();
+            this.TB_HD_Z = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel7 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel8 = new System.Windows.Forms.ToolStripLabel();
+            this.TB_PD = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel9 = new System.Windows.Forms.ToolStripLabel();
+            this.TB_PD_X = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel10 = new System.Windows.Forms.ToolStripLabel();
+            this.TB_PD_Y = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel12 = new System.Windows.Forms.ToolStripLabel();
+            this.TB_PD_Z = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStrip4 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel11 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel13 = new System.Windows.Forms.ToolStripLabel();
+            this.TB_SF = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel14 = new System.Windows.Forms.ToolStripLabel();
+            this.TB_SF_Z = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel16 = new System.Windows.Forms.ToolStripLabel();
+            this.TB_SF_Z2 = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStrip6 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel15 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel17 = new System.Windows.Forms.ToolStripLabel();
+            this.TB_CV = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator24 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel18 = new System.Windows.Forms.ToolStripLabel();
+            this.TB_CV_W = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel19 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+            this.BT_Parameter_Load = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
+            this.BT_Parameter_Save = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator27 = new System.Windows.Forms.ToolStripSeparator();
+            this.BT_UpdateConfig = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip7 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel20 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
+            this.BT_AutoDoorLockUse = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip8 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel21 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
+            this.BT_UnderDoorCheckUse = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip9 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel22 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator25 = new System.Windows.Forms.ToolStripSeparator();
+            this.BT_PasswordProtect = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip10 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel23 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator26 = new System.Windows.Forms.ToolStripSeparator();
+            this.BT_MCCLogUse = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip12 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel25 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator29 = new System.Windows.Forms.ToolStripSeparator();
+            this.BT_LANGUAGE = new System.Windows.Forms.ToolStripDropDownButton();
+            this.BT_LAN_KOREAN = new System.Windows.Forms.ToolStripMenuItem();
+            this.BT_LAN_ENGLISH = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStrip13 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel26 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator30 = new System.Windows.Forms.ToolStripSeparator();
+            this.BT_PRE_MC = new System.Windows.Forms.ToolStripDropDownButton();
+            this.BT_PREMC_ISP = new System.Windows.Forms.ToolStripMenuItem();
+            this.BT_PREMC_ATTACH = new System.Windows.Forms.ToolStripMenuItem();
+            this.BT_PREMC_DISPENSOR = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStrip11 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel24 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator28 = new System.Windows.Forms.ToolStripSeparator();
+            this.BT_autoLaserTiltCheck = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator31 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStrip5.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
+            this.toolStrip4.SuspendLayout();
+            this.toolStrip6.SuspendLayout();
+            this.toolStrip3.SuspendLayout();
+            this.toolStrip7.SuspendLayout();
+            this.toolStrip8.SuspendLayout();
+            this.toolStrip9.SuspendLayout();
+            this.toolStrip10.SuspendLayout();
+            this.toolStrip12.SuspendLayout();
+            this.toolStrip13.SuspendLayout();
+            this.toolStrip11.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // LB_
+            // 
+            resources.ApplyResources(this.LB_, "LB_");
+            this.LB_.Name = "LB_";
+            // 
+            // toolStrip5
+            // 
+            this.toolStrip5.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.toolStrip5, "toolStrip5");
+            this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LB_Parameter,
             this.toolStripSeparator5,
             this.BT_Parameter_HD,
@@ -691,32 +691,32 @@
 			this.toolStrip8.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel21,
             this.toolStripSeparator23,
-            this.BT_DoorServoControlUse});
-			this.toolStrip8.Name = "toolStrip8";
-			// 
-			// toolStripLabel21
-			// 
-			resources.ApplyResources(this.toolStripLabel21, "toolStripLabel21");
-			this.toolStripLabel21.Name = "toolStripLabel21";
-			// 
-			// toolStripSeparator23
-			// 
-			this.toolStripSeparator23.Name = "toolStripSeparator23";
-			resources.ApplyResources(this.toolStripSeparator23, "toolStripSeparator23");
-			// 
-			// BT_DoorServoControlUse
-			// 
-			resources.ApplyResources(this.BT_DoorServoControlUse, "BT_DoorServoControlUse");
-			this.BT_DoorServoControlUse.AutoToolTip = false;
-			this.BT_DoorServoControlUse.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
-			this.BT_DoorServoControlUse.Name = "BT_DoorServoControlUse";
-			this.BT_DoorServoControlUse.Click += new System.EventHandler(this.Control_Click);
-			// 
-			// toolStrip9
-			// 
-			this.toolStrip9.BackColor = System.Drawing.Color.Transparent;
-			resources.ApplyResources(this.toolStrip9, "toolStrip9");
-			this.toolStrip9.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.BT_UnderDoorCheckUse});
+            this.toolStrip8.Name = "toolStrip8";
+            // 
+            // toolStripLabel21
+            // 
+            resources.ApplyResources(this.toolStripLabel21, "toolStripLabel21");
+            this.toolStripLabel21.Name = "toolStripLabel21";
+            // 
+            // toolStripSeparator23
+            // 
+            this.toolStripSeparator23.Name = "toolStripSeparator23";
+            resources.ApplyResources(this.toolStripSeparator23, "toolStripSeparator23");
+            // 
+            // BT_UnderDoorCheckUse
+            // 
+            resources.ApplyResources(this.BT_UnderDoorCheckUse, "BT_UnderDoorCheckUse");
+            this.BT_UnderDoorCheckUse.AutoToolTip = false;
+            this.BT_UnderDoorCheckUse.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
+            this.BT_UnderDoorCheckUse.Name = "BT_UnderDoorCheckUse";
+            this.BT_UnderDoorCheckUse.Click += new System.EventHandler(this.Control_Click);
+            // 
+            // toolStrip9
+            // 
+            this.toolStrip9.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.toolStrip9, "toolStrip9");
+            this.toolStrip9.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel22,
             this.toolStripSeparator25,
             this.BT_PasswordProtect});
@@ -1024,7 +1024,7 @@
 		private System.Windows.Forms.ToolStrip toolStrip8;
 		private System.Windows.Forms.ToolStripLabel toolStripLabel21;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator23;
-		private System.Windows.Forms.ToolStripButton BT_DoorServoControlUse;
+		private System.Windows.Forms.ToolStripButton BT_UnderDoorCheckUse;
 		private System.Windows.Forms.ToolStrip toolStrip9;
 		private System.Windows.Forms.ToolStripLabel toolStripLabel22;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator25;

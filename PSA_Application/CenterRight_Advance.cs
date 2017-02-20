@@ -38,8 +38,8 @@ namespace PSA_Application
 			{
 				if (mc.para.ETC.autoDoorControlUse.value == 0) { BT_AutoDoorLockUse.Text = "OFF"; BT_AutoDoorLockUse.Image = Properties.Resources.YellowLED_OFF; }
 				else { BT_AutoDoorLockUse.Text = "ON"; BT_AutoDoorLockUse.Image = Properties.Resources.Yellow_LED; }
-				if (mc.para.ETC.doorServoControlUse.value == 0) { BT_DoorServoControlUse.Text = "OFF"; BT_DoorServoControlUse.Image = Properties.Resources.YellowLED_OFF; }
-				else { BT_DoorServoControlUse.Text = "ON"; BT_DoorServoControlUse.Image = Properties.Resources.Yellow_LED; }
+                if (mc.para.ETC.underDoorCheckUse.value == 0) { BT_UnderDoorCheckUse.Text = "OFF"; BT_UnderDoorCheckUse.Image = Properties.Resources.YellowLED_OFF; }
+                else { BT_UnderDoorCheckUse.Text = "ON"; BT_UnderDoorCheckUse.Image = Properties.Resources.Yellow_LED; }
 				if (mc.para.ETC.passwordProtect.value == 0) { BT_PasswordProtect.Text = "OFF"; BT_PasswordProtect.Image = Properties.Resources.YellowLED_OFF; }
 				else { BT_PasswordProtect.Text = "ON"; BT_PasswordProtect.Image = Properties.Resources.Yellow_LED; }
 				if (mc.para.ETC.mccLogUse.value == 0) { BT_MCCLogUse.Text = "OFF"; BT_MCCLogUse.Image = Properties.Resources.YellowLED_OFF; }
@@ -97,12 +97,12 @@ namespace PSA_Application
 					if(mc.swcontrol.useDoorControl) mc.para.setting(ref mc.para.ETC.autoDoorControlUse, 0);
 				}
 			}
-			if (sender.Equals(BT_DoorServoControlUse))
+			if (sender.Equals(BT_UnderDoorCheckUse))
 			{
-				if (mc.para.ETC.doorServoControlUse.value == 0)
-					mc.para.setting(ref mc.para.ETC.doorServoControlUse, 1);
+                if (mc.para.ETC.underDoorCheckUse.value == 0)
+                    mc.para.setting(ref mc.para.ETC.underDoorCheckUse, 1);
 				else
-					mc.para.setting(ref mc.para.ETC.doorServoControlUse, 0);
+                    mc.para.setting(ref mc.para.ETC.underDoorCheckUse, 0);
 			}
 			if (sender.Equals(BT_PasswordProtect))
 			{

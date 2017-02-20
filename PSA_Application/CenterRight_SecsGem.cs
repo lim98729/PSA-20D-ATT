@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using PSA_SystemLibrary;
 using DefineLibrary;
+using AccessoryLibrary;
 
 namespace PSA_Application
 {
@@ -47,12 +48,8 @@ namespace PSA_Application
 			}
 			else
 			{
-				if (firstdisp)
-				{
-					TB_MPC_IpAddr.Text = mc.para.DIAG.ipAddr.description;
-					TB_MPC_NAME.Text = mc.para.DIAG.mpcName.description;
-					firstdisp = false;
-				}
+				TB_MPC_IpAddr.Text = mc.para.DIAG.ipAddr.description;
+				TB_MPC_NAME.Text = mc.para.DIAG.mpcName.description;
 				TB_MPC_PORT.Text = mc.para.DIAG.portNum.value.ToString();
 
 				if (mc.commMPC._connect_flag) image = Properties.Resources.Green_LED;
@@ -138,12 +135,23 @@ namespace PSA_Application
 			if (!mc.check.READY_PUSH(sender)) goto EXIT;
 			mc.check.push(sender, true);
 
-			if (sender.Equals(TB_MPC_IpAddr)) mc.para.DIAG.ipAddr.description = TB_MPC_IpAddr.Text;
+            if (sender.Equals(TB_MPC_IpAddr))
+            {
+                FormUserPad pad = new FormUserPad(mc.para.DIAG.ipAddr.description);
+                if (pad.ShowDialog() == DialogResult.OK)
+                {
+                    mc.para.DIAG.ipAddr.description = pad.GetString();
+                }               
+            }
 			if (sender.Equals(TB_MPC_PORT)) mc.para.setting(mc.para.DIAG.portNum, out mc.para.DIAG.portNum);
             if (sender.Equals(TB_MPC_NAME))
             {
-                mc.para.DIAG.mpcName.description = TB_MPC_NAME.Text;
-                mc.commMPC.mpcDomainName = mc.para.DIAG.mpcName.description;
+                FormUserPad pad = new FormUserPad(mc.para.DIAG.mpcName.description);
+                if (pad.ShowDialog() == DialogResult.OK)
+                {
+                    mc.para.DIAG.mpcName.description = pad.GetString();
+                    mc.commMPC.mpcDomainName = mc.para.DIAG.mpcName.description;
+                }               
             }
 
 			bool r;

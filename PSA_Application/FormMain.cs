@@ -23,11 +23,6 @@ namespace PSA_Application
             // 20140612
             logRemove();
             mc.user.logInUserName = "Operator";
-
-            // 20140618
-//  			mc.main.DoStart_Polling();
-// 			mc.main.DoReset_Polling();
-
             #region EVENT 등록
             EVENT.onAdd_powerOff += new EVENT.InsertHandler(powerOff);
             EVENT.onAdd_panelUpResize += new EVENT.InsertHandler(panelUpResize);

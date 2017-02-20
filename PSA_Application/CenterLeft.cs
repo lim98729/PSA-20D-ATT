@@ -553,13 +553,16 @@ namespace PSA_Application
 
 		private void CenterLeft_Load(object sender, EventArgs e)
 		{
-            boardActivate(BOARD_ZONE.LOADING, (int)mc.para.MT.padCount.x.value, (int)mc.para.MT.padCount.y.value);
-            boardActivate(BOARD_ZONE.WORKING, (int)mc.para.MT.padCount.x.value, (int)mc.para.MT.padCount.y.value);
-            boardActivate(BOARD_ZONE.UNLOADING, (int)mc.para.MT.padCount.x.value, (int)mc.para.MT.padCount.y.value);
+            int padX; int padY;
+            padX = (int)mc.para.MT.padCount.x.value;
+            padY = (int)mc.para.MT.padCount.y.value;
+            boardActivate(BOARD_ZONE.LOADING, padX, padY);
+            boardActivate(BOARD_ZONE.WORKING, padX, padY);
+            boardActivate(BOARD_ZONE.UNLOADING, padX, padY);
 
-            EVENT.boardStatus(BOARD_ZONE.LOADING, mc.board.padStatus(BOARD_ZONE.LOADING), (int)mc.para.MT.padCount.x.value, (int)mc.para.MT.padCount.y.value);
-			EVENT.boardStatus(BOARD_ZONE.WORKING, mc.board.padStatus(BOARD_ZONE.WORKING), (int)mc.para.MT.padCount.x.value, (int)mc.para.MT.padCount.y.value);
-			EVENT.boardStatus(BOARD_ZONE.UNLOADING, mc.board.padStatus(BOARD_ZONE.UNLOADING), (int)mc.para.MT.padCount.x.value, (int)mc.para.MT.padCount.y.value);
+            EVENT.boardStatus(BOARD_ZONE.LOADING, mc.board.padStatus(BOARD_ZONE.LOADING), padX, padY);
+			EVENT.boardStatus(BOARD_ZONE.WORKING, mc.board.padStatus(BOARD_ZONE.WORKING), padX, padY);
+			EVENT.boardStatus(BOARD_ZONE.UNLOADING, mc.board.padStatus(BOARD_ZONE.UNLOADING), padX, padY);
             
             BoardStatus_LoadingZone.Visible = false;
             BoardStatus_WorkingZone.Visible = false;
@@ -625,6 +628,8 @@ namespace PSA_Application
         {
             if (mc.main.THREAD_RUNNING) return;
             if (!mc.init.success.HD) return;
+            if (!mc.check.READY_PUSH(sender)) return;
+
             mc.check.push(sender, true);
 
             RetValue retval;

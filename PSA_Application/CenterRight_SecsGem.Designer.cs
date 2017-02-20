@@ -151,42 +151,43 @@
             this.toolStripLabel2,
             this.toolStripSeparator2,
             this.TB_MPC_IpAddr});
-			this.TS_SGIpAddr.Location = new System.Drawing.Point(6, 88);
-			this.TS_SGIpAddr.Name = "TS_SGIpAddr";
-			this.TS_SGIpAddr.Size = new System.Drawing.Size(290, 25);
-			this.TS_SGIpAddr.TabIndex = 41;
-			this.TS_SGIpAddr.Text = "toolStrip1";
-			// 
-			// toolStripLabel2
-			// 
-			this.toolStripLabel2.AutoSize = false;
-			this.toolStripLabel2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.toolStripLabel2.Name = "toolStripLabel2";
-			this.toolStripLabel2.Size = new System.Drawing.Size(150, 22);
-			this.toolStripLabel2.Text = "MPC IP Address";
-			this.toolStripLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// toolStripSeparator2
-			// 
-			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-			// 
-			// TB_MPC_IpAddr
-			// 
-			this.TB_MPC_IpAddr.AutoSize = false;
-			this.TB_MPC_IpAddr.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.TB_MPC_IpAddr.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.TB_MPC_IpAddr.Name = "TB_MPC_IpAddr";
-			this.TB_MPC_IpAddr.Size = new System.Drawing.Size(120, 21);
-			this.TB_MPC_IpAddr.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			this.TB_MPC_IpAddr.Click += new System.EventHandler(this.Control_Click);
-			// 
-			// TS_SGPort
-			// 
-			this.TS_SGPort.BackColor = System.Drawing.Color.Transparent;
-			this.TS_SGPort.Dock = System.Windows.Forms.DockStyle.None;
-			this.TS_SGPort.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.TS_SGPort.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TS_SGIpAddr.Location = new System.Drawing.Point(6, 88);
+            this.TS_SGIpAddr.Name = "TS_SGIpAddr";
+            this.TS_SGIpAddr.Size = new System.Drawing.Size(290, 25);
+            this.TS_SGIpAddr.TabIndex = 41;
+            this.TS_SGIpAddr.Text = "toolStrip1";
+            // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.AutoSize = false;
+            this.toolStripLabel2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(150, 22);
+            this.toolStripLabel2.Text = "MPC IP Address";
+            this.toolStripLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // TB_MPC_IpAddr
+            // 
+            this.TB_MPC_IpAddr.AutoSize = false;
+            this.TB_MPC_IpAddr.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TB_MPC_IpAddr.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TB_MPC_IpAddr.Name = "TB_MPC_IpAddr";
+            this.TB_MPC_IpAddr.ReadOnly = true;
+            this.TB_MPC_IpAddr.Size = new System.Drawing.Size(120, 21);
+            this.TB_MPC_IpAddr.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_MPC_IpAddr.Click += new System.EventHandler(this.Control_Click);
+            // 
+            // TS_SGPort
+            // 
+            this.TS_SGPort.BackColor = System.Drawing.Color.Transparent;
+            this.TS_SGPort.Dock = System.Windows.Forms.DockStyle.None;
+            this.TS_SGPort.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TS_SGPort.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripLabel3,
             this.toolStripSeparator3,
             this.TB_MPC_PORT});
@@ -230,42 +231,43 @@
             this.toolStripLabel4,
             this.toolStripSeparator4,
             this.TB_MPC_NAME});
-			this.TS_MPCName.Location = new System.Drawing.Point(6, 162);
-			this.TS_MPCName.Name = "TS_MPCName";
-			this.TS_MPCName.Size = new System.Drawing.Size(290, 25);
-			this.TS_MPCName.TabIndex = 43;
-			this.TS_MPCName.Text = "toolStrip1";
-			// 
-			// toolStripLabel4
-			// 
-			this.toolStripLabel4.AutoSize = false;
-			this.toolStripLabel4.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.toolStripLabel4.Name = "toolStripLabel4";
-			this.toolStripLabel4.Size = new System.Drawing.Size(150, 22);
-			this.toolStripLabel4.Text = "MPC Name";
-			this.toolStripLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// toolStripSeparator4
-			// 
-			this.toolStripSeparator4.Name = "toolStripSeparator4";
-			this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-			// 
-			// TB_MPC_NAME
-			// 
-			this.TB_MPC_NAME.AutoSize = false;
-			this.TB_MPC_NAME.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.TB_MPC_NAME.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.TB_MPC_NAME.Name = "TB_MPC_NAME";
-			this.TB_MPC_NAME.Size = new System.Drawing.Size(120, 21);
-			this.TB_MPC_NAME.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			this.TB_MPC_NAME.Click += new System.EventHandler(this.Control_Click);
-			// 
-			// toolStrip2
-			// 
-			this.toolStrip2.BackColor = System.Drawing.Color.Transparent;
-			this.toolStrip2.Dock = System.Windows.Forms.DockStyle.None;
-			this.toolStrip2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TS_MPCName.Location = new System.Drawing.Point(6, 162);
+            this.TS_MPCName.Name = "TS_MPCName";
+            this.TS_MPCName.Size = new System.Drawing.Size(290, 25);
+            this.TS_MPCName.TabIndex = 43;
+            this.TS_MPCName.Text = "toolStrip1";
+            // 
+            // toolStripLabel4
+            // 
+            this.toolStripLabel4.AutoSize = false;
+            this.toolStripLabel4.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripLabel4.Name = "toolStripLabel4";
+            this.toolStripLabel4.Size = new System.Drawing.Size(150, 22);
+            this.toolStripLabel4.Text = "MPC Name";
+            this.toolStripLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
+            // TB_MPC_NAME
+            // 
+            this.TB_MPC_NAME.AutoSize = false;
+            this.TB_MPC_NAME.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TB_MPC_NAME.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TB_MPC_NAME.Name = "TB_MPC_NAME";
+            this.TB_MPC_NAME.ReadOnly = true;
+            this.TB_MPC_NAME.Size = new System.Drawing.Size(120, 21);
+            this.TB_MPC_NAME.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_MPC_NAME.Click += new System.EventHandler(this.Control_Click);
+            // 
+            // toolStrip2
+            // 
+            this.toolStrip2.BackColor = System.Drawing.Color.Transparent;
+            this.toolStrip2.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TS_SGConnect,
             this.toolStripSeparator5,
             this.BT_Connect,

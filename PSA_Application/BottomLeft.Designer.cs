@@ -1270,7 +1270,7 @@
 		private System.Windows.Forms.TextBox TB_CircleErrorT1;
 		private System.Windows.Forms.TabPage tabGraph;
 		private System.Windows.Forms.Button button1;
-        public AccessoryLibrary.loadScope loadcellScope;
+        private AccessoryLibrary.loadScope loadcellScope;
 		private System.Windows.Forms.Label label5;
 
 

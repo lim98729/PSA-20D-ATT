@@ -537,7 +537,7 @@ namespace MeiLibrary
 		//}
 		public void move(double position, axisMotionSpeed speed, out RetMessage retMessage)
 		{
-            if (dev.NotExistHW.ZMP) { retMessage = RetMessage.OK; return; }
+            if (dev.NotExistHW.ZMP) { motionPos = position; retMessage = RetMessage.OK; return; }
 			if (!isActivate) 
 			{
 				retMessage = RetMessage.INVALID;

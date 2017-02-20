@@ -216,17 +216,24 @@ namespace PSA_Application
 				return;
 			}
 
-            EVENT.userDialogMessage(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.INFORMATION, String.Format(textResource.MB_USER_DELETE_ACCOUNT, mc.user.userName[CB_RegisteredUserList.SelectedIndex]));
-			mc.user.deleteUser(mc.user.userName[CB_RegisteredUserList.SelectedIndex]);
+            if (CB_RegisteredUserList.SelectedIndex > 0)
+            {
+                EVENT.userDialogMessage(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.INFORMATION, String.Format(textResource.MB_USER_DELETE_ACCOUNT, mc.user.userName[CB_RegisteredUserList.SelectedIndex]));
+                mc.user.deleteUser(mc.user.userName[CB_RegisteredUserList.SelectedIndex]);
 
 			CB_LogInUserList.Items.Clear();
 			CB_RegisteredUserList.Items.Clear();
 
-			for (int i = 0; i < mc.user.userNumber; i++)
-			{
-				CB_LogInUserList.Items.Add(mc.user.userName[i]);
-				CB_RegisteredUserList.Items.Add(mc.user.userName[i]);
-			}
+                for (int i = 0; i < mc.user.userNumber; i++)
+                {
+                    CB_LogInUserList.Items.Add(mc.user.userName[i]);
+                    CB_RegisteredUserList.Items.Add(mc.user.userName[i]);
+                }
+            }
+            else if (CB_RegisteredUserList.SelectedIndex == 0)
+            {
+                EVENT.userDialogMessage(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.FAILURE, "Can not delete account [Administrator]");
+            }
 
 			mc.check.push(sender, false);
 		}

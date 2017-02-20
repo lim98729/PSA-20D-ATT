@@ -5059,7 +5059,7 @@ namespace PSA_SystemLibrary
         public para_member wasteCount;
 
         public para_member autoDoorControlUse; 
-        public para_member doorServoControlUse; 
+        public para_member underDoorCheckUse; 
         public para_member passwordProtect;
         public para_member mccLogUse; 
         public para_member preMachine;
@@ -5119,7 +5119,7 @@ namespace PSA_SystemLibrary
 				writeTuple(pedestalSuctionCheckLevel, i, out i);
 
 				writeTuple(autoDoorControlUse, i, out i);
-				writeTuple(doorServoControlUse, i, out i);
+				writeTuple(underDoorCheckUse, i, out i);
                 
 				writeTuple(passwordProtect, i, out i);
 				writeTuple(mccLogUse, i, out i);
@@ -5242,7 +5242,7 @@ namespace PSA_SystemLibrary
 				readTuple("pedestalSuctionCheckLevel", out pedestalSuctionCheckLevel, out fail); if (fail) goto SET_FAIL;
 
 				readTuple("autoDoorControlUse", out autoDoorControlUse, out fail); if (fail) goto SET_FAIL;
-				readTuple("doorServoControlUse", out doorServoControlUse, out fail); if (fail) goto SET_FAIL;
+				readTuple("underDoorCheckUse", out underDoorCheckUse, out fail); if (fail) goto SET_FAIL;
 
 				readTuple("passwordProtect", out passwordProtect, out fail); if (fail) goto SET_FAIL;
 				readTuple("mccLogUse", out mccLogUse, out fail); if (fail) goto SET_FAIL;
@@ -5401,7 +5401,7 @@ namespace PSA_SystemLibrary
 			setDefault("pedestalSuctionCheckLevel", out pedestalSuctionCheckLevel, out fail); if (fail) goto SET_FAIL;
             
 			setDefault("autoDoorControlUse", out autoDoorControlUse, out fail); if (fail) goto SET_FAIL;
-			setDefault("doorServoControlUse", out doorServoControlUse, out fail); if (fail) goto SET_FAIL;
+			setDefault("underDoorCheckUse", out underDoorCheckUse, out fail); if (fail) goto SET_FAIL;
 
 			setDefault("passwordProtect", out passwordProtect, out fail); if (fail) goto SET_FAIL;
 			setDefault("mccLogUse", out mccLogUse, out fail); if (fail) goto SET_FAIL;
@@ -5478,7 +5478,7 @@ namespace PSA_SystemLibrary
 				id++; if (name == "pedestalSuctionCheckLevel") setDefault(out p, name, id, 2000, 0, 32767, AUTHORITY.MAINTENCE.ToString(), "description");
 
 				id++; if (name == "autoDoorControlUse") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "doorServoControlUse") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
+				id++; if (name == "underDoorCheckUse") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
                 
 				id++; if (name == "passwordProtect") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "mccLogUse") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");

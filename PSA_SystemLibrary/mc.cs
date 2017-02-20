@@ -1534,6 +1534,46 @@ namespace PSA_SystemLibrary
                         mc.OUT.MAIN.DOOR_LOCK(true, out ret.message);
                         doorStatus = true;
                     }
+
+                    if (mc.para.ETC.underDoorCheckUse.value > 0)
+                    {
+                        doorOpenFilter.Reset();
+                        while (doorOpenFilter.Elapsed < 500)
+                        {
+                            Thread.Sleep(1);
+                            mc.IN.MAIN.SF_DOOR(out ret.b, out ret.message);
+                            if (ret.b) continue;
+                            else
+                            {
+                                OUT.MAIN.UserBuzzerCtl(true);
+                                mc.full.req = false; mc.full.reqMode = REQMODE.INVALID;
+                                mc.hd.req = false; mc.hd.reqMode = REQMODE.INVALID;
+                                mc.init.req = false;
+                                EVENT.userDialogMessage(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.WARNING, "StackFeeder Door가 열려있습니다.");
+                                OUT.MAIN.UserBuzzerCtl(false);
+                                goto MACHINE_RUN_SKIP;
+                            }
+                        }
+
+                        doorOpenFilter.Reset();
+                        while (doorOpenFilter.Elapsed < 500)
+                        {
+                            Thread.Sleep(1);
+                            mc.IN.MAIN.LOW_DOOR(out ret.b, out ret.message);
+                            if (ret.b) continue;
+                            else
+                            {
+                                OUT.MAIN.UserBuzzerCtl(true);
+                                mc.full.req = false; mc.full.reqMode = REQMODE.INVALID;
+                                mc.hd.req = false; mc.hd.reqMode = REQMODE.INVALID;
+                                mc.init.req = false;
+                                EVENT.userDialogMessage(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.WARNING, "Under Door가 열려있습니다.");
+                                OUT.MAIN.UserBuzzerCtl(false);
+                                goto MACHINE_RUN_SKIP;
+                            }
+                        }
+
+                    }
                 }
 
                 //mc.STOP = false; mc.SKIP = false;
@@ -3978,7 +4018,7 @@ namespace PSA_SystemLibrary
 
         public class user
         {
-            public const string supervisor = "ChipPacAdmin";
+            public const string supervisor = "Administrator";
             const int _MAX_USER_NUMBER = 30;
             public const string Master_Password = "2002";
             
@@ -3998,10 +4038,11 @@ namespace PSA_SystemLibrary
 
             public static bool readUserInfo()
             {
+                FileStream fs = File.Open(filename, FileMode.Open);
+                StreamReader sr = new StreamReader(fs, Encoding.BigEndianUnicode);
+
                 try
                 {
-                    FileStream fs = File.Open(filename, FileMode.Open);
-                    StreamReader sr = new StreamReader(fs, Encoding.BigEndianUnicode);
 
                     string readData;
                     string[] readSplitData;
@@ -4032,7 +4073,14 @@ namespace PSA_SystemLibrary
                 }
                 catch
                 {
-                    userNumber = 0;
+                    if (sr != null) sr.Close();
+                    if (fs != null) fs.Close();
+
+                    userName[0] = supervisor;
+                    passWord[0] = Master_Password;
+
+                    userNumber = 1;
+                    writeUserInfo();
                 }
                 return false;
             }
@@ -5031,7 +5079,7 @@ namespace PSA_SystemLibrary
                 {
                     tmp_ETC.autoDoorControlUse.value = ETC.autoDoorControlUse.value;
                     tmp_ETC.passwordProtect.value = ETC.passwordProtect.value;
-                    tmp_ETC.doorServoControlUse.value = ETC.doorServoControlUse.value;
+                    tmp_ETC.underDoorCheckUse.value = ETC.underDoorCheckUse.value;
                     tmp_ETC.mccLogUse.value = ETC.mccLogUse.value;
                     tmp_ETC.preMachine.value = ETC.preMachine.value;
 					tmp_ETC.autoLaserTiltCheck.value = ETC.autoLaserTiltCheck.value;
@@ -5468,7 +5516,7 @@ namespace PSA_SystemLibrary
                 {
                     if (ETC.autoDoorControlUse.value != tmp_ETC.autoDoorControlUse.value) { b = true; return b; }
                     if (ETC.passwordProtect.value != tmp_ETC.passwordProtect.value) { b = true; return b; }
-                    if (ETC.doorServoControlUse.value != tmp_ETC.doorServoControlUse.value) { b = true; return b; }
+                    if (ETC.underDoorCheckUse.value != tmp_ETC.underDoorCheckUse.value) { b = true; return b; }
                     if (ETC.mccLogUse.value != tmp_ETC.mccLogUse.value) { b = true; return b; }
                     if (ETC.preMachine.value != tmp_ETC.preMachine.value) { b = true; return b; }
 					if (ETC.autoLaserTiltCheck.value != tmp_ETC.autoLaserTiltCheck.value) { b = true; return b; }
@@ -5932,7 +5980,7 @@ namespace PSA_SystemLibrary
                 {
                     ETC.autoDoorControlUse.value = tmp_ETC.autoDoorControlUse.value;
                     ETC.passwordProtect.value = tmp_ETC.passwordProtect.value;
-                    ETC.doorServoControlUse.value = tmp_ETC.doorServoControlUse.value;
+                    ETC.underDoorCheckUse.value = tmp_ETC.underDoorCheckUse.value;
                     ETC.mccLogUse.value = tmp_ETC.mccLogUse.value;
                     ETC.preMachine.value = tmp_ETC.preMachine.value;
 					ETC.autoLaserTiltCheck.value = tmp_ETC.autoLaserTiltCheck.value;
