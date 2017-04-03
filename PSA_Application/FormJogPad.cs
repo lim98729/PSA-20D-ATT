@@ -24,6 +24,7 @@ namespace PSA_Application
 		public UnitCodeSF unitCodeSF = UnitCodeSF.SF1;
 		public para_member dataX, dataY;
 		para_member _dataX, _dataY;
+        parameterXY _rotateCenter;
 
 		RetValue ret;
 		bool bStop;
@@ -63,6 +64,11 @@ namespace PSA_Application
 			#region ULC_TOOL
 			if (jogMode == JOGMODE.ULC_TOOL)
 			{
+                if (mc.swcontrol.useRotateCenter)
+                {
+                    _rotateCenter.x.value = mc.para.CAL.ToolRotateCenter.x.value;
+                    _rotateCenter.y.value = mc.para.CAL.ToolRotateCenter.y.value;
+                }
 				BT_JogT_CCW.Visible = true; BT_JogT_CW.Visible = true;
 				speedType = SPEED_TYPE.LARGE;
 				EVENT.hWindowLargeDisplay(mc.ulc.cam.acq.grabber.cameraNumber);
@@ -673,6 +679,14 @@ namespace PSA_Application
 					dataX.value = teachCalcX;
 					dataY.value = teachCalcY;
 				}
+                if (sender.Equals(BT_Set))
+                {
+                    if (jogMode == JOGMODE.ULC_TOOL && mc.swcontrol.useRotateCenter)
+                    {
+                        mc.para.CAL.ToolRotateCenter.x.value = _rotateCenter.x.value;
+                        mc.para.CAL.ToolRotateCenter.y.value = _rotateCenter.y.value;
+                    }
+                }
 				this.Close();
 			}
 			if (sender.Equals(BT_Speed))
@@ -846,98 +860,222 @@ namespace PSA_Application
 				if (jogMode == JOGMODE.ULC_TOOL)
 				{
 					mc.ulc.LIVE = false;
-				   
-					#region circleFind
-					int stepDeg = 90;
-					int stepCnt = 360 / stepDeg;
-					double[] centerX = new double[stepCnt];
-					double[] centerY = new double[stepCnt];
-					#region 데이타 초기화
-					for (int i = 0; i < stepCnt; i++)
-					{
-						centerX[i] = 0; centerY[i] = 0;
-					}
-					#endregion
-					for (int i = 0; i < stepCnt; i++)
-					{
-						#region moving pre Center
-						mc.para.CAL.HDC_TOOL.x.value = dataX.value;
-						mc.para.CAL.HDC_TOOL.y.value = dataY.value;
-						posX = mc.hd.tool.tPos.x.ULC;
-						posY = mc.hd.tool.tPos.y.ULC;
-						posT = mc.para.CAL.toolAngleOffset.value + (stepDeg * i);
-						mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-						#endregion
-						mc.ulc.circleFind();
-						if ((double)mc.ulc.cam.circleCenter.resultRadius != -1)
-						{
-							centerX[i] -= Math.Round((double)mc.ulc.cam.circleCenter.resultX, 2);
-							centerY[i] -= Math.Round((double)mc.ulc.cam.circleCenter.resultY, 2);
-							#region moving
-							mc.para.CAL.HDC_TOOL.x.value = dataX.value;
-							mc.para.CAL.HDC_TOOL.y.value = dataY.value;
-							posX = mc.hd.tool.tPos.x.ULC + centerX[i];
-							posY = mc.hd.tool.tPos.y.ULC + centerY[i];
-							posT = mc.para.CAL.toolAngleOffset.value + (stepDeg * i);
-							mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-							#endregion
-						}
-						mc.idle(100);
-					}
-					dataX.value += Math.Round(centerX.Average(), 2);
-					dataY.value += Math.Round(centerY.Average(), 2);
-					#endregion
 
-					#region circleFind
-					int stepDeg2 = 45;
-					int stepCnt2 = 360 / stepDeg2;
-					double[] centerX2 = new double[stepCnt2];
-					double[] centerY2 = new double[stepCnt2];
-					#region 데이타 초기화
-					for (int i = 0; i < stepCnt2; i++)
-					{
-						centerX2[i] = 0; centerY2[i] = 0;
-					}
-					#endregion
-					for (int i = 0; i < stepCnt2; i++)
-					{
-						#region moving pre Center
-						mc.para.CAL.HDC_TOOL.x.value = dataX.value;
-						mc.para.CAL.HDC_TOOL.y.value = dataY.value;
-						posX = mc.hd.tool.tPos.x.ULC;
-						posY = mc.hd.tool.tPos.y.ULC;
-						posT = mc.para.CAL.toolAngleOffset.value + (stepDeg2 * i);
-						mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-						#endregion
-						mc.ulc.circleFind();
-						if ((double)mc.ulc.cam.circleCenter.resultRadius != -1)
-						{
-							centerX2[i] -= Math.Round((double)mc.ulc.cam.circleCenter.resultX, 2);
-							centerY2[i] -= Math.Round((double)mc.ulc.cam.circleCenter.resultY, 2);
-							#region moving
-							mc.para.CAL.HDC_TOOL.x.value = dataX.value;
-							mc.para.CAL.HDC_TOOL.y.value = dataY.value;
-							posX = mc.hd.tool.tPos.x.ULC + centerX2[i];
-							posY = mc.hd.tool.tPos.y.ULC + centerY2[i];
-							posT = mc.para.CAL.toolAngleOffset.value + (stepDeg2 * i);
-							mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-							#endregion
-						}
-						mc.idle(100);
-					}
-					dataX.value += Math.Round(centerX2.Average(), 2);
-					dataY.value += Math.Round(centerY2.Average(), 2);
-					#endregion
-				   
+                    if (!mc.swcontrol.useRotateCenter)
+                    {
+                        #region circleFind
+                        int stepDeg = 90;
+                        int stepCnt = 360 / stepDeg;
+                        double[] centerX = new double[stepCnt];
+                        double[] centerY = new double[stepCnt];
+                        #region 데이타 초기화
+                        for (int i = 0; i < stepCnt; i++)
+                        {
+                            centerX[i] = 0; centerY[i] = 0;
+                        }
+                        #endregion
+                        for (int i = 0; i < stepCnt; i++)
+                        {
+                            #region moving pre Center
+                            mc.para.CAL.HDC_TOOL.x.value = dataX.value;
+                            mc.para.CAL.HDC_TOOL.y.value = dataY.value;
+                            posX = mc.hd.tool.tPos.x.ULC;
+                            posY = mc.hd.tool.tPos.y.ULC;
+                            posT = mc.para.CAL.toolAngleOffset.value + (stepDeg * i);
+                            mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                            #endregion
+                            mc.ulc.circleFind();
+                            if ((double)mc.ulc.cam.circleCenter.resultRadius != -1)
+                            {
+                                centerX[i] -= Math.Round((double)mc.ulc.cam.circleCenter.resultX, 2);
+                                centerY[i] -= Math.Round((double)mc.ulc.cam.circleCenter.resultY, 2);
+                                #region moving
+                                mc.para.CAL.HDC_TOOL.x.value = dataX.value;
+                                mc.para.CAL.HDC_TOOL.y.value = dataY.value;
+                                posX = mc.hd.tool.tPos.x.ULC + centerX[i];
+                                posY = mc.hd.tool.tPos.y.ULC + centerY[i];
+                                posT = mc.para.CAL.toolAngleOffset.value + (stepDeg * i);
+                                mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                                #endregion
+                            }
+                            mc.idle(100);
+                        }
+                        dataX.value += Math.Round(centerX.Average(), 2);
+                        dataY.value += Math.Round(centerY.Average(), 2);
+                        #endregion
 
-					#region moving
-					mc.para.CAL.HDC_TOOL.x.value = dataX.value;
-					mc.para.CAL.HDC_TOOL.y.value = dataY.value;
-					posX = mc.hd.tool.tPos.x.ULC;
-					posY = mc.hd.tool.tPos.y.ULC;
-					posT = mc.para.CAL.toolAngleOffset.value;
-					mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-					#endregion
+                        #region circleFind
+                        int stepDeg2 = 45;
+                        int stepCnt2 = 360 / stepDeg2;
+                        double[] centerX2 = new double[stepCnt2];
+                        double[] centerY2 = new double[stepCnt2];
+                        #region 데이타 초기화
+                        for (int i = 0; i < stepCnt2; i++)
+                        {
+                            centerX2[i] = 0; centerY2[i] = 0;
+                        }
+                        #endregion
+                        for (int i = 0; i < stepCnt2; i++)
+                        {
+                            #region moving pre Center
+                            mc.para.CAL.HDC_TOOL.x.value = dataX.value;
+                            mc.para.CAL.HDC_TOOL.y.value = dataY.value;
+                            posX = mc.hd.tool.tPos.x.ULC;
+                            posY = mc.hd.tool.tPos.y.ULC;
+                            posT = mc.para.CAL.toolAngleOffset.value + (stepDeg2 * i);
+                            mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                            #endregion
+                            mc.ulc.circleFind();
+                            if ((double)mc.ulc.cam.circleCenter.resultRadius != -1)
+                            {
+                                centerX2[i] -= Math.Round((double)mc.ulc.cam.circleCenter.resultX, 2);
+                                centerY2[i] -= Math.Round((double)mc.ulc.cam.circleCenter.resultY, 2);
+                                #region moving
+                                mc.para.CAL.HDC_TOOL.x.value = dataX.value;
+                                mc.para.CAL.HDC_TOOL.y.value = dataY.value;
+                                posX = mc.hd.tool.tPos.x.ULC + centerX2[i];
+                                posY = mc.hd.tool.tPos.y.ULC + centerY2[i];
+                                posT = mc.para.CAL.toolAngleOffset.value + (stepDeg2 * i);
+                                mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                                #endregion
+                            }
+                            mc.idle(100);
+                        }
+                        dataX.value += Math.Round(centerX2.Average(), 2);
+                        dataY.value += Math.Round(centerY2.Average(), 2);
+                        #endregion
+
+                        #region moving
+                        mc.para.CAL.HDC_TOOL.x.value = dataX.value;
+                        mc.para.CAL.HDC_TOOL.y.value = dataY.value;
+                        posX = mc.hd.tool.tPos.x.ULC;
+                        posY = mc.hd.tool.tPos.y.ULC;
+                        posT = mc.para.CAL.toolAngleOffset.value;
+                        mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                        #endregion
+                    }
+                    else
+                    {
+                        double ctX = 0;
+                        double ctY = 0;
+                        mc.para.CAL.HDC_TOOL.x.value = dataX.value;
+                        mc.para.CAL.HDC_TOOL.y.value = dataY.value;
+                        posX = mc.hd.tool.tPos.x.ULC;
+                        posY = mc.hd.tool.tPos.y.ULC;
+                        posT = mc.para.CAL.toolAngleOffset.value;
+                        mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                        mc.ulc.circleFind();
+                        if ((double)mc.ulc.cam.circleCenter.resultRadius != -1)
+                        {
+                            ctX -= Math.Round((double)mc.ulc.cam.circleCenter.resultX, 2);
+                            ctY -= Math.Round((double)mc.ulc.cam.circleCenter.resultY, 2);
+                            #region moving
+                            dataX.value += ctX;
+                            dataY.value += ctY;
+                            mc.para.CAL.HDC_TOOL.x.value = dataX.value;
+                            mc.para.CAL.HDC_TOOL.y.value = dataY.value;
+                            posX = mc.hd.tool.tPos.x.ULC;// +ctX;
+                            posY = mc.hd.tool.tPos.y.ULC;// +ctY;
+                            posT = mc.para.CAL.toolAngleOffset.value;
+                            mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                            #endregion
+                        }
+                        mc.idle(100);
+
+                        mc.ulc.circleFind();
+
+                        #region circleFind
+                        int stepDeg = 90;
+                        int stepCnt = 360 / stepDeg;
+                        double[] centerX = new double[stepCnt];
+                        double[] centerY = new double[stepCnt];
+                        #region 데이타 초기화
+                        for (int i = 0; i < stepCnt; i++)
+                        {
+                            centerX[i] = 0; centerY[i] = 0;
+                        }
+                        #endregion
+                        for (int i = 0; i < stepCnt; i++)
+                        {
+                            #region moving pre Center
+                            mc.para.CAL.HDC_TOOL.x.value = dataX.value;
+                            mc.para.CAL.HDC_TOOL.y.value = dataY.value;
+                            posX = mc.hd.tool.tPos.x.ULC;
+                            posY = mc.hd.tool.tPos.y.ULC;
+                            posT = mc.para.CAL.toolAngleOffset.value + (stepDeg * i);
+                            mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                            #endregion
+                            mc.ulc.circleFind();
+                            if ((double)mc.ulc.cam.circleCenter.resultRadius != -1)
+                            {
+                                centerX[i] -= Math.Round((double)mc.ulc.cam.circleCenter.resultX, 2);
+                                centerY[i] -= Math.Round((double)mc.ulc.cam.circleCenter.resultY, 2);
+                                #region moving
+                                mc.para.CAL.HDC_TOOL.x.value = dataX.value;
+                                mc.para.CAL.HDC_TOOL.y.value = dataY.value;
+                                posX = mc.hd.tool.tPos.x.ULC + centerX[i];
+                                posY = mc.hd.tool.tPos.y.ULC + centerY[i];
+                                posT = mc.para.CAL.toolAngleOffset.value + (stepDeg * i);
+                                mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                                #endregion
+                            }
+                            mc.idle(100);
+                        }
+                        #endregion
+
+                        #region circleFind
+                        int stepDeg2 = 45;
+                        int stepCnt2 = 360 / stepDeg2;
+                        double[] centerX2 = new double[stepCnt2];
+                        double[] centerY2 = new double[stepCnt2];
+                        #region 데이타 초기화
+                        for (int i = 0; i < stepCnt2; i++)
+                        {
+                            centerX2[i] = 0; centerY2[i] = 0;
+                        }
+                        #endregion
+                        for (int i = 0; i < stepCnt2; i++)
+                        {
+                            #region moving pre Center
+                            mc.para.CAL.HDC_TOOL.x.value = dataX.value;
+                            mc.para.CAL.HDC_TOOL.y.value = dataY.value;
+                            posX = mc.hd.tool.tPos.x.ULC;
+                            posY = mc.hd.tool.tPos.y.ULC;
+                            posT = mc.para.CAL.toolAngleOffset.value + (stepDeg2 * i);
+                            mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                            #endregion
+                            mc.ulc.circleFind();
+                            if ((double)mc.ulc.cam.circleCenter.resultRadius != -1)
+                            {
+                                centerX2[i] -= Math.Round((double)mc.ulc.cam.circleCenter.resultX, 2);
+                                centerY2[i] -= Math.Round((double)mc.ulc.cam.circleCenter.resultY, 2);
+                                #region moving
+                                mc.para.CAL.HDC_TOOL.x.value = dataX.value;
+                                mc.para.CAL.HDC_TOOL.y.value = dataY.value;
+                                posX = mc.hd.tool.tPos.x.ULC + centerX2[i];
+                                posY = mc.hd.tool.tPos.y.ULC + centerY2[i];
+                                posT = mc.para.CAL.toolAngleOffset.value + (stepDeg2 * i);
+                                mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                                #endregion
+                            }
+                            mc.idle(100);
+                        }
+                        //dataX.value += Math.Round(centerX2.Average(), 2);
+                        //dataY.value += Math.Round(centerY2.Average(), 2);
+                        _rotateCenter.x.value = (centerX.Average() + centerX2.Average()) / 2;
+                        _rotateCenter.y.value = (centerY.Average() + centerY2.Average()) / 2;
+                        mc.log.debug.write(mc.log.CODE.INFO, "회전중심 X : " + _rotateCenter.x.value.ToString() + ", 회전중심 Y : " + _rotateCenter.y.value.ToString());
+                        #endregion
+
+                        #region moving
+                        mc.para.CAL.HDC_TOOL.x.value = dataX.value;
+                        mc.para.CAL.HDC_TOOL.y.value = dataY.value;
+                        posX = mc.hd.tool.tPos.x.ULC;
+                        posY = mc.hd.tool.tPos.y.ULC;
+                        posT = mc.para.CAL.toolAngleOffset.value;
+                        mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                        #endregion
+                    }
 
 					mc.ulc.circleFind();
 					mc.ulc.LIVE = true; mc.ulc.liveMode = REFRESH_REQMODE.CIRCLE_CENTER;

@@ -6552,12 +6552,28 @@ namespace PSA_SystemLibrary
 					}
 					#endregion
 
-                    cosTheta = Math.Cos((-ulcT) * Math.PI / 180);
-                    sinTheta = Math.Sin((-ulcT) * Math.PI / 180);
-                    ulcX = (cosTheta * ulcX) - (sinTheta * ulcY);
-                    ulcY = (sinTheta * ulcX) + (cosTheta * ulcY);
-                    placeX -= ulcX;
-                    placeY -= ulcY;
+                    if (!mc.swcontrol.useRotateCenter)
+                    {
+                        cosTheta = Math.Cos((-ulcT) * Math.PI / 180);
+                        sinTheta = Math.Sin((-ulcT) * Math.PI / 180);
+                        ulcX = (cosTheta * ulcX) - (sinTheta * ulcY);
+                        ulcY = (sinTheta * ulcX) + (cosTheta * ulcY);
+                        placeX -= ulcX;
+                        placeY -= ulcY;
+                    }
+                    else
+                    {
+                        DPOINT ulc_ct, pt1, pt2;
+                        ulc_ct.x = -mc.para.CAL.ToolRotateCenter.x.value;
+                        ulc_ct.y = -mc.para.CAL.ToolRotateCenter.y.value;
+                        pt1.x = ulcX;
+                        pt1.y = ulcY;
+
+                        Calc.rotate(-ulcP2T, ulc_ct, pt1, out pt2);
+
+                        placeX -= pt2.x;
+                        placeY -= pt2.y;
+                    }
 
                     if(mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG)
                     {

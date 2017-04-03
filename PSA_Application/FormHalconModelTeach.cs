@@ -162,10 +162,25 @@ namespace PSA_Application
                         double rX = 0, rY = 0;
                         Calc.calcAlign(0, alignX, alignY, alignT, lidSizeW, lidSizeH, out rX, out rY);
 
-                        double cosTheta = Math.Cos((-alignT) * Math.PI / 180);
-                        double sinTheta = Math.Sin((-alignT) * Math.PI / 180);
-                        alignX = (cosTheta * rX) - (sinTheta * rY);
-                        alignY = (sinTheta * rX) + (cosTheta * rY);
+                        if (!mc.swcontrol.useRotateCenter)
+                        {
+                            double cosTheta = Math.Cos((-alignT) * Math.PI / 180);
+                            double sinTheta = Math.Sin((-alignT) * Math.PI / 180);
+                            alignX = (cosTheta * rX) - (sinTheta * rY);
+                            alignY = (sinTheta * rX) + (cosTheta * rY);
+                        }
+                        else
+                        {
+                            DPOINT ulc_ct, pt1, pt2;
+                            ulc_ct.x = -mc.para.CAL.ToolRotateCenter.x.value;
+                            ulc_ct.y = -mc.para.CAL.ToolRotateCenter.y.value;
+                            pt1.x = alignX;
+                            pt1.y = alignY;
+
+                            Calc.rotate(-alignT, ulc_ct, pt1, out pt2);
+                            alignX = pt2.x;
+                            alignY = pt2.y;
+                        }
 
                         posX -= alignX;
                         posY -= alignY;
@@ -201,10 +216,25 @@ namespace PSA_Application
                         double rX = 0, rY = 0;
                         Calc.calcAlign(0, alignX, alignY, alignT, lidSizeW, lidSizeH, out rX, out rY);
 
-                        double cosTheta = Math.Cos((-alignT) * Math.PI / 180);
-                        double sinTheta = Math.Sin((-alignT) * Math.PI / 180);
-                        alignX = (cosTheta * rX) - (sinTheta * rY);
-                        alignY = (sinTheta * rX) + (cosTheta * rY);
+                        if (!mc.swcontrol.useRotateCenter)
+                        {
+                            double cosTheta = Math.Cos((-alignT) * Math.PI / 180);
+                            double sinTheta = Math.Sin((-alignT) * Math.PI / 180);
+                            alignX = (cosTheta * rX) - (sinTheta * rY);
+                            alignY = (sinTheta * rX) + (cosTheta * rY);
+                        }
+                        else
+                        {
+                            DPOINT ulc_ct, pt1, pt2;
+                            ulc_ct.x = -mc.para.CAL.ToolRotateCenter.x.value;
+                            ulc_ct.y = -mc.para.CAL.ToolRotateCenter.y.value;
+                            pt1.x = alignX;
+                            pt1.y = alignY;
+
+                            Calc.rotate(-alignT, ulc_ct, pt1, out pt2);
+                            alignX = pt2.x;
+                            alignY = pt2.y;
+                        }
 
                         posX -= alignX;
                         posY -= alignY;
@@ -248,10 +278,25 @@ namespace PSA_Application
                         double rX = 0, rY = 0;
                         Calc.calcAlign(1, alignX, alignY, alignT, lidSizeW, lidSizeH, out rX, out rY);
 
-                        double cosTheta = Math.Cos((-alignT) * Math.PI / 180);
-                        double sinTheta = Math.Sin((-alignT) * Math.PI / 180);
-                        alignX = (cosTheta * rX) - (sinTheta * rY);
-                        alignY = (sinTheta * rX) + (cosTheta * rY);
+                        if (!mc.swcontrol.useRotateCenter)
+                        {
+                            double cosTheta = Math.Cos((-alignT) * Math.PI / 180);
+                            double sinTheta = Math.Sin((-alignT) * Math.PI / 180);
+                            alignX = (cosTheta * rX) - (sinTheta * rY);
+                            alignY = (sinTheta * rX) + (cosTheta * rY);
+                        }
+                        else
+                        {
+                            DPOINT ulc_ct, pt1, pt2;
+                            ulc_ct.x = -mc.para.CAL.ToolRotateCenter.x.value;
+                            ulc_ct.y = -mc.para.CAL.ToolRotateCenter.y.value;
+                            pt1.x = alignX;
+                            pt1.y = alignY;
+
+                            Calc.rotate(-alignT, ulc_ct, pt1, out pt2);
+                            alignX = pt2.x;
+                            alignY = pt2.y;
+                        }
 
                         posX -= alignX;
                         posY -= alignY;
@@ -287,10 +332,25 @@ namespace PSA_Application
                         double rX = 0, rY = 0;
                         Calc.calcAlign(1, alignX, alignY, alignT, lidSizeW, lidSizeH, out rX, out rY);
 
-                        double cosTheta = Math.Cos((-alignT) * Math.PI / 180);
-                        double sinTheta = Math.Sin((-alignT) * Math.PI / 180);
-                        alignX = (cosTheta * rX) - (sinTheta * rY);
-                        alignY = (sinTheta * rX) + (cosTheta * rY);
+                        if (!mc.swcontrol.useRotateCenter)
+                        {
+                            double cosTheta = Math.Cos((-alignT) * Math.PI / 180);
+                            double sinTheta = Math.Sin((-alignT) * Math.PI / 180);
+                            alignX = (cosTheta * rX) - (sinTheta * rY);
+                            alignY = (sinTheta * rX) + (cosTheta * rY);
+                        }
+                        else
+                        {
+                            DPOINT ulc_ct, pt1, pt2;
+                            ulc_ct.x = -mc.para.CAL.ToolRotateCenter.x.value;
+                            ulc_ct.y = -mc.para.CAL.ToolRotateCenter.y.value;
+                            pt1.x = alignX;
+                            pt1.y = alignY;
+
+                            Calc.rotate(-alignT, ulc_ct, pt1, out pt2);
+                            alignX = pt2.x;
+                            alignY = pt2.y;
+                        }
 
                         posX -= alignX;
                         posY -= alignY;
@@ -334,10 +394,25 @@ namespace PSA_Application
                         double rX = 0, rY = 0;
                         Calc.calcAlign(2, alignX, alignY, alignT, lidSizeW, lidSizeH, out rX, out rY);
 
-                        double cosTheta = Math.Cos((-alignT) * Math.PI / 180);
-                        double sinTheta = Math.Sin((-alignT) * Math.PI / 180);
-                        alignX = (cosTheta * rX) - (sinTheta * rY);
-                        alignY = (sinTheta * rX) + (cosTheta * rY);
+                        if (!mc.swcontrol.useRotateCenter)
+                        {
+                            double cosTheta = Math.Cos((-alignT) * Math.PI / 180);
+                            double sinTheta = Math.Sin((-alignT) * Math.PI / 180);
+                            alignX = (cosTheta * rX) - (sinTheta * rY);
+                            alignY = (sinTheta * rX) + (cosTheta * rY);
+                        }
+                        else
+                        {
+                            DPOINT ulc_ct, pt1, pt2;
+                            ulc_ct.x = -mc.para.CAL.ToolRotateCenter.x.value;
+                            ulc_ct.y = -mc.para.CAL.ToolRotateCenter.y.value;
+                            pt1.x = alignX;
+                            pt1.y = alignY;
+
+                            Calc.rotate(-alignT, ulc_ct, pt1, out pt2);
+                            alignX = pt2.x;
+                            alignY = pt2.y;
+                        }
 
                         posX -= alignX;
                         posY -= alignY;
@@ -373,10 +448,25 @@ namespace PSA_Application
                         double rX = 0, rY = 0;
                         Calc.calcAlign(2, alignX, alignY, alignT, lidSizeW, lidSizeH, out rX, out rY);
 
-                        double cosTheta = Math.Cos((-alignT) * Math.PI / 180);
-                        double sinTheta = Math.Sin((-alignT) * Math.PI / 180);
-                        alignX = (cosTheta * rX) - (sinTheta * rY);
-                        alignY = (sinTheta * rX) + (cosTheta * rY);
+                        if (!mc.swcontrol.useRotateCenter)
+                        {
+                            double cosTheta = Math.Cos((-alignT) * Math.PI / 180);
+                            double sinTheta = Math.Sin((-alignT) * Math.PI / 180);
+                            alignX = (cosTheta * rX) - (sinTheta * rY);
+                            alignY = (sinTheta * rX) + (cosTheta * rY);
+                        }
+                        else
+                        {
+                            DPOINT ulc_ct, pt1, pt2;
+                            ulc_ct.x = -mc.para.CAL.ToolRotateCenter.x.value;
+                            ulc_ct.y = -mc.para.CAL.ToolRotateCenter.y.value;
+                            pt1.x = alignX;
+                            pt1.y = alignY;
+
+                            Calc.rotate(-alignT, ulc_ct, pt1, out pt2);
+                            alignX = pt2.x;
+                            alignY = pt2.y;
+                        }
 
                         posX -= alignX;
                         posY -= alignY;
@@ -420,10 +510,25 @@ namespace PSA_Application
                         double rX = 0, rY = 0;
                         Calc.calcAlign(3, alignX, alignY, alignT, lidSizeW, lidSizeH, out rX, out rY);
 
-                        double cosTheta = Math.Cos((-alignT) * Math.PI / 180);
-                        double sinTheta = Math.Sin((-alignT) * Math.PI / 180);
-                        alignX = (cosTheta * rX) - (sinTheta * rY);
-                        alignY = (sinTheta * rX) + (cosTheta * rY);
+                        if (!mc.swcontrol.useRotateCenter)
+                        {
+                            double cosTheta = Math.Cos((-alignT) * Math.PI / 180);
+                            double sinTheta = Math.Sin((-alignT) * Math.PI / 180);
+                            alignX = (cosTheta * rX) - (sinTheta * rY);
+                            alignY = (sinTheta * rX) + (cosTheta * rY);
+                        }
+                        else
+                        {
+                            DPOINT ulc_ct, pt1, pt2;
+                            ulc_ct.x = -mc.para.CAL.ToolRotateCenter.x.value;
+                            ulc_ct.y = -mc.para.CAL.ToolRotateCenter.y.value;
+                            pt1.x = alignX;
+                            pt1.y = alignY;
+
+                            Calc.rotate(-alignT, ulc_ct, pt1, out pt2);
+                            alignX = pt2.x;
+                            alignY = pt2.y;
+                        }
 
                         posX -= alignX;
                         posY -= alignY;
@@ -459,10 +564,25 @@ namespace PSA_Application
                         double rX = 0, rY = 0;
                         Calc.calcAlign(3, alignX, alignY, alignT, lidSizeW, lidSizeH, out rX, out rY);
 
-                        double cosTheta = Math.Cos((-alignT) * Math.PI / 180);
-                        double sinTheta = Math.Sin((-alignT) * Math.PI / 180);
-                        alignX = (cosTheta * rX) - (sinTheta * rY);
-                        alignY = (sinTheta * rX) + (cosTheta * rY);
+                        if (!mc.swcontrol.useRotateCenter)
+                        {
+                            double cosTheta = Math.Cos((-alignT) * Math.PI / 180);
+                            double sinTheta = Math.Sin((-alignT) * Math.PI / 180);
+                            alignX = (cosTheta * rX) - (sinTheta * rY);
+                            alignY = (sinTheta * rX) + (cosTheta * rY);
+                        }
+                        else
+                        {
+                            DPOINT ulc_ct, pt1, pt2;
+                            ulc_ct.x = -mc.para.CAL.ToolRotateCenter.x.value;
+                            ulc_ct.y = -mc.para.CAL.ToolRotateCenter.y.value;
+                            pt1.x = alignX;
+                            pt1.y = alignY;
+
+                            Calc.rotate(-alignT, ulc_ct, pt1, out pt2);
+                            alignX = pt2.x;
+                            alignY = pt2.y;
+                        }
 
                         posX -= alignX;
                         posY -= alignY;

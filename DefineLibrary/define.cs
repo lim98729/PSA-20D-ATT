@@ -5213,7 +5213,6 @@ namespace DefineLibrary
 
         public static bool simulation;
 
-
 		public static Color[] colorCode = new Color[(int)COLORCODE.CODERCODE_MAX];
 
 		static string filename = "C:\\PROTEC\\DATA\\SystemControl.INI";
@@ -5423,7 +5422,6 @@ namespace DefineLibrary
 
             temp = simulation ? 1 : 0;
             utilconfig.WriteInt("Simulation", temp);
-
         }
 	}
 

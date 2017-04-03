@@ -128,7 +128,8 @@ namespace PSA_Application
 				posY = mc.hd.tool.tPos.y.ULC;
 				posZ = mc.hd.tool.tPos.z.ULC_FOCUS;
 				posT = mc.hd.tool.tPos.t.ZERO;
-				mc.hd.tool.jogMove(posX, posY, posZ, posT, out ret.message); if (ret.message != RetMessage.OK)
+				mc.hd.tool.jogMove(posX, posY, posZ, posT, out ret.message);
+                if (ret.message != RetMessage.OK)
 				{
 					mc.message.alarmMotion(ret.message);
 					mc.para.CAL.ulc.x.value = tmpX;

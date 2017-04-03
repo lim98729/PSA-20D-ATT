@@ -6360,6 +6360,7 @@ namespace PSA_SystemLibrary
 
 		public parameterXY[] machineRef = new parameterXY[5];
 		public parameterXY HDC_TOOL = new parameterXY();
+        public parameterXY ToolRotateCenter = new parameterXY();
 		public parameterXY HDC_LASER = new parameterXY();
 		public parameterXY[] HDC_PD = new parameterXY[4];
 		public parameterXY touchProbe = new parameterXY();
@@ -6406,6 +6407,7 @@ namespace PSA_SystemLibrary
 					writeTuple(machineRef[j].x, i, out i); writeTuple(machineRef[j].y, i, out i);
 				}
 				writeTuple(HDC_TOOL.x, i, out i); writeTuple(HDC_TOOL.y, i, out i);
+                writeTuple(ToolRotateCenter.x, i, out i); writeTuple(ToolRotateCenter.y, i, out i);
 				writeTuple(HDC_LASER.x, i, out i); writeTuple(HDC_LASER.y, i, out i);
 				for (int j = 0; j < 4; j++)
 				{
@@ -6541,6 +6543,9 @@ namespace PSA_SystemLibrary
 
 				readTuple("HDC_TOOL.x", out HDC_TOOL.x, out fail); if (fail) goto SET_FAIL;
 				readTuple("HDC_TOOL.y", out HDC_TOOL.y, out fail); if (fail) goto SET_FAIL;
+
+                readTuple("ToolRotateCenter.x", out ToolRotateCenter.x, out fail); if (fail) goto SET_FAIL;
+                readTuple("ToolRotateCenter.y", out ToolRotateCenter.y, out fail); if (fail) goto SET_FAIL;
 
 				readTuple("HDC_LASER.x", out HDC_LASER.x, out fail); if (fail) goto SET_FAIL;
 				readTuple("HDC_LASER.y", out HDC_LASER.y, out fail); if (fail) goto SET_FAIL;
@@ -6731,6 +6736,9 @@ namespace PSA_SystemLibrary
 			setDefault("HDC_TOOL.x", out HDC_TOOL.x, out fail); if (fail) goto SET_FAIL;
 			setDefault("HDC_TOOL.y", out HDC_TOOL.y, out fail); if (fail) goto SET_FAIL;
 
+            setDefault("ToolRotateCenter.x", out ToolRotateCenter.x, out fail); if (fail) goto SET_FAIL;
+            setDefault("ToolRotateCenter.y", out ToolRotateCenter.y, out fail); if (fail) goto SET_FAIL;
+
 			setDefault("HDC_LASER.x", out HDC_LASER.x, out fail); if (fail) goto SET_FAIL;
 			setDefault("HDC_LASER.y", out HDC_LASER.y, out fail); if (fail) goto SET_FAIL;
 
@@ -6840,6 +6848,9 @@ namespace PSA_SystemLibrary
 
 				id++; if (name == "HDC_TOOL.x") setDefault(out p, name, id, 0, lowLimitXY, highLimitXY, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "HDC_TOOL.y") setDefault(out p, name, id, 0, lowLimitXY, highLimitXY, AUTHORITY.MAINTENCE.ToString(), "description");
+
+                id++; if (name == "ToolRotateCenter.x") setDefault(out p, name, id, 0, lowLimitXY, highLimitXY, AUTHORITY.MAINTENCE.ToString(), "description");
+                id++; if (name == "ToolRotateCenter.y") setDefault(out p, name, id, 0, lowLimitXY, highLimitXY, AUTHORITY.MAINTENCE.ToString(), "description");
 
 				id++; if (name == "HDC_LASER.x") setDefault(out p, name, id, 0, lowLimitXY, highLimitXY, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "HDC_LASER.y") setDefault(out p, name, id, 0, lowLimitXY, highLimitXY, AUTHORITY.MAINTENCE.ToString(), "description");

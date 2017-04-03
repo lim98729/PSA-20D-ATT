@@ -4496,7 +4496,7 @@ namespace PSA_SystemLibrary
             public static bool useCheckAttachTilt;
             public static bool useCheckEpoxy;
             public static bool useDoorControl;
-
+            public static bool useRotateCenter;     // 동심도를 Tool 중심으로 지정하지 않고 개별 지정하기 위한 옵션
 
             //static string filename = Environment.CurrentDirectory + "\\PSA.INI";
             static string filename = "C:\\PROTEC\\DATA\\PSA.INI";
@@ -4667,6 +4667,10 @@ namespace PSA_SystemLibrary
                 temp = swconfig.GetInt("useCheckEpoxy", 2);
                 if (temp == 2) genflag = true;
                 useCheckEpoxy = (temp != 1) ? false : true;
+
+                temp = swconfig.GetInt("useRotateCenter", 2);
+                if (temp == 2) genflag = true;
+                useRotateCenter = (temp != 1) ? false : true;
             }
 
             public static void writeETCConfig()
@@ -4720,6 +4724,9 @@ namespace PSA_SystemLibrary
 
                 temp = useCheckEpoxy ? 1 : 0;
                 swconfig.WriteInt("useCheckEpoxy", temp);
+
+                temp = useRotateCenter ? 1 : 0;
+                swconfig.WriteInt("useRotateCenter", temp);
             }
         }
 
