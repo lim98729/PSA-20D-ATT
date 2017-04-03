@@ -107,7 +107,7 @@ namespace PSA_Application
 				speedType = SPEED_TYPE.LARGE;
 				EVENT.hWindowLargeDisplay(mc.hdc.cam.acq.grabber.cameraNumber);
 				mc.hdc.lighting_exposure(mc.para.HDC.light[(int)LIGHTMODE_HDC.PD_P1234], mc.para.HDC.exposure[(int)LIGHTMODE_HDC.PD_P1234]);
-				mc.hdc.rectangleFind();
+                mc.hdc.circleFind();
 				mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.RECTANGLE_CENTER;
 			}
 			#endregion
@@ -433,8 +433,6 @@ namespace PSA_Application
 				if (jogMode == JOGMODE.HDC_PD_P1)
 				{
 					#region moving
-					//posX = (double)MP_PD_X.P1_FR; 
-					//posY = (double)MP_PD_Y.P1;
                     posX = mc.pd.pos.x.P1;
                     posY = mc.pd.pos.y.P1;
 					posX += dataX.value;
@@ -443,8 +441,8 @@ namespace PSA_Application
 					#endregion
 					//mc.idle(100);
 					mc.hdc.LIVE = false;
-					mc.hdc.rectangleFind();
-					mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.RECTANGLE_CENTER;
+                    mc.hdc.circleFind();
+					mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.CIRCLE_CENTER;
 				}
 				if (jogMode == JOGMODE.HDC_PD_P2)
 				{
@@ -951,17 +949,18 @@ namespace PSA_Application
 					int retry = 0;
 					mc.hdc.LIVE = false;
 				RETRY:
-					mc.hdc.rectangleFind();
-					if ((double)mc.hdc.cam.rectangleCenter.resultWidth != -1)
+                    mc.hdc.circleFind();
+					//if ((double)mc.hdc.cam.rectangleCenter.resultWidth != -1)
+                    if ((double)mc.hdc.cam.circleCenter.findRadius != -1)
 					{
-						dataX.value -= Math.Round((double)mc.hdc.cam.rectangleCenter.resultX, 2);
-						dataY.value -= Math.Round((double)mc.hdc.cam.rectangleCenter.resultY, 2);
-					  
+                        dataX.value -= Math.Round((double)mc.hdc.cam.circleCenter.resultX, 2);
+                        dataY.value -= Math.Round((double)mc.hdc.cam.circleCenter.resultY, 2);
+
 						#region moving
-						posX = mc.pd.pos.x.P1;
-						posY = mc.pd.pos.y.P1;
-						//posX = (double)MP_PD_X.P1_FR; 
-						//posY = (double)MP_PD_Y.P1;
+                        //posX = mc.pd.pos.x.PAD(padX);
+                        //posY = mc.pd.pos.y.PAD(padY);
+                        posX = mc.pd.pos.x.P1;
+                        posY = mc.pd.pos.y.P1;
 						posX += dataX.value;
 						posY += dataY.value;
 						mc.pd.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
@@ -969,8 +968,8 @@ namespace PSA_Application
 					}
 					mc.idle(100);
 					if (retry++ < 3) goto RETRY;
-					mc.hdc.rectangleFind();
-					mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.RECTANGLE_CENTER;
+                    mc.hdc.circleFind();
+					mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.CIRCLE_CENTER;
 
 				}
 				#endregion

@@ -65,8 +65,8 @@ namespace PSA_Application
 					if (!mc.pd.Y.config.write()) { mc.message.alarm("Pedestal Y homing para write error"); }
 					if (!mc.pd.Z.config.write()) { mc.message.alarm("Pedestal Z homing para write error"); }
 
-					if (!mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.write()) { mc.message.alarm("Stack Feeder Z2 homing para write error"); }
-                    if (!mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.write()) { mc.message.alarm("Stack Feeder Z homing para write error"); }
+					if (!mc.sf.Z2.config.write()) { mc.message.alarm("Stack Feeder Z2 homing para write error"); }
+                    if (!mc.sf.Z.config.write()) { mc.message.alarm("Stack Feeder Z homing para write error"); }
 
 					if (!mc.cv.W.config.write()) { mc.message.alarm("Conveyor W homing para write error"); }
 				}
@@ -185,11 +185,11 @@ namespace PSA_Application
 			#region BT_HDC_PD_Calibration
 			if (sender.Equals(BT_HDC_PD_Calibration))
 			{
-                int padX = 3;
-                int padY = 1;
 				#region HD moving
 				if (unitCodePDRef == UnitCodePDRef.P1)
 				{
+                    //posX = mc.hd.tool.cPos.x.PAD(padX);
+                    //posY = mc.hd.tool.cPos.y.PAD(padY);
                     posX = mc.hd.tool.cPos.x.PD_P1;
                     posY = mc.hd.tool.cPos.y.PD_P1;
 					jogMode = JOGMODE.HDC_PD_P1;
@@ -219,10 +219,11 @@ namespace PSA_Application
 				#region PD moving
 				if (unitCodePDRef == UnitCodePDRef.P1)
 				{
-					//posX = (double)MP_PD_X.P1_FR; posY = (double)MP_PD_Y.P1;
                     posX = mc.pd.pos.x.P1;
                     posY = mc.pd.pos.y.P1;
-				}
+                    //posX = mc.pd.pos.x.PAD(padX);
+                    //posY = mc.pd.pos.y.PAD(padY);
+                }
 				else if (unitCodePDRef == UnitCodePDRef.P2)
 				{
 					posX = mc.pd.pos.x.P2;
@@ -243,7 +244,9 @@ namespace PSA_Application
 				posX += mc.para.CAL.HDC_PD[(int)unitCodePDRef].x.value;
 				posY += mc.para.CAL.HDC_PD[(int)unitCodePDRef].y.value;
                 mc.pd.jogMode = (int)PD_JOGMODE.UP_MODE;
-				posZ = (double)MP_PD_Z.BD_UP;
+				if(mc.swcontrol.mechanicalRevision == (int)CUSTOMER.CHIPPAC) posZ = (double)MP_PD_Z.BD_UP;
+                else posZ = (double)MP_PD_Z.BD_UP_HIGH;
+
 				mc.pd.jogMove(posX, posY, posZ, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				#endregion
 				FormJogPad ff = new FormJogPad();
@@ -456,7 +459,7 @@ namespace PSA_Application
 				#region moving and motorDisable
 				posX = (double)MP_HD_X.ULC;
 				posY = (double)MP_HD_Y.BD_EDGE + 30000;
-				posZ = (double)MP_HD_Z.PEDESTAL;
+                posZ = mc.hd.tool.tPos.z.XY_MOVING;
 				posT = 0;
 				mc.hd.tool.jogMove(posX, posY, posZ, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				mc.idle(1000);
@@ -665,6 +668,12 @@ namespace PSA_Application
                     posX = mc.para.CAL.standbyPosition.x.value;
                     posY = mc.para.CAL.standbyPosition.y.value;
                     mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+
+                    posX = mc.pd.pos.x.PAD(0);
+                    posY = mc.pd.pos.y.PAD(0);
+                    mc.pd.jogMode = (int)PD_JOGMODE.DOWN_MODE;
+                    posZ = mc.pd.pos.z.HOME;
+                    mc.pd.jogMove(posX, posY, posZ, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 					#endregion
 				}
 				#endregion
@@ -1241,6 +1250,11 @@ namespace PSA_Application
 		private void CenterRight_Calibration_Load(object sender, EventArgs e)
 		{
 		    // temp
+            BT_MachineRef1_1.Visible = false;
+            BT_MachineRef1_2.Visible = false;
+            BT_HDC_PDSelelctP2.Visible = false;
+            BT_HDC_PDSelelctP3.Visible = false;
+            BT_HDC_PDSelelctP4.Visible = false;
 			if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG)
 			{
 				BT_PICK_PosSelect_3.Visible = false;

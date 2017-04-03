@@ -796,6 +796,11 @@ namespace PSA_SystemLibrary
 				case 24:
 					if (dwell.Elapsed < 100) break;
 					Axis.capturePosition(out ret.d1, out ret.message); if (mpiCheck(Axis.config.axisCode, sqc, ret.message)) break;
+                    if (Axis.config.homing.encoderInverted == 1)
+                    {
+                        mc.log.debug.write(mc.log.CODE.WARN, "Capture Position Inverted : " + Axis.config.axisCode.ToString() + " (" + ret.d1.ToString() + ")");
+                        ret.d1 *= -1;
+                    }
 					//mc.log.debug.write(mc.log.CODE.EVENT, Axis.config.axisCode.ToString() + "(Cap) : " + Math.Round(Axis.c_to_um(ret.d1), 3).ToString() + "[" + Math.Round(ret.d1, 3).ToString() + "]");
 					//Axis.captureOrigin(ret.d1, out ret.message); if (mpiCheck(Axis.config.axisCode, sqc, ret.message)) break;
 					

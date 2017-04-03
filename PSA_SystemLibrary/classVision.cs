@@ -86,6 +86,10 @@ namespace PSA_SystemLibrary
 					if (reqMode == REQMODE.FIND_EDGE_QUARTER_2) { sqc = SQC.FIND_EDGE_QUARTER_SECOND; break; }
 					if (reqMode == REQMODE.FIND_EDGE_QUARTER_1) { sqc = SQC.FIND_EDGE_QUARTER_FIRST; break; }
 					if (reqMode == REQMODE.FIND_EDGE_QUARTER_4) { sqc = SQC.FIND_EDGE_QUARTER_FOURTH; break; }
+                    if (reqMode == REQMODE.FIND_PROJECTION_EDGE_QUARTER_1) { sqc = SQC.FIND_PROJECTION_EDGE_QUARTER_1; break; }
+					if (reqMode == REQMODE.FIND_PROJECTION_EDGE_QUARTER_2) { sqc = SQC.FIND_PROJECTION_EDGE_QUARTER_2; break; }
+					if (reqMode == REQMODE.FIND_PROJECTION_EDGE_QUARTER_3) { sqc = SQC.FIND_PROJECTION_EDGE_QUARTER_3; break; }
+					if (reqMode == REQMODE.FIND_PROJECTION_EDGE_QUARTER_4) { sqc = SQC.FIND_PROJECTION_EDGE_QUARTER_4; break; }
 					if (unitCode == UnitCode.HDC)
 					{
 						errorCheck(ERRORCODE.HDC, sqc, "요청 모드[" + reqMode.ToString() + "]", ALARM_CODE.E_SYSTEM_SW_HDC_LIST_NONE); break;
@@ -525,6 +529,185 @@ namespace PSA_SystemLibrary
 					sqc = SQC.STOP; break;
 				#endregion
 
+                #region FIND_PROJECTION_EDGE_QUARTER
+                case SQC.FIND_PROJECTION_EDGE_QUARTER_1:            // RT
+                    if (cam.refresh_req) break;
+                    #region grab
+                    if (triggerMode == TRIGGERMODE.SOFTWARE)
+                    {
+                        cam.grabSofrwareTrigger(out ret.message, out ret.s); if (ret.message != RetMessage.OK) { sqc = SQC.GRAB_ERROR; break; }
+                    }
+                    else
+                    {
+                        cam.grab(out ret.message, out ret.s); if (ret.message != RetMessage.OK) { sqc = SQC.GRAB_ERROR; break; }
+                    }
+                    #endregion
+
+                    cam.projectionEdge.quardrant  = (int)QUARDRANT.QUARDRANT_RT;
+                    cam.createCornerRegion();
+                    cam.DispBinaryRectImage(out ret.b);
+                    if (!ret.b)
+                    {
+                        if (unitCode == UnitCode.HDC && (int)mc.para.HDC.imageSave.value == 1)
+                        {
+                            cam.writeLogGrabImage("HDC_C1_Process_Fail");
+                        }
+                        else if (unitCode == UnitCode.ULC && (int)mc.para.ULC.imageSave.value == 1)
+                        {
+                            cam.writeLogGrabImage("ULC_C1_Process_Fail");
+                        }
+                        sqc = SQC.FIND_ERROR; break;
+                    }
+                    else
+                    {
+                        if (unitCode == UnitCode.HDC && (int)mc.para.HDC.imageSave.value == 2)
+                        {
+                            cam.writeLogGrabImage("HDC_C1_OK");
+                        }
+                        if (unitCode == UnitCode.ULC && (int)mc.para.ULC.imageSave.value == 2)
+                        {
+                            cam.writeLogGrabImage("ULC_C1_OK");
+                        }
+                    }
+                    #region refresh
+                    cam.refresh_req = true;
+                    cam.refresh_reqMode = REFRESH_REQMODE.PROJECTION_EDGE;
+                    #endregion
+                    sqc = SQC.STOP; break;
+                case SQC.FIND_PROJECTION_EDGE_QUARTER_2:            // RB
+                    if (cam.refresh_req) break;
+                    #region grab
+                    if (triggerMode == TRIGGERMODE.SOFTWARE)
+                    {
+                        cam.grabSofrwareTrigger(out ret.message, out ret.s); if (ret.message != RetMessage.OK) { sqc = SQC.GRAB_ERROR; break; }
+                    }
+                    else
+                    {
+                        cam.grab(out ret.message, out ret.s); if (ret.message != RetMessage.OK) { sqc = SQC.GRAB_ERROR; break; }
+                    }
+                    #endregion
+
+                    cam.projectionEdge.quardrant  = (int)QUARDRANT.QUARDRANT_RB;
+                    cam.createCornerRegion();
+                    cam.DispBinaryRectImage(out ret.b);
+                    if (!ret.b)
+                    {
+                        if (unitCode == UnitCode.HDC && (int)mc.para.HDC.imageSave.value == 1)
+                        {
+                            cam.writeLogGrabImage("HDC_C2_Process_Fail");
+                        }
+                        else if (unitCode == UnitCode.ULC && (int)mc.para.ULC.imageSave.value == 1)
+                        {
+                            cam.writeLogGrabImage("ULC_C2_Process_Fail");
+                        }
+                        sqc = SQC.FIND_ERROR; break;
+                    }
+                    else
+                    {
+                        if (unitCode == UnitCode.HDC && (int)mc.para.HDC.imageSave.value == 2)
+                        {
+                            cam.writeLogGrabImage("HDC_C2_OK");
+                        }
+                        if (unitCode == UnitCode.ULC && (int)mc.para.ULC.imageSave.value == 2)
+                        {
+                            cam.writeLogGrabImage("ULC_C2_OK");
+                        }
+                    }
+                    #region refresh
+                    cam.refresh_req = true;
+                    cam.refresh_reqMode = REFRESH_REQMODE.PROJECTION_EDGE;
+                    #endregion
+                    sqc = SQC.STOP; break;
+                case SQC.FIND_PROJECTION_EDGE_QUARTER_3:            // LB
+                    if (cam.refresh_req) break;
+                    #region grab
+                    if (triggerMode == TRIGGERMODE.SOFTWARE)
+                    {
+                        cam.grabSofrwareTrigger(out ret.message, out ret.s); if (ret.message != RetMessage.OK) { sqc = SQC.GRAB_ERROR; break; }
+                    }
+                    else
+                    {
+                        cam.grab(out ret.message, out ret.s); if (ret.message != RetMessage.OK) { sqc = SQC.GRAB_ERROR; break; }
+                    }
+                    #endregion
+
+                    cam.projectionEdge.quardrant  = (int)QUARDRANT.QUARDRANT_LB;
+                    cam.createCornerRegion();
+                    cam.DispBinaryRectImage(out ret.b);
+                    if (!ret.b)
+                    {
+                        if (unitCode == UnitCode.HDC && (int)mc.para.HDC.imageSave.value == 1)
+                        {
+                            cam.writeLogGrabImage("HDC_C3_Process_Fail");
+                        }
+                        else if (unitCode == UnitCode.ULC && (int)mc.para.ULC.imageSave.value == 1)
+                        {
+                            cam.writeLogGrabImage("ULC_C3_Process_Fail");
+                        }
+                        sqc = SQC.FIND_ERROR; break;
+                    }
+                    else
+                    {
+                        if (unitCode == UnitCode.HDC && (int)mc.para.HDC.imageSave.value == 2)
+                        {
+                            cam.writeLogGrabImage("HDC_C3_OK");
+                        }
+                        if (unitCode == UnitCode.ULC && (int)mc.para.ULC.imageSave.value == 2)
+                        {
+                            cam.writeLogGrabImage("ULC_C3_OK");
+                        }
+                    }
+                    #region refresh
+                    cam.refresh_req = true;
+                    cam.refresh_reqMode = REFRESH_REQMODE.PROJECTION_EDGE;
+                    #endregion
+                    sqc = SQC.STOP; break;
+                case SQC.FIND_PROJECTION_EDGE_QUARTER_4:            // LT
+                    if (cam.refresh_req) break;
+                    #region grab
+                    if (triggerMode == TRIGGERMODE.SOFTWARE)
+                    {
+                        cam.grabSofrwareTrigger(out ret.message, out ret.s); if (ret.message != RetMessage.OK) { sqc = SQC.GRAB_ERROR; break; }
+                    }
+                    else
+                    {
+                        cam.grab(out ret.message, out ret.s); if (ret.message != RetMessage.OK) { sqc = SQC.GRAB_ERROR; break; }
+                    }
+                    #endregion
+                    
+                    cam.projectionEdge.quardrant  = (int)QUARDRANT.QUARDRANT_LT;
+                    cam.createCornerRegion();
+                    cam.DispBinaryRectImage(out ret.b);
+                    if (!ret.b)
+                    {
+                        if (unitCode == UnitCode.HDC && (int)mc.para.HDC.imageSave.value == 1)
+                        {
+                            cam.writeLogGrabImage("HDC_C4_Process_Fail");
+                        }
+                        else if (unitCode == UnitCode.ULC && (int)mc.para.ULC.imageSave.value == 1)
+                        {
+                            cam.writeLogGrabImage("ULC_C4_Process_Fail");
+                        }
+                        sqc = SQC.FIND_ERROR; break;
+                    }
+                    else
+                    {
+                        if (unitCode == UnitCode.HDC && (int)mc.para.HDC.imageSave.value == 2)
+                        {
+                            cam.writeLogGrabImage("HDC_C4_OK");
+                        }
+                        if (unitCode == UnitCode.ULC && (int)mc.para.ULC.imageSave.value == 2)
+                        {
+                            cam.writeLogGrabImage("ULC_C4_OK");
+                        }
+                    }
+                    #region refresh
+                    cam.refresh_req = true;
+                    cam.refresh_reqMode = REFRESH_REQMODE.PROJECTION_EDGE;
+                    #endregion
+                    sqc = SQC.STOP; break;
+                #endregion
+
 				case SQC.GRAB_ERROR:
 					cam.refresh_errorMessage = ret.s;
 					errorCheck(ERRORCODE.HDC, sqc, cam.refresh_errorMessage);
@@ -783,7 +966,7 @@ namespace PSA_SystemLibrary
 		{
 			cam.grabSofrwareTrigger();
 
-			cam.findBlob(halconBlob, tempthreshold, tempareaminfilter, -1, -1, out retMessage, out ret.s, 1); if (ret.message != RetMessage.OK) return;
+			cam.findBlob(halconBlob, tempthreshold, tempareaminfilter, -1, -1, out retMessage, out ret.s, 1); if (retMessage != RetMessage.OK) return;
 			cam.refresh_req = true; mc.hdc.cam.refresh_reqMode = REFRESH_REQMODE.FIND_EPOXY;
 
 			EpoxyAmountJugement(out ret.message, out ret.s);
@@ -810,6 +993,7 @@ namespace PSA_SystemLibrary
 				mc.idle(1);
 				if (!mc.hdc.cam.refresh_req) break;
 			}
+			//b = mc.hdc.cam.edgeIntersection.SUCCESS; 
 		}
 
 		public void edgeIntersectionFind(QUARTER_NUMBER quarterNumber, out bool b, int cam = 0)
@@ -845,6 +1029,23 @@ namespace PSA_SystemLibrary
                 b = mc.ulc.cam.edgeIntersection.SUCCESS;
             }
 		}
+
+        public void projectionEdgeFind(QUARDRANT quardrant, out bool b)
+        {
+            cam.grabSofrwareTrigger();
+            cam.projectionEdge.quardrant = (int)quardrant;
+            cam.createCornerRegion();
+            cam.DispBinaryRectImage(out ret.b);
+            cam.refresh_req = true; cam.refresh_reqMode = REFRESH_REQMODE.PROJECTION_EDGE;
+            dwell.Reset();
+            while (true)
+            {
+                if (dwell.Elapsed > 5000) { cam.refresh_req = false; b = false; return; }
+                mc.idle(1);
+                if (!cam.refresh_req) break;
+            }
+            b = true;
+        }
 
 		public void cornerEdgeFind(QUARTER_NUMBER quarterNumber)
 		{

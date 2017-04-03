@@ -1321,11 +1321,17 @@ namespace DefineLibrary
 		public const int FIND_CIRCLE_QUARTER_4 = 3630;
 		public const int FIND_RECTANGLE_HS = 3640;
 
+        public const int FIND_PROJECTION_EDGE_QUARTER_1 = 3700;
+        public const int FIND_PROJECTION_EDGE_QUARTER_2 = 3710;
+        public const int FIND_PROJECTION_EDGE_QUARTER_3 = 3720;
+        public const int FIND_PROJECTION_EDGE_QUARTER_4 = 3730;
+
 		public const int READY = 4000;
 		public const int DOWN = 4050;
 		public const int INSERT = 4100;
 		public const int EXHAUST = 4150;
 		public const int CHANGEDOWN = 4200;
+        public const int PUT = 4500;
 
 		public const int STOP = 10000;
 		public const int ERROR = 20000;
@@ -1628,7 +1634,45 @@ namespace DefineLibrary
 		RECTANGLE,
 		CIRCLE,
 		CORNER,
+        PROJECTION,
 	}
+
+    public struct RECT
+    {
+        public double left, right, top, bottom;
+    }
+
+    public enum Direction
+    {
+        LEFT = 0,
+        TOP,
+        RIGHT,
+        BOTTOM
+    }
+
+    public enum QUARDRANT
+    {
+        QUARDRANT_LT,
+        QUARDRANT_RT,
+        QUARDRANT_LB,
+        QUARDRANT_RB,
+    }
+
+    public enum SELECT_CORNER
+    {
+        INVALID = -1,
+        PAD_CORNER_1 = 0,       // RT       
+        PAD_CORNER_2,           // RB
+        PAD_CORNER_4,           // LB
+        PAD_CORNER_3,           // LT
+    }
+
+    public enum PROJECTION_TYPE
+    {
+        PROJECTION_POSITIVE = 0,
+        PROJECTION_NEGATIVE,
+    }
+
 	public enum BOOL
 	{
 		INVALID = -1,
@@ -1752,11 +1796,16 @@ namespace DefineLibrary
 		FIND_EDGE_QUARTER_2,
 		FIND_EDGE_QUARTER_3,
 		FIND_EDGE_QUARTER_4,
-		
+
+        FIND_PROJECTION_EDGE_QUARTER_1,
+        FIND_PROJECTION_EDGE_QUARTER_2,
+        FIND_PROJECTION_EDGE_QUARTER_3,
+        FIND_PROJECTION_EDGE_QUARTER_4,
+
 		READY,
 		DOWN,
 
-		INSERT,
+		PUT,
 		EXHAUST,
 
 
@@ -1775,6 +1824,7 @@ namespace DefineLibrary
 		CIRCLE_CENTER,
 		RECTANGLE_CENTER,
 		CORNER_EDGE,
+        PROJECTION_EDGE,
 		EDGE_INTERSECTION,
 		FIND_MODEL,
         FIND_EPOXY,
@@ -2722,6 +2772,11 @@ namespace DefineLibrary
 		SENSOR2,
 	}
 	#endregion
+
+    public struct DPOINT
+    {
+        public double x, y;
+    }
 
 	#region BOARD_WORK_DATA
 	public struct TMS_INFO
@@ -5216,7 +5271,7 @@ namespace DefineLibrary
 			forceCheckDelay = utilconfig.GetInt("CheckDelay", 2500);
 			forceOffsetGram = utilconfig.GetInt("OffsetGram", 0);
 			forceAnalogOffset = utilconfig.GetDouble("AnalogOffset", 0.0);
-			forceAnalogDataUse = utilconfig.GetInt("AnalogDataUse", 2500);
+			forceAnalogDataUse = utilconfig.GetInt("AnalogDataUse", 1);
 			forceZeroPressVoltage = utilconfig.GetDouble("ZeroForceVoltage", 0.6);		// 새로운 Calibration에서 이 값을 사용한다.
 			forcePlaceStartForce = utilconfig.GetDouble("PlaceStartForce", 1.0);		// Place시에 설정된 값으로 Force를 변경한다.
 			forceMaxPressVoltage = utilconfig.GetDouble("MaxForceVoltage", 10.0);		// Idle 상태에서의 최대 출력 전압을 설정한다. 메인압이 떨어지는 경우에는 전압이 높아도 최대 출력값을 가질 수 없으므로 최대 전압을 낮춰야 한다.
@@ -5428,6 +5483,63 @@ namespace DefineLibrary
 				}
 		}
 	}
+
+    public class Calc
+    {
+        // 계산 관련 수식을 여기다 넣자
+        public static void rotate(double angle, DPOINT ct, DPOINT pt1, out DPOINT pt2)
+        {
+            // 센터를 기준으로 각도만큼 회전 변환
+            double rad = angle * Math.PI / 180;
+            pt2 = new DPOINT();
+            pt2.x = ct.x + (pt1.x - ct.x) * Math.Cos(rad) - (pt1.y - ct.y) * Math.Sin(rad);
+            pt2.y = ct.y + (pt1.x - ct.x) * Math.Sin(rad) + (pt1.y - ct.y) * Math.Cos(rad);
+        }
+
+        public static void calcAlign(int quardrant, double pX, double pY, double pT, double lidSizeW, double lidSizeH, out double rX, out double rY)
+        {
+            int dirX = 0;
+            int dirY = 0;
+            rX = 0;
+            rY = 0;
+
+            if (quardrant == 0)
+            {
+                // Right Top
+                dirX = -1;
+                dirY = -1;
+            }
+            else if (quardrant == 1)
+            {
+                // Right Bottom
+                dirX = -1;
+                dirY = 1;
+            }
+            else if (quardrant == 2)
+            {
+                // Left Bottom
+                dirX = 1;
+                dirY = 1;
+            }
+            else if (quardrant == 3)
+            {
+                // Left Top
+                dirX = 1;
+                dirY = -1;
+            }
+
+            DPOINT ct, pt1, pt2;
+            ct.x = dirX * lidSizeW / 2;
+            ct.y = dirY * lidSizeH / 2;
+            pt1.x = pX;
+            pt1.y = pY;
+
+            Calc.rotate(-pT, ct, pt1, out pt2);
+
+            rX = pt2.x;
+            rY = pt2.y;
+        }
+    }
 
     public class WorkingOriginData
 	{

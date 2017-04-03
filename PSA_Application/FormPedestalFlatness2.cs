@@ -93,10 +93,10 @@ namespace PSA_Application
 
             for (index = 0; index < 4; index++ )
             {
-                if (index == 0) { distX *= 1; distY *= 1; index = 0; }
-                if (index == 1) { distX *= 1; distY *= -1; index = 1; }
-                if (index == 2) { distX *= -1; distY *= -1; index = 2; }
-                if (index == 3) { distX *= -1; distY *= 1; index = 3; }
+                if (index == 0) { distX *= 1; distY *= 1; }
+                if (index == 1) { distX *= 1; distY *= -1; }
+                if (index == 2) { distX *= -1; distY *= -1; }
+                if (index == 3) { distX *= -1; distY *= 1; }
 
                 #region xyz moving
                 mc.hd.tool.jogMove(posX + distX, posY + distY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); return; }
@@ -108,7 +108,7 @@ namespace PSA_Application
                     
                 refresh();
 
-                mc.log.debug.write(mc.log.CODE.INFO, "Pedestal Tilt Check(#" + index + ") : " + heightText[i]);
+                mc.log.debug.write(mc.log.CODE.INFO, "Pedestal Tilt Check(#" + index + ") : " + heightText[index]);
             }			
 		}
 

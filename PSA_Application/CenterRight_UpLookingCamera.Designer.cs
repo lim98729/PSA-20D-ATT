@@ -57,6 +57,7 @@
             this.BT_AlgorismSelect_ShapeModel = new System.Windows.Forms.ToolStripMenuItem();
             this.BT_AlgorismSelect_RectangleModel = new System.Windows.Forms.ToolStripMenuItem();
             this.BT_AlgorismSelect_CornerModel = new System.Windows.Forms.ToolStripMenuItem();
+            this.BT_AlgorismSelect_ProjectionModel = new System.Windows.Forms.ToolStripMenuItem();
             this.BT_AlgorismSelect_CircleModel = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.BT_Model_Teach = new System.Windows.Forms.ToolStripButton();
@@ -405,6 +406,7 @@
             this.BT_AlgorismSelect_ShapeModel,
             this.BT_AlgorismSelect_RectangleModel,
             this.BT_AlgorismSelect_CornerModel,
+            this.BT_AlgorismSelect_ProjectionModel,
             this.BT_AlgorismSelect_CircleModel});
             this.BT_AlgorismSelect.Font = new System.Drawing.Font("Arial", 9F);
             this.BT_AlgorismSelect.Image = ((System.Drawing.Image)(resources.GetObject("BT_AlgorismSelect.Image")));
@@ -418,7 +420,7 @@
             this.BT_AlgorismSelect_NccModel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.BT_AlgorismSelect_NccModel.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_AlgorismSelect_NccModel.Name = "BT_AlgorismSelect_NccModel";
-            this.BT_AlgorismSelect_NccModel.Size = new System.Drawing.Size(256, 36);
+            this.BT_AlgorismSelect_NccModel.Size = new System.Drawing.Size(260, 36);
             this.BT_AlgorismSelect_NccModel.Text = "NCC Model";
             this.BT_AlgorismSelect_NccModel.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
             this.BT_AlgorismSelect_NccModel.Visible = false;
@@ -429,7 +431,7 @@
             this.BT_AlgorismSelect_ShapeModel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.BT_AlgorismSelect_ShapeModel.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_AlgorismSelect_ShapeModel.Name = "BT_AlgorismSelect_ShapeModel";
-            this.BT_AlgorismSelect_ShapeModel.Size = new System.Drawing.Size(256, 36);
+            this.BT_AlgorismSelect_ShapeModel.Size = new System.Drawing.Size(260, 36);
             this.BT_AlgorismSelect_ShapeModel.Text = "Shape Model";
             this.BT_AlgorismSelect_ShapeModel.Visible = false;
             this.BT_AlgorismSelect_ShapeModel.Click += new System.EventHandler(this.Control_Click);
@@ -438,7 +440,7 @@
             // 
             this.BT_AlgorismSelect_RectangleModel.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_AlgorismSelect_RectangleModel.Name = "BT_AlgorismSelect_RectangleModel";
-            this.BT_AlgorismSelect_RectangleModel.Size = new System.Drawing.Size(256, 36);
+            this.BT_AlgorismSelect_RectangleModel.Size = new System.Drawing.Size(260, 36);
             this.BT_AlgorismSelect_RectangleModel.Text = "Rectangle Model";
             this.BT_AlgorismSelect_RectangleModel.Click += new System.EventHandler(this.Control_Click);
             // 
@@ -446,15 +448,23 @@
             // 
             this.BT_AlgorismSelect_CornerModel.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_AlgorismSelect_CornerModel.Name = "BT_AlgorismSelect_CornerModel";
-            this.BT_AlgorismSelect_CornerModel.Size = new System.Drawing.Size(256, 36);
+            this.BT_AlgorismSelect_CornerModel.Size = new System.Drawing.Size(260, 36);
             this.BT_AlgorismSelect_CornerModel.Text = "Corner Model";
             this.BT_AlgorismSelect_CornerModel.Click += new System.EventHandler(this.Control_Click);
+            // 
+            // BT_AlgorismSelect_ProjectionModel
+            // 
+            this.BT_AlgorismSelect_ProjectionModel.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BT_AlgorismSelect_ProjectionModel.Name = "BT_AlgorismSelect_ProjectionModel";
+            this.BT_AlgorismSelect_ProjectionModel.Size = new System.Drawing.Size(260, 36);
+            this.BT_AlgorismSelect_ProjectionModel.Text = "Projection Model";
+            this.BT_AlgorismSelect_ProjectionModel.Click += new System.EventHandler(this.Control_Click);
             // 
             // BT_AlgorismSelect_CircleModel
             // 
             this.BT_AlgorismSelect_CircleModel.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_AlgorismSelect_CircleModel.Name = "BT_AlgorismSelect_CircleModel";
-            this.BT_AlgorismSelect_CircleModel.Size = new System.Drawing.Size(256, 36);
+            this.BT_AlgorismSelect_CircleModel.Size = new System.Drawing.Size(260, 36);
             this.BT_AlgorismSelect_CircleModel.Text = "Circle Model";
             this.BT_AlgorismSelect_CircleModel.Visible = false;
             this.BT_AlgorismSelect_CircleModel.Click += new System.EventHandler(this.Control_Click);
@@ -616,7 +626,7 @@
             this.BT_ChamferNumber});
             this.TS_CHECK_CAMFER.Location = new System.Drawing.Point(3, 398);
             this.TS_CHECK_CAMFER.Name = "TS_CHECK_CAMFER";
-            this.TS_CHECK_CAMFER.Size = new System.Drawing.Size(716, 35);
+            this.TS_CHECK_CAMFER.Size = new System.Drawing.Size(747, 35);
             this.TS_CHECK_CAMFER.TabIndex = 64;
             this.TS_CHECK_CAMFER.Text = "toolStrip4";
             // 
@@ -745,10 +755,10 @@
             // 
             this.BT_ChamferNumber.AutoSize = false;
             this.BT_ChamferNumber.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.BT_ChamferNumber_1,
-            this.BT_ChamferNumber_2,
+            this.BT_ChamferNumber_4,
             this.BT_ChamferNumber_3,
-            this.BT_ChamferNumber_4});
+            this.BT_ChamferNumber_1,
+            this.BT_ChamferNumber_2});
             this.BT_ChamferNumber.Image = global::PSA_Application.Properties.Resources.chamfer_c2;
             this.BT_ChamferNumber.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BT_ChamferNumber.Name = "BT_ChamferNumber";
@@ -763,7 +773,7 @@
             this.BT_ChamferNumber_1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.BT_ChamferNumber_1.Name = "BT_ChamferNumber_1";
             this.BT_ChamferNumber_1.Size = new System.Drawing.Size(152, 60);
-            this.BT_ChamferNumber_1.Text = "1";
+            this.BT_ChamferNumber_1.Text = "3";
             this.BT_ChamferNumber_1.Click += new System.EventHandler(this.Control_Click);
             // 
             // BT_ChamferNumber_2
@@ -774,7 +784,7 @@
             this.BT_ChamferNumber_2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.BT_ChamferNumber_2.Name = "BT_ChamferNumber_2";
             this.BT_ChamferNumber_2.Size = new System.Drawing.Size(152, 60);
-            this.BT_ChamferNumber_2.Text = "2";
+            this.BT_ChamferNumber_2.Text = "4";
             this.BT_ChamferNumber_2.Click += new System.EventHandler(this.Control_Click);
             // 
             // BT_ChamferNumber_3
@@ -785,7 +795,7 @@
             this.BT_ChamferNumber_3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.BT_ChamferNumber_3.Name = "BT_ChamferNumber_3";
             this.BT_ChamferNumber_3.Size = new System.Drawing.Size(152, 60);
-            this.BT_ChamferNumber_3.Text = "3";
+            this.BT_ChamferNumber_3.Text = "2";
             this.BT_ChamferNumber_3.Click += new System.EventHandler(this.Control_Click);
             // 
             // BT_ChamferNumber_4
@@ -796,7 +806,7 @@
             this.BT_ChamferNumber_4.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.BT_ChamferNumber_4.Name = "BT_ChamferNumber_4";
             this.BT_ChamferNumber_4.Size = new System.Drawing.Size(152, 60);
-            this.BT_ChamferNumber_4.Text = "4";
+            this.BT_ChamferNumber_4.Text = "1";
             this.BT_ChamferNumber_4.Click += new System.EventHandler(this.Control_Click);
             // 
             // toolStrip9
@@ -1429,7 +1439,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripTextBox TB_AngleStart;
         private System.Windows.Forms.ToolStripMenuItem BT_AlgorismSelect_RectangleModel;
-        private System.Windows.Forms.ToolStripMenuItem BT_AlgorismSelect_CircleModel;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton BT_Model_Teach;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
@@ -1519,5 +1528,7 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel6;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator32;
         private System.Windows.Forms.ToolStripTextBox TB_CropArea;
+        private System.Windows.Forms.ToolStripMenuItem BT_AlgorismSelect_CircleModel;
+        private System.Windows.Forms.ToolStripMenuItem BT_AlgorismSelect_ProjectionModel;
     }
 }

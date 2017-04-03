@@ -89,7 +89,8 @@ namespace PSA_Application
                 posY = mc.hd.tool.cPos.y.PAD(padIndexY);
                
                 mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
-                mc.hd.tool.jogMove(posX, posY, out ret.message); if (ret.message != RetMessage.OK)
+                mc.hd.tool.jogMove(posX, posY, out ret.message);
+                if (ret.message != RetMessage.OK)
                 {
                     mc.message.alarmMotion(ret.message);
                     EVENT.hWindow2Display();
@@ -247,6 +248,10 @@ namespace PSA_Application
 				padIndexX = CbB_PadIndexX.SelectedIndex;
 				padIndexY = CbB_PadIndexY.SelectedIndex;
 
+				mc.hdc.lighting_exposure(mc.para.EPOXY.light, mc.para.EPOXY.exposureTime);
+				EVENT.hWindowLargeDisplay(mc.hdc.cam.acq.grabber.cameraNumber);
+				mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
+
 				#region pd moving
 				mc.OUT.PD.SUC(true, out ret.message);
 				posX = mc.pd.pos.x.PAD(padIndexX);
@@ -257,7 +262,7 @@ namespace PSA_Application
 				mc.pd.jogMove(posX, posY, posZ, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				#endregion
 				mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PAD(padIndexX), mc.hd.tool.cPos.y.PAD(padIndexY), mc.para.CAL.toolAngleOffset.value, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-
+				mc.hdc.LIVE = false;
 				FormEpoxyFilter ff = new FormEpoxyFilter();
 				ff.ShowDialog();
 
@@ -293,6 +298,7 @@ namespace PSA_Application
 			}
             
 		EXIT:
+			if (mc.hdc.LIVE) mc.hdc.LIVE = false;
 			mc.para.write(out ret.b); if (!ret.b) { mc.message.alarm("para write error"); }
 			refresh();
 			mc.main.Thread_Polling();

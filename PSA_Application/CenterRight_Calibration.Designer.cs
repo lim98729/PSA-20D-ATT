@@ -335,7 +335,7 @@
             this.BT_Pick_Calibration});
             this.TS_PICK.Location = new System.Drawing.Point(3, 226);
             this.TS_PICK.Name = "TS_PICK";
-            this.TS_PICK.Size = new System.Drawing.Size(493, 29);
+            this.TS_PICK.Size = new System.Drawing.Size(462, 29);
             this.TS_PICK.TabIndex = 52;
             this.TS_PICK.Text = "toolStrip1";
             // 
@@ -367,7 +367,7 @@
             // 
             this.BT_PICK_PosSelect_1.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_PICK_PosSelect_1.Name = "BT_PICK_PosSelect_1";
-            this.BT_PICK_PosSelect_1.Size = new System.Drawing.Size(152, 36);
+            this.BT_PICK_PosSelect_1.Size = new System.Drawing.Size(122, 36);
             this.BT_PICK_PosSelect_1.Text = "SF1";
             this.BT_PICK_PosSelect_1.Click += new System.EventHandler(this.NonControl_Click);
             // 
@@ -375,7 +375,7 @@
             // 
             this.BT_PICK_PosSelect_2.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_PICK_PosSelect_2.Name = "BT_PICK_PosSelect_2";
-            this.BT_PICK_PosSelect_2.Size = new System.Drawing.Size(152, 36);
+            this.BT_PICK_PosSelect_2.Size = new System.Drawing.Size(122, 36);
             this.BT_PICK_PosSelect_2.Text = "SF2";
             this.BT_PICK_PosSelect_2.Click += new System.EventHandler(this.NonControl_Click);
             // 
@@ -383,7 +383,7 @@
             // 
             this.BT_PICK_PosSelect_3.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_PICK_PosSelect_3.Name = "BT_PICK_PosSelect_3";
-            this.BT_PICK_PosSelect_3.Size = new System.Drawing.Size(152, 36);
+            this.BT_PICK_PosSelect_3.Size = new System.Drawing.Size(122, 36);
             this.BT_PICK_PosSelect_3.Text = "SF3";
             this.BT_PICK_PosSelect_3.Click += new System.EventHandler(this.NonControl_Click);
             // 
@@ -391,7 +391,7 @@
             // 
             this.BT_PICK_PosSelect_4.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_PICK_PosSelect_4.Name = "BT_PICK_PosSelect_4";
-            this.BT_PICK_PosSelect_4.Size = new System.Drawing.Size(152, 36);
+            this.BT_PICK_PosSelect_4.Size = new System.Drawing.Size(122, 36);
             this.BT_PICK_PosSelect_4.Text = "SF4";
             this.BT_PICK_PosSelect_4.Click += new System.EventHandler(this.NonControl_Click);
             // 
@@ -1179,7 +1179,7 @@
             this.BT_HDC_PD_Calibration});
             this.TS_HDC_PD.Location = new System.Drawing.Point(3, 136);
             this.TS_HDC_PD.Name = "TS_HDC_PD";
-            this.TS_HDC_PD.Size = new System.Drawing.Size(462, 29);
+            this.TS_HDC_PD.Size = new System.Drawing.Size(493, 29);
             this.TS_HDC_PD.TabIndex = 66;
             this.TS_HDC_PD.Text = "toolStrip6";
             // 
@@ -1211,7 +1211,7 @@
             // 
             this.BT_HDC_PDSelelctP1.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_HDC_PDSelelctP1.Name = "BT_HDC_PDSelelctP1";
-            this.BT_HDC_PDSelelctP1.Size = new System.Drawing.Size(108, 36);
+            this.BT_HDC_PDSelelctP1.Size = new System.Drawing.Size(152, 36);
             this.BT_HDC_PDSelelctP1.Text = "P1";
             this.BT_HDC_PDSelelctP1.Click += new System.EventHandler(this.NonControl_Click);
             // 
@@ -1219,7 +1219,7 @@
             // 
             this.BT_HDC_PDSelelctP2.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_HDC_PDSelelctP2.Name = "BT_HDC_PDSelelctP2";
-            this.BT_HDC_PDSelelctP2.Size = new System.Drawing.Size(108, 36);
+            this.BT_HDC_PDSelelctP2.Size = new System.Drawing.Size(152, 36);
             this.BT_HDC_PDSelelctP2.Text = "P2";
             this.BT_HDC_PDSelelctP2.Click += new System.EventHandler(this.NonControl_Click);
             // 
@@ -1227,7 +1227,7 @@
             // 
             this.BT_HDC_PDSelelctP3.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_HDC_PDSelelctP3.Name = "BT_HDC_PDSelelctP3";
-            this.BT_HDC_PDSelelctP3.Size = new System.Drawing.Size(108, 36);
+            this.BT_HDC_PDSelelctP3.Size = new System.Drawing.Size(152, 36);
             this.BT_HDC_PDSelelctP3.Text = "P3";
             this.BT_HDC_PDSelelctP3.Click += new System.EventHandler(this.NonControl_Click);
             // 
@@ -1235,7 +1235,7 @@
             // 
             this.BT_HDC_PDSelelctP4.Font = new System.Drawing.Font("Arial Narrow", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BT_HDC_PDSelelctP4.Name = "BT_HDC_PDSelelctP4";
-            this.BT_HDC_PDSelelctP4.Size = new System.Drawing.Size(108, 36);
+            this.BT_HDC_PDSelelctP4.Size = new System.Drawing.Size(152, 36);
             this.BT_HDC_PDSelelctP4.Text = "P4";
             this.BT_HDC_PDSelelctP4.Click += new System.EventHandler(this.NonControl_Click);
             // 

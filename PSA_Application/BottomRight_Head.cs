@@ -158,6 +158,7 @@ namespace PSA_Application
 		}
 		private void BT_OUT_Click(object sender, EventArgs e)
 		{
+            if (mc.main.THREAD_RUNNING) return;
 			if (!mc.check.READY_PUSH(sender)) return;
 			mc.check.push(sender, true, (int)SelectedMenu.BOTTOM_RIGHT);
 			#region OUT
@@ -189,6 +190,7 @@ namespace PSA_Application
 
 		private void Manual_Click(object sender, EventArgs e)
 		{
+            if (mc.main.THREAD_RUNNING) return;
 			if (!mc.check.READY_AUTORUN(sender)) return;
 			mc.check.push(sender, true, (int)SelectedMenu.BOTTOM_RIGHT);
 
@@ -199,8 +201,6 @@ namespace PSA_Application
                 mc.cv.clear();
                 mc.pd.clear();
                 mc.sf.clear();
-                mc.sf.feeder[(int)UnitCodeSFMG.MG1].clear();
-                mc.sf.feeder[(int)UnitCodeSFMG.MG2].clear();
                 mc.hdc.clear();
                 mc.ulc.clear();
             }
@@ -229,6 +229,7 @@ namespace PSA_Application
 		
 		private void Function_Click(object sender, EventArgs e)
 		{
+            if (mc.main.THREAD_RUNNING) return;
 			if (!mc.check.READY_AUTORUN(sender)) return;
 			mc.check.push(sender, true, (int)SelectedMenu.BOTTOM_RIGHT);
 			#region Function
@@ -280,6 +281,7 @@ namespace PSA_Application
 		}
 		private void Position_Click(object sender, EventArgs e)
 		{
+            if (mc.main.THREAD_RUNNING) return;
 			if (!mc.check.READY_PUSH(sender)) return;
 			mc.check.push(sender, true, (int)SelectedMenu.BOTTOM_RIGHT);
 			#region BT_PositionSelect
@@ -348,6 +350,7 @@ namespace PSA_Application
 
 		private void BT_Position_CameraMove_Click(object sender, EventArgs e)
 		{
+            if (mc.main.THREAD_RUNNING) return;
 			if (!mc.check.READY_AUTORUN(sender)) return;
 			mc.check.push(sender, true, (int)SelectedMenu.BOTTOM_RIGHT);
 			#region Position Cameara Move
@@ -465,6 +468,7 @@ namespace PSA_Application
 
 		private void BT_Position_ToolMove_Click(object sender, EventArgs e)
 		{
+            if (mc.main.THREAD_RUNNING) return;
 			if (!mc.check.READY_AUTORUN(sender)) return;
 			mc.check.push(sender, true, (int)SelectedMenu.BOTTOM_RIGHT);
 			#region Position Tool Move
@@ -591,6 +595,8 @@ namespace PSA_Application
 
 		private void BottomRight_Head_Load(object sender, EventArgs e)
 		{
+            TS_Manual_StepCycle.Visible = false;
+            BT_Manual_StepCycle.Visible = false;
             TS_Function.Visible = false;
             LB_IN_ATC_OPEN.Visible = false;
             LB_IN_ATC_CLOSE.Visible = false;
@@ -605,6 +611,7 @@ namespace PSA_Application
 
 		private void BT_Position_LaserMove_Click(object sender, EventArgs e)
 		{
+            if (mc.main.THREAD_RUNNING) return;
 			if (!mc.check.READY_AUTORUN(sender)) return;
 			mc.check.push(sender, true, (int)SelectedMenu.BOTTOM_RIGHT);
 			#region Position Laser Move

@@ -40,7 +40,6 @@
             this.tabLog = new System.Windows.Forms.TabPage();
             this.TB_Log = new System.Windows.Forms.TextBox();
             this.tabGraph = new System.Windows.Forms.TabPage();
-            this.loadcellScope = new AccessoryLibrary.loadScope();
             this.timerError = new System.Windows.Forms.Timer(this.components);
             this.timerAlarm = new System.Windows.Forms.Timer(this.components);
             this.TC_PROD_STS = new System.Windows.Forms.TabControl();
@@ -118,6 +117,7 @@
             this.LB_PickInfoT1 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.timerRefresh = new System.Windows.Forms.Timer(this.components);
+            this.loadcellScope = new AccessoryLibrary.loadScope();
             this.TC_.SuspendLayout();
             this.tabError.SuspendLayout();
             this.tabAlarm.SuspendLayout();
@@ -269,15 +269,6 @@
             this.tabGraph.TabIndex = 3;
             this.tabGraph.Text = "Graph";
             // 
-            // loadcellScope
-            // 
-            this.loadcellScope.Location = new System.Drawing.Point(-1, 0);
-            this.loadcellScope.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.loadcellScope.Name = "loadcellScope";
-            this.loadcellScope.Size = new System.Drawing.Size(593, 264);
-            this.loadcellScope.TabIndex = 0;
-            this.loadcellScope.DoubleClick += new System.EventHandler(this.loadcellScope_DoubleClick);
-            // 
             // timerError
             // 
             this.timerError.Interval = 500;
@@ -329,7 +320,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 20;
-            this.button1.Text = "button1";
+            this.button1.Text = "ㄱbutton1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -1147,6 +1138,15 @@
             this.timerRefresh.Enabled = true;
             this.timerRefresh.Interval = 1000;
             this.timerRefresh.Tick += new System.EventHandler(this.timerRefresh_Tick);
+            // 
+            // loadcellScope
+            // 
+            this.loadcellScope.Location = new System.Drawing.Point(-1, 0);
+            this.loadcellScope.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.loadcellScope.Name = "loadcellScope";
+            this.loadcellScope.Size = new System.Drawing.Size(593, 264);
+            this.loadcellScope.TabIndex = 0;
+            this.loadcellScope.DoubleClick += new System.EventHandler(this.loadcellScope_DoubleClick);
             // 
             // BottomLeft
             // 

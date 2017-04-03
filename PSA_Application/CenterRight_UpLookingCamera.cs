@@ -105,6 +105,12 @@ namespace PSA_Application
                 mc.ulc.model_delete(SELECT_FIND_MODEL.ULC_PKG);
                 TS_CORNER_TEACH.Visible = true;
             }
+            if (sender.Equals(BT_AlgorismSelect_ProjectionModel))
+            {
+                mc.para.setting(ref mc.para.ULC.algorism, (int)MODEL_ALGORISM.PROJECTION);
+                mc.ulc.model_delete(SELECT_FIND_MODEL.ULC_PKG);
+                TS_CORNER_TEACH.Visible = true;
+            }
             if (sender.Equals(BT_SelectModel_LIDC1))
             {
                 mode = SELECT_FIND_MODEL.ULC_LIDC1;
@@ -522,9 +528,107 @@ namespace PSA_Application
                     TS_CORNER_TEACH.Visible = false;
                     TS_ALIGN_DIRECTION.Visible = false;
 				}
+                else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                {
+                    BT_AlgorismSelect.Text = BT_AlgorismSelect_ProjectionModel.Text;
+                    hWC_Model.Visible = false;
+                    TS_CORNER_TEACH.Visible = true;
+                    TS_CHECK_CAMFER.Visible = false;
+                    TS_CHECK_CIRCLE.Visible = false;
+                    TS_CHECK_ORIENTATION.Visible = false;
+                    TS_ALIGN_DIRECTION.Visible = true;
+                    TS_ANGLE_START.Visible = false;
+                    TS_ANGLE_EXTENT.Visible = false;
+                    TS_CROPAREA.Visible = false;
+
+                    if (mode == SELECT_FIND_MODEL.ULC_LIDC1)
+                    {
+                        angleStart = mc.para.ULC.modelLIDC1.angleStart.value.ToString();
+                        angelExtent = mc.para.ULC.modelLIDC1.angleExtent.value.ToString();
+                        exposureTime = mc.para.ULC.modelLIDC1.exposureTime.value.ToString();
+                        lightCh1 = mc.para.ULC.modelLIDC1.light.ch1.value.ToString();
+                        lightCh2 = mc.para.ULC.modelLIDC1.light.ch2.value.ToString();
+
+                        if (mc.para.ULC.modelLIDC1.isCreate.value == (int)BOOL.TRUE)
+                        {
+                            LB_Model_Created_BackColor = Color.Transparent;
+                            LB_Model_Created_Text = "Model Created";
+                        }
+                        else
+                        {
+                            LB_Model_Created_BackColor = Color.Red;
+                            LB_Model_Created_Text = "Model Uncreated";
+                        }
+                        LB_SelectModel_Text = BT_SelectModel_LIDC1.Text;
+                    }
+                    else if (mode == SELECT_FIND_MODEL.ULC_LIDC2)
+                    {
+                        angleStart = mc.para.ULC.modelLIDC2.angleStart.value.ToString();
+                        angelExtent = mc.para.ULC.modelLIDC2.angleExtent.value.ToString();
+                        exposureTime = mc.para.ULC.modelLIDC2.exposureTime.value.ToString();
+                        lightCh1 = mc.para.ULC.modelLIDC2.light.ch1.value.ToString();
+                        lightCh2 = mc.para.ULC.modelLIDC2.light.ch2.value.ToString();
+
+                        if (mc.para.ULC.modelLIDC2.isCreate.value == (int)BOOL.TRUE)
+                        {
+                            LB_Model_Created_BackColor = Color.Transparent;
+                            LB_Model_Created_Text = "Model Created";
+                        }
+                        else
+                        {
+                            LB_Model_Created_BackColor = Color.Red;
+                            LB_Model_Created_Text = "Model Uncreated";
+                        }
+                        LB_SelectModel_Text = BT_SelectModel_LIDC2.Text;
+                    }
+                    else if (mode == SELECT_FIND_MODEL.ULC_LIDC3)
+                    {
+                        angleStart = mc.para.ULC.modelLIDC3.angleStart.value.ToString();
+                        angelExtent = mc.para.ULC.modelLIDC3.angleExtent.value.ToString();
+                        exposureTime = mc.para.ULC.modelLIDC3.exposureTime.value.ToString();
+                        lightCh1 = mc.para.ULC.modelLIDC3.light.ch1.value.ToString();
+                        lightCh2 = mc.para.ULC.modelLIDC3.light.ch2.value.ToString();
+
+                        if (mc.para.ULC.modelLIDC3.isCreate.value == (int)BOOL.TRUE)
+                        {
+                            LB_Model_Created_BackColor = Color.Transparent;
+                            LB_Model_Created_Text = "Model Created";
+                        }
+                        else
+                        {
+                            LB_Model_Created_BackColor = Color.Red;
+                            LB_Model_Created_Text = "Model Uncreated";
+                        }
+                        LB_SelectModel_Text = BT_SelectModel_LIDC3.Text;
+                    }
+                    else if (mode == SELECT_FIND_MODEL.ULC_LIDC4)
+                    {
+                        angleStart = mc.para.ULC.modelLIDC4.angleStart.value.ToString();
+                        angelExtent = mc.para.ULC.modelLIDC4.angleExtent.value.ToString();
+                        exposureTime = mc.para.ULC.modelLIDC4.exposureTime.value.ToString();
+                        lightCh1 = mc.para.ULC.modelLIDC4.light.ch1.value.ToString();
+                        lightCh2 = mc.para.ULC.modelLIDC4.light.ch2.value.ToString();
+
+                        if (mc.para.ULC.modelLIDC4.isCreate.value == (int)BOOL.TRUE)
+                        {
+                            LB_Model_Created_BackColor = Color.Transparent;
+                            LB_Model_Created_Text = "Model Created";
+                        }
+                        else
+                        {
+                            LB_Model_Created_BackColor = Color.Red;
+                            LB_Model_Created_Text = "Model Uncreated";
+                        }
+                        LB_SelectModel_Text = BT_SelectModel_LIDC4.Text;
+                    }
+                    LB_Model_Created.BackColor = LB_Model_Created_BackColor;
+                    LB_Model_Created.Text = LB_Model_Created_Text;
+                    LB_SelectModel.Text = LB_SelectModel_Text;
+                }
                 else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CORNER)
                 {
                     BT_AlgorismSelect.Text = BT_AlgorismSelect_CornerModel.Text;
+                    TB_CropArea.Visible = true;
                     TB_CropArea.Text = mc.para.ULC.cropArea.value.ToString();
                     hWC_Model.Visible = false;
                     TS_CORNER_TEACH.Visible = true;

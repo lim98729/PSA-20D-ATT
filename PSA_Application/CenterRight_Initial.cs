@@ -82,6 +82,7 @@ namespace PSA_Application
 
 		private void Control_Click(object sender, EventArgs e)
 		{
+            if (mc.main.THREAD_RUNNING) return;
 			if (!mc.check.READY_INITIAL(sender)) return;
 			mc.check.push(sender, true);
 			timer.Enabled = true;
@@ -90,8 +91,9 @@ namespace PSA_Application
 			#region Initial
 			if (sender.Equals(BT_Vision))
 			{
-				mc.hdc.req = true; mc.hdc.reqMode = REQMODE.HOMING;
-				mc.ulc.req = true; mc.ulc.reqMode = REQMODE.HOMING;
+                //mc.loadCell.setZero(0);
+                mc.hdc.req = true; mc.hdc.reqMode = REQMODE.HOMING;
+                mc.ulc.req = true; mc.ulc.reqMode = REQMODE.HOMING;
 			}
 			if (sender.Equals(BT_HD))
 			{

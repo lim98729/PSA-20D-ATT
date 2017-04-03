@@ -386,7 +386,7 @@ namespace PSA_SystemLibrary
 						//break;
 					}
 					// 161101-JHY, PD Down 속도 느려서 Up이랑 동일하게 변경.
-					rateZ = Z.config.speed.rate; Z.config.speed.rate = 0.3;
+					rateZ = Z.config.speed.rate; Z.config.speed.rate = Math.Max(rateZ * 0.5, 0.1);
 					Z.move(pos.z.READY, out ret.message); Z.config.speed.rate = rateZ; if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
@@ -400,13 +400,12 @@ namespace PSA_SystemLibrary
 					limitCheckTime.Reset();
 					sqc++; break;
 				case SQC.AUTO + 4:
-                    if (mc.swcontrol.noUsePDUpSensor) { sqc++; break; }
 					Z.IN_N_LIMIT(out ret.b, out ret.message);
 					if(dwell.Elapsed < 5000)
 					{
 						if (ret.b == true)
 						{
-							if (limitCheckTime.Elapsed > 50)
+							if (limitCheckTime.Elapsed > 300)
 							{
                                 dwell.Reset();
                                 limitCheckTime.Reset();
@@ -430,7 +429,7 @@ namespace PSA_SystemLibrary
 					{
 						if (!ret.b)
 						{
-							if (limitCheckTime.Elapsed > 50)
+							if (limitCheckTime.Elapsed > 300)
 							{
                                 sqc++; break;
 							}
@@ -501,7 +500,7 @@ namespace PSA_SystemLibrary
 					{
 						if (ret.b)
 						{
-							if (limitCheckTime.Elapsed > 50)
+							if (limitCheckTime.Elapsed > 300)
 							{
 								sqc = SQC.STOP; break;
 							}
@@ -546,13 +545,12 @@ namespace PSA_SystemLibrary
 					limitCheckTime.Reset();
 					sqc++; break;
 				case SQC.COMPEN_FLAT + 4:
-                    if (mc.swcontrol.noUsePDUpSensor) { sqc++; break; }
 					Z.IN_N_LIMIT(out ret.b, out ret.message);
 					if (dwell.Elapsed < 5000)
 					{
 						if (ret.b == true)
 						{
-							if (limitCheckTime.Elapsed > 50)
+							if (limitCheckTime.Elapsed > 300)
 							{
                                 dwell.Reset();
                                 limitCheckTime.Reset();
@@ -576,7 +574,7 @@ namespace PSA_SystemLibrary
                     {
                         if (!ret.b == true)
                         {
-                            if (limitCheckTime.Elapsed > 50)
+                            if (limitCheckTime.Elapsed > 300)
                             {
                                 sqc++; break;
                             }
@@ -639,7 +637,7 @@ namespace PSA_SystemLibrary
                     {
                         if (ret.b == true)
                         {
-                            if (limitCheckTime.Elapsed > 50)
+                            if (limitCheckTime.Elapsed > 300)
                             {
                                 sqc++; break;
                             }
@@ -686,13 +684,12 @@ namespace PSA_SystemLibrary
 					limitCheckTime.Reset();
 					sqc++; break;
 				case SQC.READY + 4:
-                    if (mc.swcontrol.noUsePDUpSensor) { sqc++; break; }
 					Z.IN_N_LIMIT(out ret.b, out ret.message);
 					if (dwell.Elapsed < 5000)
 					{
 						if (ret.b)
 						{
-							if (limitCheckTime.Elapsed > 50)
+							if (limitCheckTime.Elapsed > 300)
 							{
 								sqc++; break;
 							}
@@ -714,7 +711,7 @@ namespace PSA_SystemLibrary
                     {
                         if (!ret.b)
                         {
-                            if (limitCheckTime.Elapsed > 50)
+                            if (limitCheckTime.Elapsed > 300)
                             {
                                 sqc++; break;
                             }
@@ -1021,7 +1018,8 @@ namespace PSA_SystemLibrary
 			{
 				if (mc.para.mcType.FrRr == McTypeFrRr.FRONT)
 				{
-                    return (double)MP_PD_X.BD_EDGE_FR + (double)MP_PD_X.P1_FR;
+                    //return (double)MP_PD_X.BD_EDGE_FR + (double)MP_PD_X.P1_FR;
+                    return (double)MP_PD_X.BD_EDGE_FR + -50000;
 				}
 				if (mc.para.mcType.FrRr == McTypeFrRr.REAR)
 				{
@@ -1117,7 +1115,8 @@ namespace PSA_SystemLibrary
 		{
 			get
 			{
-                return (double)MP_PD_Y.BD_EDGE + (double)MP_PD_Y.P1;
+                //return (double)MP_PD_Y.BD_EDGE + (double)MP_PD_Y.P1;
+                return (double)MP_PD_Y.BD_EDGE + 60000;
 			}
 		}
 		public double P2

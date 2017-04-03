@@ -369,6 +369,7 @@ namespace PSA_Application
 
 		private void BT_OUT_Click(object sender, EventArgs e)
 		{
+            if (mc.main.THREAD_RUNNING) return;
 			if (!mc.check.READY_PUSH(sender)) return;
 			mc.check.push(sender, true, (int)SelectedMenu.BOTTOM_RIGHT);
 			#region OUT

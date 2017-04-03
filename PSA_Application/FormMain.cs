@@ -216,7 +216,7 @@ namespace PSA_Application
                 modelName = "ATTACH #2";
 
             this.Text = mc.model + " (" + modelName + ") " + " [" + mc.para.mcType.FrRr.ToString() + "] - (Version [" + mc.version + "], SECSGEM [" + ((MPCMODE)mc.para.DIAG.controlState.value).ToString() + "])";
-            EVENT.mainFormPanelMode(SPLITTER_MODE.NORMAL, SPLITTER_MODE.NORMAL, SPLITTER_MODE.EXPAND);
+            EVENT.mainFormPanelMode(SPLITTER_MODE.NORMAL, SPLITTER_MODE.NORMAL, SPLITTER_MODE.NORMAL);
             EVENT.centerRightPanelMode(CENTERER_RIGHT_PANEL.INITIAL);
             EVENT.bottomRightPanelMode(BOTTOM_RIGHT_PANEL.MAIN);
         }

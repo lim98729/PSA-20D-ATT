@@ -52,6 +52,8 @@
             this.LB_IN = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.LB_IN_VAC = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.LB_IN_DOWN_SENSOR = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.LB_IN_UP_SENSOR = new System.Windows.Forms.ToolStripLabel();
             this.TS_OUT.SuspendLayout();
@@ -66,52 +68,52 @@
             // 
             // TS_OUT
             // 
-            resources.ApplyResources(this.TS_OUT, "TS_OUT");
             this.TS_OUT.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.TS_OUT, "TS_OUT");
             this.TS_OUT.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LB_OUT,
             this.toolStripSeparator6,
             this.BT_OUT_SUCTION,
             this.toolStripSeparator17,
             this.BT_OUT_BLOW});
-            this.TS_OUT.Name = "TS_OUT";
-            // 
-            // LB_OUT
-            // 
-            resources.ApplyResources(this.LB_OUT, "LB_OUT");
-            this.LB_OUT.Name = "LB_OUT";
-            // 
-            // toolStripSeparator6
-            // 
-            resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            // 
-            // BT_OUT_SUCTION
-            // 
-            resources.ApplyResources(this.BT_OUT_SUCTION, "BT_OUT_SUCTION");
-            this.BT_OUT_SUCTION.AutoToolTip = false;
-            this.BT_OUT_SUCTION.Image = global::PSA_Application.Properties.Resources.gray_ball1;
-            this.BT_OUT_SUCTION.Name = "BT_OUT_SUCTION";
-            this.BT_OUT_SUCTION.Click += new System.EventHandler(this.BT_OUT_Click);
-            // 
-            // toolStripSeparator17
-            // 
-            resources.ApplyResources(this.toolStripSeparator17, "toolStripSeparator17");
-            this.toolStripSeparator17.Name = "toolStripSeparator17";
-            // 
-            // BT_OUT_BLOW
-            // 
-            resources.ApplyResources(this.BT_OUT_BLOW, "BT_OUT_BLOW");
-            this.BT_OUT_BLOW.AutoToolTip = false;
-            this.BT_OUT_BLOW.Image = global::PSA_Application.Properties.Resources.yellow_ball;
-            this.BT_OUT_BLOW.Name = "BT_OUT_BLOW";
-            this.BT_OUT_BLOW.Click += new System.EventHandler(this.BT_OUT_Click);
-            // 
-            // TS_Position
-            // 
-            resources.ApplyResources(this.TS_Position, "TS_Position");
-            this.TS_Position.BackColor = System.Drawing.Color.Transparent;
-            this.TS_Position.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.TS_OUT.Name = "TS_OUT";
+			// 
+			// LB_OUT
+			// 
+			resources.ApplyResources(this.LB_OUT, "LB_OUT");
+			this.LB_OUT.Name = "LB_OUT";
+			// 
+			// toolStripSeparator6
+			// 
+			this.toolStripSeparator6.Name = "toolStripSeparator6";
+			resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
+			// 
+			// BT_OUT_SUCTION
+			// 
+			resources.ApplyResources(this.BT_OUT_SUCTION, "BT_OUT_SUCTION");
+			this.BT_OUT_SUCTION.AutoToolTip = false;
+			this.BT_OUT_SUCTION.Image = global::PSA_Application.Properties.Resources.gray_ball1;
+			this.BT_OUT_SUCTION.Name = "BT_OUT_SUCTION";
+			this.BT_OUT_SUCTION.Click += new System.EventHandler(this.BT_OUT_Click);
+			// 
+			// toolStripSeparator17
+			// 
+			this.toolStripSeparator17.Name = "toolStripSeparator17";
+			resources.ApplyResources(this.toolStripSeparator17, "toolStripSeparator17");
+			// 
+			// BT_OUT_BLOW
+			// 
+			resources.ApplyResources(this.BT_OUT_BLOW, "BT_OUT_BLOW");
+			this.BT_OUT_BLOW.AutoToolTip = false;
+			this.BT_OUT_BLOW.Image = global::PSA_Application.Properties.Resources.yellow_ball;
+			this.BT_OUT_BLOW.Name = "BT_OUT_BLOW";
+			this.BT_OUT_BLOW.Click += new System.EventHandler(this.BT_OUT_Click);
+			// 
+			// TS_Position
+			// 
+			this.TS_Position.BackColor = System.Drawing.Color.Transparent;
+			resources.ApplyResources(this.TS_Position, "TS_Position");
+			this.TS_Position.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LB_Position,
             this.toolStripSeparator3,
             this.CbB_PadIX,
@@ -121,74 +123,76 @@
             this.BT_Position_MoveToUp,
             this.toolStripSeparator8,
             this.BT_Position_MoveToDown});
-            this.TS_Position.Name = "TS_Position";
-            // 
-            // LB_Position
-            // 
-            resources.ApplyResources(this.LB_Position, "LB_Position");
-            this.LB_Position.Name = "LB_Position";
-            // 
-            // toolStripSeparator3
-            // 
-            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            // 
-            // CbB_PadIX
-            // 
-            resources.ApplyResources(this.CbB_PadIX, "CbB_PadIX");
-            this.CbB_PadIX.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.CbB_PadIX.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CbB_PadIX.Name = "CbB_PadIX";
-            // 
-            // toolStripSeparator20
-            // 
-            resources.ApplyResources(this.toolStripSeparator20, "toolStripSeparator20");
-            this.toolStripSeparator20.Name = "toolStripSeparator20";
-            // 
-            // CbB_PadIY
-            // 
-            resources.ApplyResources(this.CbB_PadIY, "CbB_PadIY");
-            this.CbB_PadIY.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.CbB_PadIY.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CbB_PadIY.Name = "CbB_PadIY";
-            // 
-            // toolStripSeparator21
-            // 
-            resources.ApplyResources(this.toolStripSeparator21, "toolStripSeparator21");
-            this.toolStripSeparator21.Name = "toolStripSeparator21";
-            // 
-            // BT_Position_MoveToUp
-            // 
-            resources.ApplyResources(this.BT_Position_MoveToUp, "BT_Position_MoveToUp");
-            this.BT_Position_MoveToUp.AutoToolTip = false;
-            this.BT_Position_MoveToUp.Name = "BT_Position_MoveToUp";
-            this.BT_Position_MoveToUp.Click += new System.EventHandler(this.BT_Position_MoveToUp_Click);
-            // 
-            // toolStripSeparator8
-            // 
-            resources.ApplyResources(this.toolStripSeparator8, "toolStripSeparator8");
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            // 
-            // BT_Position_MoveToDown
-            // 
-            resources.ApplyResources(this.BT_Position_MoveToDown, "BT_Position_MoveToDown");
-            this.BT_Position_MoveToDown.AutoToolTip = false;
-            this.BT_Position_MoveToDown.Name = "BT_Position_MoveToDown";
-            this.BT_Position_MoveToDown.Click += new System.EventHandler(this.BT_Position_MoveToDown_Click);
-            // 
-            // timer
-            // 
-            this.timer.Interval = 300;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
-            // TS_IN
-            // 
-            resources.ApplyResources(this.TS_IN, "TS_IN");
-            this.TS_IN.BackColor = System.Drawing.Color.Transparent;
-            this.TS_IN.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.TS_Position.Name = "TS_Position";
+			// 
+			// LB_Position
+			// 
+			resources.ApplyResources(this.LB_Position, "LB_Position");
+			this.LB_Position.Name = "LB_Position";
+			// 
+			// toolStripSeparator3
+			// 
+			this.toolStripSeparator3.Name = "toolStripSeparator3";
+			resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
+			// 
+			// CbB_PadIX
+			// 
+			this.CbB_PadIX.BackColor = System.Drawing.SystemColors.InactiveCaption;
+			this.CbB_PadIX.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			resources.ApplyResources(this.CbB_PadIX, "CbB_PadIX");
+			this.CbB_PadIX.Name = "CbB_PadIX";
+			// 
+			// toolStripSeparator20
+			// 
+			this.toolStripSeparator20.Name = "toolStripSeparator20";
+			resources.ApplyResources(this.toolStripSeparator20, "toolStripSeparator20");
+			// 
+			// CbB_PadIY
+			// 
+			this.CbB_PadIY.BackColor = System.Drawing.SystemColors.InactiveCaption;
+			this.CbB_PadIY.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			resources.ApplyResources(this.CbB_PadIY, "CbB_PadIY");
+			this.CbB_PadIY.Name = "CbB_PadIY";
+			// 
+			// toolStripSeparator21
+			// 
+			this.toolStripSeparator21.Name = "toolStripSeparator21";
+			resources.ApplyResources(this.toolStripSeparator21, "toolStripSeparator21");
+			// 
+			// BT_Position_MoveToUp
+			// 
+			resources.ApplyResources(this.BT_Position_MoveToUp, "BT_Position_MoveToUp");
+			this.BT_Position_MoveToUp.AutoToolTip = false;
+			this.BT_Position_MoveToUp.Name = "BT_Position_MoveToUp";
+			this.BT_Position_MoveToUp.Click += new System.EventHandler(this.BT_Position_MoveToUp_Click);
+			// 
+			// toolStripSeparator8
+			// 
+			this.toolStripSeparator8.Name = "toolStripSeparator8";
+			resources.ApplyResources(this.toolStripSeparator8, "toolStripSeparator8");
+			// 
+			// BT_Position_MoveToDown
+			// 
+			resources.ApplyResources(this.BT_Position_MoveToDown, "BT_Position_MoveToDown");
+			this.BT_Position_MoveToDown.AutoToolTip = false;
+			this.BT_Position_MoveToDown.Name = "BT_Position_MoveToDown";
+			this.BT_Position_MoveToDown.Click += new System.EventHandler(this.BT_Position_MoveToDown_Click);
+			// 
+			// timer
+			// 
+			this.timer.Interval = 300;
+			this.timer.Tick += new System.EventHandler(this.timer_Tick);
+			// 
+			// TS_IN
+			// 
+			this.TS_IN.BackColor = System.Drawing.Color.Transparent;
+			resources.ApplyResources(this.TS_IN, "TS_IN");
+			this.TS_IN.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LB_IN,
             this.toolStripSeparator5,
             this.LB_IN_VAC,
+            this.toolStripSeparator2,
+            this.LB_IN_DOWN_SENSOR,
             this.toolStripSeparator1,
             this.LB_IN_UP_SENSOR});
             this.TS_IN.Name = "TS_IN";
@@ -200,18 +204,28 @@
             // 
             // toolStripSeparator5
             // 
-            resources.ApplyResources(this.toolStripSeparator5, "toolStripSeparator5");
             this.toolStripSeparator5.Name = "toolStripSeparator5";
+            resources.ApplyResources(this.toolStripSeparator5, "toolStripSeparator5");
             // 
             // LB_IN_VAC
             // 
             resources.ApplyResources(this.LB_IN_VAC, "LB_IN_VAC");
             this.LB_IN_VAC.Name = "LB_IN_VAC";
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
+            // 
+            // LB_IN_DOWN_SENSOR
+            // 
+            resources.ApplyResources(this.LB_IN_DOWN_SENSOR, "LB_IN_DOWN_SENSOR");
+            this.LB_IN_DOWN_SENSOR.Name = "LB_IN_DOWN_SENSOR";
+            // 
             // toolStripSeparator1
             // 
-            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             this.toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             // 
             // LB_IN_UP_SENSOR
             // 
@@ -265,6 +279,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
 		private System.Windows.Forms.ToolStripLabel LB_IN_VAC;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripLabel LB_IN_UP_SENSOR;
+		private System.Windows.Forms.ToolStripLabel LB_IN_UP_SENSOR;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+		private System.Windows.Forms.ToolStripLabel LB_IN_DOWN_SENSOR;
     }
 }

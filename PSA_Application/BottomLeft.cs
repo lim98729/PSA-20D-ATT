@@ -315,25 +315,48 @@ namespace PSA_Application
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			EVENT.clearLoadcellData();
-			QueryTimer dwell = new QueryTimer();
-			Random random = new Random();
-			dwell.Reset();
-			int rndMin, rndMax;
-			int index = 0;
-			while (dwell.Elapsed < 5000)
-			{
-				rndMin = (int)dwell.Elapsed - 200;
-				rndMax = (int)dwell.Elapsed + 200;
-				index++;
-				if (index % 100 == 0) EVENT.addLoadcellData(1, dwell.Elapsed, random.Next(rndMin, rndMax) / 1000.0, random.Next(rndMin, rndMax) / 1000.0);
-				else EVENT.addLoadcellData(0, dwell.Elapsed, random.Next(rndMin, rndMax) / 1000.0, random.Next(rndMin, rndMax) / 1000.0);
-				//EVENT.controlLoadcellData(1, 0);
+            bool b = false;
 
-				mc.idle(0);
-			}
-			int xMax = ((int)(dwell.Elapsed) / 1000) * 1000 + 1000;
-			EVENT.controlLoadcellData(2, xMax);
+            //mc.loadCell.deactivate(out b);
+            //mc.loadCell.activate(out b, 0);
+            //double aaa = mc.loadCell.getData(0);
+            //mc.log.debug.write(mc.log.CODE.ETC, "LoadCell Data : " + aaa.ToString());
+            
+            //bool b = false;
+            RetMessage retMessage = RetMessage.INVALID;
+            mc.OUT.HD.SUC(false, out retMessage);
+            mc.OUT.HD.BLW(true, out retMessage);
+            QueryTimer dwell = new QueryTimer();
+            dwell.Reset();
+            while (true)
+            {
+                mc.IN.HD.VAC_CHK(out b, out retMessage);
+                if (b == false)
+                {
+                    mc.log.debug.write(mc.log.CODE.INFO, Math.Round(dwell.Elapsed, 3).ToString());
+                    break;
+                }
+            }
+
+            //EVENT.clearLoadcellData();
+            //QueryTimer dwell = new QueryTimer();
+            //Random random = new Random();
+            //dwell.Reset();
+            //int rndMin, rndMax;
+            //int index = 0;
+            //while (dwell.Elapsed < 5000)
+            //{
+            //    rndMin = (int)dwell.Elapsed - 200;
+            //    rndMax = (int)dwell.Elapsed + 200;
+            //    index++;
+            //    if (index % 100 == 0) EVENT.addLoadcellData(1, dwell.Elapsed, random.Next(rndMin, rndMax) / 1000.0, random.Next(rndMin, rndMax) / 1000.0);
+            //    else EVENT.addLoadcellData(0, dwell.Elapsed, random.Next(rndMin, rndMax) / 1000.0, random.Next(rndMin, rndMax) / 1000.0);
+            //    //EVENT.controlLoadcellData(1, 0);
+
+            //    mc.idle(0);
+            //}
+            //int xMax = ((int)(dwell.Elapsed) / 1000) * 1000 + 1000;
+            //EVENT.controlLoadcellData(2, xMax);
 		}
 
 		private void LB_TimeMean_DoubleClick(object sender, EventArgs e)

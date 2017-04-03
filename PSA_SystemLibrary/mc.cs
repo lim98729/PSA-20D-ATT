@@ -54,7 +54,7 @@ namespace PSA_SystemLibrary
         {
             get
             {
-                return "20170219A";
+                return "20170324A";
             }
         }
         //public static bool START;
@@ -634,7 +634,7 @@ namespace PSA_SystemLibrary
                     X.homing.captureTimeLimit = 3;
                     X.homing.speed = mc.speed.homing;
                     X.homing.captureSpeed = mc.speed.capture;
-
+                    X.homing.encoderInverted = 0;
                     X.homing.method = MPIHomingMethod.Capture;
                 }
                 #endregion
@@ -678,7 +678,7 @@ namespace PSA_SystemLibrary
                     Y.homing.captureTimeLimit = 3;
                     Y.homing.speed = mc.speed.homing;
                     Y.homing.captureSpeed = mc.speed.capture;
-
+                    Y.homing.encoderInverted = 0;
                     Y.homing.method = MPIHomingMethod.Gantry;
                 }
                 #endregion
@@ -722,7 +722,7 @@ namespace PSA_SystemLibrary
                     Y2.homing.captureTimeLimit = 0;
                     Y2.homing.speed = mc.speed.homing;
                     Y2.homing.captureSpeed = mc.speed.capture;
-
+                    Y2.homing.encoderInverted = 0;
                     Y2.homing.method = MPIHomingMethod.Gantry;
                 }
                 #endregion
@@ -768,7 +768,7 @@ namespace PSA_SystemLibrary
                     Z.homing.captureTimeLimit = 3;
                     Z.homing.speed = mc.speed.homing;
                     Z.homing.captureSpeed = mc.speed.capture;
-
+                    Z.homing.encoderInverted = 0;
                     Z.homing.method = MPIHomingMethod.Capture;
                 }
                 #endregion
@@ -812,7 +812,8 @@ namespace PSA_SystemLibrary
                     T.homing.captureTimeLimit = 10;
                     T.homing.speed = mc.speed.homingRPM;
                     T.homing.captureSpeed = mc.speed.captureRPM;
-
+                    if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.CHIPPAC) T.homing.encoderInverted = 0;
+                    else T.homing.encoderInverted = 1;
                     T.homing.method = MPIHomingMethod.Capture;
                 }
                 #endregion
@@ -887,7 +888,7 @@ namespace PSA_SystemLibrary
                     X.homing.captureTimeLimit = 3;
                     X.homing.speed = mc.speed.homing;
                     X.homing.captureSpeed = mc.speed.capture;
-
+                    X.homing.encoderInverted = 0;
                     X.homing.method = MPIHomingMethod.Capture;
                 }
                 #endregion
@@ -931,7 +932,7 @@ namespace PSA_SystemLibrary
                     Y.homing.captureTimeLimit = 3;
                     Y.homing.speed = mc.speed.homing;
                     Y.homing.captureSpeed = mc.speed.capture;
-
+                    Y.homing.encoderInverted = 0;
                     Y.homing.method = MPIHomingMethod.Capture;
                 }
                 #endregion
@@ -975,7 +976,7 @@ namespace PSA_SystemLibrary
                     Z.homing.captureTimeLimit = 3;
                     Z.homing.speed = mc.speed.homingRPM;
                     Z.homing.captureSpeed = mc.speed.captureRPM;
-
+                    Z.homing.encoderInverted = 0;
                     Z.homing.method = MPIHomingMethod.Capture;
                 }
                 #endregion
@@ -1037,7 +1038,7 @@ namespace PSA_SystemLibrary
                     Z.homing.captureTimeLimit = 1;
                     Z.homing.speed = mc.speed.homing;
                     Z.homing.captureSpeed = mc.speed.capture;
-
+                    Z.homing.encoderInverted = 0;
                     Z.homing.method = MPIHomingMethod.Capture;
                 }
                 #endregion
@@ -1082,7 +1083,7 @@ namespace PSA_SystemLibrary
                     Z2.homing.captureTimeLimit = 1;
                     Z2.homing.speed = mc.speed.homing;
                     Z2.homing.captureSpeed = mc.speed.capture;
-
+                    Z2.homing.encoderInverted = 0;
                     Z2.homing.method = MPIHomingMethod.Capture;
                 }
                 #endregion
@@ -1146,7 +1147,7 @@ namespace PSA_SystemLibrary
                     W.homing.captureTimeLimit = 1;
                     W.homing.speed = mc.speed.homing;
                     W.homing.captureSpeed = mc.speed.capture;
-
+                    W.homing.encoderInverted = 0;
                     W.homing.method = MPIHomingMethod.Capture;
                 }
                 #endregion
@@ -1603,6 +1604,7 @@ namespace PSA_SystemLibrary
                     if (!check.RUNTIMEPOWER)
                     {
                         DoEmergencyControl();
+                        break;
                     }
 
                     if (!THREAD_RUNNING && !THREAD_ALIVE) break;
@@ -1665,8 +1667,8 @@ namespace PSA_SystemLibrary
                 pd.Z.eStop(out ret.message);
 
                 // stack feeder
-                sf.feeder[(int)UnitCodeSFMG.MG1].Z.eStop(out ret.message);
-                sf.feeder[(int)UnitCodeSFMG.MG2].Z.eStop(out ret.message);
+                sf.Z.eStop(out ret.message);
+                sf.Z2.eStop(out ret.message);
 
                 // conveyor
                 cv.W.eStop(out ret.message);
@@ -2224,8 +2226,8 @@ namespace PSA_SystemLibrary
                         pd.homingZ.control();
 
                         sf.control();
-                        sf.feeder[(int)UnitCodeSFMG.MG1].homingZ.control();
-                        sf.feeder[(int)UnitCodeSFMG.MG2].homingZ.control();
+                        sf.homingZ.control();
+                        sf.homingZ2.control();
 
                         cv.control();
                         cv.homingW.control();
@@ -2301,7 +2303,6 @@ namespace PSA_SystemLibrary
                         pd.homingZ.ret.alarmCode = ALARM_CODE.E_ALL_OK;
                         pd.homingZ.ret.SecsGemReport = false;
                     }
-
                     if (sf.ret.errorCode != ERRORCODE.NONE)
                     {
                         //string str = "errorCode [" + sf.ret.errorCode.ToString() + "] ";
@@ -2316,7 +2317,7 @@ namespace PSA_SystemLibrary
                         sf.ret.alarmCode = ALARM_CODE.E_ALL_OK;
                         sf.ret.SecsGemReport = false;
                     }
-                    if (sf.feeder[(int)UnitCodeSFMG.MG1].homingZ.ret.errorCode != ERRORCODE.NONE)
+                    if (sf.homingZ.ret.errorCode != ERRORCODE.NONE)
                     {
                         //string str = "errorCode [" + sf.homingZ.ret.errorCode.ToString() + "] ";
                         //if (sf.homingZ.ret.axisCode != UnitCodeAxis.INVALID) str += "axisCode [" + sf.homingZ.ret.axisCode.ToString() + "] ";
@@ -2325,12 +2326,12 @@ namespace PSA_SystemLibrary
                         //if (sf.homingZ.ret.errorString != "") str += ": " + sf.homingZ.ret.errorString;
                         //error.set(error.SF, str);
                         //error.axisMapping(error.SF, sf.homingZ.ret.axisCode, ref sf.homingZ.ret.alarmCode);
-                        error.set(error.SF, sf.feeder[(int)UnitCodeSFMG.MG1].homingZ.ret.alarmCode, sf.feeder[(int)UnitCodeSFMG.MG1].homingZ.ret.errorString, sf.feeder[(int)UnitCodeSFMG.MG1].homingZ.ret.SecsGemReport);
-                        sf.feeder[(int)UnitCodeSFMG.MG1].homingZ.ret.errorCode = ERRORCODE.NONE;
-                        sf.feeder[(int)UnitCodeSFMG.MG1].homingZ.ret.alarmCode = ALARM_CODE.E_ALL_OK;
-                        sf.feeder[(int)UnitCodeSFMG.MG1].homingZ.ret.SecsGemReport = false;
+                        error.set(error.SF, sf.homingZ.ret.alarmCode, sf.homingZ.ret.errorString, sf.homingZ.ret.SecsGemReport);
+                        sf.homingZ.ret.errorCode = ERRORCODE.NONE;
+                        sf.homingZ.ret.alarmCode = ALARM_CODE.E_ALL_OK;
+                        sf.homingZ.ret.SecsGemReport = false;
                     }
-                    if (sf.feeder[(int)UnitCodeSFMG.MG2].homingZ.ret.errorCode != ERRORCODE.NONE)
+                    if (sf.homingZ2.ret.errorCode != ERRORCODE.NONE)
                     {
                         //string str = "errorCode [" + sf.homingX.ret.errorCode.ToString() + "] ";
                         //if (sf.homingX.ret.axisCode != UnitCodeAxis.INVALID) str += "axisCode [" + sf.homingX.ret.axisCode.ToString() + "] ";
@@ -2339,10 +2340,10 @@ namespace PSA_SystemLibrary
                         //if (sf.homingX.ret.errorString != "") str += ": " + sf.homingX.ret.errorString;
                         //error.set(error.SF, str);
                         //error.axisMapping(error.SF, sf.homingZ2.ret.axisCode, ref sf.homingZ2.ret.alarmCode);
-                        error.set(error.SF, sf.feeder[(int)UnitCodeSFMG.MG2].homingZ.ret.alarmCode, sf.feeder[(int)UnitCodeSFMG.MG2].homingZ.ret.errorString, sf.feeder[(int)UnitCodeSFMG.MG2].homingZ.ret.SecsGemReport);
-                        sf.feeder[(int)UnitCodeSFMG.MG2].homingZ.ret.errorCode = ERRORCODE.NONE;
-                        sf.feeder[(int)UnitCodeSFMG.MG2].homingZ.ret.alarmCode = ALARM_CODE.E_ALL_OK;
-                        sf.feeder[(int)UnitCodeSFMG.MG2].homingZ.ret.SecsGemReport = false;
+                        error.set(error.SF, sf.homingZ2.ret.alarmCode, sf.homingZ2.ret.errorString, sf.homingZ2.ret.SecsGemReport);
+                        sf.homingZ2.ret.errorCode = ERRORCODE.NONE;
+                        sf.homingZ2.ret.alarmCode = ALARM_CODE.E_ALL_OK;
+                        sf.homingZ2.ret.SecsGemReport = false;
                     }
 
                     if (cv.ret.errorCode != ERRORCODE.NONE)
@@ -2453,8 +2454,8 @@ namespace PSA_SystemLibrary
                         if (pd.homingZ.RUNING) return true;
 
                         if (sf.RUNING) return true;
-                        if (sf.feeder[(int)UnitCodeSFMG.MG1].homingZ.RUNING) return true;
-                        if (sf.feeder[(int)UnitCodeSFMG.MG2].homingZ.RUNING) return true;
+                        if (sf.homingZ.RUNING) return true;
+                        if (sf.homingZ2.RUNING) return true;
 
                         if (cv.RUNING) return true;
                         if (cv.homingW.RUNING) return true;
@@ -2660,6 +2661,7 @@ namespace PSA_SystemLibrary
                         {
                             //mc.error.set(error.POWER, "EMERGENCY or Power Error [MOTOR(MC2)]");
                             string tmpErrStr;
+                            mc2.req = MC_REQ.STOP;
                             hd.directErrorCheck(out tmpErrStr, ERRORCODE.POWER, ALARM_CODE.E_SYSTEM_HW_EMERGENCY);
                             mc.error.set(error.POWER, ALARM_CODE.E_SYSTEM_HW_EMERGENCY, tmpErrStr, true);
                             powerFailType = 1;
@@ -2688,6 +2690,7 @@ namespace PSA_SystemLibrary
                         {
                             //mc.error.set(error.POWER, "Power Error [CP-Y1,Y2(CP6)]");
                             string tmpErrStr;
+                            mc2.req = MC_REQ.STOP;
                             hd.directErrorCheck(out tmpErrStr, ERRORCODE.POWER, ALARM_CODE.E_SYSTEM_HW_CP6);
                             mc.error.set(error.POWER, ALARM_CODE.E_SYSTEM_HW_CP6, tmpErrStr, true);
                             powerFailType = 6;
@@ -2716,6 +2719,7 @@ namespace PSA_SystemLibrary
                         {
                             //mc.error.set(error.POWER, "Power Error [CP-X(CP7)]");
                             string tmpErrStr;
+                            mc2.req = MC_REQ.STOP;
                             hd.directErrorCheck(out tmpErrStr, ERRORCODE.POWER, ALARM_CODE.E_SYSTEM_HW_CP7);
                             mc.error.set(error.POWER, ALARM_CODE.E_SYSTEM_HW_CP7, tmpErrStr, true);
                             powerFailType = 7;
@@ -2738,6 +2742,7 @@ namespace PSA_SystemLibrary
                         {
                             //mc.error.set(error.POWER, "Power Error [CP-Z,PD(CP8)]");
                             string tmpErrStr;
+                            mc2.req = MC_REQ.STOP;
                             hd.directErrorCheck(out tmpErrStr, ERRORCODE.POWER, ALARM_CODE.E_SYSTEM_HW_CP8);
                             mc.error.set(error.POWER, ALARM_CODE.E_SYSTEM_HW_CP8, tmpErrStr, true);
                             powerFailType = 8;
@@ -2760,6 +2765,7 @@ namespace PSA_SystemLibrary
                         {
                             //mc.error.set(error.POWER, "Power Error [CP-DC(CP9)]");
                             string tmpErrStr;
+                            mc2.req = MC_REQ.STOP;
                             hd.directErrorCheck(out tmpErrStr, ERRORCODE.POWER, ALARM_CODE.E_SYSTEM_HW_CP9);
                             mc.error.set(error.POWER, ALARM_CODE.E_SYSTEM_HW_CP9, tmpErrStr, true);
                             powerFailType = 9;
@@ -2782,6 +2788,7 @@ namespace PSA_SystemLibrary
                         {
                             //mc.error.set(error.POWER, "Power Error [CP-T(CP10)]");
                             string tmpErrStr;
+                            mc2.req = MC_REQ.STOP;
                             hd.directErrorCheck(out tmpErrStr, ERRORCODE.POWER, ALARM_CODE.E_SYSTEM_HW_CP10);
                             mc.error.set(error.POWER, ALARM_CODE.E_SYSTEM_HW_CP10, tmpErrStr, true);
                             powerFailType = 10;
@@ -4038,51 +4045,59 @@ namespace PSA_SystemLibrary
 
             public static bool readUserInfo()
             {
-                FileStream fs = File.Open(filename, FileMode.Open);
-                StreamReader sr = new StreamReader(fs, Encoding.BigEndianUnicode);
-
                 try
                 {
-
-                    string readData;
-                    string[] readSplitData;
-                    
-                    readData= sr.ReadLine();
-                    string decData = CryptorEngine.Decrypt(readData);
-                    userNumber = Convert.ToInt32(decData);
-                    if (userNumber > _MAX_USER_NUMBER)
+                    if (File.Exists(filename))
                     {
-                        userNumber = 0;
+                        FileStream fs = File.Open(filename, FileMode.Open);
+                        StreamReader sr = new StreamReader(fs, Encoding.BigEndianUnicode);
+
+
+                        string readData;
+                        string[] readSplitData;
+
+                        readData = sr.ReadLine();
+                        string decData = CryptorEngine.Decrypt(readData);
+                        userNumber = Convert.ToInt32(decData);
+                        if (userNumber > _MAX_USER_NUMBER)
+                        {
+                            userNumber = 0;
+                            sr.Close();
+                            fs.Close();
+                        }
+                        for (int i = 0; i < userNumber; i++)
+                        {
+                            readData = sr.ReadLine();
+                            if (readData.Length > 0)
+                            {
+                                readSplitData = readData.Split('\t');
+                                userName[i] = CryptorEngine.Decrypt(readSplitData[0]);
+                                passWord[i] = CryptorEngine.Decrypt(readSplitData[1]);
+                            }
+                        }
                         sr.Close();
                         fs.Close();
                     }
-                    for (int i = 0; i < userNumber; i++)
+                    else
                     {
-                        readData = sr.ReadLine();
-                        if (readData.Length > 0)
-                        {
-                            readSplitData = readData.Split('\t');
-                            userName[i] = CryptorEngine.Decrypt(readSplitData[0]);
-                            passWord[i] = CryptorEngine.Decrypt(readSplitData[1]);
-                        }
-                    }
-                    sr.Close();
-                    fs.Close();
+                        userName[0] = supervisor;
+                        passWord[0] = Master_Password;
 
+                        userNumber = 1;
+                        writeUserInfo();
+                    }
+                    
                     return true;
                 }
                 catch
                 {
-                    if (sr != null) sr.Close();
-                    if (fs != null) fs.Close();
-
                     userName[0] = supervisor;
                     passWord[0] = Master_Password;
 
                     userNumber = 1;
                     writeUserInfo();
+                    return true;
                 }
-                return false;
             }
 
             public static bool writeUserInfo()
@@ -4676,6 +4691,7 @@ namespace PSA_SystemLibrary
                 swconfig.WriteInt("noUsePDUpSensor", temp);
 
                 swconfig.WriteInt("RemoveConveyor", removeConveyor);
+                swconfig.WriteInt("setupMode", setupMode);
 
                 // 20140612
                 swconfig.WriteInt("LogSave", logSave);
@@ -4932,8 +4948,7 @@ namespace PSA_SystemLibrary
                     tmp_SF.useMGZ1.value = SF.useMGZ1.value;
                     tmp_SF.useMGZ2.value = SF.useMGZ2.value;
 
-                    mc.sf.feeder[(int)UnitCodeSFMG.MG1]._FeederZ = mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.speed.rate;
-                    mc.sf.feeder[(int)UnitCodeSFMG.MG2]._FeederZ = mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.speed.rate;
+                    mc.sf._FeederZ = mc.sf.Z.config.speed.rate;
 
                     tmp_SF.firstDownPitch.value = SF.firstDownPitch.value;
                     tmp_SF.firstDownVel.value = SF.firstDownVel.value;
@@ -5093,8 +5108,8 @@ namespace PSA_SystemLibrary
                     mc.pd._Y = mc.pd.Y.config.speed.rate;
                     mc.pd._Z = mc.pd.Z.config.speed.rate;
 
-                    mc.sf.feeder[(int)UnitCodeSFMG.MG1]._Z = mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.speed.rate;
-                    mc.sf.feeder[(int)UnitCodeSFMG.MG2]._Z = mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.speed.rate;
+                    mc.sf._Z = mc.sf.Z.config.speed.rate;
+                    mc.sf._Z2 = mc.sf.Z2.config.speed.rate;
 
                     mc.cv._W = mc.cv.W.config.speed.rate;
                 }
@@ -5363,8 +5378,8 @@ namespace PSA_SystemLibrary
                     if (tmp_SF.useMGZ1.value != SF.useMGZ1.value) { b = true; return b; }
                     if (tmp_SF.useMGZ2.value != SF.useMGZ2.value) { b = true; return b; }
 
-                    if (mc.sf.feeder[(int)UnitCodeSFMG.MG1]._FeederZ != mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.speed.rate) { b = true; return b; }
-                    if (mc.sf.feeder[(int)UnitCodeSFMG.MG2]._FeederZ != mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.speed.rate) { b = true; return b; }
+                    if (mc.sf._FeederZ != mc.sf.Z.config.speed.rate) { b = true; return b; }
+                    if (mc.sf._FeederZ != mc.sf.Z2.config.speed.rate) { b = true; return b; }
 
                     if (tmp_SF.firstDownPitch.value != SF.firstDownPitch.value) { b = true; return b; }
                     if (tmp_SF.firstDownVel.value != SF.firstDownVel.value) { b = true; return b; }
@@ -5530,8 +5545,8 @@ namespace PSA_SystemLibrary
                     if (mc.pd.Y.config.speed.rate != mc.pd._Y) { b = true; return b; }
                     if (mc.pd.Z.config.speed.rate != mc.pd._Z) { b = true; return b; }
 
-                    if (mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.speed.rate != mc.sf.feeder[(int)UnitCodeSFMG.MG1]._Z) { b = true; return b; }
-                    if (mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.speed.rate != mc.sf.feeder[(int)UnitCodeSFMG.MG2]._Z) { b = true; return b; }
+                    if (mc.sf.Z.config.speed.rate != mc.sf._Z) { b = true; return b; }
+                    if (mc.sf.Z2.config.speed.rate != mc.sf._Z2) { b = true; return b; }
 
                     if (mc.cv.W.config.speed.rate != mc.cv._W) { b = true; return b; }
                 }
@@ -5807,8 +5822,8 @@ namespace PSA_SystemLibrary
                     SF.useMGZ1.value = tmp_SF.useMGZ1.value;
                     SF.useMGZ2.value = tmp_SF.useMGZ2.value;
 
-                    mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.speed.rate = mc.sf.feeder[(int)UnitCodeSFMG.MG1]._FeederZ;
-                    mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.speed.rate = mc.sf.feeder[(int)UnitCodeSFMG.MG2]._FeederZ;
+                    mc.sf.Z.config.speed.rate = mc.sf._FeederZ;
+                    mc.sf.Z2.config.speed.rate = mc.sf._FeederZ;
 
                     SF.firstDownPitch.value = tmp_SF.firstDownPitch.value;
                     SF.firstDownVel.value = tmp_SF.firstDownVel.value;
@@ -5994,8 +6009,8 @@ namespace PSA_SystemLibrary
                     mc.pd.Y.config.speed.rate = mc.pd._Y;
                     mc.pd.Z.config.speed.rate = mc.pd._Z; ;
 
-                    mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.speed.rate = mc.sf.feeder[(int)UnitCodeSFMG.MG1]._Z;
-                    mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.speed.rate = mc.sf.feeder[(int)UnitCodeSFMG.MG2]._Z;
+                    mc.sf.Z.config.speed.rate = mc.sf._Z;
+                    mc.sf.Z2.config.speed.rate = mc.sf._Z2;
 
                     mc.cv.W.config.speed.rate = mc.cv._W;
 
@@ -6131,17 +6146,17 @@ namespace PSA_SystemLibrary
                 {
                     if (axisCode == UnitCodeAxis.Z)
                     {
-                        p.value = mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.speed.rate;
+                        p.value = mc.sf.Z.config.speed.rate;
                         mc.para.setting(p, out p);
-                        mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.speed.rate = p.value;
-                        mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.write();
+                        mc.sf.Z.config.speed.rate = p.value;
+                        mc.sf.Z.config.write();
                     }
                     if (axisCode == UnitCodeAxis.Z2)
                     {
-                        p.value = mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.speed.rate;
+                        p.value = mc.sf.Z2.config.speed.rate;
                         mc.para.setting(p, out p);
-                        mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.speed.rate = p.value;
-                        mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.write();
+                        mc.sf.Z2.config.speed.rate = p.value;
+                        mc.sf.Z2.config.write();
                     }
                 }
                 if (unitCode == UnitCode.CV)
@@ -6195,12 +6210,12 @@ namespace PSA_SystemLibrary
                 }
                 if (unitCode == UnitCode.SF)
                 {
-                    p.value = mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.speed.rate * 100;
+                    p.value = mc.sf.Z.config.speed.rate * 100;
                     mc.para.setting(p, out p);
-                    mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.speed.rate = p.value * 0.01;
-                    mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.speed.rate = p.value * 0.01;
-                    mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.write();
-                    mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.write();
+                    mc.sf.Z.config.speed.rate = p.value * 0.01;
+                    mc.sf.Z2.config.speed.rate = p.value * 0.01;
+                    mc.sf.Z.config.write();
+                    mc.sf.Z2.config.write();
                 }
                 if (unitCode == UnitCode.CV)
                 {
@@ -8263,7 +8278,7 @@ namespace PSA_SystemLibrary
                     probe.DiscardInBuffer();
                     probe.DiscardOutBuffer();
                     probe.Write(">R01" + Char.ConvertFromUtf32(13) + Char.ConvertFromUtf32(10));
-                    mc.idle(500);
+                    mc.idle(1);
                     string temp = probe.ReadLine().Substring(6, 7);
                     data = Convert.ToDouble(temp);
                     r = true;
@@ -8277,218 +8292,125 @@ namespace PSA_SystemLibrary
 
         public class loadCell
         {
-            //static classLoadCell com = new classLoadCell();
-            //static classLoadCell hdcom = new classLoadCell();		// head loadcell communication. added from ChipPAC revision
-            // static QueryTimer dwell = new QueryTimer();	20141012
+            static SerialPort loadcell;
 
-            //public static bool isActivate;
-            //public static string strTemp;
             public static void activate(out bool r, int comselect = 0)
             {
                 r = false;
-                if (comselect == 0)
+                try
                 {
-                    // 20141012
-                    //com.activate("COM2", 19200, Parity.None, 8, StopBits.One, out ret.message); if (ret.message != RetMessage.OK) return;
-                }
-                else
-                {
-                    // 20141012
-                    //hdcom.activate("COM3", 19200, Parity.None, 8, StopBits.One, out ret.message); if (ret.message != RetMessage.OK) return;
-                }
-                r = true;
-            }
-            public static void deactivate(out bool r, int comselect = 0)
-            {
-                if (comselect == 0)
-                {
-                    // 20141012
-                    //com.deactivate(out ret.message); if (ret.message != RetMessage.OK) { r = false; return; }
-                }
-                else
-                {
-                    // 20141012
-                    //hdcom.deactivate(out ret.message); if (ret.message != RetMessage.OK) { r = false; return; }
-                }
-                r = true;
-            }
-            // calibration시 loadcell Z position teaching시, press low, press high Z축 높이 teaching시 loadcell 값을 0으로 만듦.
-            // force calibration시에도 사용해야할 필요성이 있음.
-            //public static void setZero(out bool r, int comselect = 0)
-            //{
-            //    if (comselect == 0)
-            //    {
-            //        com.zero_set(out ret.message); if (ret.message != RetMessage.OK) { r = false; return; }
-            //    }
-            //    else
-            //    {
-            //        hdcom.zero_set(out ret.message); if (ret.message != RetMessage.OK) { r = false; return; }
-            //    }
-            //    r = true;
-            //}
-            //public static void setHold(bool hold, out bool r, int comselect = 0)
-            //{
-            //    if (comselect == 0)
-            //    {
-            //        com.hold_set(hold, out ret.message); if (ret.message != RetMessage.OK) { r = false; return; }
-            //    }
-            //    else
-            //    {
-
-            //        hdcom.hold_set(hold, out ret.message); if (ret.message != RetMessage.OK) { r = false; return; }
-            //    }
-            //    r = true;
-            //}
-            
-            public static double getData(int comselect = 0)
-            {
-                //if (UtilityControl.forceAnalogDataUse == 0)
-                //{
-                //    if (comselect == 0)
-                //    {
-                //        data = -1; r = false;
-                //        com.req_data(out ret.message); if (ret.message != RetMessage.OK) return;
-                //        dwell.Reset();
-                //        while (true)
-                //        {
-                //            Application.DoEvents(); Thread.Sleep(10);
-                //            if (com.dataReceived) break;
-                //            if (dwell.Elapsed > 3000) return;
-                //        }
-                //        try
-                //        {
-                //            data = Convert.ToDouble(com.rData);
-                //            r = true;
-                //        }
-                //        catch
-                //        {
-                //            data = -1; r = false;
-                //        }
-                //    }
-                //    else
-                //    {
-                //        data = -1; r = false;
-                //        hdcom.req_data(out ret.message); if (ret.message != RetMessage.OK) return;
-                //        dwell.Reset();
-                //        while (true)
-                //        {
-                //            Application.DoEvents(); Thread.Sleep(10);
-                //            if (hdcom.dataReceived) break;
-                //            if (dwell.Elapsed > 3000) return;
-                //        }
-                //        try
-                //        {
-                //            data = Convert.ToDouble(hdcom.rData);
-                //            r = true;
-                //        }
-                //        catch
-                //        {
-                //            data = -1; r = false;
-                //        }
-                //    }
-                //}
-                //else	// read Analog Data
-                //{
                     if (comselect == 0)
                     {
-                        return(mc.AIN.BottomLoadcell());
-                        //data = -1; r = false;
-                        //mc.AIN.BottomLoadcell(out ret.d, out ret.message); //if (ret.message != RetMessage.OK) return;
-                        //data = Math.Round(ret.d, 2); r = true;
-                        //return ret.d;
+                        //if (UtilityControl.forceAnalogDataUse == 0)
+                        {
+                            if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG)
+                            {
+                                loadcell = new SerialPort("COM2", 4800, Parity.None, 8, StopBits.One);
+                                loadcell.Open();
+                                loadcell.ReadTimeout = 500;
+                                loadcell.WriteTimeout = 500;
+                            }
+                        }
                     }
                     else
                     {
-                        //data = -1; r = false;
-                        return(mc.AIN.HeadLoadcell()); //if (ret.message != RetMessage.OK) return;
-                        //data = Math.Round(ret.d, 2); r = true;
                     }
-                //}
+                    r = true;
+                }
+                catch
+                {
+                    r = false;
+                }
             }
-            //public static void getDataSerial(out double data, out bool r, int comselect = 0)
-            //{
-            //    if (comselect == 0)
-            //    {
-            //        data = -1; r = false;
-            //        com.req_data(out ret.message); if (ret.message != RetMessage.OK) return;
-            //        dwell.Reset();
-            //        while (true)
-            //        {
-            //            Application.DoEvents(); Thread.Sleep(10);
-            //            if (com.dataReceived) break;
-            //            if (dwell.Elapsed > 3000) return;
-            //        }
-            //        try
-            //        {
-            //            data = Convert.ToDouble(com.rData);
-            //            r = true;
-            //        }
-            //        catch
-            //        {
-            //            data = -1; r = false;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        data = -1; r = false;
-            //        hdcom.req_data(out ret.message); if (ret.message != RetMessage.OK) return;
-            //        dwell.Reset();
-            //        while (true)
-            //        {
-            //            Application.DoEvents(); Thread.Sleep(10);
-            //            if (hdcom.dataReceived) break;
-            //            if (dwell.Elapsed > 3000) return;
-            //        }
-            //        try
-            //        {
-            //            data = Convert.ToDouble(hdcom.rData);
-            //            r = true;
-            //        }
-            //        catch
-            //        {
-            //            data = -1; r = false;
-            //        }
-            //    }
-            //}
-            // get data step을 구분한 이유는 sequence내에서 loadcell로부터 data를 취합하기 위함.
-            // get data step 1 : data request
-            //public static void getDataS1(out RetMessage retMsg, int comselect = 0)
-            //{
-            //    if (comselect == 0)
-            //    {
-            //        com.req_data(out retMsg);
-            //    }
-            //    else
-            //    {
-            //        hdcom.req_data(out retMsg);
-            //    }
-            //}
-            //// get data step 2 : data를 receive했는지 확인
-            //public static void getDataS2(out bool dataRcv, int comselect = 0)
-            //{
-            //    if (comselect == 0)
-            //    {
-            //        if (com.dataReceived) dataRcv = true;
-            //        else dataRcv = false;
-            //    }
-            //    else
-            //    {
-            //        if (hdcom.dataReceived) dataRcv = true;
-            //        else dataRcv = false;
-            //    }
-            //}
-            //// get data step 3 : 전송된 data를 double로 변환
-            //public static void getDataS3(out double retVal, int comselect = 0)
-            //{
-            //    if (comselect == 0)
-            //    {
-            //        retVal = Convert.ToDouble(com.rData);
-            //    }
-            //    else
-            //    {
-            //        retVal = Convert.ToDouble(hdcom.rData);
-            //    }
-            //}
+            public static void deactivate(out bool r, int comselect = 0)
+            {
+                try
+                {
+                    if (comselect == 0)
+                    {
+                        //if (UtilityControl.forceAnalogDataUse == 0)
+                        {
+                            if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG)
+                            {
+                                loadcell.Close();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // 20141012
+                        //hdcom.deactivate(out ret.message); if (ret.message != RetMessage.OK) { r = false; return; }
+                    }
+                    r = true;
+                }
+                catch
+                {
+                    r = false;
+                }
+            }
+
+            public static bool setZero(int comselect = 0)
+            {
+                try
+                {
+                    if (comselect == 0)
+                    {
+                        // Bottom
+                        //if (UtilityControl.forceAnalogDataUse == 0)
+                        {
+                            if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG)
+                            {
+                                loadcell.DiscardInBuffer();
+                                loadcell.DiscardOutBuffer();
+                                loadcell.Write("ID01Z" + Char.ConvertFromUtf32(13) + Char.ConvertFromUtf32(10));
+                            }
+                        }
+                    }
+                   
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+
+            public static double getData(int comselect = 0)
+            {
+                try
+                {
+                    if (comselect == 0)
+                    {
+                        // Bottom
+                        if (UtilityControl.forceAnalogDataUse == 0)
+                        {
+                            loadcell.DiscardInBuffer();
+                            loadcell.DiscardOutBuffer();
+                            loadcell.Write("ID01P" + Char.ConvertFromUtf32(13) + Char.ConvertFromUtf32(10));
+                            string temp = loadcell.ReadLine();
+                            if (temp != null)
+                            {
+                                string tmp;
+                                if (temp.Length > 14) tmp = temp.Substring(7, 7);
+                                else tmp = temp.Substring(0, 6);
+                                //string temp = loadcell.ReadLine().Substring(7, 7);
+                                return Convert.ToDouble(tmp);
+                            }
+                            else
+                            {
+                                int a = 0;
+                                return 9999;
+                            }
+                        }
+                        else return(mc.AIN.BottomLoadcell());
+                    }
+                    else return (mc.AIN.HeadLoadcell());
+                }
+                catch (System.Exception ex)
+                {
+                    return 9999.0;
+                }
+            }
         }
 
         public class IN
@@ -9053,6 +8975,11 @@ namespace PSA_SystemLibrary
                     }
                 }
 
+                public static void DOWN_SENSOR_CHK(out bool detected, out RetMessage retMessage)
+                {
+                    mc.IN.PD.N_LIMIT.Z(out detected, out retMessage);
+                }
+
                 public struct P_LIMIT
                 {
                     public static void X(out bool detected, out RetMessage retMessage)
@@ -9488,22 +9415,22 @@ namespace PSA_SystemLibrary
                 {
                     public static void Z(out bool detected, out RetMessage retMessage)
                     {
-                        sf.feeder[(int)UnitCodeSFMG.MG1].Z.IN_P_LIMIT(out detected, out retMessage);
+                        sf.Z.IN_P_LIMIT(out detected, out retMessage);
                     }
                     public static void Z2(out bool detected, out RetMessage retMessage)
                     {
-                        sf.feeder[(int)UnitCodeSFMG.MG2].Z.IN_P_LIMIT(out detected, out retMessage);
+                        sf.Z2.IN_P_LIMIT(out detected, out retMessage);
                     }
                 }
                 public struct N_LIMIT
                 {
                     public static void Z(out bool detected, out RetMessage retMessage)
                     {
-                        sf.feeder[(int)UnitCodeSFMG.MG1].Z.IN_N_LIMIT(out detected, out retMessage);
+                        sf.Z.IN_N_LIMIT(out detected, out retMessage);
                     }
                     public static void Z2(out bool detected, out RetMessage retMessage)
                     {
-                        sf.feeder[(int)UnitCodeSFMG.MG2].Z.IN_N_LIMIT(out detected, out retMessage);
+                        sf.Z2.IN_N_LIMIT(out detected, out retMessage);
                     }
                 }
             }
@@ -10822,47 +10749,24 @@ namespace PSA_SystemLibrary
 
         public class AIN
         {
-            static double[] temp = new double[10];		// analog값 입력받을때 내부적으로 filtering하기 위한 용도...
-            static double[] temp_sg = new double[10];		// analog값 입력받을때 내부적으로 filtering하기 위한 용도...(strain gauge)
+            const int filterCount = 50;
+            static double[] temp = new double[filterCount];		// analog값 입력받을때 내부적으로 filtering하기 위한 용도...
+            static double[] temp_sg = new double[filterCount];		// analog값 입력받을때 내부적으로 filtering하기 위한 용도...(strain gauge)
 
             public static double VPPM()	// 정압형 regulator 출력 전압
             {
                 bool b = true;
                 double v = 0;
-                int maxIndex = 0, minIndex = 0;
 
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < filterCount; i++)
                 {
-                    //axt.ain(channel, ref v, out b);
                     axt.ain(0, ref v, out b);
                     temp[i] = v;
                 }
 
-                double maxVal = -100;
-                double minVal = 100;
-                for (int i = 0; i < 10; i++)
-                {
-                    if (temp[i] > maxVal) { maxVal = temp[i]; maxIndex = i; }
-                    if (temp[i] < minVal) { minVal = temp[i]; minIndex = i; }
-                }
-                if (maxIndex == minIndex)
-                {
-                    maxIndex = minIndex + 1;
-                }
-                double sumVal = 0;
-                for (int i = 0; i < 10; i++)
-                {
-                    if (i == maxIndex || i == minIndex) continue;
-                    else
-                    {
-                        sumVal += temp[i];
-                        //mc.log.debug.write(mc.log.CODE.TRACE, "Index : " + i.ToString() + ", Val : " + autoCheckResult[i].ToString() + ", Sum : " + sumVal.ToString());
-                    }
-                }
-
                 if (b)
                 {
-                    return (sumVal / 8.0);
+                    return ((temp.Sum() - (temp.Max() + temp.Min())) / (filterCount - 2));
                 }
                 else
                 {
@@ -10891,39 +10795,16 @@ namespace PSA_SystemLibrary
             {
                 bool b = true;
                 double v = 0;
-                int maxIndex = 0, minIndex = 0;
 
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < filterCount; i++)
                 {
                     axt.ain(3, ref v, out b);
-                    temp_sg[i] = v;
-                }
-
-                double maxVal = -100;
-                double minVal = 100;
-                for (int i = 0; i < 10; i++)
-                {
-                    if (temp_sg[i] > maxVal) { maxVal = temp_sg[i]; maxIndex = i; }
-                    if (temp_sg[i] < minVal) { minVal = temp_sg[i]; minIndex = i; }
-                }
-                if (maxIndex == minIndex)
-                {
-                    maxIndex = minIndex + 1;
-                }
-                double sumVal = 0;
-                for (int i = 0; i < 10; i++)
-                {
-                    if (i == maxIndex || i == minIndex) continue;
-                    else
-                    {
-                        sumVal += temp_sg[i];
-                        //mc.log.debug.write(mc.log.CODE.TRACE, "Index : " + i.ToString() + ", Val : " + autoCheckResult[i].ToString() + ", Sum : " + sumVal.ToString());
-                    }
+                    temp[i] = v;
                 }
 
                 if (b)
                 {
-                    return (sumVal / 8.0);
+                    return ((temp.Sum() - (temp.Max() + temp.Min())) / (filterCount - 2));
                 }
                 else
                 {
@@ -10935,39 +10816,16 @@ namespace PSA_SystemLibrary
             {
                 bool b = true;
                 double v = 0;
-                int maxIndex = 0, minIndex = 0;
 
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < filterCount; i++)
                 {
                     axt.ain(2, ref v, out b);
-                    temp_sg[i] = v;
-                }
-
-                double maxVal = -100;
-                double minVal = 100;
-                for (int i = 0; i < 10; i++)
-                {
-                    if (temp_sg[i] > maxVal) { maxVal = temp_sg[i]; maxIndex = i; }
-                    if (temp_sg[i] < minVal) { minVal = temp_sg[i]; minIndex = i; }
-                }
-                if (maxIndex == minIndex)
-                {
-                    maxIndex = minIndex + 1;
-                }
-                double sumVal = 0;
-                for (int i = 0; i < 10; i++)
-                {
-                    if (i == maxIndex || i == minIndex) continue;
-                    else
-                    {
-                        sumVal += temp_sg[i];
-                        //mc.log.debug.write(mc.log.CODE.TRACE, "Index : " + i.ToString() + ", Val : " + autoCheckResult[i].ToString() + ", Sum : " + sumVal.ToString());
-                    }
+                    temp[i] = v;
                 }
 
                 if (b)
                 {
-                    return (sumVal / 8.0);
+                    return ((temp.Sum() - (temp.Max() + temp.Min())) / (filterCount - 2));
                 }
                 else
                 {
@@ -11077,8 +10935,8 @@ namespace PSA_SystemLibrary
                 mc.pd.Y.MOTOR_ENABLE(out state, out ret.message); if (state == false) { retMessage = RetMessage.SERVO_OFF; detected = false; return; }
                 mc.pd.Z.MOTOR_ENABLE(out state, out ret.message); if (state == false) { retMessage = RetMessage.SERVO_OFF; detected = false; return; }
 
-                mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.MOTOR_ENABLE(out state, out ret.message); if (state == false) { retMessage = RetMessage.SERVO_OFF; detected = false; return; }
-                mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.MOTOR_ENABLE(out state, out ret.message); if (state == false) { retMessage = RetMessage.SERVO_OFF; detected = false; return; }
+                mc.sf.Z.MOTOR_ENABLE(out state, out ret.message); if (state == false) { retMessage = RetMessage.SERVO_OFF; detected = false; return; }
+                mc.sf.Z2.MOTOR_ENABLE(out state, out ret.message); if (state == false) { retMessage = RetMessage.SERVO_OFF; detected = false; return; }
                     
                 mc.cv.W.MOTOR_ENABLE(out state, out ret.message); if (state == false) { retMessage = RetMessage.SERVO_OFF; detected = false; return; }
             }

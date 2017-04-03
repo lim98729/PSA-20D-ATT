@@ -90,6 +90,8 @@ namespace PSA_Application
 				LB_WorkConv.Visible = false;
 				LB_OutbufConv.Visible = false;
 				LB_TubeStatus.Visible = false;
+                BT_hWindowAdvanceMode.Visible = false;
+                BT_MOVE_STANDBY.Visible = false;
 				if (dev.NotExistHW.CAMERA) return;
 				hWindow.hWindowLargeDisplay(camNumber);
 			}
@@ -115,6 +117,8 @@ namespace PSA_Application
 				LB_WorkConv.Visible = true;
 				LB_OutbufConv.Visible = true;
 				LB_TubeStatus.Visible = true;
+                BT_hWindowAdvanceMode.Visible = true;
+                BT_MOVE_STANDBY.Visible = true;
 			}
 		}
 

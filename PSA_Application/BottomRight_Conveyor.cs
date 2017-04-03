@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using PSA_SystemLibrary;
 using System.Threading;
 using DefineLibrary;
+using AccessoryLibrary;
 
 namespace PSA_Application
 {
@@ -151,6 +152,7 @@ namespace PSA_Application
 		RetValue ret;
 		private void OUT_Click(object sender, EventArgs e)
 		{
+            if (mc.main.THREAD_RUNNING) return;
 			if (!mc.check.READY_PUSH(sender)) return;
 			mc.check.push(sender, true, (int)SelectedMenu.BOTTOM_RIGHT);
 			#region OUT
@@ -203,6 +205,7 @@ namespace PSA_Application
 
 		private void Feeding_Click(object sender, EventArgs e)
 		{
+            if (mc.main.THREAD_RUNNING) return;
 			if (!mc.check.READY_AUTORUN(sender)) return;
 			mc.check.push(sender, true, (int)SelectedMenu.BOTTOM_RIGHT);
 			#region Feeding
@@ -249,12 +252,19 @@ namespace PSA_Application
                         // sequence내에서 TMS file을 읽는 부분이 있으므로 그냥 구동한다.
                     }
                 }
-                ret.usrDialog = FormMain.UserMessageBox2(DIAG_SEL_MODE.TmsManualPressCancel, DIAG_ICON_MODE.QUESTION, textResource.MB_CV_TRAY_LOADING_INFO);
+                FormUserMessage ff = new FormUserMessage();
+                ff.SetDisplayItems(DIAG_SEL_MODE.Sel1Sel2Sel3, DIAG_ICON_MODE.QUESTION, textResource.MB_CV_TRAY_LOADING_INFO, "Load TMS", "Manual", "Cancel");
+                ff.ShowDialog();
+                ret.usrDialog = FormUserMessage.diagResult;
 				//mc.message.YesNoCancel("PAD 장착 정보를 읽는 경로를 선택해 주세요.\n(YES) -> TMS File\n(NO) -> 초기화 상태.", out ret.dialog);
-				if (ret.usrDialog == DIAG_RESULT.Cancel) { mc.check.push(sender, false); return; }
-				else if (ret.usrDialog == DIAG_RESULT.Tms) mc.cv.toLoading.loadPadState = 0;
-				else if(ret.usrDialog == DIAG_RESULT.Manual) mc.cv.toLoading.loadPadState = 1;
-                else if (ret.usrDialog == DIAG_RESULT.Press) mc.cv.toLoading.loadPadState = 2;
+				
+				if (ret.usrDialog == DIAG_RESULT.Sel1) mc.cv.toLoading.loadPadState = 0;
+				else if(ret.usrDialog == DIAG_RESULT.Sel2) mc.cv.toLoading.loadPadState = 1;
+                else
+                {
+                    mc.check.push(sender, false); 
+                    return; 
+                }
 				mc.cv.toLoading.req = true;
 				mc.cv.toLoading.reqMode = REQMODE.DUMY;
 			}
@@ -268,6 +278,7 @@ namespace PSA_Application
 
 		private void Reject_Click(object sender, EventArgs e)
 		{
+            if (mc.main.THREAD_RUNNING) return;
 			if (!mc.check.READY_PUSH(sender)) return;
 			mc.check.push(sender, true, (int)SelectedMenu.BOTTOM_RIGHT);
 			#region Reject

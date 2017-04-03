@@ -779,6 +779,11 @@ namespace PSA_SystemLibrary
 						}
 						else
 						{
+                            if (mc.full.reqMode == REQMODE.DUMY)
+                            {
+                                mc.pd.req = true;
+                                mc.pd.reqMode = REQMODE.AUTO;
+                            }
                             sqc = (int)SEQ.AUTO_HOME_PICK;
 							break;
 						}
@@ -796,7 +801,6 @@ namespace PSA_SystemLibrary
 						sqc = SQC.ERROR; 
 						break; 
 					}
-                    // temp : wastedonestop이 뭔지 알아보자.
                     if (wastedonestop) { sqc = (int)SEQ.AUTO_WASTE_DONE_STOP; break; }
 					sqc = (int)SEQ.AUTO_PICK_ULC; break;
                 case (int)SEQ.AUTO_PICK_ULC:
@@ -2253,6 +2257,8 @@ namespace PSA_SystemLibrary
 		public double hdcP2X, hdcP2Y, hdcP2T, hdcPassScoreP2;
         public double ulcP1X, ulcP1Y, ulcP1T;
         public double ulcP2X, ulcP2Y, ulcP2T;
+        int ulcDir = 0;
+        int hdcDir = 0;
         public double epoxyPX, epoxyPY, epoxyAmount = 0;
 		public bool epoxyfailchecked = false;
         // 1121. HeatSlug
@@ -2768,7 +2774,6 @@ namespace PSA_SystemLibrary
 								{	// retry pick up
 									// move to waste position
 									sqc = 80;
-									mc.sf.req = true;
 									pickupFailDone = false;
 									mc.log.debug.write(mc.log.CODE.EVENT, String.Format("PickUp Suction Check Fail. FailCnt[{0}]", pickretrycount + 1));
 								}
@@ -2909,6 +2914,7 @@ namespace PSA_SystemLibrary
 						X.move(tPos.x.WASTE, mc.speed.slow, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						Y.move(tPos.y.WASTE, mc.speed.slow, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 					}
+                    mc.sf.req = true;
 					dwell.Reset();
 					sqc++; break;
 				case 83:
@@ -3375,13 +3381,36 @@ namespace PSA_SystemLibrary
                         if (mc.para.ULC.modelLIDC1.isCreate.value == (int)BOOL.TRUE
                             && mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3)
                         {
+                            ulcDir = 0;
                             mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
                             mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC3.light, mc.para.ULC.modelLIDC3.exposureTime);
                         }
                         else if (mc.para.ULC.modelLIDC2.isCreate.value == (int)BOOL.TRUE
                             && mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C2AndC4)
                         {
+                            ulcDir = 1;
                             mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_2;
+                            mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC2.light, mc.para.ULC.modelLIDC2.exposureTime);
+                        }
+                        else
+                        {
+                            mc.ulc.reqMode = REQMODE.GRAB;
+                            mc.ulc.lighting_exposure(mc.para.ULC.model.light, mc.para.ULC.model.exposureTime);
+                        }
+                    }
+                    else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                    {
+                        ulcP1X = 0; ulcP1Y = 0; ulcP1T = 0;
+                        if (mc.para.ULC.modelLIDC1.isCreate.value == (int)BOOL.TRUE
+                            && mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3)
+                        {
+                            mc.ulc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_1;
+                            mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC1.light, mc.para.ULC.modelLIDC1.exposureTime);
+                        }
+                        else if (mc.para.ULC.modelLIDC2.isCreate.value == (int)BOOL.TRUE
+                            && mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C2AndC4)
+                        {
+                            mc.ulc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_2;
                             mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC2.light, mc.para.ULC.modelLIDC2.exposureTime);
                         }
                         else
@@ -3410,8 +3439,8 @@ namespace PSA_SystemLibrary
 					mc.log.mcclog.write(mc.log.MCCCODE.SCAN_HEAT_SLUG, 0);
 					dwell.Reset();
 					sqc++; break;
-				case 51:
-					if (dwell.Elapsed < 30) break; //  ulc camera delay
+				case 51:if (dwell.Elapsed < cameraDelay) break; // ulc camera delay
+					
                     mc.ulc.req = true;
 					triggerULC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
 					dwell.Reset();
@@ -3426,15 +3455,17 @@ namespace PSA_SystemLibrary
 					{ Esqc = sqc; sqc = SQC.ERROR; break; }
 					mc.log.mcclog.write(mc.log.MCCCODE.SCAN_HEAT_SLUG, 1);
 // 					mc.hd.homepickdone = true;		// 집고 문제 없으니 true
-                    if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CORNER) sqc = 60;
+                    if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CORNER
+                        || mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.PROJECTION) sqc = 60;
 					else sqc = SQC.STOP;
                     break;
 				#endregion
 
                 #region case 60 XYZ.move.LIDC2(C4)
                 case 60:
+                    if (mc.ulc.RUNING) break;
                     // 여기는 Corner Algoritm 일 때만 탄다.
-                    if (mc.para.ULC.algorism.value != (int)MODEL_ALGORISM.CORNER) break;
+                    if (mc.para.ULC.algorism.value != (int)MODEL_ALGORISM.CORNER && mc.para.ULC.algorism.value != (int)MODEL_ALGORISM.PROJECTION) break;
 
                     mc.log.mcclog.write(mc.log.MCCCODE.HEAD_MOVE_ULC_POS, 0);
                     rateY = Y.config.speed.rate; Y.config.speed.rate = Math.Max(rateY * 0.3, 0.1);
@@ -3466,29 +3497,87 @@ namespace PSA_SystemLibrary
 					if (mc.hd.reqMode == REQMODE.DUMY) { }
 					else
 					{
-                        ulcP1X = mc.ulc.cam.edgeIntersection.resultX;
-                        ulcP1Y = mc.ulc.cam.edgeIntersection.resultY;
-                        ulcP1T = mc.ulc.cam.edgeIntersection.resultAngleH;
+                        if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                        {
+                            ulcP1X = mc.ulc.cam.edgeIntersection.resultX;
+                            ulcP1Y = mc.ulc.cam.edgeIntersection.resultY;
+                            ulcP1T = mc.ulc.cam.edgeIntersection.resultAngleH;
+
+                            // Test
+                            if (true)
+                            {
+                                double lidSizeW = (double)mc.para.MT.lidSize.x.value * 1000;
+                                double lidSizeH = (double)mc.para.MT.lidSize.y.value * 1000;
+
+                                double rX = 0, rY = 0;
+
+                                Calc.calcAlign(ulcDir, ulcP1X, ulcP1Y, ulcP1T, lidSizeW, lidSizeH, out rX, out rY);
+
+                                ulcP1X = rX;
+                                ulcP1Y = rY;
+                            }
+                        }
+                        else
+                        {
+                            ulcP1X = mc.ulc.cam.projectionEdge.resultX;
+                            ulcP1Y = mc.ulc.cam.projectionEdge.resultY;
+                            ulcP1T = mc.ulc.cam.projectionEdge.resultAngle2;
+
+                            // Test
+                            if (true)
+                            {
+                                double lidSizeW = (double)mc.para.MT.lidSize.x.value * 1000;
+                                double lidSizeH = (double)mc.para.MT.lidSize.y.value * 1000;
+
+                                double rX = 0, rY = 0;
+
+                                Calc.calcAlign(ulcDir, ulcP1X, ulcP1Y, ulcP1T, lidSizeW, lidSizeH, out rX, out rY);
+
+                                ulcP1X = rX;
+                                ulcP1Y = rY;
+                            }
+                        }
 					}
 					#endregion
 
                     #region ULC.req
-                    if (mc.hd.reqMode == REQMODE.DUMY)
+                    ulcP2X = 0; ulcP2Y = 0; ulcP2T = 0;
+                    if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CORNER)
                     {
-                        mc.ulc.reqMode = REQMODE.GRAB;
-                        mc.ulc.lighting_exposure(mc.para.ULC.model.light, mc.para.ULC.model.exposureTime);
-                    }
-                    else
-                    {
-                        ulcP1X = 0; ulcP1Y = 0; ulcP1T = 0;
                         if (mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3 && mc.para.ULC.modelLIDC3.isCreate.value == (int)BOOL.TRUE)
                         {
-                            mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
+                            ulcDir = 2;
+                            if(mc.hd.reqMode != REQMODE.DUMY) mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
+                            else mc.ulc.reqMode = REQMODE.GRAB;
                             mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC1.light, mc.para.ULC.modelLIDC1.exposureTime);
                         }
                         else if (mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C2AndC4 && mc.para.ULC.modelLIDC4.isCreate.value == (int)BOOL.TRUE)
                         {
-                            mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_4;
+                            ulcDir = 3;
+                            if (mc.hd.reqMode != REQMODE.DUMY) mc.ulc.reqMode = REQMODE.FIND_EDGE_QUARTER_4;
+                            else mc.ulc.reqMode = REQMODE.GRAB;
+                            mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC4.light, mc.para.ULC.modelLIDC4.exposureTime);
+                        }
+                        else
+                        {
+                            mc.ulc.reqMode = REQMODE.GRAB;
+                            mc.ulc.lighting_exposure(mc.para.ULC.model.light, mc.para.ULC.model.exposureTime);
+                        }
+                    }
+                    else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                    {                        
+                        if (mc.para.ULC.modelLIDC3.isCreate.value == (int)BOOL.TRUE
+                            && mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3)
+                        {
+                            if (mc.hd.reqMode != REQMODE.DUMY) mc.ulc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_3;
+                            else mc.ulc.reqMode = REQMODE.GRAB;
+                            mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC3.light, mc.para.ULC.modelLIDC3.exposureTime);
+                        }
+                        else if (mc.para.ULC.modelLIDC4.isCreate.value == (int)BOOL.TRUE
+                            && mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C2AndC4)
+                        {
+                            if (mc.hd.reqMode != REQMODE.DUMY) mc.ulc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_4;
+                            else mc.ulc.reqMode = REQMODE.GRAB;
                             mc.ulc.lighting_exposure(mc.para.ULC.modelLIDC4.light, mc.para.ULC.modelLIDC4.exposureTime);
                         }
                         else
@@ -3518,7 +3607,7 @@ namespace PSA_SystemLibrary
                     dwell.Reset();
                     sqc++; break;
                 case 71:
-                    if (dwell.Elapsed < 30) break; //  ulc camera delay
+                    if (dwell.Elapsed < cameraDelay) break; // ulc camera delay
                     mc.ulc.req = true;
                     triggerULC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
                     dwell.Reset();
@@ -3594,6 +3683,7 @@ namespace PSA_SystemLibrary
 		bool placeSensorForceOver, placeSensorForceUnder;
 
 		int placeForceCheckCount;
+        const int cameraDelay = 50;
 
 		StringBuilder tempSb = new StringBuilder();
 		double cosTheta, sinTheta;
@@ -3953,7 +4043,7 @@ namespace PSA_SystemLibrary
 					dwell.Reset();
 					sqc++; break;
 				case 6:
-					if (dwell.Elapsed < 15) break; // head camera delay
+					if (dwell.Elapsed < cameraDelay) break; // head camera delay
                     mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
 					dwell.Reset();
@@ -4112,8 +4202,13 @@ namespace PSA_SystemLibrary
 								}
 								else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
 								{
+                                    hdcDir = 0;
 									mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
 								}
+                                else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                                {
+                                    mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_1;
+                                }
 								else mc.hdc.reqMode = REQMODE.GRAB;
 								mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
 								//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
@@ -4146,8 +4241,17 @@ namespace PSA_SystemLibrary
 								}
 								else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.CORNER)
 								{
+                                    hdcDir = 1;
 									mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_2;
 								}
+                                else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                                {
+                                    mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_2;
+                                }
+                                else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                                {
+                                    mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_2;
+                                }
 								else mc.hdc.reqMode = REQMODE.GRAB;
 								mc.hdc.lighting_exposure(mc.para.HDC.modelPADC2.light, mc.para.HDC.modelPADC2.exposureTime);
 								//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
@@ -4217,8 +4321,13 @@ namespace PSA_SystemLibrary
 								}
 								else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.CORNER)
 								{
+                                    hdcDir = 1;
 									mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_2;
 								}
+                                else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                                {
+                                    mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_2;
+                                }
 								else mc.hdc.reqMode = REQMODE.GRAB;
 								mc.hdc.lighting_exposure(mc.para.HDC.modelPADC2.light, mc.para.HDC.modelPADC2.exposureTime);
                                 //if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
@@ -4251,7 +4360,12 @@ namespace PSA_SystemLibrary
                                 }
                                 else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
                                 {
+                                    hdcDir = 0;
                                     mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
+                                }
+                                else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                                {
+                                    mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_1;
                                 }
                                 else mc.hdc.reqMode = REQMODE.GRAB;
                                 mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
@@ -4320,7 +4434,7 @@ namespace PSA_SystemLibrary
 					dwell.Reset();
 					sqc++; break;
 				case 21:
-					if (dwell.Elapsed < 15) break; // head camear delay
+					if (dwell.Elapsed < cameraDelay) break; // head camera delay
 					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
                     mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
@@ -4340,6 +4454,8 @@ namespace PSA_SystemLibrary
                                               
 				#region case 30 xy pad c3 move
 				case 30:
+                    if (mc.hdc.RUNING) break;
+
 					mc.log.mcclog.write(mc.log.MCCCODE.HEAD_MOVE_2ND_FIDUCIAL_POS, 0);
 					rateY = Y.config.speed.rate; Y.config.speed.rate = Math.Max(rateY * 0.3, 0.1);
 					rateX = X.config.speed.rate; X.config.speed.rate = Math.Max(rateX * 0.3, 0.1);
@@ -4423,7 +4539,27 @@ namespace PSA_SystemLibrary
 									hdcP1X = mc.hdc.cam.edgeIntersection.resultX;
 									hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
 									hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
+
+                                    // Test
+                                    if (true)
+                                    {
+                                        double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
+                                        double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
+
+                                        double rX = 0, rY = 0;
+
+                                        Calc.calcAlign(hdcDir, hdcP1X, hdcP1Y, hdcP1T, padSizeW, padSizeH, out rX, out rY);
+
+                                        hdcP1X = rX;
+                                        hdcP1Y = rY;
+                                    }
 								}
+                                else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                                {
+                                    hdcP1X = mc.hdc.cam.projectionEdge.resultX;
+                                    hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
+                                    hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
+                                }
 								if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
 								{
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
@@ -4553,8 +4689,13 @@ namespace PSA_SystemLibrary
 								}
 								else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
 								{
+                                    hdcDir = 2;
 									mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
 								}
+                                else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                                {
+                                    mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_3;
+                                }
 								else mc.hdc.reqMode = REQMODE.GRAB;
 								mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
 								//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
@@ -4587,7 +4728,27 @@ namespace PSA_SystemLibrary
 									hdcP1X = mc.hdc.cam.edgeIntersection.resultX;
 									hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
 									hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
+
+                                    // Test
+                                    if (true)
+                                    {
+                                        double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
+                                        double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
+
+                                        double rX = 0, rY = 0;
+
+                                        Calc.calcAlign(hdcDir, hdcP1X, hdcP1Y, hdcP1T, padSizeW, padSizeH, out rX, out rY);
+
+                                        hdcP1X = rX;
+                                        hdcP1Y = rY;
+                                    }
 								}
+                                else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                                {
+                                    hdcP1X = mc.hdc.cam.projectionEdge.resultX;
+                                    hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
+                                    hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
+                                }
 								if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
 								{
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
@@ -4717,8 +4878,13 @@ namespace PSA_SystemLibrary
 								}
 								else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.CORNER)
 								{
+                                    hdcDir = 3;
 									mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_4;
 								}
+                                else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                                {
+                                    mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_4;
+                                }
 								else mc.hdc.reqMode = REQMODE.GRAB;
 								mc.hdc.lighting_exposure(mc.para.HDC.modelPADC4.light, mc.para.HDC.modelPADC4.exposureTime);
 								//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
@@ -4915,7 +5081,27 @@ namespace PSA_SystemLibrary
 									hdcP1X = mc.hdc.cam.edgeIntersection.resultX;
 									hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
 									hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
+
+                                    // Test
+                                    if (true)
+                                    {
+                                        double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
+                                        double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
+
+                                        double rX = 0, rY = 0;
+
+                                        Calc.calcAlign(hdcDir, hdcP1X, hdcP1Y, hdcP1T, padSizeW, padSizeH, out rX, out rY);
+
+                                        hdcP1X = rX;
+                                        hdcP1Y = rY;
+                                    }
 								}
+                                else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                                {
+                                    hdcP1X = mc.hdc.cam.projectionEdge.resultX;
+                                    hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
+                                    hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
+                                }
 								if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
 								{
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
@@ -5045,8 +5231,13 @@ namespace PSA_SystemLibrary
 								}
 								else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.CORNER)
 								{
+                                    hdcDir = 3;
 									mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_4;
 								}
+                                else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                                {
+                                    mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_4;
+                                }
 								else mc.hdc.reqMode = REQMODE.GRAB;
 								mc.hdc.lighting_exposure(mc.para.HDC.modelPADC4.light, mc.para.HDC.modelPADC4.exposureTime);
 								//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
@@ -5079,7 +5270,27 @@ namespace PSA_SystemLibrary
 									hdcP1X = mc.hdc.cam.edgeIntersection.resultX;
 									hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
 									hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
+
+                                    // Test
+                                    if (true)
+                                    {
+                                        double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
+                                        double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
+
+                                        double rX = 0, rY = 0;
+
+                                        Calc.calcAlign(hdcDir, hdcP1X, hdcP1Y, hdcP1T, padSizeW, padSizeH, out rX, out rY);
+
+                                        hdcP1X = rX;
+                                        hdcP1Y = rY;
+                                    }
 								}
+                                else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                                {
+                                    hdcP1X = mc.hdc.cam.projectionEdge.resultX;
+                                    hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
+                                    hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
+                                }
 								if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
 								{
 									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
@@ -5209,8 +5420,13 @@ namespace PSA_SystemLibrary
 								}
 								else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
 								{
+                                    hdcDir = 2;
 									mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
 								}
+                                else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                                {
+                                    mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_3;
+                                }
 								else mc.hdc.reqMode = REQMODE.GRAB;
 								mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
 								//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
@@ -5399,7 +5615,7 @@ namespace PSA_SystemLibrary
 					dwell.Reset();
 					sqc++; break;
 				case 41:
-					if (dwell.Elapsed < 15) break; // head camear delay
+					if (dwell.Elapsed < cameraDelay) break; // head camera delay
 					//if( mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
                     mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
@@ -5470,11 +5686,47 @@ namespace PSA_SystemLibrary
                             ulcP2Y = mc.ulc.cam.edgeIntersection.resultY;
                             ulcP2T = mc.ulc.cam.edgeIntersection.resultAngleH;
 
+                            // Test
+                            if (true)
+                            {
+                                double lidSizeW = (double)mc.para.MT.lidSize.x.value * 1000;
+                                double lidSizeH = (double)mc.para.MT.lidSize.y.value * 1000;
+
+                                double rX = 0, rY = 0;
+
+                                Calc.calcAlign(ulcDir, ulcP2X, ulcP2Y, ulcP2T, lidSizeW, lidSizeH, out rX, out rY);
+                                ulcP2X = rX;
+                                ulcP2Y = rY;
+                            }
+
                             ulcX = (ulcP1X + ulcP2X) / 2;
                             ulcY = (ulcP1Y + ulcP2Y) / 2;
                             ulcT = (ulcP1T + ulcP2T) / 2;
                         }
+                        else if(mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                        {    
+                            ulcP2X = mc.ulc.cam.projectionEdge.resultX;
+                            ulcP2Y = mc.ulc.cam.projectionEdge.resultY;
+                            ulcP2T = mc.ulc.cam.projectionEdge.resultAngle2;
 
+                            // Test
+                            if (true)
+                            {
+                                double lidSizeW = (double)mc.para.MT.lidSize.x.value * 1000;
+                                double lidSizeH = (double)mc.para.MT.lidSize.y.value * 1000;
+
+                                double rX = 0, rY = 0;
+
+                                Calc.calcAlign(ulcDir, ulcP2X, ulcP2Y, ulcP2T, lidSizeW, lidSizeH, out rX, out rY);
+
+                                ulcP2X = rX;
+                                ulcP2Y = rY;
+                            }
+
+                            ulcX = (ulcP1X + ulcP2X) / 2;
+                            ulcY = (ulcP1Y + ulcP2Y) / 2;
+                            ulcT = (ulcP1T + ulcP2T) / 2;
+                        }
                         if (ulcX == -1 && ulcY == -1 && ulcT == -1) // ULC Vision Result Error
                         {
                             mc.ulc.displayUserMessage("LID DETECTION FAIL");
@@ -5752,8 +6004,27 @@ namespace PSA_SystemLibrary
 								hdcP2X = mc.hdc.cam.edgeIntersection.resultX;
 								hdcP2Y = mc.hdc.cam.edgeIntersection.resultY;
 								hdcP2T = mc.hdc.cam.edgeIntersection.resultAngleH;
-							}
 
+                                // Test
+                                if (true)
+                                {
+                                    double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
+                                    double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
+
+                                    double rX = 0, rY = 0;
+
+                                    Calc.calcAlign(hdcDir, hdcP2X, hdcP2Y, hdcP2T, padSizeW, padSizeH, out rX, out rY);
+
+                                    hdcP2X = rX;
+                                    hdcP2Y = rY;
+                                }
+							}
+                            else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                hdcP2X = mc.hdc.cam.projectionEdge.resultX;
+                                hdcP2Y = mc.hdc.cam.projectionEdge.resultY;
+                                hdcP2T = mc.hdc.cam.projectionEdge.resultAngle2;
+                            }
 							//cosTheta = Math.Cos(hdcT * Math.PI / 180);
 							//sinTheta = Math.Sin(hdcT * Math.PI / 180);
 							//hdcX = (cosTheta * hdcX) - (sinTheta * hdcY);
@@ -5819,7 +6090,27 @@ namespace PSA_SystemLibrary
 								hdcP2X = mc.hdc.cam.edgeIntersection.resultX;
 								hdcP2Y = mc.hdc.cam.edgeIntersection.resultY;
 								hdcP2T = mc.hdc.cam.edgeIntersection.resultAngleH;
+
+                                // Test
+                                if (true)
+                                {
+                                    double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
+                                    double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
+
+                                    double rX = 0, rY = 0;
+
+                                    Calc.calcAlign(hdcDir, hdcP2X, hdcP2Y, hdcP2T, padSizeW, padSizeH, out rX, out rY);
+
+                                    hdcP2X = rX;
+                                    hdcP2Y = rY;
+                                }
 							}
+                            else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                hdcP2X = mc.hdc.cam.projectionEdge.resultX;
+                                hdcP2Y = mc.hdc.cam.projectionEdge.resultY;
+                                hdcP2T = mc.hdc.cam.projectionEdge.resultAngle2;
+                            }
 							//cosTheta = Math.Cos(hdcT * Math.PI / 180);
 							//sinTheta = Math.Sin(hdcT * Math.PI / 180);
 							//hdcX = (cosTheta * hdcX) - (sinTheta * hdcY);
@@ -6174,7 +6465,7 @@ namespace PSA_SystemLibrary
 					if (setJogTeach == false)
 					{
 						tempSb.Clear(); tempSb.Length = 0;
-						tempSb.AppendFormat("HDC[{0},{1}] Package X,Y,T : {2}, {3}, {4}", padX, padY, Math.Round(hdcX), Math.Round(hdcY), Math.Round(hdcT));
+						tempSb.AppendFormat("HDC[{0},{1}] Package X,Y,T : {2}, {3}, {4}", padX, padY, Math.Round(hdcX), Math.Round(hdcY), Math.Round(hdcT, 2));
 						mc.log.debug.write(mc.log.CODE.INFO, tempSb.ToString());
 						if (Math.Abs(hdcX) > mc.para.MT.padCheckCenterLimit.value)
 						{
@@ -6261,13 +6552,38 @@ namespace PSA_SystemLibrary
 					}
 					#endregion
 
+                    cosTheta = Math.Cos((-ulcT) * Math.PI / 180);
+                    sinTheta = Math.Sin((-ulcT) * Math.PI / 180);
+                    ulcX = (cosTheta * ulcX) - (sinTheta * ulcY);
+                    ulcY = (sinTheta * ulcX) + (cosTheta * ulcY);
+                    placeX -= ulcX;
+                    placeY -= ulcY;
+
+                    if(mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG)
+                    {
+                        // 이상하게 뒤집혔네...
+                        ulcT *= -1;
+                        hdcT *= -1;
+                    }
+
 					//double cosTheta, sinTheta;
-					cosTheta = Math.Cos((-ulcT) * Math.PI / 180);
-					sinTheta = Math.Sin((-ulcT) * Math.PI / 180);
-					ulcX = (cosTheta * ulcX) - (sinTheta * ulcY);
-					ulcY = (sinTheta * ulcX) + (cosTheta * ulcY);
-					placeX -= ulcX;
-					placeY -= ulcY;
+                    //if (mc.para.ULC.algorism.value != (int)MODEL_ALGORISM.CORNER)
+                    //{
+                    //    cosTheta = Math.Cos((-ulcT) * Math.PI / 180);
+                    //    sinTheta = Math.Sin((-ulcT) * Math.PI / 180);
+                    //    ulcX = (cosTheta * ulcX) - (sinTheta * ulcY);
+                    //    ulcY = (sinTheta * ulcX) + (cosTheta * ulcY);
+                    //    placeX -= ulcX;
+                    //    placeY -= ulcY;
+                    //}
+                    //else
+                    //{
+                    //    placeX -= ulcX;
+                    //    placeY -= ulcY;
+                    //    ulcT *= -1;
+                    //    hdcT *= -1;
+                    //}
+
 					placeT = tPos.t.ZERO + ulcT - hdcT + mc.para.HD.place.offset.t.value;
 
 					placeX += hdcX;
@@ -7012,8 +7328,13 @@ namespace PSA_SystemLibrary
 							}
 							else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
 							{
+                                hdcDir = 0;
 								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
 							}
+                            else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
+                            }
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
 							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
@@ -7046,8 +7367,13 @@ namespace PSA_SystemLibrary
 							}
 							else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.CORNER)
 							{
+                                hdcDir = 1;
 								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_2;
 							}
+                            else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_2;
+                            }
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC2.light, mc.para.HDC.modelPADC2.exposureTime);
 							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
@@ -7104,7 +7430,7 @@ namespace PSA_SystemLibrary
 					dwell.Reset();
 					sqc++; break;
 				case 91:
-					if (dwell.Elapsed < 15) break; // head camear delay
+					if (dwell.Elapsed < cameraDelay) break; // head camera delay
 					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
                     mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
@@ -7176,7 +7502,27 @@ namespace PSA_SystemLibrary
 								hdcP1X = mc.hdc.cam.edgeIntersection.resultX;
 								hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
 								hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
+
+                                // Test
+                                if (true)
+                                {
+                                    double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
+                                    double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
+
+                                    double rX = 0, rY = 0;
+
+                                    Calc.calcAlign(hdcDir, hdcP1X, hdcP1Y, hdcP1T, padSizeW, padSizeH, out rX, out rY);
+
+                                    hdcP1X = rX;
+                                    hdcP1Y = rY;
+                                }
 							}
+                            else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                hdcP1X = mc.hdc.cam.projectionEdge.resultX;
+                                hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
+                                hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
+                            }
 							if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
 							{
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
@@ -7306,8 +7652,13 @@ namespace PSA_SystemLibrary
 							}
 							else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
 							{
+                                hdcDir = 2;
 								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
 							}
+                            else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_3;
+                            }
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
 							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
@@ -7340,7 +7691,27 @@ namespace PSA_SystemLibrary
 								hdcP1X = mc.hdc.cam.edgeIntersection.resultX;
 								hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
 								hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
+
+                                // Test
+                                if (true)
+                                {
+                                    double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
+                                    double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
+
+                                    double rX = 0, rY = 0;
+
+                                    Calc.calcAlign(hdcDir, hdcP1X, hdcP1Y, hdcP1T, padSizeW, padSizeH, out rX, out rY);
+
+                                    hdcP1X = rX;
+                                    hdcP1Y = rY;
+                                }
 							}
+                            else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                hdcP1X = mc.hdc.cam.projectionEdge.resultX;
+                                hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
+                                hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
+                            }
 							if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
 							{
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
@@ -7470,8 +7841,13 @@ namespace PSA_SystemLibrary
 							}
 							else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.CORNER)
 							{
+                                hdcDir = 3;
 								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_4;
 							}
+                            else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_4;
+                            }
 							else mc.hdc.reqMode = REQMODE.GRAB;
 							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC4.light, mc.para.HDC.modelPADC4.exposureTime);
 							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
@@ -7655,7 +8031,7 @@ namespace PSA_SystemLibrary
 					dwell.Reset();
 					sqc++; break;
 				case 111:
-					if (dwell.Elapsed < 15) break; // head camear delay
+					if (dwell.Elapsed < cameraDelay) break; // head camera delay
 					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
                     mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
@@ -7892,7 +8268,7 @@ namespace PSA_SystemLibrary
                     dwell.Reset();
                     sqc++; break;
                 case 211:
-                    if (dwell.Elapsed < 15) break; // head camera delay
+                    if (dwell.Elapsed < cameraDelay) break; // head camera delay
                     mc.hdc.req = true;
                     triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
                     dwell.Reset();
@@ -8231,7 +8607,7 @@ namespace PSA_SystemLibrary
 					dwell.Reset();
 					sqc++; break;
 				case 21:
-					if (dwell.Elapsed < 15) break; // head camear delay
+					if (dwell.Elapsed < cameraDelay) break; // head camera delay
 					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
                     mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
@@ -8820,7 +9196,7 @@ namespace PSA_SystemLibrary
 					dwell.Reset();
 					sqc++; break;
 				case 41:
-					if (dwell.Elapsed < 15) break; // head camear delay
+					if (dwell.Elapsed < cameraDelay) break; // head camera delay
 					//if( mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
                     mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
@@ -9183,7 +9559,7 @@ namespace PSA_SystemLibrary
 					dwell.Reset();
 					sqc++; break;
 				case 91:
-					if (dwell.Elapsed < 15) break; // head camear delay
+					if (dwell.Elapsed < cameraDelay) break; // head camera delay
 					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
                     mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
@@ -9442,7 +9818,7 @@ namespace PSA_SystemLibrary
 					dwell.Reset();
 					sqc++; break;
 				case 111:
-					if (dwell.Elapsed < 15) break; // head camear delay
+					if (dwell.Elapsed < cameraDelay) break; // head camera delay
 					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
                     mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
@@ -9600,7 +9976,7 @@ namespace PSA_SystemLibrary
 					dwell.Reset();
 					sqc++; break;
 				case 6:
-					if (dwell.Elapsed < 15) break; // head camear delay
+					if (dwell.Elapsed < cameraDelay) break; // head camera delay
 					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
                     mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
@@ -9886,7 +10262,7 @@ namespace PSA_SystemLibrary
 					dwell.Reset();
 					sqc++; break;
 				case 21:
-					if (dwell.Elapsed < 15) break; // head camear delay
+					if (dwell.Elapsed < cameraDelay) break; // head camera delay
 					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
                     mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
@@ -9971,6 +10347,12 @@ namespace PSA_SystemLibrary
 								hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
 								hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
 							}
+                            else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                hdcP1X = mc.hdc.cam.projectionEdge.resultX;
+                                hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
+                                hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
+                            }
 							if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
 							{
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
@@ -10142,6 +10524,12 @@ namespace PSA_SystemLibrary
 								hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
 								hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
 							}
+                            else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                hdcP1X = mc.hdc.cam.projectionEdge.resultX;
+                                hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
+                                hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
+                            }
 							if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
 							{
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
@@ -10317,6 +10705,12 @@ namespace PSA_SystemLibrary
 								hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
 								hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
 							}
+                            else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                hdcP1X = mc.hdc.cam.projectionEdge.resultX;
+                                hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
+                                hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
+                            }
 							if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
 							{
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
@@ -10489,6 +10883,12 @@ namespace PSA_SystemLibrary
 								hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
 								hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
 							}
+                            else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                hdcP1X = mc.hdc.cam.projectionEdge.resultX;
+                                hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
+                                hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
+                            }
 							if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
 							{
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
@@ -10652,7 +11052,7 @@ namespace PSA_SystemLibrary
 					dwell.Reset();
 					sqc++; break;
 				case 41:
-					if (dwell.Elapsed < 15) break; // head camear delay
+					if (dwell.Elapsed < cameraDelay) break; // head camera delay
 					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
                     mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
@@ -11981,7 +12381,7 @@ namespace PSA_SystemLibrary
 					dwell.Reset();
 					sqc++; break;
 				case 91:
-					if (dwell.Elapsed < 15) break; // head camear delay
+					if (dwell.Elapsed < cameraDelay) break; // head camera delay
 					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
                     mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
@@ -12045,6 +12445,12 @@ namespace PSA_SystemLibrary
 							hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
 							hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
 						}
+                        else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                        {
+                            hdcP1X = mc.hdc.cam.projectionEdge.resultX;
+                            hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
+                            hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
+                        }
 						if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
 						{
 							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
@@ -12216,6 +12622,12 @@ namespace PSA_SystemLibrary
 							hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
 							hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
 						}
+                        else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                        {
+                            hdcP1X = mc.hdc.cam.projectionEdge.resultX;
+                            hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
+                            hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
+                        }
 						if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
 						{
 							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
@@ -12377,7 +12789,7 @@ namespace PSA_SystemLibrary
 					dwell.Reset();
 					sqc++; break;
 				case 111:
-					if (dwell.Elapsed < 15) break; // head camear delay
+					if (dwell.Elapsed < cameraDelay) break; // head camera delay
 					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
                     mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
@@ -12811,7 +13223,7 @@ namespace PSA_SystemLibrary
 					dwell.Reset();
 					sqc++; break;
 				case 7:
-					if (dwell.Elapsed < 15) break; // head camear delay
+					if (dwell.Elapsed < cameraDelay) break; // head camera delay
 					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
                     mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
@@ -13099,7 +13511,7 @@ namespace PSA_SystemLibrary
 					dwell.Reset();
 					sqc++; break;
 				case 21:
-					if (dwell.Elapsed < 15) break; // head camear delay
+					if (dwell.Elapsed < cameraDelay) break; // head camera delay
 					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
                     mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
@@ -13186,6 +13598,12 @@ namespace PSA_SystemLibrary
 								hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
 								hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
 							}
+                            else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                hdcP1X = mc.hdc.cam.projectionEdge.resultX;
+                                hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
+                                hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
+                            }
 							if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
 							{
 								mc.hdc.displayUserMessage("DETECTION FAIL");
@@ -13323,6 +13741,12 @@ namespace PSA_SystemLibrary
 								hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
 								hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
 							}
+                            else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                hdcP1X = mc.hdc.cam.projectionEdge.resultX;
+                                hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
+                                hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
+                            }
 							if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
 							{
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
@@ -13460,6 +13884,12 @@ namespace PSA_SystemLibrary
 								hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
 								hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
 							}
+                            else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                hdcP1X = mc.hdc.cam.projectionEdge.resultX;
+                                hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
+                                hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
+                            }
 							if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
 							{
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
@@ -13594,6 +14024,12 @@ namespace PSA_SystemLibrary
 								hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
 								hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
 							}
+                            else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                hdcP1X = mc.hdc.cam.projectionEdge.resultX;
+                                hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
+                                hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
+                            }
 							if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
 							{
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
@@ -13719,7 +14155,7 @@ namespace PSA_SystemLibrary
 					dwell.Reset();
 					sqc++; break;
 				case 41:
-					if (dwell.Elapsed < 15) break; // head camear delay
+					if (dwell.Elapsed < cameraDelay) break; // head camera delay
 					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
                     mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
@@ -14716,7 +15152,7 @@ namespace PSA_SystemLibrary
 					dwell.Reset();
 					sqc++; break;
 				case 91:
-					if (dwell.Elapsed < 15) break; // head camear delay
+					if (dwell.Elapsed < cameraDelay) break; // head camera delay
 					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
                     mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
@@ -14780,6 +15216,12 @@ namespace PSA_SystemLibrary
 							hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
 							hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
 						}
+                        else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                        {
+                            hdcP1X = mc.hdc.cam.projectionEdge.resultX;
+                            hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
+                            hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
+                        }
 						if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
 						{
 							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
@@ -14912,6 +15354,12 @@ namespace PSA_SystemLibrary
 							hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
 							hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
 						}
+                        else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                        {
+                            hdcP1X = mc.hdc.cam.projectionEdge.resultX;
+                            hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
+                            hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
+                        }
 						if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
 						{
 							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
@@ -15034,7 +15482,7 @@ namespace PSA_SystemLibrary
 					dwell.Reset();
 					sqc++; break;
 				case 111:
-					if (dwell.Elapsed < 15) break; // head camear delay
+					if (dwell.Elapsed < cameraDelay) break; // head camera delay
 					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
                     mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
@@ -16631,7 +17079,7 @@ namespace PSA_SystemLibrary
 					dwell.Reset();
 					sqc++; break;
 				case 24:
-					if (dwell.Elapsed < 15) break; // head camear delay
+					if (dwell.Elapsed < cameraDelay) break; // head camera delay
 					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
                     mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
@@ -16832,7 +17280,7 @@ namespace PSA_SystemLibrary
 					dwell.Reset();
 					sqc++; break;
 				case 24:
-					if (dwell.Elapsed < 15) break; // head camear delay
+					if (dwell.Elapsed < cameraDelay) break; // head camera delay
 					//if (mc.swcontrol.useHwTriger == 0) mc.hdc.req = true;
                     mc.hdc.req = true;
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
@@ -17317,7 +17765,7 @@ namespace PSA_SystemLibrary
 					dwell.Reset();
 					sqc++; break;
 				case 21:
-					if (dwell.Elapsed < 15) break; // head camera delay
+					if (dwell.Elapsed < cameraDelay) break; // head camera delay
 					triggerHDC.output(true, out ret.message); if (mpiCheck(sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
@@ -20189,7 +20637,9 @@ namespace PSA_SystemLibrary
 						}
 					}
 					if (ret.d > srch) break;
-					kilogram(mc.para.HD.place.search.force, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                    if (UtilityControl.forceTopLoadcellBaseForce == 0) kilogram(mc.para.HD.place.search.force, out ret.message);
+                    else kilogram(mc.para.HD.place.search.force, out ret.message, true);
+                    if (ioCheck(sqc, ret.message)) break;
 					//mc.log.debug.write(mc.log.CODE.ETC, "Search1 Done:" + Math.Round(dwell.Elapsed).ToString() + ", Force:" + mc.para.HD.place.search.force.value.ToString());
 					sqc++; break;
 				case SQC.F_M2PLACE + 2:
@@ -20208,7 +20658,10 @@ namespace PSA_SystemLibrary
 					}
 					mc.hd.tool.Z.commandPosition(out ret.d, out ret.message); if (mpiCheck(mc.hd.tool.Z.config.axisCode, sqc, ret.message)) break;
 					if (ret.d > srch2) break;
-					kilogram(mc.para.HD.place.search2.force, out ret.message); if (ioCheck(sqc, ret.message)) break;
+					
+                    if(UtilityControl.forceTopLoadcellBaseForce == 0) kilogram(mc.para.HD.place.search2.force, out ret.message);
+                    else kilogram(mc.para.HD.place.search2.force, out ret.message, true);
+                    if (ioCheck(sqc, ret.message)) break;
 					//mc.log.debug.write(mc.log.CODE.ETC, "Search2 Done:" + Math.Round(dwell.Elapsed).ToString() + ", Force:" + mc.para.HD.place.search2.force.value.ToString());
 					sqc++; break;
 				case SQC.F_M2PLACE + 4:
@@ -20229,7 +20682,9 @@ namespace PSA_SystemLibrary
 				//    sqc++; break;
 				//case SQC.F_M2PLACE + 6:
 
-					kilogram(mc.para.HD.place.force, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                    if (UtilityControl.forceTopLoadcellBaseForce == 0) kilogram(mc.para.HD.place.force, out ret.message);
+                    else kilogram(mc.para.HD.place.force, out ret.message, true);
+                    if (ioCheck(sqc, ret.message)) break;
 					//mc.log.debug.write(mc.log.CODE.ETC, "Place Done:" + Math.Round(dwell.Elapsed).ToString() + ", Force:" + mc.para.HD.place.force.value.ToString());
 					sqc = SQC.STOP; break;
 				#endregion
@@ -20619,7 +21074,11 @@ namespace PSA_SystemLibrary
 			{
 				double tmp;
 				tmp = BD_EDGE;
-                if (mc.para.mcType.FrRr == McTypeFrRr.FRONT) tmp += (double)MP_HD_X.PD_P1_FR;
+                if (mc.para.mcType.FrRr == McTypeFrRr.FRONT)
+                {
+                    //tmp += (double)MP_HD_X.PD_P1_FR;
+                    tmp += -50000;
+                }
 				if (mc.para.mcType.FrRr == McTypeFrRr.REAR) tmp += (double)MP_HD_X.PD_P1_RR;
 				return tmp;
 			}
@@ -20860,6 +21319,7 @@ namespace PSA_SystemLibrary
 			{
 				double tmp;
 				tmp = BD_EDGE;
+                //tmp += 60000;// (double)MP_HD_Y.PD_P1;
                 tmp += 60000;// (double)MP_HD_Y.PD_P1;
 				return tmp;
 			}

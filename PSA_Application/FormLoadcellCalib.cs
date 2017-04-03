@@ -537,24 +537,46 @@ namespace PSA_Application
 					mc.hd.tool.F.kilogram(2, out retT.message);
 					posZ = mc.hd.tool.tPos.z.LOADCELL + 1000;	// move to contact point
 					mc.hd.tool.jogMove(posZ, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); headForceCalibStatus = 0; goto THREADEND; }
+
+                    mc.loadCell.setZero(0);
+                    mc.idle(500);
+
 					// move to contact position
-					posZ = mc.hd.tool.tPos.z.LOADCELL + 100;	// move to contact point
-					mc.hd.tool.jogMove(posZ, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); headForceCalibStatus = 0; goto THREADEND; }
-					mc.idle(500);		// VPPM 안정화 시간
-					mc.hd.tool.F.kilogram(0.2, out retT.message);
-					mc.idle(1000);
-					posZ = mc.hd.tool.tPos.z.LOADCELL - 300;
-					mc.hd.tool.Z.move(posZ, (double)(checkRepeatSpeed / 1000.0), 0.01, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); headForceCalibStatus = 0; goto THREADEND; }
-					mc.hd.tool.checkZMoveEnd(out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); headForceCalibStatus = 0; goto THREADEND; }
-					//mc.hd.tool.jogMove(posZ, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); return; }
-					mc.hd.tool.F.kilogram(checkTargetForce, out retT.message);
+                    if (mc.para.HD.place.forceMode.mode.value == (int)PLACE_FORCE_MODE.LOW_HIGH_MODE)
+                    {
+                        posZ = mc.hd.tool.tPos.z.LOADCELL + 100;	// move to contact point
+                        mc.hd.tool.jogMove(posZ, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); headForceCalibStatus = 0; goto THREADEND; }
+                        mc.idle(500);		// VPPM 안정화 시간
+                        mc.hd.tool.F.kilogram(0.2, out retT.message);
+                        mc.idle(1000);
+                        posZ = mc.hd.tool.tPos.z.LOADCELL + mc.para.HD.place.forceOffset.z.value;
+                        mc.hd.tool.Z.move(posZ, (double)(checkRepeatSpeed / 1000.0), 0.01, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); headForceCalibStatus = 0; goto THREADEND; }
+                        mc.hd.tool.checkZMoveEnd(out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); headForceCalibStatus = 0; goto THREADEND; }
+                        //mc.hd.tool.jogMove(posZ, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); return; }
+                        mc.hd.tool.F.kilogram(checkTargetForce, out retT.message);
+                    }
+                    else
+                    {
+                        // 1. 타겟 포스 만들고
+                        mc.hd.tool.F.kilogram(checkTargetForce, out retT.message);
+                        mc.idle(1000);
+
+                        // 2. 500 위까진 빠르게 내려오고
+                        posZ = mc.hd.tool.tPos.z.LOADCELL + 500;	// move to contact point
+                        mc.hd.tool.jogMove(posZ, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); headForceCalibStatus = 0; goto THREADEND; }
+                        
+                        // 3. 여기부터 타겟 속도로 이동..
+                        posZ = mc.hd.tool.tPos.z.LOADCELL + mc.para.HD.place.forceOffset.z.value;
+                        mc.hd.tool.Z.move(posZ, (double)(checkRepeatSpeed / 1000.0), 0.01, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); headForceCalibStatus = 0; goto THREADEND; }
+                        mc.hd.tool.checkZMoveEnd(out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); headForceCalibStatus = 0; goto THREADEND; }
+                    }
 					mc.idle(1500);
 					retT.d = mc.loadCell.getData(0);
 					//mc.loadCell.getData(out retT.d1, out retT.b1, 1);
 					retT.d1 = mc.AIN.HeadLoadcell();
 					mc.hd.tool.F.sgVoltage2kilogram(retT.d1, out retT.d2, out retT.message);
 
-					writeData = (i + 1).ToString() + ", " + (checkTargetForce).ToString() + ", " + (retT.d).ToString() + ", " + Math.Round(retT.d2, 2).ToString();
+                    writeData = (i + 1).ToString() + ", " + (checkTargetForce).ToString() + ", " + Math.Round(retT.d, 3).ToString() + ", " + Math.Round(retT.d2, 3).ToString();
 					mc.log.debug.write(mc.log.CODE.INFO, writeData);
 
 					stmWriter.WriteLine(writeData);
@@ -569,7 +591,9 @@ namespace PSA_Application
 
 				posZ = mc.hd.tool.tPos.z.XY_MOVING;	// move to Moving Point
 				mc.hd.tool.jogMove(posZ, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); return; }
-
+                mc.OUT.MAIN.UserRedBuzzerCtl(true);
+                mc.idle(500);
+                mc.OUT.MAIN.UserRedBuzzerCtl(false);
 				headForceCalibStatus = 0;
 			}
 			catch (System.Exception ex)

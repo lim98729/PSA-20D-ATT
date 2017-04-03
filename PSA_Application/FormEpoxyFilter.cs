@@ -61,7 +61,10 @@ namespace PSA_Application
         {
             if (mc.hdc.cam.refresh_req == true) return;
 
-			mc.idle(500);
+			mc.hdc.cam.grabClear(out ret.message, out ret.s);
+			//mc.hdc.cam.grabSofrwareTrigger();
+			
+			//mc.idle(500);
 
 			//mc.hdc.liveMode = REFRESH_REQMODE.FIND_EPOXY;
 			//mc.hdc.LIVE = true;
@@ -94,8 +97,6 @@ namespace PSA_Application
 			LB_AreaFilterMinValue.Text = tempareaminfilter.ToString();
 			LB_ThresholdValue.Text = tempthreshold.ToString();   
 
-			mc.hdc.lighting_exposure(mc.para.EPOXY.light, mc.para.EPOXY.exposureTime);
-			EVENT.hWindowLargeDisplay(mc.hdc.cam.acq.grabber.cameraNumber);
 			//mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
 			//mc.hdc.cam.grabSofrwareTrigger();
             

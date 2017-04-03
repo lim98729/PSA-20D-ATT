@@ -62,9 +62,9 @@ namespace PSA_Application
 				TB_PD_Y.Text = mc.pd.Y.config.speed.rate.ToString();
 				TB_PD_Z.Text = mc.pd.Z.config.speed.rate.ToString();
 
-				TB_SF.Text = (mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.speed.rate * 100).ToString();
-                TB_SF_Z.Text = mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.speed.rate.ToString();
-                TB_SF_Z2.Text = mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.speed.rate.ToString();
+				TB_SF.Text = (mc.sf.Z.config.speed.rate * 100).ToString();
+                TB_SF_Z.Text = mc.sf.Z.config.speed.rate.ToString();
+                TB_SF_Z2.Text = mc.sf.Z2.config.speed.rate.ToString();
 
 				TB_CV.Text = (mc.cv.W.config.speed.rate * 100).ToString();
 				TB_CV_W.Text = mc.cv.W.config.speed.rate.ToString();
@@ -232,8 +232,8 @@ namespace PSA_Application
 					if (!mc.pd.Y.config.read(selected)) { EVENT.userDialogMessage(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.FAILURE, "Pedestal Y Motion Parameter Read ERROR!"); return; }
 					if (!mc.pd.Z.config.read(selected)) { EVENT.userDialogMessage(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.FAILURE, "Pedestal Z Motion Parameter Read ERROR!"); return; }
 
-                    if (!mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.read(selected)) { EVENT.userDialogMessage(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.FAILURE, "StackFeeder Z2 Motion Parameter Read ERROR!"); return; }
-                    if (!mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.read(selected)) { EVENT.userDialogMessage(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.FAILURE, "StackFeeder Z Motion Parameter Read ERROR!"); return; }
+                    if (!mc.sf.Z2.config.read(selected)) { EVENT.userDialogMessage(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.FAILURE, "StackFeeder Z2 Motion Parameter Read ERROR!"); return; }
+                    if (!mc.sf.Z.config.read(selected)) { EVENT.userDialogMessage(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.FAILURE, "StackFeeder Z Motion Parameter Read ERROR!"); return; }
 
 					if (!mc.cv.W.config.read(selected)) { EVENT.userDialogMessage(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.FAILURE, "Conveyor W homing para write error"); return; }
 
@@ -293,8 +293,8 @@ namespace PSA_Application
 					if (!mc.pd.Y.config.write(selected)) { EVENT.userDialogMessage(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.FAILURE, "Pedestal Y Motion Parameter Write ERROR!"); return; }
 					if (!mc.pd.Z.config.write(selected)) { EVENT.userDialogMessage(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.FAILURE, "Pedestal Z Motion Parameter Write ERROR!"); return; }
 
-                    if (!mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.write(selected)) { EVENT.userDialogMessage(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.FAILURE, "StackFeeder Z2 Motion Parameter Write ERROR!"); return; }
-                    if (!mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.write(selected)) { EVENT.userDialogMessage(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.FAILURE, "StackFeeder Z Motion Parameter Write ERROR!"); return; }
+                    if (!mc.sf.Z2.config.write(selected)) { EVENT.userDialogMessage(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.FAILURE, "StackFeeder Z2 Motion Parameter Write ERROR!"); return; }
+                    if (!mc.sf.Z.config.write(selected)) { EVENT.userDialogMessage(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.FAILURE, "StackFeeder Z Motion Parameter Write ERROR!"); return; }
 
 					if (!mc.cv.W.config.write(selected)) { EVENT.userDialogMessage(DIAG_SEL_MODE.OK, DIAG_ICON_MODE.FAILURE, "Conveyor W homing para write error"); return; }
 

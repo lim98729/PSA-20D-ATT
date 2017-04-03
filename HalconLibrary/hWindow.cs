@@ -411,6 +411,7 @@ namespace HalconLibrary
 			double ratio_height;
 			if (hVision.cam1.isActivate)
 			{
+                hVision.cam1.clearWindow();
 				ratio_height = (double)hVision.cam1.acq.height / (double)hVision.cam1.acq.width;
 				if (ratio_height > 1) ratio_height = 1;
 				width[1] = 300;
@@ -419,6 +420,7 @@ namespace HalconLibrary
 			}
 			if (hVision.cam2.isActivate)
 			{
+                hVision.cam2.clearWindow();
 				ratio_height = (double)hVision.cam2.acq.height / (double)hVision.cam2.acq.width;
 				if (ratio_height > 1) ratio_height = 1;
 				width[2] = 300;
@@ -2897,6 +2899,8 @@ namespace HalconLibrary
 							hVision.cam1.refreshFindModel();
 						if (hVision.cam1.refresh_reqMode == REFRESH_REQMODE.CORNER_EDGE)
 							hVision.cam1.refreshCornerEdge();
+                        if (hVision.cam1.refresh_reqMode == REFRESH_REQMODE.PROJECTION_EDGE)
+                            hVision.cam1.refreshProjectionEdge();
 						if (hVision.cam1.refresh_reqMode == REFRESH_REQMODE.EDGE_INTERSECTION)
 							hVision.cam1.refreshEdgeIntersection();
 						if (hVision.cam1.refresh_reqMode == REFRESH_REQMODE.ERROR_DISPLAY)
@@ -2928,6 +2932,8 @@ namespace HalconLibrary
 							hVision.cam2.refreshFindModel();
 						if (hVision.cam2.refresh_reqMode == REFRESH_REQMODE.CORNER_EDGE)
 							hVision.cam2.refreshCornerEdge();
+                        if (hVision.cam2.refresh_reqMode == REFRESH_REQMODE.PROJECTION_EDGE)
+                            hVision.cam2.refreshProjectionEdge();
 						if (hVision.cam2.refresh_reqMode == REFRESH_REQMODE.EDGE_INTERSECTION)
 							hVision.cam2.refreshEdgeIntersection();
 						if (hVision.cam2.refresh_reqMode == REFRESH_REQMODE.ERROR_DISPLAY)
@@ -2959,6 +2965,8 @@ namespace HalconLibrary
 							hVision.cam3.refreshFindModel();
 						if (hVision.cam3.refresh_reqMode == REFRESH_REQMODE.CORNER_EDGE)
 							hVision.cam3.refreshCornerEdge();
+                        if (hVision.cam3.refresh_reqMode == REFRESH_REQMODE.PROJECTION_EDGE)
+                            hVision.cam3.refreshProjectionEdge();
 						if (hVision.cam3.refresh_reqMode == REFRESH_REQMODE.EDGE_INTERSECTION)
 							hVision.cam3.refreshEdgeIntersection();
 						if (hVision.cam3.refresh_reqMode == REFRESH_REQMODE.ERROR_DISPLAY)
@@ -2991,6 +2999,8 @@ namespace HalconLibrary
 							hVision.cam4.refreshFindModel();
 						if (hVision.cam4.refresh_reqMode == REFRESH_REQMODE.CORNER_EDGE)
 							hVision.cam4.refreshCornerEdge();
+                        if (hVision.cam4.refresh_reqMode == REFRESH_REQMODE.PROJECTION_EDGE)
+                            hVision.cam4.refreshProjectionEdge();
 						if (hVision.cam4.refresh_reqMode == REFRESH_REQMODE.EDGE_INTERSECTION)
 							hVision.cam4.refreshEdgeIntersection();
 						if (hVision.cam4.refresh_reqMode == REFRESH_REQMODE.ERROR_DISPLAY)

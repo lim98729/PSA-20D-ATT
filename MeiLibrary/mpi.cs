@@ -1960,7 +1960,7 @@ namespace MeiLibrary
 				saveTuple[i++] = "homing.gpHomeSensor.motorNumber"; saveTuple[i++] = homing.gpHomeSensor.motorNumber;
 				saveTuple[i++] = "homing.gpHomeSensor.bitNumber"; saveTuple[i++] = homing.gpHomeSensor.bitNumber;
 				saveTuple[i++] = "homing.originOffset"; saveTuple[i++] = homing.originOffset;   // kenny 130711
-
+                saveTuple[i++] = "homing.encoderInverted"; saveTuple[i++] = homing.encoderInverted;   // 170310 jhlim
 
 				HTuple filePath, fileName;
 				filePath = savepath + "\\Motion\\Config\\";
@@ -2037,7 +2037,7 @@ namespace MeiLibrary
 				homing.gpHomeSensor.motorNumber = saveTuple[i]; i += 2;
 				homing.gpHomeSensor.bitNumber = saveTuple[i]; i += 2;
 				homing.originOffset = saveTuple[i]; i += 2;      // kenny 130711
-
+                homing.encoderInverted = saveTuple[i]; i += 2;      // 170310 jhlim
 
 				return true;
 
@@ -2117,7 +2117,7 @@ namespace MeiLibrary
 		public double capturedPosition;
 		public double originOffset;      // kenny 130711
 		public double homePosition;
-
+        public int encoderInverted;     // 170310 jhlim : Encoder 방향을 MEI에서 뒤집은 후(배치파일 이용) 캡쳐값이 반대로 들어오는 현상에 의해 옵션처리함.
 
 		public double timeLimit;
 		public double captureTimeLimit;

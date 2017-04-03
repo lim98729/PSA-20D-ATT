@@ -139,69 +139,82 @@ namespace PSA_Application
                     mc.ulc.model_delete(mode);
                     int retry = 0;
                 RETRY:
-                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.FIRST, out ret.b, 1); if (!ret.b) goto EXIT;
-                    #region moving
-                    if ((double)mc.ulc.cam.edgeIntersection.resultX > 2.0 || (double)mc.ulc.cam.edgeIntersection.resultY > 2.0)
+                    if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CORNER)
                     {
-                        string showstr;
-                        showstr = "Result X:" + Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2).ToString();
-                        showstr += "\nResult Y:" + Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2).ToString();
-                        showstr += "\nResult is OK?";
-                        DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
-                        if (digrst == DialogResult.No) goto EXIT;
+                        mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.FIRST, out ret.b, 1); if (!ret.b) goto EXIT;
+                        #region moving
+                        if ((double)mc.ulc.cam.edgeIntersection.resultX > 2.0 || (double)mc.ulc.cam.edgeIntersection.resultY > 2.0)
+                        {
+                            string showstr;
+                            showstr = "Result X:" + Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2).ToString();
+                            showstr += "\nResult Y:" + Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2).ToString();
+                            showstr += "\nResult is OK?";
+                            DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
+                            if (digrst == DialogResult.No) goto EXIT;
+                        }
+
+                        double alignX = (double)mc.ulc.cam.edgeIntersection.resultX;
+                        double alignY = (double)mc.ulc.cam.edgeIntersection.resultY;
+                        double alignT = (double)mc.ulc.cam.edgeIntersection.resultAngleH;
+                        double lidSizeW = (double)mc.para.MT.lidSize.x.value * 1000;
+                        double lidSizeH = (double)mc.para.MT.lidSize.y.value * 1000;
+
+                        double rX = 0, rY = 0;
+                        Calc.calcAlign(0, alignX, alignY, alignT, lidSizeW, lidSizeH, out rX, out rY);
+
+                        double cosTheta = Math.Cos((-alignT) * Math.PI / 180);
+                        double sinTheta = Math.Sin((-alignT) * Math.PI / 180);
+                        alignX = (cosTheta * rX) - (sinTheta * rY);
+                        alignY = (sinTheta * rX) + (cosTheta * rY);
+
+                        posX -= alignX;
+                        posY -= alignY;
+                        posT -= alignT;
+                        mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                        #endregion
+                        mc.idle(100);
+                        if (retry++ < 5) goto RETRY;
+                        mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.FIRST, out ret.b, 1); if (!ret.b) goto EXIT;
                     }
+                    else
+                    {
+                        mc.ulc.projectionEdgeFind(QUARDRANT.QUARDRANT_RT, out ret.b); if (!ret.b) goto EXIT;
+                        mc.para.ULC.modelLIDC1.isCreate.value = (int)BOOL.TRUE;
+                        #region moving
+                        if (mc.ulc.cam.projectionEdge.resultX > 2.0
+                            || mc.ulc.cam.projectionEdge.resultY > 2.0)
+                        {
+                            string showstr;
+                            showstr = "Result X:" + Math.Round((double)mc.ulc.cam.projectionEdge.resultX, 2).ToString();
+                            showstr += "\nResult Y:" + Math.Round((double)mc.ulc.cam.projectionEdge.resultY, 2).ToString();
+                            showstr += "\nResult is OK?";
+                            DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
+                            if (digrst == DialogResult.No) goto EXIT;
+                        }
 
-                    posX -= Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2);
-                    posY -= Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2);
-                    mc.hd.tool.jogMoveXY(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-                    #endregion
-                    mc.idle(100);
-                    if (retry++ < 5) goto RETRY;
-                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.FIRST, out ret.b, 1); if (!ret.b) goto EXIT;
+                        double alignX = mc.ulc.cam.projectionEdge.resultX;
+                        double alignY = mc.ulc.cam.projectionEdge.resultY;
+                        double alignT = mc.ulc.cam.projectionEdge.resultAngle2;
+                        double lidSizeW = (double)mc.para.MT.lidSize.x.value * 1000;
+                        double lidSizeH = (double)mc.para.MT.lidSize.y.value * 1000;
 
-                    #region auto teach
-                    //halcon_region tmpRegion;
-                    //if (mc.para.ULC.modelLIDC1.algorism.value == (int)MODEL_ALGORISM.NCC)
-                    //{
-                    //    mc.ulc.cam.model[(int)ulc_MODEL.PADC1_NCC].algorism = MODEL_ALGORISM.NCC.ToString();
-                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.15);
-                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.15);
-                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.15);
-                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.15);
-                    //    mc.ulc.cam.createModel((int)ulc_MODEL.PADC1_NCC, tmpRegion);
+                        double rX = 0, rY = 0;
+                        Calc.calcAlign(0, alignX, alignY, alignT, lidSizeW, lidSizeH, out rX, out rY);
 
-                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.3);
-                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.3);
-                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.3);
-                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.3);
-                    //    mc.ulc.cam.createFind((int)ulc_MODEL.PADC1_NCC, tmpRegion);
-                    //    mc.idle(500);
-                    //    mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.TRUE;
-                    //    if (mc.ulc.cam.model[(int)ulc_MODEL.PADC1_NCC].isCreate == "false") mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.FALSE;
-                    //}
-                    //if (mc.para.ulc.modelPADC1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-                    //{
-                    //    mc.ulc.cam.model[(int)ulc_MODEL.PADC1_SHAPE].algorism = MODEL_ALGORISM.SHAPE.ToString();
-                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.15);
-                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.15);
-                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.15);
-                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.15);
-                    //    mc.ulc.cam.createModel((int)ulc_MODEL.PADC1_SHAPE, tmpRegion);
+                        double cosTheta = Math.Cos((-alignT) * Math.PI / 180);
+                        double sinTheta = Math.Sin((-alignT) * Math.PI / 180);
+                        alignX = (cosTheta * rX) - (sinTheta * rY);
+                        alignY = (sinTheta * rX) + (cosTheta * rY);
 
-                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.3);
-                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.3);
-                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.3);
-                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.3);
-                    //    mc.ulc.cam.createFind((int)ulc_MODEL.PADC1_SHAPE, tmpRegion);
-                    //    mc.idle(500);
-                    //    mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.TRUE;
-                    //    if (mc.ulc.cam.model[(int)ulc_MODEL.PADC1_SHAPE].isCreate == "false") mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.FALSE;
-                    //}
-                    //if (mc.para.ulc.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
-                    //{
-                    //    mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.TRUE;
-                    //}
-                    #endregion
+                        posX -= alignX;
+                        posY -= alignY;
+                        posT -= alignT;
+                        mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                        #endregion
+                        mc.idle(100);
+                        if (retry++ < 5) goto RETRY;
+                        mc.ulc.projectionEdgeFind(QUARDRANT.QUARDRANT_RT, out ret.b); if (!ret.b) goto EXIT;
+                    }
                     mc.ulc.LIVE = true; mc.ulc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
                 }
                 #endregion
@@ -212,69 +225,82 @@ namespace PSA_Application
                     mc.ulc.model_delete(mode);
                     int retry = 0;
                 RETRY:
-                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.SECOND, out ret.b, 1); if (!ret.b) goto EXIT;
-                    #region moving
-                    if ((double)mc.ulc.cam.edgeIntersection.resultX > 2.0 || (double)mc.ulc.cam.edgeIntersection.resultY > 2.0)
+                    if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CORNER)
                     {
-                        string showstr;
-                        showstr = "Result X:" + Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2).ToString();
-                        showstr += "\nResult Y:" + Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2).ToString();
-                        showstr += "\nResult is OK?";
-                        DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
-                        if (digrst == DialogResult.No) goto EXIT;
+                        mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.SECOND, out ret.b, 1); if (!ret.b) goto EXIT;
+                        #region moving
+                        if ((double)mc.ulc.cam.edgeIntersection.resultX > 2.0 || (double)mc.ulc.cam.edgeIntersection.resultY > 2.0)
+                        {
+                            string showstr;
+                            showstr = "Result X:" + Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2).ToString();
+                            showstr += "\nResult Y:" + Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2).ToString();
+                            showstr += "\nResult is OK?";
+                            DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
+                            if (digrst == DialogResult.No) goto EXIT;
+                        }
+
+                        double alignX = (double)mc.ulc.cam.edgeIntersection.resultX;
+                        double alignY = (double)mc.ulc.cam.edgeIntersection.resultY;
+                        double alignT = (double)mc.ulc.cam.edgeIntersection.resultAngleH;
+                        double lidSizeW = (double)mc.para.MT.lidSize.x.value * 1000;
+                        double lidSizeH = (double)mc.para.MT.lidSize.y.value * 1000;
+
+                        double rX = 0, rY = 0;
+                        Calc.calcAlign(1, alignX, alignY, alignT, lidSizeW, lidSizeH, out rX, out rY);
+
+                        double cosTheta = Math.Cos((-alignT) * Math.PI / 180);
+                        double sinTheta = Math.Sin((-alignT) * Math.PI / 180);
+                        alignX = (cosTheta * rX) - (sinTheta * rY);
+                        alignY = (sinTheta * rX) + (cosTheta * rY);
+
+                        posX -= alignX;
+                        posY -= alignY;
+                        posT -= alignT;
+                        mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                        #endregion
+                        mc.idle(100);
+                        if (retry++ < 5) goto RETRY;
+                        mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.SECOND, out ret.b, 1); if (!ret.b) goto EXIT;
                     }
+                    else
+                    {
+                        mc.ulc.projectionEdgeFind(QUARDRANT.QUARDRANT_RB, out ret.b); if (!ret.b) goto EXIT;
+                        mc.para.ULC.modelLIDC1.isCreate.value = (int)BOOL.TRUE;
+                        #region moving
+                        if (mc.ulc.cam.projectionEdge.resultX > 2.0
+                            || mc.ulc.cam.projectionEdge.resultY > 2.0)
+                        {
+                            string showstr;
+                            showstr = "Result X:" + Math.Round((double)mc.ulc.cam.projectionEdge.resultX, 2).ToString();
+                            showstr += "\nResult Y:" + Math.Round((double)mc.ulc.cam.projectionEdge.resultY, 2).ToString();
+                            showstr += "\nResult is OK?";
+                            DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
+                            if (digrst == DialogResult.No) goto EXIT;
+                        }
 
-                    posX -= Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2);
-                    posY -= Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2);
-                    mc.hd.tool.jogMoveXY(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-                    #endregion
-                    mc.idle(100);
-                    if (retry++ < 5) goto RETRY;
-                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.SECOND, out ret.b, 1); if (!ret.b) goto EXIT;
+                        double alignX = mc.ulc.cam.projectionEdge.resultX;
+                        double alignY = mc.ulc.cam.projectionEdge.resultY;
+                        double alignT = mc.ulc.cam.projectionEdge.resultAngle2;
+                        double lidSizeW = (double)mc.para.MT.lidSize.x.value * 1000;
+                        double lidSizeH = (double)mc.para.MT.lidSize.y.value * 1000;
 
-                    #region auto teach
-                    //halcon_region tmpRegion;
-                    //if (mc.para.ULC.modelLIDC1.algorism.value == (int)MODEL_ALGORISM.NCC)
-                    //{
-                    //    mc.ulc.cam.model[(int)ulc_MODEL.PADC1_NCC].algorism = MODEL_ALGORISM.NCC.ToString();
-                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.15);
-                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.15);
-                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.15);
-                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.15);
-                    //    mc.ulc.cam.createModel((int)ulc_MODEL.PADC1_NCC, tmpRegion);
+                        double rX = 0, rY = 0;
+                        Calc.calcAlign(1, alignX, alignY, alignT, lidSizeW, lidSizeH, out rX, out rY);
 
-                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.3);
-                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.3);
-                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.3);
-                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.3);
-                    //    mc.ulc.cam.createFind((int)ulc_MODEL.PADC1_NCC, tmpRegion);
-                    //    mc.idle(500);
-                    //    mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.TRUE;
-                    //    if (mc.ulc.cam.model[(int)ulc_MODEL.PADC1_NCC].isCreate == "false") mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.FALSE;
-                    //}
-                    //if (mc.para.ulc.modelPADC1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-                    //{
-                    //    mc.ulc.cam.model[(int)ulc_MODEL.PADC1_SHAPE].algorism = MODEL_ALGORISM.SHAPE.ToString();
-                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.15);
-                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.15);
-                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.15);
-                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.15);
-                    //    mc.ulc.cam.createModel((int)ulc_MODEL.PADC1_SHAPE, tmpRegion);
+                        double cosTheta = Math.Cos((-alignT) * Math.PI / 180);
+                        double sinTheta = Math.Sin((-alignT) * Math.PI / 180);
+                        alignX = (cosTheta * rX) - (sinTheta * rY);
+                        alignY = (sinTheta * rX) + (cosTheta * rY);
 
-                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.3);
-                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.3);
-                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.3);
-                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.3);
-                    //    mc.ulc.cam.createFind((int)ulc_MODEL.PADC1_SHAPE, tmpRegion);
-                    //    mc.idle(500);
-                    //    mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.TRUE;
-                    //    if (mc.ulc.cam.model[(int)ulc_MODEL.PADC1_SHAPE].isCreate == "false") mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.FALSE;
-                    //}
-                    //if (mc.para.ulc.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
-                    //{
-                    //    mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.TRUE;
-                    //}
-                    #endregion
+                        posX -= alignX;
+                        posY -= alignY;
+                        posT -= alignT;
+                        mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                        #endregion
+                        mc.idle(100);
+                        if (retry++ < 5) goto RETRY;
+                        mc.ulc.projectionEdgeFind(QUARDRANT.QUARDRANT_RB, out ret.b); if (!ret.b) goto EXIT;
+                    }
                     mc.ulc.LIVE = true; mc.ulc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
                 }
                 #endregion
@@ -285,69 +311,82 @@ namespace PSA_Application
                     mc.ulc.model_delete(mode);
                     int retry = 0;
                 RETRY:
-                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.THIRD, out ret.b, 1); if (!ret.b) goto EXIT;
-                    #region moving
-                    if ((double)mc.ulc.cam.edgeIntersection.resultX > 2.0 || (double)mc.ulc.cam.edgeIntersection.resultY > 2.0)
+                    if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CORNER)
                     {
-                        string showstr;
-                        showstr = "Result X:" + Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2).ToString();
-                        showstr += "\nResult Y:" + Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2).ToString();
-                        showstr += "\nResult is OK?";
-                        DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
-                        if (digrst == DialogResult.No) goto EXIT;
+                        mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.THIRD, out ret.b, 1); if (!ret.b) goto EXIT;
+                        #region moving
+                        if ((double)mc.ulc.cam.edgeIntersection.resultX > 2.0 || (double)mc.ulc.cam.edgeIntersection.resultY > 2.0)
+                        {
+                            string showstr;
+                            showstr = "Result X:" + Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2).ToString();
+                            showstr += "\nResult Y:" + Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2).ToString();
+                            showstr += "\nResult is OK?";
+                            DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
+                            if (digrst == DialogResult.No) goto EXIT;
+                        }
+
+                        double alignX = (double)mc.ulc.cam.edgeIntersection.resultX;
+                        double alignY = (double)mc.ulc.cam.edgeIntersection.resultY;
+                        double alignT = (double)mc.ulc.cam.edgeIntersection.resultAngleH;
+                        double lidSizeW = (double)mc.para.MT.lidSize.x.value * 1000;
+                        double lidSizeH = (double)mc.para.MT.lidSize.y.value * 1000;
+
+                        double rX = 0, rY = 0;
+                        Calc.calcAlign(2, alignX, alignY, alignT, lidSizeW, lidSizeH, out rX, out rY);
+
+                        double cosTheta = Math.Cos((-alignT) * Math.PI / 180);
+                        double sinTheta = Math.Sin((-alignT) * Math.PI / 180);
+                        alignX = (cosTheta * rX) - (sinTheta * rY);
+                        alignY = (sinTheta * rX) + (cosTheta * rY);
+
+                        posX -= alignX;
+                        posY -= alignY;
+                        posT -= alignT;
+                        mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                        #endregion
+                        mc.idle(100);
+                        if (retry++ < 5) goto RETRY;
+                        mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.THIRD, out ret.b, 1); if (!ret.b) goto EXIT;
                     }
+                      else
+                      {
+                          mc.ulc.projectionEdgeFind(QUARDRANT.QUARDRANT_LB, out ret.b); if (!ret.b) goto EXIT;
+                          mc.para.ULC.modelLIDC1.isCreate.value = (int)BOOL.TRUE;
+                          #region moving
+                        if (mc.ulc.cam.projectionEdge.resultX > 2.0
+                            || mc.ulc.cam.projectionEdge.resultY > 2.0)
+                        {
+                            string showstr;
+                            showstr = "Result X:" + Math.Round((double)mc.ulc.cam.projectionEdge.resultX, 2).ToString();
+                            showstr += "\nResult Y:" + Math.Round((double)mc.ulc.cam.projectionEdge.resultY, 2).ToString();
+                            showstr += "\nResult is OK?";
+                            DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
+                            if (digrst == DialogResult.No) goto EXIT;
+                        }
 
-                    posX -= Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2);
-                    posY -= Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2);
-                    mc.hd.tool.jogMoveXY(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-                    #endregion
-                    mc.idle(100);
-                    if (retry++ < 5) goto RETRY;
-                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.THIRD, out ret.b, 1); if (!ret.b) goto EXIT;
+                        double alignX = mc.ulc.cam.projectionEdge.resultX;
+                        double alignY = mc.ulc.cam.projectionEdge.resultY;
+                        double alignT = mc.ulc.cam.projectionEdge.resultAngle2;
+                        double lidSizeW = (double)mc.para.MT.lidSize.x.value * 1000;
+                        double lidSizeH = (double)mc.para.MT.lidSize.y.value * 1000;
 
-                    #region auto teach
-                    //halcon_region tmpRegion;
-                    //if (mc.para.ULC.modelLIDC1.algorism.value == (int)MODEL_ALGORISM.NCC)
-                    //{
-                    //    mc.ulc.cam.model[(int)ulc_MODEL.PADC1_NCC].algorism = MODEL_ALGORISM.NCC.ToString();
-                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.15);
-                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.15);
-                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.15);
-                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.15);
-                    //    mc.ulc.cam.createModel((int)ulc_MODEL.PADC1_NCC, tmpRegion);
+                        double rX = 0, rY = 0;
+                        Calc.calcAlign(2, alignX, alignY, alignT, lidSizeW, lidSizeH, out rX, out rY);
 
-                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.3);
-                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.3);
-                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.3);
-                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.3);
-                    //    mc.ulc.cam.createFind((int)ulc_MODEL.PADC1_NCC, tmpRegion);
-                    //    mc.idle(500);
-                    //    mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.TRUE;
-                    //    if (mc.ulc.cam.model[(int)ulc_MODEL.PADC1_NCC].isCreate == "false") mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.FALSE;
-                    //}
-                    //if (mc.para.ulc.modelPADC1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-                    //{
-                    //    mc.ulc.cam.model[(int)ulc_MODEL.PADC1_SHAPE].algorism = MODEL_ALGORISM.SHAPE.ToString();
-                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.15);
-                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.15);
-                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.15);
-                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.15);
-                    //    mc.ulc.cam.createModel((int)ulc_MODEL.PADC1_SHAPE, tmpRegion);
+                        double cosTheta = Math.Cos((-alignT) * Math.PI / 180);
+                        double sinTheta = Math.Sin((-alignT) * Math.PI / 180);
+                        alignX = (cosTheta * rX) - (sinTheta * rY);
+                        alignY = (sinTheta * rX) + (cosTheta * rY);
 
-                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.3);
-                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.3);
-                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.3);
-                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.3);
-                    //    mc.ulc.cam.createFind((int)ulc_MODEL.PADC1_SHAPE, tmpRegion);
-                    //    mc.idle(500);
-                    //    mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.TRUE;
-                    //    if (mc.ulc.cam.model[(int)ulc_MODEL.PADC1_SHAPE].isCreate == "false") mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.FALSE;
-                    //}
-                    //if (mc.para.ulc.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
-                    //{
-                    //    mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.TRUE;
-                    //}
-                    #endregion
+                        posX -= alignX;
+                        posY -= alignY;
+                        posT -= alignT;
+                        mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                        #endregion
+                        mc.idle(100);
+                        if (retry++ < 5) goto RETRY;
+                        mc.ulc.projectionEdgeFind(QUARDRANT.QUARDRANT_LB, out ret.b); if (!ret.b) goto EXIT;
+                    }
                     mc.ulc.LIVE = true; mc.ulc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
                 }
                 #endregion
@@ -358,69 +397,82 @@ namespace PSA_Application
                     mc.ulc.model_delete(mode);
                     int retry = 0;
                 RETRY:
-                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.FOURTH, out ret.b, 1); if (!ret.b) goto EXIT;
-                    #region moving
-                    if ((double)mc.ulc.cam.edgeIntersection.resultX > 2.0 || (double)mc.ulc.cam.edgeIntersection.resultY > 2.0)
+                    if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CORNER)
                     {
-                        string showstr;
-                        showstr = "Result X:" + Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2).ToString();
-                        showstr += "\nResult Y:" + Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2).ToString();
-                        showstr += "\nResult is OK?";
-                        DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
-                        if (digrst == DialogResult.No) goto EXIT;
+                        mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.FOURTH, out ret.b, 1); if (!ret.b) goto EXIT;
+                        #region moving
+                        if ((double)mc.ulc.cam.edgeIntersection.resultX > 2.0 || (double)mc.ulc.cam.edgeIntersection.resultY > 2.0)
+                        {
+                            string showstr;
+                            showstr = "Result X:" + Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2).ToString();
+                            showstr += "\nResult Y:" + Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2).ToString();
+                            showstr += "\nResult is OK?";
+                            DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
+                            if (digrst == DialogResult.No) goto EXIT;
+                        }
+
+                        double alignX = (double)mc.ulc.cam.edgeIntersection.resultX;
+                        double alignY = (double)mc.ulc.cam.edgeIntersection.resultY;
+                        double alignT = (double)mc.ulc.cam.edgeIntersection.resultAngleH;
+                        double lidSizeW = (double)mc.para.MT.lidSize.x.value * 1000;
+                        double lidSizeH = (double)mc.para.MT.lidSize.y.value * 1000;
+
+                        double rX = 0, rY = 0;
+                        Calc.calcAlign(3, alignX, alignY, alignT, lidSizeW, lidSizeH, out rX, out rY);
+
+                        double cosTheta = Math.Cos((-alignT) * Math.PI / 180);
+                        double sinTheta = Math.Sin((-alignT) * Math.PI / 180);
+                        alignX = (cosTheta * rX) - (sinTheta * rY);
+                        alignY = (sinTheta * rX) + (cosTheta * rY);
+
+                        posX -= alignX;
+                        posY -= alignY;
+                        posT -= alignT;
+                        mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                        #endregion
+                        mc.idle(100);
+                        if (retry++ < 5) goto RETRY;
+                        mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.FOURTH, out ret.b, 1); if (!ret.b) goto EXIT;
                     }
+                    else
+                    {
+                        mc.ulc.projectionEdgeFind(QUARDRANT.QUARDRANT_LT, out ret.b); if (!ret.b) goto EXIT;
+                        mc.para.ULC.modelLIDC1.isCreate.value = (int)BOOL.TRUE;
+                        #region moving
+                        if (mc.ulc.cam.projectionEdge.resultX > 2.0
+                            || mc.ulc.cam.projectionEdge.resultY > 2.0)
+                        {
+                            string showstr;
+                            showstr = "Result X:" + Math.Round((double)mc.ulc.cam.projectionEdge.resultX, 2).ToString();
+                            showstr += "\nResult Y:" + Math.Round((double)mc.ulc.cam.projectionEdge.resultY, 2).ToString();
+                            showstr += "\nResult is OK?";
+                            DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
+                            if (digrst == DialogResult.No) goto EXIT;
+                        }
 
-                    posX -= Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2);
-                    posY -= Math.Round((double)mc.ulc.cam.edgeIntersection.resultY, 2);
-                    mc.hd.tool.jogMoveXY(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-                    #endregion
-                    mc.idle(100);
-                    if (retry++ < 5) goto RETRY;
-                    mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.FOURTH, out ret.b, 1); if (!ret.b) goto EXIT;
+                        double alignX = mc.ulc.cam.projectionEdge.resultX;
+                        double alignY = mc.ulc.cam.projectionEdge.resultY;
+                        double alignT = mc.ulc.cam.projectionEdge.resultAngle2;
+                        double lidSizeW = (double)mc.para.MT.lidSize.x.value * 1000;
+                        double lidSizeH = (double)mc.para.MT.lidSize.y.value * 1000;
 
-                    #region auto teach
-                    //halcon_region tmpRegion;
-                    //if (mc.para.ULC.modelLIDC1.algorism.value == (int)MODEL_ALGORISM.NCC)
-                    //{
-                    //    mc.ulc.cam.model[(int)ulc_MODEL.PADC1_NCC].algorism = MODEL_ALGORISM.NCC.ToString();
-                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.15);
-                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.15);
-                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.15);
-                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.15);
-                    //    mc.ulc.cam.createModel((int)ulc_MODEL.PADC1_NCC, tmpRegion);
+                        double rX = 0, rY = 0;
+                        Calc.calcAlign(3, alignX, alignY, alignT, lidSizeW, lidSizeH, out rX, out rY);
 
-                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.3);
-                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.3);
-                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.3);
-                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.3);
-                    //    mc.ulc.cam.createFind((int)ulc_MODEL.PADC1_NCC, tmpRegion);
-                    //    mc.idle(500);
-                    //    mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.TRUE;
-                    //    if (mc.ulc.cam.model[(int)ulc_MODEL.PADC1_NCC].isCreate == "false") mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.FALSE;
-                    //}
-                    //if (mc.para.ulc.modelPADC1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-                    //{
-                    //    mc.ulc.cam.model[(int)ulc_MODEL.PADC1_SHAPE].algorism = MODEL_ALGORISM.SHAPE.ToString();
-                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.15);
-                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.15);
-                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.15);
-                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.15);
-                    //    mc.ulc.cam.createModel((int)ulc_MODEL.PADC1_SHAPE, tmpRegion);
+                        double cosTheta = Math.Cos((-alignT) * Math.PI / 180);
+                        double sinTheta = Math.Sin((-alignT) * Math.PI / 180);
+                        alignX = (cosTheta * rX) - (sinTheta * rY);
+                        alignY = (sinTheta * rX) + (cosTheta * rY);
 
-                    //    tmpRegion.row1 = mc.ulc.cam.acq.height * (0.5 - 0.3);
-                    //    tmpRegion.row2 = mc.ulc.cam.acq.height * (0.5 + 0.3);
-                    //    tmpRegion.column1 = mc.ulc.cam.acq.width * (0.5 - 0.3);
-                    //    tmpRegion.column2 = mc.ulc.cam.acq.width * (0.5 + 0.3);
-                    //    mc.ulc.cam.createFind((int)ulc_MODEL.PADC1_SHAPE, tmpRegion);
-                    //    mc.idle(500);
-                    //    mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.TRUE;
-                    //    if (mc.ulc.cam.model[(int)ulc_MODEL.PADC1_SHAPE].isCreate == "false") mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.FALSE;
-                    //}
-                    //if (mc.para.ulc.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
-                    //{
-                    //    mc.para.ulc.modelPADC1.isCreate.value = (int)BOOL.TRUE;
-                    //}
-                    #endregion
+                        posX -= alignX;
+                        posY -= alignY;
+                        posT -= alignT;
+                        mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                        #endregion
+                        mc.idle(100);
+                        if (retry++ < 5) goto RETRY;
+                        mc.ulc.projectionEdgeFind(QUARDRANT.QUARDRANT_LT, out ret.b); if (!ret.b) goto EXIT;
+                    }
                     mc.ulc.LIVE = true; mc.ulc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
                 }
                 #endregion
@@ -432,17 +484,19 @@ namespace PSA_Application
 					mc.hdc.model_delete(mode);
 					int retry = 0;
 				RETRY:
-					mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.FIRST, out ret.b); if (!ret.b) goto EXIT;
-					#region moving
-					if ((double)mc.hdc.cam.edgeIntersection.resultX > 2.0 || (double)mc.hdc.cam.edgeIntersection.resultY > 2.0)
-					{
-						string showstr;
-						showstr = "Result X:" + Math.Round((double)mc.hdc.cam.edgeIntersection.resultX, 2).ToString();
-						showstr += "\nResult Y:" + Math.Round((double)mc.hdc.cam.edgeIntersection.resultY, 2).ToString();
-						showstr += "\nResult is OK?";
-						DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
-						if (digrst == DialogResult.No) goto EXIT;
-					}
+                    if (mc.para.HDC.modelPADC1.algorism.value != (int)MODEL_ALGORISM.PROJECTION)
+                    {
+                        mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.FIRST, out ret.b); if (!ret.b) goto EXIT;
+                        #region moving
+                        if ((double)mc.hdc.cam.edgeIntersection.resultX > 2.0 || (double)mc.hdc.cam.edgeIntersection.resultY > 2.0)
+                        {
+                            string showstr;
+                            showstr = "Result X:" + Math.Round((double)mc.hdc.cam.edgeIntersection.resultX, 2).ToString();
+                            showstr += "\nResult Y:" + Math.Round((double)mc.hdc.cam.edgeIntersection.resultY, 2).ToString();
+                            showstr += "\nResult is OK?";
+                            DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
+                            if (digrst == DialogResult.No) goto EXIT;
+                        }
 
 					posX += Math.Round((double)mc.hdc.cam.edgeIntersection.resultX, 2);
 					posY += Math.Round((double)mc.hdc.cam.edgeIntersection.resultY, 2);
@@ -481,20 +535,41 @@ namespace PSA_Application
 						tmpRegion.column2 = mc.hdc.cam.acq.width * (0.5 + 0.15);
 						mc.hdc.cam.createModel((int)HDC_MODEL.PADC1_SHAPE, tmpRegion);
 
-						tmpRegion.row1 = mc.hdc.cam.acq.height * (0.5 - 0.3);
-						tmpRegion.row2 = mc.hdc.cam.acq.height * (0.5 + 0.3);
-						tmpRegion.column1 = mc.hdc.cam.acq.width * (0.5 - 0.3);
-						tmpRegion.column2 = mc.hdc.cam.acq.width * (0.5 + 0.3);
-						mc.hdc.cam.createFind((int)HDC_MODEL.PADC1_SHAPE, tmpRegion);
-						mc.idle(500);
-						mc.para.HDC.modelPADC1.isCreate.value = (int)BOOL.TRUE;
-						if (mc.hdc.cam.model[(int)HDC_MODEL.PADC1_SHAPE].isCreate == "false") mc.para.HDC.modelPADC1.isCreate.value = (int)BOOL.FALSE;
-					}
-					//if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
-					//{
-					//    mc.para.HDC.modelPADC1.isCreate.value = (int)BOOL.TRUE;
-					//}
-					#endregion
+                            tmpRegion.row1 = mc.hdc.cam.acq.height * (0.5 - 0.3);
+                            tmpRegion.row2 = mc.hdc.cam.acq.height * (0.5 + 0.3);
+                            tmpRegion.column1 = mc.hdc.cam.acq.width * (0.5 - 0.3);
+                            tmpRegion.column2 = mc.hdc.cam.acq.width * (0.5 + 0.3);
+                            mc.hdc.cam.createFind((int)HDC_MODEL.PADC1_SHAPE, tmpRegion);
+                            mc.idle(500);
+                            mc.para.HDC.modelPADC1.isCreate.value = (int)BOOL.TRUE;
+                            if (mc.hdc.cam.model[(int)HDC_MODEL.PADC1_SHAPE].isCreate == "false") mc.para.HDC.modelPADC1.isCreate.value = (int)BOOL.FALSE;
+                        }
+                        #endregion
+                    }
+                    else
+                    {
+                        mc.hdc.projectionEdgeFind(QUARDRANT.QUARDRANT_RT, out ret.b); if (!ret.b) goto EXIT;
+                        mc.para.HDC.modelPADC1.isCreate.value = (int)BOOL.TRUE;
+                        #region moving
+                        if (mc.hdc.cam.projectionEdge.resultX > 2.0
+                            || mc.hdc.cam.projectionEdge.resultY > 2.0)
+                        {
+                            string showstr;
+                            showstr = "Result X:" + Math.Round((double)mc.hdc.cam.projectionEdge.resultX, 2).ToString();
+                            showstr += "\nResult Y:" + Math.Round((double)mc.hdc.cam.projectionEdge.resultY, 2).ToString();
+                            showstr += "\nResult is OK?";
+                            DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
+                            if (digrst == DialogResult.No) goto EXIT;
+                        }
+                        posX += Math.Round((double)mc.hdc.cam.projectionEdge.resultX, 2);
+                        posY += Math.Round((double)mc.hdc.cam.projectionEdge.resultY, 2);
+                        mc.hd.tool.jogMoveXY(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                        #endregion
+                        mc.idle(100);
+                        if (retry++ < 5) goto RETRY;
+                        mc.ulc.projectionEdgeFind(QUARDRANT.QUARDRANT_RT, out ret.b); if (!ret.b) goto EXIT;
+                    }
+					
 					mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
 				}
 				#endregion
@@ -505,24 +580,26 @@ namespace PSA_Application
 					mc.hdc.model_delete(mode);
 					int retry = 0;
 				RETRY:
-					mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.SECOND, out ret.b); if (!ret.b) goto EXIT;
-					if ((double)mc.hdc.cam.edgeIntersection.resultX > 2.0 || (double)mc.hdc.cam.edgeIntersection.resultY > 2.0)
-					{
-						string showstr;
-						showstr = "Result X:" + Math.Round((double)mc.hdc.cam.edgeIntersection.resultX, 2).ToString();
-						showstr += "\nResult Y:" + Math.Round((double)mc.hdc.cam.edgeIntersection.resultY, 2).ToString();
-						showstr += "\nResult is OK?";
-						DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
-						if (digrst == DialogResult.No) goto EXIT;
-					}
-					#region moving
-					posX += Math.Round((double)mc.hdc.cam.edgeIntersection.resultX, 2);
-					posY += Math.Round((double)mc.hdc.cam.edgeIntersection.resultY, 2);
-					mc.hd.tool.jogMoveXY(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-					#endregion
-					mc.idle(100);
-					if (retry++ < 5) goto RETRY;
-					mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.SECOND, out ret.b); if (!ret.b) goto EXIT;
+                    if (mc.para.HDC.modelPADC2.algorism.value != (int)MODEL_ALGORISM.PROJECTION)
+                    {
+                        mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.SECOND, out ret.b); if (!ret.b) goto EXIT;
+                        if ((double)mc.hdc.cam.edgeIntersection.resultX > 2.0 || (double)mc.hdc.cam.edgeIntersection.resultY > 2.0)
+                        {
+                            string showstr;
+                            showstr = "Result X:" + Math.Round((double)mc.hdc.cam.edgeIntersection.resultX, 2).ToString();
+                            showstr += "\nResult Y:" + Math.Round((double)mc.hdc.cam.edgeIntersection.resultY, 2).ToString();
+                            showstr += "\nResult is OK?";
+                            DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
+                            if (digrst == DialogResult.No) goto EXIT;
+                        }
+                        #region moving
+                        posX += Math.Round((double)mc.hdc.cam.edgeIntersection.resultX, 2);
+                        posY += Math.Round((double)mc.hdc.cam.edgeIntersection.resultY, 2);
+                        mc.hd.tool.jogMoveXY(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                        #endregion
+                        mc.idle(100);
+                        if (retry++ < 5) goto RETRY;
+                        mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.SECOND, out ret.b); if (!ret.b) goto EXIT;
 
 					halcon_region tmpRegion;
 					#region auto teach
@@ -553,20 +630,44 @@ namespace PSA_Application
 						tmpRegion.column2 = mc.hdc.cam.acq.width * (0.5 + 0.15);
 						mc.hdc.cam.createModel((int)HDC_MODEL.PADC2_SHAPE, tmpRegion);
 
-						tmpRegion.row1 = mc.hdc.cam.acq.height * (0.5 - 0.3);
-						tmpRegion.row2 = mc.hdc.cam.acq.height * (0.5 + 0.3);
-						tmpRegion.column1 = mc.hdc.cam.acq.width * (0.5 - 0.3);
-						tmpRegion.column2 = mc.hdc.cam.acq.width * (0.5 + 0.3);
-						mc.hdc.cam.createFind((int)HDC_MODEL.PADC2_SHAPE, tmpRegion);
-						mc.idle(500);
-						mc.para.HDC.modelPADC2.isCreate.value = (int)BOOL.TRUE;
-						if (mc.hdc.cam.model[(int)HDC_MODEL.PADC2_SHAPE].isCreate == "false") mc.para.HDC.modelPADC2.isCreate.value = (int)BOOL.FALSE;
-					}
-					//if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.CORNER)
-					//{
-					//    mc.para.HDC.modelPADC2.isCreate.value = (int)BOOL.TRUE;
-					//}
-					#endregion
+                            tmpRegion.row1 = mc.hdc.cam.acq.height * (0.5 - 0.3);
+                            tmpRegion.row2 = mc.hdc.cam.acq.height * (0.5 + 0.3);
+                            tmpRegion.column1 = mc.hdc.cam.acq.width * (0.5 - 0.3);
+                            tmpRegion.column2 = mc.hdc.cam.acq.width * (0.5 + 0.3);
+                            mc.hdc.cam.createFind((int)HDC_MODEL.PADC2_SHAPE, tmpRegion);
+                            mc.idle(500);
+                            mc.para.HDC.modelPADC2.isCreate.value = (int)BOOL.TRUE;
+                            if (mc.hdc.cam.model[(int)HDC_MODEL.PADC2_SHAPE].isCreate == "false") mc.para.HDC.modelPADC2.isCreate.value = (int)BOOL.FALSE;
+                        }
+                        //if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                        //{
+                        //    mc.para.HDC.modelPADC2.isCreate.value = (int)BOOL.TRUE;
+                        //}
+                        #endregion
+                    }
+                    else
+                    {
+                        mc.hdc.projectionEdgeFind(QUARDRANT.QUARDRANT_RB, out ret.b); if (!ret.b) goto EXIT;
+                        mc.para.HDC.modelPADC2.isCreate.value = (int)BOOL.TRUE;
+                        #region moving
+                        if (mc.hdc.cam.projectionEdge.resultX > 2.0
+                            || mc.hdc.cam.projectionEdge.resultY > 2.0)
+                        {
+                            string showstr;
+                            showstr = "Result X:" + Math.Round((double)mc.hdc.cam.projectionEdge.resultX, 2).ToString();
+                            showstr += "\nResult Y:" + Math.Round((double)mc.hdc.cam.projectionEdge.resultY, 2).ToString();
+                            showstr += "\nResult is OK?";
+                            DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
+                            if (digrst == DialogResult.No) goto EXIT;
+                        }
+                        posX += Math.Round((double)mc.hdc.cam.projectionEdge.resultX, 2);
+                        posY += Math.Round((double)mc.hdc.cam.projectionEdge.resultY, 2);
+                        mc.hd.tool.jogMoveXY(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                        #endregion
+                        mc.idle(100);
+                        if (retry++ < 5) goto RETRY;
+                        mc.ulc.projectionEdgeFind(QUARDRANT.QUARDRANT_RB, out ret.b); if (!ret.b) goto EXIT;
+                    }
 					mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
 				}
 				#endregion
@@ -577,24 +678,26 @@ namespace PSA_Application
 					mc.hdc.model_delete(mode);
 					int retry = 0;
 				RETRY:
-					mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.THIRD, out ret.b); if (!ret.b) goto EXIT;
-					if ((double)mc.hdc.cam.edgeIntersection.resultX > 2.0 || (double)mc.hdc.cam.edgeIntersection.resultY > 2.0)
-					{
-						string showstr;
-						showstr = "Result X:" + Math.Round((double)mc.hdc.cam.edgeIntersection.resultX, 2).ToString();
-						showstr += "\nResult Y:" + Math.Round((double)mc.hdc.cam.edgeIntersection.resultY, 2).ToString();
-						showstr += "\nResult is OK?";
-						DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
-						if (digrst == DialogResult.No) goto EXIT;
-					}
-					#region moving
-					posX += Math.Round((double)mc.hdc.cam.edgeIntersection.resultX, 2);
-					posY += Math.Round((double)mc.hdc.cam.edgeIntersection.resultY, 2);
-					mc.hd.tool.jogMoveXY(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-					#endregion
-					mc.idle(100);
-					if (retry++ < 5) goto RETRY;
-                    mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.THIRD, out ret.b); if (!ret.b) goto EXIT;
+                    if (mc.para.HDC.modelPADC3.algorism.value != (int)MODEL_ALGORISM.PROJECTION)
+                    {
+                        mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.THIRD, out ret.b); if (!ret.b) goto EXIT;
+                        if ((double)mc.hdc.cam.edgeIntersection.resultX > 2.0 || (double)mc.hdc.cam.edgeIntersection.resultY > 2.0)
+                        {
+                            string showstr;
+                            showstr = "Result X:" + Math.Round((double)mc.hdc.cam.edgeIntersection.resultX, 2).ToString();
+                            showstr += "\nResult Y:" + Math.Round((double)mc.hdc.cam.edgeIntersection.resultY, 2).ToString();
+                            showstr += "\nResult is OK?";
+                            DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
+                            if (digrst == DialogResult.No) goto EXIT;
+                        }
+                        #region moving
+                        posX += Math.Round((double)mc.hdc.cam.edgeIntersection.resultX, 2);
+                        posY += Math.Round((double)mc.hdc.cam.edgeIntersection.resultY, 2);
+                        mc.hd.tool.jogMoveXY(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                        #endregion
+                        mc.idle(100);
+                        if (retry++ < 5) goto RETRY;
+                        mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.THIRD, out ret.b); if (!ret.b) goto EXIT;
 
 					halcon_region tmpRegion;
 					#region auto teach
@@ -625,20 +728,44 @@ namespace PSA_Application
 						tmpRegion.column2 = mc.hdc.cam.acq.width * (0.5 + 0.15);
 						mc.hdc.cam.createModel((int)HDC_MODEL.PADC3_SHAPE, tmpRegion);
 
-						tmpRegion.row1 = mc.hdc.cam.acq.height * (0.5 - 0.3);
-						tmpRegion.row2 = mc.hdc.cam.acq.height * (0.5 + 0.3);
-						tmpRegion.column1 = mc.hdc.cam.acq.width * (0.5 - 0.3);
-						tmpRegion.column2 = mc.hdc.cam.acq.width * (0.5 + 0.3);
-						mc.hdc.cam.createFind((int)HDC_MODEL.PADC3_SHAPE, tmpRegion);
-						mc.idle(500);
-						mc.para.HDC.modelPADC3.isCreate.value = (int)BOOL.TRUE;
-						if (mc.hdc.cam.model[(int)HDC_MODEL.PADC3_SHAPE].isCreate == "false") mc.para.HDC.modelPADC3.isCreate.value = (int)BOOL.FALSE;
-					}
-					//if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
-					//{
-					//    mc.para.HDC.modelPADC3.isCreate.value = (int)BOOL.TRUE;
-					//}
-					#endregion
+                            tmpRegion.row1 = mc.hdc.cam.acq.height * (0.5 - 0.3);
+                            tmpRegion.row2 = mc.hdc.cam.acq.height * (0.5 + 0.3);
+                            tmpRegion.column1 = mc.hdc.cam.acq.width * (0.5 - 0.3);
+                            tmpRegion.column2 = mc.hdc.cam.acq.width * (0.5 + 0.3);
+                            mc.hdc.cam.createFind((int)HDC_MODEL.PADC3_SHAPE, tmpRegion);
+                            mc.idle(500);
+                            mc.para.HDC.modelPADC3.isCreate.value = (int)BOOL.TRUE;
+                            if (mc.hdc.cam.model[(int)HDC_MODEL.PADC3_SHAPE].isCreate == "false") mc.para.HDC.modelPADC3.isCreate.value = (int)BOOL.FALSE;
+                        }
+                        //if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                        //{
+                        //    mc.para.HDC.modelPADC3.isCreate.value = (int)BOOL.TRUE;
+                        //}
+                        #endregion
+                    }
+                    else
+                    {
+                        mc.hdc.projectionEdgeFind(QUARDRANT.QUARDRANT_LB, out ret.b); if (!ret.b) goto EXIT;
+                        mc.para.HDC.modelPADC3.isCreate.value = (int)BOOL.TRUE;
+                        #region moving
+                        if (mc.hdc.cam.projectionEdge.resultX > 2.0
+                            || mc.hdc.cam.projectionEdge.resultY > 2.0)
+                        {
+                            string showstr;
+                            showstr = "Result X:" + Math.Round((double)mc.hdc.cam.projectionEdge.resultX, 2).ToString();
+                            showstr += "\nResult Y:" + Math.Round((double)mc.hdc.cam.projectionEdge.resultY, 2).ToString();
+                            showstr += "\nResult is OK?";
+                            DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
+                            if (digrst == DialogResult.No) goto EXIT;
+                        }
+                        posX += Math.Round((double)mc.hdc.cam.projectionEdge.resultX, 2);
+                        posY += Math.Round((double)mc.hdc.cam.projectionEdge.resultY, 2);
+                        mc.hd.tool.jogMoveXY(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                        #endregion
+                        mc.idle(100);
+                        if (retry++ < 5) goto RETRY;
+                        mc.ulc.projectionEdgeFind(QUARDRANT.QUARDRANT_LB, out ret.b); if (!ret.b) goto EXIT;
+                    }
 					mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
 				}
 				#endregion
@@ -649,24 +776,26 @@ namespace PSA_Application
 					mc.hdc.model_delete(mode);
 					int retry = 0;
 				RETRY:
-					mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.FOURTH, out ret.b); if (!ret.b) goto EXIT;
-					if ((double)mc.hdc.cam.edgeIntersection.resultX > 2.0 || (double)mc.hdc.cam.edgeIntersection.resultY > 2.0)
-					{
-						string showstr;
-						showstr = "Result X:" + Math.Round((double)mc.hdc.cam.edgeIntersection.resultX, 2).ToString();
-						showstr += "\nResult Y:" + Math.Round((double)mc.hdc.cam.edgeIntersection.resultY, 2).ToString();
-						showstr += "\nResult is OK?";
-						DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
-						if (digrst == DialogResult.No) goto EXIT;
-					}
-					#region moving
-					posX += Math.Round((double)mc.hdc.cam.edgeIntersection.resultX, 2);
-					posY += Math.Round((double)mc.hdc.cam.edgeIntersection.resultY, 2);
-					mc.hd.tool.jogMoveXY(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-					#endregion
-					mc.idle(100);
-					if (retry++ < 5) goto RETRY;
-                    mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.FOURTH, out ret.b); if (!ret.b) goto EXIT;
+                    if (mc.para.HDC.modelPADC4.algorism.value != (int)MODEL_ALGORISM.PROJECTION)
+                    {
+                        mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.FOURTH, out ret.b); if (!ret.b) goto EXIT;
+                        if ((double)mc.hdc.cam.edgeIntersection.resultX > 2.0 || (double)mc.hdc.cam.edgeIntersection.resultY > 2.0)
+                        {
+                            string showstr;
+                            showstr = "Result X:" + Math.Round((double)mc.hdc.cam.edgeIntersection.resultX, 2).ToString();
+                            showstr += "\nResult Y:" + Math.Round((double)mc.hdc.cam.edgeIntersection.resultY, 2).ToString();
+                            showstr += "\nResult is OK?";
+                            DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
+                            if (digrst == DialogResult.No) goto EXIT;
+                        }
+                        #region moving
+                        posX += Math.Round((double)mc.hdc.cam.edgeIntersection.resultX, 2);
+                        posY += Math.Round((double)mc.hdc.cam.edgeIntersection.resultY, 2);
+                        mc.hd.tool.jogMoveXY(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                        #endregion
+                        mc.idle(100);
+                        if (retry++ < 5) goto RETRY;
+                        mc.hdc.edgeIntersectionFind(QUARTER_NUMBER.FOURTH, out ret.b); if (!ret.b) goto EXIT;
 
 					halcon_region tmpRegion;
 					#region auto teach
@@ -698,20 +827,44 @@ namespace PSA_Application
 						tmpRegion.column2 = mc.hdc.cam.acq.width * (0.5 + 0.15);
 						mc.hdc.cam.createModel((int)HDC_MODEL.PADC4_SHAPE, tmpRegion);
 
-						tmpRegion.row1 = mc.hdc.cam.acq.height * (0.5 - 0.3);
-						tmpRegion.row2 = mc.hdc.cam.acq.height * (0.5 + 0.3);
-						tmpRegion.column1 = mc.hdc.cam.acq.width * (0.5 - 0.3);
-						tmpRegion.column2 = mc.hdc.cam.acq.width * (0.5 + 0.3);
-						mc.hdc.cam.createFind((int)HDC_MODEL.PADC4_SHAPE, tmpRegion);
-						mc.idle(500);
-						mc.para.HDC.modelPADC4.isCreate.value = (int)BOOL.TRUE;
-						if (mc.hdc.cam.model[(int)HDC_MODEL.PADC4_SHAPE].isCreate == "false") mc.para.HDC.modelPADC4.isCreate.value = (int)BOOL.FALSE;
-					}
-					//if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.CORNER)
-					//{
-					//    mc.para.HDC.modelPADC4.isCreate.value = (int)BOOL.TRUE;
-					//}
-					#endregion
+                            tmpRegion.row1 = mc.hdc.cam.acq.height * (0.5 - 0.3);
+                            tmpRegion.row2 = mc.hdc.cam.acq.height * (0.5 + 0.3);
+                            tmpRegion.column1 = mc.hdc.cam.acq.width * (0.5 - 0.3);
+                            tmpRegion.column2 = mc.hdc.cam.acq.width * (0.5 + 0.3);
+                            mc.hdc.cam.createFind((int)HDC_MODEL.PADC4_SHAPE, tmpRegion);
+                            mc.idle(500);
+                            mc.para.HDC.modelPADC4.isCreate.value = (int)BOOL.TRUE;
+                            if (mc.hdc.cam.model[(int)HDC_MODEL.PADC4_SHAPE].isCreate == "false") mc.para.HDC.modelPADC4.isCreate.value = (int)BOOL.FALSE;
+                        }
+                        //if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                        //{
+                        //    mc.para.HDC.modelPADC4.isCreate.value = (int)BOOL.TRUE;
+                        //}
+                        #endregion
+                    }
+                    else
+                    {
+                        mc.hdc.projectionEdgeFind(QUARDRANT.QUARDRANT_LT, out ret.b); if (!ret.b) goto EXIT;
+                        mc.para.HDC.modelPADC4.isCreate.value = (int)BOOL.TRUE;
+                        #region moving
+                        if (mc.hdc.cam.projectionEdge.resultX > 2.0
+                            || mc.hdc.cam.projectionEdge.resultY > 2.0)
+                        {
+                            string showstr;
+                            showstr = "Result X:" + Math.Round((double)mc.hdc.cam.projectionEdge.resultX, 2).ToString();
+                            showstr += "\nResult Y:" + Math.Round((double)mc.hdc.cam.projectionEdge.resultY, 2).ToString();
+                            showstr += "\nResult is OK?";
+                            DialogResult digrst = MessageBox.Show(showstr, "Confirm", MessageBoxButtons.YesNo);
+                            if (digrst == DialogResult.No) goto EXIT;
+                        }
+                        posX += Math.Round((double)mc.hdc.cam.projectionEdge.resultX, 2);
+                        posY += Math.Round((double)mc.hdc.cam.projectionEdge.resultY, 2);
+                        mc.hd.tool.jogMoveXY(posX, posY, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                        #endregion
+                        mc.idle(100);
+                        if (retry++ < 5) goto RETRY;
+                        mc.ulc.projectionEdgeFind(QUARDRANT.QUARDRANT_LT, out ret.b); if (!ret.b) goto EXIT;
+                    }
 					mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
 				}
 				#endregion
@@ -1208,7 +1361,7 @@ namespace PSA_Application
 						mc.para.HDC.modelPADC1.isCreate.value = (int)BOOL.TRUE;
 						if (mc.hdc.cam.model[(int)HDC_MODEL.PADC1_SHAPE].isCreate == "false") mc.para.HDC.modelPADC1.isCreate.value = (int)BOOL.FALSE;
 					}
-					if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                    if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER || mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
 					{
 						mc.para.HDC.modelPADC1.isCreate.value = (int)BOOL.TRUE;
 					}
@@ -1237,7 +1390,7 @@ namespace PSA_Application
 						mc.para.HDC.modelPADC2.isCreate.value = (int)BOOL.TRUE;
 						if (mc.hdc.cam.model[(int)HDC_MODEL.PADC2_SHAPE].isCreate == "false") mc.para.HDC.modelPADC2.isCreate.value = (int)BOOL.FALSE;
 					}
-					if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                    if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.CORNER || mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
 					{
 						mc.para.HDC.modelPADC2.isCreate.value = (int)BOOL.TRUE;
 					}
@@ -1266,7 +1419,7 @@ namespace PSA_Application
 						mc.para.HDC.modelPADC3.isCreate.value = (int)BOOL.TRUE;
 						if (mc.hdc.cam.model[(int)HDC_MODEL.PADC3_SHAPE].isCreate == "false") mc.para.HDC.modelPADC3.isCreate.value = (int)BOOL.FALSE;
 					}
-					if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                    if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER || mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
 					{
 						mc.para.HDC.modelPADC3.isCreate.value = (int)BOOL.TRUE;
 					}
@@ -1295,7 +1448,7 @@ namespace PSA_Application
 						mc.para.HDC.modelPADC4.isCreate.value = (int)BOOL.TRUE;
 						if (mc.hdc.cam.model[(int)HDC_MODEL.PADC4_SHAPE].isCreate == "false") mc.para.HDC.modelPADC4.isCreate.value = (int)BOOL.FALSE;
 					}
-					if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                    if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.CORNER || mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
 					{
 						mc.para.HDC.modelPADC4.isCreate.value = (int)BOOL.TRUE;
 					}
@@ -2467,7 +2620,7 @@ namespace PSA_Application
                     BT_AutoTeach.Visible = true;
                     BT_Teach.Visible = false;
                 }
-                else if(mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                else if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CORNER || mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
                 {
                     BT_AutoTeach.Visible = true;
                     BT_Teach.Visible = true;
@@ -2518,7 +2671,7 @@ namespace PSA_Application
 				BT_ESC.Visible = true;
 				BT_AutoTeach.Visible = true;
 
-                if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER || mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
                 {
                     BT_Teach.Text = "SAVE";
                 }
@@ -2544,7 +2697,7 @@ namespace PSA_Application
 				BT_ESC.Visible = true;
 				BT_AutoTeach.Visible = true;
 
-                if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.CORNER || mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
                 {
                     BT_Teach.Text = "SAVE";
                 }
@@ -2570,7 +2723,7 @@ namespace PSA_Application
 				BT_ESC.Visible = true;
 				BT_AutoTeach.Visible = true;
 
-                if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER || mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
                 {
                     BT_Teach.Text = "SAVE";
                 }
@@ -2596,7 +2749,7 @@ namespace PSA_Application
 				BT_ESC.Visible = true;
 				BT_AutoTeach.Visible = true;
 
-                if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.CORNER || mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
                 {
                     BT_Teach.Text = "SAVE";
                 }

@@ -92,9 +92,9 @@
             // BT_Move
             // 
             this.BT_Move.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BT_Move.Location = new System.Drawing.Point(493, 290);
+            this.BT_Move.Location = new System.Drawing.Point(14, 450);
             this.BT_Move.Name = "BT_Move";
-            this.BT_Move.Size = new System.Drawing.Size(105, 74);
+            this.BT_Move.Size = new System.Drawing.Size(143, 74);
             this.BT_Move.TabIndex = 4;
             this.BT_Move.Text = "Camera Move";
             this.BT_Move.UseVisualStyleBackColor = true;
@@ -103,9 +103,9 @@
             // BT_Repress
             // 
             this.BT_Repress.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BT_Repress.Location = new System.Drawing.Point(609, 290);
+            this.BT_Repress.Location = new System.Drawing.Point(175, 450);
             this.BT_Repress.Name = "BT_Repress";
-            this.BT_Repress.Size = new System.Drawing.Size(105, 74);
+            this.BT_Repress.Size = new System.Drawing.Size(143, 74);
             this.BT_Repress.TabIndex = 5;
             this.BT_Repress.Text = "PRESS";
             this.BT_Repress.UseVisualStyleBackColor = true;
@@ -114,9 +114,9 @@
             // BT_ReWork
             // 
             this.BT_ReWork.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BT_ReWork.Location = new System.Drawing.Point(493, 370);
+            this.BT_ReWork.Location = new System.Drawing.Point(336, 450);
             this.BT_ReWork.Name = "BT_ReWork";
-            this.BT_ReWork.Size = new System.Drawing.Size(105, 74);
+            this.BT_ReWork.Size = new System.Drawing.Size(143, 74);
             this.BT_ReWork.TabIndex = 6;
             this.BT_ReWork.Text = "ATTACH";
             this.BT_ReWork.UseVisualStyleBackColor = true;
@@ -125,9 +125,9 @@
             // BT_Close
             // 
             this.BT_Close.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BT_Close.Location = new System.Drawing.Point(609, 370);
+            this.BT_Close.Location = new System.Drawing.Point(497, 450);
             this.BT_Close.Name = "BT_Close";
-            this.BT_Close.Size = new System.Drawing.Size(105, 74);
+            this.BT_Close.Size = new System.Drawing.Size(143, 74);
             this.BT_Close.TabIndex = 7;
             this.BT_Close.Text = "Close";
             this.BT_Close.UseVisualStyleBackColor = true;
@@ -472,13 +472,13 @@
             this.BoardStatus_WorkArea.BackColor = System.Drawing.Color.Gainsboro;
             this.BoardStatus_WorkArea.Location = new System.Drawing.Point(14, 12);
             this.BoardStatus_WorkArea.Name = "BoardStatus_WorkArea";
-            this.BoardStatus_WorkArea.Size = new System.Drawing.Size(700, 249);
+            this.BoardStatus_WorkArea.Size = new System.Drawing.Size(628, 249);
             this.BoardStatus_WorkArea.TabIndex = 18;
             // 
             // FormTrayEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(728, 458);
+            this.ClientSize = new System.Drawing.Size(654, 537);
             this.ControlBox = false;
             this.Controls.Add(this.BoardStatus_WorkArea);
             this.Controls.Add(this.groupBox2);

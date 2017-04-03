@@ -159,138 +159,6 @@
   <data name="TS_IN.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
   </data>
-  <data name="LB_IN.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="LB_IN.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial, 9pt, style=Bold</value>
-  </data>
-  <data name="LB_IN.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 22</value>
-  </data>
-  <data name="LB_IN.Text" xml:space="preserve">
-    <value>입력 신호</value>
-  </data>
-  <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="LB_IN_MG1.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="LB_IN_MG1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
-        AAAB60lEQVRIS+2VsU7DMBCGO/IMvANIDOUheI0ysVaIPgRsGTt06UaGDh1ZGLrBwMDAgMTM0InZ6DP+
-        o8NcnKSiYuGkT6kT5z6f7bij/yjFZrMJ8PT6Eq+W1OX3QqLtdttAW+xF3ia0sly6Wq8CpObwsFLJ0qNi
-        1HUdRLrVP6xUwvXdOlTPVTh/uAhHH2cRfsPicfFNsqyXYT6fD5N7UoSIjsNpKzy3A0BcVVU/OSJPmksO
-        w0lD/kxy1hkxdK65quVKO5ciOnCwA7CVU/XsZhannXZr2GpZUzu9CGhDLhbqO34fxyoBMSTFz9A0e9VS
-        EcLbt/u4mfpUTj/yIJ1eTtunOxfzopKQFLE2WS60WHG1rOI0I2atoygPhKBNpQS2urZKLaqa6Z5cT6Kw
-        KEZoxVRm5X3ROxJPrr5oXedcrAS7MkgsaNs13oWdxd7BMQQGbsUQRV5IStSbOu5gL2kXebWCXZ7Sl2OX
-        qtlgUeqIiwcJH7o92IfKvSmOpMGktH4g5q9Np40ODk8kmun1pEbceoIRiDlxQB25Ug0gsTRVdkghCkqB
-        XH9rdgBsEJuowRMK0y8m7wrJ2RSCQXDPFXgYaXFzeYGMlzhzhSuxGKFg36SUw8JOv9CASkLo/Q0PDRIz
-        iFzIvb1J8yh+Mn8bo9EnpdQXVpEtIdAAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="LB_IN_MG1.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="LB_IN_MG1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 32</value>
-  </data>
-  <data name="LB_IN_MG1.Text" xml:space="preserve">
-    <value>MAGAZINE1</value>
-  </data>
-  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="LB_IN_MG2.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="LB_IN_MG2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
-        AAAB60lEQVRIS+2VsU7DMBCGO/IMvANIDOUheI0ysVaIPgRsGTt06UaGDh1ZGLrBwMDAgMTM0InZ6DP+
-        o8NcnKSiYuGkT6kT5z6f7bij/yjFZrMJ8PT6Eq+W1OX3QqLtdttAW+xF3ia0sly6Wq8CpObwsFLJ0qNi
-        1HUdRLrVP6xUwvXdOlTPVTh/uAhHH2cRfsPicfFNsqyXYT6fD5N7UoSIjsNpKzy3A0BcVVU/OSJPmksO
-        w0lD/kxy1hkxdK65quVKO5ciOnCwA7CVU/XsZhannXZr2GpZUzu9CGhDLhbqO34fxyoBMSTFz9A0e9VS
-        EcLbt/u4mfpUTj/yIJ1eTtunOxfzopKQFLE2WS60WHG1rOI0I2atoygPhKBNpQS2urZKLaqa6Z5cT6Kw
-        KEZoxVRm5X3ROxJPrr5oXedcrAS7MkgsaNs13oWdxd7BMQQGbsUQRV5IStSbOu5gL2kXebWCXZ7Sl2OX
-        qtlgUeqIiwcJH7o92IfKvSmOpMGktH4g5q9Np40ODk8kmun1pEbceoIRiDlxQB25Ug0gsTRVdkghCkqB
-        XH9rdgBsEJuowRMK0y8m7wrJ2RSCQXDPFXgYaXFzeYGMlzhzhSuxGKFg36SUw8JOv9CASkLo/Q0PDRIz
-        iFzIvb1J8yh+Mn8bo9EnpdQXVpEtIdAAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="LB_IN_MG2.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="LB_IN_MG2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 32</value>
-  </data>
-  <data name="LB_IN_MG2.Text" xml:space="preserve">
-    <value>MAGAZINE2</value>
-  </data>
-  <data name="toolStripSeparator19.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="LB_IN_MG1_RESET.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="LB_IN_MG1_RESET.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
-        AAAB60lEQVRIS+2VsU7DMBCGO/IMvANIDOUheI0ysVaIPgRsGTt06UaGDh1ZGLrBwMDAgMTM0InZ6DP+
-        o8NcnKSiYuGkT6kT5z6f7bij/yjFZrMJ8PT6Eq+W1OX3QqLtdttAW+xF3ia0sly6Wq8CpObwsFLJ0qNi
-        1HUdRLrVP6xUwvXdOlTPVTh/uAhHH2cRfsPicfFNsqyXYT6fD5N7UoSIjsNpKzy3A0BcVVU/OSJPmksO
-        w0lD/kxy1hkxdK65quVKO5ciOnCwA7CVU/XsZhannXZr2GpZUzu9CGhDLhbqO34fxyoBMSTFz9A0e9VS
-        EcLbt/u4mfpUTj/yIJ1eTtunOxfzopKQFLE2WS60WHG1rOI0I2atoygPhKBNpQS2urZKLaqa6Z5cT6Kw
-        KEZoxVRm5X3ROxJPrr5oXedcrAS7MkgsaNs13oWdxd7BMQQGbsUQRV5IStSbOu5gL2kXebWCXZ7Sl2OX
-        qtlgUeqIiwcJH7o92IfKvSmOpMGktH4g5q9Np40ODk8kmun1pEbceoIRiDlxQB25Ug0gsTRVdkghCkqB
-        XH9rdgBsEJuowRMK0y8m7wrJ2RSCQXDPFXgYaXFzeYGMlzhzhSuxGKFg36SUw8JOv9CASkLo/Q0PDRIz
-        iFzIvb1J8yh+Mn8bo9EnpdQXVpEtIdAAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="LB_IN_MG1_RESET.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="LB_IN_MG1_RESET.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 32</value>
-  </data>
-  <data name="LB_IN_MG1_RESET.Text" xml:space="preserve">
-    <value>MG 1 Reset</value>
-  </data>
-  <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="LB_IN_MG2_RESET.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="LB_IN_MG2_RESET.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
-        AAAB60lEQVRIS+2VsU7DMBCGO/IMvANIDOUheI0ysVaIPgRsGTt06UaGDh1ZGLrBwMDAgMTM0InZ6DP+
-        o8NcnKSiYuGkT6kT5z6f7bij/yjFZrMJ8PT6Eq+W1OX3QqLtdttAW+xF3ia0sly6Wq8CpObwsFLJ0qNi
-        1HUdRLrVP6xUwvXdOlTPVTh/uAhHH2cRfsPicfFNsqyXYT6fD5N7UoSIjsNpKzy3A0BcVVU/OSJPmksO
-        w0lD/kxy1hkxdK65quVKO5ciOnCwA7CVU/XsZhannXZr2GpZUzu9CGhDLhbqO34fxyoBMSTFz9A0e9VS
-        EcLbt/u4mfpUTj/yIJ1eTtunOxfzopKQFLE2WS60WHG1rOI0I2atoygPhKBNpQS2urZKLaqa6Z5cT6Kw
-        KEZoxVRm5X3ROxJPrr5oXedcrAS7MkgsaNs13oWdxd7BMQQGbsUQRV5IStSbOu5gL2kXebWCXZ7Sl2OX
-        qtlgUeqIiwcJH7o92IfKvSmOpMGktH4g5q9Np40ODk8kmun1pEbceoIRiDlxQB25Ug0gsTRVdkghCkqB
-        XH9rdgBsEJuowRMK0y8m7wrJ2RSCQXDPFXgYaXFzeYGMlzhzhSuxGKFg36SUw8JOv9CASkLo/Q0PDRIz
-        iFzIvb1J8yh+Mn8bo9EnpdQXVpEtIdAAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="LB_IN_MG2_RESET.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="LB_IN_MG2_RESET.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 32</value>
-  </data>
-  <data name="LB_IN_MG2_RESET.Text" xml:space="preserve">
-    <value>MG 2 Reset</value>
-  </data>
   <data name="TS_IN.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 37</value>
   </data>
@@ -315,6 +183,142 @@
   <data name="&gt;&gt;TS_IN.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="LB_IN.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="LB_IN.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial, 9pt, style=Bold</value>
+  </data>
+  <data name="LB_IN.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 22</value>
+  </data>
+  <data name="LB_IN.Text" xml:space="preserve">
+    <value>입력 신호</value>
+  </data>
+  <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="LB_IN_MG1.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="LB_IN_MG1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
+        AAACCElEQVRIS+2WrU4DURBGK3kG3gESRHkIXqMobEPoQ4BbWVFTx4qKSgxiHQgEAkGCRlShLzmXfpvp
+        zf3bpnU0mex2d7pnvpnZmY5G/59MBrquc9jb54c/Wjt44gTabDZOBlh2FDgPjwFDtXyX4tV65bC9M2Ch
+        Sm3Nw9q2dbIa/x0fC5Wa9dPaNe+Nu365cWc/V944xxavix2Fy3bp5vO5D6AaHoMCBHTuLpPGfRsA4KZp
+        6uCoU02lFGgIPHUXThbeE5w6A8aKNZdajqQohAI7iRjXFYBVjurZw8ynPZtyq5aa2vQCVG1jcK4JPv4e
+        e5UYYCwJVppjalEE9PHr2TdTjXL8gAGd3k7T6Q7B/FAKpFZNllJsVfP7Ztn4NAOm1lHVdhLhIKhVl1Jq
+        A1G9SffkfuKBWbCdwYBtfW0Xl85tnQFP7v4sWecQnHtna+5JcRVYMxjFtsY1oNBnb3BscAwJgMBtqlGe
+        faV0s+3a4phMBRKqVbrp8qrZvY9qms8rNY1VrDPRMG3sVhkKj6XYg7fBZBUDZrVpuNdspz69EaUWnF0Y
+        gJk4mBw5av8CsdarLEBRXawxcK01GwAN0tdQtUwBt8PD+hfBOAiuDaMVR0BqmOLRBJfdUrGItFeZubIh
+        QCmmb6oUh042/SqD1l4fiE2/Oa9+h4dGxoMJIqw/144GDYMs/scaquqQ/r+l1BdWdfIAXAAAAABJRU5E
+        rkJggg==
+</value>
+  </data>
+  <data name="LB_IN_MG1.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="LB_IN_MG1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 32</value>
+  </data>
+  <data name="LB_IN_MG1.Text" xml:space="preserve">
+    <value>MAGAZINE1</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="LB_IN_MG2.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="LB_IN_MG2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
+        AAACCElEQVRIS+2WrU4DURBGK3kG3gESRHkIXqMobEPoQ4BbWVFTx4qKSgxiHQgEAkGCRlShLzmXfpvp
+        zf3bpnU0mex2d7pnvpnZmY5G/59MBrquc9jb54c/Wjt44gTabDZOBlh2FDgPjwFDtXyX4tV65bC9M2Ch
+        Sm3Nw9q2dbIa/x0fC5Wa9dPaNe+Nu365cWc/V944xxavix2Fy3bp5vO5D6AaHoMCBHTuLpPGfRsA4KZp
+        6uCoU02lFGgIPHUXThbeE5w6A8aKNZdajqQohAI7iRjXFYBVjurZw8ynPZtyq5aa2vQCVG1jcK4JPv4e
+        e5UYYCwJVppjalEE9PHr2TdTjXL8gAGd3k7T6Q7B/FAKpFZNllJsVfP7Ztn4NAOm1lHVdhLhIKhVl1Jq
+        A1G9SffkfuKBWbCdwYBtfW0Xl85tnQFP7v4sWecQnHtna+5JcRVYMxjFtsY1oNBnb3BscAwJgMBtqlGe
+        faV0s+3a4phMBRKqVbrp8qrZvY9qms8rNY1VrDPRMG3sVhkKj6XYg7fBZBUDZrVpuNdspz69EaUWnF0Y
+        gJk4mBw5av8CsdarLEBRXawxcK01GwAN0tdQtUwBt8PD+hfBOAiuDaMVR0BqmOLRBJfdUrGItFeZubIh
+        QCmmb6oUh042/SqD1l4fiE2/Oa9+h4dGxoMJIqw/144GDYMs/scaquqQ/r+l1BdWdfIAXAAAAABJRU5E
+        rkJggg==
+</value>
+  </data>
+  <data name="LB_IN_MG2.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="LB_IN_MG2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 32</value>
+  </data>
+  <data name="LB_IN_MG2.Text" xml:space="preserve">
+    <value>MAGAZINE2</value>
+  </data>
+  <data name="toolStripSeparator19.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="LB_IN_MG1_RESET.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="LB_IN_MG1_RESET.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
+        AAACCElEQVRIS+2WrU4DURBGK3kG3gESRHkIXqMobEPoQ4BbWVFTx4qKSgxiHQgEAkGCRlShLzmXfpvp
+        zf3bpnU0mex2d7pnvpnZmY5G/59MBrquc9jb54c/Wjt44gTabDZOBlh2FDgPjwFDtXyX4tV65bC9M2Ch
+        Sm3Nw9q2dbIa/x0fC5Wa9dPaNe+Nu365cWc/V944xxavix2Fy3bp5vO5D6AaHoMCBHTuLpPGfRsA4KZp
+        6uCoU02lFGgIPHUXThbeE5w6A8aKNZdajqQohAI7iRjXFYBVjurZw8ynPZtyq5aa2vQCVG1jcK4JPv4e
+        e5UYYCwJVppjalEE9PHr2TdTjXL8gAGd3k7T6Q7B/FAKpFZNllJsVfP7Ztn4NAOm1lHVdhLhIKhVl1Jq
+        A1G9SffkfuKBWbCdwYBtfW0Xl85tnQFP7v4sWecQnHtna+5JcRVYMxjFtsY1oNBnb3BscAwJgMBtqlGe
+        faV0s+3a4phMBRKqVbrp8qrZvY9qms8rNY1VrDPRMG3sVhkKj6XYg7fBZBUDZrVpuNdspz69EaUWnF0Y
+        gJk4mBw5av8CsdarLEBRXawxcK01GwAN0tdQtUwBt8PD+hfBOAiuDaMVR0BqmOLRBJfdUrGItFeZubIh
+        QCmmb6oUh042/SqD1l4fiE2/Oa9+h4dGxoMJIqw/144GDYMs/scaquqQ/r+l1BdWdfIAXAAAAABJRU5E
+        rkJggg==
+</value>
+  </data>
+  <data name="LB_IN_MG1_RESET.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="LB_IN_MG1_RESET.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 32</value>
+  </data>
+  <data name="LB_IN_MG1_RESET.Text" xml:space="preserve">
+    <value>MG 1 Reset</value>
+  </data>
+  <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="LB_IN_MG2_RESET.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="LB_IN_MG2_RESET.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
+        AAACCElEQVRIS+2WrU4DURBGK3kG3gESRHkIXqMobEPoQ4BbWVFTx4qKSgxiHQgEAkGCRlShLzmXfpvp
+        zf3bpnU0mex2d7pnvpnZmY5G/59MBrquc9jb54c/Wjt44gTabDZOBlh2FDgPjwFDtXyX4tV65bC9M2Ch
+        Sm3Nw9q2dbIa/x0fC5Wa9dPaNe+Nu365cWc/V944xxavix2Fy3bp5vO5D6AaHoMCBHTuLpPGfRsA4KZp
+        6uCoU02lFGgIPHUXThbeE5w6A8aKNZdajqQohAI7iRjXFYBVjurZw8ynPZtyq5aa2vQCVG1jcK4JPv4e
+        e5UYYCwJVppjalEE9PHr2TdTjXL8gAGd3k7T6Q7B/FAKpFZNllJsVfP7Ztn4NAOm1lHVdhLhIKhVl1Jq
+        A1G9SffkfuKBWbCdwYBtfW0Xl85tnQFP7v4sWecQnHtna+5JcRVYMxjFtsY1oNBnb3BscAwJgMBtqlGe
+        faV0s+3a4phMBRKqVbrp8qrZvY9qms8rNY1VrDPRMG3sVhkKj6XYg7fBZBUDZrVpuNdspz69EaUWnF0Y
+        gJk4mBw5av8CsdarLEBRXawxcK01GwAN0tdQtUwBt8PD+hfBOAiuDaMVR0BqmOLRBJfdUrGItFeZubIh
+        QCmmb6oUh042/SqD1l4fiE2/Oa9+h4dGxoMJIqw/144GDYMs/scaquqQ/r+l1BdWdfIAXAAAAABJRU5E
+        rkJggg==
+</value>
+  </data>
+  <data name="LB_IN_MG2_RESET.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="LB_IN_MG2_RESET.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 32</value>
+  </data>
+  <data name="LB_IN_MG2_RESET.Text" xml:space="preserve">
+    <value>MG 2 Reset</value>
+  </data>
   <metadata name="TS_IN2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>103, 14</value>
   </metadata>
@@ -323,135 +327,6 @@
   </data>
   <data name="TS_IN2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
-  </data>
-  <data name="LB_IN2.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="LB_IN2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 22</value>
-  </data>
-  <data name="LB_IN2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="SL_IN_GUIDE1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="LB_IN_GUIDE1.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="LB_IN_GUIDE1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
-        AAAB60lEQVRIS+2VsU7DMBCGO/IMvANIDOUheI0ysVaIPgRsGTt06UaGDh1ZGLrBwMDAgMTM0InZ6DP+
-        o8NcnKSiYuGkT6kT5z6f7bij/yjFZrMJ8PT6Eq+W1OX3QqLtdttAW+xF3ia0sly6Wq8CpObwsFLJ0qNi
-        1HUdRLrVP6xUwvXdOlTPVTh/uAhHH2cRfsPicfFNsqyXYT6fD5N7UoSIjsNpKzy3A0BcVVU/OSJPmksO
-        w0lD/kxy1hkxdK65quVKO5ciOnCwA7CVU/XsZhannXZr2GpZUzu9CGhDLhbqO34fxyoBMSTFz9A0e9VS
-        EcLbt/u4mfpUTj/yIJ1eTtunOxfzopKQFLE2WS60WHG1rOI0I2atoygPhKBNpQS2urZKLaqa6Z5cT6Kw
-        KEZoxVRm5X3ROxJPrr5oXedcrAS7MkgsaNs13oWdxd7BMQQGbsUQRV5IStSbOu5gL2kXebWCXZ7Sl2OX
-        qtlgUeqIiwcJH7o92IfKvSmOpMGktH4g5q9Np40ODk8kmun1pEbceoIRiDlxQB25Ug0gsTRVdkghCkqB
-        XH9rdgBsEJuowRMK0y8m7wrJ2RSCQXDPFXgYaXFzeYGMlzhzhSuxGKFg36SUw8JOv9CASkLo/Q0PDRIz
-        iFzIvb1J8yh+Mn8bo9EnpdQXVpEtIdAAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="LB_IN_GUIDE1.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="LB_IN_GUIDE1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 32</value>
-  </data>
-  <data name="LB_IN_GUIDE1.Text" xml:space="preserve">
-    <value>GUIDE 1</value>
-  </data>
-  <data name="SL_IN_GUIDE2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="LB_IN_GUIDE2.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="LB_IN_GUIDE2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
-        AAAB60lEQVRIS+2VsU7DMBCGO/IMvANIDOUheI0ysVaIPgRsGTt06UaGDh1ZGLrBwMDAgMTM0InZ6DP+
-        o8NcnKSiYuGkT6kT5z6f7bij/yjFZrMJ8PT6Eq+W1OX3QqLtdttAW+xF3ia0sly6Wq8CpObwsFLJ0qNi
-        1HUdRLrVP6xUwvXdOlTPVTh/uAhHH2cRfsPicfFNsqyXYT6fD5N7UoSIjsNpKzy3A0BcVVU/OSJPmksO
-        w0lD/kxy1hkxdK65quVKO5ciOnCwA7CVU/XsZhannXZr2GpZUzu9CGhDLhbqO34fxyoBMSTFz9A0e9VS
-        EcLbt/u4mfpUTj/yIJ1eTtunOxfzopKQFLE2WS60WHG1rOI0I2atoygPhKBNpQS2urZKLaqa6Z5cT6Kw
-        KEZoxVRm5X3ROxJPrr5oXedcrAS7MkgsaNs13oWdxd7BMQQGbsUQRV5IStSbOu5gL2kXebWCXZ7Sl2OX
-        qtlgUeqIiwcJH7o92IfKvSmOpMGktH4g5q9Np40ODk8kmun1pEbceoIRiDlxQB25Ug0gsTRVdkghCkqB
-        XH9rdgBsEJuowRMK0y8m7wrJ2RSCQXDPFXgYaXFzeYGMlzhzhSuxGKFg36SUw8JOv9CASkLo/Q0PDRIz
-        iFzIvb1J8yh+Mn8bo9EnpdQXVpEtIdAAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="LB_IN_GUIDE2.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="LB_IN_GUIDE2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 32</value>
-  </data>
-  <data name="LB_IN_GUIDE2.Text" xml:space="preserve">
-    <value>GUIDE 2</value>
-  </data>
-  <data name="SL_IN_GUIDE3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="LB_IN_GUIDE3.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="LB_IN_GUIDE3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
-        AAAB60lEQVRIS+2VsU7DMBCGO/IMvANIDOUheI0ysVaIPgRsGTt06UaGDh1ZGLrBwMDAgMTM0InZ6DP+
-        o8NcnKSiYuGkT6kT5z6f7bij/yjFZrMJ8PT6Eq+W1OX3QqLtdttAW+xF3ia0sly6Wq8CpObwsFLJ0qNi
-        1HUdRLrVP6xUwvXdOlTPVTh/uAhHH2cRfsPicfFNsqyXYT6fD5N7UoSIjsNpKzy3A0BcVVU/OSJPmksO
-        w0lD/kxy1hkxdK65quVKO5ciOnCwA7CVU/XsZhannXZr2GpZUzu9CGhDLhbqO34fxyoBMSTFz9A0e9VS
-        EcLbt/u4mfpUTj/yIJ1eTtunOxfzopKQFLE2WS60WHG1rOI0I2atoygPhKBNpQS2urZKLaqa6Z5cT6Kw
-        KEZoxVRm5X3ROxJPrr5oXedcrAS7MkgsaNs13oWdxd7BMQQGbsUQRV5IStSbOu5gL2kXebWCXZ7Sl2OX
-        qtlgUeqIiwcJH7o92IfKvSmOpMGktH4g5q9Np40ODk8kmun1pEbceoIRiDlxQB25Ug0gsTRVdkghCkqB
-        XH9rdgBsEJuowRMK0y8m7wrJ2RSCQXDPFXgYaXFzeYGMlzhzhSuxGKFg36SUw8JOv9CASkLo/Q0PDRIz
-        iFzIvb1J8yh+Mn8bo9EnpdQXVpEtIdAAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="LB_IN_GUIDE3.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="LB_IN_GUIDE3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 32</value>
-  </data>
-  <data name="LB_IN_GUIDE3.Text" xml:space="preserve">
-    <value>GUIDE 3</value>
-  </data>
-  <data name="SL_IN_GUIDE4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="LB_IN_GUIDE4.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="LB_IN_GUIDE4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
-        AAAB60lEQVRIS+2VsU7DMBCGO/IMvANIDOUheI0ysVaIPgRsGTt06UaGDh1ZGLrBwMDAgMTM0InZ6DP+
-        o8NcnKSiYuGkT6kT5z6f7bij/yjFZrMJ8PT6Eq+W1OX3QqLtdttAW+xF3ia0sly6Wq8CpObwsFLJ0qNi
-        1HUdRLrVP6xUwvXdOlTPVTh/uAhHH2cRfsPicfFNsqyXYT6fD5N7UoSIjsNpKzy3A0BcVVU/OSJPmksO
-        w0lD/kxy1hkxdK65quVKO5ciOnCwA7CVU/XsZhannXZr2GpZUzu9CGhDLhbqO34fxyoBMSTFz9A0e9VS
-        EcLbt/u4mfpUTj/yIJ1eTtunOxfzopKQFLE2WS60WHG1rOI0I2atoygPhKBNpQS2urZKLaqa6Z5cT6Kw
-        KEZoxVRm5X3ROxJPrr5oXedcrAS7MkgsaNs13oWdxd7BMQQGbsUQRV5IStSbOu5gL2kXebWCXZ7Sl2OX
-        qtlgUeqIiwcJH7o92IfKvSmOpMGktH4g5q9Np40ODk8kmun1pEbceoIRiDlxQB25Ug0gsTRVdkghCkqB
-        XH9rdgBsEJuowRMK0y8m7wrJ2RSCQXDPFXgYaXFzeYGMlzhzhSuxGKFg36SUw8JOv9CASkLo/Q0PDRIz
-        iFzIvb1J8yh+Mn8bo9EnpdQXVpEtIdAAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="LB_IN_GUIDE4.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="LB_IN_GUIDE4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 32</value>
-  </data>
-  <data name="LB_IN_GUIDE4.Text" xml:space="preserve">
-    <value>GUIDE 4</value>
   </data>
   <data name="TS_IN2.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 72</value>
@@ -476,6 +351,139 @@
   </data>
   <data name="&gt;&gt;TS_IN2.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="LB_IN2.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="LB_IN2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 22</value>
+  </data>
+  <data name="LB_IN2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="SL_IN_GUIDE1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="LB_IN_GUIDE1.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="LB_IN_GUIDE1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
+        AAACCElEQVRIS+2WrU4DURBGK3kG3gESRHkIXqMobEPoQ4BbWVFTx4qKSgxiHQgEAkGCRlShLzmXfpvp
+        zf3bpnU0mex2d7pnvpnZmY5G/59MBrquc9jb54c/Wjt44gTabDZOBlh2FDgPjwFDtXyX4tV65bC9M2Ch
+        Sm3Nw9q2dbIa/x0fC5Wa9dPaNe+Nu365cWc/V944xxavix2Fy3bp5vO5D6AaHoMCBHTuLpPGfRsA4KZp
+        6uCoU02lFGgIPHUXThbeE5w6A8aKNZdajqQohAI7iRjXFYBVjurZw8ynPZtyq5aa2vQCVG1jcK4JPv4e
+        e5UYYCwJVppjalEE9PHr2TdTjXL8gAGd3k7T6Q7B/FAKpFZNllJsVfP7Ztn4NAOm1lHVdhLhIKhVl1Jq
+        A1G9SffkfuKBWbCdwYBtfW0Xl85tnQFP7v4sWecQnHtna+5JcRVYMxjFtsY1oNBnb3BscAwJgMBtqlGe
+        faV0s+3a4phMBRKqVbrp8qrZvY9qms8rNY1VrDPRMG3sVhkKj6XYg7fBZBUDZrVpuNdspz69EaUWnF0Y
+        gJk4mBw5av8CsdarLEBRXawxcK01GwAN0tdQtUwBt8PD+hfBOAiuDaMVR0BqmOLRBJfdUrGItFeZubIh
+        QCmmb6oUh042/SqD1l4fiE2/Oa9+h4dGxoMJIqw/144GDYMs/scaquqQ/r+l1BdWdfIAXAAAAABJRU5E
+        rkJggg==
+</value>
+  </data>
+  <data name="LB_IN_GUIDE1.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="LB_IN_GUIDE1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 32</value>
+  </data>
+  <data name="LB_IN_GUIDE1.Text" xml:space="preserve">
+    <value>GUIDE 1</value>
+  </data>
+  <data name="SL_IN_GUIDE2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="LB_IN_GUIDE2.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="LB_IN_GUIDE2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
+        AAACCElEQVRIS+2WrU4DURBGK3kG3gESRHkIXqMobEPoQ4BbWVFTx4qKSgxiHQgEAkGCRlShLzmXfpvp
+        zf3bpnU0mex2d7pnvpnZmY5G/59MBrquc9jb54c/Wjt44gTabDZOBlh2FDgPjwFDtXyX4tV65bC9M2Ch
+        Sm3Nw9q2dbIa/x0fC5Wa9dPaNe+Nu365cWc/V944xxavix2Fy3bp5vO5D6AaHoMCBHTuLpPGfRsA4KZp
+        6uCoU02lFGgIPHUXThbeE5w6A8aKNZdajqQohAI7iRjXFYBVjurZw8ynPZtyq5aa2vQCVG1jcK4JPv4e
+        e5UYYCwJVppjalEE9PHr2TdTjXL8gAGd3k7T6Q7B/FAKpFZNllJsVfP7Ztn4NAOm1lHVdhLhIKhVl1Jq
+        A1G9SffkfuKBWbCdwYBtfW0Xl85tnQFP7v4sWecQnHtna+5JcRVYMxjFtsY1oNBnb3BscAwJgMBtqlGe
+        faV0s+3a4phMBRKqVbrp8qrZvY9qms8rNY1VrDPRMG3sVhkKj6XYg7fBZBUDZrVpuNdspz69EaUWnF0Y
+        gJk4mBw5av8CsdarLEBRXawxcK01GwAN0tdQtUwBt8PD+hfBOAiuDaMVR0BqmOLRBJfdUrGItFeZubIh
+        QCmmb6oUh042/SqD1l4fiE2/Oa9+h4dGxoMJIqw/144GDYMs/scaquqQ/r+l1BdWdfIAXAAAAABJRU5E
+        rkJggg==
+</value>
+  </data>
+  <data name="LB_IN_GUIDE2.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="LB_IN_GUIDE2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 32</value>
+  </data>
+  <data name="LB_IN_GUIDE2.Text" xml:space="preserve">
+    <value>GUIDE 2</value>
+  </data>
+  <data name="SL_IN_GUIDE3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="LB_IN_GUIDE3.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="LB_IN_GUIDE3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
+        AAACCElEQVRIS+2WrU4DURBGK3kG3gESRHkIXqMobEPoQ4BbWVFTx4qKSgxiHQgEAkGCRlShLzmXfpvp
+        zf3bpnU0mex2d7pnvpnZmY5G/59MBrquc9jb54c/Wjt44gTabDZOBlh2FDgPjwFDtXyX4tV65bC9M2Ch
+        Sm3Nw9q2dbIa/x0fC5Wa9dPaNe+Nu365cWc/V944xxavix2Fy3bp5vO5D6AaHoMCBHTuLpPGfRsA4KZp
+        6uCoU02lFGgIPHUXThbeE5w6A8aKNZdajqQohAI7iRjXFYBVjurZw8ynPZtyq5aa2vQCVG1jcK4JPv4e
+        e5UYYCwJVppjalEE9PHr2TdTjXL8gAGd3k7T6Q7B/FAKpFZNllJsVfP7Ztn4NAOm1lHVdhLhIKhVl1Jq
+        A1G9SffkfuKBWbCdwYBtfW0Xl85tnQFP7v4sWecQnHtna+5JcRVYMxjFtsY1oNBnb3BscAwJgMBtqlGe
+        faV0s+3a4phMBRKqVbrp8qrZvY9qms8rNY1VrDPRMG3sVhkKj6XYg7fBZBUDZrVpuNdspz69EaUWnF0Y
+        gJk4mBw5av8CsdarLEBRXawxcK01GwAN0tdQtUwBt8PD+hfBOAiuDaMVR0BqmOLRBJfdUrGItFeZubIh
+        QCmmb6oUh042/SqD1l4fiE2/Oa9+h4dGxoMJIqw/144GDYMs/scaquqQ/r+l1BdWdfIAXAAAAABJRU5E
+        rkJggg==
+</value>
+  </data>
+  <data name="LB_IN_GUIDE3.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="LB_IN_GUIDE3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 32</value>
+  </data>
+  <data name="LB_IN_GUIDE3.Text" xml:space="preserve">
+    <value>GUIDE 3</value>
+  </data>
+  <data name="SL_IN_GUIDE4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="LB_IN_GUIDE4.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="LB_IN_GUIDE4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
+        AAACCElEQVRIS+2WrU4DURBGK3kG3gESRHkIXqMobEPoQ4BbWVFTx4qKSgxiHQgEAkGCRlShLzmXfpvp
+        zf3bpnU0mex2d7pnvpnZmY5G/59MBrquc9jb54c/Wjt44gTabDZOBlh2FDgPjwFDtXyX4tV65bC9M2Ch
+        Sm3Nw9q2dbIa/x0fC5Wa9dPaNe+Nu365cWc/V944xxavix2Fy3bp5vO5D6AaHoMCBHTuLpPGfRsA4KZp
+        6uCoU02lFGgIPHUXThbeE5w6A8aKNZdajqQohAI7iRjXFYBVjurZw8ynPZtyq5aa2vQCVG1jcK4JPv4e
+        e5UYYCwJVppjalEE9PHr2TdTjXL8gAGd3k7T6Q7B/FAKpFZNllJsVfP7Ztn4NAOm1lHVdhLhIKhVl1Jq
+        A1G9SffkfuKBWbCdwYBtfW0Xl85tnQFP7v4sWecQnHtna+5JcRVYMxjFtsY1oNBnb3BscAwJgMBtqlGe
+        faV0s+3a4phMBRKqVbrp8qrZvY9qms8rNY1VrDPRMG3sVhkKj6XYg7fBZBUDZrVpuNdspz69EaUWnF0Y
+        gJk4mBw5av8CsdarLEBRXawxcK01GwAN0tdQtUwBt8PD+hfBOAiuDaMVR0BqmOLRBJfdUrGItFeZubIh
+        QCmmb6oUh042/SqD1l4fiE2/Oa9+h4dGxoMJIqw/144GDYMs/scaquqQ/r+l1BdWdfIAXAAAAABJRU5E
+        rkJggg==
+</value>
+  </data>
+  <data name="LB_IN_GUIDE4.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="LB_IN_GUIDE4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 32</value>
+  </data>
+  <data name="LB_IN_GUIDE4.Text" xml:space="preserve">
+    <value>GUIDE 4</value>
   </data>
   <metadata name="timer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>336, 16</value>
@@ -507,24 +515,6 @@
   <data name="BT_PositionSelect.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="BT_PositionSelect_MGZ1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial Narrow, 18pt, style=Bold</value>
-  </data>
-  <data name="BT_PositionSelect_MGZ1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 34</value>
-  </data>
-  <data name="BT_PositionSelect_MGZ1.Text" xml:space="preserve">
-    <value>MGZ #1</value>
-  </data>
-  <data name="BT_PositionSelect_MGZ2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Arial Narrow, 18pt, style=Bold</value>
-  </data>
-  <data name="BT_PositionSelect_MGZ2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 34</value>
-  </data>
-  <data name="BT_PositionSelect_MGZ2.Text" xml:space="preserve">
-    <value>MGZ #2</value>
-  </data>
   <data name="BT_PositionSelect.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
@@ -546,17 +536,17 @@
   <data name="BT_Position_Pick.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
+        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
 </value>
   </data>
   <data name="BT_Position_Pick.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -577,17 +567,17 @@
   <data name="BT_Position_Ready.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         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
-        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
+        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
 </value>
   </data>
   <data name="BT_Position_Ready.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -599,11 +589,42 @@
   <data name="BT_Position_Ready.Text" xml:space="preserve">
     <value>DOWN</value>
   </data>
+  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="BT_Position_PutSlug.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="BT_Position_PutSlug.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJPSURBVEhL7ZRfSJNhFMafb9V0WVYiq2wXgXdGVNZFYEVR
+        F1qWaRCNmBG1ki1zkxAqi0gsK9YfKGIUMycUBBp4MSyhZGS4iTQThbkIoj8Q0Zf0b7RgT+ezLrqp3L7d
+        1Qs/eOG873nO97znO8D/pcMBRcfdv1ytjwXh7KtDriVPTk7NuJByJKpOb3pFuB8PwerfJgIzhSmZExKB
+        nYEvxMk3ROP9JJz9HVjtKhYBk6DbOgWuqNoaI9H8jjjznmgSIefgB9junELeygUiMk2P0ITA6Sdkeedn
+        omWc8HwkLsj+6HNiXzCGzdd2icCsdG0TgVH1UJg8F0mKgJb8E3EpTlxJEOdl7+pKwtpzF8vrV6Vjm4La
+        EXV/H+l+RFYFEizwfWW+7xtzfUlm+0ijnzSdVWmoCMaxzusRkbmpdJsCR1i1PiCre0lHYJzLLr/mIs8L
+        FjY/o+X4GM0Nw5xRE6ahvCuBFYdvSvJSYfZku0zB7rC66R55bEAsckWJg6PEgWHCESHsA4TNl8QGbwg5
+        829I0hZhY4oCIXVtN1l56+2P5HUj0kVDxN4QsbXzJSwl7ZLQK7iFNcK81CyyPVS3iz1ZDWOSXARqBomK
+        3jiW2jugGLWqTwhbhEIhRzBM1h7tnIKqHrW4TbrHIVVXtyax/mIQpvw2iWkPahMWC3NSqfrXAhRUdqvZ
+        9n6irP0pzEv8Erwq1AolP+0wThSS9iq9HUHRnutQFM3nRqFMWChkZFRodRUIOwRt0BUJaf+1v/vILAmY
+        BW1c65o7f3JRh8dpP86/ePE7au/vycw7NE4AAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="BT_Position_PutSlug.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="BT_Position_PutSlug.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 32</value>
+  </data>
+  <data name="BT_Position_PutSlug.Text" xml:space="preserve">
+    <value>Put Mode</value>
+  </data>
   <data name="TS_Position.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 253</value>
   </data>
   <data name="TS_Position.Size" type="System.Drawing.Size, System.Drawing">
-    <value>470, 35</value>
+    <value>627, 35</value>
   </data>
   <data name="TS_Position.TabIndex" type="System.Int32, mscorlib">
     <value>79</value>
@@ -623,6 +644,24 @@
   <data name="&gt;&gt;TS_Position.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="BT_PositionSelect_MGZ1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial Narrow, 18pt, style=Bold</value>
+  </data>
+  <data name="BT_PositionSelect_MGZ1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 34</value>
+  </data>
+  <data name="BT_PositionSelect_MGZ1.Text" xml:space="preserve">
+    <value>MGZ #1</value>
+  </data>
+  <data name="BT_PositionSelect_MGZ2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Arial Narrow, 18pt, style=Bold</value>
+  </data>
+  <data name="BT_PositionSelect_MGZ2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 34</value>
+  </data>
+  <data name="BT_PositionSelect_MGZ2.Text" xml:space="preserve">
+    <value>MGZ #2</value>
+  </data>
   <metadata name="TS_IN4.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>532, 16</value>
   </metadata>
@@ -631,141 +670,6 @@
   </data>
   <data name="TS_IN4.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
-  </data>
-  <data name="LB_IN4.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="LB_IN4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 22</value>
-  </data>
-  <data name="LB_IN4.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="SL_IN_TUBE1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="LB_IN_TUBE_1.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="LB_IN_TUBE_1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
-        AAAB60lEQVRIS+2VsU7DMBCGO/IMvANIDOUheI0ysVaIPgRsGTt06UaGDh1ZGLrBwMDAgMTM0InZ6DP+
-        o8NcnKSiYuGkT6kT5z6f7bij/yjFZrMJ8PT6Eq+W1OX3QqLtdttAW+xF3ia0sly6Wq8CpObwsFLJ0qNi
-        1HUdRLrVP6xUwvXdOlTPVTh/uAhHH2cRfsPicfFNsqyXYT6fD5N7UoSIjsNpKzy3A0BcVVU/OSJPmksO
-        w0lD/kxy1hkxdK65quVKO5ciOnCwA7CVU/XsZhannXZr2GpZUzu9CGhDLhbqO34fxyoBMSTFz9A0e9VS
-        EcLbt/u4mfpUTj/yIJ1eTtunOxfzopKQFLE2WS60WHG1rOI0I2atoygPhKBNpQS2urZKLaqa6Z5cT6Kw
-        KEZoxVRm5X3ROxJPrr5oXedcrAS7MkgsaNs13oWdxd7BMQQGbsUQRV5IStSbOu5gL2kXebWCXZ7Sl2OX
-        qtlgUeqIiwcJH7o92IfKvSmOpMGktH4g5q9Np40ODk8kmun1pEbceoIRiDlxQB25Ug0gsTRVdkghCkqB
-        XH9rdgBsEJuowRMK0y8m7wrJ2RSCQXDPFXgYaXFzeYGMlzhzhSuxGKFg36SUw8JOv9CASkLo/Q0PDRIz
-        iFzIvb1J8yh+Mn8bo9EnpdQXVpEtIdAAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="LB_IN_TUBE_1.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="LB_IN_TUBE_1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 32</value>
-  </data>
-  <data name="LB_IN_TUBE_1.Text" xml:space="preserve">
-    <value>TUBE 1</value>
-  </data>
-  <data name="SL_IN_TUBE2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="LB_IN_TUBE_2.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="LB_IN_TUBE_2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
-        AAAB60lEQVRIS+2VsU7DMBCGO/IMvANIDOUheI0ysVaIPgRsGTt06UaGDh1ZGLrBwMDAgMTM0InZ6DP+
-        o8NcnKSiYuGkT6kT5z6f7bij/yjFZrMJ8PT6Eq+W1OX3QqLtdttAW+xF3ia0sly6Wq8CpObwsFLJ0qNi
-        1HUdRLrVP6xUwvXdOlTPVTh/uAhHH2cRfsPicfFNsqyXYT6fD5N7UoSIjsNpKzy3A0BcVVU/OSJPmksO
-        w0lD/kxy1hkxdK65quVKO5ciOnCwA7CVU/XsZhannXZr2GpZUzu9CGhDLhbqO34fxyoBMSTFz9A0e9VS
-        EcLbt/u4mfpUTj/yIJ1eTtunOxfzopKQFLE2WS60WHG1rOI0I2atoygPhKBNpQS2urZKLaqa6Z5cT6Kw
-        KEZoxVRm5X3ROxJPrr5oXedcrAS7MkgsaNs13oWdxd7BMQQGbsUQRV5IStSbOu5gL2kXebWCXZ7Sl2OX
-        qtlgUeqIiwcJH7o92IfKvSmOpMGktH4g5q9Np40ODk8kmun1pEbceoIRiDlxQB25Ug0gsTRVdkghCkqB
-        XH9rdgBsEJuowRMK0y8m7wrJ2RSCQXDPFXgYaXFzeYGMlzhzhSuxGKFg36SUw8JOv9CASkLo/Q0PDRIz
-        iFzIvb1J8yh+Mn8bo9EnpdQXVpEtIdAAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="LB_IN_TUBE_2.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="LB_IN_TUBE_2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 32</value>
-  </data>
-  <data name="LB_IN_TUBE_2.Text" xml:space="preserve">
-    <value>TUBE 2</value>
-  </data>
-  <data name="SL_IN_TUBE3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="LB_IN_TUBE_3.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="LB_IN_TUBE_3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
-        AAAB60lEQVRIS+2VsU7DMBCGO/IMvANIDOUheI0ysVaIPgRsGTt06UaGDh1ZGLrBwMDAgMTM0InZ6DP+
-        o8NcnKSiYuGkT6kT5z6f7bij/yjFZrMJ8PT6Eq+W1OX3QqLtdttAW+xF3ia0sly6Wq8CpObwsFLJ0qNi
-        1HUdRLrVP6xUwvXdOlTPVTh/uAhHH2cRfsPicfFNsqyXYT6fD5N7UoSIjsNpKzy3A0BcVVU/OSJPmksO
-        w0lD/kxy1hkxdK65quVKO5ciOnCwA7CVU/XsZhannXZr2GpZUzu9CGhDLhbqO34fxyoBMSTFz9A0e9VS
-        EcLbt/u4mfpUTj/yIJ1eTtunOxfzopKQFLE2WS60WHG1rOI0I2atoygPhKBNpQS2urZKLaqa6Z5cT6Kw
-        KEZoxVRm5X3ROxJPrr5oXedcrAS7MkgsaNs13oWdxd7BMQQGbsUQRV5IStSbOu5gL2kXebWCXZ7Sl2OX
-        qtlgUeqIiwcJH7o92IfKvSmOpMGktH4g5q9Np40ODk8kmun1pEbceoIRiDlxQB25Ug0gsTRVdkghCkqB
-        XH9rdgBsEJuowRMK0y8m7wrJ2RSCQXDPFXgYaXFzeYGMlzhzhSuxGKFg36SUw8JOv9CASkLo/Q0PDRIz
-        iFzIvb1J8yh+Mn8bo9EnpdQXVpEtIdAAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="LB_IN_TUBE_3.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="LB_IN_TUBE_3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 32</value>
-  </data>
-  <data name="LB_IN_TUBE_3.Text" xml:space="preserve">
-    <value>TUBE 3</value>
-  </data>
-  <data name="SL_IN_TUBE4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 35</value>
-  </data>
-  <data name="LB_IN_TUBE_4.AutoSize" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="LB_IN_TUBE_4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
-        AAAB60lEQVRIS+2VsU7DMBCGO/IMvANIDOUheI0ysVaIPgRsGTt06UaGDh1ZGLrBwMDAgMTM0InZ6DP+
-        o8NcnKSiYuGkT6kT5z6f7bij/yjFZrMJ8PT6Eq+W1OX3QqLtdttAW+xF3ia0sly6Wq8CpObwsFLJ0qNi
-        1HUdRLrVP6xUwvXdOlTPVTh/uAhHH2cRfsPicfFNsqyXYT6fD5N7UoSIjsNpKzy3A0BcVVU/OSJPmksO
-        w0lD/kxy1hkxdK65quVKO5ciOnCwA7CVU/XsZhannXZr2GpZUzu9CGhDLhbqO34fxyoBMSTFz9A0e9VS
-        EcLbt/u4mfpUTj/yIJ1eTtunOxfzopKQFLE2WS60WHG1rOI0I2atoygPhKBNpQS2urZKLaqa6Z5cT6Kw
-        KEZoxVRm5X3ROxJPrr5oXedcrAS7MkgsaNs13oWdxd7BMQQGbsUQRV5IStSbOu5gL2kXebWCXZ7Sl2OX
-        qtlgUeqIiwcJH7o92IfKvSmOpMGktH4g5q9Np40ODk8kmun1pEbceoIRiDlxQB25Ug0gsTRVdkghCkqB
-        XH9rdgBsEJuowRMK0y8m7wrJ2RSCQXDPFXgYaXFzeYGMlzhzhSuxGKFg36SUw8JOv9CASkLo/Q0PDRIz
-        iFzIvb1J8yh+Mn8bo9EnpdQXVpEtIdAAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="LB_IN_TUBE_4.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="LB_IN_TUBE_4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 32</value>
-  </data>
-  <data name="LB_IN_TUBE_4.Text" xml:space="preserve">
-    <value>TUBE 4</value>
-  </data>
-  <data name="LB_IN_TUBE7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 32</value>
-  </data>
-  <data name="LB_IN_TUBE8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 32</value>
   </data>
   <data name="TS_IN4.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 107</value>
@@ -791,6 +695,145 @@
   <data name="&gt;&gt;TS_IN4.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="LB_IN4.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="LB_IN4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 22</value>
+  </data>
+  <data name="LB_IN4.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="SL_IN_TUBE1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="LB_IN_TUBE_1.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="LB_IN_TUBE_1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
+        AAACCElEQVRIS+2WrU4DURBGK3kG3gESRHkIXqMobEPoQ4BbWVFTx4qKSgxiHQgEAkGCRlShLzmXfpvp
+        zf3bpnU0mex2d7pnvpnZmY5G/59MBrquc9jb54c/Wjt44gTabDZOBlh2FDgPjwFDtXyX4tV65bC9M2Ch
+        Sm3Nw9q2dbIa/x0fC5Wa9dPaNe+Nu365cWc/V944xxavix2Fy3bp5vO5D6AaHoMCBHTuLpPGfRsA4KZp
+        6uCoU02lFGgIPHUXThbeE5w6A8aKNZdajqQohAI7iRjXFYBVjurZw8ynPZtyq5aa2vQCVG1jcK4JPv4e
+        e5UYYCwJVppjalEE9PHr2TdTjXL8gAGd3k7T6Q7B/FAKpFZNllJsVfP7Ztn4NAOm1lHVdhLhIKhVl1Jq
+        A1G9SffkfuKBWbCdwYBtfW0Xl85tnQFP7v4sWecQnHtna+5JcRVYMxjFtsY1oNBnb3BscAwJgMBtqlGe
+        faV0s+3a4phMBRKqVbrp8qrZvY9qms8rNY1VrDPRMG3sVhkKj6XYg7fBZBUDZrVpuNdspz69EaUWnF0Y
+        gJk4mBw5av8CsdarLEBRXawxcK01GwAN0tdQtUwBt8PD+hfBOAiuDaMVR0BqmOLRBJfdUrGItFeZubIh
+        QCmmb6oUh042/SqD1l4fiE2/Oa9+h4dGxoMJIqw/144GDYMs/scaquqQ/r+l1BdWdfIAXAAAAABJRU5E
+        rkJggg==
+</value>
+  </data>
+  <data name="LB_IN_TUBE_1.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="LB_IN_TUBE_1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 32</value>
+  </data>
+  <data name="LB_IN_TUBE_1.Text" xml:space="preserve">
+    <value>TUBE 1</value>
+  </data>
+  <data name="SL_IN_TUBE2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="LB_IN_TUBE_2.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="LB_IN_TUBE_2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
+        AAACCElEQVRIS+2WrU4DURBGK3kG3gESRHkIXqMobEPoQ4BbWVFTx4qKSgxiHQgEAkGCRlShLzmXfpvp
+        zf3bpnU0mex2d7pnvpnZmY5G/59MBrquc9jb54c/Wjt44gTabDZOBlh2FDgPjwFDtXyX4tV65bC9M2Ch
+        Sm3Nw9q2dbIa/x0fC5Wa9dPaNe+Nu365cWc/V944xxavix2Fy3bp5vO5D6AaHoMCBHTuLpPGfRsA4KZp
+        6uCoU02lFGgIPHUXThbeE5w6A8aKNZdajqQohAI7iRjXFYBVjurZw8ynPZtyq5aa2vQCVG1jcK4JPv4e
+        e5UYYCwJVppjalEE9PHr2TdTjXL8gAGd3k7T6Q7B/FAKpFZNllJsVfP7Ztn4NAOm1lHVdhLhIKhVl1Jq
+        A1G9SffkfuKBWbCdwYBtfW0Xl85tnQFP7v4sWecQnHtna+5JcRVYMxjFtsY1oNBnb3BscAwJgMBtqlGe
+        faV0s+3a4phMBRKqVbrp8qrZvY9qms8rNY1VrDPRMG3sVhkKj6XYg7fBZBUDZrVpuNdspz69EaUWnF0Y
+        gJk4mBw5av8CsdarLEBRXawxcK01GwAN0tdQtUwBt8PD+hfBOAiuDaMVR0BqmOLRBJfdUrGItFeZubIh
+        QCmmb6oUh042/SqD1l4fiE2/Oa9+h4dGxoMJIqw/144GDYMs/scaquqQ/r+l1BdWdfIAXAAAAABJRU5E
+        rkJggg==
+</value>
+  </data>
+  <data name="LB_IN_TUBE_2.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="LB_IN_TUBE_2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 32</value>
+  </data>
+  <data name="LB_IN_TUBE_2.Text" xml:space="preserve">
+    <value>TUBE 2</value>
+  </data>
+  <data name="SL_IN_TUBE3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="LB_IN_TUBE_3.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="LB_IN_TUBE_3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
+        AAACCElEQVRIS+2WrU4DURBGK3kG3gESRHkIXqMobEPoQ4BbWVFTx4qKSgxiHQgEAkGCRlShLzmXfpvp
+        zf3bpnU0mex2d7pnvpnZmY5G/59MBrquc9jb54c/Wjt44gTabDZOBlh2FDgPjwFDtXyX4tV65bC9M2Ch
+        Sm3Nw9q2dbIa/x0fC5Wa9dPaNe+Nu365cWc/V944xxavix2Fy3bp5vO5D6AaHoMCBHTuLpPGfRsA4KZp
+        6uCoU02lFGgIPHUXThbeE5w6A8aKNZdajqQohAI7iRjXFYBVjurZw8ynPZtyq5aa2vQCVG1jcK4JPv4e
+        e5UYYCwJVppjalEE9PHr2TdTjXL8gAGd3k7T6Q7B/FAKpFZNllJsVfP7Ztn4NAOm1lHVdhLhIKhVl1Jq
+        A1G9SffkfuKBWbCdwYBtfW0Xl85tnQFP7v4sWecQnHtna+5JcRVYMxjFtsY1oNBnb3BscAwJgMBtqlGe
+        faV0s+3a4phMBRKqVbrp8qrZvY9qms8rNY1VrDPRMG3sVhkKj6XYg7fBZBUDZrVpuNdspz69EaUWnF0Y
+        gJk4mBw5av8CsdarLEBRXawxcK01GwAN0tdQtUwBt8PD+hfBOAiuDaMVR0BqmOLRBJfdUrGItFeZubIh
+        QCmmb6oUh042/SqD1l4fiE2/Oa9+h4dGxoMJIqw/144GDYMs/scaquqQ/r+l1BdWdfIAXAAAAABJRU5E
+        rkJggg==
+</value>
+  </data>
+  <data name="LB_IN_TUBE_3.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="LB_IN_TUBE_3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 32</value>
+  </data>
+  <data name="LB_IN_TUBE_3.Text" xml:space="preserve">
+    <value>TUBE 3</value>
+  </data>
+  <data name="SL_IN_TUBE4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 35</value>
+  </data>
+  <data name="LB_IN_TUBE_4.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="LB_IN_TUBE_4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0ICQMB9xQAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAAZdEVYdFNvZnR3YXJlAE1pY3Jvc29mdCBPZmZpY2V/7TVx
+        AAACCElEQVRIS+2WrU4DURBGK3kG3gESRHkIXqMobEPoQ4BbWVFTx4qKSgxiHQgEAkGCRlShLzmXfpvp
+        zf3bpnU0mex2d7pnvpnZmY5G/59MBrquc9jb54c/Wjt44gTabDZOBlh2FDgPjwFDtXyX4tV65bC9M2Ch
+        Sm3Nw9q2dbIa/x0fC5Wa9dPaNe+Nu365cWc/V944xxavix2Fy3bp5vO5D6AaHoMCBHTuLpPGfRsA4KZp
+        6uCoU02lFGgIPHUXThbeE5w6A8aKNZdajqQohAI7iRjXFYBVjurZw8ynPZtyq5aa2vQCVG1jcK4JPv4e
+        e5UYYCwJVppjalEE9PHr2TdTjXL8gAGd3k7T6Q7B/FAKpFZNllJsVfP7Ztn4NAOm1lHVdhLhIKhVl1Jq
+        A1G9SffkfuKBWbCdwYBtfW0Xl85tnQFP7v4sWecQnHtna+5JcRVYMxjFtsY1oNBnb3BscAwJgMBtqlGe
+        faV0s+3a4phMBRKqVbrp8qrZvY9qms8rNY1VrDPRMG3sVhkKj6XYg7fBZBUDZrVpuNdspz69EaUWnF0Y
+        gJk4mBw5av8CsdarLEBRXawxcK01GwAN0tdQtUwBt8PD+hfBOAiuDaMVR0BqmOLRBJfdUrGItFeZubIh
+        QCmmb6oUh042/SqD1l4fiE2/Oa9+h4dGxoMJIqw/144GDYMs/scaquqQ/r+l1BdWdfIAXAAAAABJRU5E
+        rkJggg==
+</value>
+  </data>
+  <data name="LB_IN_TUBE_4.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="LB_IN_TUBE_4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 32</value>
+  </data>
+  <data name="LB_IN_TUBE_4.Text" xml:space="preserve">
+    <value>TUBE 4</value>
+  </data>
+  <data name="LB_IN_TUBE7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 32</value>
+  </data>
+  <data name="LB_IN_TUBE8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 32</value>
+  </data>
   <metadata name="TS_OUT.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 57</value>
   </metadata>
@@ -799,6 +842,30 @@
   </data>
   <data name="TS_OUT.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
+  </data>
+  <data name="TS_OUT.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 218</value>
+  </data>
+  <data name="TS_OUT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>404, 35</value>
+  </data>
+  <data name="TS_OUT.TabIndex" type="System.Int32, mscorlib">
+    <value>82</value>
+  </data>
+  <data name="TS_OUT.Text" xml:space="preserve">
+    <value>toolStrip11</value>
+  </data>
+  <data name="&gt;&gt;TS_OUT.Name" xml:space="preserve">
+    <value>TS_OUT</value>
+  </data>
+  <data name="&gt;&gt;TS_OUT.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TS_OUT.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TS_OUT.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="LB_OUT.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -848,30 +915,6 @@
   <data name="BT_OUT_MG2_RESET.Text" xml:space="preserve">
     <value>MAGAZINE #2 RESET</value>
   </data>
-  <data name="TS_OUT.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 218</value>
-  </data>
-  <data name="TS_OUT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>404, 35</value>
-  </data>
-  <data name="TS_OUT.TabIndex" type="System.Int32, mscorlib">
-    <value>82</value>
-  </data>
-  <data name="TS_OUT.Text" xml:space="preserve">
-    <value>toolStrip11</value>
-  </data>
-  <data name="&gt;&gt;TS_OUT.Name" xml:space="preserve">
-    <value>TS_OUT</value>
-  </data>
-  <data name="&gt;&gt;TS_OUT.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TS_OUT.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;TS_OUT.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>112, 57</value>
   </metadata>
@@ -880,6 +923,30 @@
   </data>
   <data name="toolStrip1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Arial, 9pt</value>
+  </data>
+  <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 183</value>
+  </data>
+  <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>576, 35</value>
+  </data>
+  <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>83</value>
+  </data>
+  <data name="toolStrip1.Text" xml:space="preserve">
+    <value>toolStrip11</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.Name" xml:space="preserve">
+    <value>toolStrip1</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="toolStripLabel1.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -965,30 +1032,6 @@
   <data name="BT_OUT_TUBEBLOW4.Text" xml:space="preserve">
     <value>TUBE BLOW #4</value>
   </data>
-  <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 183</value>
-  </data>
-  <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>607, 35</value>
-  </data>
-  <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>83</value>
-  </data>
-  <data name="toolStrip1.Text" xml:space="preserve">
-    <value>toolStrip11</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.Name" xml:space="preserve">
-    <value>toolStrip1</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1022,10 +1065,70 @@
   <data name="&gt;&gt;LB_IN_MG1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
+    <value>toolStripSeparator1</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_MG2.Name" xml:space="preserve">
+    <value>LB_IN_MG2</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_MG2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator19.Name" xml:space="preserve">
+    <value>toolStripSeparator19</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator19.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_MG1_RESET.Name" xml:space="preserve">
+    <value>LB_IN_MG1_RESET</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_MG1_RESET.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator12.Name" xml:space="preserve">
+    <value>toolStripSeparator12</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_MG2_RESET.Name" xml:space="preserve">
+    <value>LB_IN_MG2_RESET</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_MG2_RESET.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;LB_IN2.Name" xml:space="preserve">
     <value>LB_IN2</value>
   </data>
   <data name="&gt;&gt;LB_IN2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SL_IN_GUIDE1.Name" xml:space="preserve">
+    <value>SL_IN_GUIDE1</value>
+  </data>
+  <data name="&gt;&gt;SL_IN_GUIDE1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_GUIDE1.Name" xml:space="preserve">
+    <value>LB_IN_GUIDE1</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_GUIDE1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SL_IN_GUIDE2.Name" xml:space="preserve">
+    <value>SL_IN_GUIDE2</value>
+  </data>
+  <data name="&gt;&gt;SL_IN_GUIDE2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_GUIDE2.Name" xml:space="preserve">
+    <value>LB_IN_GUIDE2</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_GUIDE2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;SL_IN_GUIDE3.Name" xml:space="preserve">
@@ -1116,6 +1219,30 @@
     <value>LB_IN4</value>
   </data>
   <data name="&gt;&gt;LB_IN4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SL_IN_TUBE1.Name" xml:space="preserve">
+    <value>SL_IN_TUBE1</value>
+  </data>
+  <data name="&gt;&gt;SL_IN_TUBE1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_TUBE_1.Name" xml:space="preserve">
+    <value>LB_IN_TUBE_1</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_TUBE_1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SL_IN_TUBE2.Name" xml:space="preserve">
+    <value>SL_IN_TUBE2</value>
+  </data>
+  <data name="&gt;&gt;SL_IN_TUBE2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_TUBE_2.Name" xml:space="preserve">
+    <value>LB_IN_TUBE_2</value>
+  </data>
+  <data name="&gt;&gt;LB_IN_TUBE_2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;SL_IN_TUBE3.Name" xml:space="preserve">
@@ -1238,89 +1365,17 @@
   <data name="&gt;&gt;BT_OUT_TUBEBLOW4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;LB_IN_TUBE_1.Name" xml:space="preserve">
-    <value>LB_IN_TUBE_1</value>
+  <data name="&gt;&gt;BT_Position_PutSlug.Name" xml:space="preserve">
+    <value>BT_Position_PutSlug</value>
   </data>
-  <data name="&gt;&gt;LB_IN_TUBE_1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;BT_Position_PutSlug.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;SL_IN_TUBE2.Name" xml:space="preserve">
-    <value>SL_IN_TUBE2</value>
+  <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
+    <value>toolStripSeparator2</value>
   </data>
-  <data name="&gt;&gt;SL_IN_TUBE2.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_TUBE_2.Name" xml:space="preserve">
-    <value>LB_IN_TUBE_2</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_TUBE_2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SL_IN_TUBE1.Name" xml:space="preserve">
-    <value>SL_IN_TUBE1</value>
-  </data>
-  <data name="&gt;&gt;SL_IN_TUBE1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
-    <value>toolStripSeparator1</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_GUIDE1.Name" xml:space="preserve">
-    <value>LB_IN_GUIDE1</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_GUIDE1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SL_IN_GUIDE1.Name" xml:space="preserve">
-    <value>SL_IN_GUIDE1</value>
-  </data>
-  <data name="&gt;&gt;SL_IN_GUIDE1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SL_IN_GUIDE2.Name" xml:space="preserve">
-    <value>SL_IN_GUIDE2</value>
-  </data>
-  <data name="&gt;&gt;SL_IN_GUIDE2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_GUIDE2.Name" xml:space="preserve">
-    <value>LB_IN_GUIDE2</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_GUIDE2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_MG2.Name" xml:space="preserve">
-    <value>LB_IN_MG2</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_MG2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator19.Name" xml:space="preserve">
-    <value>toolStripSeparator19</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator19.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_MG2_RESET.Name" xml:space="preserve">
-    <value>LB_IN_MG2_RESET</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_MG2_RESET.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator12.Name" xml:space="preserve">
-    <value>toolStripSeparator12</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_MG1_RESET.Name" xml:space="preserve">
-    <value>LB_IN_MG1_RESET</value>
-  </data>
-  <data name="&gt;&gt;LB_IN_MG1_RESET.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>BottomRight_StackFeeder</value>

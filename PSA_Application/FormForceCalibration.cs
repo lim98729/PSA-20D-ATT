@@ -128,14 +128,18 @@ namespace PSA_Application
                                 mc.hd.tool.F.max(out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarm("Force Analog Output Error"); break; }
                                 mc.idle(100);
 
+                                mc.loadCell.setZero(0);
                                 // Z move down to loadcell position
                                 posZ = mc.hd.tool.tPos.z.LOADCELL + 1000;
                                 mc.hd.tool.jogMove(posZ, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); break; }
 
                                 mc.idle(100);
-                                posZ = mc.hd.tool.tPos.z.LOADCELL + 50;
-                                mc.hd.tool.jogMove(posZ, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); break; }
-                                dwellT.Reset();
+
+                                if (mc.para.HD.place.forceMode.mode.value == (int)PLACE_FORCE_MODE.LOW_HIGH_MODE)
+                                {
+                                    posZ = mc.hd.tool.tPos.z.LOADCELL + 50;
+                                    mc.hd.tool.jogMove(posZ, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); break; }
+                                    dwellT.Reset();
 
                                 // Contact 시점에는 낮은 압력을 이용한다.
                                 if (tempForce.A[j].value < (tempForce.A[0].value + 0.4))
@@ -149,14 +153,27 @@ namespace PSA_Application
 
                                 mc.idle(1500);		// 이 Factor는 안정적으로 가져가야 한다.
 
-                                // Z축이 Loadcell을 Touch한 위치에서 화면상의 Offset값 만큼 더 내린다.
-                                // 1V에 500g을 기준으로 한 높이에 Offset만큼 더 내린다.
-                                // Default Offset은 250um * 입력 전압
-                                posZ = mc.hd.tool.tPos.z.LOADCELL - mc.para.CAL.force.touchOffset.value;
-                                mc.hd.tool.Z.move(posZ, 0.0005, 0.01, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); break; }
-                                mc.hd.tool.checkZMoveEnd(out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); break; }
-                                mc.hd.tool.F.voltage(tempForce.A[j].value, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarm("Force Analog Output Error"); break; }
+                                    // Z축이 Loadcell을 Touch한 위치에서 화면상의 Offset값 만큼 더 내린다.
+                                    // 1V에 500g을 기준으로 한 높이에 Offset만큼 더 내린다.
+                                    // Default Offset은 250um * 입력 전압
+                                    posZ = mc.hd.tool.tPos.z.LOADCELL - mc.para.CAL.force.touchOffset.value;
+                                    mc.hd.tool.Z.move(posZ, 0.0005, 0.01, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); break; }
+                                    mc.hd.tool.checkZMoveEnd(out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); break; }
+                                    mc.hd.tool.F.voltage(tempForce.A[j].value, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarm("Force Analog Output Error"); break; }
+                                }
+                                else
+                                {
+                                    posZ = mc.hd.tool.tPos.z.LOADCELL + 100;
+                                    mc.hd.tool.jogMove(posZ, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); break; }
+                                    dwellT.Reset(); 
 
+                                    mc.hd.tool.F.voltage(tempForce.A[j].value, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarm("Force Analog Output Error"); break; }
+                                    mc.idle(1000);		// 이 Factor는 안정적으로 가져가야 한다.
+
+                                    posZ = mc.hd.tool.tPos.z.LOADCELL - mc.para.CAL.force.touchOffset.value;
+                                    mc.hd.tool.Z.move(posZ, 0.0005, 0.01, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); break; }
+                                    mc.hd.tool.checkZMoveEnd(out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); break; }                                    
+                                }
                                 mc.idle(UtilityControl.forceCheckDelay);
 
                                 // read loadcell data
@@ -177,7 +194,11 @@ namespace PSA_Application
                                 retT.d2 = mc.AIN.HeadLoadcell();
                                 strainGaugeResult[i] = retT.d2;
 
-                                mc.log.debug.write(mc.log.CODE.TRACE, "Volt : " + tempForce.A[j].value.ToString() + ", VPPM : " + Math.Round(vppmResult[i], 3).ToString() + ", LoadC : " + Math.Round(strainGaugeResult[i], 3).ToString() + ", Count : " + i.ToString() + ", Force : " + autoCheckResult[i].ToString());
+                                mc.log.debug.write(mc.log.CODE.TRACE, "Volt : " + Math.Round(tempForce.A[j].value, 3).ToString()
+                                    + ", VPPM : " + Math.Round(vppmResult[i], 3).ToString()
+                                    + ", Head : " + Math.Round(strainGaugeResult[i], 3).ToString()
+                                    + ", Count : " + i.ToString()
+                                    + ", Bottom : " + Math.Round(autoCheckResult[i], 3).ToString());
                             }
 
                             // loadcell force value 생성
@@ -251,10 +272,12 @@ namespace PSA_Application
                             }
                             meanValVSG = sumValVSG / 3.0;
 
-                            mc.log.debug.write(mc.log.CODE.TRACE, "Max[" + maxIndex.ToString() + "] : " + maxVal.ToString() + ", Min[" + minIndex.ToString() + "] : " + minVal.ToString() + ", Mean : " + meanVal.ToString() + " [kg], VPPM: " + Math.Round(meanValV, 3).ToString() + "[V], LD:" + Math.Round(meanValVSG, 3).ToString() + "[V]");
-                            //mc.log.debug.write(mc.log.CODE.TRACE, "Max[" + maxIndexV.ToString() + "] : " + maxValV.ToString() + ", Min[" + minIndexV.ToString() + "] : " + minValV.ToString() + ", Mean : " + meanVal.ToString() + " [kg], " + Math.Round(meanValV, 3).ToString() + "[V]");
-
-                            //mc.para.CAL.force.B[i].value
+                            mc.log.debug.write(mc.log.CODE.TRACE, "Max[" + maxIndex.ToString() + "] : " + Math.Round(maxVal, 3).ToString()
+                                + ", Min[" + minIndex.ToString() + "] : " + Math.Round(minVal, 3).ToString()
+                                + ", Mean : " + Math.Round(meanVal, 3).ToString()
+                                + " [kg], VPPM : " + Math.Round(meanValV, 3).ToString()
+                                + " [V], Head : " + Math.Round(meanValVSG, 3).ToString() + " [kg]");        // jhlim : 실제로는 Voltage 값이지만, 실부하 캘에 의해 Volt, Indigator 간 교정을 했다고 가정한다.
+                            
                             tempForce.B[j].value = Math.Round(meanVal, 3);          // Bottom Loadcell
                             tempForce.C[j].value = Math.Round(meanValV, 3);         // VPPM
                             tempForce.D[j].value = Math.Round(meanValVSG, 3);       // Head Loadcell

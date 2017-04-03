@@ -116,7 +116,7 @@ namespace PSA_Application
             }
             else
             {
-                TB_SFZSpeed.Text = mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.speed.rate.ToString();
+                TB_SFZSpeed.Text = mc.sf.Z.config.speed.rate.ToString();
                 TB_1stDownPitch.Text = mc.para.SF.firstDownPitch.value.ToString();
                 TB_1stDownVel.Text = mc.para.SF.firstDownVel.value.ToString();
                 TB_2ndUpPitch.Text = mc.para.SF.secondUpPitch.value.ToString();

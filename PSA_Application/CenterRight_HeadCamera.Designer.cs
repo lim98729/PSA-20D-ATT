@@ -39,6 +39,7 @@
             this.BT_AlgorismSelect_NccModel = new System.Windows.Forms.ToolStripMenuItem();
             this.BT_AlgorismSelect_ShapeModel = new System.Windows.Forms.ToolStripMenuItem();
             this.BT_AlgorismSelect_CornerModel = new System.Windows.Forms.ToolStripMenuItem();
+            this.BT_AlgorismSelect_ProjectionModel = new System.Windows.Forms.ToolStripMenuItem();
             this.BT_AlgorismSelect_CircleModel = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.BT_Model_Teach = new System.Windows.Forms.ToolStripButton();
@@ -223,6 +224,7 @@
             this.BT_AlgorismSelect_NccModel,
             this.BT_AlgorismSelect_ShapeModel,
             this.BT_AlgorismSelect_CornerModel,
+            this.BT_AlgorismSelect_ProjectionModel,
             this.BT_AlgorismSelect_CircleModel});
             this.BT_AlgorismSelect.Name = "BT_AlgorismSelect";
             // 
@@ -245,6 +247,12 @@
             resources.ApplyResources(this.BT_AlgorismSelect_CornerModel, "BT_AlgorismSelect_CornerModel");
             this.BT_AlgorismSelect_CornerModel.Name = "BT_AlgorismSelect_CornerModel";
             this.BT_AlgorismSelect_CornerModel.Click += new System.EventHandler(this.Control_Click);
+            // 
+            // BT_AlgorismSelect_ProjectionModel
+            // 
+            resources.ApplyResources(this.BT_AlgorismSelect_ProjectionModel, "BT_AlgorismSelect_ProjectionModel");
+            this.BT_AlgorismSelect_ProjectionModel.Name = "BT_AlgorismSelect_ProjectionModel";
+            this.BT_AlgorismSelect_ProjectionModel.Click += new System.EventHandler(this.Control_Click);
             // 
             // BT_AlgorismSelect_CircleModel
             // 
@@ -1253,5 +1261,6 @@
 		private System.Windows.Forms.ToolStripLabel toolStripLabel10;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator35;
 		private System.Windows.Forms.ToolStripTextBox TB_VisionErrorSkipCount;
+        private System.Windows.Forms.ToolStripMenuItem BT_AlgorismSelect_ProjectionModel;
     }
 }

@@ -53,6 +53,12 @@ namespace PSA_Application
 				else image = Properties.Resources.Green_LED_OFF;
 				LB_IN_VAC.Image = image;
 
+				mc.IN.PD.DOWN_SENSOR_CHK(out ret.b, out ret.message);
+				if (ret.message != RetMessage.OK) image = Properties.Resources.Fail;
+				else if (ret.b) image = Properties.Resources.Green_LED;
+				else image = Properties.Resources.Green_LED_OFF;
+				LB_IN_DOWN_SENSOR.Image = image;
+
                 if (!mc.swcontrol.noUsePDUpSensor)
                 {
                     mc.IN.PD.UP_SENSOR_CHK(out ret.b, out ret.message);
@@ -84,6 +90,7 @@ namespace PSA_Application
 		RetValue ret;
 		private void BT_OUT_Click(object sender, EventArgs e)
 		{
+            if (mc.main.THREAD_RUNNING) return;
 			if (!mc.check.READY_PUSH(sender)) return;
 			mc.check.push(sender, true, (int)SelectedMenu.BOTTOM_RIGHT);
 			#region OUT
@@ -128,6 +135,7 @@ namespace PSA_Application
 		}
 		private void BT_Position_MoveToUp_Click(object sender, EventArgs e)
 		{
+            if (mc.main.THREAD_RUNNING) return;
 			if (!mc.check.READY_AUTORUN(sender)) return;
 			mc.check.push(sender, true, (int)SelectedMenu.BOTTOM_RIGHT);
             mc.pd.jogMode = (int)PD_JOGMODE.UP_MODE;
@@ -146,6 +154,7 @@ namespace PSA_Application
 
 		private void BT_Position_MoveToDown_Click(object sender, EventArgs e)
 		{
+            if (mc.main.THREAD_RUNNING) return;
 			if (!mc.check.READY_AUTORUN(sender)) return;
 			mc.check.push(sender, true, (int)SelectedMenu.BOTTOM_RIGHT);
             mc.pd.jogMode = (int)PD_JOGMODE.DOWN_MODE;

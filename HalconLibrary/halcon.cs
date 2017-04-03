@@ -53,7 +53,8 @@ namespace HalconLibrary
 		public halcon_rectangleCenter rectangleCenter = new halcon_rectangleCenter();
 		public halcon_cornerEdge cornerEdge = new halcon_cornerEdge();
 		public halcon_edgeIntersection edgeIntersection = new halcon_edgeIntersection();
-        
+        public halcon_projection projectionEdge = new halcon_projection();
+
 		halcon_display display = new halcon_display();
 		halcon_timer dwell = new halcon_timer();
 
@@ -394,6 +395,10 @@ namespace HalconLibrary
 				}
 				#endregion
 
+                HOperatorSet.GenEmptyObj(out projectionEdge.Region);
+                HOperatorSet.GenEmptyObj(out projectionEdge.ImageReduced);
+                projectionEdge.setDefault();
+                projectionEdge.read();
 
 				for (int i = 0; i < (int)MAX_COUNT.MODEL; i++) readModel(i);
 
@@ -2694,8 +2699,6 @@ namespace HalconLibrary
 				#endregion
 
 				#region circle find
-				// Chamfer로 정의되어 있던 영역에서 하나만 사용한다.(나중에 혹시 점이 정상적으로 찍혀 있는지 전부 검사해 달라고 하는 것 아녀?
-
 				if (rectangleCenter.bottomCircleFindFlag > 0)
 				{
 
@@ -4202,6 +4205,826 @@ namespace HalconLibrary
 		}
 		#endregion
 
+
+        #region Projection
+        public bool createCornerRegion()
+        {
+            try
+            {
+                if (!isActivate) return false;
+
+                HTuple width, height;
+                HOperatorSet.GetImageSize(acq.Image, out width, out height);
+                HOperatorSet.SetColor(window.handle, "yellow");
+
+                int longLength = (int)((int)height * 0.45);
+                int shortLength = 100;
+
+                if (projectionEdge.quardrant == (int)QUARDRANT.QUARDRANT_RT)
+                {
+                    projectionEdge.createRow1 = height / 2 - shortLength;
+                    projectionEdge.createRow2 = height / 2 + longLength;
+                    projectionEdge.createColumn1 = width / 2 - longLength;
+                    projectionEdge.createColumn2 = width / 2 + shortLength;
+                }
+                else if (projectionEdge.quardrant == (int)QUARDRANT.QUARDRANT_RB)
+                {
+                    projectionEdge.createRow1 = height / 2 - longLength;
+                    projectionEdge.createRow2 = height / 2 + shortLength;
+                    projectionEdge.createColumn1 = width / 2 - longLength;
+                    projectionEdge.createColumn2 = width / 2 + shortLength;
+                }
+                else if (projectionEdge.quardrant == (int)QUARDRANT.QUARDRANT_LB)
+                {
+                    projectionEdge.createRow1 = height / 2 - longLength;
+                    projectionEdge.createRow2 = height / 2 + shortLength;
+                    projectionEdge.createColumn1 = width / 2 - shortLength;
+                    projectionEdge.createColumn2 = width / 2 + longLength;
+                }
+                else if (projectionEdge.quardrant == (int)QUARDRANT.QUARDRANT_LT)
+                {
+                    projectionEdge.createRow1 = height / 2 - shortLength;
+                    projectionEdge.createRow2 = height / 2 + longLength;
+                    projectionEdge.createColumn1 = width / 2 - shortLength;
+                    projectionEdge.createColumn2 = width / 2 + longLength;
+                }
+
+                projectionEdge.isCreate = "true";
+                return true;
+                //return writeModel(number);
+            }
+            catch (HalconException ex)
+            {
+                projectionEdge.isCreate = "false";
+                halcon_exception exception = new halcon_exception();
+                exception.message(window, acq, ex);
+                return false;
+            }
+        }
+
+        public void DispBlobImage(HTuple number, int minTh, int maxTh)
+        {
+            model[number].Region.Dispose();
+            HOperatorSet.GenRectangle1(out model[number].Region, model[number].createRow1, model[number].createColumn1, model[number].createRow2, model[number].createColumn2);
+            HOperatorSet.DispObj(model[number].Region, window.handle);
+            HOperatorSet.ReduceDomain(acq.Image, model[number].Region, out model[number].CreateTemplate);
+
+            HTuple column = new HTuple();
+            HTuple row = new HTuple();
+            HTuple hArea = new HTuple();
+            HTuple hSort = new HTuple();
+            HTuple hLength = new HTuple();
+
+            HObject hObj = new HObject();
+            hObj.Dispose();
+
+
+            HOperatorSet.Threshold(model[number].CreateTemplate, out hObj, minTh, maxTh);
+            HOperatorSet.FillUp(hObj, out hObj);
+            HOperatorSet.OpeningCircle(hObj, out hObj, 3.5);
+            HOperatorSet.Connection(hObj, out hObj);
+
+            HOperatorSet.SelectShapeStd(hObj, out hObj, "max_area", 0);
+            HOperatorSet.AreaCenter(hObj, out hArea, out row, out column);
+
+            HOperatorSet.TupleSort(hArea, out hSort);
+            HOperatorSet.TupleLength(hArea, out hLength);
+
+            //clearWindow();
+
+            //HOperatorSet.DispImage(acq.Image, window.handle);
+            HOperatorSet.SetDraw(window.handle, "margin");
+            HOperatorSet.SetColor(window.handle, "red");
+            HOperatorSet.DispObj(hObj, window.handle);
+
+            DPOINT blobCenter = new DPOINT();
+
+            blobCenter.x = column[0];
+            blobCenter.y = row[0];
+
+            double areaMin = hArea[0] - hArea[0] / 2;
+            double areaMax = hArea[0] + hArea[0] / 2;
+
+            HOperatorSet.DispCross(window.handle, blobCenter.y, blobCenter.x, 50, 0);
+        }
+
+        public bool refreshProjectionEdge()
+        {
+            try
+            {
+                if (!isActivate || !refresh_req) return false;
+                HOperatorSet.SetSystem("flush_graphic", "false");
+                HOperatorSet.ClearWindow(window.handle);
+                HOperatorSet.DispObj(acq.Image, window.handle);
+                HOperatorSet.SetDraw(window.handle, "margin");
+                HOperatorSet.SetLineWidth(window.handle, 1);
+                HOperatorSet.SetColor(window.handle, "pink");
+                messageStatus(acq.DeviceUserID);
+
+                if (projectionEdge.isCreate == "true")
+                {
+                    HOperatorSet.SetColor(window.handle, "pink");
+                    HOperatorSet.DispCross(window.handle, acq.height / 2, acq.width / 2, acq.height * 0.8, 0);
+
+                    //HOperatorSet.SetLineWidth(window.handle, 1);
+                    //HOperatorSet.SetColor(window.handle, "blue");
+                    //HOperatorSet.DispCross(window.handle, projectionEdge.pR11Row, projectionEdge.pR11Col, 40, 0);
+                    //HOperatorSet.DispCross(window.handle, projectionEdge.pR12Row, projectionEdge.pR12Col, 40, 0);
+                    //HOperatorSet.DispCross(window.handle, projectionEdge.pR21Row, projectionEdge.pR21Col, 40, 0);
+                    //HOperatorSet.DispCross(window.handle, projectionEdge.pR22Row, projectionEdge.pR22Col, 40, 0);
+
+                    HOperatorSet.SetLineWidth(window.handle, 3);
+                    HOperatorSet.SetColor(window.handle, "red");
+                    HOperatorSet.DispLine(window.handle, projectionEdge.pR11Row, projectionEdge.pR11Col, projectionEdge.pR12Row, projectionEdge.pR12Col);
+                    HOperatorSet.DispLine(window.handle, projectionEdge.pR21Row, projectionEdge.pR21Col, projectionEdge.pR22Row, projectionEdge.pR22Col);
+
+                    HOperatorSet.SetLineWidth(window.handle, 1);
+                    HOperatorSet.SetColor(window.handle, "green");
+                    HOperatorSet.DispCross(window.handle, projectionEdge.tempY, projectionEdge.tempX, 70, 0.785398);
+                }
+                else
+                {
+                    HOperatorSet.SetColor(window.handle, "red");
+                    HOperatorSet.DispCross(window.handle, acq.height / 2, acq.width / 2, acq.height * 0.8, 0);
+                }
+                HOperatorSet.SetSystem("flush_graphic", "true");
+
+                //projectionEdge[refresh_reqModelNumber].resultY = ((acq.height / 2) - projectionEdge[refresh_reqModelNumber].tempY) * acq.ResolutionY;
+                //projectionEdge[refresh_reqModelNumber].resultX = ((-acq.width / 2) + projectionEdge[refresh_reqModelNumber].tempX) * acq.ResolutionX;
+
+                #region messageResult
+                string str;
+                str = "Projection Edge" + "\n";
+                str += "X         : " + Math.Round((double)projectionEdge.resultX, 2).ToString() + "\n";
+                str += "Y         : " + Math.Round((double)projectionEdge.resultY, 2).ToString() + "\n";
+                str += "Angle  : " + Math.Round((double)projectionEdge.resultAngle, 2).ToString() + "\n";
+                str += "Angle2  : " + Math.Round((double)projectionEdge.resultAngle2, 2).ToString() + "\n";
+                str += "Time      : " + Math.Round((double)projectionEdge.resultTime, 2).ToString() + "\n";
+                messageResult(str);
+                #endregion
+                refresh_req = false;
+                return true;
+            }
+            catch //(HalconException ex)
+            {
+                //halcon_exception exception = new halcon_exception();
+                //exception.message(window, acq, ex);
+                refresh_req = false;
+                return false;
+            }
+        }
+
+        public void DispBinaryRectImage()
+        {
+            try
+            {
+                projectionEdge.Region.Dispose();
+                HOperatorSet.GenRectangle1(out projectionEdge.Region,
+                    projectionEdge.createRow1, projectionEdge.createColumn1,
+                    projectionEdge.createRow2, projectionEdge.createColumn2);
+                HOperatorSet.ReduceDomain(acq.Image, projectionEdge.Region, out projectionEdge.ImageReduced);
+
+                HTuple column = new HTuple();
+                HTuple row = new HTuple();
+                HTuple hArea = new HTuple();
+                HTuple hSort = new HTuple();
+                HTuple hLength = new HTuple();
+
+                HObject hObj = new HObject();
+                hObj.Dispose();
+
+                dwell.Reset();
+
+                HOperatorSet.Threshold(projectionEdge.ImageReduced, out hObj, projectionEdge.thresholdMin, projectionEdge.thresholdMax);
+                HOperatorSet.FillUp(hObj, out hObj);
+                HOperatorSet.OpeningCircle(hObj, out hObj, 3.5);
+                HOperatorSet.Connection(hObj, out hObj);
+
+                HOperatorSet.SelectShapeStd(hObj, out hObj, "max_area", 0);
+                HOperatorSet.AreaCenter(hObj, out hArea, out row, out column);
+
+                DPOINT blobCenter = new DPOINT();
+
+                blobCenter.x = column[0];
+                blobCenter.y = row[0];
+
+                double areaMin = hArea[0] - hArea[0] / 2;
+                double areaMax = hArea[0] + hArea[0] / 2;
+
+                HOperatorSet.DispCross(window.handle, blobCenter.y, blobCenter.x, 50, 0);
+
+                RECT cornerRgn = new RECT();
+                cornerRgn.left = projectionEdge.createColumn1;
+                cornerRgn.right = projectionEdge.createColumn2;
+                cornerRgn.top = projectionEdge.createRow1;
+                cornerRgn.bottom = projectionEdge.createRow2;
+
+                DPOINT cornerPoint;
+                double angle = -1;
+                double angle2 = -1;
+                projectionCenter(acq.Image, acq.width, acq.height, cornerRgn, projectionEdge.edgeFilter,
+                    projectionEdge.type, projectionEdge.direction, projectionEdge.quardrant, blobCenter, out cornerPoint, out angle, out angle2);
+
+                projectionEdge.tempX = cornerPoint.x;
+                projectionEdge.tempY = cornerPoint.y;
+                projectionEdge.resultAngle = angle;
+                projectionEdge.resultAngle2 = angle2;
+                projectionEdge.resultTime = dwell.Elapsed;
+            }
+            catch (HalconException ex)
+            {
+                projectionEdge.resultX = -1;
+                projectionEdge.resultY = -1;
+                projectionEdge.resultAngle = -1;
+                projectionEdge.resultAngle2 = -1;
+            }
+        }
+
+        public void DispBinaryRectImage(out bool b)
+        {
+            try
+            {
+                projectionEdge.resultX = -1;
+                projectionEdge.resultY = -1;
+                projectionEdge.resultAngle = -1;
+
+                projectionEdge.tempX = -1;
+                projectionEdge.tempY = -1;
+
+                dwell.Reset();
+
+                projectionEdge.Region.Dispose();
+                HOperatorSet.GenRectangle1(out projectionEdge.Region,
+                    projectionEdge.createRow1, projectionEdge.createColumn1,
+                    projectionEdge.createRow2, projectionEdge.createColumn2);
+                HOperatorSet.ReduceDomain(acq.Image, projectionEdge.Region, out projectionEdge.ImageReduced);
+
+                projectionEdge.type = (int)PROJECTION_TYPE.PROJECTION_NEGATIVE;
+                projectionEdge.direction = 0;
+                projectionEdge.edgeFilter = 30;
+                projectionEdge.thresholdMin = 128;
+                projectionEdge.thresholdMax = 255;
+
+                HTuple column = new HTuple();
+                HTuple row = new HTuple();
+                HTuple hArea = new HTuple();
+                HTuple hSort = new HTuple();
+                HTuple hLength = new HTuple();
+
+                HObject hObj = new HObject();
+                hObj.Dispose();
+
+                HOperatorSet.Threshold(projectionEdge.ImageReduced, out hObj, projectionEdge.thresholdMin, projectionEdge.thresholdMax);
+                HOperatorSet.FillUp(hObj, out hObj);
+                HOperatorSet.OpeningCircle(hObj, out hObj, 3.5);
+                HOperatorSet.Connection(hObj, out hObj);
+
+                HOperatorSet.SelectShapeStd(hObj, out hObj, "max_area", 0);
+                HOperatorSet.AreaCenter(hObj, out hArea, out row, out column);
+
+                HOperatorSet.TupleSort(hArea, out hSort);
+                HOperatorSet.TupleLength(hArea, out hLength);
+
+                //clearWindow();
+
+                //HOperatorSet.DispImage(acq.Image, window.handle);
+                HOperatorSet.SetDraw(window.handle, "margin");
+                HOperatorSet.SetColor(window.handle, "red");
+                HOperatorSet.DispObj(hObj, window.handle);
+
+                DPOINT blobCenter = new DPOINT();
+
+                blobCenter.x = column[0];
+                blobCenter.y = row[0];
+
+                double areaMin = hArea[0] - hArea[0] / 2;
+                double areaMax = hArea[0] + hArea[0] / 2;
+
+                //HOperatorSet.DispCross(window.handle, blobCenter.y, blobCenter.x, 50, 0);
+
+                //clearWindow();
+
+                //grab();
+
+                //HOperatorSet.DispImage(acq.Image, window.handle);
+
+                RECT cornerRgn = new RECT();
+                cornerRgn.left = projectionEdge.createColumn1;
+                cornerRgn.right = projectionEdge.createColumn2;
+                cornerRgn.top = projectionEdge.createRow1;
+                cornerRgn.bottom = projectionEdge.createRow2;
+
+                DPOINT cornerPoint;
+                double angle = 0;
+                double angle2 = 0;
+                projectionCenter(acq.Image, acq.width, acq.height, cornerRgn, projectionEdge.edgeFilter,
+                    projectionEdge.type, projectionEdge.direction, projectionEdge.quardrant, blobCenter, out cornerPoint, out angle, out angle2);
+                //HOperatorSet.DispObj(reducedImage, window.handle);
+
+                // DispCross..
+                //HOperatorSet.DispCross(window.handle, cornerPoint.y, cornerPoint.x, 100, 0);
+
+                projectionEdge.tempX = cornerPoint.x;
+                projectionEdge.tempY = cornerPoint.y;
+                projectionEdge.resultX = ((-acq.width / 2) + cornerPoint.x) * acq.ResolutionX;
+                projectionEdge.resultY = -((-acq.height / 2) + cornerPoint.y) * acq.ResolutionY;
+                projectionEdge.resultAngle = angle;
+                projectionEdge.resultAngle2 = angle2;
+                projectionEdge.resultTime = dwell.Elapsed;
+
+                projectionEdge.write();
+                if ((double)projectionEdge.resultX == -1 && (double)projectionEdge.resultY == -1) b = false;
+                else b = true;
+            }
+            catch
+            {
+                projectionEdge.resultX = -1;
+                projectionEdge.resultY = -1;
+                projectionEdge.resultAngle = -1;
+
+                projectionEdge.tempX = -1;
+                projectionEdge.tempY = -1;
+
+                b = false;
+            }
+        }
+
+        public bool projectionCenter(HObject hImage, long nImageWidth, long nImageHeight, RECT rect,
+            int nEdgeThr, int nProjectionType, int nEdgeDir, int nQuardrant, DPOINT blobCenter, out DPOINT pCornerPoint, out double angle, out double angle2)
+        {
+            try
+            {
+                pCornerPoint.x = -1;
+                pCornerPoint.y = -1;
+                angle = -1;
+                angle2 = -1;
+
+                DPOINT pP11, pP12, pP21, pP22;
+                DPOINT pR11, pR12, pR21, pR22;
+                int nDrt1 = 0, nDrt2 = 0;
+                int nAngle1 = 0, nAngle2 = 0;
+                int nLength1 = 0, nLength2 = 0;
+
+                double dRAngle1 = 0, dRAngle2 = 0;
+                double dResultAnlge1 = 0, dResultAnlge2 = 0;
+                double dResultRealAnlge1 = 0, dResultRealAnlge2 = 0;
+
+                projectionEdge.pR11Row = -1;
+                projectionEdge.pR11Col = -1;
+                projectionEdge.pR12Row = -1;
+                projectionEdge.pR12Col = -1;
+                projectionEdge.pR21Row = -1;
+                projectionEdge.pR21Col = -1;
+                projectionEdge.pR22Row = -1;
+                projectionEdge.pR22Col = -1;
+
+                const double ratio = 0.5;
+
+                if (nEdgeDir == 0)       // in -> out
+                {
+                    switch (nQuardrant)
+                    {
+
+                        case (int)QUARDRANT.QUARDRANT_LT:
+                            nDrt1 = (int)Direction.LEFT;
+                            nDrt2 = (int)Direction.TOP;
+
+                            nAngle1 = 180;
+                            nAngle2 = 90;
+
+                            nLength1 = Convert.ToInt32((blobCenter.x - rect.left) * ratio);
+                            nLength2 = Convert.ToInt32((blobCenter.y - rect.top) * ratio);
+
+                            break;
+                        case (int)QUARDRANT.QUARDRANT_RT:
+                            nDrt1 = (int)Direction.RIGHT;
+                            nDrt2 = (int)Direction.TOP;
+
+                            nAngle1 = 0;
+                            nAngle2 = 90;
+
+                            nLength1 = Convert.ToInt32((rect.right - blobCenter.x) * ratio);
+                            nLength2 = Convert.ToInt32((blobCenter.y - rect.top) * ratio);
+
+                            break;
+                        case (int)QUARDRANT.QUARDRANT_LB:
+                            nDrt1 = (int)Direction.LEFT;
+                            nDrt2 = (int)Direction.BOTTOM;
+
+                            nAngle1 = 180;
+                            nAngle2 = 270;
+
+                            nLength1 = Convert.ToInt32((blobCenter.x - rect.left) * ratio);
+                            nLength2 = Convert.ToInt32((rect.bottom - blobCenter.y) * ratio);
+
+                            break;
+                        case (int)QUARDRANT.QUARDRANT_RB:
+                            nDrt1 = (int)Direction.RIGHT;
+                            nDrt2 = (int)Direction.BOTTOM;
+                            nAngle1 = 0;
+                            nAngle2 = 270;
+
+                            nLength1 = Convert.ToInt32((rect.right - blobCenter.x) * ratio);
+                            nLength2 = Convert.ToInt32((rect.bottom - blobCenter.y) * ratio);
+                            break;
+                        default:
+                            return false;
+                    }
+                }
+                else if (nEdgeDir == 1)      // out -> in
+                {
+                    switch (nQuardrant)
+                    {
+                        case (int)QUARDRANT.QUARDRANT_LT:
+                            nDrt1 = (int)Direction.RIGHT;
+                            nDrt2 = (int)Direction.BOTTOM;
+
+                            nAngle1 = 0;
+                            nAngle2 = 270;
+
+                            nLength1 = Convert.ToInt32((blobCenter.x - rect.left) * ratio);
+                            nLength2 = Convert.ToInt32((blobCenter.y - rect.top) * ratio);
+
+                            break;
+                        case (int)QUARDRANT.QUARDRANT_RT:
+                            nDrt1 = (int)Direction.LEFT;
+                            nDrt2 = (int)Direction.BOTTOM;
+
+                            nAngle1 = 180;
+                            nAngle2 = 270;
+
+                            nLength1 = Convert.ToInt32((rect.right - blobCenter.x) * ratio);
+                            nLength2 = Convert.ToInt32((blobCenter.y - rect.top) * ratio);
+
+                            break;
+                        case (int)QUARDRANT.QUARDRANT_LB:
+                            nDrt1 = (int)Direction.RIGHT;
+                            nDrt2 = (int)Direction.TOP;
+                            nAngle1 = 0;
+                            nAngle2 = 90;
+
+                            nLength1 = Convert.ToInt32((blobCenter.x - rect.left) * ratio);
+                            nLength2 = Convert.ToInt32((rect.bottom - blobCenter.y) * ratio);
+
+                            break;
+                        case (int)QUARDRANT.QUARDRANT_RB:
+                            nDrt1 = (int)Direction.LEFT;
+                            nDrt2 = (int)Direction.TOP;
+
+                            nAngle1 = 180;
+                            nAngle2 = 90;
+
+                            nLength1 = Convert.ToInt32((rect.right - blobCenter.x) * ratio);
+                            nLength2 = Convert.ToInt32((rect.bottom - blobCenter.y) * ratio);
+
+                            break;
+                        default:
+                            return false;
+                    }
+                }
+
+                if (!ProjectionLineDetect(hImage, nImageWidth, nImageHeight, nDrt1, nAngle1, rect, nEdgeThr, nProjectionType, nLength1, nQuardrant, blobCenter, out pP11, out pP12)) return false;
+                if (!ProjectionLineDetect(hImage, nImageWidth, nImageHeight, nDrt2, nAngle2, rect, nEdgeThr, nProjectionType, nLength2, nQuardrant, blobCenter, out pP21, out pP22)) return false;
+                //For Free Angle
+                if (!Get2PointAnlge(pP11, pP12, out dResultAnlge1)) return false;
+                if (!Get2PointAnlge(pP21, pP22, out dResultAnlge2)) return false;
+
+                dRAngle1 = dResultAnlge1 + Convert.ToDouble(nAngle1);
+                dRAngle2 = dResultAnlge2 + Convert.ToDouble(nAngle2);
+                
+                //Free Angle Projection
+                if (!ProjectionLineDetect(hImage, nImageWidth, nImageHeight, nDrt1, dRAngle1, rect, nEdgeThr, nProjectionType, nLength1, nQuardrant, blobCenter, out pR11, out pR12)) return false;
+                if (!ProjectionLineDetect(hImage, nImageWidth, nImageHeight, nDrt2, dRAngle2, rect, nEdgeThr, nProjectionType, nLength2, nQuardrant, blobCenter, out pR21, out pR22)) return false;
+
+                //Get Chip Vertex
+                if (!GetIntersectionLine(pR11, pR12, pR21, pR22, out pCornerPoint)) return false;
+
+                // Angle Ave [6/8/2016 abc]
+                if (!Get2PointAnlge(pR11, pR12, out dResultRealAnlge1)) return false;
+                if (!Get2PointAnlge(pR21, pR22, out dResultRealAnlge2)) return false;
+
+                projectionEdge.pR11Row = pR11.y;
+                projectionEdge.pR11Col = pR11.x;
+                projectionEdge.pR12Row = pR12.y;
+                projectionEdge.pR12Col = pR12.x;
+                projectionEdge.pR21Row = pR21.y;
+                projectionEdge.pR21Col = pR21.x;
+                projectionEdge.pR22Row = pR22.y;
+                projectionEdge.pR22Col = pR22.x;
+
+                angle2 = dResultRealAnlge1;
+                angle = dResultRealAnlge2; //(dResultRealAnlge1 + dResultRealAnlge2) / 2.0;
+                //angle = dResultAnlge1; // (dResultRealAnlge1 + dResultRealAnlge2) / 2.0;
+
+                return true;
+            }
+            catch (HalconException ex)
+            {
+                pCornerPoint.x = -1;
+                pCornerPoint.y = -1;
+                angle = -1;
+                angle2 = -1;
+                return false;
+            }
+        }
+
+        public bool GetIntersectionLine(DPOINT pAFirstPoint, DPOINT pASeconPoint, DPOINT pBFirstPoint, DPOINT pBSeconPoint, out DPOINT pIntersectionPoint)
+        {
+            HTuple hCrossPointY, hCrossPointX, hIsParallel;
+            HTuple nLength;
+
+            pIntersectionPoint.x = -1;
+            pIntersectionPoint.y = -1;
+
+            HOperatorSet.IntersectionLl(pAFirstPoint.y, pAFirstPoint.x, pASeconPoint.y, pASeconPoint.x, pBFirstPoint.y, pBFirstPoint.x, pBSeconPoint.y, pBSeconPoint.x, out hCrossPointY, out hCrossPointX, out hIsParallel);
+            HOperatorSet.TupleLength(hCrossPointX, out nLength);
+
+            if (nLength == 0) return false;
+            if (hIsParallel[0] != 0) return false;
+
+            pIntersectionPoint.x = hCrossPointX[0];
+            pIntersectionPoint.y = hCrossPointY[0];
+
+            return true;
+        }
+
+        public bool Get2PointAnlge(DPOINT pFirstPoint, DPOINT pSeconPoint, out double dAngle)
+        {
+            bool bResult = false;
+            HTuple hAngle = new HTuple();
+            HTuple nLength = new HTuple();
+
+            HOperatorSet.LineOrientation(pFirstPoint.y, pFirstPoint.x, pSeconPoint.y, pSeconPoint.x, out hAngle);
+            HOperatorSet.TupleLength(hAngle, out nLength);
+
+            if (nLength != 1)
+            {
+                dAngle = 0.0;
+                return bResult;
+            }
+
+            hAngle[0] = hAngle[0].D * 180 / Math.PI;
+            dAngle = GetAnlgeD(hAngle[0]);
+
+            return true;
+        }
+
+        public double GetAnlgeD(double degree)
+        {
+            double resultDegree;
+            if (degree > 45)
+            {
+                resultDegree = degree - 90;
+            }
+            else if (degree < -45)
+            {
+                resultDegree = degree + 90;
+            }
+            else
+            {
+                resultDegree = degree;
+            }
+
+            return resultDegree;
+        }
+
+        public bool ProjectionLineDetect(HObject hImage, long nImageWidth, long nImageHeight, int nDirection, double dDirectionAngle, RECT pRect, int nEdgeThr, int nProjectionType, int nProjectionLength, int nQuardrant, DPOINT pBlobCenter, out DPOINT pFirstPoint, out DPOINT pSecondPoint)
+        {
+            try
+            {
+                pFirstPoint.x = 0;
+                pFirstPoint.y = 0;
+
+                pSecondPoint.x = 0;
+                pSecondPoint.y = 0;
+
+                int nThickness, nDirect;
+                int nProjectPoint;
+                DPOINT pointCenter1 = new DPOINT();
+                DPOINT pointCenter2 = new DPOINT();
+
+                nDirect = nProjectionLength;
+                //RADIAN
+                switch (nDirection)
+                {
+                    case (int)Direction.LEFT:
+                        if (nQuardrant == (int)QUARDRANT.QUARDRANT_RT)
+                            nProjectPoint = Convert.ToInt32((pRect.bottom - pBlobCenter.y) * 2 / 6);
+                        else if (nQuardrant == (int)QUARDRANT.QUARDRANT_RB)
+                            nProjectPoint = Convert.ToInt32((pBlobCenter.y - pRect.top) * 2 / 6);
+                        else if (nQuardrant == (int)QUARDRANT.QUARDRANT_LT)
+                            nProjectPoint = Convert.ToInt32((pRect.bottom - pBlobCenter.y) * 2 / 6);
+                        else nProjectPoint = Convert.ToInt32((pBlobCenter.y - pRect.top) * 2 / 6);
+
+                        if (nQuardrant == (int)QUARDRANT.QUARDRANT_LT || nQuardrant == (int)QUARDRANT.QUARDRANT_LB)
+                        {
+                            //1		
+                            pointCenter1.x = pRect.left + nDirect;
+                            pointCenter1.y = pBlobCenter.y - nProjectPoint;
+
+                            //2
+                            pointCenter2.x = pRect.left + nDirect;
+                            pointCenter2.y = pBlobCenter.y + nProjectPoint;
+                        }
+                        else if (nQuardrant == (int)QUARDRANT.QUARDRANT_RT || nQuardrant == (int)QUARDRANT.QUARDRANT_RB)
+                        {
+                            //1		
+                            pointCenter1.x = pRect.right - nDirect;
+                            pointCenter1.y = pBlobCenter.y - nProjectPoint;
+
+                            //2
+                            pointCenter2.x = pRect.right - nDirect;
+                            pointCenter2.y = pBlobCenter.y + nProjectPoint;
+                        }
+                        nThickness = Convert.ToInt32(nProjectPoint / 2);
+                        break;
+                    case (int)Direction.RIGHT:
+                        if (nQuardrant == (int)QUARDRANT.QUARDRANT_RT)
+                            nProjectPoint = Convert.ToInt32((pRect.bottom - pBlobCenter.y) * 2 / 6);
+                        else if (nQuardrant == (int)QUARDRANT.QUARDRANT_RB)
+                            nProjectPoint = Convert.ToInt32((pBlobCenter.y - pRect.top) * 2 / 6);
+                        else if (nQuardrant == (int)QUARDRANT.QUARDRANT_LT)
+                            nProjectPoint = Convert.ToInt32((pRect.bottom - pBlobCenter.y) * 2 / 6);
+                        else
+                            nProjectPoint = Convert.ToInt32((pBlobCenter.y - pRect.top) * 2 / 6);
+
+                        if (nQuardrant == (int)QUARDRANT.QUARDRANT_RT || nQuardrant == (int)QUARDRANT.QUARDRANT_RB)
+                        {
+                            //1		
+                            pointCenter1.x = pRect.right - nDirect;
+                            pointCenter1.y = pBlobCenter.y - nProjectPoint;
+
+                            //2
+                            pointCenter2.x = pRect.right - nDirect;
+                            pointCenter2.y = pBlobCenter.y + nProjectPoint;
+                        }
+                        else if (nQuardrant == (int)QUARDRANT.QUARDRANT_LT || nQuardrant == (int)QUARDRANT.QUARDRANT_LB)
+                        {
+                            //1		
+                            pointCenter1.x = pRect.left + nDirect;
+                            pointCenter1.y = pBlobCenter.y - nProjectPoint;
+
+                            //2
+                            pointCenter2.x = pRect.left + nDirect;
+                            pointCenter2.y = pBlobCenter.y + nProjectPoint;
+                        }
+
+                        nThickness = Convert.ToInt32(nProjectPoint / 2);
+
+                        break;
+                    case (int)Direction.TOP:
+                        if (nQuardrant == (int)QUARDRANT.QUARDRANT_LB)
+                            nProjectPoint = Convert.ToInt32((pRect.right - pBlobCenter.x) * 2 / 6);
+                        else if (nQuardrant == (int)QUARDRANT.QUARDRANT_RB)
+                            nProjectPoint = Convert.ToInt32((pBlobCenter.x - pRect.left) * 2 / 6);
+                        else if (nQuardrant == (int)QUARDRANT.QUARDRANT_LT)
+                            nProjectPoint = Convert.ToInt32((pRect.right - pBlobCenter.x) * 2 / 6);
+                        else
+                            nProjectPoint = Convert.ToInt32((pBlobCenter.x - pRect.left) * 2 / 6);
+
+
+                        if (nQuardrant == (int)QUARDRANT.QUARDRANT_LT || nQuardrant == (int)QUARDRANT.QUARDRANT_RT)
+                        {
+                            //1		
+                            pointCenter1.x = pBlobCenter.x - nProjectPoint;
+                            pointCenter1.y = pRect.top + nDirect;
+
+                            //2
+                            pointCenter2.x = pBlobCenter.x + nProjectPoint;
+                            pointCenter2.y = pRect.top + nDirect;
+                        }
+                        else if (nQuardrant == (int)QUARDRANT.QUARDRANT_LB || nQuardrant == (int)QUARDRANT.QUARDRANT_RB)
+                        {
+                            //1		
+                            pointCenter1.x = pBlobCenter.x - nProjectPoint;
+                            pointCenter1.y = pRect.bottom - nDirect;
+
+                            //2
+                            pointCenter2.x = pBlobCenter.x + nProjectPoint;
+                            pointCenter2.y = pRect.bottom - nDirect;
+                        }
+
+                        nThickness = Convert.ToInt32(nProjectPoint / 2);
+                        break;
+                    case (int)Direction.BOTTOM:
+                        if (nQuardrant == (int)QUARDRANT.QUARDRANT_LB)
+                            nProjectPoint = Convert.ToInt32((pRect.right - pBlobCenter.x) * 2 / 6);
+                        else if (nQuardrant == (int)QUARDRANT.QUARDRANT_RB)
+                            nProjectPoint = Convert.ToInt32((pBlobCenter.x - pRect.left) * 2 / 6);
+                        else if (nQuardrant == (int)QUARDRANT.QUARDRANT_LT)
+                            nProjectPoint = Convert.ToInt32((pRect.right - pBlobCenter.x) * 2 / 6);
+                        else
+                            nProjectPoint = Convert.ToInt32((pBlobCenter.x - pRect.left) * 2 / 6);
+
+                        if (nQuardrant == (int)QUARDRANT.QUARDRANT_LB || nQuardrant == (int)QUARDRANT.QUARDRANT_RB)
+                        {
+                            //1		
+                            pointCenter1.x = pBlobCenter.x - nProjectPoint;
+                            pointCenter1.y = pRect.bottom - nDirect;
+
+                            //2
+                            pointCenter2.x = pBlobCenter.x + nProjectPoint;
+                            pointCenter2.y = pRect.bottom - nDirect;
+                        }
+                        else if (nQuardrant == (int)QUARDRANT.QUARDRANT_LT || nQuardrant == (int)QUARDRANT.QUARDRANT_RT)
+                        {
+                            //1		
+                            pointCenter1.x = pBlobCenter.x - nProjectPoint;
+                            pointCenter1.y = pRect.top + nDirect;
+
+                            //2
+                            pointCenter2.x = pBlobCenter.x + nProjectPoint;
+                            pointCenter2.y = pRect.top + nDirect;
+                        }
+
+                        nThickness = Convert.ToInt32(nProjectPoint / 2);
+                        break;
+                    default:
+                        return false;
+                }
+
+                if (!ProjectionLineMono(hImage, nImageWidth, nImageHeight, pointCenter1, dDirectionAngle, nDirect, Convert.ToInt32(nThickness), nEdgeThr, nProjectionType, out pFirstPoint))
+                    return false;
+                if (!ProjectionLineMono(hImage, nImageWidth, nImageHeight, pointCenter2, dDirectionAngle, nDirect, Convert.ToInt32(nThickness), nEdgeThr, nProjectionType, out pSecondPoint))
+                    return false;
+
+                return true;
+            }
+            catch (HalconException ex)
+            {
+                pFirstPoint.x = 0;
+                pFirstPoint.y = 0;
+
+                pSecondPoint.x = 0;
+                pSecondPoint.y = 0;
+
+                return false;
+            }
+        }
+
+        public bool ProjectionLineMono(HObject hImage, long nImageWidth, long nImageHeight, DPOINT pCenter, double dAngle, double dDirect, double nThickness, int nEdgeThr, int nProjectionType, out DPOINT pPoint)
+        {
+            try
+            {
+                pPoint.x = -1;
+                pPoint.y = -1;
+
+                HTuple hMeasureHandle = new HTuple();
+                HTuple hRowEdge = new HTuple();
+                HTuple hColumnEdge = new HTuple();
+                HTuple hAmplitude = new HTuple();
+                HTuple hDistance = new HTuple();
+                HTuple nLength = new HTuple();
+
+                //if (hMeasureHandle != -1) HOperatorSet.CloseMeasure(hMeasureHandle);
+
+                dAngle = (Math.PI / 180) * dAngle;
+
+                HOperatorSet.GenMeasureRectangle2(pCenter.y, pCenter.x, dAngle, dDirect, nThickness, nImageWidth, nImageHeight, "nearest_neighbor", out  hMeasureHandle);
+
+                if (nProjectionType == (int)PROJECTION_TYPE.PROJECTION_POSITIVE)
+                    HOperatorSet.MeasurePos(hImage, hMeasureHandle, 2, nEdgeThr, "positive", "first", out hRowEdge, out hColumnEdge, out hAmplitude, out hDistance);
+                else if (nProjectionType == (int)PROJECTION_TYPE.PROJECTION_NEGATIVE)
+                {
+                    HOperatorSet.MeasurePos(hImage, hMeasureHandle, 2, nEdgeThr, "negative", "first", out hRowEdge, out hColumnEdge, out hAmplitude, out hDistance);
+                }
+
+                if ((dAngle >= -20 && dAngle <= 20) || (dAngle >= 160 && dAngle <= 200))
+                    HOperatorSet.TupleLength(hColumnEdge, out nLength);
+                else HOperatorSet.TupleLength(hRowEdge, out nLength);
+
+                if (nLength == 0)
+                {
+                    HOperatorSet.CloseMeasure(hMeasureHandle);
+                    hMeasureHandle = -1;
+                    HOperatorSet.GenMeasureRectangle2(pCenter.y, pCenter.x, dAngle, dDirect, nThickness, nImageWidth, nImageHeight - 1, "nearest_neighbor", out  hMeasureHandle);
+                    HOperatorSet.MeasurePos(hImage, hMeasureHandle, 2, nEdgeThr, "positive", "first", out hRowEdge, out hColumnEdge, out hAmplitude, out hDistance);
+
+                    if ((dAngle >= -20 && dAngle <= 20) || (dAngle >= 160 && dAngle <= 200))
+                        HOperatorSet.TupleLength(hColumnEdge, out nLength);
+                    else HOperatorSet.TupleLength(hRowEdge, out nLength);
+                }
+
+                if (nLength == 0) return false;
+
+                for (int i = 0; i < nLength; i++)
+                {
+                    pPoint.x = hColumnEdge[i];
+                    pPoint.y = hRowEdge[i];
+                }
+
+                HOperatorSet.CloseMeasure(hMeasureHandle);
+                hMeasureHandle = -1;
+                return true;
+            }
+            catch (HalconException ex)
+            {
+                pPoint.x = -1;
+                pPoint.y = -1;
+                return false;
+            }
+        }
+        #endregion
 
         #region findBlob
         public void findBlob(halcon_blob[] halconBlob, double threshold, double minArea, double dx, double dy, out RetMessage retMessage, out string errorMessage, int LightingMode)
@@ -7292,6 +8115,208 @@ namespace HalconLibrary
 			return true;
 		}
 	}
+
+    public struct halcon_projection
+    {
+        #region parameter define
+        public HTuple isCreate;
+        public HTuple createRow1;
+        public HTuple createRow2;
+        public HTuple createColumn1;
+        public HTuple createColumn2;
+
+        public HTuple pR11Row;
+        public HTuple pR11Col;
+        public HTuple pR12Row;
+        public HTuple pR12Col;
+        public HTuple pR21Row;
+        public HTuple pR21Col;
+        public HTuple pR22Row;
+        public HTuple pR22Col;
+
+        public HTuple resultX;
+        public HTuple resultY;
+        public HTuple resultAngle;
+        public HTuple resultAngle2;
+        public HTuple tempX;
+        public HTuple tempY;
+        public HTuple resultTime;
+       
+        public HTuple thresholdMin;
+        public HTuple thresholdMax;
+        public HTuple edgeFilter;
+        public HTuple direction;
+        public HTuple type;
+        public HTuple quardrant;
+
+        public HObject Region;
+        public HObject ImageReduced;
+
+        public HTuple saveTuple;
+        #endregion
+
+        bool writeSaveTuple()
+        {
+            int i = 0;
+            try
+            {
+                saveTuple = new HTuple();
+                saveTuple[i] = "isCreate"; i++; saveTuple[i] = isCreate; i++;
+                saveTuple[i] = "createRow1"; i++; saveTuple[i] = createRow1; i++;
+                saveTuple[i] = "createRow2"; i++; saveTuple[i] = createRow2; i++;
+                saveTuple[i] = "createColumn1"; i++; saveTuple[i] = createColumn1; i++;
+                saveTuple[i] = "createColumn2"; i++; saveTuple[i] = createColumn2; i++;
+
+                saveTuple[i] = "thresholdMin"; i++; saveTuple[i] = thresholdMin; i++;
+                saveTuple[i] = "thresholdMax"; i++; saveTuple[i] = thresholdMax; i++;
+                saveTuple[i] = "edgeFilter"; i++; saveTuple[i] = edgeFilter; i++;
+                saveTuple[i] = "direction"; i++; saveTuple[i] = direction; i++;
+                saveTuple[i] = "type"; i++; saveTuple[i] = type; i++;
+                saveTuple[i] = "quardrant"; i++; saveTuple[i] = quardrant; i++;
+
+                return true;
+            }
+            catch (HalconException ex)
+            {
+                halcon_exception exception = new halcon_exception();
+                exception.message(ex);
+                return false;
+            }
+        }
+        bool readSaveTuple()
+        {
+            int i = 0;
+            try
+            {
+                i++;
+                isCreate = saveTuple[i]; i += 2;
+                createRow1 = saveTuple[i]; i += 2;
+                createRow2 = saveTuple[i]; i += 2;
+                createColumn1 = saveTuple[i]; i += 2;
+                createColumn2 = saveTuple[i]; i += 2;
+
+                thresholdMin = saveTuple[i]; i += 2;
+                thresholdMax = saveTuple[i]; i += 2;
+                edgeFilter = saveTuple[i]; i += 2;
+                direction = saveTuple[i]; i += 2;
+                type = saveTuple[i]; i += 2;
+                quardrant = saveTuple[i]; i += 2;
+
+                return true;
+            }
+            catch (HalconException ex)
+            {
+                halcon_exception exception = new halcon_exception();
+                exception.message(ex);
+                return false;
+            }
+        }
+
+        public bool write()
+        {
+            try
+            {
+                if (dev.NotExistHW.CAMERA) return false;
+                HTuple filePath, fileName;
+                filePath = mc2.savePath + "\\data\\vision\\projection\\";
+                if (!Directory.Exists(filePath)) Directory.CreateDirectory(filePath);
+                fileName = filePath + "projection";
+                writeSaveTuple();
+                HOperatorSet.WriteTuple(saveTuple, fileName + ".tup");
+                isCreate = "true";
+                return true;
+            }
+            catch (HalconException ex)
+            {
+                isCreate = "false";
+                halcon_exception exception = new halcon_exception();
+                exception.message(ex);
+                return false;
+            }
+        }
+        public bool read()
+        {
+            try
+            {
+                if (dev.NotExistHW.CAMERA) return false;
+
+                HTuple filePath, fileName, fileExists;
+                filePath = mc2.savePath + "\\data\\vision\\projection\\";
+                if (!Directory.Exists(filePath)) Directory.CreateDirectory(filePath);
+                fileName = filePath + "projection";
+                HOperatorSet.FileExists(fileName + ".tup", out fileExists);
+                if ((int)(fileExists) == 0) goto FAIL;
+                HOperatorSet.ReadTuple(fileName + ".tup", out saveTuple);
+                if (readSaveTuple() == false) goto FAIL;
+                if (isCreate == "false") goto FAIL;
+                return true;
+
+            FAIL:
+                delete();
+                return false;
+            }
+            catch (HalconException ex)
+            {
+                setDefault();
+                halcon_exception exception = new halcon_exception();
+                exception.message(ex);
+                return false;
+            }
+        }
+        public bool delete()
+        {
+            try
+            {
+                if (dev.NotExistHW.CAMERA) return false;
+                
+                HTuple filePath, fileName, fileExists;
+                filePath = mc2.savePath + "\\data\\vision\\projection\\";
+                if (!Directory.Exists(filePath)) Directory.CreateDirectory(filePath);
+                
+                fileName = filePath + "projection";
+                HOperatorSet.FileExists(fileName + ".tup", out fileExists);
+                if ((int)(fileExists) != 0) HOperatorSet.DeleteFile(fileName + ".tup");
+                setDefault();
+                return true;
+            }
+            catch (HalconException ex)
+            {
+                setDefault();
+                halcon_exception exception = new halcon_exception();
+                exception.message(ex);
+                return false;
+            }
+        }
+        public bool setDefault()
+        {
+            if (dev.NotExistHW.CAMERA) return false;
+            isCreate = "false";
+            createRow1 = -1;
+            createRow2 = -1;
+            createColumn1 = -1;
+            createColumn2 = -1;
+
+            resultX = -1;
+            resultY = -1;
+            tempX = -1;
+            tempY = -1;
+            resultAngle = -1;
+            resultAngle2 = -1;
+            resultTime = -1;
+
+            thresholdMin = -1;
+            thresholdMax = -1;
+            edgeFilter = -1;
+            direction = -1;
+            type = -1;
+            quardrant = -1;
+
+            Region.Dispose();
+            ImageReduced.Dispose();
+
+            return true;
+        }
+    }
 
 	public class halcon_cornerEdge
 	{

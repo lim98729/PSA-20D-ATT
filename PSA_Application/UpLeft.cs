@@ -878,10 +878,35 @@ namespace PSA_Application
 						controlTowerLamp(TOWERLAMP_MODE.MANUAL_MOVING, 1);
 					}
 				}
+                else if (mc.sf.reqMode == REQMODE.PUT)
+                {
+                    strTemp = "StackFeeder PutMode Run";
+                    logdisplay = 55;
+                    if (logdisplay != logdisplaybackup)
+                    {
+                        mc.log.debug.write(mc.log.CODE.FUNC, "--> StackFeeder PutMode Run");
+                        logdisplaybackup = logdisplay;
+                    }
+                    if (LB_Status.Text != strTemp)
+                    {
+                        LB_Status.Text = strTemp;
+                        controlTowerLamp(TOWERLAMP_MODE.INITIAL);
+                    }
+                    if (LB_Status.ForeColor == Color.Black)
+                    {
+                        LB_Status.ForeColor = Color.White;
+                        controlTowerLamp(TOWERLAMP_MODE.MANUAL_MOVING, 0);
+                    }
+                    else
+                    {
+                        LB_Status.ForeColor = Color.Black;
+                        controlTowerLamp(TOWERLAMP_MODE.MANUAL_MOVING, 1);
+                    }
+                }
 				else
 				{
 					strTemp = "StackFeeder INVALID";
-					logdisplay = 54;
+					logdisplay = 55;
 					if (logdisplay != logdisplaybackup)
 					{
 						mc.log.debug.write(mc.log.CODE.FUNC, "--> StackFeeder INVALID");

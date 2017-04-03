@@ -103,8 +103,6 @@ namespace PSA_SystemLibrary
                     mc.hd.tool.clear();
                     mc.pd.clear();
                     mc.sf.clear();
-                    mc.sf.feeder[(int)UnitCodeSFMG.MG1].clear();
-                    mc.sf.feeder[(int)UnitCodeSFMG.MG2].clear();
                     mc.cv.clear();
                     mc.hdc.clear();
 

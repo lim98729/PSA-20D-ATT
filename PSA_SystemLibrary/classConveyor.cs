@@ -342,7 +342,7 @@ namespace PSA_SystemLibrary
 					//mc.log.mcclog.write(mc.log.MCCCODE.TRAY_MOVE_INPUT_BUFFER, 0);
 					loadStartTime = DateTime.Now;
 					T1 = 500; T2 = 2000; T3 = 500;
-					V1 = 70; V2 = 255; V3 = 70;
+					V1 = 40; V2 = mc.para.CV.loadingConveyorSpeed.value; V3 = 40;
 					mc.AOUT.CV.FD_MTR1(0, out ret.message); if (ioCheck(sqc, ret.message)) break;
 					mc.OUT.CV.FD_MTR1(true, out ret.message); if (ioCheck(sqc, ret.message)) break;
 					timer.Reset();
@@ -396,7 +396,6 @@ namespace PSA_SystemLibrary
 					break;
 				case 201:
 					mc.OUT.CV.FD_MTR1(false, out ret.message);
-					mc.AOUT.CV.FD_MTR1(mc.para.CV.loadingConveyorSpeed.value, out ret.message);
 					mc.log.debug.write(mc.log.CODE.TRACE, String.Format("InBuf Tray Load Time : {0:F0}[ms]", loadTime.Elapsed));
 					if (loadTime.Elapsed < 1500 && reqMode != REQMODE.DUMY)
 					{
@@ -611,7 +610,7 @@ namespace PSA_SystemLibrary
 					//mc.log.mcclog.write(mc.log.MCCCODE.TRAY_MOVE_WORK_AREA, 0);
 					workStartTime = DateTime.Now;
 					T1 = 500; T2 = 2000; T3 = 500;
-					V1 = 70; V2 = 255; V3 = 70;
+					V1 = 70; V2 = mc.para.CV.workConveyorSpeed.value; V3 = 70;
 					mc.OUT.CV.BD_STOP(true, out ret.message); if (ioCheck(sqc, ret.message)) break;
 					dwell.Reset();
 					sqc++; break;
@@ -680,8 +679,6 @@ namespace PSA_SystemLibrary
 					if (dwell.Elapsed < 100) break;
 					mc.OUT.CV.FD_MTR1(false, out ret.message);
 					mc.OUT.CV.FD_MTR2(false, out ret.message);
-					mc.AOUT.CV.FD_MTR1(mc.para.CV.workConveyorSpeed.value, out ret.message);
-					mc.AOUT.CV.FD_MTR2(mc.para.CV.workConveyorSpeed.value, out ret.message);
 					mc.log.debug.write(mc.log.CODE.TRACE, String.Format("Work Tray Load Time : {0:F0}[ms]", loadTime.Elapsed));
 					if (loadTime.Elapsed < 1500)
 					{
@@ -813,7 +810,7 @@ namespace PSA_SystemLibrary
 					//mc.log.mcclog.write(mc.log.MCCCODE.TRAY_MOVE_OUTPUT_BUFFER, 0);
 					unloadStartTime = DateTime.Now;
 					T1 = 600; T2 = 2000; T3 = 600;
-					V1 = 70; V2 = 255; V3 = 70;
+					V1 = 70; V2 = mc.para.CV.unloadingConveyorSpeed.value; V3 = 70;
 					sqc++; break;
 				case 101:
 					mc.OUT.CV.BD_STOP(false, out ret.message); if (ioCheck(sqc, ret.message)) break;
@@ -869,8 +866,6 @@ namespace PSA_SystemLibrary
 				case 200:
 					mc.OUT.CV.FD_MTR2(false, out ret.message);
 					mc.OUT.CV.FD_MTR3(false, out ret.message);
-					mc.AOUT.CV.FD_MTR2(mc.para.CV.unloadingConveyorSpeed.value, out ret.message);
-					mc.AOUT.CV.FD_MTR3(mc.para.CV.unloadingConveyorSpeed.value, out ret.message);
 					mc.log.debug.write(mc.log.CODE.TRACE, String.Format("OutBuf Tray Load Time : {0:F0}[ms]", loadTime.Elapsed));
 					if (loadTime.Elapsed < 1500)
 					{
@@ -953,10 +948,10 @@ namespace PSA_SystemLibrary
 					if (mc2.req == MC_REQ.STOP) { sqc = SQC.STOP; break; }
 					mc.IN.CV.SMEMA_NEXT(out ret.b, out ret.message);
 					if (!ret.b) break;
-                    // 2016.10.24 - Unloader 아닐때만 SMEMA OUT 신호를 킨다.
+					mc.OUT.CV.SMEMA_NEXT(true, out ret.message);
+                    
                     if (mc.swcontrol.useUnloaderBuffer == 0)
                     {
-                        mc.OUT.CV.SMEMA_NEXT(true, out ret.message);
                         sqc = 100; break;
                     }
                     else
@@ -1022,20 +1017,21 @@ namespace PSA_SystemLibrary
 					if (timer.Elapsed > T3) { sqc++; break; }
 					if (dwell.Elapsed < 0.1) break;
 					speed = timer.Elapsed / T3 * (V3 - V2) + V2;
-
-                    if (mc.swcontrol.useUnloaderBuffer == 0)
-                    {
-                        mc.AOUT.CV.FD_MTR3(speed, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                        dwell.Reset();
-                        sqc = 200; break;
-                    }
-                    else
-                    {
-                        // 2016.10.24 - Amkor Unloader 일 경우 Attach Output 멈춘다.
-                        mc.AOUT.CV.FD_MTR3(0, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                        dwell.Reset();
-                        sqc = 200; break;
-                    }
+					mc.AOUT.CV.FD_MTR3(speed, out ret.message); if (ioCheck(sqc, ret.message)) break;
+					dwell.Reset();
+                    sqc = 200; break;
+					//if (mc.swcontrol.useUnloaderBuffer == 0)
+					//{
+						//dwell.Reset();
+						//sqc = 200; break;
+					//}
+					//else
+					//{
+					//    // 2016.10.24 - Amkor Unloader 일 경우 Attach Output 멈춘다.
+					//    mc.AOUT.CV.FD_MTR3(0, out ret.message); if (ioCheck(sqc, ret.message)) break;
+					//    dwell.Reset();
+					//    sqc = 200; break;
+					//}
 
 				case 200:
 					mc.IN.CV.BD_OUT(out ret.b, out ret.message);

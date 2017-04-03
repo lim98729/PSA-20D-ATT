@@ -33,7 +33,7 @@
             this.LB_ = new System.Windows.Forms.Label();
             this.TS_Manual = new System.Windows.Forms.ToolStrip();
             this.LB_Manual = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.TS_Manual_StepCycle = new System.Windows.Forms.ToolStripSeparator();
             this.BT_Manual_StepCycle = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.BT_Manual_PickupCycle = new System.Windows.Forms.ToolStripButton();
@@ -131,7 +131,7 @@
             this.TS_Manual.BackColor = System.Drawing.Color.Transparent;
             this.TS_Manual.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LB_Manual,
-            this.toolStripSeparator4,
+            this.TS_Manual_StepCycle,
             this.BT_Manual_StepCycle,
             this.toolStripSeparator10,
             this.BT_Manual_PickupCycle,
@@ -148,8 +148,8 @@
             // 
             // toolStripSeparator4
             // 
-            resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            resources.ApplyResources(this.TS_Manual_StepCycle, "TS_Manual_StepCycle");
+            this.TS_Manual_StepCycle.Name = "TS_Manual_StepCycle";
             // 
             // BT_Manual_StepCycle
             // 
@@ -726,7 +726,7 @@
         private System.Windows.Forms.Label LB_;
         private System.Windows.Forms.ToolStrip TS_Manual;
         private System.Windows.Forms.ToolStripLabel LB_Manual;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripSeparator TS_Manual_StepCycle;
         private System.Windows.Forms.ToolStripButton BT_Manual_PickupCycle;
         private System.Windows.Forms.ToolStripButton BT_Manual_WasteCycle;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;

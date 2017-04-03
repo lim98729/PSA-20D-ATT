@@ -20,7 +20,6 @@ namespace PSA_Application
 
         double posX, posY, posZ;
         double distanceX, distanceY;
-		double tiltMin = 0, tiltMax = 0;
 		double[] touchPosition = new double[5];         //          1
 														//      2   0   3       0 : 기준점
 														//          4
@@ -68,18 +67,12 @@ namespace PSA_Application
 				TB_RIGHT.Text = tmp[3].ToString();
 				TB_DOWN.Text = tmp[4].ToString();
 
-				for (int k = 0; k < 5; k++)
-				{
-					if (tiltMin > touchPosition[k]) tiltMin = touchPosition[k];		
-					if (tiltMax < touchPosition[k]) tiltMax = touchPosition[k];
-				}
+                TB_RESULT_MAX.Text = touchPosition.Max().ToString();
+                TB_RESULT_MIN.Text = touchPosition.Min().ToString();
 
-				TB_RESULT_MAX.Text = tiltMax.ToString();
-				TB_RESULT_MIN.Text = tiltMin.ToString();
-				
-				TB_TILT.Text = Math.Abs(tiltMax - tiltMin).ToString();
-				TB_TILT_HORI.Text = (touchPosition[2] - touchPosition[3]).ToString();
-				TB_TILT_VER.Text = (touchPosition[1] - touchPosition[4]).ToString();
+                TB_TILT.Text = Math.Abs(touchPosition.Max() - touchPosition.Min()).ToString();
+				TB_TILT_HORI.Text = Math.Round((touchPosition[2] - touchPosition[3]), 3).ToString();
+				TB_TILT_VER.Text  = Math.Round((touchPosition[1] - touchPosition[4]), 3).ToString();
 
 				TB_TOOLSIZE_X.Text = mc.para.CAL.ToolSize.x.value.ToString();
 				TB_TOOLSIZE_Y.Text = mc.para.CAL.ToolSize.y.value.ToString();

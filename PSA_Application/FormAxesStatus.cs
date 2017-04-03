@@ -252,56 +252,56 @@ namespace PSA_Application
 			#region Stack Feeder Information
             //// SF Z
             // Get Position
-            mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.actualPosition(out ret.d, out ret.message);
+            mc.sf.Z.actualPosition(out ret.d, out ret.message);
             GV_AxisInfo.Rows[(int)axisNumber.SF_Z].Cells[1].Value = ret.d;
             // Get - Limit Status
-            mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.IN_N_LIMIT(out ret.b, out ret.message);
+            mc.sf.Z.IN_N_LIMIT(out ret.b, out ret.message);
             if (ret.b) imageDisp = imageOn; else imageDisp = imageOff;
             GV_AxisInfo.Rows[(int)axisNumber.SF_Z].Cells[2].Value = imageDisp;
             // Get + Limit
-            mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.IN_P_LIMIT(out ret.b, out ret.message);
+            mc.sf.Z.IN_P_LIMIT(out ret.b, out ret.message);
             if (ret.b) imageDisp = imageOn; else imageDisp = imageOff;
             GV_AxisInfo.Rows[(int)axisNumber.SF_Z].Cells[3].Value = imageDisp;
             // Get Home
-            mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.IN_HOME(out ret.b, out ret.message);
+            mc.sf.Z.IN_HOME(out ret.b, out ret.message);
             if (ret.b) imageDisp = imageOn; else imageDisp = imageOff;
             GV_AxisInfo.Rows[(int)axisNumber.SF_Z].Cells[4].Value = imageDisp;
             // Get Amp Error
-            mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.getAmpFault(out ret.i, out ret.i1, out ret.message);
+            mc.sf.Z.getAmpFault(out ret.i, out ret.i1, out ret.message);
             if (ret.i > 0) GV_AxisInfo.Rows[(int)axisNumber.SF_Z].Cells[5].Value = "0x" + ret.i1.ToString("X");
             else GV_AxisInfo.Rows[(int)axisNumber.SF_Z].Cells[5].Value = "none";
             // Get Axis State
-            mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.status(out mpiState, out ret.message);
+            mc.sf.Z.status(out mpiState, out ret.message);
             GV_AxisInfo.Rows[(int)axisNumber.SF_Z].Cells[6].Value = mpiState.ToString();
             // Get Servo State
-            mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.MOTOR_ENABLE(out ret.b, out ret.message);
+            mc.sf.Z.MOTOR_ENABLE(out ret.b, out ret.message);
             GV_AxisInfo.Rows[(int)axisNumber.SF_Z].Cells[7].Value = ret.b;
 
 			//// SF Z2
 			// Get Position
-			mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.actualPosition(out ret.d, out ret.message);
+			mc.sf.Z2.actualPosition(out ret.d, out ret.message);
 			GV_AxisInfo.Rows[(int)axisNumber.SF_Z2].Cells[1].Value = ret.d;
 			// Get - Limit Status
-			mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.IN_N_LIMIT(out ret.b, out ret.message);
+			mc.sf.Z2.IN_N_LIMIT(out ret.b, out ret.message);
 			if (ret.b) imageDisp = imageOn; else imageDisp = imageOff;
 			GV_AxisInfo.Rows[(int)axisNumber.SF_Z2].Cells[2].Value = imageDisp;
 			// Get + Limit
-			mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.IN_P_LIMIT(out ret.b, out ret.message);
+			mc.sf.Z2.IN_P_LIMIT(out ret.b, out ret.message);
 			if (ret.b) imageDisp = imageOn; else imageDisp = imageOff;
 			GV_AxisInfo.Rows[(int)axisNumber.SF_Z2].Cells[3].Value = imageDisp;
 			// Get Home
-			mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.IN_HOME(out ret.b, out ret.message);
+			mc.sf.Z2.IN_HOME(out ret.b, out ret.message);
 			if (ret.b) imageDisp = imageOn; else imageDisp = imageOff;
 			GV_AxisInfo.Rows[(int)axisNumber.SF_Z2].Cells[4].Value = imageDisp;
 			// Get Amp Error
-			mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.getAmpFault(out ret.i, out ret.i1, out ret.message);
+			mc.sf.Z2.getAmpFault(out ret.i, out ret.i1, out ret.message);
 			if (ret.i > 0) GV_AxisInfo.Rows[(int)axisNumber.SF_Z2].Cells[5].Value = "0x" + ret.i1.ToString("Z2");
 			else GV_AxisInfo.Rows[(int)axisNumber.SF_Z2].Cells[5].Value = "none";
 			// Get Axis State
-			mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.status(out mpiState, out ret.message);
+			mc.sf.Z2.status(out mpiState, out ret.message);
 			GV_AxisInfo.Rows[(int)axisNumber.SF_Z2].Cells[6].Value = mpiState.ToString();
 			// Get Servo State
-			mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.MOTOR_ENABLE(out ret.b, out ret.message);
+			mc.sf.Z2.MOTOR_ENABLE(out ret.b, out ret.message);
 			GV_AxisInfo.Rows[(int)axisNumber.SF_Z2].Cells[7].Value = ret.b;
 			#endregion
 

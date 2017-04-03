@@ -168,6 +168,16 @@ namespace PSA_Application
 				if (mode == SELECT_FIND_MODEL.HDC_MANUAL_P1 || mode == SELECT_FIND_MODEL.HDC_MANUAL_P2) { goto EXIT; }
 				mc.hdc.model_delete(mode);
 			}
+            if (sender.Equals(BT_AlgorismSelect_ProjectionModel))
+            {
+                if (mode == SELECT_FIND_MODEL.HDC_PAD) { goto EXIT; }
+                if (mode == SELECT_FIND_MODEL.HDC_PADC1) mc.para.setting(ref mc.para.HDC.modelPADC1.algorism, (int)MODEL_ALGORISM.PROJECTION);
+                if (mode == SELECT_FIND_MODEL.HDC_PADC2) mc.para.setting(ref mc.para.HDC.modelPADC2.algorism, (int)MODEL_ALGORISM.PROJECTION);
+                if (mode == SELECT_FIND_MODEL.HDC_PADC3) mc.para.setting(ref mc.para.HDC.modelPADC3.algorism, (int)MODEL_ALGORISM.PROJECTION);
+                if (mode == SELECT_FIND_MODEL.HDC_PADC4) mc.para.setting(ref mc.para.HDC.modelPADC4.algorism, (int)MODEL_ALGORISM.PROJECTION);
+                if (mode == SELECT_FIND_MODEL.HDC_MANUAL_P1 || mode == SELECT_FIND_MODEL.HDC_MANUAL_P2) { goto EXIT; }
+                mc.hdc.model_delete(mode);
+            }
 			if (sender.Equals(BT_AlgorismSelect_CircleModel))
 			{
 				if (mode == SELECT_FIND_MODEL.HDC_PAD) { goto EXIT; }
@@ -558,7 +568,8 @@ namespace PSA_Application
 					lightCh2 = mc.para.HDC.modelPAD.light.ch2.value.ToString();
 					if (mc.para.HDC.modelPAD.algorism.value == (int)MODEL_ALGORISM.NCC)algorism = BT_AlgorismSelect_NccModel.Text;
 					if (mc.para.HDC.modelPAD.algorism.value == (int)MODEL_ALGORISM.SHAPE)algorism = BT_AlgorismSelect_ShapeModel.Text;
-					if (mc.para.HDC.modelPAD.algorism.value == (int)MODEL_ALGORISM.CORNER) algorism = BT_AlgorismSelect_CornerModel.Text; // 적용안됨
+					if (mc.para.HDC.modelPAD.algorism.value == (int)MODEL_ALGORISM.CORNER) algorism = BT_AlgorismSelect_CornerModel.Text;
+                    if (mc.para.HDC.modelPAD.algorism.value == (int)MODEL_ALGORISM.PROJECTION) algorism = BT_AlgorismSelect_ProjectionModel.Text;
 					if (mc.para.HDC.modelPAD.algorism.value == (int)MODEL_ALGORISM.CIRCLE) algorism = BT_AlgorismSelect_CircleModel.Text;
 					if (mc.para.HDC.modelPAD.isCreate.value == (int)BOOL.TRUE)
 					{
@@ -591,6 +602,7 @@ namespace PSA_Application
 					if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.NCC) algorism = BT_AlgorismSelect_NccModel.Text;
 					if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.SHAPE) algorism = BT_AlgorismSelect_ShapeModel.Text;
 					if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER) algorism = BT_AlgorismSelect_CornerModel.Text;
+                    if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.PROJECTION) algorism = BT_AlgorismSelect_ProjectionModel.Text;
 					if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CIRCLE) algorism = BT_AlgorismSelect_CircleModel.Text;
 					if (mc.para.HDC.modelPADC1.isCreate.value == (int)BOOL.TRUE)
 					{
@@ -623,6 +635,7 @@ namespace PSA_Application
 					if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.NCC) algorism = BT_AlgorismSelect_NccModel.Text;
 					if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.SHAPE) algorism = BT_AlgorismSelect_ShapeModel.Text;
 					if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.CORNER) algorism = BT_AlgorismSelect_CornerModel.Text;
+                    if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION) algorism = BT_AlgorismSelect_ProjectionModel.Text;
 					if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.CIRCLE) algorism = BT_AlgorismSelect_CircleModel.Text;
 					if (mc.para.HDC.modelPADC2.isCreate.value == (int)BOOL.TRUE)
 					{
@@ -655,6 +668,7 @@ namespace PSA_Application
 					if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.NCC) algorism = BT_AlgorismSelect_NccModel.Text;
 					if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.SHAPE) algorism = BT_AlgorismSelect_ShapeModel.Text;
 					if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER) algorism = BT_AlgorismSelect_CornerModel.Text;
+                    if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.PROJECTION) algorism = BT_AlgorismSelect_ProjectionModel.Text;
 					if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CIRCLE) algorism = BT_AlgorismSelect_CircleModel.Text;
 					if (mc.para.HDC.modelPADC3.isCreate.value == (int)BOOL.TRUE)
 					{
@@ -687,6 +701,7 @@ namespace PSA_Application
 					if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.NCC) algorism = BT_AlgorismSelect_NccModel.Text;
 					if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.SHAPE) algorism = BT_AlgorismSelect_ShapeModel.Text;
 					if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.CORNER) algorism = BT_AlgorismSelect_CornerModel.Text;
+                    if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.PROJECTION) algorism = BT_AlgorismSelect_ProjectionModel.Text;
 					if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.CIRCLE) algorism = BT_AlgorismSelect_CircleModel.Text;
 					if (mc.para.HDC.modelPADC4.isCreate.value == (int)BOOL.TRUE)
 					{

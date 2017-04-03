@@ -32,8 +32,8 @@ namespace PSA_Application
 			TB_HO_PD_Y.Text = mc.pd.Y.config.homing.originOffset.ToString();
 			TB_HO_PD_Z.Text = mc.pd.Z.config.homing.originOffset.ToString();
 
-			TB_HO_SF_Z.Text = mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.homing.originOffset.ToString();
-            TB_HO_SF_X.Text = mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.homing.originOffset.ToString();
+			TB_HO_SF_Z.Text = mc.sf.Z.config.homing.originOffset.ToString();
+            TB_HO_SF_X.Text = mc.sf.Z2.config.homing.originOffset.ToString();
 
 			TB_HO_CV_W.Text = mc.cv.W.config.homing.originOffset.ToString();
 		}
@@ -68,8 +68,8 @@ namespace PSA_Application
 					mc.pd.Y.config.homing.originOffset = dtemp[5];
 					mc.pd.Z.config.homing.originOffset = dtemp[6];
 
-                    mc.sf.feeder[(int)UnitCodeSFMG.MG2].Z.config.homing.originOffset = dtemp[7];
-                    mc.sf.feeder[(int)UnitCodeSFMG.MG1].Z.config.homing.originOffset = dtemp[8];
+                    mc.sf.Z2.config.homing.originOffset = dtemp[7];
+                    mc.sf.Z.config.homing.originOffset = dtemp[8];
 
 					mc.cv.W.config.homing.originOffset = dtemp[9];
 				}
