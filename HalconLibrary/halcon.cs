@@ -42,6 +42,7 @@ namespace HalconLibrary
 		public int refresh_reqModelNumber;
 		public string refresh_errorMessage;
 		public bool refresh_req;
+        public QUARTER_NUMBER refresh_quater;
 
         public halcon_model[] model = new halcon_model[(int)MAX_COUNT.MODEL];
         public halcon_blob[] epoxyBlob = new halcon_blob[(int)MAX_COUNT.BLOB];
@@ -5989,7 +5990,7 @@ namespace HalconLibrary
 				return false;
 			}
 		}
-		public bool refreshEdgeIntersection()
+		public bool refreshEdgeIntersection(QUARTER_NUMBER quater)
 		{
 			try
 			{
@@ -6004,8 +6005,31 @@ namespace HalconLibrary
 
 				if ((double)edgeIntersection.resultTime != -1)
 				{
-					HOperatorSet.SetColor(window.handle, "pink");
-					HOperatorSet.DispCross(window.handle, acq.height / 2, acq.width / 2, acq.height * 0.8, 0);
+                    HOperatorSet.SetColor(window.handle, "pink");
+
+                    if (quater == QUARTER_NUMBER.INVALID)
+                    {
+                        HOperatorSet.DispCross(window.handle, acq.height / 2, acq.width / 2, acq.height * 0.8, 0);
+                    }
+                    else
+                    {
+                        if (quater == QUARTER_NUMBER.FIRST)
+                        {
+                            HOperatorSet.DispCross(window.handle, acq.height * 0.3, acq.width * 0.7, acq.height * 0.8, 0);
+                        }
+                        else if (quater == QUARTER_NUMBER.SECOND)
+                        {
+                            HOperatorSet.DispCross(window.handle, acq.height * 0.7, acq.width * 0.7, acq.height * 0.8, 0);
+                        }
+                        else if (quater == QUARTER_NUMBER.THIRD)
+                        {
+                            HOperatorSet.DispCross(window.handle, acq.height * 0.7, acq.width * 0.3, acq.height * 0.8, 0);
+                        }
+                        else if (quater == QUARTER_NUMBER.FOURTH)
+                        {
+                            HOperatorSet.DispCross(window.handle, acq.height * 0.3, acq.width * 0.3, acq.height * 0.8, 0);
+                        }
+                    }
 					#region 서치영역 , 영역확장 디스플레이
 					//서치영역 디스플레이
 					HOperatorSet.SetColor(window.handle, "gray");
@@ -8768,7 +8792,7 @@ namespace HalconLibrary
 		HTuple ox, oy;
 		//, shortLengthX, longLengthX, shortLengthY, longLengthY;
 		HTuple shortLength, longLength;
-		public void create(HObject image, halcon_window window, HTuple resolutionX, HTuple resolutionY, QUARTER_NUMBER quarter, out bool b)
+		public void create(HObject image, halcon_window window, HTuple resolutionX, HTuple resolutionY, QUARTER_NUMBER quarter, out bool b, bool halfmode = true)
 		{
 			try
 			{
@@ -8796,51 +8820,63 @@ namespace HalconLibrary
 
 				if (quarterNumber == QUARTER_NUMBER.FIRST)
 				{
-                    createVColumn1 = ox - shortLength * cropArea;
-                    createVColumn2 = ox + shortLength;
-                    createVRow1 = oy + shortLength;
-                    createVRow2 = oy + longLength;
+                    if (halfmode)
+                    {
+                        createVColumn1 = ox - shortLength * cropArea;
+                        createVColumn2 = ox + shortLength;
+                        createVRow1 = oy + shortLength;
+                        createVRow2 = oy + longLength;
 
-                    createHColumn1 = ox - longLength;
-                    createHColumn2 = ox - shortLength;
-                    createHRow1 = oy - shortLength;
-                    createHRow2 = oy + shortLength * cropArea;
+                        createHColumn1 = ox - longLength;
+                        createHColumn2 = ox - shortLength;
+                        createHRow1 = oy - shortLength;
+                        createHRow2 = oy + shortLength * cropArea;
+                    }
 				}
 				else if (quarterNumber == QUARTER_NUMBER.SECOND)
 				{
-					createVColumn1 = ox - shortLength * cropArea;
-					createVColumn2 = ox + shortLength;
-					createVRow1 = oy - longLength;
-					createVRow2 = oy - shortLength;
+                    if (halfmode)
+                    {
+                        createVColumn1 = ox - shortLength * cropArea;
+                        createVColumn2 = ox + shortLength;
+                        createVRow1 = oy - longLength;
+                        createVRow2 = oy - shortLength;
 
-					createHColumn1 = ox - longLength;
-					createHColumn2 = ox - shortLength;
-					createHRow1 = oy - shortLength * cropArea;
-					createHRow2 = oy + shortLength;
+                        createHColumn1 = ox - longLength;
+                        createHColumn2 = ox - shortLength;
+                        createHRow1 = oy - shortLength * cropArea;
+                        createHRow2 = oy + shortLength;
+                    }
 				}
 				else if (quarterNumber == QUARTER_NUMBER.THIRD)
 				{
-                    createVColumn1 = ox - shortLength;
-                    createVColumn2 = ox + shortLength * cropArea;
-                    createVRow1 = oy - longLength;
-                    createVRow2 = oy - shortLength;
+                    if (halfmode)
+                    {
+                        createVColumn1 = ox - shortLength;
+                        createVColumn2 = ox + shortLength * cropArea;
+                        createVRow1 = oy - longLength;
+                        createVRow2 = oy - shortLength;
 
-                    createHColumn1 = ox + shortLength;
-                    createHColumn2 = ox + longLength;
-                    createHRow1 = oy - shortLength * cropArea;
-                    createHRow2 = oy + shortLength;
+                        createHColumn1 = ox + shortLength;
+                        createHColumn2 = ox + longLength;
+                        createHRow1 = oy - shortLength * cropArea;
+                        createHRow2 = oy + shortLength;
+                    }
 				}
 				else if (quarterNumber == QUARTER_NUMBER.FOURTH)
 				{
-					createVColumn1 = ox - shortLength;
-					createVColumn2 = ox + shortLength * cropArea;
-					createVRow1 = oy + shortLength;
-					createVRow2 = oy + longLength;
+                    if (halfmode)
+                    {
+                        createVColumn1 = ox - shortLength;
+                        createVColumn2 = ox + shortLength * cropArea;
+                        createVRow1 = oy + shortLength;
+                        createVRow2 = oy + longLength;
 
-					createHColumn1 = ox + shortLength;
-					createHColumn2 = ox + longLength;
-					createHRow1 = oy - shortLength;
-					createHRow2 = oy + shortLength * cropArea;
+                        createHColumn1 = ox + shortLength;
+                        createHColumn2 = ox + longLength;
+                        createHRow1 = oy - shortLength;
+                        createHRow2 = oy + shortLength * cropArea;
+                    }
 				}
 
 				VRegion.Dispose();

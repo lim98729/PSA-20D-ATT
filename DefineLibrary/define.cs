@@ -5212,6 +5212,7 @@ namespace DefineLibrary
 		public static double pickAutoMoveLimit;
 
         public static bool simulation;
+        public static bool useHalfPosition;
 
 		public static Color[] colorCode = new Color[(int)COLORCODE.CODERCODE_MAX];
 
@@ -5412,6 +5413,10 @@ namespace DefineLibrary
             if (temp == 2) genflag = true;
             simulation = (temp != 1) ? false : true;
 
+            temp = utilconfig.GetInt("useHalfPosition", 2);
+            if (temp == 2) genflag = true;
+            useHalfPosition = (temp != 1) ? false : true;
+
             if (genflag) writeSoftWareMode();
         }
 
@@ -5422,6 +5427,9 @@ namespace DefineLibrary
 
             temp = simulation ? 1 : 0;
             utilconfig.WriteInt("Simulation", temp);
+
+            temp = useHalfPosition ? 1 : 0;
+            utilconfig.WriteInt("useHalfPosition", temp);
         }
 	}
 

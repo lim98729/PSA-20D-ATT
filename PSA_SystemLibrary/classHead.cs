@@ -3937,22 +3937,22 @@ namespace PSA_SystemLibrary
 
                         if (mc.para.HDC.fiducialPos.value == 0)
                         {
-                            Y.move(cPos.y.PADC1(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-                            X.move(cPos.x.PADC1(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                            Y.move(cPos.y.PADC1(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                            X.move(cPos.x.PADC1(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
                         }
                         else if (mc.para.HDC.fiducialPos.value == 1)
                         {
-                            Y.move(cPos.y.PADC2(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                            Y.move(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
                             X.move(cPos.x.PADC2(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
                         }
                         else if (mc.para.HDC.fiducialPos.value == 2)
                         {
-                            Y.move(cPos.y.PADC3(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-                            X.move(cPos.x.PADC3(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                            Y.move(cPos.y.PADC3(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                            X.move(cPos.x.PADC3(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
                         }
                         else
                         {
-                            Y.move(cPos.y.PADC4(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                            Y.move(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
                             X.move(cPos.x.PADC4(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
                         }
                     }
@@ -3960,22 +3960,22 @@ namespace PSA_SystemLibrary
                     {
                         if (mc.para.HDC.fiducialPos.value == 0)
                         {
-                            Y.moveCompare(cPos.y.PADC1(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-                            X.moveCompare(cPos.x.PADC1(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                            Y.moveCompare(cPos.y.PADC1(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                            X.moveCompare(cPos.x.PADC1(padX, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
                         }
                         else if (mc.para.HDC.fiducialPos.value == 1)
                         {
-                            Y.moveCompare(cPos.y.PADC2(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                            Y.moveCompare(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
                             X.moveCompare(cPos.x.PADC2(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
                         }
                         else if (mc.para.HDC.fiducialPos.value == 2)
                         {
-                            Y.moveCompare(cPos.y.PADC3(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-                            X.moveCompare(cPos.x.PADC3(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                            Y.moveCompare(cPos.y.PADC3(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                            X.moveCompare(cPos.x.PADC3(padX, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
                         }
                         else
                         {
-                            Y.moveCompare(cPos.y.PADC4(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                            Y.moveCompare(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
                             X.moveCompare(cPos.x.PADC4(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
                         }
                     }
@@ -4123,13 +4123,13 @@ namespace PSA_SystemLibrary
 						{
 							if (mc.para.HDC.detectDirection.value == 0)
 							{
-								Y.move(cPos.y.PADC2(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+								Y.move(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 								X.move(cPos.x.PADC2(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 							}
 							else
 							{
-								Y.move(cPos.y.PADC1(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-								X.move(cPos.x.PADC1(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+								Y.move(cPos.y.PADC1(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+								X.move(cPos.x.PADC1(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 							}
 						}
 						else
@@ -4144,13 +4144,13 @@ namespace PSA_SystemLibrary
 						{
 							if (mc.para.HDC.detectDirection.value == 0)
 							{
-								Y.moveCompare(cPos.y.PADC2(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+								Y.moveCompare(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 								X.moveCompare(cPos.x.PADC2(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 							}
 							else
 							{
-								Y.moveCompare(cPos.y.PADC1(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-								X.moveCompare(cPos.x.PADC1(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+								Y.moveCompare(cPos.y.PADC1(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+								X.moveCompare(cPos.x.PADC1(padX, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 							}
 						}
 						else
@@ -4466,13 +4466,13 @@ namespace PSA_SystemLibrary
 						{
 							if (mc.para.HDC.detectDirection.value == 0)
 							{
-								Y.move(cPos.y.PADC4(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+								Y.move(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 								X.move(cPos.x.PADC4(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 							}
 							else
 							{
-								Y.move(cPos.y.PADC3(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-								X.move(cPos.x.PADC3(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+								Y.move(cPos.y.PADC3(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+								X.move(cPos.x.PADC3(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 							}
 						}
 						else
@@ -4487,13 +4487,13 @@ namespace PSA_SystemLibrary
 						{
 							if (mc.para.HDC.detectDirection.value == 0)
 							{
-								Y.move(cPos.y.PADC4(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+								Y.move(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 								X.move(cPos.x.PADC4(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 							}
 							else
 							{
-								Y.move(cPos.y.PADC3(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-								X.move(cPos.x.PADC3(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+								Y.move(cPos.y.PADC3(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+								X.move(cPos.x.PADC3(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 							}
 						}
 						else
@@ -7299,12 +7299,12 @@ namespace PSA_SystemLibrary
 					{
 						if (mc.para.HDC.detectDirection.value == 0)
 						{
-							Y.move(cPos.y.PADC1(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.move(cPos.x.PADC1(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+							Y.move(cPos.y.PADC1(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							X.move(cPos.x.PADC1(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 						else
 						{
-							Y.move(cPos.y.PADC2(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							Y.move(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 							X.move(cPos.x.PADC2(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 					}
@@ -7471,12 +7471,12 @@ namespace PSA_SystemLibrary
 					{
 						if (mc.para.HDC.detectDirection.value == 0)
 						{
-							Y.move(cPos.y.PADC3(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.move(cPos.x.PADC3(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+							Y.move(cPos.y.PADC3(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							X.move(cPos.x.PADC3(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 						else
 						{
-							Y.move(cPos.y.PADC4(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							Y.move(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 							X.move(cPos.x.PADC4(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 					}
@@ -9911,22 +9911,22 @@ namespace PSA_SystemLibrary
 					Z.move(tPos.z.XY_MOVING, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
 					if (mc.para.HDC.fiducialPos.value == 0)
 					{
-						Y.moveCompare(cPos.y.PADC1(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.moveCompare(cPos.x.PADC1(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						Y.moveCompare(cPos.y.PADC1(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+						X.moveCompare(cPos.x.PADC1(padX, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					else if (mc.para.HDC.fiducialPos.value == 1)
 					{
-						Y.moveCompare(cPos.y.PADC2(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+						Y.moveCompare(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 						X.moveCompare(cPos.x.PADC2(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					else if (mc.para.HDC.fiducialPos.value == 2)
 					{
-						Y.moveCompare(cPos.y.PADC3(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.moveCompare(cPos.x.PADC3(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						Y.moveCompare(cPos.y.PADC3(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+						X.moveCompare(cPos.x.PADC3(padX, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					else
 					{
-						Y.moveCompare(cPos.y.PADC4(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+						Y.moveCompare(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 						X.moveCompare(cPos.x.PADC4(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					dwell.Reset();
@@ -10073,26 +10073,26 @@ namespace PSA_SystemLibrary
 
 						if (mc.para.HDC.detectDirection.value == 0)
 						{
-							Y.move(cPos.y.PADC2(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							Y.move(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 							X.move(cPos.x.PADC2(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 						else
 						{
-							Y.move(cPos.y.PADC1(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.move(cPos.x.PADC1(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+							Y.move(cPos.y.PADC1(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							X.move(cPos.x.PADC1(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 					}
 					else
 					{
 						if (mc.para.HDC.detectDirection.value == 0)
 						{
-							Y.moveCompare(cPos.y.PADC2(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							Y.moveCompare(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 							X.moveCompare(cPos.x.PADC2(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 						else
 						{
-							Y.moveCompare(cPos.y.PADC1(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.moveCompare(cPos.x.PADC1(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+							Y.moveCompare(cPos.y.PADC1(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							X.moveCompare(cPos.x.PADC1(padX, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 					}
 					dwell.Reset();
@@ -10306,26 +10306,26 @@ namespace PSA_SystemLibrary
 					{
 						if (mc.para.HDC.detectDirection.value == 0)
 						{
-							Y.move(cPos.y.PADC4(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							Y.move(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 							X.move(cPos.x.PADC4(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 						else
 						{
-							Y.move(cPos.y.PADC3(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.move(cPos.x.PADC3(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+							Y.move(cPos.y.PADC3(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							X.move(cPos.x.PADC3(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 					}
 					else
 					{
 						if (mc.para.HDC.detectDirection.value == 0)
 						{
-							Y.move(cPos.y.PADC4(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							Y.move(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 							X.move(cPos.x.PADC4(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 						else
 						{
-							Y.move(cPos.y.PADC3(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.move(cPos.x.PADC3(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+							Y.move(cPos.y.PADC3(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							X.move(cPos.x.PADC3(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 					}
 					sqc++; break;
@@ -12298,12 +12298,12 @@ namespace PSA_SystemLibrary
 					rateX = X.config.speed.rate; X.config.speed.rate = Math.Max(rateX * 0.3, 0.1);
 					if (mc.para.HDC.detectDirection.value == 0)
 					{
-						Y.move(cPos.y.PADC1(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.move(cPos.x.PADC1(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						Y.move(cPos.y.PADC1(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+						X.move(cPos.x.PADC1(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					else
 					{
-						Y.move(cPos.y.PADC2(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+						Y.move(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 						X.move(cPos.x.PADC2(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					sqc++; break;
@@ -12420,12 +12420,12 @@ namespace PSA_SystemLibrary
 					rateX = X.config.speed.rate; X.config.speed.rate = Math.Max(rateX * 0.3, 0.1);
 					if (mc.para.HDC.detectDirection.value == 0)
 					{
-						Y.move(cPos.y.PADC3(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.move(cPos.x.PADC3(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						Y.move(cPos.y.PADC3(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+						X.move(cPos.x.PADC3(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					else
 					{
-						Y.move(cPos.y.PADC4(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+						Y.move(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 						X.move(cPos.x.PADC4(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					sqc++; break;
@@ -13158,22 +13158,22 @@ namespace PSA_SystemLibrary
 					Z.move(tPos.z.XY_MOVING, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
 					if (mc.para.HDC.fiducialPos.value == 0)
 					{
-						Y.moveCompare(cPos.y.PADC1(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.moveCompare(cPos.x.PADC1(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						Y.moveCompare(cPos.y.PADC1(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+						X.moveCompare(cPos.x.PADC1(padX, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					else if (mc.para.HDC.fiducialPos.value == 1)
 					{
-						Y.moveCompare(cPos.y.PADC2(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+						Y.moveCompare(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 						X.moveCompare(cPos.x.PADC2(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					else if (mc.para.HDC.fiducialPos.value == 2)
 					{
-						Y.moveCompare(cPos.y.PADC3(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.moveCompare(cPos.x.PADC3(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						Y.moveCompare(cPos.y.PADC3(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+						X.moveCompare(cPos.x.PADC3(padX, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					else
 					{
-						Y.moveCompare(cPos.y.PADC4(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+						Y.moveCompare(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 						X.moveCompare(cPos.x.PADC4(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					dwell.Reset();
@@ -13318,26 +13318,26 @@ namespace PSA_SystemLibrary
 
 						if (mc.para.HDC.detectDirection.value == 0)
 						{
-							Y.move(cPos.y.PADC2(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							Y.move(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 							X.move(cPos.x.PADC2(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 						else
 						{
-							Y.move(cPos.y.PADC1(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.move(cPos.x.PADC1(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+							Y.move(cPos.y.PADC1(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							X.move(cPos.x.PADC1(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 					}
 					else
 					{
 						if (mc.para.HDC.detectDirection.value == 0)
 						{
-							Y.moveCompare(cPos.y.PADC2(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							Y.moveCompare(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 							X.moveCompare(cPos.x.PADC2(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 						else
 						{
-							Y.moveCompare(cPos.y.PADC1(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.moveCompare(cPos.x.PADC1(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+							Y.moveCompare(cPos.y.PADC1(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							X.moveCompare(cPos.x.PADC1(padX, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 					}
 					#endregion
@@ -13556,26 +13556,26 @@ namespace PSA_SystemLibrary
 					{
 						if (mc.para.HDC.detectDirection.value == 0)
 						{
-							Y.move(cPos.y.PADC4(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							Y.move(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 							X.move(cPos.x.PADC4(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 						else
 						{
-							Y.move(cPos.y.PADC3(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.move(cPos.x.PADC3(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+							Y.move(cPos.y.PADC3(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							X.move(cPos.x.PADC3(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 					}
 					else
 					{
 						if (mc.para.HDC.detectDirection.value == 0)
 						{
-							Y.move(cPos.y.PADC4(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							Y.move(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 							X.move(cPos.x.PADC4(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 						else
 						{
-							Y.move(cPos.y.PADC3(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.move(cPos.x.PADC3(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+							Y.move(cPos.y.PADC3(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							X.move(cPos.x.PADC3(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 					}
 					#endregion
@@ -15069,12 +15069,12 @@ namespace PSA_SystemLibrary
 					rateX = X.config.speed.rate; X.config.speed.rate = Math.Max(rateX * 0.3, 0.1);
 					if (mc.para.HDC.detectDirection.value == 0)
 					{
-						Y.move(cPos.y.PADC1(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.move(cPos.x.PADC1(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						Y.move(cPos.y.PADC1(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+						X.move(cPos.x.PADC1(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					else
 					{
-						Y.move(cPos.y.PADC2(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+						Y.move(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 						X.move(cPos.x.PADC2(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					sqc++; break;
@@ -15191,12 +15191,12 @@ namespace PSA_SystemLibrary
 					rateX = X.config.speed.rate; X.config.speed.rate = Math.Max(rateX * 0.3, 0.1);
 					if (mc.para.HDC.detectDirection.value == 0)
 					{
-						Y.move(cPos.y.PADC3(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.move(cPos.x.PADC3(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						Y.move(cPos.y.PADC3(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+						X.move(cPos.x.PADC3(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					else
 					{
-						Y.move(cPos.y.PADC4(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+						Y.move(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
 						X.move(cPos.x.PADC4(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					sqc++; break;
@@ -17963,8 +17963,8 @@ namespace PSA_SystemLibrary
 
 				#region case 20 XY.move.PADC1
 				case 20:
-					Y.moveCompare(cPos.y.PADC1(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-					X.moveCompare(cPos.x.PADC1(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+					Y.moveCompare(cPos.y.PADC1(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+					X.moveCompare(cPos.x.PADC1(padX, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					T.moveCompare(tPos.t.ZERO, Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(T.config.axisCode, sqc, ret.message)) break;
 					sqc++; break;
 				case 21:
@@ -18015,8 +18015,8 @@ namespace PSA_SystemLibrary
 
 				#region case 40 XY.move.PADC3
 				case 40:
-					Y.moveCompare(cPos.y.PADC3(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-					X.moveCompare(cPos.x.PADC3(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+					Y.moveCompare(cPos.y.PADC3(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+					X.moveCompare(cPos.x.PADC3(padX, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					T.moveCompare(tPos.t.ZERO, Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(T.config.axisCode, sqc, ret.message)) break;
 					sqc++; break;
 				case 41:
@@ -20966,11 +20966,12 @@ namespace PSA_SystemLibrary
 			}
 			return tmp;
 		}
-        public double PADC1(int column)
+        public double PADC1(int column, bool half = true)
         {
             double tmp;
             tmp = PAD(column);
-            tmp += (mc.para.MT.padSize.x.value * 1000 * 0.5);
+            if (half) tmp += (mc.para.MT.padSize.x.value * 1000 * 0.5);
+            else tmp += (mc.para.MT.padSize.x.value * 1000 * 0.7);
             return tmp;
         }
         public double PADC2(int column)
@@ -20979,11 +20980,12 @@ namespace PSA_SystemLibrary
             tmp = PADC1(column);
             return tmp;
         }
-        public double PADC3(int column)
+        public double PADC3(int column, bool half = true)
         {
             double tmp;
             tmp = PAD(column);
-            tmp -= (mc.para.MT.padSize.x.value * 1000 * 0.5);
+            if (half) tmp -= (mc.para.MT.padSize.x.value * 1000 * 0.5);
+            else tmp -= (mc.para.MT.padSize.x.value * 1000 * 0.7);
             return tmp;
         }
         public double PADC4(int column)
@@ -21219,27 +21221,29 @@ namespace PSA_SystemLibrary
 			}
 			return tmp;
 		}
-		public double PADC1(int row)
+        public double PADC1(int row, bool half = true)
 		{
 			double tmp;
 			tmp = PAD(row);
-			tmp += (mc.para.MT.padSize.y.value * 1000 * 0.5);
+            if (half) tmp += (mc.para.MT.padSize.y.value * 1000 * 0.5);
+            else tmp += (mc.para.MT.padSize.y.value * 1000 * 0.7);
 			return tmp;
 		}
-		public double PADC2(int row)
+        public double PADC2(int row, bool half = true)
 		{
 			double tmp;
 			tmp = PAD(row);
-			tmp -= (mc.para.MT.padSize.y.value * 1000 * 0.5);
+            if (half) tmp -= (mc.para.MT.padSize.y.value * 1000 * 0.5);
+            else tmp -= (mc.para.MT.padSize.y.value * 1000 * 0.7);
 			return tmp;
 		}
-		public double PADC3(int row)
+        public double PADC3(int row, bool half = true)
 		{
 			double tmp;
 			tmp = PADC2(row);
 			return tmp;
 		}
-		public double PADC4(int row)
+        public double PADC4(int row, bool half = true)
 		{
 			double tmp;
 			tmp = PADC1(row);
