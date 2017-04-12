@@ -3273,6 +3273,7 @@ namespace PSA_SystemLibrary
 				#region case 40 XYZ.move.ULC
 				case 40:
 					mc.log.mcclog.write(mc.log.MCCCODE.HEAD_MOVE_ULC_POS, 0);
+                    Z.move(tPos.z.XY_MOVING, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
 					tmpPos = Math.Max(tPos.z.XY_MOVING - comparePos, tPos.z.DOUBLE_DET - 5000);
                     if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
                     {
@@ -3455,43 +3456,12 @@ namespace PSA_SystemLibrary
 					{ Esqc = sqc; sqc = SQC.ERROR; break; }
 					mc.log.mcclog.write(mc.log.MCCCODE.SCAN_HEAT_SLUG, 1);
 // 					mc.hd.homepickdone = true;		// 집고 문제 없으니 true
-                    if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CORNER
-                        || mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.PROJECTION) sqc = 60;
+                    if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CORNER || mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.PROJECTION) sqc++;
 					else sqc = SQC.STOP;
                     break;
-				#endregion
-
-                #region case 60 XYZ.move.LIDC2(C4)
-                case 60:
-                    if (mc.ulc.RUNING) break;
-                    // 여기는 Corner Algoritm 일 때만 탄다.
-                    if (mc.para.ULC.algorism.value != (int)MODEL_ALGORISM.CORNER && mc.para.ULC.algorism.value != (int)MODEL_ALGORISM.PROJECTION) break;
-
-                    mc.log.mcclog.write(mc.log.MCCCODE.HEAD_MOVE_ULC_POS, 0);
-                    rateY = Y.config.speed.rate; Y.config.speed.rate = Math.Max(rateY * 0.3, 0.1);
-                    rateX = X.config.speed.rate; X.config.speed.rate = Math.Max(rateX * 0.3, 0.1);
-
-                    if (mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3)
-                    {
-                        Y.move(tPos.y.LIDC3, out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-                        X.move(tPos.x.LIDC3, out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-                    }
-                    else
-                    {
-                        Y.move(tPos.y.LIDC4, out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-                        X.move(tPos.x.LIDC4, out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-                    }
-                    dwell.Reset();
-                    sqc++; break;
-                case 61:
-                    if (!Y_AT_TARGET || !X_AT_TARGET) break;
-                    dwell.Reset();
-                    sqc++; break;
-                case 62:
-                    if (!Y_AT_DONE || !X_AT_DONE) break;
+                case 54:
                     if (mc.ulc.RUNING) break;
                     if (mc.ulc.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
-					if (mc.ulc.cam.refresh_req) break;
 
                     #region ULC.LIDC.result
 					if (mc.hd.reqMode == REQMODE.DUMY) { }
@@ -3504,7 +3474,7 @@ namespace PSA_SystemLibrary
                             ulcP1T = mc.ulc.cam.edgeIntersection.resultAngleH;
 
                             // Test
-                            if (true)
+                            if (false)
                             {
                                 double lidSizeW = (double)mc.para.MT.lidSize.x.value * 1000;
                                 double lidSizeH = (double)mc.para.MT.lidSize.y.value * 1000;
@@ -3524,7 +3494,7 @@ namespace PSA_SystemLibrary
                             ulcP1T = mc.ulc.cam.projectionEdge.resultAngle2;
 
                             // Test
-                            if (true)
+                            if (false)
                             {
                                 double lidSizeW = (double)mc.para.MT.lidSize.x.value * 1000;
                                 double lidSizeH = (double)mc.para.MT.lidSize.y.value * 1000;
@@ -3537,9 +3507,63 @@ namespace PSA_SystemLibrary
                                 ulcP1Y = rY;
                             }
                         }
-					}
-					#endregion
+                    }
+                    #endregion
+                    
+                    sqc = 60; break;
+				#endregion
 
+                #region case 60 XYZ.move.LIDC2(C4)
+                case 60:
+                    // 여기는 Corner/Projection Algoritm 일 때만 탄다.
+                    mc.log.mcclog.write(mc.log.MCCCODE.HEAD_MOVE_ULC_POS, 0);
+                    rateY = Y.config.speed.rate; Y.config.speed.rate = Math.Max(rateY * 0.3, 0.1);
+                    rateX = X.config.speed.rate; X.config.speed.rate = Math.Max(rateX * 0.3, 0.1);
+
+                    if (mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3)
+                    {
+                        Y.move(tPos.y.LIDC3, out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                        X.move(tPos.x.LIDC3, out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                        if (mc.swcontrol.useULCPreAlign)
+                        {
+                            T.move(tPos.t.ZERO + ulcP1T, out ret.message);
+                            if (mpiCheck(T.config.axisCode, sqc, ret.message)) break;
+                        }
+                    }
+                    else
+                    {
+                        Y.move(tPos.y.LIDC4, out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                        X.move(tPos.x.LIDC4, out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                        if (mc.swcontrol.useULCPreAlign)
+                        {
+                            T.move(tPos.t.ZERO + ulcP1T, out ret.message);
+                            if (mpiCheck(T.config.axisCode, sqc, ret.message)) break;
+                        }
+                    }
+                    dwell.Reset();
+                    sqc++; break;
+                case 61:
+                    if (!mc.swcontrol.useULCPreAlign)
+                    {
+                        if (!Y_AT_TARGET || !X_AT_TARGET) break;
+                    }
+                    else
+                    {
+                        if (!Y_AT_TARGET || !Y_AT_TARGET || !T_AT_TARGET) break;
+                    }
+                    dwell.Reset();
+                    sqc++; break;
+                case 62:
+                    if (!mc.swcontrol.useULCPreAlign)
+                    {
+                        if (!Y_AT_DONE || !X_AT_DONE) break;
+                    }
+                    else
+                    {
+                        if (!Y_AT_DONE || !X_AT_DONE || !T_AT_DONE) break;
+                    }
+
+                    if (mc.ulc.cam.refresh_req) break;
                     #region ULC.req
                     ulcP2X = 0; ulcP2Y = 0; ulcP2T = 0;
                     if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.CORNER)
@@ -3893,7 +3917,6 @@ namespace PSA_SystemLibrary
                     }
                 }
             }
-            #endregion
             #endregion
 			
 			switch (sqc)
@@ -4541,7 +4564,7 @@ namespace PSA_SystemLibrary
 									hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
 
                                     // Test
-                                    if (true)
+                                    if (false)
                                     {
                                         double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
                                         double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
@@ -4730,7 +4753,7 @@ namespace PSA_SystemLibrary
 									hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
 
                                     // Test
-                                    if (true)
+                                    if (false)
                                     {
                                         double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
                                         double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
@@ -5083,7 +5106,7 @@ namespace PSA_SystemLibrary
 									hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
 
                                     // Test
-                                    if (true)
+                                    if (false)
                                     {
                                         double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
                                         double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
@@ -5272,7 +5295,7 @@ namespace PSA_SystemLibrary
 									hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
 
                                     // Test
-                                    if (true)
+                                    if (false)
                                     {
                                         double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
                                         double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
@@ -5687,7 +5710,7 @@ namespace PSA_SystemLibrary
                             ulcP2T = mc.ulc.cam.edgeIntersection.resultAngleH;
 
                             // Test
-                            if (true)
+                            if (false)
                             {
                                 double lidSizeW = (double)mc.para.MT.lidSize.x.value * 1000;
                                 double lidSizeH = (double)mc.para.MT.lidSize.y.value * 1000;
@@ -5699,9 +5722,20 @@ namespace PSA_SystemLibrary
                                 ulcP2Y = rY;
                             }
 
-                            ulcX = (ulcP1X + ulcP2X) / 2;
-                            ulcY = (ulcP1Y + ulcP2Y) / 2;
-                            ulcT = (ulcP1T + ulcP2T) / 2;
+                            if (!mc.swcontrol.useULCPreAlign)
+                            {
+                                ulcX = (ulcP1X + ulcP2X) / 2;
+                                ulcY = (ulcP1Y + ulcP2Y) / 2;
+                                ulcT = (ulcP1T + ulcP2T) / 2;
+                            }
+                            else
+                            {
+                                ulcX = ulcP2X;
+                                ulcY = ulcP2Y;
+                                ulcT = ulcP1T + ulcP2T;
+                                mc.log.debug.write(mc.log.CODE.ETC, "ULC T1 : " + ulcP1T.ToString());
+                                mc.log.debug.write(mc.log.CODE.ETC, "ULC T2 : " + ulcP2T.ToString());
+                            }
                         }
                         else if(mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
                         {    
@@ -5710,7 +5744,7 @@ namespace PSA_SystemLibrary
                             ulcP2T = mc.ulc.cam.projectionEdge.resultAngle2;
 
                             // Test
-                            if (true)
+                            if (false)
                             {
                                 double lidSizeW = (double)mc.para.MT.lidSize.x.value * 1000;
                                 double lidSizeH = (double)mc.para.MT.lidSize.y.value * 1000;
@@ -6006,7 +6040,7 @@ namespace PSA_SystemLibrary
 								hdcP2T = mc.hdc.cam.edgeIntersection.resultAngleH;
 
                                 // Test
-                                if (true)
+                                if (false)
                                 {
                                     double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
                                     double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
@@ -6092,7 +6126,7 @@ namespace PSA_SystemLibrary
 								hdcP2T = mc.hdc.cam.edgeIntersection.resultAngleH;
 
                                 // Test
-                                if (true)
+                                if (false)
                                 {
                                     double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
                                     double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
@@ -6554,56 +6588,98 @@ namespace PSA_SystemLibrary
 
                     if (!mc.swcontrol.useRotateCenter)
                     {
-                        cosTheta = Math.Cos((-ulcT) * Math.PI / 180);
-                        sinTheta = Math.Sin((-ulcT) * Math.PI / 180);
-                        ulcX = (cosTheta * ulcX) - (sinTheta * ulcY);
-                        ulcY = (sinTheta * ulcX) + (cosTheta * ulcY);
-                        placeX -= ulcX;
-                        placeY -= ulcY;
+                        if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
+                        {
+                            cosTheta = Math.Cos((-ulcT) * Math.PI / 180);
+                            sinTheta = Math.Sin((-ulcT) * Math.PI / 180);
+                            ulcX = (cosTheta * ulcX) - (sinTheta * ulcY);
+                            ulcY = (sinTheta * ulcX) + (cosTheta * ulcY);
+                            placeX -= ulcX;
+                            placeY -= ulcY;
+
+                            placeX += hdcX;
+                            placeY += hdcY;
+                            placeT = tPos.t.ZERO + ulcT - hdcT + mc.para.HD.place.offset.t.value;
+                        }
+                        else
+                        {
+                            //double calcX = 0, calcY = 0;
+                            double calcT = hdcT - ulcT;
+                            double lidSizeW = (double)mc.para.MT.lidSize.x.value * 1000;
+                            double lidSizeH = (double)mc.para.MT.lidSize.y.value * 1000;
+                            double rX1 = 0, rY1 = 0;
+                            double rX2 = 0, rY2 = 0;
+                            // 1. ULC P1 결과 회전변환
+                            if (mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3)
+                            {
+                                // Right Top
+                                Calc.calcAlign(0, ulcP1X, ulcP1Y, calcT, lidSizeW, lidSizeH, out rX1, out rY1);
+                                Calc.calcAlign(2, ulcP2X, ulcP2Y, calcT, lidSizeW, lidSizeH, out rX2, out rY2);
+                            }
+                            else
+                            {
+                                // Right Bottom
+                                Calc.calcAlign(1, ulcP1X, ulcP1Y, calcT, lidSizeW, lidSizeH, out rX1, out rY1);
+                                Calc.calcAlign(3, ulcP2X, ulcP2Y, calcT, lidSizeW, lidSizeH, out rX2, out rY2);
+                            }
+
+                            // 2. Delta HDC - Delta ULC
+                            //calcX = hdcX - (rX2 + rX2) / 2;
+                            //calcY = hdcY - (rY2 + rY2) / 2;
+
+                            //mc.log.debug.write(mc.log.CODE.ETC, "CalcX, CalcY, CalcY : " + calcX.ToString() + ", " + calcY.ToString() + ", " + calcT.ToString());
+                            // 3. Total
+                            placeX -= (rX1 + rX2) / 2;
+                            placeY -= (rY1 + rY2) / 2;
+                            placeX += hdcX;
+                            placeY += hdcY;
+                            placeT = tPos.t.ZERO - calcT + mc.para.HD.place.offset.t.value;
+                        }
                     }
                     else
                     {
-                        DPOINT ulc_ct, pt1, pt2;
-                        ulc_ct.x = -mc.para.CAL.ToolRotateCenter.x.value;
-                        ulc_ct.y = -mc.para.CAL.ToolRotateCenter.y.value;
-                        pt1.x = ulcX;
-                        pt1.y = ulcY;
+                        double calcX = 0, calcY = 0;
+                        double calcT = hdcT - ulcT;
+                        double lidSizeW = (double)mc.para.MT.lidSize.x.value * 1000;
+                        double lidSizeH = (double)mc.para.MT.lidSize.y.value * 1000;
+                        double rX1 = 0, rY1 = 0;
+                        double rX2 = 0, rY2 = 0;
+                        double centerX = mc.para.CAL.ToolRotateCenter.x.value;
+                        double centerY = mc.para.CAL.ToolRotateCenter.y.value;
+                        // 1. ULC P1 결과 회전변환
+                        if (mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3)
+                        {
+                            // Right Top
+                            Calc.calcAlign(0, centerX, centerY, ulcP1X, ulcP1Y, calcT, lidSizeW, lidSizeH, out rX1, out rY1);
+                        }
+                        else
+                        {
+                            // Right Bottom
+                            Calc.calcAlign(1, centerX, centerY, ulcP1X, ulcP1Y, calcT, lidSizeW, lidSizeH, out rX1, out rY1);
+                        }
 
-                        Calc.rotate(-ulcP2T, ulc_ct, pt1, out pt2);
+                        // 2. ULC P2 결과 회전변환
+                        if (mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3)
+                        {
+                            // Right Top
+                            Calc.calcAlign(2, centerX, centerY, ulcP2X, ulcP2Y, calcT, lidSizeW, lidSizeH, out rX2, out rY2);
+                        }
+                        else
+                        {
+                            // Right Bottom
+                            Calc.calcAlign(3, centerX, centerY, ulcP2X, ulcP2Y, calcT, lidSizeW, lidSizeH, out rX2, out rY2);
+                        }
 
-                        placeX -= pt2.x;
-                        placeY -= pt2.y;
+                        // 3. Delta HDC - Delta ULC
+                        calcX = hdcX - (rX1 + rX2) / 2;
+                        calcY = hdcY - (rY1 + rY2) / 2;
+
+                        // 4. Total
+                        placeX -= calcX;
+                        placeY -= calcY;
+                        placeT = tPos.t.ZERO + calcT + mc.para.HD.place.offset.t.value;
                     }
 
-                    if(mc.swcontrol.mechanicalRevision == (int)CUSTOMER.SAMSUNG)
-                    {
-                        // 이상하게 뒤집혔네...
-                        ulcT *= -1;
-                        hdcT *= -1;
-                    }
-
-					//double cosTheta, sinTheta;
-                    //if (mc.para.ULC.algorism.value != (int)MODEL_ALGORISM.CORNER)
-                    //{
-                    //    cosTheta = Math.Cos((-ulcT) * Math.PI / 180);
-                    //    sinTheta = Math.Sin((-ulcT) * Math.PI / 180);
-                    //    ulcX = (cosTheta * ulcX) - (sinTheta * ulcY);
-                    //    ulcY = (sinTheta * ulcX) + (cosTheta * ulcY);
-                    //    placeX -= ulcX;
-                    //    placeY -= ulcY;
-                    //}
-                    //else
-                    //{
-                    //    placeX -= ulcX;
-                    //    placeY -= ulcY;
-                    //    ulcT *= -1;
-                    //    hdcT *= -1;
-                    //}
-
-					placeT = tPos.t.ZERO + ulcT - hdcT + mc.para.HD.place.offset.t.value;
-
-					placeX += hdcX;
-					placeY += hdcY;
 
 					if (padX < 0 || padY < 0)
 					{
@@ -7520,7 +7596,7 @@ namespace PSA_SystemLibrary
 								hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
 
                                 // Test
-                                if (true)
+                                if (false)
                                 {
                                     double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
                                     double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
@@ -7709,7 +7785,7 @@ namespace PSA_SystemLibrary
 								hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
 
                                 // Test
-                                if (true)
+                                if (false)
                                 {
                                     double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
                                     double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
@@ -12846,8 +12922,9 @@ namespace PSA_SystemLibrary
 					sqc = SQC.END; break;
 			}
 		}
+        #endregion
 
-		bool DisplayGraph(int curPoint, bool useForceTracking = false, bool useForceCheck = false, bool useNoiseFilter = false, bool graphDisplay = true)
+        bool DisplayGraph(int curPoint, bool useForceTracking = false, bool useForceCheck = false, bool useNoiseFilter = false, bool graphDisplay = true)
 		{
 			if ((graphDisplayIndex % graphDisplayCount) == 0 && graphDisplayPoint <= curPoint)
 			{
@@ -20971,7 +21048,7 @@ namespace PSA_SystemLibrary
             double tmp;
             tmp = PAD(column);
             if (half) tmp += (mc.para.MT.padSize.x.value * 1000 * 0.5);
-            else tmp += (mc.para.MT.padSize.x.value * 1000 * 0.7);
+            else tmp += (mc.para.MT.padSize.x.value * 1000 * 0.3);
             return tmp;
         }
         public double PADC2(int column)
@@ -20985,7 +21062,7 @@ namespace PSA_SystemLibrary
             double tmp;
             tmp = PAD(column);
             if (half) tmp -= (mc.para.MT.padSize.x.value * 1000 * 0.5);
-            else tmp -= (mc.para.MT.padSize.x.value * 1000 * 0.7);
+            else tmp -= (mc.para.MT.padSize.x.value * 1000 * 0.3);
             return tmp;
         }
         public double PADC4(int column)
@@ -21226,7 +21303,7 @@ namespace PSA_SystemLibrary
 			double tmp;
 			tmp = PAD(row);
             if (half) tmp += (mc.para.MT.padSize.y.value * 1000 * 0.5);
-            else tmp += (mc.para.MT.padSize.y.value * 1000 * 0.7);
+            else tmp += (mc.para.MT.padSize.y.value * 1000 * 0.3);
 			return tmp;
 		}
         public double PADC2(int row, bool half = true)
@@ -21234,7 +21311,7 @@ namespace PSA_SystemLibrary
 			double tmp;
 			tmp = PAD(row);
             if (half) tmp -= (mc.para.MT.padSize.y.value * 1000 * 0.5);
-            else tmp -= (mc.para.MT.padSize.y.value * 1000 * 0.7);
+            else tmp -= (mc.para.MT.padSize.y.value * 1000 * 0.3);
 			return tmp;
 		}
         public double PADC3(int row, bool half = true)

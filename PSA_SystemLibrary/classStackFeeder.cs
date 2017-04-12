@@ -448,12 +448,12 @@ namespace PSA_SystemLibrary
                     if (!ret.b1 && !ret.b2) { sqc = SQC.STOP; break; }
                     if (readyPosition == 0)
                     {
-                        rateZ = Z.config.speed.rate; Z.config.speed.rate = Math.Max(rateZ * 0.5, 0.1);
+                        rateZ = Z.config.speed.rate; Z.config.speed.rate = Math.Max(rateZ * 0.3, 0.1);
                         Z.move(pos.z.DOWN, out ret.message); Z.config.speed.rate = rateZ; if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
                     }
                     else if (readyPosition == 1)
                     {
-                        rateZ = Z2.config.speed.rate; Z2.config.speed.rate = Math.Max(rateZ * 0.5, 0.1);
+                        rateZ = Z2.config.speed.rate; Z2.config.speed.rate = Math.Max(rateZ * 0.3, 0.1);
                         Z2.move(pos.z2.DOWN, out ret.message); Z2.config.speed.rate = rateZ; if (mpiCheck(Z2.config.axisCode, sqc, ret.message)) break;
                     }
                     dwell.Reset();
@@ -1025,20 +1025,37 @@ namespace PSA_SystemLibrary
                     workingZAxis = 0;
                     if (workingTubeNumber == UnitCodeSF.INVALID) { errorCheck(ERRORCODE.SF, sqc, "", ALARM_CODE.E_MACHINE_RUN_HEAT_SLUG_EMPTY); motorAbortSkip = true; break; }
                     // SF1, SF2 중 한개라도 Invalid가 아니라면... Z1 Up 하고.. (마찬가지로 Z2도 Up)
-
-                    if (tubeStatus(UnitCodeSF.SF1) == SF_TUBE_STATUS.WORKING || tubeStatus(UnitCodeSF.SF2) == SF_TUBE_STATUS.WORKING)
+                    
+                    if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.CHIPPAC)
                     {
-                        mc.log.debug.write(mc.log.CODE.INFO, String.Format(textResource.LOG_DEBUG_SF_READY_UP, "MGZ #1"), false);
-                        Z.move(pos.z.FULL_STROKE, out ret.message);
-                        moveSFZ = true;
+                        if (tubeStatus(UnitCodeSF.SF1) == SF_TUBE_STATUS.WORKING || tubeStatus(UnitCodeSF.SF2) == SF_TUBE_STATUS.WORKING)
+                        {
+                            mc.log.debug.write(mc.log.CODE.INFO, String.Format(textResource.LOG_DEBUG_SF_READY_UP, "MGZ #1"), false);
+                            Z.move(pos.z.FULL_STROKE, out ret.message);
+                            moveSFZ = true;
+                        }
+                        else if (tubeStatus(UnitCodeSF.SF3) == SF_TUBE_STATUS.WORKING || tubeStatus(UnitCodeSF.SF4) == SF_TUBE_STATUS.WORKING)
+                        {
+                            mc.log.debug.write(mc.log.CODE.INFO, String.Format(textResource.LOG_DEBUG_SF_READY_UP, "MGZ #2"), false);
+                            Z2.move(pos.z.FULL_STROKE, out ret.message);
+                            moveSFZ2 = true;
+                        }
                     }
-                    else if (tubeStatus(UnitCodeSF.SF3) == SF_TUBE_STATUS.WORKING || tubeStatus(UnitCodeSF.SF4) == SF_TUBE_STATUS.WORKING)
+                    else
                     {
-                        mc.log.debug.write(mc.log.CODE.INFO, String.Format(textResource.LOG_DEBUG_SF_READY_UP, "MGZ #2"), false);
-                        Z2.move(pos.z.FULL_STROKE, out ret.message);
-                        moveSFZ2 = true;
+                        if (tubeStatus(UnitCodeSF.SF1) == SF_TUBE_STATUS.WORKING)
+                        {
+                            mc.log.debug.write(mc.log.CODE.INFO, String.Format(textResource.LOG_DEBUG_SF_READY_UP, "MGZ #1"), false);
+                            Z.move(pos.z.FULL_STROKE, out ret.message);
+                            moveSFZ = true;
+                        }
+                        else if (tubeStatus(UnitCodeSF.SF2) == SF_TUBE_STATUS.WORKING)
+                        {
+                            mc.log.debug.write(mc.log.CODE.INFO, String.Format(textResource.LOG_DEBUG_SF_READY_UP, "MGZ #2"), false);
+                            Z2.move(pos.z.FULL_STROKE, out ret.message);
+                            moveSFZ2 = true;
+                        }
                     }
-
                     //if (tubeStatus(UnitCodeSF.SF1) != SF_TUBE_STATUS.INVALID || tubeStatus(UnitCodeSF.SF2) != SF_TUBE_STATUS.INVALID)
                     //{
                     //    mc.log.debug.write(mc.log.CODE.INFO, "MGZ #1 Ready 상태이므로 UP 합니다.");
@@ -1104,16 +1121,25 @@ namespace PSA_SystemLibrary
                             Z2.reset(out ret.message);
                             if (ret.b1)
                             {
-                                tubeStatus(UnitCodeSF.SF1, SF_TUBE_STATUS.WORKING);
-                                if (tubeStatus(UnitCodeSF.SF2) != SF_TUBE_STATUS.INVALID)
-                                    tubeStatus(UnitCodeSF.SF2, SF_TUBE_STATUS.READY);
+                                if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.CHIPPAC)
+                                {
+                                    tubeStatus(UnitCodeSF.SF1, SF_TUBE_STATUS.WORKING);
+                                    if (tubeStatus(UnitCodeSF.SF2) != SF_TUBE_STATUS.INVALID)
+                                        tubeStatus(UnitCodeSF.SF2, SF_TUBE_STATUS.READY);
+                                }
+                                else tubeStatus(UnitCodeSF.SF1, SF_TUBE_STATUS.WORKING);
                             }
                             else if (ret.b2)
                             {
-                                if (tubeStatus(UnitCodeSF.SF1) != SF_TUBE_STATUS.INVALID)
-                                    tubeStatus(UnitCodeSF.SF1, SF_TUBE_STATUS.READY);
-                                tubeStatus(UnitCodeSF.SF2, SF_TUBE_STATUS.WORKING);
+                                if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.CHIPPAC)
+                                {
+                                    if (tubeStatus(UnitCodeSF.SF1) != SF_TUBE_STATUS.INVALID)
+                                        tubeStatus(UnitCodeSF.SF1, SF_TUBE_STATUS.READY);
+                                    tubeStatus(UnitCodeSF.SF2, SF_TUBE_STATUS.WORKING);
+                                }
+                                else tubeStatus(UnitCodeSF.SF1, SF_TUBE_STATUS.WORKING);
                             }
+                            dwell.Reset();
                             sqc = SQC.AUTO + 4;
                         }
                         if (limitCheck)
@@ -1135,16 +1161,25 @@ namespace PSA_SystemLibrary
                             Z.reset(out ret.message);
                             if (ret.b3)
                             {
-                                tubeStatus(UnitCodeSF.SF3, SF_TUBE_STATUS.WORKING);
-                                if (tubeStatus(UnitCodeSF.SF4) != SF_TUBE_STATUS.INVALID)
-                                    tubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.READY);
+                                if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.CHIPPAC)
+                                {
+                                    tubeStatus(UnitCodeSF.SF3, SF_TUBE_STATUS.WORKING);
+                                    if (tubeStatus(UnitCodeSF.SF4) != SF_TUBE_STATUS.INVALID)
+                                        tubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.READY);
+                                }
+                                else tubeStatus(UnitCodeSF.SF2, SF_TUBE_STATUS.WORKING);
                             }
                             else if (ret.b4)
                             {
-                                if (tubeStatus(UnitCodeSF.SF3) != SF_TUBE_STATUS.INVALID)
-                                    tubeStatus(UnitCodeSF.SF3, SF_TUBE_STATUS.READY);
-                                tubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.WORKING);
+                                if (mc.swcontrol.mechanicalRevision == (int)CUSTOMER.CHIPPAC)
+                                {
+                                    if (tubeStatus(UnitCodeSF.SF3) != SF_TUBE_STATUS.INVALID)
+                                        tubeStatus(UnitCodeSF.SF3, SF_TUBE_STATUS.READY);
+                                    tubeStatus(UnitCodeSF.SF4, SF_TUBE_STATUS.WORKING);
+                                }
+                                else tubeStatus(UnitCodeSF.SF2, SF_TUBE_STATUS.WORKING);
                             }
+                            dwell.Reset();
                             sqc = SQC.AUTO + 4;
                         }
                         if (limitCheck2)
@@ -1552,17 +1587,17 @@ namespace PSA_SystemLibrary
                     errorCheck((int)UnitCodeAxisNumber.SF_Z1, ERRORCODE.SF, sqc, ret.s, ALARM_CODE.E_AXIS_CHECK_TARGET_MOTION_ERROR);
 					return false;
 				}
-				Z.AT_MOVING(out ret.b, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) return false;
-				if (ret.b)
-				{
-					if (dwell.Elapsed > 20000)
-					{
-						Z.checkAlarmStatus(out ret.s, out ret.message);
-                        errorCheck((int)UnitCodeAxisNumber.SF_Z1, ERRORCODE.SF, sqc, ret.s, ALARM_CODE.E_AXIS_CHECK_TARGET_MOTION_TIMEOUT);
-					}
-					//timeCheck(UnitCodeAxis.Z, sqc, 30);
-					return false;
-				}
+                //Z.AT_MOVING(out ret.b, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) return false;
+                //if (ret.b)
+                //{
+                //    if (dwell.Elapsed > 20000)
+                //    {
+                //        Z.checkAlarmStatus(out ret.s, out ret.message);
+                //        errorCheck((int)UnitCodeAxisNumber.SF_Z1, ERRORCODE.SF, sqc, ret.s, ALARM_CODE.E_AXIS_CHECK_TARGET_MOTION_TIMEOUT);
+                //    }
+                //    //timeCheck(UnitCodeAxis.Z, sqc, 30);
+                //    return false;
+                //}
 				Z.AT_DONE(out ret.b, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) return false;
 				if (!ret.b)
 				{
@@ -1588,17 +1623,17 @@ namespace PSA_SystemLibrary
                     errorCheck((int)UnitCodeAxisNumber.SF_Z2, ERRORCODE.SF, sqc, ret.s, ALARM_CODE.E_AXIS_CHECK_TARGET_MOTION_ERROR);
                     return false;
                 }
-                Z2.AT_MOVING(out ret.b, out ret.message); if (mpiCheck(Z2.config.axisCode, sqc, ret.message)) return false;
-                if (ret.b)
-                {
-                    if (dwell.Elapsed > 20000)
-                    {
-                        Z2.checkAlarmStatus(out ret.s, out ret.message);
-                        errorCheck((int)UnitCodeAxisNumber.SF_Z2, ERRORCODE.SF, sqc, ret.s, ALARM_CODE.E_AXIS_CHECK_TARGET_MOTION_TIMEOUT);
-                    }
-                    //timeCheck(UnitCodeAxis.X, sqc, 20);
-                    return false;
-                }
+                //Z2.AT_MOVING(out ret.b, out ret.message); if (mpiCheck(Z2.config.axisCode, sqc, ret.message)) return false;
+                //if (ret.b)
+                //{
+                //    if (dwell.Elapsed > 20000)
+                //    {
+                //        Z2.checkAlarmStatus(out ret.s, out ret.message);
+                //        errorCheck((int)UnitCodeAxisNumber.SF_Z2, ERRORCODE.SF, sqc, ret.s, ALARM_CODE.E_AXIS_CHECK_TARGET_MOTION_TIMEOUT);
+                //    }
+                //    //timeCheck(UnitCodeAxis.X, sqc, 20);
+                //    return false;
+                //}
                 Z2.AT_DONE(out ret.b, out ret.message); if (mpiCheck(Z2.config.axisCode, sqc, ret.message)) return false;
                 if (!ret.b)
                 {

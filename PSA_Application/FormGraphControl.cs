@@ -74,6 +74,7 @@ namespace PSA_Application
 			mc.swcontrol.readconfig();			// Swcontrol 를 읽는 부분이 초기화 부분밖에 없어서 추가함. 사실 이 폼에는 필요없는 값들이지만, INI Update 하기 위한 공용 폼으로 사용함.
 			UtilityControl.readGraphConfig();
 			UtilityControl.readForceConfig();
+            UtilityControl.readSoftWareMode();
 
 			CB_DisplayStartPoint.SelectedIndex = UtilityControl.graphStartPoint;
 			CB_DisplayEndPoint.SelectedIndex = UtilityControl.graphEndPoint;

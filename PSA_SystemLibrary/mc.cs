@@ -54,7 +54,7 @@ namespace PSA_SystemLibrary
         {
             get
             {
-                return "20170324A";
+                return "20170408A";
             }
         }
         //public static bool START;
@@ -4497,6 +4497,7 @@ namespace PSA_SystemLibrary
             public static bool useCheckEpoxy;
             public static bool useDoorControl;
             public static bool useRotateCenter;     // 동심도를 Tool 중심으로 지정하지 않고 개별 지정하기 위한 옵션
+            public static bool useULCPreAlign;      // 2샷 중에 첫 샷에 앵글 먼저 보상하고 다음샷 보도록
 
             //static string filename = Environment.CurrentDirectory + "\\PSA.INI";
             static string filename = "C:\\PROTEC\\DATA\\PSA.INI";
@@ -4671,6 +4672,10 @@ namespace PSA_SystemLibrary
                 temp = swconfig.GetInt("useRotateCenter", 2);
                 if (temp == 2) genflag = true;
                 useRotateCenter = (temp != 1) ? false : true;
+
+                temp = swconfig.GetInt("useULCPreAlign", 2);
+                if (temp == 2) genflag = true;
+                useULCPreAlign = (temp != 1) ? false : true;
             }
 
             public static void writeETCConfig()
@@ -4727,6 +4732,9 @@ namespace PSA_SystemLibrary
 
                 temp = useRotateCenter ? 1 : 0;
                 swconfig.WriteInt("useRotateCenter", temp);
+
+                temp = useULCPreAlign ? 1 : 0;
+                swconfig.WriteInt("useULCPreAlign", temp);
             }
         }
 

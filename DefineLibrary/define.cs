@@ -5545,6 +5545,51 @@ namespace DefineLibrary
             rX = pt2.x;
             rY = pt2.y;
         }
+
+        public static void calcAlign(int quardrant, double rotateCenterX, double rotateCenterY, double pX, double pY, double pT, double lidSizeW, double lidSizeH, out double rX, out double rY)
+        {
+            int dirX = 0;
+            int dirY = 0;
+            rX = 0;
+            rY = 0;
+
+            if (quardrant == 0)
+            {
+                // Right Top
+                dirX = -1;
+                dirY = -1;
+            }
+            else if (quardrant == 1)
+            {
+                // Right Bottom
+                dirX = -1;
+                dirY = 1;
+            }
+            else if (quardrant == 2)
+            {
+                // Left Bottom
+                dirX = 1;
+                dirY = 1;
+            }
+            else if (quardrant == 3)
+            {
+                // Left Top
+                dirX = 1;
+                dirY = -1;
+            }
+
+            DPOINT ct, pt1, pt2;
+            ct.x = dirX * lidSizeW / 2 - rotateCenterX;
+            ct.y = dirY * lidSizeH / 2 - rotateCenterY;
+            pt1.x = pX;
+            pt1.y = pY;
+
+            Calc.rotate(-pT, ct, pt1, out pt2);
+
+            rX = pt2.x;
+            rY = pt2.y;
+        }
+
     }
 
     public class WorkingOriginData

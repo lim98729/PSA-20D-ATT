@@ -143,7 +143,7 @@ namespace PSA_Application
                     {
                         mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.FIRST, out ret.b, 1); if (!ret.b) goto EXIT;
                         #region moving
-                        if ((double)mc.ulc.cam.edgeIntersection.resultX > 2.0 || (double)mc.ulc.cam.edgeIntersection.resultY > 2.0)
+                        //if ((double)mc.ulc.cam.edgeIntersection.resultX > 2.0 || (double)mc.ulc.cam.edgeIntersection.resultY > 2.0)
                         {
                             string showstr;
                             showstr = "Result X:" + Math.Round((double)mc.ulc.cam.edgeIntersection.resultX, 2).ToString();
@@ -160,34 +160,41 @@ namespace PSA_Application
                         double lidSizeH = (double)mc.para.MT.lidSize.y.value * 1000;
 
                         double rX = 0, rY = 0;
+                        double centerX = mc.para.CAL.ToolRotateCenter.x.value;
+                        double centerY = mc.para.CAL.ToolRotateCenter.y.value;
+                        //Calc.calcAlign(0, centerX, centerY, alignX, alignY, alignT, lidSizeW, lidSizeH, out rX, out rY);
                         Calc.calcAlign(0, alignX, alignY, alignT, lidSizeW, lidSizeH, out rX, out rY);
 
                         if (!mc.swcontrol.useRotateCenter)
                         {
-                            double cosTheta = Math.Cos((-alignT) * Math.PI / 180);
-                            double sinTheta = Math.Sin((-alignT) * Math.PI / 180);
-                            alignX = (cosTheta * rX) - (sinTheta * rY);
-                            alignY = (sinTheta * rX) + (cosTheta * rY);
+                            alignX = rX;
+                            alignY = rY;
+                            //double cosTheta = Math.Cos((-alignT) * Math.PI / 180);
+                            //double sinTheta = Math.Sin((-alignT) * Math.PI / 180);
+                            //alignX = (cosTheta * rX) - (sinTheta * rY);
+                            //alignY = (sinTheta * rX) + (cosTheta * rY);
                         }
                         else
                         {
-                            DPOINT ulc_ct, pt1, pt2;
-                            ulc_ct.x = -mc.para.CAL.ToolRotateCenter.x.value;
-                            ulc_ct.y = -mc.para.CAL.ToolRotateCenter.y.value;
-                            pt1.x = alignX;
-                            pt1.y = alignY;
+                            alignX = rX;
+                            alignY = rY;
+                            //DPOINT ulc_ct, pt1, pt2;
+                            //ulc_ct.x = -mc.para.CAL.ToolRotateCenter.x.value;
+                            //ulc_ct.y = -mc.para.CAL.ToolRotateCenter.y.value;
+                            //pt1.x = alignX;
+                            //pt1.y = alignY;
 
-                            Calc.rotate(-alignT, ulc_ct, pt1, out pt2);
-                            alignX = pt2.x;
-                            alignY = pt2.y;
+                            //Calc.rotate(-alignT, ulc_ct, pt1, out pt2);
+                            //alignX = pt2.x;
+                            //alignY = pt2.y;
                         }
 
                         posX -= alignX;
                         posY -= alignY;
-                        posT -= alignT;
+                        posT += alignT;
                         mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
                         #endregion
-                        mc.idle(100);
+                        mc.idle(500);
                         if (retry++ < 5) goto RETRY;
                         mc.ulc.edgeIntersectionFind(QUARTER_NUMBER.FIRST, out ret.b, 1); if (!ret.b) goto EXIT;
                     }
@@ -238,7 +245,7 @@ namespace PSA_Application
 
                         posX -= alignX;
                         posY -= alignY;
-                        posT -= alignT;
+                        posT += alignT;
                         mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
                         #endregion
                         mc.idle(100);
@@ -300,7 +307,7 @@ namespace PSA_Application
 
                         posX -= alignX;
                         posY -= alignY;
-                        posT -= alignT;
+                        posT += alignT;
                         mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
                         #endregion
                         mc.idle(100);
@@ -354,7 +361,7 @@ namespace PSA_Application
 
                         posX -= alignX;
                         posY -= alignY;
-                        posT -= alignT;
+                        posT += alignT;
                         mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
                         #endregion
                         mc.idle(100);
@@ -404,8 +411,8 @@ namespace PSA_Application
                         else
                         {
                             DPOINT ulc_ct, pt1, pt2;
-                            ulc_ct.x = -mc.para.CAL.ToolRotateCenter.x.value;
-                            ulc_ct.y = -mc.para.CAL.ToolRotateCenter.y.value;
+                            ulc_ct.x = mc.para.CAL.ToolRotateCenter.x.value;
+                            ulc_ct.y = mc.para.CAL.ToolRotateCenter.y.value;
                             pt1.x = alignX;
                             pt1.y = alignY;
 
@@ -416,7 +423,7 @@ namespace PSA_Application
 
                         posX -= alignX;
                         posY -= alignY;
-                        posT -= alignT;
+                        posT += alignT;
                         mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
                         #endregion
                         mc.idle(100);
@@ -470,7 +477,7 @@ namespace PSA_Application
 
                         posX -= alignX;
                         posY -= alignY;
-                        posT -= alignT;
+                        posT += alignT;
                         mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
                         #endregion
                         mc.idle(100);
@@ -532,7 +539,7 @@ namespace PSA_Application
 
                         posX -= alignX;
                         posY -= alignY;
-                        posT -= alignT;
+                        posT += alignT;
                         mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
                         #endregion
                         mc.idle(100);
@@ -586,7 +593,7 @@ namespace PSA_Application
 
                         posX -= alignX;
                         posY -= alignY;
-                        posT -= alignT;
+                        posT += alignT;
                         mc.hd.tool.jogMoveXYT(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
                         #endregion
                         mc.idle(100);
@@ -2776,8 +2783,8 @@ namespace PSA_Application
 			{
 				mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
 				EVENT.hWindowLargeDisplay(mc.hdc.cam.acq.grabber.cameraNumber);
-				posX = mc.hd.tool.cPos.x.PADC1(padIndexX);
-				posY = mc.hd.tool.cPos.y.PADC1(padIndexY);
+				posX = mc.hd.tool.cPos.x.PADC1(padIndexX, UtilityControl.useHalfPosition);
+                posY = mc.hd.tool.cPos.y.PADC1(padIndexY, UtilityControl.useHalfPosition);
 				posT = mc.hd.tool.tPos.t.ZERO;
 				mc.hd.tool.jogMove(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); this.Close(); }
 				mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.CENTER_CROSS;

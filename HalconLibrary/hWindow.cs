@@ -411,7 +411,7 @@ namespace HalconLibrary
 			double ratio_height;
 			if (hVision.cam1.isActivate)
 			{
-                hVision.cam1.clearWindow();
+                //hVision.cam1.clearWindow();
 				ratio_height = (double)hVision.cam1.acq.height / (double)hVision.cam1.acq.width;
 				if (ratio_height > 1) ratio_height = 1;
 				width[1] = 300;
@@ -420,7 +420,7 @@ namespace HalconLibrary
 			}
 			if (hVision.cam2.isActivate)
 			{
-                hVision.cam2.clearWindow();
+                //hVision.cam2.clearWindow();
 				ratio_height = (double)hVision.cam2.acq.height / (double)hVision.cam2.acq.width;
 				if (ratio_height > 1) ratio_height = 1;
 				width[2] = 300;

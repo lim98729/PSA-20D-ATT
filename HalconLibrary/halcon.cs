@@ -6007,7 +6007,7 @@ namespace HalconLibrary
 				{
                     HOperatorSet.SetColor(window.handle, "pink");
 
-                    if (quater == QUARTER_NUMBER.INVALID)
+                    if (UtilityControl.useHalfPosition || quater == QUARTER_NUMBER.INVALID)
                     {
                         HOperatorSet.DispCross(window.handle, acq.height / 2, acq.width / 2, acq.height * 0.8, 0);
                     }
@@ -8831,6 +8831,18 @@ namespace HalconLibrary
                         createHColumn2 = ox - shortLength;
                         createHRow1 = oy - shortLength;
                         createHRow2 = oy + shortLength * cropArea;
+                    }
+                    else
+                    {
+                        createVColumn1 = width * 0.7 - shortLength * cropArea;
+                        createVColumn2 = width * 0.7 + shortLength;
+                        createVRow1 = height * 0.3 + shortLength;
+                        createVRow2 = height * 0.3 + longLength;
+
+                        createHColumn1 = width * 0.3 - longLength;
+                        createHColumn2 = width * 0.3 - shortLength;
+                        createHRow1 = height * 0.3 - shortLength;
+                        createHRow2 = height * 0.3 + shortLength * cropArea;
                     }
 				}
 				else if (quarterNumber == QUARTER_NUMBER.SECOND)
