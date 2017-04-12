@@ -45,7 +45,7 @@ namespace PSA_SystemLibrary
                     selectCornerNumber = 0;
 					Offset[selectCornerNumber].x.value = 0;
 					Offset[selectCornerNumber].y.value = 0;
-					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC1((int)mc.hd.tool.padX), mc.hd.tool.cPos.y.PADC1((int)mc.hd.tool.padY), out ret.message); 
+					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC1((int)mc.hd.tool.padX, true), mc.hd.tool.cPos.y.PADC1((int)mc.hd.tool.padY, true), out ret.message); 
 					if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); }
                 }
                 else 
@@ -53,7 +53,7 @@ namespace PSA_SystemLibrary
                     selectCornerNumber = 1;
 					Offset[selectCornerNumber].x.value = 0;
 					Offset[selectCornerNumber].y.value = 0;
-					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC2((int)mc.hd.tool.padX), mc.hd.tool.cPos.y.PADC2((int)mc.hd.tool.padY), out ret.message);
+					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC2((int)mc.hd.tool.padX, true), mc.hd.tool.cPos.y.PADC2((int)mc.hd.tool.padY, true), out ret.message);
 					if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); }
                 }
             }
@@ -65,7 +65,7 @@ namespace PSA_SystemLibrary
                     selectCornerNumber = 2;
 					Offset[selectCornerNumber].x.value = 0;
 					Offset[selectCornerNumber].y.value = 0;
-					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC3((int)mc.hd.tool.padX), mc.hd.tool.cPos.y.PADC3((int)mc.hd.tool.padY), out ret.message);
+					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC3((int)mc.hd.tool.padX, true), mc.hd.tool.cPos.y.PADC3((int)mc.hd.tool.padY, true), out ret.message);
 					if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); }
                 }
                 else 
@@ -73,7 +73,7 @@ namespace PSA_SystemLibrary
                     selectCornerNumber = 3;
 					Offset[selectCornerNumber].x.value = 0;
 					Offset[selectCornerNumber].y.value = 0;
-					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC4((int)mc.hd.tool.padX), mc.hd.tool.cPos.y.PADC4((int)mc.hd.tool.padY), out ret.message);
+					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC4((int)mc.hd.tool.padX, true), mc.hd.tool.cPos.y.PADC4((int)mc.hd.tool.padY, true), out ret.message);
 					if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); }
                 }
             } // 버튼에 따라서 선택한 코너 위치 selectCornerNumber 에 저장 시키고
@@ -288,22 +288,22 @@ namespace PSA_SystemLibrary
                 // moving
                 if( selectCornerNumber == 0 )
                 {
-					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC1((int)mc.hd.tool.padX) + Offset[0].x.value, mc.hd.tool.cPos.y.PADC1((int)mc.hd.tool.padY) + Offset[0].y.value, out ret.message);
+					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC1((int)mc.hd.tool.padX, true) + Offset[0].x.value, mc.hd.tool.cPos.y.PADC1((int)mc.hd.tool.padY, true) + Offset[0].y.value, out ret.message);
 				    if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
                 }
                 else if (selectCornerNumber == 1)
                 {
-					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC2((int)mc.hd.tool.padX) + Offset[1].x.value, mc.hd.tool.cPos.y.PADC2((int)mc.hd.tool.padY) + Offset[1].y.value, out ret.message);
+					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC2((int)mc.hd.tool.padX, true) + Offset[1].x.value, mc.hd.tool.cPos.y.PADC2((int)mc.hd.tool.padY, true) + Offset[1].y.value, out ret.message);
 					if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
                 }
                 else if (selectCornerNumber == 2)
                 {
-					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC3((int)mc.hd.tool.padX) + Offset[2].x.value, mc.hd.tool.cPos.y.PADC3((int)mc.hd.tool.padY) + Offset[2].y.value, out ret.message);
+					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC3((int)mc.hd.tool.padX, true) + Offset[2].x.value, mc.hd.tool.cPos.y.PADC3((int)mc.hd.tool.padY, true) + Offset[2].y.value, out ret.message);
 					if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
                 }
                 else if (selectCornerNumber == 3)
                 {
-					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC4((int)mc.hd.tool.padX) + Offset[3].x.value, mc.hd.tool.cPos.y.PADC4((int)mc.hd.tool.padY) + Offset[3].y.value, out ret.message);
+					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC4((int)mc.hd.tool.padX, true) + Offset[3].x.value, mc.hd.tool.cPos.y.PADC4((int)mc.hd.tool.padY, true) + Offset[3].y.value, out ret.message);
 					if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
                 }
                 

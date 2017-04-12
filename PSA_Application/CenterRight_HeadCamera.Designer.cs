@@ -137,16 +137,6 @@
             this.toolStripLabel7 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator30 = new System.Windows.Forms.ToolStripSeparator();
             this.BT_JOGTEACH_USE = new System.Windows.Forms.ToolStripButton();
-            this.toolStrip15 = new System.Windows.Forms.ToolStrip();
-            this.toolStripLabel8 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripSeparator31 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_USE_MANUAL_TEACH = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_SelectModel_P1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_SelectModel_P2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator32 = new System.Windows.Forms.ToolStripSeparator();
-            this.BT_Dist_P1P2 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel9 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator33 = new System.Windows.Forms.ToolStripSeparator();
@@ -168,7 +158,6 @@
             this.toolStrip12.SuspendLayout();
             this.toolStrip13.SuspendLayout();
             this.toolStrip14.SuspendLayout();
-            this.toolStrip15.SuspendLayout();
             this.toolStrip3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -944,82 +933,6 @@
             this.BT_JOGTEACH_USE.Name = "BT_JOGTEACH_USE";
             this.BT_JOGTEACH_USE.Click += new System.EventHandler(this.Control_Click);
             // 
-            // toolStrip15
-            // 
-            this.toolStrip15.BackColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(this.toolStrip15, "toolStrip15");
-            this.toolStrip15.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripLabel8,
-            this.toolStripSeparator31,
-            this.BT_USE_MANUAL_TEACH,
-            this.toolStripSeparator20,
-            this.BT_SelectModel_P1,
-            this.toolStripSeparator2,
-            this.BT_SelectModel_P2,
-            this.toolStripSeparator32,
-            this.BT_Dist_P1P2});
-            this.toolStrip15.Name = "toolStrip15";
-            // 
-            // toolStripLabel8
-            // 
-            resources.ApplyResources(this.toolStripLabel8, "toolStripLabel8");
-            this.toolStripLabel8.Name = "toolStripLabel8";
-            // 
-            // toolStripSeparator31
-            // 
-            this.toolStripSeparator31.Name = "toolStripSeparator31";
-            resources.ApplyResources(this.toolStripSeparator31, "toolStripSeparator31");
-            // 
-            // BT_USE_MANUAL_TEACH
-            // 
-            resources.ApplyResources(this.BT_USE_MANUAL_TEACH, "BT_USE_MANUAL_TEACH");
-            this.BT_USE_MANUAL_TEACH.AutoToolTip = false;
-            this.BT_USE_MANUAL_TEACH.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
-            this.BT_USE_MANUAL_TEACH.Name = "BT_USE_MANUAL_TEACH";
-            this.BT_USE_MANUAL_TEACH.Click += new System.EventHandler(this.Control_Click);
-            // 
-            // toolStripSeparator20
-            // 
-            this.toolStripSeparator20.Name = "toolStripSeparator20";
-            resources.ApplyResources(this.toolStripSeparator20, "toolStripSeparator20");
-            // 
-            // BT_SelectModel_P1
-            // 
-            resources.ApplyResources(this.BT_SelectModel_P1, "BT_SelectModel_P1");
-            this.BT_SelectModel_P1.AutoToolTip = false;
-            this.BT_SelectModel_P1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.BT_SelectModel_P1.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
-            this.BT_SelectModel_P1.Name = "BT_SelectModel_P1";
-            this.BT_SelectModel_P1.Click += new System.EventHandler(this.Control_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
-            // 
-            // BT_SelectModel_P2
-            // 
-            resources.ApplyResources(this.BT_SelectModel_P2, "BT_SelectModel_P2");
-            this.BT_SelectModel_P2.AutoToolTip = false;
-            this.BT_SelectModel_P2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.BT_SelectModel_P2.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
-            this.BT_SelectModel_P2.Name = "BT_SelectModel_P2";
-            this.BT_SelectModel_P2.Click += new System.EventHandler(this.Control_Click);
-            // 
-            // toolStripSeparator32
-            // 
-            this.toolStripSeparator32.Name = "toolStripSeparator32";
-            resources.ApplyResources(this.toolStripSeparator32, "toolStripSeparator32");
-            // 
-            // BT_Dist_P1P2
-            // 
-            resources.ApplyResources(this.BT_Dist_P1P2, "BT_Dist_P1P2");
-            this.BT_Dist_P1P2.AutoToolTip = false;
-            this.BT_Dist_P1P2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.BT_Dist_P1P2.Image = global::PSA_Application.Properties.Resources.YellowLED_OFF;
-            this.BT_Dist_P1P2.Name = "BT_Dist_P1P2";
-            this.BT_Dist_P1P2.Click += new System.EventHandler(this.Control_Click);
-            // 
             // toolStrip3
             // 
             this.toolStrip3.BackColor = System.Drawing.Color.Transparent;
@@ -1081,7 +994,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.toolStrip3);
-            this.Controls.Add(this.toolStrip15);
             this.Controls.Add(this.toolStrip14);
             this.Controls.Add(this.toolStrip13);
             this.Controls.Add(this.toolStrip12);
@@ -1125,8 +1037,6 @@
             this.toolStrip13.PerformLayout();
             this.toolStrip14.ResumeLayout(false);
             this.toolStrip14.PerformLayout();
-            this.toolStrip15.ResumeLayout(false);
-            this.toolStrip15.PerformLayout();
             this.toolStrip3.ResumeLayout(false);
             this.toolStrip3.PerformLayout();
             this.ResumeLayout(false);
@@ -1242,17 +1152,7 @@
         private System.Windows.Forms.ToolStrip toolStrip14;
         private System.Windows.Forms.ToolStripLabel toolStripLabel7;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator30;
-		private System.Windows.Forms.ToolStripButton BT_JOGTEACH_USE;
-		private System.Windows.Forms.ToolStrip toolStrip15;
-		private System.Windows.Forms.ToolStripLabel toolStripLabel8;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator31;
-		private System.Windows.Forms.ToolStripButton BT_USE_MANUAL_TEACH;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator20;
-		private System.Windows.Forms.ToolStripButton BT_SelectModel_P1;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-		private System.Windows.Forms.ToolStripButton BT_SelectModel_P2;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator32;
-		private System.Windows.Forms.ToolStripButton BT_Dist_P1P2;
+        private System.Windows.Forms.ToolStripButton BT_JOGTEACH_USE;
 		private System.Windows.Forms.ToolStrip toolStrip3;
 		private System.Windows.Forms.ToolStripLabel toolStripLabel9;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator33;

@@ -3966,7 +3966,7 @@ namespace PSA_SystemLibrary
                         else if (mc.para.HDC.fiducialPos.value == 1)
                         {
                             Y.move(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-                            X.move(cPos.x.PADC2(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                            X.move(cPos.x.PADC2(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
                         }
                         else if (mc.para.HDC.fiducialPos.value == 2)
                         {
@@ -3976,7 +3976,7 @@ namespace PSA_SystemLibrary
                         else
                         {
                             Y.move(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-                            X.move(cPos.x.PADC4(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                            X.move(cPos.x.PADC4(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
                         }
                     }
                     else
@@ -3989,7 +3989,7 @@ namespace PSA_SystemLibrary
                         else if (mc.para.HDC.fiducialPos.value == 1)
                         {
                             Y.moveCompare(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-                            X.moveCompare(cPos.x.PADC2(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                            X.moveCompare(cPos.x.PADC2(padX, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
                         }
                         else if (mc.para.HDC.fiducialPos.value == 2)
                         {
@@ -3999,7 +3999,7 @@ namespace PSA_SystemLibrary
                         else
                         {
                             Y.moveCompare(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-                            X.moveCompare(cPos.x.PADC4(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                            X.moveCompare(cPos.x.PADC4(padX, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
                         }
                     }
 					dwell.Reset();
@@ -4142,44 +4142,29 @@ namespace PSA_SystemLibrary
 					{
 						rateY = Y.config.speed.rate; Y.config.speed.rate = Math.Max(rateY * 0.3, 0.1);
 						rateX = X.config.speed.rate; X.config.speed.rate = Math.Max(rateX * 0.3, 0.1);
-						if (mc.para.HDC.useManualTeach.value == 0)
+						
+						if (mc.para.HDC.detectDirection.value == 0)
 						{
-							if (mc.para.HDC.detectDirection.value == 0)
-							{
-								Y.move(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-								X.move(cPos.x.PADC2(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-							}
-							else
-							{
-								Y.move(cPos.y.PADC1(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-								X.move(cPos.x.PADC1(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-							}
+							Y.move(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							X.move(cPos.x.PADC2(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 						else
 						{
-							Y.move(cPos.y.M_POS_P1(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.move(cPos.x.M_POS_P1(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+							Y.move(cPos.y.PADC1(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							X.move(cPos.x.PADC1(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 					}
 					else
 					{
-						if (mc.para.HDC.useManualTeach.value == 0)
+						if (mc.para.HDC.detectDirection.value == 0)
 						{
-							if (mc.para.HDC.detectDirection.value == 0)
-							{
-								Y.moveCompare(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-								X.moveCompare(cPos.x.PADC2(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-							}
-							else
-							{
-								Y.moveCompare(cPos.y.PADC1(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-								X.moveCompare(cPos.x.PADC1(padX, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-							}
+							Y.moveCompare(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							X.moveCompare(cPos.x.PADC2(padX, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 						else
 						{
-							Y.moveCompare(cPos.y.M_POS_P1(padY), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.moveCompare(cPos.x.M_POS_P1(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+							Y.moveCompare(cPos.y.PADC1(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							X.moveCompare(cPos.x.PADC1(padX, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 					}
 					dwell.Reset();
@@ -4196,236 +4181,168 @@ namespace PSA_SystemLibrary
 
 					if (hdcfailchecked)
 					{
-						if (mc.para.HDC.useManualTeach.value == 0)
+						if (mc.para.HDC.detectDirection.value == 0)
 						{
-							if (mc.para.HDC.detectDirection.value == 0)
-							{
-								#region HDC.PADC1.req
-								hdcP1X = 0;
-								hdcP1Y = 0;
-								hdcP1T = 0;
-								if (mc.hd.reqMode == REQMODE.DUMY) mc.hdc.reqMode = REQMODE.GRAB;
-								else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.NCC)
-								{
-									if (mc.para.HDC.modelPADC1.isCreate.value == (int)BOOL.TRUE)
-									{
-										mc.hdc.reqMode = REQMODE.FIND_MODEL;
-										mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC1_NCC;
-									}
-									else mc.hdc.reqMode = REQMODE.GRAB;
-								}
-								else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-								{
-									if (mc.para.HDC.modelPADC1.isCreate.value == (int)BOOL.TRUE)
-									{
-										mc.hdc.reqMode = REQMODE.FIND_MODEL;
-										mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC1_SHAPE;
-                                    }
-                                    else mc.hdc.reqMode = REQMODE.GRAB;
-								}
-								else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
-								{
-                                    hdcDir = 0;
-									mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
-								}
-                                else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
-                                {
-                                    mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_1;
-                                }
-								else mc.hdc.reqMode = REQMODE.GRAB;
-								mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
-								//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
-								#endregion
-							}
-							else
-							{
-								#region HDC.PADC2.req
-								hdcP1X = 0;
-								hdcP1Y = 0;
-								hdcP1T = 0;
-								if (mc.hd.reqMode == REQMODE.DUMY) mc.hdc.reqMode = REQMODE.GRAB;
-								else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.NCC)
-								{
-									if (mc.para.HDC.modelPADC2.isCreate.value == (int)BOOL.TRUE)
-									{
-										mc.hdc.reqMode = REQMODE.FIND_MODEL;
-										mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC4_NCC;
-									}
-									else mc.hdc.reqMode = REQMODE.GRAB;
-								}
-								else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-								{
-									if (mc.para.HDC.modelPADC2.isCreate.value == (int)BOOL.TRUE)
-									{
-										mc.hdc.reqMode = REQMODE.FIND_MODEL;
-										mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC4_SHAPE;
-									}
-									else mc.hdc.reqMode = REQMODE.GRAB;
-								}
-								else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.CORNER)
-								{
-                                    hdcDir = 1;
-									mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_2;
-								}
-                                else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
-                                {
-                                    mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_2;
-                                }
-                                else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
-                                {
-                                    mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_2;
-                                }
-								else mc.hdc.reqMode = REQMODE.GRAB;
-								mc.hdc.lighting_exposure(mc.para.HDC.modelPADC2.light, mc.para.HDC.modelPADC2.exposureTime);
-								//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
-								#endregion
-							}
-						}
-						else
-						{
-							#region HDC.modelManualTeach.paraP1.req
+							#region HDC.PADC1.req
 							hdcP1X = 0;
 							hdcP1Y = 0;
 							hdcP1T = 0;
-							hdcResult = 0;
 							if (mc.hd.reqMode == REQMODE.DUMY) mc.hdc.reqMode = REQMODE.GRAB;
-							else if (mc.para.HDC.modelManualTeach.paraP1.algorism.value == (int)MODEL_ALGORISM.NCC)
+							else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.NCC)
 							{
-								if (mc.para.HDC.modelManualTeach.paraP1.isCreate.value == (int)BOOL.TRUE)
+								if (mc.para.HDC.modelPADC1.isCreate.value == (int)BOOL.TRUE)
 								{
 									mc.hdc.reqMode = REQMODE.FIND_MODEL;
-									mc.hdc.reqModelNumber = (int)HDC_MODEL.MANUAL_TEACH_P1_NCC;
+									mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC1_NCC;
 								}
 								else mc.hdc.reqMode = REQMODE.GRAB;
 							}
-							else if (mc.para.HDC.modelManualTeach.paraP1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+							else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
 							{
-								if (mc.para.HDC.modelManualTeach.paraP1.isCreate.value == (int)BOOL.TRUE)
+								if (mc.para.HDC.modelPADC1.isCreate.value == (int)BOOL.TRUE)
 								{
 									mc.hdc.reqMode = REQMODE.FIND_MODEL;
-									mc.hdc.reqModelNumber = (int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE;
-								}
-								else mc.hdc.reqMode = REQMODE.GRAB;
+									mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC1_SHAPE;
+                                }
+                                else mc.hdc.reqMode = REQMODE.GRAB;
 							}
+							else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
+							{
+                                hdcDir = 0;
+								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
+							}
+                            else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_1;
+                            }
 							else mc.hdc.reqMode = REQMODE.GRAB;
-							mc.hdc.lighting_exposure(mc.para.HDC.modelManualTeach.paraP1.light, mc.para.HDC.modelManualTeach.paraP1.exposureTime);
+							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							#endregion
+						}
+						else
+						{
+							#region HDC.PADC2.req
+							hdcP1X = 0;
+							hdcP1Y = 0;
+							hdcP1T = 0;
+							if (mc.hd.reqMode == REQMODE.DUMY) mc.hdc.reqMode = REQMODE.GRAB;
+							else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.NCC)
+							{
+								if (mc.para.HDC.modelPADC2.isCreate.value == (int)BOOL.TRUE)
+								{
+									mc.hdc.reqMode = REQMODE.FIND_MODEL;
+									mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC4_NCC;
+								}
+								else mc.hdc.reqMode = REQMODE.GRAB;
+							}
+							else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+							{
+								if (mc.para.HDC.modelPADC2.isCreate.value == (int)BOOL.TRUE)
+								{
+									mc.hdc.reqMode = REQMODE.FIND_MODEL;
+									mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC4_SHAPE;
+								}
+								else mc.hdc.reqMode = REQMODE.GRAB;
+							}
+							else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.CORNER)
+							{
+                                hdcDir = 1;
+								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_2;
+							}
+                            else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_2;
+                            }
+                            else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_2;
+                            }
+							else mc.hdc.reqMode = REQMODE.GRAB;
+							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC2.light, mc.para.HDC.modelPADC2.exposureTime);
 							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 						}
 					}
 					else
 					{
-						if(mc.para.HDC.useManualTeach.value == 0)
+						if (mc.para.HDC.detectDirection.value == 0)
 						{
-							if (mc.para.HDC.detectDirection.value == 0)
-							{
-								#region HDC.PADC2.req
-								hdcP1X = 0;
-								hdcP1Y = 0;
-								hdcP1T = 0;
-								if (mc.hd.reqMode == REQMODE.DUMY) mc.hdc.reqMode = REQMODE.GRAB;
-								else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.NCC)
-								{
-									if (mc.para.HDC.modelPADC2.isCreate.value == (int)BOOL.TRUE)
-									{
-										mc.hdc.reqMode = REQMODE.FIND_MODEL;
-										mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC4_NCC;
-									}
-									else mc.hdc.reqMode = REQMODE.GRAB;
-								}
-								else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-								{
-									if (mc.para.HDC.modelPADC2.isCreate.value == (int)BOOL.TRUE)
-									{
-										mc.hdc.reqMode = REQMODE.FIND_MODEL;
-										mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC4_SHAPE;
-									}
-									else mc.hdc.reqMode = REQMODE.GRAB;
-								}
-								else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.CORNER)
-								{
-                                    hdcDir = 1;
-									mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_2;
-								}
-                                else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
-                                {
-                                    mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_2;
-                                }
-								else mc.hdc.reqMode = REQMODE.GRAB;
-								mc.hdc.lighting_exposure(mc.para.HDC.modelPADC2.light, mc.para.HDC.modelPADC2.exposureTime);
-                                //if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
-                                #endregion
-                            }
-                            else
-                            {
-                                #region HDC.PADC1.req
-                                hdcP1X = 0;
-                                hdcP1Y = 0;
-                                hdcP1T = 0;
-                                if (mc.hd.reqMode == REQMODE.DUMY) mc.hdc.reqMode = REQMODE.GRAB;
-                                else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.NCC)
-                                {
-                                    if (mc.para.HDC.modelPADC1.isCreate.value == (int)BOOL.TRUE)
-                                    {
-                                        mc.hdc.reqMode = REQMODE.FIND_MODEL;
-                                        mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC1_NCC;
-                                    }
-                                    else mc.hdc.reqMode = REQMODE.GRAB;
-                                }
-                                else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-                                {
-                                    if (mc.para.HDC.modelPADC1.isCreate.value == (int)BOOL.TRUE)
-                                    {
-                                        mc.hdc.reqMode = REQMODE.FIND_MODEL;
-                                        mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC1_SHAPE;
-                                    }
-                                    else mc.hdc.reqMode = REQMODE.GRAB;
-                                }
-                                else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
-                                {
-                                    hdcDir = 0;
-                                    mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
-                                }
-                                else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
-                                {
-                                    mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_1;
-                                }
-                                else mc.hdc.reqMode = REQMODE.GRAB;
-                                mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
-                                //if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
-                                #endregion
-							}
-						}
-						else
-						{
-							#region HDC.modelManualTeach.paraP1.req
+							#region HDC.PADC2.req
 							hdcP1X = 0;
 							hdcP1Y = 0;
 							hdcP1T = 0;
-							hdcResult = 0;
 							if (mc.hd.reqMode == REQMODE.DUMY) mc.hdc.reqMode = REQMODE.GRAB;
-							else if (mc.para.HDC.modelManualTeach.paraP1.algorism.value == (int)MODEL_ALGORISM.NCC)
+							else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.NCC)
 							{
-								if (mc.para.HDC.modelManualTeach.paraP1.isCreate.value == (int)BOOL.TRUE)
+								if (mc.para.HDC.modelPADC2.isCreate.value == (int)BOOL.TRUE)
 								{
 									mc.hdc.reqMode = REQMODE.FIND_MODEL;
-									mc.hdc.reqModelNumber = (int)HDC_MODEL.MANUAL_TEACH_P1_NCC;
+									mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC4_NCC;
 								}
 								else mc.hdc.reqMode = REQMODE.GRAB;
 							}
-							else if (mc.para.HDC.modelManualTeach.paraP1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+							else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.SHAPE)
 							{
-								if (mc.para.HDC.modelManualTeach.paraP1.isCreate.value == (int)BOOL.TRUE)
+								if (mc.para.HDC.modelPADC2.isCreate.value == (int)BOOL.TRUE)
 								{
 									mc.hdc.reqMode = REQMODE.FIND_MODEL;
-									mc.hdc.reqModelNumber = (int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE;
+									mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC4_SHAPE;
 								}
 								else mc.hdc.reqMode = REQMODE.GRAB;
 							}
+							else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.CORNER)
+							{
+                                hdcDir = 1;
+								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_2;
+							}
+                            else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_2;
+                            }
 							else mc.hdc.reqMode = REQMODE.GRAB;
-							mc.hdc.lighting_exposure(mc.para.HDC.modelManualTeach.paraP1.light, mc.para.HDC.modelManualTeach.paraP1.exposureTime);
-							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
-							#endregion
+							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC2.light, mc.para.HDC.modelPADC2.exposureTime);
+                            //if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+                            #endregion
+                        }
+                        else
+                        {
+                            #region HDC.PADC1.req
+                            hdcP1X = 0;
+                            hdcP1Y = 0;
+                            hdcP1T = 0;
+                            if (mc.hd.reqMode == REQMODE.DUMY) mc.hdc.reqMode = REQMODE.GRAB;
+                            else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.NCC)
+                            {
+                                if (mc.para.HDC.modelPADC1.isCreate.value == (int)BOOL.TRUE)
+                                {
+                                    mc.hdc.reqMode = REQMODE.FIND_MODEL;
+                                    mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC1_NCC;
+                                }
+                                else mc.hdc.reqMode = REQMODE.GRAB;
+                            }
+                            else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+                            {
+                                if (mc.para.HDC.modelPADC1.isCreate.value == (int)BOOL.TRUE)
+                                {
+                                    mc.hdc.reqMode = REQMODE.FIND_MODEL;
+                                    mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC1_SHAPE;
+                                }
+                                else mc.hdc.reqMode = REQMODE.GRAB;
+                            }
+                            else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
+                            {
+                                hdcDir = 0;
+                                mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
+                            }
+                            else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_1;
+                            }
+                            else mc.hdc.reqMode = REQMODE.GRAB;
+                            mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
+                            //if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+                            #endregion
 						}
 					}
 					dwell.Reset();
@@ -4485,44 +4402,28 @@ namespace PSA_SystemLibrary
 
 					if (hdcfailchecked)
 					{
-						if (mc.para.HDC.useManualTeach.value == 0)
-						{
-							if (mc.para.HDC.detectDirection.value == 0)
-							{
-								Y.move(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-								X.move(cPos.x.PADC4(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-							}
-							else
-							{
-								Y.move(cPos.y.PADC3(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-								X.move(cPos.x.PADC3(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-							}
-						}
-						else
-						{
-							Y.move(cPos.y.M_POS_P2(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.move(cPos.x.M_POS_P2(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-						}
+                        if (mc.para.HDC.detectDirection.value == 0)
+                        {
+                            Y.move(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                            X.move(cPos.x.PADC4(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                        }
+                        else
+                        {
+                            Y.move(cPos.y.PADC3(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                            X.move(cPos.x.PADC3(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                        }
 					}
 					else
 					{
-						if(mc.para.HDC.useManualTeach.value == 0)
+						if (mc.para.HDC.detectDirection.value == 0)
 						{
-							if (mc.para.HDC.detectDirection.value == 0)
-							{
-								Y.move(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-								X.move(cPos.x.PADC4(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-							}
-							else
-							{
-								Y.move(cPos.y.PADC3(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-								X.move(cPos.x.PADC3(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-							}
+							Y.move(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							X.move(cPos.x.PADC4(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 						else
 						{
-							Y.move(cPos.y.M_POS_P2(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.move(cPos.x.M_POS_P2(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+							Y.move(cPos.y.PADC3(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+							X.move(cPos.x.PADC3(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 					}
 					sqc++; break;
@@ -4533,419 +4434,61 @@ namespace PSA_SystemLibrary
 
 					if (hdcfailchecked)
 					{
-						if(mc.para.HDC.useManualTeach.value == 0)
+						if (mc.para.HDC.detectDirection.value == 0)
 						{
-							if (mc.para.HDC.detectDirection.value == 0)
-							{
-								#region HDC.PADC1.result
-								if (mc.hd.reqMode == REQMODE.DUMY) { }
-								else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.NCC)
-								{
-									if (mc.para.HDC.modelPADC1.isCreate.value == (int)BOOL.TRUE)
-									{
-										hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_NCC].resultX;
-										hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_NCC].resultY;
-										hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_NCC].resultAngle;
-									}
-								}
-								else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-								{
-									if (mc.para.HDC.modelPADC1.isCreate.value == (int)BOOL.TRUE)
-									{
-										hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_SHAPE].resultX;
-										hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_SHAPE].resultY;
-										hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_SHAPE].resultAngle;
-									}
-								}
-								else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
-								{
-									hdcP1X = mc.hdc.cam.edgeIntersection.resultX;
-									hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
-									hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
-
-                                    // Test
-                                    if (false)
-                                    {
-                                        double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
-                                        double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
-
-                                        double rX = 0, rY = 0;
-
-                                        Calc.calcAlign(hdcDir, hdcP1X, hdcP1Y, hdcP1T, padSizeW, padSizeH, out rX, out rY);
-
-                                        hdcP1X = rX;
-                                        hdcP1Y = rY;
-                                    }
-								}
-                                else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
-                                {
-                                    hdcP1X = mc.hdc.cam.projectionEdge.resultX;
-                                    hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
-                                    hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
-                                }
-								if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
-								{
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PAD P1 Chk Fail(Processing ERROR)-PadX[{0}], PadY[{1}], FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.hdcfailcount);
-										//string str = "PAD P1 Chk Fail(Processing ERROR)-PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.hdcfailcount.ToString() + "]";
-										mc.log.debug.write(mc.log.CODE.ERROR, tempSb.ToString());
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											////JogTeachMode = jogTeachCornerMode.Corner13;
-											sqc = 130; break;
-										}
-										else
-										{
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PAD P1 Chk Fail(Processing ERROR)-PadX[{0}], PadY[{1}], FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.hdcfailcount);
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_VISION_PROCESS_FAIL); break;
-										}
-									}
-								}								
-								#region HDC Position Check
-                                if (Math.Abs(hdcP1X) > 1000)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner13;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
-										}
-									}
-								}
-								if (Math.Abs(hdcP1Y) > 1000)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											////JogTeachMode = jogTeachCornerMode.Corner13;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
-										}
-									}
-								}
-								if (Math.Abs(hdcP1T) > 5)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner13;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
-										}
-									}
-								}
-                                #endregion
-								#endregion
-								#region HDC.PADC3.req
-								hdcP2X = 0;
-								hdcP2Y = 0;
-								hdcP2T = 0;
-								if (mc.hd.reqMode == REQMODE.DUMY) mc.hdc.reqMode = REQMODE.GRAB;
-								else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.NCC)
-								{
-									if (mc.para.HDC.modelPADC3.isCreate.value == (int)BOOL.TRUE)
-									{
-										mc.hdc.reqMode = REQMODE.FIND_MODEL;
-										mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC3_NCC;
-									}
-									else mc.hdc.reqMode = REQMODE.GRAB;
-								}
-								else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-								{
-									if (mc.para.HDC.modelPADC3.isCreate.value == (int)BOOL.TRUE)
-									{
-										mc.hdc.reqMode = REQMODE.FIND_MODEL;
-										mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC3_SHAPE;
-									}
-									else mc.hdc.reqMode = REQMODE.GRAB;
-								}
-								else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
-								{
-                                    hdcDir = 2;
-									mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
-								}
-                                else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
-                                {
-                                    mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_3;
-                                }
-								else mc.hdc.reqMode = REQMODE.GRAB;
-								mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
-								//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
-								#endregion
-							}
-							else
-							{
-								#region HDC.PADC2.result
-								if (mc.hd.reqMode == REQMODE.DUMY) { }
-								else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.NCC)
-								{
-									if (mc.para.HDC.modelPADC2.isCreate.value == (int)BOOL.TRUE)
-									{
-										hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_NCC].resultX;
-										hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_NCC].resultY;
-										hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_NCC].resultAngle;
-									}
-								}
-								else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-								{
-									if (mc.para.HDC.modelPADC2.isCreate.value == (int)BOOL.TRUE)
-									{
-										hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_SHAPE].resultX;
-										hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_SHAPE].resultY;
-										hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_SHAPE].resultAngle;
-									}
-								}
-								else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.CORNER)
-								{
-									hdcP1X = mc.hdc.cam.edgeIntersection.resultX;
-									hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
-									hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
-
-                                    // Test
-                                    if (false)
-                                    {
-                                        double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
-                                        double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
-
-                                        double rX = 0, rY = 0;
-
-                                        Calc.calcAlign(hdcDir, hdcP1X, hdcP1Y, hdcP1T, padSizeW, padSizeH, out rX, out rY);
-
-                                        hdcP1X = rX;
-                                        hdcP1Y = rY;
-                                    }
-								}
-                                else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
-                                {
-                                    hdcP1X = mc.hdc.cam.projectionEdge.resultX;
-                                    hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
-                                    hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
-                                }
-								if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
-								{
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PAD P2 Chk Fail(Processing ERROR)-PadX[{0}],PadY[{1}],FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.hdcfailcount);
-										//string str = "PAD P2 Chk Fail(Processing ERROR)-PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.hdcfailcount.ToString() + "]";
-										mc.log.debug.write(mc.log.CODE.ERROR, tempSb.ToString());
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner24;
-											sqc = 130; break;
-										}
-										else
-										{
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PAD P2 Chk Fail(Processing ERROR)-PadX[{0}],PadY[{1}],FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.hdcfailcount);
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_VISION_PROCESS_FAIL); break;
-										}
-									}
-								}								
-								#region HDC Position Check
-                                if (Math.Abs(hdcP1X) > 1000)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0} um", hdcP1X));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner24;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
-										}
-									}
-								}
-								if (Math.Abs(hdcP1Y) > 1000)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner24;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C21_Y_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
-										}
-									}
-								}
-								if (Math.Abs(hdcP1T) > 5)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner24;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
-										}
-									}
-                                }
-                                #endregion
-                                #endregion
-                                #region HDC.PADC4.req
-                                hdcP2X = 0;
-								hdcP2Y = 0;
-								hdcP2T = 0;
-								if (mc.hd.reqMode == REQMODE.DUMY) mc.hdc.reqMode = REQMODE.GRAB;
-								else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.NCC)
-								{
-									if (mc.para.HDC.modelPADC4.isCreate.value == (int)BOOL.TRUE)
-									{
-										mc.hdc.reqMode = REQMODE.FIND_MODEL;
-										mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC4_NCC;
-									}
-									else mc.hdc.reqMode = REQMODE.GRAB;
-								}
-								else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-								{
-									if (mc.para.HDC.modelPADC4.isCreate.value == (int)BOOL.TRUE)
-									{
-										mc.hdc.reqMode = REQMODE.FIND_MODEL;
-										mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC4_SHAPE;
-									}
-									else mc.hdc.reqMode = REQMODE.GRAB;
-								}
-								else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.CORNER)
-								{
-                                    hdcDir = 3;
-									mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_4;
-								}
-                                else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
-                                {
-                                    mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_4;
-                                }
-								else mc.hdc.reqMode = REQMODE.GRAB;
-								mc.hdc.lighting_exposure(mc.para.HDC.modelPADC4.light, mc.para.HDC.modelPADC4.exposureTime);
-								//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
-								#endregion
-							}
-						}
-						else
-						{
-							#region HDC.modelManualTeach.paraP1.result
+							#region HDC.PADC1.result
 							if (mc.hd.reqMode == REQMODE.DUMY) { }
-							else if (mc.para.HDC.modelManualTeach.paraP1.algorism.value == (int)MODEL_ALGORISM.NCC)
+							else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.NCC)
 							{
-								hdcPassScoreP1 = mc.para.HDC.modelManualTeach.paraP1.passScore.value;
-								if (mc.para.HDC.modelManualTeach.paraP1.isCreate.value == (int)BOOL.TRUE)
+								if (mc.para.HDC.modelPADC1.isCreate.value == (int)BOOL.TRUE)
 								{
-									hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].resultX - mc.para.HDC.modelManualTeach.offsetX_P1.value;
-									hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].resultY - mc.para.HDC.modelManualTeach.offsetY_P1.value;
- 									hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].resultAngle;
-									hdcResult = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].resultScore.D * 100;
+									hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_NCC].resultX;
+									hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_NCC].resultY;
+									hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_NCC].resultAngle;
 								}
 							}
-							else if (mc.para.HDC.modelManualTeach.paraP1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+							else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
 							{
-								hdcPassScoreP1 = mc.para.HDC.modelManualTeach.paraP1.passScore.value;
-								if (mc.para.HDC.modelManualTeach.paraP1.isCreate.value == (int)BOOL.TRUE)
+								if (mc.para.HDC.modelPADC1.isCreate.value == (int)BOOL.TRUE)
 								{
-									hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].resultX - mc.para.HDC.modelManualTeach.offsetX_P1.value;
-									hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].resultY - mc.para.HDC.modelManualTeach.offsetY_P1.value;
- 									hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].resultAngle;
-									hdcResult = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].resultScore.D * 100;
+									hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_SHAPE].resultX;
+									hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_SHAPE].resultY;
+									hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_SHAPE].resultAngle;
 								}
 							}
-							if (hdcP1X == -1 && hdcP1Y == -1/* && hdcP1T == -1*/) // HDC Vision Result Error
+							else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
+							{
+								hdcP1X = mc.hdc.cam.edgeIntersection.resultX;
+								hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
+								hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
+
+                                // Test
+                                if (false)
+                                {
+                                    double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
+                                    double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
+
+                                    double rX = 0, rY = 0;
+
+                                    Calc.calcAlign(hdcDir, hdcP1X, hdcP1Y, hdcP1T, padSizeW, padSizeH, out rX, out rY);
+
+                                    hdcP1X = rX;
+                                    hdcP1Y = rY;
+                                }
+							}
+                            else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                hdcP1X = mc.hdc.cam.projectionEdge.resultX;
+                                hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
+                                hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
+                            }
+							if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
 							{
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
 									tempSb.Clear(); tempSb.Length = 0;
 									tempSb.AppendFormat("PAD P1 Chk Fail(Processing ERROR)-PadX[{0}], PadY[{1}], FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.hdcfailcount);
+									//string str = "PAD P1 Chk Fail(Processing ERROR)-PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.hdcfailcount.ToString() + "]";
 									mc.log.debug.write(mc.log.CODE.ERROR, tempSb.ToString());
 									sqc = 120; break;
 								}
@@ -4953,7 +4496,7 @@ namespace PSA_SystemLibrary
 								{
 									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
 									{
-										//JogTeachMode = jogTeachCornerMode.Corner13;
+										////JogTeachMode = jogTeachCornerMode.Corner13;
 										sqc = 130; break;
 									}
 									else
@@ -4964,8 +4507,8 @@ namespace PSA_SystemLibrary
 										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_VISION_PROCESS_FAIL); break;
 									}
 								}
-                            }
-                            #region #region HDC Position Check
+							}								
+							#region HDC Position Check
                             if (Math.Abs(hdcP1X) > 1000)
 							{
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
@@ -5003,7 +4546,7 @@ namespace PSA_SystemLibrary
 								{
 									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
 									{
-										//JogTeachMode = jogTeachCornerMode.Corner13;
+										////JogTeachMode = jogTeachCornerMode.Corner13;
 										sqc = 130; break;
 									}
 									else
@@ -5016,12 +4559,12 @@ namespace PSA_SystemLibrary
 									}
 								}
 							}
-                            if (hdcPassScoreP1 > hdcResult)
+							if (Math.Abs(hdcP1T) > 5)
 							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Score Limit Error : {0:F1}%", hdcResult));
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 									sqc = 120; break;
 								}
 								else
@@ -5033,462 +4576,488 @@ namespace PSA_SystemLibrary
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}], P1: Score[{2}%]", (padX + 1), (padY + 1), Math.Round(hdcResult, 2));
+										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
+										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
 									}
 								}
 							}
                             #endregion
 							#endregion
-							#region HDC.modelManualTeach.paraP2.req
+							#region HDC.PADC3.req
 							hdcP2X = 0;
 							hdcP2Y = 0;
 							hdcP2T = 0;
-							hdcResult = 0;
 							if (mc.hd.reqMode == REQMODE.DUMY) mc.hdc.reqMode = REQMODE.GRAB;
-							else if (mc.para.HDC.modelManualTeach.paraP2.algorism.value == (int)MODEL_ALGORISM.NCC)
+							else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.NCC)
 							{
-								if (mc.para.HDC.modelManualTeach.paraP2.isCreate.value == (int)BOOL.TRUE)
+								if (mc.para.HDC.modelPADC3.isCreate.value == (int)BOOL.TRUE)
 								{
 									mc.hdc.reqMode = REQMODE.FIND_MODEL;
-									mc.hdc.reqModelNumber = (int)HDC_MODEL.MANUAL_TEACH_P2_NCC;
+									mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC3_NCC;
 								}
 								else mc.hdc.reqMode = REQMODE.GRAB;
 							}
-							else if (mc.para.HDC.modelManualTeach.paraP2.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+							else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.SHAPE)
 							{
-								if (mc.para.HDC.modelManualTeach.paraP2.isCreate.value == (int)BOOL.TRUE)
+								if (mc.para.HDC.modelPADC3.isCreate.value == (int)BOOL.TRUE)
 								{
 									mc.hdc.reqMode = REQMODE.FIND_MODEL;
-									mc.hdc.reqModelNumber = (int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE;
+									mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC3_SHAPE;
 								}
 								else mc.hdc.reqMode = REQMODE.GRAB;
 							}
+							else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
+							{
+                                hdcDir = 2;
+								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
+							}
+                            else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_3;
+                            }
 							else mc.hdc.reqMode = REQMODE.GRAB;
-							mc.hdc.lighting_exposure(mc.para.HDC.modelManualTeach.paraP2.light, mc.para.HDC.modelManualTeach.paraP2.exposureTime);
+							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							#endregion
+						}
+						else
+						{
+							#region HDC.PADC2.result
+							if (mc.hd.reqMode == REQMODE.DUMY) { }
+							else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.NCC)
+							{
+								if (mc.para.HDC.modelPADC2.isCreate.value == (int)BOOL.TRUE)
+								{
+									hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_NCC].resultX;
+									hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_NCC].resultY;
+									hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_NCC].resultAngle;
+								}
+							}
+							else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+							{
+								if (mc.para.HDC.modelPADC2.isCreate.value == (int)BOOL.TRUE)
+								{
+									hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_SHAPE].resultX;
+									hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_SHAPE].resultY;
+									hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_SHAPE].resultAngle;
+								}
+							}
+							else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.CORNER)
+							{
+								hdcP1X = mc.hdc.cam.edgeIntersection.resultX;
+								hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
+								hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
+
+                                // Test
+                                if (false)
+                                {
+                                    double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
+                                    double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
+
+                                    double rX = 0, rY = 0;
+
+                                    Calc.calcAlign(hdcDir, hdcP1X, hdcP1Y, hdcP1T, padSizeW, padSizeH, out rX, out rY);
+
+                                    hdcP1X = rX;
+                                    hdcP1Y = rY;
+                                }
+							}
+                            else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                hdcP1X = mc.hdc.cam.projectionEdge.resultX;
+                                hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
+                                hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
+                            }
+							if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
+							{
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+								{
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PAD P2 Chk Fail(Processing ERROR)-PadX[{0}],PadY[{1}],FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.hdcfailcount);
+									//string str = "PAD P2 Chk Fail(Processing ERROR)-PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.hdcfailcount.ToString() + "]";
+									mc.log.debug.write(mc.log.CODE.ERROR, tempSb.ToString());
+									sqc = 120; break;
+								}
+								else
+								{
+									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+									{
+										//JogTeachMode = jogTeachCornerMode.Corner24;
+										sqc = 130; break;
+									}
+									else
+									{
+										tempSb.Clear(); tempSb.Length = 0;
+										tempSb.AppendFormat("PAD P2 Chk Fail(Processing ERROR)-PadX[{0}],PadY[{1}],FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.hdcfailcount);
+										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "]";
+										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_VISION_PROCESS_FAIL); break;
+									}
+								}
+							}								
+							#region HDC Position Check
+                            if (Math.Abs(hdcP1X) > 1000)
+							{
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0} um", hdcP1X));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+								{
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
+									sqc = 120; break;
+								}
+								else
+								{
+									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+									{
+										//JogTeachMode = jogTeachCornerMode.Corner24;
+										sqc = 130; break;
+									}
+									else
+									{
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
+										tempSb.Clear(); tempSb.Length = 0;
+										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
+										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
+										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
+									}
+								}
+							}
+							if (Math.Abs(hdcP1Y) > 1000)
+							{
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+								{
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
+									sqc = 120; break;
+								}
+								else
+								{
+									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+									{
+										//JogTeachMode = jogTeachCornerMode.Corner24;
+										sqc = 130; break;
+									}
+									else
+									{
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C21_Y_Limit");
+										tempSb.Clear(); tempSb.Length = 0;
+										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
+										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
+										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
+									}
+								}
+							}
+							if (Math.Abs(hdcP1T) > 5)
+							{
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+								{
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
+									sqc = 120; break;
+								}
+								else
+								{
+									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+									{
+										//JogTeachMode = jogTeachCornerMode.Corner24;
+										sqc = 130; break;
+									}
+									else
+									{
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
+										tempSb.Clear(); tempSb.Length = 0;
+										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
+										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
+										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
+									}
+								}
+                            }
+                            #endregion
+                            #endregion
+                            #region HDC.PADC4.req
+                            hdcP2X = 0;
+							hdcP2Y = 0;
+							hdcP2T = 0;
+							if (mc.hd.reqMode == REQMODE.DUMY) mc.hdc.reqMode = REQMODE.GRAB;
+							else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.NCC)
+							{
+								if (mc.para.HDC.modelPADC4.isCreate.value == (int)BOOL.TRUE)
+								{
+									mc.hdc.reqMode = REQMODE.FIND_MODEL;
+									mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC4_NCC;
+								}
+								else mc.hdc.reqMode = REQMODE.GRAB;
+							}
+							else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+							{
+								if (mc.para.HDC.modelPADC4.isCreate.value == (int)BOOL.TRUE)
+								{
+									mc.hdc.reqMode = REQMODE.FIND_MODEL;
+									mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC4_SHAPE;
+								}
+								else mc.hdc.reqMode = REQMODE.GRAB;
+							}
+							else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.CORNER)
+							{
+                                hdcDir = 3;
+								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_4;
+							}
+                            else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_4;
+                            }
+							else mc.hdc.reqMode = REQMODE.GRAB;
+							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC4.light, mc.para.HDC.modelPADC4.exposureTime);
 							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 						}
 					}
 					else
 					{
-						if(mc.para.HDC.useManualTeach.value == 0)
+						if (mc.para.HDC.detectDirection.value == 0)
 						{
-							if (mc.para.HDC.detectDirection.value == 0)
-							{
-								#region HDC.PADC2.result
-								if (mc.hd.reqMode == REQMODE.DUMY) { }
-								else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.NCC)
-								{
-									if (mc.para.HDC.modelPADC2.isCreate.value == (int)BOOL.TRUE)
-									{
-										hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_NCC].resultX;
-										hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_NCC].resultY;
-										hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_NCC].resultAngle;
-									}
-								}
-								else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-								{
-									if (mc.para.HDC.modelPADC2.isCreate.value == (int)BOOL.TRUE)
-									{
-										hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_SHAPE].resultX;
-										hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_SHAPE].resultY;
-										hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_SHAPE].resultAngle;
-									}
-								}
-								else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.CORNER)
-								{
-									hdcP1X = mc.hdc.cam.edgeIntersection.resultX;
-									hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
-									hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
-
-                                    // Test
-                                    if (false)
-                                    {
-                                        double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
-                                        double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
-
-                                        double rX = 0, rY = 0;
-
-                                        Calc.calcAlign(hdcDir, hdcP1X, hdcP1Y, hdcP1T, padSizeW, padSizeH, out rX, out rY);
-
-                                        hdcP1X = rX;
-                                        hdcP1Y = rY;
-                                    }
-								}
-                                else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
-                                {
-                                    hdcP1X = mc.hdc.cam.projectionEdge.resultX;
-                                    hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
-                                    hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
-                                }
-								if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
-								{
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PAD P2 Chk Fail(Processing ERROR)-PadX[{0}],PadY[{1}],FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.hdcfailcount);
-										//string str = "PAD P2 Chk Fail(Processing ERROR)-PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.hdcfailcount.ToString() + "]";
-										mc.log.debug.write(mc.log.CODE.ERROR, tempSb.ToString());
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner24;
-											sqc = 130; break;
-										}
-										else
-										{
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PAD P2 Chk Fail(Processing ERROR)-PadX[{0}],PadY[{1}],FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.hdcfailcount);
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_VISION_PROCESS_FAIL); break;
-										}
-									}
-                                }
-                                #region #region HDC Position Check
-                                if (Math.Abs(hdcP1X) > 1000)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner24;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
-										}
-									}
-								}
-								if (Math.Abs(hdcP1Y) > 1000)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner24;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C21_Y_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
-										}
-									}
-								}
-								if (Math.Abs(hdcP1T) > 5)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner24;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
-										}
-									}
-								}
-                                #endregion
-								#endregion
-								#region HDC.PADC4.req
-								hdcP2X = 0;
-								hdcP2Y = 0;
-								hdcP2T = 0;
-								if (mc.hd.reqMode == REQMODE.DUMY) mc.hdc.reqMode = REQMODE.GRAB;
-								else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.NCC)
-								{
-									if (mc.para.HDC.modelPADC4.isCreate.value == (int)BOOL.TRUE)
-									{
-										mc.hdc.reqMode = REQMODE.FIND_MODEL;
-										mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC4_NCC;
-									}
-									else mc.hdc.reqMode = REQMODE.GRAB;
-								}
-								else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-								{
-									if (mc.para.HDC.modelPADC4.isCreate.value == (int)BOOL.TRUE)
-									{
-										mc.hdc.reqMode = REQMODE.FIND_MODEL;
-										mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC4_SHAPE;
-									}
-									else mc.hdc.reqMode = REQMODE.GRAB;
-								}
-								else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.CORNER)
-								{
-                                    hdcDir = 3;
-									mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_4;
-								}
-                                else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
-                                {
-                                    mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_4;
-                                }
-								else mc.hdc.reqMode = REQMODE.GRAB;
-								mc.hdc.lighting_exposure(mc.para.HDC.modelPADC4.light, mc.para.HDC.modelPADC4.exposureTime);
-								//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
-								#endregion
-							}
-							else
-							{
-								#region HDC.PADC1.result
-								if (mc.hd.reqMode == REQMODE.DUMY) { }
-								else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.NCC)
-								{
-									if (mc.para.HDC.modelPADC1.isCreate.value == (int)BOOL.TRUE)
-									{
-										hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_NCC].resultX;
-										hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_NCC].resultY;
-										hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_NCC].resultAngle;
-									}
-								}
-								else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-								{
-									if (mc.para.HDC.modelPADC1.isCreate.value == (int)BOOL.TRUE)
-									{
-										hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_SHAPE].resultX;
-										hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_SHAPE].resultY;
-										hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_SHAPE].resultAngle;
-									}
-								}
-								else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
-								{
-									hdcP1X = mc.hdc.cam.edgeIntersection.resultX;
-									hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
-									hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
-
-                                    // Test
-                                    if (false)
-                                    {
-                                        double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
-                                        double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
-
-                                        double rX = 0, rY = 0;
-
-                                        Calc.calcAlign(hdcDir, hdcP1X, hdcP1Y, hdcP1T, padSizeW, padSizeH, out rX, out rY);
-
-                                        hdcP1X = rX;
-                                        hdcP1Y = rY;
-                                    }
-								}
-                                else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
-                                {
-                                    hdcP1X = mc.hdc.cam.projectionEdge.resultX;
-                                    hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
-                                    hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
-                                }
-								if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
-								{
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PAD P1 Chk Fail(Processing ERROR)-PadX[{0}],PadY[{1}],FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.hdcfailcount);
-										//string str = "PAD P1 Chk Fail(Processing ERROR)-PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.hdcfailcount.ToString() + "]";
-										mc.log.debug.write(mc.log.CODE.ERROR, tempSb.ToString());
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner13;
-											sqc = 130; break;
-										}
-										else
-										{
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}]", (padX + 1), (padY + 1));
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_VISION_PROCESS_FAIL); break;
-										}
-									}
-								}			
-								#region #region HDC Position Check
-                                if (Math.Abs(hdcP1X) > 1000)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner13;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
-										}
-									}
-								}
-								if (Math.Abs(hdcP1Y) > 1000)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner13;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
-										}
-									}
-								}
-								if (Math.Abs(hdcP1T) > 5)
-								{
-									mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
-									if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-										sqc = 120; break;
-									}
-									else
-									{
-										if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-										{
-											//JogTeachMode = jogTeachCornerMode.Corner13;
-											sqc = 130; break;
-										}
-										else
-										{
-											if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-											tempSb.Clear(); tempSb.Length = 0;
-											tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
-											//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-											errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
-										}
-									}
-								}
-                                #endregion
-								#endregion
-								#region HDC.PADC3.req
-								hdcP2X = 0;
-								hdcP2Y = 0;
-								hdcP2T = 0;
-								if (mc.hd.reqMode == REQMODE.DUMY) mc.hdc.reqMode = REQMODE.GRAB;
-								else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.NCC)
-								{
-									if (mc.para.HDC.modelPADC3.isCreate.value == (int)BOOL.TRUE)
-									{
-										mc.hdc.reqMode = REQMODE.FIND_MODEL;
-										mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC3_NCC;
-									}
-									else mc.hdc.reqMode = REQMODE.GRAB;
-								}
-								else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-								{
-									if (mc.para.HDC.modelPADC3.isCreate.value == (int)BOOL.TRUE)
-									{
-										mc.hdc.reqMode = REQMODE.FIND_MODEL;
-										mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC3_SHAPE;
-									}
-									else mc.hdc.reqMode = REQMODE.GRAB;
-								}
-								else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
-								{
-                                    hdcDir = 2;
-									mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
-								}
-                                else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
-                                {
-                                    mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_3;
-                                }
-								else mc.hdc.reqMode = REQMODE.GRAB;
-								mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
-								//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
-								#endregion
-							}
-						}
-						else
-						{
-							#region HDC.modelManualTeach.paraP1.result
+							#region HDC.PADC2.result
 							if (mc.hd.reqMode == REQMODE.DUMY) { }
-							else if (mc.para.HDC.modelManualTeach.paraP1.algorism.value == (int)MODEL_ALGORISM.NCC)
+							else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.NCC)
 							{
-								hdcPassScoreP1 = mc.para.HDC.modelManualTeach.paraP1.passScore.value;
-								if (mc.para.HDC.modelManualTeach.paraP1.isCreate.value == (int)BOOL.TRUE)
+								if (mc.para.HDC.modelPADC2.isCreate.value == (int)BOOL.TRUE)
 								{
-									hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].resultX - mc.para.HDC.modelManualTeach.offsetX_P1.value;
-									hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].resultY - mc.para.HDC.modelManualTeach.offsetY_P1.value;
-									hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].resultAngle;
-									hdcResult = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].resultScore.D * 100;
+									hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_NCC].resultX;
+									hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_NCC].resultY;
+									hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_NCC].resultAngle;
 								}
 							}
-							else if (mc.para.HDC.modelManualTeach.paraP1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+							else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.SHAPE)
 							{
-								hdcPassScoreP1 = mc.para.HDC.modelManualTeach.paraP1.passScore.value;
-								if (mc.para.HDC.modelManualTeach.paraP1.isCreate.value == (int)BOOL.TRUE)
+								if (mc.para.HDC.modelPADC2.isCreate.value == (int)BOOL.TRUE)
 								{
-									hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].resultX - mc.para.HDC.modelManualTeach.offsetX_P1.value;
-									hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].resultY - mc.para.HDC.modelManualTeach.offsetY_P1.value;
-									hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].resultAngle;
-									hdcResult = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].resultScore.D * 100;
+									hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_SHAPE].resultX;
+									hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_SHAPE].resultY;
+									hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_SHAPE].resultAngle;
 								}
 							}
-							//mc.log.debug.write(mc.log.CODE.INFO, "hdcP1X : " + hdcP1X + ", hdcP1Y : " + hdcP1Y);
-							if (hdcP1X == -1 && hdcP1Y == -1/* && hdcP1T == -1*/) // HDC Vision Result Error
+							else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.CORNER)
+							{
+								hdcP1X = mc.hdc.cam.edgeIntersection.resultX;
+								hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
+								hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
+
+                                // Test
+                                if (false)
+                                {
+                                    double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
+                                    double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
+
+                                    double rX = 0, rY = 0;
+
+                                    Calc.calcAlign(hdcDir, hdcP1X, hdcP1Y, hdcP1T, padSizeW, padSizeH, out rX, out rY);
+
+                                    hdcP1X = rX;
+                                    hdcP1Y = rY;
+                                }
+							}
+                            else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                hdcP1X = mc.hdc.cam.projectionEdge.resultX;
+                                hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
+                                hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
+                            }
+							if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
 							{
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
 									tempSb.Clear(); tempSb.Length = 0;
-									tempSb.AppendFormat("PAD P1 Chk Fail(Processing ERROR)-PadX[{0}], PadY[{1}], FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.hdcfailcount);
+									tempSb.AppendFormat("PAD P2 Chk Fail(Processing ERROR)-PadX[{0}],PadY[{1}],FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.hdcfailcount);
+									//string str = "PAD P2 Chk Fail(Processing ERROR)-PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.hdcfailcount.ToString() + "]";
+									mc.log.debug.write(mc.log.CODE.ERROR, tempSb.ToString());
+									sqc = 120; break;
+								}
+								else
+								{
+									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+									{
+										//JogTeachMode = jogTeachCornerMode.Corner24;
+										sqc = 130; break;
+									}
+									else
+									{
+										tempSb.Clear(); tempSb.Length = 0;
+										tempSb.AppendFormat("PAD P2 Chk Fail(Processing ERROR)-PadX[{0}],PadY[{1}],FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.hdcfailcount);
+										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "]";
+										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_VISION_PROCESS_FAIL); break;
+									}
+								}
+                            }
+                            #region #region HDC Position Check
+                            if (Math.Abs(hdcP1X) > 1000)
+							{
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+								{
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
+									sqc = 120; break;
+								}
+								else
+								{
+									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+									{
+										//JogTeachMode = jogTeachCornerMode.Corner24;
+										sqc = 130; break;
+									}
+									else
+									{
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
+										tempSb.Clear(); tempSb.Length = 0;
+										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
+										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
+										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
+									}
+								}
+							}
+							if (Math.Abs(hdcP1Y) > 1000)
+							{
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+								{
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
+									sqc = 120; break;
+								}
+								else
+								{
+									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+									{
+										//JogTeachMode = jogTeachCornerMode.Corner24;
+										sqc = 130; break;
+									}
+									else
+									{
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C21_Y_Limit");
+										tempSb.Clear(); tempSb.Length = 0;
+										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
+										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
+										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
+									}
+								}
+							}
+							if (Math.Abs(hdcP1T) > 5)
+							{
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+								{
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
+									sqc = 120; break;
+								}
+								else
+								{
+									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+									{
+										//JogTeachMode = jogTeachCornerMode.Corner24;
+										sqc = 130; break;
+									}
+									else
+									{
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
+										tempSb.Clear(); tempSb.Length = 0;
+										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
+										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
+										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
+									}
+								}
+							}
+                            #endregion
+							#endregion
+							#region HDC.PADC4.req
+							hdcP2X = 0;
+							hdcP2Y = 0;
+							hdcP2T = 0;
+							if (mc.hd.reqMode == REQMODE.DUMY) mc.hdc.reqMode = REQMODE.GRAB;
+							else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.NCC)
+							{
+								if (mc.para.HDC.modelPADC4.isCreate.value == (int)BOOL.TRUE)
+								{
+									mc.hdc.reqMode = REQMODE.FIND_MODEL;
+									mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC4_NCC;
+								}
+								else mc.hdc.reqMode = REQMODE.GRAB;
+							}
+							else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+							{
+								if (mc.para.HDC.modelPADC4.isCreate.value == (int)BOOL.TRUE)
+								{
+									mc.hdc.reqMode = REQMODE.FIND_MODEL;
+									mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC4_SHAPE;
+								}
+								else mc.hdc.reqMode = REQMODE.GRAB;
+							}
+							else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.CORNER)
+							{
+                                hdcDir = 3;
+								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_4;
+							}
+                            else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_4;
+                            }
+							else mc.hdc.reqMode = REQMODE.GRAB;
+							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC4.light, mc.para.HDC.modelPADC4.exposureTime);
+							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+							#endregion
+						}
+						else
+						{
+							#region HDC.PADC1.result
+							if (mc.hd.reqMode == REQMODE.DUMY) { }
+							else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.NCC)
+							{
+								if (mc.para.HDC.modelPADC1.isCreate.value == (int)BOOL.TRUE)
+								{
+									hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_NCC].resultX;
+									hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_NCC].resultY;
+									hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_NCC].resultAngle;
+								}
+							}
+							else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+							{
+								if (mc.para.HDC.modelPADC1.isCreate.value == (int)BOOL.TRUE)
+								{
+									hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_SHAPE].resultX;
+									hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_SHAPE].resultY;
+									hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_SHAPE].resultAngle;
+								}
+							}
+							else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
+							{
+								hdcP1X = mc.hdc.cam.edgeIntersection.resultX;
+								hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
+								hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
+
+                                // Test
+                                if (false)
+                                {
+                                    double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
+                                    double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
+
+                                    double rX = 0, rY = 0;
+
+                                    Calc.calcAlign(hdcDir, hdcP1X, hdcP1Y, hdcP1T, padSizeW, padSizeH, out rX, out rY);
+
+                                    hdcP1X = rX;
+                                    hdcP1Y = rY;
+                                }
+							}
+                            else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                hdcP1X = mc.hdc.cam.projectionEdge.resultX;
+                                hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
+                                hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
+                            }
+							if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
+							{
+								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+								{
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PAD P1 Chk Fail(Processing ERROR)-PadX[{0}],PadY[{1}],FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.hdcfailcount);
 									//string str = "PAD P1 Chk Fail(Processing ERROR)-PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.hdcfailcount.ToString() + "]";
 									mc.log.debug.write(mc.log.CODE.ERROR, tempSb.ToString());
 									sqc = 120; break;
@@ -5503,13 +5072,13 @@ namespace PSA_SystemLibrary
 									else
 									{
 										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PAD P1 Chk Fail(Processing ERROR)-PadX[{0}], PadY[{1}], FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.hdcfailcount);
+										tempSb.AppendFormat("PadX[{0}],PadY[{1}]", (padX + 1), (padY + 1));
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "]";
 										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_VISION_PROCESS_FAIL); break;
 									}
 								}
-                            }
-                            #region #region HDC Position Check
+							}			
+							#region #region HDC Position Check
                             if (Math.Abs(hdcP1X) > 1000)
 							{
 								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
@@ -5560,13 +5129,12 @@ namespace PSA_SystemLibrary
 									}
 								}
 							}
-							
-							if (hdcPassScoreP1 > hdcResult)
+							if (Math.Abs(hdcP1T) > 5)
 							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Score Limit Error : {0:F1}%", hdcResult));
+								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1} degree", hdcP1T));
 								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 									sqc = 120; break;
 								}
 								else
@@ -5578,42 +5146,50 @@ namespace PSA_SystemLibrary
 									}
 									else
 									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
+										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
 										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}], P1: Score[{2}%]", (padX + 1), (padY + 1), Math.Round(hdcResult, 2));
+										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1T));
 										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
+										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
 									}
 								}
 							}
-#endregion
+                            #endregion
 							#endregion
-							#region HDC.modelManualTeach.paraP2.req
+							#region HDC.PADC3.req
 							hdcP2X = 0;
 							hdcP2Y = 0;
 							hdcP2T = 0;
-							hdcResult = 0;
 							if (mc.hd.reqMode == REQMODE.DUMY) mc.hdc.reqMode = REQMODE.GRAB;
-							else if (mc.para.HDC.modelManualTeach.paraP2.algorism.value == (int)MODEL_ALGORISM.NCC)
+							else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.NCC)
 							{
-								if (mc.para.HDC.modelManualTeach.paraP2.isCreate.value == (int)BOOL.TRUE)
+								if (mc.para.HDC.modelPADC3.isCreate.value == (int)BOOL.TRUE)
 								{
 									mc.hdc.reqMode = REQMODE.FIND_MODEL;
-									mc.hdc.reqModelNumber = (int)HDC_MODEL.MANUAL_TEACH_P2_NCC;
+									mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC3_NCC;
 								}
 								else mc.hdc.reqMode = REQMODE.GRAB;
 							}
-							else if (mc.para.HDC.modelManualTeach.paraP2.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+							else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.SHAPE)
 							{
-								if (mc.para.HDC.modelManualTeach.paraP2.isCreate.value == (int)BOOL.TRUE)
+								if (mc.para.HDC.modelPADC3.isCreate.value == (int)BOOL.TRUE)
 								{
 									mc.hdc.reqMode = REQMODE.FIND_MODEL;
-									mc.hdc.reqModelNumber = (int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE;
+									mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC3_SHAPE;
 								}
 								else mc.hdc.reqMode = REQMODE.GRAB;
 							}
+							else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
+							{
+                                hdcDir = 2;
+								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
+							}
+                            else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            {
+                                mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_3;
+                            }
 							else mc.hdc.reqMode = REQMODE.GRAB;
-							mc.hdc.lighting_exposure(mc.para.HDC.modelManualTeach.paraP2.light, mc.para.HDC.modelManualTeach.paraP2.exposureTime);
+							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
 							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 							#endregion
 						}
@@ -6011,490 +5587,257 @@ namespace PSA_SystemLibrary
 
 					if (((mc.hd.tool.hdcfailcount % 2) == 0 && mc.para.HDC.detectDirection.value == 0) || ((mc.hd.tool.hdcfailcount % 2) == 1 && mc.para.HDC.detectDirection.value == 1))
 					{
-						if(mc.para.HDC.useManualTeach.value == 0)
+						#region HDC.PADC4.result
+						if (mc.hd.reqMode == REQMODE.DUMY) { }
+						else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.NCC)
 						{
-							#region HDC.PADC4.result
-							if (mc.hd.reqMode == REQMODE.DUMY) { }
-							else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.NCC)
+							if (mc.para.HDC.modelPADC4.isCreate.value == (int)BOOL.TRUE)
 							{
-								if (mc.para.HDC.modelPADC4.isCreate.value == (int)BOOL.TRUE)
-								{
-									hdcP2X = mc.hdc.cam.model[(int)HDC_MODEL.PADC4_NCC].resultX;
-									hdcP2Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC4_NCC].resultY;
-									hdcP2T = mc.hdc.cam.model[(int)HDC_MODEL.PADC4_NCC].resultAngle;
-								}
+								hdcP2X = mc.hdc.cam.model[(int)HDC_MODEL.PADC4_NCC].resultX;
+								hdcP2Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC4_NCC].resultY;
+								hdcP2T = mc.hdc.cam.model[(int)HDC_MODEL.PADC4_NCC].resultAngle;
 							}
-							else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+						}
+						else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+						{
+							if (mc.para.HDC.modelPADC4.isCreate.value == (int)BOOL.TRUE)
 							{
-								if (mc.para.HDC.modelPADC4.isCreate.value == (int)BOOL.TRUE)
-								{
-									hdcP2X = mc.hdc.cam.model[(int)HDC_MODEL.PADC4_SHAPE].resultX;
-									hdcP2Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC4_SHAPE].resultY;
-									hdcP2T = mc.hdc.cam.model[(int)HDC_MODEL.PADC4_SHAPE].resultAngle;
-								}
+								hdcP2X = mc.hdc.cam.model[(int)HDC_MODEL.PADC4_SHAPE].resultX;
+								hdcP2Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC4_SHAPE].resultY;
+								hdcP2T = mc.hdc.cam.model[(int)HDC_MODEL.PADC4_SHAPE].resultAngle;
 							}
-							else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.CORNER)
-							{
-								hdcP2X = mc.hdc.cam.edgeIntersection.resultX;
-								hdcP2Y = mc.hdc.cam.edgeIntersection.resultY;
-								hdcP2T = mc.hdc.cam.edgeIntersection.resultAngleH;
+						}
+						else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.CORNER)
+						{
+							hdcP2X = mc.hdc.cam.edgeIntersection.resultX;
+							hdcP2Y = mc.hdc.cam.edgeIntersection.resultY;
+							hdcP2T = mc.hdc.cam.edgeIntersection.resultAngleH;
 
-                                // Test
-                                if (false)
-                                {
-                                    double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
-                                    double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
-
-                                    double rX = 0, rY = 0;
-
-                                    Calc.calcAlign(hdcDir, hdcP2X, hdcP2Y, hdcP2T, padSizeW, padSizeH, out rX, out rY);
-
-                                    hdcP2X = rX;
-                                    hdcP2Y = rY;
-                                }
-							}
-                            else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            // Test
+                            if (false)
                             {
-                                hdcP2X = mc.hdc.cam.projectionEdge.resultX;
-                                hdcP2Y = mc.hdc.cam.projectionEdge.resultY;
-                                hdcP2T = mc.hdc.cam.projectionEdge.resultAngle2;
+                                double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
+                                double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
+
+                                double rX = 0, rY = 0;
+
+                                Calc.calcAlign(hdcDir, hdcP2X, hdcP2Y, hdcP2T, padSizeW, padSizeH, out rX, out rY);
+
+                                hdcP2X = rX;
+                                hdcP2Y = rY;
                             }
-							//cosTheta = Math.Cos(hdcT * Math.PI / 180);
-							//sinTheta = Math.Sin(hdcT * Math.PI / 180);
-							//hdcX = (cosTheta * hdcX) - (sinTheta * hdcY);
-							//hdcY = (sinTheta * hdcX) + (cosTheta * hdcY);
-							//EVENT.statusDisplay("HDC : " + Math.Round(hdcX, 2).ToString() + "  " + Math.Round(hdcY, 2).ToString() + "  " + Math.Round(hdcT, 2).ToString());
-							#endregion
 						}
-						else
-						{
-							#region HDC.modelManualTeach.paraP2.result
-							if (mc.hd.reqMode == REQMODE.DUMY) { }
-							else if (mc.para.HDC.modelManualTeach.paraP2.algorism.value == (int)MODEL_ALGORISM.NCC)
-							{
-								hdcPassScoreP2 = mc.para.HDC.modelManualTeach.paraP2.passScore.value;
-								if (mc.para.HDC.modelManualTeach.paraP2.isCreate.value == (int)BOOL.TRUE)
-								{
-									hdcP2X = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_NCC].resultX - mc.para.HDC.modelManualTeach.offsetX_P2.value;
-									hdcP2Y = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_NCC].resultY - mc.para.HDC.modelManualTeach.offsetY_P2.value;
- 									hdcP2T = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_NCC].resultAngle;
-									hdcResult = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_NCC].resultScore.D * 100;
-								}
-							}
-							else if (mc.para.HDC.modelManualTeach.paraP2.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-							{
-								hdcPassScoreP2 = mc.para.HDC.modelManualTeach.paraP2.passScore.value;
-								if (mc.para.HDC.modelManualTeach.paraP2.isCreate.value == (int)BOOL.TRUE)
-								{
-									hdcP2X = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE].resultX - mc.para.HDC.modelManualTeach.offsetX_P2.value;
-									hdcP2Y = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE].resultY - mc.para.HDC.modelManualTeach.offsetY_P2.value;
- 									hdcP2T = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE].resultAngle;
-									hdcResult = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE].resultScore.D * 100;
-								}
-							}
-							#endregion
-						}
+                        else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                        {
+                            hdcP2X = mc.hdc.cam.projectionEdge.resultX;
+                            hdcP2Y = mc.hdc.cam.projectionEdge.resultY;
+                            hdcP2T = mc.hdc.cam.projectionEdge.resultAngle2;
+                        }
+						//cosTheta = Math.Cos(hdcT * Math.PI / 180);
+						//sinTheta = Math.Sin(hdcT * Math.PI / 180);
+						//hdcX = (cosTheta * hdcX) - (sinTheta * hdcY);
+						//hdcY = (sinTheta * hdcX) + (cosTheta * hdcY);
+						//EVENT.statusDisplay("HDC : " + Math.Round(hdcX, 2).ToString() + "  " + Math.Round(hdcY, 2).ToString() + "  " + Math.Round(hdcT, 2).ToString());
+						#endregion
 					}
 					else
 					{
-						if(mc.para.HDC.useManualTeach.value == 0)
+						#region HDC.PADC3.result
+						if (mc.hd.reqMode == REQMODE.DUMY) { }
+						else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.NCC)
 						{
-							#region HDC.PADC3.result
-							if (mc.hd.reqMode == REQMODE.DUMY) { }
-							else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.NCC)
+							if (mc.para.HDC.modelPADC3.isCreate.value == (int)BOOL.TRUE)
 							{
-								if (mc.para.HDC.modelPADC3.isCreate.value == (int)BOOL.TRUE)
-								{
-									hdcP2X = mc.hdc.cam.model[(int)HDC_MODEL.PADC3_NCC].resultX;
-									hdcP2Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC3_NCC].resultY;
-									hdcP2T = mc.hdc.cam.model[(int)HDC_MODEL.PADC3_NCC].resultAngle;
-								}
+								hdcP2X = mc.hdc.cam.model[(int)HDC_MODEL.PADC3_NCC].resultX;
+								hdcP2Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC3_NCC].resultY;
+								hdcP2T = mc.hdc.cam.model[(int)HDC_MODEL.PADC3_NCC].resultAngle;
 							}
-							else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+						}
+						else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+						{
+							if (mc.para.HDC.modelPADC3.isCreate.value == (int)BOOL.TRUE)
 							{
-								if (mc.para.HDC.modelPADC3.isCreate.value == (int)BOOL.TRUE)
-								{
-									hdcP2X = mc.hdc.cam.model[(int)HDC_MODEL.PADC3_SHAPE].resultX;
-									hdcP2Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC3_SHAPE].resultY;
-									hdcP2T = mc.hdc.cam.model[(int)HDC_MODEL.PADC3_SHAPE].resultAngle;
-								}
+								hdcP2X = mc.hdc.cam.model[(int)HDC_MODEL.PADC3_SHAPE].resultX;
+								hdcP2Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC3_SHAPE].resultY;
+								hdcP2T = mc.hdc.cam.model[(int)HDC_MODEL.PADC3_SHAPE].resultAngle;
 							}
-							else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
-							{
-								hdcP2X = mc.hdc.cam.edgeIntersection.resultX;
-								hdcP2Y = mc.hdc.cam.edgeIntersection.resultY;
-								hdcP2T = mc.hdc.cam.edgeIntersection.resultAngleH;
+						}
+						else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
+						{
+							hdcP2X = mc.hdc.cam.edgeIntersection.resultX;
+							hdcP2Y = mc.hdc.cam.edgeIntersection.resultY;
+							hdcP2T = mc.hdc.cam.edgeIntersection.resultAngleH;
 
-                                // Test
-                                if (false)
-                                {
-                                    double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
-                                    double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
-
-                                    double rX = 0, rY = 0;
-
-                                    Calc.calcAlign(hdcDir, hdcP2X, hdcP2Y, hdcP2T, padSizeW, padSizeH, out rX, out rY);
-
-                                    hdcP2X = rX;
-                                    hdcP2Y = rY;
-                                }
-							}
-                            else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                            // Test
+                            if (false)
                             {
-                                hdcP2X = mc.hdc.cam.projectionEdge.resultX;
-                                hdcP2Y = mc.hdc.cam.projectionEdge.resultY;
-                                hdcP2T = mc.hdc.cam.projectionEdge.resultAngle2;
+                                double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
+                                double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
+
+                                double rX = 0, rY = 0;
+
+                                Calc.calcAlign(hdcDir, hdcP2X, hdcP2Y, hdcP2T, padSizeW, padSizeH, out rX, out rY);
+
+                                hdcP2X = rX;
+                                hdcP2Y = rY;
                             }
-							//cosTheta = Math.Cos(hdcT * Math.PI / 180);
-							//sinTheta = Math.Sin(hdcT * Math.PI / 180);
-							//hdcX = (cosTheta * hdcX) - (sinTheta * hdcY);
-							//hdcY = (sinTheta * hdcX) + (cosTheta * hdcY);
-							//EVENT.statusDisplay("HDC : " + Math.Round(hdcX, 2).ToString() + "  " + Math.Round(hdcY, 2).ToString() + "  " + Math.Round(hdcT, 2).ToString());
-							#endregion
+						}
+                        else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                        {
+                            hdcP2X = mc.hdc.cam.projectionEdge.resultX;
+                            hdcP2Y = mc.hdc.cam.projectionEdge.resultY;
+                            hdcP2T = mc.hdc.cam.projectionEdge.resultAngle2;
+                        }
+						//cosTheta = Math.Cos(hdcT * Math.PI / 180);
+						//sinTheta = Math.Sin(hdcT * Math.PI / 180);
+						//hdcX = (cosTheta * hdcX) - (sinTheta * hdcY);
+						//hdcY = (sinTheta * hdcX) + (cosTheta * hdcY);
+						//EVENT.statusDisplay("HDC : " + Math.Round(hdcX, 2).ToString() + "  " + Math.Round(hdcY, 2).ToString() + "  " + Math.Round(hdcT, 2).ToString());
+						#endregion
+					}
+					#region C2.Result
+					if (hdcP2X == -1 && hdcP2Y == -1 && hdcP2T == -1) // HDC Vision Result Error
+					{
+						if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+						{
+							tempSb.Clear(); tempSb.Length = 0;
+							tempSb.AppendFormat("PAD P2 Chk Fail(Processing ERROR)-PadX[{0}],PadY[{1}], FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.hdcfailcount);
+							//string str = "PAD P2 Chk Fail(Processing ERROR)-PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.hdcfailcount.ToString() + "]";
+							mc.log.debug.write(mc.log.CODE.ERROR, tempSb.ToString());
+							sqc = 120; break;
 						}
 						else
 						{
-							#region HDC.modelManualTeach.paraP2.result
-							if (mc.hd.reqMode == REQMODE.DUMY) { }
-							else if (mc.para.HDC.modelManualTeach.paraP2.algorism.value == (int)MODEL_ALGORISM.NCC)
+							if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
 							{
-								hdcPassScoreP2 = mc.para.HDC.modelManualTeach.paraP2.passScore.value;
-								if (mc.para.HDC.modelManualTeach.paraP2.isCreate.value == (int)BOOL.TRUE)
-								{
-									hdcP2X = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_NCC].resultX - mc.para.HDC.modelManualTeach.offsetX_P2.value;
-									hdcP2Y = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_NCC].resultY - mc.para.HDC.modelManualTeach.offsetY_P2.value;
- 									hdcP2T = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_NCC].resultAngle;
-									hdcResult = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_NCC].resultScore.D * 100;
-								}
+								//if (mc.para.HDC.detectDirection.value == 0) JogTeachMode = jogTeachCornerMode.Corner24;
+								//else JogTeachMode = jogTeachCornerMode.Corner13;
+								sqc = 130; break;
 							}
-							else if (mc.para.HDC.modelManualTeach.paraP2.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-							{
-								hdcPassScoreP2 = mc.para.HDC.modelManualTeach.paraP2.passScore.value;
-								if (mc.para.HDC.modelManualTeach.paraP2.isCreate.value == (int)BOOL.TRUE)
-								{
-									hdcP2X = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE].resultX - mc.para.HDC.modelManualTeach.offsetX_P2.value;
-									hdcP2Y = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE].resultY - mc.para.HDC.modelManualTeach.offsetY_P2.value;
- 									hdcP2T = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE].resultAngle;
-									hdcResult = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE].resultScore.D * 100;
-								}
-							}
-							#endregion
-						}
-					}
-					//mc.log.debug.write(mc.log.CODE.INFO, "hdcP2X : " + hdcP2X + ", hdcP2Y : " + hdcP2Y);
-					if (mc.para.HDC.useManualTeach.value == 0)
-					{
-						#region C2.Result
-						if (hdcP2X == -1 && hdcP2Y == -1 && hdcP2T == -1) // HDC Vision Result Error
-						{
-							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+							else
 							{
 								tempSb.Clear(); tempSb.Length = 0;
-								tempSb.AppendFormat("PAD P2 Chk Fail(Processing ERROR)-PadX[{0}],PadY[{1}], FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.hdcfailcount);
-								//string str = "PAD P2 Chk Fail(Processing ERROR)-PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.hdcfailcount.ToString() + "]";
-								mc.log.debug.write(mc.log.CODE.ERROR, tempSb.ToString());
-								sqc = 120; break;
+								tempSb.AppendFormat("PadX[{0}],PadY[{1}]", (padX + 1), (padY + 1));
+								//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "]";
+								errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_VISION_PROCESS_FAIL); break;
+							}
+						}
+                    }
+                    #region #region HDC Position Check
+                    if (Math.Abs(hdcP2X) > 1000)
+					{
+						mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1} um", hdcP2X));
+						if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+						{
+							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
+							sqc = 120; break;
+						}
+						else
+						{
+							if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+							{
+								//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
+								//else //JogTeachMode = jogTeachCornerMode.Corner13;
+								sqc = 130; break;
 							}
 							else
-							{
-								if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-								{
-									//if (mc.para.HDC.detectDirection.value == 0) JogTeachMode = jogTeachCornerMode.Corner24;
-									//else JogTeachMode = jogTeachCornerMode.Corner13;
-									sqc = 130; break;
-								}
-								else
-								{
-									tempSb.Clear(); tempSb.Length = 0;
-									tempSb.AppendFormat("PadX[{0}],PadY[{1}]", (padX + 1), (padY + 1));
-									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "]";
-									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_VISION_PROCESS_FAIL); break;
-								}
-							}
-                        }
-                        #region #region HDC Position Check
-                        if (Math.Abs(hdcP2X) > 1000)
-						{
-							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1} um", hdcP2X));
-							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
 								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
-								sqc = 120; break;
-							}
-							else
-							{
-								if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-								{
-									//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
-									//else //JogTeachMode = jogTeachCornerMode.Corner13;
-									sqc = 130; break;
-								}
-								else
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
-									tempSb.Clear(); tempSb.Length = 0;
-									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2X);
-									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2X).ToString() + "]";
-									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
-								}
+								tempSb.Clear(); tempSb.Length = 0;
+								tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2X);
+								//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2X).ToString() + "]";
+								errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
 							}
 						}
-						if (Math.Abs(hdcP2Y) > 1000)
+					}
+					if (Math.Abs(hdcP2Y) > 1000)
+					{
+						mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1} um", hdcP2Y));
+						if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 						{
-							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1} um", hdcP2Y));
-							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
+							sqc = 120; break;
+						}
+						else
+						{
+							if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+							{
+								//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
+								//else //JogTeachMode = jogTeachCornerMode.Corner13;
+								sqc = 130; break;
+							}
+							else
 							{
 								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
-								sqc = 120; break;
-							}
-							else
-							{
-								if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-								{
-									//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
-									//else //JogTeachMode = jogTeachCornerMode.Corner13;
-									sqc = 130; break;
-								}
-								else
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
-									tempSb.Clear(); tempSb.Length = 0;
-									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2Y);
-									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2Y).ToString() + "]";
-									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
-								}
+								tempSb.Clear(); tempSb.Length = 0;
+								tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2Y);
+								//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2Y).ToString() + "]";
+								errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
 							}
 						}
-						if (Math.Abs(hdcP2T) > 5)
+					}
+					if (Math.Abs(hdcP2T) > 5)
+					{
+						mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1} degree", hdcP2T));
+						if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 						{
-							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1} degree", hdcP2T));
-							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_T_Limit");
+							sqc = 120; break;
+						}
+						else
+						{
+							if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+							{
+								//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
+								//else //JogTeachMode = jogTeachCornerMode.Corner13;
+								sqc = 130; break;
+							}
+							else
 							{
 								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_T_Limit");
-								sqc = 120; break;
-							}
-							else
-							{
-								if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-								{
-									//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
-									//else //JogTeachMode = jogTeachCornerMode.Corner13;
-									sqc = 130; break;
-								}
-								else
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_T_Limit");
-									tempSb.Clear(); tempSb.Length = 0;
-									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2T);
-									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2T).ToString() + "]";
-									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
-								}
-							}
-						}
-						if (Math.Abs(hdcP1X - hdcP2X) > mc.para.MT.padCheckLimit.value || Math.Abs(hdcP1Y - hdcP2Y) > mc.para.MT.padCheckLimit.value)
-						{
-							tempSb.Clear(); tempSb.Length = 0;
-							tempSb.AppendFormat("PadX[{0}],PadY[{1}] - P1-P2 : {2:F2}, {3:F2}", (padX + 1), (padY + 1), hdcP1X - hdcP2X, hdcP1Y - hdcP2Y);
-							//string str = "HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString();
-							mc.log.debug.write(mc.log.CODE.EVENT, tempSb.ToString());
-							//EVENT.statusDisplay("HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString());
-							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
-								sqc = 120; break;
-							}
-							else
-							{
-								if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-								{
-									//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
-									//else //JogTeachMode = jogTeachCornerMode.Corner13;
-									sqc = 130; break;
-								}
-								else
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
-									//str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y - hdcP2T).ToString() + "]";
-									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_PAD_SIZE_OVER); break;
-								}
-							}
-						}
-						#endregion
-						#endregion
-					}
-					else
-					{
-						#region C2.Result(Pattern)
-						if (hdcP2X == -1 && hdcP2Y == -1/* && hdcP2T == -1*/) // HDC Vision Result Error
-						{
-							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-							{
 								tempSb.Clear(); tempSb.Length = 0;
-								tempSb.AppendFormat("PAD P2 Chk Fail(Processing ERROR)-PadX[{0}],PadY[{1}], FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.hdcfailcount);
-								//string str = "PAD P2 Chk Fail(Processing ERROR)-PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.hdcfailcount.ToString() + "]";
-								mc.log.debug.write(mc.log.CODE.ERROR, tempSb.ToString());
-								sqc = 120; break;
-							}
-							else
-							{
-								if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-								{
-									//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
-									//else //JogTeachMode = jogTeachCornerMode.Corner13;
-									sqc = 130; break;
-								}
-								else
-								{
-									tempSb.Clear(); tempSb.Length = 0;
-									tempSb.AppendFormat("PadX[{0}],PadY[{1}]", (padX + 1), (padY + 1));
-									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "]";
-									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_VISION_PROCESS_FAIL); break;
-								}
-							}
-						}					
-						#region #region HDC Position Check
-                        if (Math.Abs(hdcP2X) > 1000)
-						{
-							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1} um", hdcP2X));
-							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
-								sqc = 120; break;
-							}
-							else
-							{
-								if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-								{
-									//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
-									//else //JogTeachMode = jogTeachCornerMode.Corner13;
-									sqc = 130; break;
-								}
-								else
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_X_Limit");
-									tempSb.Clear(); tempSb.Length = 0;
-									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2X);
-									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2X).ToString() + "]";
-									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
-								}
+								tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2T);
+								//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2T).ToString() + "]";
+								errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
 							}
 						}
-						if (Math.Abs(hdcP2Y) > 1000)
+					}
+					if (Math.Abs(hdcP1X - hdcP2X) > mc.para.MT.padCheckLimit.value || Math.Abs(hdcP1Y - hdcP2Y) > mc.para.MT.padCheckLimit.value)
+					{
+						tempSb.Clear(); tempSb.Length = 0;
+						tempSb.AppendFormat("PadX[{0}],PadY[{1}] - P1-P2 : {2:F2}, {3:F2}", (padX + 1), (padY + 1), hdcP1X - hdcP2X, hdcP1Y - hdcP2Y);
+						//string str = "HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString();
+						mc.log.debug.write(mc.log.CODE.EVENT, tempSb.ToString());
+						//EVENT.statusDisplay("HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString());
+						if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 						{
-							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1} um", hdcP2Y));
-							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+							if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
+							sqc = 120; break;
+						}
+						else
+						{
+							if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
 							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
-								sqc = 120; break;
+								//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
+								//else //JogTeachMode = jogTeachCornerMode.Corner13;
+								sqc = 130; break;
 							}
 							else
-							{
-								if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-								{
-									//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
-									//else //JogTeachMode = jogTeachCornerMode.Corner13;
-									sqc = 130; break;
-								}
-								else
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C3_Y_Limit");
-									tempSb.Clear(); tempSb.Length = 0;
-									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP2Y);
-									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP2Y).ToString() + "]";
-									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
-								}
-							}
-						}
-						if (hdcPassScoreP2 > hdcResult)
-						{
-							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Score Limit Error : {0:F1}%", hdcResult));
-							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-							{
-								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P2_Score_Limit");
-								sqc = 120; break;
-							}
-							else
-							{
-								if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-								{
-									//JogTeachMode = jogTeachCornerMode.Corner13;
-									sqc = 130; break;
-								}
-								else
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P2_Score_Limit");
-									tempSb.Clear(); tempSb.Length = 0;
-									tempSb.AppendFormat("PadX[{0}],PadY[{1}], P2: Score[{2}%]", (padX + 1), (padY + 1), Math.Round(hdcResult, 2));
-									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
-								}
-							}
-						}
-						if (Math.Abs(hdcP1X - hdcP2X) > mc.para.MT.padCheckLimit.value || Math.Abs(hdcP1Y - hdcP2Y) > mc.para.MT.padCheckLimit.value)
-						{
-							tempSb.Clear(); tempSb.Length = 0;
-							tempSb.AppendFormat("PadX[{0}],PadY[{1}] - P1-P2 : {2:F2}, {3:F2}", (padX + 1), (padY + 1), hdcP1X - hdcP2X, hdcP1Y - hdcP2Y);
-							//string str = "HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString();
-							mc.log.debug.write(mc.log.CODE.EVENT, tempSb.ToString());
-							//EVENT.statusDisplay("HDC[" + padX.ToString() + "," + padY.ToString() + "] P1-P2 : " + Math.Round(hdcP1X - hdcP2X, 2).ToString() + "  " + Math.Round(hdcP1Y - hdcP2Y, 2).ToString());
-							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
 								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
-								sqc = 120; break;
-							}
-							else
-							{
-								if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-								{
-									//if (mc.para.HDC.detectDirection.value == 0) //JogTeachMode = jogTeachCornerMode.Corner24;
-									//else //JogTeachMode = jogTeachCornerMode.Corner13;
-									sqc = 130; break;
-								}
-								else
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_(C1-C3)_Limit");
-									//str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y - hdcP2T).ToString() + "]";
-									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_PAD_SIZE_OVER); break;
-								}
+								//str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y - hdcP2T).ToString() + "]";
+								errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_PAD_SIZE_OVER); break;
 							}
 						}
-                        #endregion
-						#endregion
 					}
+					#endregion
+					#endregion
                     sqc++; break;
 
                 case 52:
-					if (mc.para.HDC.jogTeachUse.value == 1)
-					{
-						placeX = tPos.x.PAD(padX);
-						placeY = tPos.y.PAD(padY);
-					}
-
-					if(mc.para.HDC.useManualTeach.value == 0)
-					{
-						hdcX = (hdcP1X + hdcP2X) / 2;
-						hdcY = (hdcP1Y + hdcP2Y) / 2;
-						hdcT = (hdcP1T + hdcP2T) / 2;
-					}
-					else
-					{
-						hdcX = (hdcP1X + hdcP2X) / 2;
-						hdcY = (hdcP1Y + hdcP2Y) / 2;
-//						hdcT = (hdcP1T + hdcP2T) / 2;
-						tmpDistX = hdcP2X + mc.hd.tool.cPos.x.M_POS_P2(padX) - (hdcP1X + mc.hd.tool.cPos.x.M_POS_P1(padX));
-						tmpDistY = hdcP2Y + mc.hd.tool.cPos.y.M_POS_P2(padY) - (hdcP1Y + mc.hd.tool.cPos.y.M_POS_P1(padY));
- 						hdcT = Math.Atan2(tmpDistY, tmpDistX) - mc.para.HDC.modelManualTeach.dT.value;
-						// 여기까지 라디안 및 오프셋 구하기 완료..`
-						cosTheta = Math.Cos(hdcT);			// hdcT 가 라디안이므로 그냥 넣는다.
-						sinTheta = Math.Sin(hdcT);
-						hdcX = (cosTheta * hdcX) - (sinTheta * hdcY);
-						hdcY = (sinTheta * hdcX) + (cosTheta * hdcY);
-						if (mc.hd.noUseSlugAlignment) hdcT = 0;
-						else hdcT = hdcT * 180/Math.PI;			// 모터 구동은 Degree 이므로 변환
-					}
-
-					//#region PCB Position Error Check
-					//tempSb.Clear(); tempSb.Length = 0;
+					hdcX = (hdcP1X + hdcP2X) / 2;
+					hdcY = (hdcP1Y + hdcP2Y) / 2;
+					hdcT = (hdcP1T + hdcP2T) / 2;
 
 					if (setJogTeach == false)
 					{
@@ -7371,135 +6714,93 @@ namespace PSA_SystemLibrary
 				case 80:
 					rateY = Y.config.speed.rate; Y.config.speed.rate = Math.Max(rateY * 0.3, 0.1);
 					rateX = X.config.speed.rate; X.config.speed.rate = Math.Max(rateX * 0.3, 0.1);
-					if(mc.para.HDC.useManualTeach.value == 0)
-					{
-						if (mc.para.HDC.detectDirection.value == 0)
-						{
-							Y.move(cPos.y.PADC1(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.move(cPos.x.PADC1(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-						}
-						else
-						{
-							Y.move(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.move(cPos.x.PADC2(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-						}
-					}
-					else
-					{
-						Y.move(cPos.y.M_POS_P1(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.move(cPos.x.M_POS_P1(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-					}
+                    if (mc.para.HDC.detectDirection.value == 0)
+                    {
+                        Y.move(cPos.y.PADC1(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                        X.move(cPos.x.PADC1(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                    }
+                    else
+                    {
+                        Y.move(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                        X.move(cPos.x.PADC2(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                    }
 					sqc++; break;
 				case 81:
-					if(mc.para.HDC.useManualTeach.value == 0)
+					if (mc.para.HDC.detectDirection.value == 0)
 					{
-						if (mc.para.HDC.detectDirection.value == 0)
-						{
-							#region HDC.PADC1.req
-							hdcP1X = 0;
-							hdcP1Y = 0;
-							hdcP1T = 0;
-							if (mc.hd.reqMode == REQMODE.DUMY) mc.hdc.reqMode = REQMODE.GRAB;
-							else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.NCC)
-							{
-								if (mc.para.HDC.modelPADC1.isCreate.value == (int)BOOL.TRUE)
-								{
-									mc.hdc.reqMode = REQMODE.FIND_MODEL;
-									mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC1_NCC;
-								}
-								else mc.hdc.reqMode = REQMODE.GRAB;
-							}
-							else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-							{
-								if (mc.para.HDC.modelPADC1.isCreate.value == (int)BOOL.TRUE)
-								{
-									mc.hdc.reqMode = REQMODE.FIND_MODEL;
-									mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC1_SHAPE;
-								}
-								else mc.hdc.reqMode = REQMODE.GRAB;
-							}
-							else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
-							{
-                                hdcDir = 0;
-								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
-							}
-                            else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
-                            {
-                                mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
-                            }
-							else mc.hdc.reqMode = REQMODE.GRAB;
-							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
-							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
-							#endregion
-						}
-						else
-						{
-							#region HDC.PADC2.req
-							hdcP1X = 0;
-							hdcP1Y = 0;
-							hdcP1T = 0;
-							if (mc.hd.reqMode == REQMODE.DUMY) mc.hdc.reqMode = REQMODE.GRAB;
-							else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.NCC)
-							{
-								if (mc.para.HDC.modelPADC2.isCreate.value == (int)BOOL.TRUE)
-								{
-									mc.hdc.reqMode = REQMODE.FIND_MODEL;
-									mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC4_NCC;
-								}
-								else mc.hdc.reqMode = REQMODE.GRAB;
-							}
-							else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-							{
-								if (mc.para.HDC.modelPADC2.isCreate.value == (int)BOOL.TRUE)
-								{
-									mc.hdc.reqMode = REQMODE.FIND_MODEL;
-									mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC4_SHAPE;
-								}
-								else mc.hdc.reqMode = REQMODE.GRAB;
-							}
-							else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.CORNER)
-							{
-                                hdcDir = 1;
-								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_2;
-							}
-                            else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
-                            {
-                                mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_2;
-                            }
-							else mc.hdc.reqMode = REQMODE.GRAB;
-							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC2.light, mc.para.HDC.modelPADC2.exposureTime);
-							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
-							#endregion
-						}
-					}
-					else
-					{
-						#region HDC.modelManualTeach.paraP1.req
+						#region HDC.PADC1.req
 						hdcP1X = 0;
 						hdcP1Y = 0;
 						hdcP1T = 0;
-						hdcResult = 0;
 						if (mc.hd.reqMode == REQMODE.DUMY) mc.hdc.reqMode = REQMODE.GRAB;
-						else if (mc.para.HDC.modelManualTeach.paraP1.algorism.value == (int)MODEL_ALGORISM.NCC)
+						else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.NCC)
 						{
-							if (mc.para.HDC.modelManualTeach.paraP1.isCreate.value == (int)BOOL.TRUE)
+							if (mc.para.HDC.modelPADC1.isCreate.value == (int)BOOL.TRUE)
 							{
 								mc.hdc.reqMode = REQMODE.FIND_MODEL;
-								mc.hdc.reqModelNumber = (int)HDC_MODEL.MANUAL_TEACH_P1_NCC;
+								mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC1_NCC;
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 						}
-						else if (mc.para.HDC.modelManualTeach.paraP1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+						else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
 						{
-							if (mc.para.HDC.modelManualTeach.paraP1.isCreate.value == (int)BOOL.TRUE)
+							if (mc.para.HDC.modelPADC1.isCreate.value == (int)BOOL.TRUE)
 							{
 								mc.hdc.reqMode = REQMODE.FIND_MODEL;
-								mc.hdc.reqModelNumber = (int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE;
+								mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC1_SHAPE;
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 						}
+						else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
+						{
+                            hdcDir = 0;
+							mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
+						}
+                        else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                        {
+                            mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_1;
+                        }
 						else mc.hdc.reqMode = REQMODE.GRAB;
-						mc.hdc.lighting_exposure(mc.para.HDC.modelManualTeach.paraP1.light, mc.para.HDC.modelManualTeach.paraP1.exposureTime);
+						mc.hdc.lighting_exposure(mc.para.HDC.modelPADC1.light, mc.para.HDC.modelPADC1.exposureTime);
+						//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+						#endregion
+					}
+					else
+					{
+						#region HDC.PADC2.req
+						hdcP1X = 0;
+						hdcP1Y = 0;
+						hdcP1T = 0;
+						if (mc.hd.reqMode == REQMODE.DUMY) mc.hdc.reqMode = REQMODE.GRAB;
+						else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.NCC)
+						{
+							if (mc.para.HDC.modelPADC2.isCreate.value == (int)BOOL.TRUE)
+							{
+								mc.hdc.reqMode = REQMODE.FIND_MODEL;
+								mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC4_NCC;
+							}
+							else mc.hdc.reqMode = REQMODE.GRAB;
+						}
+						else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+						{
+							if (mc.para.HDC.modelPADC2.isCreate.value == (int)BOOL.TRUE)
+							{
+								mc.hdc.reqMode = REQMODE.FIND_MODEL;
+								mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC4_SHAPE;
+							}
+							else mc.hdc.reqMode = REQMODE.GRAB;
+						}
+						else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.CORNER)
+						{
+                            hdcDir = 1;
+							mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_2;
+						}
+                        else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                        {
+                            mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_2;
+                        }
+						else mc.hdc.reqMode = REQMODE.GRAB;
+						mc.hdc.lighting_exposure(mc.para.HDC.modelPADC2.light, mc.para.HDC.modelPADC2.exposureTime);
 						//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 						#endregion
 					}
@@ -7543,442 +6844,74 @@ namespace PSA_SystemLibrary
 				case 100:
 					rateY = Y.config.speed.rate; Y.config.speed.rate = Math.Max(rateY * 0.3, 0.1);
 					rateX = X.config.speed.rate; X.config.speed.rate = Math.Max(rateX * 0.3, 0.1);
-					if(mc.para.HDC.useManualTeach.value == 0)
-					{
-						if (mc.para.HDC.detectDirection.value == 0)
-						{
-							Y.move(cPos.y.PADC3(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.move(cPos.x.PADC3(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-						}
-						else
-						{
-							Y.move(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.move(cPos.x.PADC4(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-						}
-					}
-					else
-					{
-						Y.move(cPos.y.M_POS_P2(padY), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.move(cPos.x.M_POS_P2(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-					}
+                    if (mc.para.HDC.detectDirection.value == 0)
+                    {
+                        Y.move(cPos.y.PADC3(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                        X.move(cPos.x.PADC3(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                    }
+                    else
+                    {
+                        Y.move(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                        X.move(cPos.x.PADC4(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                    }
 					sqc++; break;
 				case 101:
 					if (mc.hdc.RUNING) break;
 					if (mc.hdc.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
-					if(mc.para.HDC.useManualTeach.value == 0)
+					if (mc.para.HDC.detectDirection.value == 0)
 					{
-						if (mc.para.HDC.detectDirection.value == 0)
-						{
-							#region HDC.PADC1.result
-							if (mc.hd.reqMode == REQMODE.DUMY) { }
-							else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.NCC)
-							{
-								if (mc.para.HDC.modelPADC1.isCreate.value == (int)BOOL.TRUE)
-								{
-									hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_NCC].resultX;
-									hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_NCC].resultY;
-									hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_NCC].resultAngle;
-								}
-							}
-							else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-							{
-								if (mc.para.HDC.modelPADC1.isCreate.value == (int)BOOL.TRUE)
-								{
-									hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_SHAPE].resultX;
-									hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_SHAPE].resultY;
-									hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_SHAPE].resultAngle;
-								}
-							}
-							else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
-							{
-								hdcP1X = mc.hdc.cam.edgeIntersection.resultX;
-								hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
-								hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
-
-                                // Test
-                                if (false)
-                                {
-                                    double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
-                                    double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
-
-                                    double rX = 0, rY = 0;
-
-                                    Calc.calcAlign(hdcDir, hdcP1X, hdcP1Y, hdcP1T, padSizeW, padSizeH, out rX, out rY);
-
-                                    hdcP1X = rX;
-                                    hdcP1Y = rY;
-                                }
-							}
-                            else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
-                            {
-                                hdcP1X = mc.hdc.cam.projectionEdge.resultX;
-                                hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
-                                hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
-                            }
-							if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
-							{
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									tempSb.Clear(); tempSb.Length = 0;
-									tempSb.AppendFormat("PAD P1 Chk Fail(Processing ERROR)-PadX[{0}],PadY[{1}], FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.hdcfailcount);
-									//string str = "PAD P1 Chk Fail(Processing ERROR)-PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.hdcfailcount.ToString() + "]";
-									mc.log.debug.write(mc.log.CODE.ERROR, tempSb.ToString());
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//JogTeachMode = jogTeachCornerMode.Corner13;
-										sqc = 130; break;
-									}
-									else
-									{
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}]", (padX + 1), (padY + 1));
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_VISION_PROCESS_FAIL); break;
-									}
-								}
-							}
-							#region HDC Position Check
-                            if (Math.Abs(hdcP1X) > 1000)
-							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//JogTeachMode = jogTeachCornerMode.Corner13;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
-									}
-								}
-							}
-							if (Math.Abs(hdcP1Y) > 1000)
-							{
-								mc.log.debug.write(mc.log.CODE.ERROR, "HDC P1-Y Compensation Amount Limit Error : " + Math.Round(hdcP1Y).ToString() + " um");
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//JogTeachMode = jogTeachCornerMode.Corner13;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
-									}
-								}
-							}
-							if (Math.Abs(hdcP1T) > 5)
-							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//JogTeachMode = jogTeachCornerMode.Corner13;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
-									}
-								}
-							}
-                            #endregion
-							#endregion
-							#region HDC.PADC3.req
-							hdcP2X = 0;
-							hdcP2Y = 0;
-							hdcP2T = 0;
-							if (mc.hd.reqMode == REQMODE.DUMY) mc.hdc.reqMode = REQMODE.GRAB;
-							else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.NCC)
-							{
-								if (mc.para.HDC.modelPADC3.isCreate.value == (int)BOOL.TRUE)
-								{
-									mc.hdc.reqMode = REQMODE.FIND_MODEL;
-									mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC3_NCC;
-								}
-								else mc.hdc.reqMode = REQMODE.GRAB;
-							}
-							else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-							{
-								if (mc.para.HDC.modelPADC3.isCreate.value == (int)BOOL.TRUE)
-								{
-									mc.hdc.reqMode = REQMODE.FIND_MODEL;
-									mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC3_SHAPE;
-								}
-								else mc.hdc.reqMode = REQMODE.GRAB;
-							}
-							else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
-							{
-                                hdcDir = 2;
-								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
-							}
-                            else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
-                            {
-                                mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_3;
-                            }
-							else mc.hdc.reqMode = REQMODE.GRAB;
-							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
-							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
-							#endregion
-						}
-						else
-						{
-							#region HDC.PADC2.result
-							if (mc.hd.reqMode == REQMODE.DUMY) { }
-							else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.NCC)
-							{
-								if (mc.para.HDC.modelPADC2.isCreate.value == (int)BOOL.TRUE)
-								{
-									hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_NCC].resultX;
-									hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_NCC].resultY;
-									hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_NCC].resultAngle;
-								}
-							}
-							else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-							{
-								if (mc.para.HDC.modelPADC2.isCreate.value == (int)BOOL.TRUE)
-								{
-									hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_SHAPE].resultX;
-									hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_SHAPE].resultY;
-									hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_SHAPE].resultAngle;
-								}
-							}
-							else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.CORNER)
-							{
-								hdcP1X = mc.hdc.cam.edgeIntersection.resultX;
-								hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
-								hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
-
-                                // Test
-                                if (false)
-                                {
-                                    double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
-                                    double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
-
-                                    double rX = 0, rY = 0;
-
-                                    Calc.calcAlign(hdcDir, hdcP1X, hdcP1Y, hdcP1T, padSizeW, padSizeH, out rX, out rY);
-
-                                    hdcP1X = rX;
-                                    hdcP1Y = rY;
-                                }
-							}
-                            else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
-                            {
-                                hdcP1X = mc.hdc.cam.projectionEdge.resultX;
-                                hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
-                                hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
-                            }
-							if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
-							{
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									tempSb.Clear(); tempSb.Length = 0;
-									tempSb.AppendFormat("PAD P2 Chk Fail(Processing ERROR)-PadX[{0}],PadY[{1}], FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.hdcfailcount);
-									//string str = "PAD P2 Chk Fail(Processing ERROR)-PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.hdcfailcount.ToString() + "]";
-									mc.log.debug.write(mc.log.CODE.ERROR, tempSb.ToString());
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//JogTeachMode = jogTeachCornerMode.Corner24;
-										sqc = 130; break;
-									}
-									else
-									{
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "]";
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}]", (padX + 1), (padY + 1));
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_VISION_PROCESS_FAIL); break;
-									}
-								}
-                            }
-                            #region HDC Position Check
-                            if (Math.Abs(hdcP1X) > 1000)
-							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//JogTeachMode = jogTeachCornerMode.Corner24;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
-									}
-								}
-							}
-							if (Math.Abs(hdcP1Y) > 1000)
-							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//JogTeachMode = jogTeachCornerMode.Corner24;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C21_Y_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
-									}
-								}
-							}
-							if (Math.Abs(hdcP1T) > 5)
-							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
-								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-									sqc = 120; break;
-								}
-								else
-								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//JogTeachMode = jogTeachCornerMode.Corner24;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
-									}
-								}
-							}
-                            #endregion
-							#endregion
-							#region HDC.PADC4.req
-							hdcP2X = 0;
-							hdcP2Y = 0;
-							hdcP2T = 0;
-							if (mc.hd.reqMode == REQMODE.DUMY) mc.hdc.reqMode = REQMODE.GRAB;
-							else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.NCC)
-							{
-								if (mc.para.HDC.modelPADC4.isCreate.value == (int)BOOL.TRUE)
-								{
-									mc.hdc.reqMode = REQMODE.FIND_MODEL;
-									mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC4_NCC;
-								}
-								else mc.hdc.reqMode = REQMODE.GRAB;
-							}
-							else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-							{
-								if (mc.para.HDC.modelPADC4.isCreate.value == (int)BOOL.TRUE)
-								{
-									mc.hdc.reqMode = REQMODE.FIND_MODEL;
-									mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC4_SHAPE;
-								}
-								else mc.hdc.reqMode = REQMODE.GRAB;
-							}
-							else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.CORNER)
-							{
-                                hdcDir = 3;
-								mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_4;
-							}
-                            else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
-                            {
-                                mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_4;
-                            }
-							else mc.hdc.reqMode = REQMODE.GRAB;
-							mc.hdc.lighting_exposure(mc.para.HDC.modelPADC4.light, mc.para.HDC.modelPADC4.exposureTime);
-							//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
-							#endregion
-						}
-					}
-					else
-					{
-						#region HDC.modelManualTeach.paraP1.result
+						#region HDC.PADC1.result
 						if (mc.hd.reqMode == REQMODE.DUMY) { }
-						else if (mc.para.HDC.modelManualTeach.paraP1.algorism.value == (int)MODEL_ALGORISM.NCC)
+						else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.NCC)
 						{
-							hdcPassScoreP1 = mc.para.HDC.modelManualTeach.paraP1.passScore.value;
-							if (mc.para.HDC.modelManualTeach.paraP1.isCreate.value == (int)BOOL.TRUE)
+							if (mc.para.HDC.modelPADC1.isCreate.value == (int)BOOL.TRUE)
 							{
-								hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].resultX - mc.para.HDC.modelManualTeach.offsetX_P1.value;
-								hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].resultY - mc.para.HDC.modelManualTeach.offsetY_P1.value;
-								hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].resultAngle;
-								hdcResult = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].resultScore.D * 100;
+								hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_NCC].resultX;
+								hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_NCC].resultY;
+								hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_NCC].resultAngle;
 							}
 						}
-						else if (mc.para.HDC.modelManualTeach.paraP1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+						else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
 						{
-							hdcPassScoreP1 = mc.para.HDC.modelManualTeach.paraP1.passScore.value;
-							if (mc.para.HDC.modelManualTeach.paraP1.isCreate.value == (int)BOOL.TRUE)
+							if (mc.para.HDC.modelPADC1.isCreate.value == (int)BOOL.TRUE)
 							{
-								hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].resultX - mc.para.HDC.modelManualTeach.offsetX_P1.value;
-								hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].resultY - mc.para.HDC.modelManualTeach.offsetY_P1.value;
-								hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].resultAngle;
-								hdcResult = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].resultScore.D * 100;
+								hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_SHAPE].resultX;
+								hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_SHAPE].resultY;
+								hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.PADC1_SHAPE].resultAngle;
 							}
 						}
-						//mc.log.debug.write(mc.log.CODE.INFO, "hdcP1X : " + hdcP1X + ", hdcP1Y : " + hdcP1Y);
-						if (hdcP1X == -1 && hdcP1Y == -1/* && hdcP1T == -1*/) // HDC Vision Result Error
+						else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.CORNER)
+						{
+							hdcP1X = mc.hdc.cam.edgeIntersection.resultX;
+							hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
+							hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
+
+                            // Test
+                            if (false)
+                            {
+                                double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
+                                double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
+
+                                double rX = 0, rY = 0;
+
+                                Calc.calcAlign(hdcDir, hdcP1X, hdcP1Y, hdcP1T, padSizeW, padSizeH, out rX, out rY);
+
+                                hdcP1X = rX;
+                                hdcP1Y = rY;
+                            }
+						}
+                        else if (mc.para.HDC.modelPADC1.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                        {
+                            hdcP1X = mc.hdc.cam.projectionEdge.resultX;
+                            hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
+                            hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
+                        }
+						if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
 						{
 							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
 								tempSb.Clear(); tempSb.Length = 0;
-								tempSb.AppendFormat("PAD P1 Chk Fail(Processing ERROR)-PadX[{0}], PadY[{1}], FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.hdcfailcount);
+								tempSb.AppendFormat("PAD P1 Chk Fail(Processing ERROR)-PadX[{0}],PadY[{1}], FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.hdcfailcount);
 								//string str = "PAD P1 Chk Fail(Processing ERROR)-PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.hdcfailcount.ToString() + "]";
 								mc.log.debug.write(mc.log.CODE.ERROR, tempSb.ToString());
 								sqc = 120; break;
@@ -7993,119 +6926,316 @@ namespace PSA_SystemLibrary
 								else
 								{
 									tempSb.Clear(); tempSb.Length = 0;
-									tempSb.AppendFormat("PAD P1 Chk Fail(Processing ERROR)-PadX[{0}], PadY[{1}], FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.hdcfailcount);
+									tempSb.AppendFormat("PadX[{0}],PadY[{1}]", (padX + 1), (padY + 1));
 									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "]";
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_VISION_PROCESS_FAIL); break;
+								}
+							}
+						}
+						#region HDC Position Check
+                        if (Math.Abs(hdcP1X) > 1000)
+						{
+							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
+							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+							{
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
+								sqc = 120; break;
+							}
+							else
+							{
+								if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+								{
+									//JogTeachMode = jogTeachCornerMode.Corner13;
+									sqc = 130; break;
+								}
+								else
+								{
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
+									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
+								}
+							}
+						}
+						if (Math.Abs(hdcP1Y) > 1000)
+						{
+							mc.log.debug.write(mc.log.CODE.ERROR, "HDC P1-Y Compensation Amount Limit Error : " + Math.Round(hdcP1Y).ToString() + " um");
+							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+							{
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
+								sqc = 120; break;
+							}
+							else
+							{
+								if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+								{
+									//JogTeachMode = jogTeachCornerMode.Corner13;
+									sqc = 130; break;
+								}
+								else
+								{
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
+									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
+								}
+							}
+						}
+						if (Math.Abs(hdcP1T) > 5)
+						{
+							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
+							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+							{
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
+								sqc = 120; break;
+							}
+							else
+							{
+								if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+								{
+									//JogTeachMode = jogTeachCornerMode.Corner13;
+									sqc = 130; break;
+								}
+								else
+								{
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_T_Limit");
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
+									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_T_RESULT_OVER); break;
+								}
+							}
+						}
+                        #endregion
+						#endregion
+						#region HDC.PADC3.req
+						hdcP2X = 0;
+						hdcP2Y = 0;
+						hdcP2T = 0;
+						if (mc.hd.reqMode == REQMODE.DUMY) mc.hdc.reqMode = REQMODE.GRAB;
+						else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.NCC)
+						{
+							if (mc.para.HDC.modelPADC3.isCreate.value == (int)BOOL.TRUE)
+							{
+								mc.hdc.reqMode = REQMODE.FIND_MODEL;
+								mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC3_NCC;
+							}
+							else mc.hdc.reqMode = REQMODE.GRAB;
+						}
+						else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+						{
+							if (mc.para.HDC.modelPADC3.isCreate.value == (int)BOOL.TRUE)
+							{
+								mc.hdc.reqMode = REQMODE.FIND_MODEL;
+								mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC3_SHAPE;
+							}
+							else mc.hdc.reqMode = REQMODE.GRAB;
+						}
+						else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.CORNER)
+						{
+                            hdcDir = 2;
+							mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_3;
+						}
+                        else if (mc.para.HDC.modelPADC3.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                        {
+                            mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_3;
+                        }
+						else mc.hdc.reqMode = REQMODE.GRAB;
+						mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
+						//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
+						#endregion
+					}
+					else
+					{
+						#region HDC.PADC2.result
+						if (mc.hd.reqMode == REQMODE.DUMY) { }
+						else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.NCC)
+						{
+							if (mc.para.HDC.modelPADC2.isCreate.value == (int)BOOL.TRUE)
+							{
+								hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_NCC].resultX;
+								hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_NCC].resultY;
+								hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_NCC].resultAngle;
+							}
+						}
+						else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+						{
+							if (mc.para.HDC.modelPADC2.isCreate.value == (int)BOOL.TRUE)
+							{
+								hdcP1X = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_SHAPE].resultX;
+								hdcP1Y = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_SHAPE].resultY;
+								hdcP1T = mc.hdc.cam.model[(int)HDC_MODEL.PADC2_SHAPE].resultAngle;
+							}
+						}
+						else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.CORNER)
+						{
+							hdcP1X = mc.hdc.cam.edgeIntersection.resultX;
+							hdcP1Y = mc.hdc.cam.edgeIntersection.resultY;
+							hdcP1T = mc.hdc.cam.edgeIntersection.resultAngleH;
+
+                            // Test
+                            if (false)
+                            {
+                                double padSizeW = (double)mc.para.MT.padSize.x.value * 1000;
+                                double padSizeH = (double)mc.para.MT.padSize.y.value * 1000;
+
+                                double rX = 0, rY = 0;
+
+                                Calc.calcAlign(hdcDir, hdcP1X, hdcP1Y, hdcP1T, padSizeW, padSizeH, out rX, out rY);
+
+                                hdcP1X = rX;
+                                hdcP1Y = rY;
+                            }
+						}
+                        else if (mc.para.HDC.modelPADC2.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                        {
+                            hdcP1X = mc.hdc.cam.projectionEdge.resultX;
+                            hdcP1Y = mc.hdc.cam.projectionEdge.resultY;
+                            hdcP1T = mc.hdc.cam.projectionEdge.resultAngle2;
+                        }
+						if (hdcP1X == -1 && hdcP1Y == -1 && hdcP1T == -1) // HDC Vision Result Error
+						{
+							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+							{
+								tempSb.Clear(); tempSb.Length = 0;
+								tempSb.AppendFormat("PAD P2 Chk Fail(Processing ERROR)-PadX[{0}],PadY[{1}], FailCnt[{2}]", (padX + 1), (padY + 1), mc.hd.tool.hdcfailcount);
+								//string str = "PAD P2 Chk Fail(Processing ERROR)-PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "], FailCnt[" + mc.hd.tool.hdcfailcount.ToString() + "]";
+								mc.log.debug.write(mc.log.CODE.ERROR, tempSb.ToString());
+								sqc = 120; break;
+							}
+							else
+							{
+								if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
+								{
+									//JogTeachMode = jogTeachCornerMode.Corner24;
+									sqc = 130; break;
+								}
+								else
+								{
+									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "]";
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PadX[{0}],PadY[{1}]", (padX + 1), (padY + 1));
 									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_VISION_PROCESS_FAIL); break;
 								}
 							}
                         }
                         #region HDC Position Check
                         if (Math.Abs(hdcP1X) > 1000)
+						{
+							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-X Compensation Amount Limit Error : {0:F1}um", hdcP1X));
+							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-X Compensation Amount Limit Error : {0:F1} um", hdcP1X));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
+								sqc = 120; break;
+							}
+							else
+							{
+								if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-									sqc = 120; break;
+									//JogTeachMode = jogTeachCornerMode.Corner24;
+									sqc = 130; break;
 								}
 								else
 								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//JogTeachMode = jogTeachCornerMode.Corner13;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_X_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1X));
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_X_RESULT_OVER); break;
-									}
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_X_Limit");
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1X);
+									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1X).ToString() + "]";
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_X_RESULT_OVER); break;
 								}
 							}
-							if (Math.Abs(hdcP1Y) > 1000)
+						}
+						if (Math.Abs(hdcP1Y) > 1000)
+						{
+							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-Y Compensation Amount Limit Error : {0:F1}um", hdcP1Y));
+							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Y Compensation Amount Limit Error : {0:F1} um", hdcP1Y));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_Y_Limit");
+								sqc = 120; break;
+							}
+							else
+							{
+								if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-									sqc = 120; break;
+									//JogTeachMode = jogTeachCornerMode.Corner24;
+									sqc = 130; break;
 								}
 								else
 								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//JogTeachMode = jogTeachCornerMode.Corner13;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C1_Y_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2}]", (padX + 1), (padY + 1), Math.Round(hdcP1Y));
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P1_Y_RESULT_OVER); break;
-									}
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C21_Y_Limit");
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1Y);
+									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1Y).ToString() + "]";
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_Y_RESULT_OVER); break;
 								}
 							}
-							if (hdcPassScoreP1 > hdcResult)
+						}
+						if (Math.Abs(hdcP1T) > 5)
+						{
+							mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P2-T Compensation Amount Limit Error : {0:F1}degree", hdcP1T));
+							if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
 							{
-								mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HDC P1-Score Limit Error : {0:F1}%", hdcResult));
-								if (mc.para.HDC.failretry.value > 0 && mc.hd.tool.hdcfailcount < mc.para.HDC.failretry.value)
+								if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
+								sqc = 120; break;
+							}
+							else
+							{
+								if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
 								{
-									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
-									sqc = 120; break;
+									//JogTeachMode = jogTeachCornerMode.Corner24;
+									sqc = 130; break;
 								}
 								else
 								{
-									if (mc.para.HDC.jogTeachUse.value == 1 || mc.para.HDC.VisionErrorSkip.value == 1)
-									{
-										//JogTeachMode = jogTeachCornerMode.Corner13;
-										sqc = 130; break;
-									}
-									else
-									{
-										if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_P1_Score_Limit");
-										tempSb.Clear(); tempSb.Length = 0;
-										tempSb.AppendFormat("PadX[{0}],PadY[{1}], P1: Score[{2}%]", (padX + 1), (padY + 1), Math.Round(hdcResult, 2));
-										//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
-										errorCheck(ERRORCODE.HD, sqc, tempSb.ToString()); break;
-									}
+									if (mc.para.HDC.imageSave.value == 1) mc.hdc.cam.writeLogGrabImage("HDC_C2_T_Limit");
+									tempSb.Clear(); tempSb.Length = 0;
+									tempSb.AppendFormat("PadX[{0}],PadY[{1}],Result[{2:F1}]", (padX + 1), (padY + 1), hdcP1T);
+									//string str = "PadX[" + (padX + 1).ToString() + "],PadY[" + (padY + 1).ToString() + "],Result[" + Math.Round(hdcP1T).ToString() + "]";
+									errorCheck(ERRORCODE.HD, sqc, tempSb.ToString(), ALARM_CODE.E_HDC_P2_T_RESULT_OVER); break;
 								}
 							}
+						}
                         #endregion
 						#endregion
-						#region HDC.modelManualTeach.paraP2.req
+						#region HDC.PADC4.req
 						hdcP2X = 0;
 						hdcP2Y = 0;
 						hdcP2T = 0;
-						hdcResult = 0;
 						if (mc.hd.reqMode == REQMODE.DUMY) mc.hdc.reqMode = REQMODE.GRAB;
-						else if (mc.para.HDC.modelManualTeach.paraP2.algorism.value == (int)MODEL_ALGORISM.NCC)
+						else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.NCC)
 						{
-							if (mc.para.HDC.modelManualTeach.paraP2.isCreate.value == (int)BOOL.TRUE)
+							if (mc.para.HDC.modelPADC4.isCreate.value == (int)BOOL.TRUE)
 							{
 								mc.hdc.reqMode = REQMODE.FIND_MODEL;
-								mc.hdc.reqModelNumber = (int)HDC_MODEL.MANUAL_TEACH_P2_NCC;
+								mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC4_NCC;
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 						}
-						else if (mc.para.HDC.modelManualTeach.paraP2.algorism.value == (int)MODEL_ALGORISM.SHAPE)
+						else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.SHAPE)
 						{
-							if (mc.para.HDC.modelManualTeach.paraP2.isCreate.value == (int)BOOL.TRUE)
+							if (mc.para.HDC.modelPADC4.isCreate.value == (int)BOOL.TRUE)
 							{
 								mc.hdc.reqMode = REQMODE.FIND_MODEL;
-								mc.hdc.reqModelNumber = (int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE;
+								mc.hdc.reqModelNumber = (int)HDC_MODEL.PADC4_SHAPE;
 							}
 							else mc.hdc.reqMode = REQMODE.GRAB;
 						}
+						else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.CORNER)
+						{
+                            hdcDir = 3;
+							mc.hdc.reqMode = REQMODE.FIND_EDGE_QUARTER_4;
+						}
+                        else if (mc.para.HDC.modelPADC4.algorism.value == (int)MODEL_ALGORISM.PROJECTION)
+                        {
+                            mc.hdc.reqMode = REQMODE.FIND_PROJECTION_EDGE_QUARTER_4;
+                        }
 						else mc.hdc.reqMode = REQMODE.GRAB;
-						mc.hdc.lighting_exposure(mc.para.HDC.modelManualTeach.paraP2.light, mc.para.HDC.modelManualTeach.paraP2.exposureTime);
+						mc.hdc.lighting_exposure(mc.para.HDC.modelPADC4.light, mc.para.HDC.modelPADC4.exposureTime);
 						//if (mc.swcontrol.useHwTriger == 1) mc.hdc.req = true;
 						#endregion
-					}
+					}	
 					dwell.Reset();
 					sqc++; break;
 				case 102:
@@ -9993,7 +9123,7 @@ namespace PSA_SystemLibrary
 					else if (mc.para.HDC.fiducialPos.value == 1)
 					{
 						Y.moveCompare(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.moveCompare(cPos.x.PADC2(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						X.moveCompare(cPos.x.PADC2(padX, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					else if (mc.para.HDC.fiducialPos.value == 2)
 					{
@@ -10003,7 +9133,7 @@ namespace PSA_SystemLibrary
 					else
 					{
 						Y.moveCompare(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.moveCompare(cPos.x.PADC4(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						X.moveCompare(cPos.x.PADC4(padX, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					dwell.Reset();
 					sqc++; break;
@@ -10150,7 +9280,7 @@ namespace PSA_SystemLibrary
 						if (mc.para.HDC.detectDirection.value == 0)
 						{
 							Y.move(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.move(cPos.x.PADC2(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+							X.move(cPos.x.PADC2(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 						else
 						{
@@ -10163,7 +9293,7 @@ namespace PSA_SystemLibrary
 						if (mc.para.HDC.detectDirection.value == 0)
 						{
 							Y.moveCompare(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.moveCompare(cPos.x.PADC2(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+							X.moveCompare(cPos.x.PADC2(padX, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 						else
 						{
@@ -10383,7 +9513,7 @@ namespace PSA_SystemLibrary
 						if (mc.para.HDC.detectDirection.value == 0)
 						{
 							Y.move(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.move(cPos.x.PADC4(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+							X.move(cPos.x.PADC4(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 						else
 						{
@@ -10396,7 +9526,7 @@ namespace PSA_SystemLibrary
 						if (mc.para.HDC.detectDirection.value == 0)
 						{
 							Y.move(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.move(cPos.x.PADC4(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+							X.move(cPos.x.PADC4(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 						else
 						{
@@ -12380,7 +11510,7 @@ namespace PSA_SystemLibrary
 					else
 					{
 						Y.move(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.move(cPos.x.PADC2(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						X.move(cPos.x.PADC2(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					sqc++; break;
 				case 81:
@@ -12502,7 +11632,7 @@ namespace PSA_SystemLibrary
 					else
 					{
 						Y.move(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.move(cPos.x.PADC4(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						X.move(cPos.x.PADC4(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					sqc++; break;
 				case 101:
@@ -13241,7 +12371,7 @@ namespace PSA_SystemLibrary
 					else if (mc.para.HDC.fiducialPos.value == 1)
 					{
 						Y.moveCompare(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.moveCompare(cPos.x.PADC2(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						X.moveCompare(cPos.x.PADC2(padX, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					else if (mc.para.HDC.fiducialPos.value == 2)
 					{
@@ -13251,7 +12381,7 @@ namespace PSA_SystemLibrary
 					else
 					{
 						Y.moveCompare(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.moveCompare(cPos.x.PADC4(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						X.moveCompare(cPos.x.PADC4(padX, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					dwell.Reset();
 					sqc++; break;
@@ -13396,7 +12526,7 @@ namespace PSA_SystemLibrary
 						if (mc.para.HDC.detectDirection.value == 0)
 						{
 							Y.move(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.move(cPos.x.PADC2(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+							X.move(cPos.x.PADC2(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 						else
 						{
@@ -13409,7 +12539,7 @@ namespace PSA_SystemLibrary
 						if (mc.para.HDC.detectDirection.value == 0)
 						{
 							Y.moveCompare(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.moveCompare(cPos.x.PADC2(padX), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+							X.moveCompare(cPos.x.PADC2(padX, UtilityControl.useHalfPosition), Z.config, tPos.z.XY_MOVING - comparePos, true, false, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 						else
 						{
@@ -13634,7 +12764,7 @@ namespace PSA_SystemLibrary
 						if (mc.para.HDC.detectDirection.value == 0)
 						{
 							Y.move(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.move(cPos.x.PADC4(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+							X.move(cPos.x.PADC4(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 						else
 						{
@@ -13647,7 +12777,7 @@ namespace PSA_SystemLibrary
 						if (mc.para.HDC.detectDirection.value == 0)
 						{
 							Y.move(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-							X.move(cPos.x.PADC4(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+							X.move(cPos.x.PADC4(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 						}
 						else
 						{
@@ -15152,7 +14282,7 @@ namespace PSA_SystemLibrary
 					else
 					{
 						Y.move(cPos.y.PADC2(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.move(cPos.x.PADC2(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						X.move(cPos.x.PADC2(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					sqc++; break;
 				case 81:
@@ -15274,7 +14404,7 @@ namespace PSA_SystemLibrary
 					else
 					{
 						Y.move(cPos.y.PADC4(padY, UtilityControl.useHalfPosition), out ret.message); Y.config.speed.rate = rateY; if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-						X.move(cPos.x.PADC4(padX), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+						X.move(cPos.x.PADC4(padX, UtilityControl.useHalfPosition), out ret.message); X.config.speed.rate = rateX; if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
 					}
 					sqc++; break;
 				case 101:
@@ -21043,32 +20173,32 @@ namespace PSA_SystemLibrary
 			}
 			return tmp;
 		}
-        public double PADC1(int column, bool half = true)
+        public double PADC1(int column, bool halfMode)
         {
             double tmp;
             tmp = PAD(column);
-            if (half) tmp += (mc.para.MT.padSize.x.value * 1000 * 0.5);
-            else tmp += (mc.para.MT.padSize.x.value * 1000 * 0.3);
+            tmp += (mc.para.MT.padSize.x.value * 1000 * 0.5);
+            if (!halfMode) tmp -= mc.hdc.cam.acq.width * mc.hdc.cam.acq.ResolutionX * 0.25;
             return tmp;
         }
-        public double PADC2(int column)
+        public double PADC2(int column, bool halfMode)
         {
             double tmp;
-            tmp = PADC1(column);
+            tmp = PADC1(column, halfMode);
             return tmp;
         }
-        public double PADC3(int column, bool half = true)
+        public double PADC3(int column, bool halfMode)
         {
             double tmp;
             tmp = PAD(column);
-            if (half) tmp -= (mc.para.MT.padSize.x.value * 1000 * 0.5);
-            else tmp -= (mc.para.MT.padSize.x.value * 1000 * 0.3);
+            tmp -= (mc.para.MT.padSize.x.value * 1000 * 0.5);
+            if (!halfMode) tmp += mc.hdc.cam.acq.width * mc.hdc.cam.acq.ResolutionX * 0.25;
             return tmp;
         }
-        public double PADC4(int column)
+        public double PADC4(int column, bool halfMode)
         {
             double tmp;
-            tmp = PADC3(column);
+            tmp = PADC3(column, halfMode);
             return tmp;
         }
 
@@ -21099,21 +20229,6 @@ namespace PSA_SystemLibrary
             tmp = HSPADC3(column);
             return tmp;
         }
-
-		public double M_POS_P1(int column)
-		{
-			double tmp;
-			tmp = PAD(column);
-			tmp += mc.para.HDC.MTeachPosX_P1.value;
-			return tmp;
-		}
-		public double M_POS_P2(int column)
-		{
-			double tmp;
-			tmp = PAD(column);
-			tmp += mc.para.HDC.MTeachPosX_P2.value;
-			return tmp;
-		}
 
 		public double ULC
 		{
@@ -21298,34 +20413,34 @@ namespace PSA_SystemLibrary
 			}
 			return tmp;
 		}
-        public double PADC1(int row, bool half = true)
-		{
-			double tmp;
-			tmp = PAD(row);
-            if (half) tmp += (mc.para.MT.padSize.y.value * 1000 * 0.5);
-            else tmp += (mc.para.MT.padSize.y.value * 1000 * 0.3);
-			return tmp;
-		}
-        public double PADC2(int row, bool half = true)
-		{
-			double tmp;
-			tmp = PAD(row);
-            if (half) tmp -= (mc.para.MT.padSize.y.value * 1000 * 0.5);
-            else tmp -= (mc.para.MT.padSize.y.value * 1000 * 0.3);
-			return tmp;
-		}
-        public double PADC3(int row, bool half = true)
-		{
-			double tmp;
-			tmp = PADC2(row);
-			return tmp;
-		}
-        public double PADC4(int row, bool half = true)
-		{
-			double tmp;
-			tmp = PADC1(row);
-			return tmp;
-		}
+        public double PADC1(int row, bool halfMode)
+        {
+            double tmp;
+            tmp = PAD(row);
+            tmp += (mc.para.MT.padSize.y.value * 1000 * 0.5);
+            if (!halfMode) tmp -= mc.hdc.cam.acq.height * mc.hdc.cam.acq.ResolutionY * 0.25;
+            return tmp;
+        }
+        public double PADC2(int row, bool halfMode)
+        {
+            double tmp;
+            tmp = PAD(row);
+            tmp -= (mc.para.MT.padSize.y.value * 1000 * 0.5);
+            if (!halfMode) tmp += mc.hdc.cam.acq.height * mc.hdc.cam.acq.ResolutionY * 0.25;
+            return tmp;
+        }
+        public double PADC3(int row, bool halfMode)
+        {
+            double tmp;
+            tmp = PADC2(row, halfMode);
+            return tmp;
+        }
+        public double PADC4(int row, bool halfMode)
+        {
+            double tmp;
+            tmp = PADC1(row, halfMode);
+            return tmp;
+        }
 
         // 1121. HeatSlug
         public double HSPADC1(int row)
@@ -21354,22 +20469,6 @@ namespace PSA_SystemLibrary
             tmp = HSPADC1(row);
             return tmp;
         }
-
-		public double M_POS_P1(int row)
-		{
-			double tmp;
-			tmp = PAD(row);
-			tmp += mc.para.HDC.MTeachPosY_P1.value;
-			return tmp;
-		}
-		public double M_POS_P2(int row)
-		{
-			double tmp;
-			tmp = PAD(row);
-			tmp += mc.para.HDC.MTeachPosY_P2.value;
-			return tmp;
-		}
-
 		public double ULC
 		{
 			get

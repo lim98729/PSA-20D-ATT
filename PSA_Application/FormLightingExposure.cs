@@ -133,16 +133,6 @@ namespace PSA_Application
 				light_para = mc.para.HDC.modelFiducial.light;
 				exposure_para = mc.para.HDC.modelFiducial.exposureTime;
 			}
-			if (mode == LIGHTEXPOSUREMODE.HDC_MANUAL_P1)
-			{
-				light_para = mc.para.HDC.modelManualTeach.paraP1.light;
-				exposure_para = mc.para.HDC.modelManualTeach.paraP1.exposureTime;
-			}
-			if (mode == LIGHTEXPOSUREMODE.HDC_MANUAL_P2)
-			{
-				light_para = mc.para.HDC.modelManualTeach.paraP2.light;
-				exposure_para = mc.para.HDC.modelManualTeach.paraP2.exposureTime;
-			}
 			if (mode == LIGHTEXPOSUREMODE.EPOXY)
 			{
 				light_para = mc.para.EPOXY.light;
@@ -342,17 +332,6 @@ namespace PSA_Application
 					mc.para.HDC.modelFiducial.light = light_para;
 					mc.para.HDC.modelFiducial.exposureTime = exposure_para;
 				}
-				if (mode == LIGHTEXPOSUREMODE.HDC_MANUAL_P1)
-				{
-					mc.para.HDC.modelManualTeach.paraP1.light = light_para;
-					mc.para.HDC.modelManualTeach.paraP1.exposureTime = exposure_para;
-
-				}
-				if (mode == LIGHTEXPOSUREMODE.HDC_MANUAL_P2)
-				{
-					mc.para.HDC.modelManualTeach.paraP2.light = light_para;
-					mc.para.HDC.modelManualTeach.paraP2.exposureTime = exposure_para;
-				}
 				if (mode == LIGHTEXPOSUREMODE.EPOXY)
 				{
 					mc.para.EPOXY.light = light_para;
@@ -449,17 +428,6 @@ namespace PSA_Application
 				{
 					light_para = mc.para.HDC.modelFiducial.light;
 					exposure_para = mc.para.HDC.modelFiducial.exposureTime;
-				}
-				if (mode == LIGHTEXPOSUREMODE.HDC_MANUAL_P1)
-				{
-					light_para = mc.para.HDC.modelManualTeach.paraP1.light;
-					exposure_para = mc.para.HDC.modelManualTeach.paraP1.exposureTime;
-
-				}
-				if (mode == LIGHTEXPOSUREMODE.HDC_MANUAL_P2)
-				{
-					light_para = mc.para.HDC.modelManualTeach.paraP2.light;
-					exposure_para = mc.para.HDC.modelManualTeach.paraP2.exposureTime;
 				}
 				if (mode == LIGHTEXPOSUREMODE.EPOXY)
 				{

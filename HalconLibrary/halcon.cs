@@ -5990,93 +5990,101 @@ namespace HalconLibrary
 				return false;
 			}
 		}
-		public bool refreshEdgeIntersection(QUARTER_NUMBER quater)
-		{
-			try
-			{
-				if (!isActivate || !refresh_req) return false;
-				HOperatorSet.SetSystem("flush_graphic", "false");
-				HOperatorSet.ClearWindow(window.handle);
-				HOperatorSet.DispObj(acq.Image, window.handle);
-				HOperatorSet.SetDraw(window.handle, "margin");
-				HOperatorSet.SetLineWidth(window.handle, 1);
-				HOperatorSet.SetColor(window.handle, "pink");
-				messageStatus(acq.DeviceUserID);
+        public bool refreshEdgeIntersection()
+        {
+            try
+            {
+                if (!isActivate || !refresh_req) return false;
+                HOperatorSet.SetSystem("flush_graphic", "false");
+                HOperatorSet.ClearWindow(window.handle);
+                HOperatorSet.DispObj(acq.Image, window.handle);
+                HOperatorSet.SetDraw(window.handle, "margin");
+                HOperatorSet.SetLineWidth(window.handle, 1);
+                HOperatorSet.SetColor(window.handle, "pink");
+                messageStatus(acq.DeviceUserID);
 
-				if ((double)edgeIntersection.resultTime != -1)
-				{
-                    HOperatorSet.SetColor(window.handle, "pink");
-
-                    if (UtilityControl.useHalfPosition || quater == QUARTER_NUMBER.INVALID)
+                if ((double)edgeIntersection.resultTime != -1)
+                {
+                    if (refresh_quater == QUARTER_NUMBER.INVALID)
                     {
+                        HOperatorSet.SetColor(window.handle, "pink");
                         HOperatorSet.DispCross(window.handle, acq.height / 2, acq.width / 2, acq.height * 0.8, 0);
                     }
                     else
                     {
-                        if (quater == QUARTER_NUMBER.FIRST)
+                        double centerX, centerY;
+
+                        if (refresh_quater == QUARTER_NUMBER.SECOND)
                         {
-                            HOperatorSet.DispCross(window.handle, acq.height * 0.3, acq.width * 0.7, acq.height * 0.8, 0);
+                            centerX = acq.width * 0.75;
+                            centerY = acq.height * 0.75;
                         }
-                        else if (quater == QUARTER_NUMBER.SECOND)
+                        else if (refresh_quater == QUARTER_NUMBER.THIRD)
                         {
-                            HOperatorSet.DispCross(window.handle, acq.height * 0.7, acq.width * 0.7, acq.height * 0.8, 0);
+                            centerX = acq.width * 0.25;
+                            centerY = acq.height * 0.75;
                         }
-                        else if (quater == QUARTER_NUMBER.THIRD)
+                        else if (refresh_quater == QUARTER_NUMBER.FOURTH)
                         {
-                            HOperatorSet.DispCross(window.handle, acq.height * 0.7, acq.width * 0.3, acq.height * 0.8, 0);
+                            centerX = acq.width * 0.25;
+                            centerY = acq.height * 0.25;
                         }
-                        else if (quater == QUARTER_NUMBER.FOURTH)
+                        else
                         {
-                            HOperatorSet.DispCross(window.handle, acq.height * 0.3, acq.width * 0.3, acq.height * 0.8, 0);
+                            centerX = acq.width * 0.75;
+                            centerY = acq.height * 0.25;
                         }
+                        HOperatorSet.SetColor(window.handle, "pink");
+                        HOperatorSet.DispCross(window.handle, centerY, centerX, acq.height * 0.8, 0);
                     }
-					#region 서치영역 , 영역확장 디스플레이
-					//서치영역 디스플레이
-					HOperatorSet.SetColor(window.handle, "gray");
-					HOperatorSet.DispRectangle1(window.handle, edgeIntersection.createVRow1, edgeIntersection.createVColumn1, edgeIntersection.createVRow2, edgeIntersection.createVColumn2);
-					HOperatorSet.DispRectangle1(window.handle, edgeIntersection.createHRow1, edgeIntersection.createHColumn1, edgeIntersection.createHRow2, edgeIntersection.createHColumn2);
-					//  영역확장 디스플레이
-					//HOperatorSet.SetPart(window.handle, acq.height * 0.3, acq.width * 0.3, acq.height * 0.7, acq.width * 0.7);
-					//HOperatorSet.DispObj(acq.Image, window.handle);
-					#endregion
-					HOperatorSet.SetLineWidth(window.handle, 3);
-					HOperatorSet.SetColor(window.handle, "red");
-					HOperatorSet.DispObj(edgeIntersection.VFitEdgeLine, window.handle);
-					HOperatorSet.DispObj(edgeIntersection.HFitEdgeLine, window.handle);
-					HOperatorSet.SetColor(window.handle, "green");
-					HOperatorSet.SetLineWidth(window.handle, 1);
-					HOperatorSet.DispObj(edgeIntersection.IntersectionCross, window.handle);
-				}
-				else
-				{
-					HOperatorSet.SetColor(window.handle, "red");
-					HOperatorSet.DispCross(window.handle, acq.height / 2, acq.width / 2, acq.height * 0.8, 0);
-				}
-				HOperatorSet.SetSystem("flush_graphic", "true");
+
+                    #region 서치영역 , 영역확장 디스플레이
+                    //서치영역 디스플레이
+                    HOperatorSet.SetColor(window.handle, "gray");
+                    HOperatorSet.DispRectangle1(window.handle, edgeIntersection.createVRow1, edgeIntersection.createVColumn1, edgeIntersection.createVRow2, edgeIntersection.createVColumn2);
+                    HOperatorSet.DispRectangle1(window.handle, edgeIntersection.createHRow1, edgeIntersection.createHColumn1, edgeIntersection.createHRow2, edgeIntersection.createHColumn2);
+                    //  영역확장 디스플레이
+                    //HOperatorSet.SetPart(window.handle, acq.height * 0.3, acq.width * 0.3, acq.height * 0.7, acq.width * 0.7);
+                    //HOperatorSet.DispObj(acq.Image, window.handle);
+                    #endregion
+                    HOperatorSet.SetLineWidth(window.handle, 3);
+                    HOperatorSet.SetColor(window.handle, "red");
+                    HOperatorSet.DispObj(edgeIntersection.VFitEdgeLine, window.handle);
+                    HOperatorSet.DispObj(edgeIntersection.HFitEdgeLine, window.handle);
+                    HOperatorSet.SetColor(window.handle, "green");
+                    HOperatorSet.SetLineWidth(window.handle, 1);
+                    HOperatorSet.DispObj(edgeIntersection.IntersectionCross, window.handle);
+                }
+                else
+                {
+                    HOperatorSet.SetColor(window.handle, "red");
+                    HOperatorSet.DispCross(window.handle, acq.height / 2, acq.width / 2, acq.height * 0.8, 0);
+                }
+                HOperatorSet.SetSystem("flush_graphic", "true");
 
 
-				#region messageResult
-				string str;
-				str = "Edge Intersection" + "\n";
-				str += "X         : " + Math.Round((double)edgeIntersection.resultX, 2).ToString() + "\n";
-				str += "Y         : " + Math.Round((double)edgeIntersection.resultY, 2).ToString() + "\n";
-				str += "Angle(V)  : " + Math.Round((double)edgeIntersection.resultAngleV, 2).ToString() + "\n";
-				str += "Angle(H)  : " + Math.Round((double)edgeIntersection.resultAngleH, 2).ToString() + "\n";
-				str += "Angle(VH) : " + Math.Round((double)edgeIntersection.resultAngleVH, 2).ToString() + "\n";
-				str += "Time      : " + Math.Round((double)edgeIntersection.resultTime, 2).ToString() + "\n";
-				messageResult(str);
-				#endregion
-				refresh_req = false;
-				return true;
-			}
-			catch //(HalconException ex)
-			{
-				//halcon_exception exception = new halcon_exception();
-				//exception.message(window, acq, ex);
-				refresh_req = false;
-				return false;
-			}
-		}
+                #region messageResult
+                string str;
+                str = "Edge Intersection" + "\n";
+                str += "X         : " + Math.Round((double)edgeIntersection.resultX, 2).ToString() + "\n";
+                str += "Y         : " + Math.Round((double)edgeIntersection.resultY, 2).ToString() + "\n";
+                str += "Angle(V)  : " + Math.Round((double)edgeIntersection.resultAngleV, 2).ToString() + "\n";
+                str += "Angle(H)  : " + Math.Round((double)edgeIntersection.resultAngleH, 2).ToString() + "\n";
+                str += "Angle(VH) : " + Math.Round((double)edgeIntersection.resultAngleVH, 2).ToString() + "\n";
+                str += "Time      : " + Math.Round((double)edgeIntersection.resultTime, 2).ToString() + "\n";
+                messageResult(str);
+                #endregion
+                refresh_req = false;
+                return true;
+            }
+            catch //(HalconException ex)
+            {
+                //halcon_exception exception = new halcon_exception();
+                //exception.message(window, acq, ex);
+                refresh_req = false;
+                return false;
+            }
+        }
 		
 		public bool refreshErrorDisplay()
 		{
@@ -8818,6 +8826,30 @@ namespace HalconLibrary
 
 				if (cropArea < 0.8) cropArea = 2.5;
 
+                double centerX, centerY;
+                int gap = 50;
+
+                if (quarterNumber == QUARTER_NUMBER.SECOND)
+                {
+                    centerX = width * 0.75;
+                    centerY = height * 0.75;
+                }
+                else if (quarterNumber == QUARTER_NUMBER.THIRD)
+                {
+                    centerX = width * 0.25;
+                    centerY = height * 0.75;
+                }
+                else if (quarterNumber == QUARTER_NUMBER.FOURTH)
+                {
+                    centerX = width * 0.25;
+                    centerY = height * 0.25;
+                }
+                else
+                {
+                    centerX = width * 0.75;
+                    centerY = height * 0.25;
+                }
+
 				if (quarterNumber == QUARTER_NUMBER.FIRST)
 				{
                     if (halfmode)
@@ -8834,15 +8866,15 @@ namespace HalconLibrary
                     }
                     else
                     {
-                        createVColumn1 = width * 0.7 - shortLength * cropArea;
-                        createVColumn2 = width * 0.7 + shortLength;
-                        createVRow1 = height * 0.3 + shortLength;
-                        createVRow2 = height * 0.3 + longLength;
+                        createVColumn1 = centerX - shortLength * cropArea;
+                        createVColumn2 = centerX + shortLength;
+                        createVRow1 = height / 2 - gap;
+                        createVRow2 = height - gap;
 
-                        createHColumn1 = width * 0.3 - longLength;
-                        createHColumn2 = width * 0.3 - shortLength;
-                        createHRow1 = height * 0.3 - shortLength;
-                        createHRow2 = height * 0.3 + shortLength * cropArea;
+                        createHColumn1 = gap;
+                        createHColumn2 = width / 2 + gap;
+                        createHRow1 = centerY - shortLength;
+                        createHRow2 = centerY + shortLength * cropArea;
                     }
 				}
 				else if (quarterNumber == QUARTER_NUMBER.SECOND)
@@ -8859,6 +8891,18 @@ namespace HalconLibrary
                         createHRow1 = oy - shortLength * cropArea;
                         createHRow2 = oy + shortLength;
                     }
+                    else
+                    {
+                        createVColumn1 = centerX - shortLength * cropArea;
+                        createVColumn2 = centerX + shortLength;
+                        createVRow1 = gap;
+                        createVRow2 = height / 2 + gap;
+
+                        createHColumn1 = gap;
+                        createHColumn2 = width / 2 + gap;
+                        createHRow1 = centerY - shortLength;
+                        createHRow2 = centerY + shortLength * cropArea;
+                    }
 				}
 				else if (quarterNumber == QUARTER_NUMBER.THIRD)
 				{
@@ -8874,6 +8918,18 @@ namespace HalconLibrary
                         createHRow1 = oy - shortLength * cropArea;
                         createHRow2 = oy + shortLength;
                     }
+                    else
+                    {
+                        createVColumn1 = centerX - shortLength * cropArea;
+                        createVColumn2 = centerX + shortLength;
+                        createVRow1 = gap;
+                        createVRow2 = height / 2 + gap;
+
+                        createHColumn1 = width / 2 - gap;
+                        createHColumn2 = width - gap;
+                        createHRow1 = centerY - shortLength;
+                        createHRow2 = centerY + shortLength * cropArea;
+                    }
 				}
 				else if (quarterNumber == QUARTER_NUMBER.FOURTH)
 				{
@@ -8888,6 +8944,18 @@ namespace HalconLibrary
                         createHColumn2 = ox + longLength;
                         createHRow1 = oy - shortLength;
                         createHRow2 = oy + shortLength * cropArea;
+                    }
+                    else
+                    {
+                        createVColumn1 = centerX - shortLength * cropArea;
+                        createVColumn2 = centerX + shortLength;
+                        createVRow1 = height / 2 - gap;
+                        createVRow2 = height - gap;
+
+                        createHColumn1 = width / 2 - gap;
+                        createHColumn2 = width - gap;
+                        createHRow1 = centerY - shortLength;
+                        createHRow2 = centerY + shortLength * cropArea;
                     }
 				}
 
@@ -8911,69 +8979,101 @@ namespace HalconLibrary
 				display.message(window.handle, hv_Exception.ToString(), "image", hv_Row, hv_Column, "red", "true");
 			}
 		}
-		public void find(out bool b)
-		{
-			try
-			{
-				//dwell.Reset();
+        public void find(out bool b, bool halfMode)
+        {
+            try
+            {
+                //dwell.Reset();
 
-				#region Fitting된 에지 추출
-				VEdgeLine.Dispose();
-				p_FitEdgeDetection(Image, out VEdgeLine, createVRow1, createVColumn1, createVRow2,createVColumn2,
-										  out FitVRowBegin, out FitVColumnBegin, out FitVRowEnd, out FitVColumnEnd);
-				
-				HEdgeLine.Dispose();
-				p_FitEdgeDetection(Image, out HEdgeLine, createHRow1, createHColumn1, createHRow2, createHColumn2,
-										  out FitHRowBegin, out FitHColumnBegin, out FitHRowEnd, out FitHColumnEnd);
-				#endregion
+                #region Fitting된 에지 추출
+                VEdgeLine.Dispose();
+                p_FitEdgeDetection(Image, out VEdgeLine, createVRow1, createVColumn1, createVRow2, createVColumn2,
+                                          out FitVRowBegin, out FitVColumnBegin, out FitVRowEnd, out FitVColumnEnd);
 
-				#region 교차점 추출
-				HOperatorSet.IntersectionLl(FitVRowBegin, FitVColumnBegin, FitVRowEnd, FitVColumnEnd,
-											FitHRowBegin, FitHColumnBegin, FitHRowEnd, FitHColumnEnd,
-											out findRow, out findColumn, out IsOverlapping);
-				resultY = ((height / 2) - findRow) * ResolutionY;
-				resultX = ((-width / 2) + findColumn) * ResolutionX;
-				#endregion
+                HEdgeLine.Dispose();
+                p_FitEdgeDetection(Image, out HEdgeLine, createHRow1, createHColumn1, createHRow2, createHColumn2,
+                                          out FitHRowBegin, out FitHColumnBegin, out FitHRowEnd, out FitHColumnEnd);
+                #endregion
 
-				#region angle 추출
-				IntersectionCross.Dispose();
-				HOperatorSet.GenCrossContourXld(out IntersectionCross, findRow, findColumn, 70, 0.785398);
+                #region 교차점 추출
+                HOperatorSet.IntersectionLl(FitVRowBegin, FitVColumnBegin, FitVRowEnd, FitVColumnEnd,
+                                            FitHRowBegin, FitHColumnBegin, FitHRowEnd, FitHColumnEnd,
+                                            out findRow, out findColumn, out IsOverlapping);
 
-				VFitEdgeLine.Dispose();
-				gen_arrow_contour_xld(out VFitEdgeLine, FitVRowBegin, FitVColumnBegin, FitVRowEnd, FitVColumnEnd, 0, 0);
-				HFitEdgeLine.Dispose();
-				gen_arrow_contour_xld(out HFitEdgeLine, FitHRowBegin, FitHColumnBegin, FitHRowEnd, FitHColumnEnd, 0, 0);
+                double centerX, centerY;
 
-				HOperatorSet.AngleLx(FitVRowBegin, FitVColumnBegin, FitVRowEnd, FitVColumnEnd, out findVPhi);
-				HOperatorSet.AngleLx(FitHRowBegin, FitHColumnBegin, FitHRowEnd, FitHColumnEnd, out findHPhi);
-				HOperatorSet.AngleLl(FitVRowBegin, FitVColumnBegin, FitVRowEnd, FitVColumnEnd, FitHRowBegin, FitHColumnBegin, FitHRowEnd, FitHColumnEnd, out findVHPhi);
+                if (halfMode)
+                {
+                    centerX = width * 0.5;
+                    centerY = height * 0.5;
+                }
+                else
+                {
+                    if (quarterNumber == QUARTER_NUMBER.SECOND)
+                    {
+                        centerX = width * 0.75;
+                        centerY = height * 0.75;
+                    }
+                    else if (quarterNumber == QUARTER_NUMBER.THIRD)
+                    {
+                        centerX = width * 0.25;
+                        centerY = height * 0.75;
+                    }
+                    else if (quarterNumber == QUARTER_NUMBER.FOURTH)
+                    {
+                        centerX = width * 0.25;
+                        centerY = height * 0.25;
+                    }
+                    else
+                    {
+                        centerX = width * 0.75;
+                        centerY = height * 0.25;
+                    }
+                }
 
-				HOperatorSet.TupleDeg(findVPhi, out resultAngleV);
-				HOperatorSet.TupleDeg(findHPhi, out resultAngleH);
-				HOperatorSet.TupleDeg(findVHPhi, out resultAngleVH);
+                resultY = (centerY - findRow) * ResolutionY;
+                resultX = (-centerX + findColumn) * ResolutionX;
+                #endregion
 
-				if(resultAngleV < 0) resultAngleV += 180;
-				if(resultAngleH > 90 && resultAngleH < 180) resultAngleH -= 180;
-				else if(resultAngleH > -180 && resultAngleH < -90) resultAngleH += 180;
-				if(findVHPhi < 0) findVHPhi += 180;
-				#endregion
+                #region angle 추출
+                IntersectionCross.Dispose();
+                HOperatorSet.GenCrossContourXld(out IntersectionCross, findRow, findColumn, 70, 0.785398);
 
-				resultTime = dwell.Elapsed;
-				SUCCESS = true;
-				b = true;
-			}
-			catch 
-			{
-				SUCCESS = false;
-				resultX = -1;
-				resultY = -1;
-				resultAngleV = -1;
-				resultAngleH = -1;
-				resultAngleVH = -1;
-				resultTime = -1;
-				b = false;
-			}
-		}
+                VFitEdgeLine.Dispose();
+                gen_arrow_contour_xld(out VFitEdgeLine, FitVRowBegin, FitVColumnBegin, FitVRowEnd, FitVColumnEnd, 0, 0);
+                HFitEdgeLine.Dispose();
+                gen_arrow_contour_xld(out HFitEdgeLine, FitHRowBegin, FitHColumnBegin, FitHRowEnd, FitHColumnEnd, 0, 0);
+
+                HOperatorSet.AngleLx(FitVRowBegin, FitVColumnBegin, FitVRowEnd, FitVColumnEnd, out findVPhi);
+                HOperatorSet.AngleLx(FitHRowBegin, FitHColumnBegin, FitHRowEnd, FitHColumnEnd, out findHPhi);
+                HOperatorSet.AngleLl(FitVRowBegin, FitVColumnBegin, FitVRowEnd, FitVColumnEnd, FitHRowBegin, FitHColumnBegin, FitHRowEnd, FitHColumnEnd, out findVHPhi);
+
+                HOperatorSet.TupleDeg(findVPhi, out resultAngleV);
+                HOperatorSet.TupleDeg(findHPhi, out resultAngleH);
+                HOperatorSet.TupleDeg(findVHPhi, out resultAngleVH);
+
+                if (resultAngleV < 0) resultAngleV += 180;
+                if (resultAngleH > 90 && resultAngleH < 180) resultAngleH -= 180;
+                else if (resultAngleH > -180 && resultAngleH < -90) resultAngleH += 180;
+                if (findVHPhi < 0) findVHPhi += 180;
+                #endregion
+
+                resultTime = dwell.Elapsed;
+                SUCCESS = true;
+                b = true;
+            }
+            catch
+            {
+                SUCCESS = false;
+                resultX = -1;
+                resultY = -1;
+                resultAngleV = -1;
+                resultAngleH = -1;
+                resultAngleVH = -1;
+                resultTime = -1;
+                b = false;
+            }
+        }
 		
 		#region Local procedures
 		enum SELECT_DIRECT

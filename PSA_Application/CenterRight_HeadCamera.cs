@@ -77,27 +77,9 @@ namespace PSA_Application
 			{
 				mode = SELECT_FIND_MODEL.HDC_PADC4;
 			}
-			if (sender.Equals(BT_SelectModel_P1))
-			{
-				mode = SELECT_FIND_MODEL.HDC_MANUAL_P1;
-			}
-			if (sender.Equals(BT_SelectModel_P2))
-			{
-				mode = SELECT_FIND_MODEL.HDC_MANUAL_P2;
-			}
 
 			#endregion
-			if (sender.Equals(BT_USE_MANUAL_TEACH))
-			{
-				if (mc.para.HDC.useManualTeach.value == 0)
-				{
-					mc.para.setting(ref mc.para.HDC.useManualTeach, 1);
-				}
-				else
-				{
-					mc.para.setting(ref mc.para.HDC.useManualTeach, 0);
-				}
-			}
+			
 			if (sender.Equals(BT_Model_Teach))
 			{
 				padIndexX = CbB_PadIndexX.SelectedIndex;
@@ -143,8 +125,6 @@ namespace PSA_Application
 				if (mode == SELECT_FIND_MODEL.HDC_PADC2) mc.para.setting(ref mc.para.HDC.modelPADC2.algorism, (int)MODEL_ALGORISM.NCC);
 				if (mode == SELECT_FIND_MODEL.HDC_PADC3) mc.para.setting(ref mc.para.HDC.modelPADC3.algorism, (int)MODEL_ALGORISM.NCC);
 				if (mode == SELECT_FIND_MODEL.HDC_PADC4) mc.para.setting(ref mc.para.HDC.modelPADC4.algorism, (int)MODEL_ALGORISM.NCC);
-				if (mode == SELECT_FIND_MODEL.HDC_MANUAL_P1) mc.para.setting(ref mc.para.HDC.modelManualTeach.paraP1.algorism, (int)MODEL_ALGORISM.NCC);
-				if (mode == SELECT_FIND_MODEL.HDC_MANUAL_P2) mc.para.setting(ref mc.para.HDC.modelManualTeach.paraP2.algorism, (int)MODEL_ALGORISM.NCC);
 				mc.hdc.model_delete(mode);
 			}
 			if (sender.Equals(BT_AlgorismSelect_ShapeModel))
@@ -154,8 +134,6 @@ namespace PSA_Application
 				if (mode == SELECT_FIND_MODEL.HDC_PADC2) mc.para.setting(ref mc.para.HDC.modelPADC2.algorism, (int)MODEL_ALGORISM.SHAPE);
 				if (mode == SELECT_FIND_MODEL.HDC_PADC3) mc.para.setting(ref mc.para.HDC.modelPADC3.algorism, (int)MODEL_ALGORISM.SHAPE);
 				if (mode == SELECT_FIND_MODEL.HDC_PADC4) mc.para.setting(ref mc.para.HDC.modelPADC4.algorism, (int)MODEL_ALGORISM.SHAPE);
-				if (mode == SELECT_FIND_MODEL.HDC_MANUAL_P1) mc.para.setting(ref mc.para.HDC.modelManualTeach.paraP1.algorism, (int)MODEL_ALGORISM.SHAPE);
-				if (mode == SELECT_FIND_MODEL.HDC_MANUAL_P2) mc.para.setting(ref mc.para.HDC.modelManualTeach.paraP2.algorism, (int)MODEL_ALGORISM.SHAPE);
 				mc.hdc.model_delete(mode);
 			}
 			if (sender.Equals(BT_AlgorismSelect_CornerModel))
@@ -195,8 +173,6 @@ namespace PSA_Application
 				if (mode == SELECT_FIND_MODEL.HDC_PADC2) mc.para.setting(mc.para.HDC.modelPADC2.passScore, out mc.para.HDC.modelPADC2.passScore);
 				if (mode == SELECT_FIND_MODEL.HDC_PADC3) mc.para.setting(mc.para.HDC.modelPADC3.passScore, out mc.para.HDC.modelPADC3.passScore);
 				if (mode == SELECT_FIND_MODEL.HDC_PADC4) mc.para.setting(mc.para.HDC.modelPADC4.passScore, out mc.para.HDC.modelPADC4.passScore);
-				if (mode == SELECT_FIND_MODEL.HDC_MANUAL_P1) mc.para.setting(mc.para.HDC.modelManualTeach.paraP1.passScore, out mc.para.HDC.modelManualTeach.paraP1.passScore);
-				if (mode == SELECT_FIND_MODEL.HDC_MANUAL_P2) mc.para.setting(mc.para.HDC.modelManualTeach.paraP2.passScore, out mc.para.HDC.modelManualTeach.paraP2.passScore);
 			}
 // 			if (sender.Equals(TB_AngleStart))
 // 			{
@@ -228,9 +204,6 @@ namespace PSA_Application
 				if (mode == SELECT_FIND_MODEL.HDC_PADC2) mc.para.setting(mc.para.HDC.modelPADC2.exposureTime, out mc.para.HDC.modelPADC2.exposureTime);
 				if (mode == SELECT_FIND_MODEL.HDC_PADC3) mc.para.setting(mc.para.HDC.modelPADC3.exposureTime, out mc.para.HDC.modelPADC3.exposureTime);
 				if (mode == SELECT_FIND_MODEL.HDC_PADC4) mc.para.setting(mc.para.HDC.modelPADC4.exposureTime, out mc.para.HDC.modelPADC4.exposureTime);
-				if (mode == SELECT_FIND_MODEL.HDC_MANUAL_P1) mc.para.setting(mc.para.HDC.modelManualTeach.paraP1.exposureTime, out mc.para.HDC.modelManualTeach.paraP1.exposureTime);
-				if (mode == SELECT_FIND_MODEL.HDC_MANUAL_P2) mc.para.setting(mc.para.HDC.modelManualTeach.paraP2.exposureTime, out mc.para.HDC.modelManualTeach.paraP2.exposureTime);
-
 			}
 			if (sender.Equals(TB_Lighiting_Ch1))
 			{
@@ -239,9 +212,6 @@ namespace PSA_Application
 				if (mode == SELECT_FIND_MODEL.HDC_PADC2) mc.para.setting(mc.para.HDC.modelPADC2.light.ch1, out mc.para.HDC.modelPADC2.light.ch1);
 				if (mode == SELECT_FIND_MODEL.HDC_PADC3) mc.para.setting(mc.para.HDC.modelPADC3.light.ch1, out mc.para.HDC.modelPADC3.light.ch1);
 				if (mode == SELECT_FIND_MODEL.HDC_PADC4) mc.para.setting(mc.para.HDC.modelPADC4.light.ch1, out mc.para.HDC.modelPADC4.light.ch1);
-				if (mode == SELECT_FIND_MODEL.HDC_MANUAL_P1) mc.para.setting(mc.para.HDC.modelManualTeach.paraP1.light.ch1, out mc.para.HDC.modelManualTeach.paraP1.light.ch1);
-				if (mode == SELECT_FIND_MODEL.HDC_MANUAL_P2) mc.para.setting(mc.para.HDC.modelManualTeach.paraP2.light.ch1, out mc.para.HDC.modelManualTeach.paraP2.light.ch1);
-
 			}
 			if (sender.Equals(TB_Lighiting_Ch2))
 			{
@@ -250,8 +220,6 @@ namespace PSA_Application
 				if (mode == SELECT_FIND_MODEL.HDC_PADC2) mc.para.setting(mc.para.HDC.modelPADC2.light.ch2, out mc.para.HDC.modelPADC2.light.ch2);
 				if (mode == SELECT_FIND_MODEL.HDC_PADC3) mc.para.setting(mc.para.HDC.modelPADC3.light.ch2, out mc.para.HDC.modelPADC3.light.ch2);
 				if (mode == SELECT_FIND_MODEL.HDC_PADC4) mc.para.setting(mc.para.HDC.modelPADC4.light.ch2, out mc.para.HDC.modelPADC4.light.ch2);
-				if (mode == SELECT_FIND_MODEL.HDC_MANUAL_P1) mc.para.setting(mc.para.HDC.modelManualTeach.paraP1.light.ch2, out mc.para.HDC.modelManualTeach.paraP1.light.ch2);
-				if (mode == SELECT_FIND_MODEL.HDC_MANUAL_P2) mc.para.setting(mc.para.HDC.modelManualTeach.paraP2.light.ch2, out mc.para.HDC.modelManualTeach.paraP2.light.ch2);
 			}
 			if (sender.Equals(BT_Lighiting_Jog))
 			{
@@ -275,27 +243,19 @@ namespace PSA_Application
 				}
 				if (mode == SELECT_FIND_MODEL.HDC_PADC1)
 				{
-					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC1(padIndexX), mc.hd.tool.cPos.y.PADC1(padIndexY), mc.para.CAL.toolAngleOffset.value, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC1(padIndexX, UtilityControl.useHalfPosition), mc.hd.tool.cPos.y.PADC1(padIndexY, UtilityControl.useHalfPosition), mc.para.CAL.toolAngleOffset.value, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				}
 				if (mode == SELECT_FIND_MODEL.HDC_PADC2)
 				{
-					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC2(padIndexX), mc.hd.tool.cPos.y.PADC2(padIndexY), mc.para.CAL.toolAngleOffset.value, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                    mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC2(padIndexX, UtilityControl.useHalfPosition), mc.hd.tool.cPos.y.PADC2(padIndexY, UtilityControl.useHalfPosition), mc.para.CAL.toolAngleOffset.value, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				}
 				if (mode == SELECT_FIND_MODEL.HDC_PADC3)
 				{
-					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC3(padIndexX), mc.hd.tool.cPos.y.PADC3(padIndexY), mc.para.CAL.toolAngleOffset.value, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                    mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC3(padIndexX, UtilityControl.useHalfPosition), mc.hd.tool.cPos.y.PADC3(padIndexY, UtilityControl.useHalfPosition), mc.para.CAL.toolAngleOffset.value, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				}
 				if (mode == SELECT_FIND_MODEL.HDC_PADC4)
 				{
-					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC4(padIndexX), mc.hd.tool.cPos.y.PADC4(padIndexY), mc.para.CAL.toolAngleOffset.value, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-				}
-				if (mode == SELECT_FIND_MODEL.HDC_MANUAL_P1)
-				{
-					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.M_POS_P1(padIndexX), mc.hd.tool.cPos.y.M_POS_P1(padIndexY), mc.para.CAL.toolAngleOffset.value, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
-				}
-				if (mode == SELECT_FIND_MODEL.HDC_MANUAL_P2)
-				{
-					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.M_POS_P2(padIndexX), mc.hd.tool.cPos.y.M_POS_P2(padIndexY), mc.para.CAL.toolAngleOffset.value, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                    mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC4(padIndexX, UtilityControl.useHalfPosition), mc.hd.tool.cPos.y.PADC4(padIndexY, UtilityControl.useHalfPosition), mc.para.CAL.toolAngleOffset.value, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				}
 
 				EVENT.hWindowLargeDisplay(mc.hdc.cam.acq.grabber.cameraNumber);
@@ -453,19 +413,19 @@ namespace PSA_Application
 
 				if (mc.para.HDC.fiducialPos.value == 0)
 				{
-					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC1(padIndexX), mc.hd.tool.cPos.y.PADC1(padIndexY), mc.para.CAL.toolAngleOffset.value, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                    mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC1(padIndexX, UtilityControl.useHalfPosition), mc.hd.tool.cPos.y.PADC1(padIndexY, UtilityControl.useHalfPosition), mc.para.CAL.toolAngleOffset.value, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				}
 				if (mc.para.HDC.fiducialPos.value == 1)
 				{
-					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC2(padIndexX), mc.hd.tool.cPos.y.PADC2(padIndexY), mc.para.CAL.toolAngleOffset.value, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                    mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC2(padIndexX, UtilityControl.useHalfPosition), mc.hd.tool.cPos.y.PADC2(padIndexY, UtilityControl.useHalfPosition), mc.para.CAL.toolAngleOffset.value, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				}
 				if (mc.para.HDC.fiducialPos.value == 2)
 				{
-					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC3(padIndexX), mc.hd.tool.cPos.y.PADC3(padIndexY), mc.para.CAL.toolAngleOffset.value, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                    mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC3(padIndexX, UtilityControl.useHalfPosition), mc.hd.tool.cPos.y.PADC3(padIndexY, UtilityControl.useHalfPosition), mc.para.CAL.toolAngleOffset.value, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				}
 				if (mc.para.HDC.fiducialPos.value == 3)
 				{
-					mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC4(padIndexX), mc.hd.tool.cPos.y.PADC4(padIndexY), mc.para.CAL.toolAngleOffset.value, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
+                    mc.hd.tool.jogMove(mc.hd.tool.cPos.x.PADC4(padIndexX, UtilityControl.useHalfPosition), mc.hd.tool.cPos.y.PADC4(padIndexY, UtilityControl.useHalfPosition), mc.para.CAL.toolAngleOffset.value, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); goto EXIT; }
 				}
 
 				EVENT.hWindowLargeDisplay(mc.hdc.cam.acq.grabber.cameraNumber);
@@ -518,16 +478,6 @@ namespace PSA_Application
 				#endregion
 				this.Enabled = true;
 				EVENT.hWindow2Display();
-			}
-			if (sender.Equals(BT_Dist_P1P2))
-			{
-				mc.para.HDC.modelManualTeach.dX.value = mc.hd.tool.cPos.x.M_POS_P2(padIndexX) + mc.para.HDC.modelManualTeach.offsetX_P2.value - (mc.hd.tool.cPos.x.M_POS_P1(padIndexX) + mc.para.HDC.modelManualTeach.offsetX_P1.value);
-				mc.para.HDC.modelManualTeach.dY.value = mc.hd.tool.cPos.y.M_POS_P2(padIndexY) + mc.para.HDC.modelManualTeach.offsetY_P2.value - (mc.hd.tool.cPos.y.M_POS_P1(padIndexY) + mc.para.HDC.modelManualTeach.offsetY_P1.value); 
-				mc.para.HDC.modelManualTeach.dT.value = Math.Atan2(mc.para.HDC.modelManualTeach.dY.value, mc.para.HDC.modelManualTeach.dX.value);
-				mc.log.debug.write(mc.log.CODE.ETC, "dX : " + mc.para.HDC.modelManualTeach.dX.value);
-				mc.log.debug.write(mc.log.CODE.ETC, "dY : " + mc.para.HDC.modelManualTeach.dY.value);
-				mc.log.debug.write(mc.log.CODE.ETC, "dT : " + mc.para.HDC.modelManualTeach.dT.value);
-				mc.log.debug.write(mc.log.CODE.ETC, "Degrees : dT : " + mc.para.HDC.modelManualTeach.dT.value * 180/Math.PI);
 			}
 		EXIT:
 			mc.para.write(out ret.b); if (!ret.b) { mc.message.alarm("para write error"); }
@@ -725,162 +675,6 @@ namespace PSA_Application
 					LB_SelectModel_Text = BT_SelectModel_PADC4.Text;
 				}
 
-				if (mode == SELECT_FIND_MODEL.HDC_MANUAL_P1)
-				{
-					passScore = mc.para.HDC.modelManualTeach.paraP1.passScore.value.ToString();
-					angleStart = mc.para.HDC.modelManualTeach.paraP1.angleStart.value.ToString();
-					angelExtent = mc.para.HDC.modelManualTeach.paraP1.angleExtent.value.ToString();
-					exposureTime = mc.para.HDC.modelManualTeach.paraP1.exposureTime.value.ToString();
-					lightCh1 = mc.para.HDC.modelManualTeach.paraP1.light.ch1.value.ToString();
-					lightCh2 = mc.para.HDC.modelManualTeach.paraP1.light.ch2.value.ToString();
-					hWC_Model.Visible = true;
-
-					if (mc.para.HDC.modelManualTeach.paraP1.algorism.value == (int)MODEL_ALGORISM.NCC)
-					{
-						algorism = BT_AlgorismSelect_NccModel.Text;
-
-						HOperatorSet.ClearWindow(hWC_Model.HalconID);
-						if (mc.para.HDC.modelManualTeach.paraP1.isCreate.value == (int)BOOL.TRUE)
-						{
-							try
-							{
-								HTuple sizeX, sizeY, ratio;
-								sizeX = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].createColumn2 - mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].createColumn1;
-								sizeY = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].createRow2 - mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].createRow1;
-								ratio = sizeY / sizeX;
-								double height;
-								height = hWC_Model.Width * ratio;
-								hWC_Model.Height = (int)height;
-								HOperatorSet.SetPart(hWC_Model.HalconID, 0, 0, mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].createRow2 - mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].createRow1
-									, mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].createColumn2  - mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].createColumn1);
-								HOperatorSet.DispImage(mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].CropDomainImage, hWC_Model.HalconID);
-								HOperatorSet.SetColor(hWC_Model.HalconID, "green");
-								HOperatorSet.DispCross(hWC_Model.HalconID, (mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].createRow2 - mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].createRow1)/2
-									, (mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].createColumn2  - mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].createColumn1)/2, 10, 0);
-							}
-							catch
-							{
-							}
-						}
-					}
-					if (mc.para.HDC.modelManualTeach.paraP1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-					{
-						algorism = BT_AlgorismSelect_ShapeModel.Text;
-
-						HOperatorSet.ClearWindow(hWC_Model.HalconID);
-						if (mc.para.HDC.modelManualTeach.paraP1.isCreate.value == (int)BOOL.TRUE)
-						{
-							try
-							{
-								HTuple sizeX, sizeY, ratio;
-								sizeX = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].createColumn2 - mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].createColumn1;
-								sizeY = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].createRow2 - mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].createRow1;
-								ratio = sizeY / sizeX;
-								double height;
-								height = hWC_Model.Width * ratio;
-								hWC_Model.Height = (int)height;
-								HOperatorSet.SetPart(hWC_Model.HalconID, 0, 0, mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].createRow2 - mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].createRow1
-									, mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].createColumn2 - mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].createColumn1);
-								HOperatorSet.DispImage(mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].CropDomainImage, hWC_Model.HalconID);
-								HOperatorSet.SetColor(hWC_Model.HalconID, "green");
-								HOperatorSet.DispCross(hWC_Model.HalconID, (mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].createRow2 - mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].createRow1) / 2
-									, (mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].createColumn2 - mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].createColumn1) / 2, 10, 0);
-							}
-							catch
-							{
-							}
-						}
-					}
-					if (mc.para.HDC.modelManualTeach.paraP1.isCreate.value == (int)BOOL.TRUE)
-					{
-						LB_Model_Created_BackColor = Color.Transparent;
-						LB_Model_Created_Text = "Model Created";
-					}
-					else
-					{
-						LB_Model_Created_BackColor = Color.Red;
-						LB_Model_Created_Text = "Model Uncreated";
-					}
-					LB_SelectModel_Text = BT_SelectModel_P1.Text;
-				}
-				if (mode == SELECT_FIND_MODEL.HDC_MANUAL_P2)
-				{
-					passScore = mc.para.HDC.modelManualTeach.paraP2.passScore.value.ToString();
-					angleStart = mc.para.HDC.modelManualTeach.paraP2.angleStart.value.ToString();
-					angelExtent = mc.para.HDC.modelManualTeach.paraP2.angleExtent.value.ToString();
-					exposureTime = mc.para.HDC.modelManualTeach.paraP2.exposureTime.value.ToString();
-					lightCh1 = mc.para.HDC.modelManualTeach.paraP2.light.ch1.value.ToString();
-					lightCh2 = mc.para.HDC.modelManualTeach.paraP2.light.ch2.value.ToString();
-					hWC_Model.Visible = true;
-					if (mc.para.HDC.modelManualTeach.paraP2.algorism.value == (int)MODEL_ALGORISM.NCC)
-					{
-						algorism = BT_AlgorismSelect_NccModel.Text;
-
-						HOperatorSet.ClearWindow(hWC_Model.HalconID);
-						if (mc.para.HDC.modelManualTeach.paraP2.isCreate.value == (int)BOOL.TRUE)
-						{
-							try
-							{
-								HTuple sizeX, sizeY, ratio;
-								sizeX = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_NCC].createColumn2 - mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_NCC].createColumn1;
-								sizeY = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_NCC].createRow2 - mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_NCC].createRow1;
-								ratio = sizeY / sizeX;
-								double height;
-								height = hWC_Model.Width * ratio;
-								hWC_Model.Height = (int)height;
-								HOperatorSet.SetPart(hWC_Model.HalconID, 0, 0, mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_NCC].createRow2 - mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_NCC].createRow1
-									, mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_NCC].createColumn2 - mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_NCC].createColumn1);
-								HOperatorSet.DispImage(mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_NCC].CropDomainImage, hWC_Model.HalconID);
-								HOperatorSet.SetColor(hWC_Model.HalconID, "green");
-								HOperatorSet.DispCross(hWC_Model.HalconID, (mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_NCC].createRow2 - mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_NCC].createRow1) / 2
-									, (mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_NCC].createColumn2 - mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_NCC].createColumn1) / 2, 10, 0);
-							}
-							catch
-							{
-							}
-						}
-					}
-					if (mc.para.HDC.modelManualTeach.paraP2.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-					{
-						algorism = BT_AlgorismSelect_ShapeModel.Text;
-
-						HOperatorSet.ClearWindow(hWC_Model.HalconID);
-						if (mc.para.HDC.modelManualTeach.paraP2.isCreate.value == (int)BOOL.TRUE)
-						{
-							try
-							{
-								HTuple sizeX, sizeY, ratio;
-								sizeX = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE].createColumn2 - mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE].createColumn1;
-								sizeY = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE].createRow2 - mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE].createRow1;
-								ratio = sizeY / sizeX;
-								double height;
-								height = hWC_Model.Width * ratio;
-								hWC_Model.Height = (int)height;
-								HOperatorSet.SetPart(hWC_Model.HalconID, 0, 0, mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE].createRow2 - mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE].createRow1
-									, mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE].createColumn2 - mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE].createColumn1);
-								HOperatorSet.DispImage(mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE].CropDomainImage, hWC_Model.HalconID);
-								HOperatorSet.SetColor(hWC_Model.HalconID, "green");
-								HOperatorSet.DispCross(hWC_Model.HalconID, (mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE].createRow2 - mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE].createRow1) / 2
-									, (mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE].createColumn2 - mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE].createColumn1) / 2, 10, 0);
-							}
-							catch
-							{
-							}
-						}
-					}
-					if (mc.para.HDC.modelManualTeach.paraP2.isCreate.value == (int)BOOL.TRUE)
-					{
-						LB_Model_Created_BackColor = Color.Transparent;
-						LB_Model_Created_Text = "Model Created";
-					}
-					else
-					{
-						LB_Model_Created_BackColor = Color.Red;
-						LB_Model_Created_Text = "Model Uncreated";
-					}
-					LB_SelectModel_Text = BT_SelectModel_P2.Text;
-				}
-
 				TB_PassScore.Text = passScore;
 // 				TB_AngleStart.Text = angleStart;
 // 				TB_AngleExtent.Text = angelExtent;
@@ -929,37 +723,14 @@ namespace PSA_Application
 					BT_VisionErrorSkip.Text = "ON"; BT_VisionErrorSkip.Image = Properties.Resources.Yellow_LED;
 				}
 
-				if (mc.para.HDC.useManualTeach.value == 0)
-				{
-					BT_USE_MANUAL_TEACH.Text = "OFF"; BT_USE_MANUAL_TEACH.Image = Properties.Resources.YellowLED_OFF;
-					
-					BT_SelectModel_P1.Enabled = false;
-					BT_SelectModel_P2.Enabled = false;
-					BT_Dist_P1P2.Enabled = false;
-					BT_SelectModel_PAD.Enabled = true;
-					BT_SelectModel_PADC1.Enabled = true;
-					BT_SelectModel_PADC2.Enabled = true;
-					BT_SelectModel_PADC3.Enabled = true;
-					BT_SelectModel_PADC4.Enabled = true;
-					TS_DETECT_DIRECT.Enabled = true;
-					TS_CROPAREA.Enabled = true;
-				}
-				else
-				{
-					BT_USE_MANUAL_TEACH.Text = "ON"; BT_USE_MANUAL_TEACH.Image = Properties.Resources.Yellow_LED;
-
-					BT_SelectModel_P1.Enabled = true;
-					BT_SelectModel_P2.Enabled = true;
-					BT_Dist_P1P2.Enabled = true;
-					BT_SelectModel_PAD.Enabled = false;
-					BT_SelectModel_PADC1.Enabled = false;
-					BT_SelectModel_PADC2.Enabled = false;
-					BT_SelectModel_PADC3.Enabled = false;
-					BT_SelectModel_PADC4.Enabled = false;
-					TS_DETECT_DIRECT.Enabled = false;
-					TS_CROPAREA.Enabled = false;
-				}
-
+                BT_SelectModel_PAD.Enabled = true;
+                BT_SelectModel_PADC1.Enabled = true;
+                BT_SelectModel_PADC2.Enabled = true;
+                BT_SelectModel_PADC3.Enabled = true;
+                BT_SelectModel_PADC4.Enabled = true;
+                TS_DETECT_DIRECT.Enabled = true;
+                TS_CROPAREA.Enabled = true;
+			
 				if (mc.para.HDC.fiducialPos.value == 0)
 				{
 					BT_FIDUCIAL_POS.Text = BT_FIDUCIAL_POS1.Text;

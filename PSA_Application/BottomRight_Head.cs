@@ -410,29 +410,29 @@ namespace PSA_Application
 			{
 				padIndexX = CbB_PadIX.SelectedIndex;
 				padIndexY = CbB_PadIY.SelectedIndex;
-				posX = mc.hd.tool.cPos.x.PADC1(padIndexX);
-				posY = mc.hd.tool.cPos.y.PADC1(padIndexY);
+				posX = mc.hd.tool.cPos.x.PADC1(padIndexX, UtilityControl.useHalfPosition);
+                posY = mc.hd.tool.cPos.y.PADC1(padIndexY, UtilityControl.useHalfPosition);
 			}
 			else if (BT_PositionSelect.Text == BT_PositionSelect_PadC2.Text)
 			{
 				padIndexX = CbB_PadIX.SelectedIndex;
 				padIndexY = CbB_PadIY.SelectedIndex;
-				posX = mc.hd.tool.cPos.x.PADC2(padIndexX);
-				posY = mc.hd.tool.cPos.y.PADC2(padIndexY);
+                posX = mc.hd.tool.cPos.x.PADC2(padIndexX, UtilityControl.useHalfPosition);
+                posY = mc.hd.tool.cPos.y.PADC2(padIndexY, UtilityControl.useHalfPosition);
 			}
 			else if (BT_PositionSelect.Text == BT_PositionSelect_PadC3.Text)
 			{
 				padIndexX = CbB_PadIX.SelectedIndex;
 				padIndexY = CbB_PadIY.SelectedIndex;
-				posX = mc.hd.tool.cPos.x.PADC3(padIndexX);
-				posY = mc.hd.tool.cPos.y.PADC3(padIndexY);
+                posX = mc.hd.tool.cPos.x.PADC3(padIndexX, UtilityControl.useHalfPosition);
+                posY = mc.hd.tool.cPos.y.PADC3(padIndexY, UtilityControl.useHalfPosition);
 			}
 			else if (BT_PositionSelect.Text == BT_PositionSelect_PadC4.Text)
 			{
 				padIndexX = CbB_PadIX.SelectedIndex;
 				padIndexY = CbB_PadIY.SelectedIndex;
-				posX = mc.hd.tool.cPos.x.PADC4(padIndexX);
-				posY = mc.hd.tool.cPos.y.PADC4(padIndexY);
+                posX = mc.hd.tool.cPos.x.PADC4(padIndexX, UtilityControl.useHalfPosition);
+                posY = mc.hd.tool.cPos.y.PADC4(padIndexY, UtilityControl.useHalfPosition);
 			}
 			else if (BT_PositionSelect.Text == BT_PositionSelect_ATC1.Text)
 			{

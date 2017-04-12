@@ -1781,66 +1781,6 @@ namespace PSA_Application
 					mc.ulc.LIVE = true; mc.ulc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
 				}
 				#endregion
-				#region HDC_MANUAL_P1
-				if (mode == SELECT_FIND_MODEL.HDC_MANUAL_P1)
-				{
-					mc.hdc.LIVE = false;
-					mc.hdc.model_delete(mode);
-
-					if (mc.para.HDC.modelManualTeach.paraP1.algorism.value == (int)MODEL_ALGORISM.NCC)
-					{
-						mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].algorism = MODEL_ALGORISM.NCC.ToString();
-						mc.hdc.cam.createModel((int)HDC_MODEL.MANUAL_TEACH_P1_NCC);
-						mc.hdc.cam.createFind((int)HDC_MODEL.MANUAL_TEACH_P1_NCC);
-						mc.para.HDC.modelManualTeach.paraP1.isCreate.value = (int)BOOL.TRUE;
-						if (mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].isCreate == "false") 
-							mc.para.HDC.modelManualTeach.paraP1.isCreate.value = (int)BOOL.FALSE;
-					}
-					else if (mc.para.HDC.modelManualTeach.paraP1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-					{
-						mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].algorism = MODEL_ALGORISM.SHAPE.ToString();
-						mc.hdc.cam.createModel((int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE);
-						mc.hdc.cam.createFind((int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE);
-						mc.para.HDC.modelManualTeach.paraP1.isCreate.value = (int)BOOL.TRUE;
-						if (mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].isCreate == "false") 
-							mc.para.HDC.modelManualTeach.paraP1.isCreate.value = (int)BOOL.FALSE;
-					}
-					mc.para.HDC.MTeachPosX_P1.value = posX - mc.hd.tool.cPos.x.PAD(padIndexX);
-					mc.para.HDC.MTeachPosY_P1.value = posY - mc.hd.tool.cPos.y.PAD(padIndexY);
-					
-					mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
-				}
-				#endregion
-				#region HDC_MANUAL_P2
-				if (mode == SELECT_FIND_MODEL.HDC_MANUAL_P2)
-				{
-					mc.hdc.LIVE = false;
-					mc.hdc.model_delete(mode);
-
-					if (mc.para.HDC.modelManualTeach.paraP2.algorism.value == (int)MODEL_ALGORISM.NCC)
-					{
-						mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_NCC].algorism = MODEL_ALGORISM.NCC.ToString();
-						mc.hdc.cam.createModel((int)HDC_MODEL.MANUAL_TEACH_P2_NCC);
-						mc.hdc.cam.createFind((int)HDC_MODEL.MANUAL_TEACH_P2_NCC);
-						mc.para.HDC.modelManualTeach.paraP2.isCreate.value = (int)BOOL.TRUE;
-						if (mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_NCC].isCreate == "false") 
-							mc.para.HDC.modelManualTeach.paraP2.isCreate.value = (int)BOOL.FALSE;
-					}
-					else if (mc.para.HDC.modelManualTeach.paraP2.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-					{
-						mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE].algorism = MODEL_ALGORISM.SHAPE.ToString();
-						mc.hdc.cam.createModel((int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE);
-						mc.hdc.cam.createFind((int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE);
-						mc.para.HDC.modelManualTeach.paraP2.isCreate.value = (int)BOOL.TRUE;
-						if (mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE].isCreate == "false") 
-							mc.para.HDC.modelManualTeach.paraP2.isCreate.value = (int)BOOL.FALSE;
-					}
-					mc.para.HDC.MTeachPosX_P2.value = posX - mc.hd.tool.cPos.x.PAD(padIndexX);
-					mc.para.HDC.MTeachPosY_P2.value = posY - mc.hd.tool.cPos.y.PAD(padIndexY);
-
-					mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
-				}
-				#endregion
 			}
 			#endregion
 			#region BT_SpeedXY
@@ -2240,8 +2180,8 @@ namespace PSA_Application
 				{
 					mc.hdc.LIVE = false;
 					#region hd pd
-					posX = mc.hd.tool.cPos.x.PADC2(padIndexX) - 4000;
-					posY = mc.hd.tool.cPos.y.PADC2(padIndexY);
+					posX = mc.hd.tool.cPos.x.PADC2(padIndexX, UtilityControl.useHalfPosition) - 4000;
+					posY = mc.hd.tool.cPos.y.PADC2(padIndexY, UtilityControl.useHalfPosition);
 					posT = mc.hd.tool.tPos.t.ZERO;
 					mc.hd.tool.jogMove(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); this.Close(); }
 					#endregion
@@ -2307,23 +2247,23 @@ namespace PSA_Application
 					#region move pd
 					if (mc.para.HDC.fiducialPos.value == 0)
 					{
-						posX = mc.hd.tool.cPos.x.PADC1(padIndexX);
-						posY = mc.hd.tool.cPos.y.PADC1(padIndexY);
+						posX = mc.hd.tool.cPos.x.PADC1(padIndexX, UtilityControl.useHalfPosition);
+						posY = mc.hd.tool.cPos.y.PADC1(padIndexY, UtilityControl.useHalfPosition);
 					}
 					else if (mc.para.HDC.fiducialPos.value == 1)
 					{
-						posX = mc.hd.tool.cPos.x.PADC2(padIndexX);
-						posY = mc.hd.tool.cPos.y.PADC2(padIndexY);
+						posX = mc.hd.tool.cPos.x.PADC2(padIndexX, UtilityControl.useHalfPosition);
+						posY = mc.hd.tool.cPos.y.PADC2(padIndexY, UtilityControl.useHalfPosition);
 					}
 					else if (mc.para.HDC.fiducialPos.value == 2)
 					{
-						posX = mc.hd.tool.cPos.x.PADC3(padIndexX);
-						posY = mc.hd.tool.cPos.y.PADC3(padIndexY);
+						posX = mc.hd.tool.cPos.x.PADC3(padIndexX, UtilityControl.useHalfPosition);
+						posY = mc.hd.tool.cPos.y.PADC3(padIndexY, UtilityControl.useHalfPosition);
 					}
 					else
 					{
-						posX = mc.hd.tool.cPos.x.PADC4(padIndexX);
-						posY = mc.hd.tool.cPos.y.PADC4(padIndexY);
+						posX = mc.hd.tool.cPos.x.PADC4(padIndexX, UtilityControl.useHalfPosition);
+						posY = mc.hd.tool.cPos.y.PADC4(padIndexY, UtilityControl.useHalfPosition);
 					}
 					posT = mc.hd.tool.tPos.t.ZERO;
 					mc.hd.tool.jogMove(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); this.Close(); }
@@ -2510,139 +2450,6 @@ namespace PSA_Application
 
 				}
 				#endregion
-
-				#region HDC_MANUAL_P1
-				if (mode == SELECT_FIND_MODEL.HDC_MANUAL_P1)
-				{
-					mc.hdc.LIVE = false;
-					#region hd move
-					posX = mc.hd.tool.cPos.x.M_POS_P1(padIndexX);
-					posY = mc.hd.tool.cPos.y.M_POS_P1(padIndexY);
-					posT = mc.hd.tool.tPos.t.ZERO;
-					mc.hd.tool.jogMove(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); this.Close(); }
-					#endregion
-					#region HDC.req
-					if (mc.para.HDC.modelManualTeach.paraP1.isCreate.value == (int)BOOL.TRUE)
-					{
-						if (mc.para.HDC.modelManualTeach.paraP1.algorism.value == (int)MODEL_ALGORISM.NCC)
-						{
-							mc.hdc.reqMode = REQMODE.FIND_MODEL;
-							mc.hdc.reqModelNumber = (int)HDC_MODEL.MANUAL_TEACH_P1_NCC;
-						}
-						else if (mc.para.HDC.modelManualTeach.paraP1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-						{
-							mc.hdc.reqMode = REQMODE.FIND_MODEL;
-							mc.hdc.reqModelNumber = (int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE;
-						}
-					}
-					else
-					{
-						mc.hdc.reqMode = REQMODE.GRAB;
-					}
-					mc.hdc.lighting_exposure(mc.para.HDC.modelManualTeach.paraP1.light, mc.para.HDC.modelManualTeach.paraP1.exposureTime);
-
-					mc.hdc.triggerMode = TRIGGERMODE.SOFTWARE;
-					mc.hdc.req = true;
-
-					#endregion
-					mc.main.Thread_Polling();
-					#region HDC result
-					double rX = 0;
-					double rY = 0;
-					double rT = 0;
-					if (mc.para.HDC.modelManualTeach.paraP1.isCreate.value == (int)BOOL.TRUE)
-					{
-						if (mc.para.HDC.modelManualTeach.paraP1.algorism.value == (int)MODEL_ALGORISM.NCC)
-						{
-							rX = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].resultX;
-							rY = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].resultY;
-							rT = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_NCC].resultAngle;
-						}
-						else if (mc.para.HDC.modelManualTeach.paraP1.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-						{
-							rX = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].resultX;
-							rY = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].resultY;
-							rT = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P1_SHAPE].resultAngle;
-						}
-					}
-					#endregion
-					TB_Result.Clear();
-					TB_Result.AppendText("Result X        : " + Math.Round(rX, 3).ToString() + "\n");
-					TB_Result.AppendText("Result Y        : " + Math.Round(rY, 3).ToString() + "\n");
-					mc.log.debug.write(mc.log.CODE.ETC, "X : " + Math.Round(rX, 3).ToString() + "/ Y : " + Math.Round(rY, 3).ToString());
-					mc.para.HDC.modelManualTeach.offsetX_P1.value = rX;
-					mc.para.HDC.modelManualTeach.offsetY_P1.value = rY;
-					mc.idle(1000);
-					mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
-				}
-				#endregion
-
-				#region HDC_MANUAL_P2
-				if (mode == SELECT_FIND_MODEL.HDC_MANUAL_P2)
-				{
-					mc.hdc.LIVE = false;
-					#region move pd
-					posX = mc.hd.tool.cPos.x.M_POS_P2(padIndexX);
-					posY = mc.hd.tool.cPos.y.M_POS_P2(padIndexY);
-					posT = mc.hd.tool.tPos.t.ZERO;
-					mc.hd.tool.jogMove(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); this.Close(); }
-					#endregion
-					#region HDC.req
-					if (mc.para.HDC.modelManualTeach.paraP2.isCreate.value == (int)BOOL.TRUE)
-					{
-						if (mc.para.HDC.modelManualTeach.paraP2.algorism.value == (int)MODEL_ALGORISM.NCC)
-						{
-							mc.hdc.reqMode = REQMODE.FIND_MODEL;
-							mc.hdc.reqModelNumber = (int)HDC_MODEL.MANUAL_TEACH_P2_NCC;
-						}
-						else if (mc.para.HDC.modelManualTeach.paraP2.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-						{
-							mc.hdc.reqMode = REQMODE.FIND_MODEL;
-							mc.hdc.reqModelNumber = (int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE;
-						}
-					}
-					else
-					{
-						mc.hdc.reqMode = REQMODE.GRAB;
-					}
-					mc.hdc.lighting_exposure(mc.para.HDC.modelManualTeach.paraP2.light, mc.para.HDC.modelManualTeach.paraP2.exposureTime);
-
-					mc.hdc.triggerMode = TRIGGERMODE.SOFTWARE;
-					mc.hdc.req = true;
-
-					#endregion
-					mc.main.Thread_Polling();
-					#region HDC result
-					double rX = 0;
-					double rY = 0;
-					double rT = 0;
-					if (mc.para.HDC.modelManualTeach.paraP2.isCreate.value == (int)BOOL.TRUE)
-					{
-						if (mc.para.HDC.modelManualTeach.paraP2.algorism.value == (int)MODEL_ALGORISM.NCC)
-						{
-							rX = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_NCC].resultX;
-							rY = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_NCC].resultY;
-							rT = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_NCC].resultAngle;
-						}
-						else if (mc.para.HDC.modelManualTeach.paraP2.algorism.value == (int)MODEL_ALGORISM.SHAPE)
-						{
-							rX = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE].resultX;
-							rY = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE].resultY;
-							rT = mc.hdc.cam.model[(int)HDC_MODEL.MANUAL_TEACH_P2_SHAPE].resultAngle;
-						}
-					}
-					#endregion
-					TB_Result.Clear();
-					TB_Result.AppendText("Result X        : " + Math.Round(rX, 3).ToString() + "\n");
-					TB_Result.AppendText("Result Y        : " + Math.Round(rY, 3).ToString() + "\n");
-					mc.log.debug.write(mc.log.CODE.ETC, "X : " + Math.Round(rX, 3).ToString() + "/ Y : " + Math.Round(rY, 3).ToString());
-					mc.para.HDC.modelManualTeach.offsetX_P2.value = rX;
-					mc.para.HDC.modelManualTeach.offsetY_P2.value = rY;
-					mc.idle(1000);
-					mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
-				}
-				#endregion
-
 			}
 			#endregion
 			if (sender.Equals(BT_ESC))
@@ -2761,8 +2568,8 @@ namespace PSA_Application
 			{
 				mc.hdc.lighting_exposure(mc.para.HDC.modelPAD.light, mc.para.HDC.modelPAD.exposureTime);
 				EVENT.hWindowLargeDisplay(mc.hdc.cam.acq.grabber.cameraNumber);
-				posX = mc.hd.tool.cPos.x.PADC2(padIndexX) - 4000;
-				posY = mc.hd.tool.cPos.y.PADC2(padIndexY);
+				posX = mc.hd.tool.cPos.x.PADC2(padIndexX, UtilityControl.useHalfPosition) - 4000;
+				posY = mc.hd.tool.cPos.y.PADC2(padIndexY, UtilityControl.useHalfPosition);
 				posT = mc.hd.tool.tPos.t.ZERO;
 				mc.hd.tool.jogMove(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); this.Close(); }
 				mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
@@ -2809,8 +2616,8 @@ namespace PSA_Application
 			{
 				mc.hdc.lighting_exposure(mc.para.HDC.modelPADC2.light, mc.para.HDC.modelPADC2.exposureTime);
 				EVENT.hWindowLargeDisplay(mc.hdc.cam.acq.grabber.cameraNumber);
-				posX = mc.hd.tool.cPos.x.PADC2(padIndexX);
-				posY = mc.hd.tool.cPos.y.PADC2(padIndexY);
+				posX = mc.hd.tool.cPos.x.PADC2(padIndexX, UtilityControl.useHalfPosition);
+				posY = mc.hd.tool.cPos.y.PADC2(padIndexY, UtilityControl.useHalfPosition);
 				posT = mc.hd.tool.tPos.t.ZERO;
 				mc.hd.tool.jogMove(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); this.Close(); }
 				mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
@@ -2835,8 +2642,8 @@ namespace PSA_Application
 			{
 				mc.hdc.lighting_exposure(mc.para.HDC.modelPADC3.light, mc.para.HDC.modelPADC3.exposureTime);
 				EVENT.hWindowLargeDisplay(mc.hdc.cam.acq.grabber.cameraNumber);
-				posX = mc.hd.tool.cPos.x.PADC3(padIndexX);
-				posY = mc.hd.tool.cPos.y.PADC3(padIndexY);
+				posX = mc.hd.tool.cPos.x.PADC3(padIndexX, UtilityControl.useHalfPosition);
+				posY = mc.hd.tool.cPos.y.PADC3(padIndexY, UtilityControl.useHalfPosition);
 				posT = mc.hd.tool.tPos.t.ZERO;
 				mc.hd.tool.jogMove(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); this.Close(); }
 				mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
@@ -2861,8 +2668,8 @@ namespace PSA_Application
 			{
 				mc.hdc.lighting_exposure(mc.para.HDC.modelPADC4.light, mc.para.HDC.modelPADC4.exposureTime);
 				EVENT.hWindowLargeDisplay(mc.hdc.cam.acq.grabber.cameraNumber);
-				posX = mc.hd.tool.cPos.x.PADC4(padIndexX);
-				posY = mc.hd.tool.cPos.y.PADC4(padIndexY);
+				posX = mc.hd.tool.cPos.x.PADC4(padIndexX, UtilityControl.useHalfPosition);
+				posY = mc.hd.tool.cPos.y.PADC4(padIndexY, UtilityControl.useHalfPosition);
 				posT = mc.hd.tool.tPos.t.ZERO;
 				mc.hd.tool.jogMove(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); this.Close(); }
 				mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
@@ -2889,7 +2696,7 @@ namespace PSA_Application
             {
                 mc.hdc.lighting_exposure(mc.para.HS.modelPAD.light, mc.para.HS.modelPAD.exposureTime);
                 EVENT.hWindowLargeDisplay(mc.hdc.cam.acq.grabber.cameraNumber);
-                posX = mc.hd.tool.cPos.x.HSPADC2(padIndexX) - 4000;
+                posX = mc.hd.tool.cPos.x.HSPADC2(padIndexX);
                 posY = mc.hd.tool.cPos.y.HSPADC2(padIndexY);
                 posT = mc.hd.tool.tPos.t.ZERO;
                 mc.hd.tool.jogMove(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); this.Close(); }
@@ -2998,23 +2805,23 @@ namespace PSA_Application
 				EVENT.hWindowLargeDisplay(mc.hdc.cam.acq.grabber.cameraNumber);
 				if (mc.para.HDC.fiducialPos.value == 0)
 				{
-					posX = mc.hd.tool.cPos.x.PADC1(padIndexX);
-					posY = mc.hd.tool.cPos.y.PADC1(padIndexY);
+					posX = mc.hd.tool.cPos.x.PADC1(padIndexX, UtilityControl.useHalfPosition);
+					posY = mc.hd.tool.cPos.y.PADC1(padIndexY, UtilityControl.useHalfPosition);
 				}
 				else if (mc.para.HDC.fiducialPos.value == 1)
 				{
-					posX = mc.hd.tool.cPos.x.PADC2(padIndexX);
-					posY = mc.hd.tool.cPos.y.PADC2(padIndexY);
+					posX = mc.hd.tool.cPos.x.PADC2(padIndexX, UtilityControl.useHalfPosition);
+					posY = mc.hd.tool.cPos.y.PADC2(padIndexY, UtilityControl.useHalfPosition);
 				}
 				else if (mc.para.HDC.fiducialPos.value == 2)
 				{
-					posX = mc.hd.tool.cPos.x.PADC3(padIndexX);
-					posY = mc.hd.tool.cPos.y.PADC3(padIndexY);
+					posX = mc.hd.tool.cPos.x.PADC3(padIndexX, UtilityControl.useHalfPosition);
+					posY = mc.hd.tool.cPos.y.PADC3(padIndexY, UtilityControl.useHalfPosition);
 				}
 				else
 				{
-					posX = mc.hd.tool.cPos.x.PADC4(padIndexX);
-					posY = mc.hd.tool.cPos.y.PADC4(padIndexY);
+					posX = mc.hd.tool.cPos.x.PADC4(padIndexX, UtilityControl.useHalfPosition);
+					posY = mc.hd.tool.cPos.y.PADC4(padIndexY, UtilityControl.useHalfPosition);
 				}
 				posT = mc.hd.tool.tPos.t.ZERO;
 				mc.hd.tool.jogMove(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); this.Close(); }
@@ -3068,50 +2875,6 @@ namespace PSA_Application
 
 				BT_Test.Visible = true;
 				BT_AutoTeach.Visible = false;
-			}
-			#endregion
-			#region HDC_MANUAL_P1
-			if (mode == SELECT_FIND_MODEL.HDC_MANUAL_P1)
-			{
-				mc.hdc.lighting_exposure(mc.para.HDC.modelManualTeach.paraP1.light, mc.para.HDC.modelManualTeach.paraP1.exposureTime);
-				EVENT.hWindowLargeDisplay(mc.hdc.cam.acq.grabber.cameraNumber);
-				posX = mc.hd.tool.cPos.x.M_POS_P1(padIndexX);
-				posY = mc.hd.tool.cPos.y.M_POS_P1(padIndexY);
-				posT = mc.hd.tool.tPos.t.ZERO;
-				mc.hd.tool.jogMove(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); this.Close(); }
-				mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
-
-				_posX = posX;
-				_posY = posY;
-				_posT = posT;
-				dXY = 10; dT = 1;
-
-				BT_AutoTeach.Visible = false;
-				BT_Teach.Visible = true;
-				BT_ESC.Visible = true;
-				BT_Test.Visible = true;
-			}
-			#endregion
-			#region HDC_MANUAL_P2
-			if (mode == SELECT_FIND_MODEL.HDC_MANUAL_P2)
-			{
-				mc.hdc.lighting_exposure(mc.para.HDC.modelManualTeach.paraP2.light, mc.para.HDC.modelManualTeach.paraP2.exposureTime);
-				EVENT.hWindowLargeDisplay(mc.hdc.cam.acq.grabber.cameraNumber);
-				posX = mc.hd.tool.cPos.x.M_POS_P2(padIndexX);
-				posY = mc.hd.tool.cPos.y.M_POS_P2(padIndexY);
-				posT = mc.hd.tool.tPos.t.ZERO;
-				mc.hd.tool.jogMove(posX, posY, posT, out ret.message); if (ret.message != RetMessage.OK) { mc.message.alarmMotion(ret.message); this.Close(); }
-				mc.hdc.LIVE = true; mc.hdc.liveMode = REFRESH_REQMODE.CENTER_CROSS;
-
-				_posX = posX;
-				_posY = posY;
-				_posT = posT;
-				dXY = 10; dT = 1;
-
-				BT_AutoTeach.Visible = false;
-				BT_Teach.Visible = true;
-				BT_ESC.Visible = true;
-				BT_Test.Visible = true;
 			}
 			#endregion
 

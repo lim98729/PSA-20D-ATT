@@ -2396,7 +2396,6 @@ namespace PSA_SystemLibrary
 		public halconModelParameter modelPADC2 = new halconModelParameter();
 		public halconModelParameter modelPADC3 = new halconModelParameter();
 		public halconModelParameter modelPADC4 = new halconModelParameter();
-		public manualTeachParameter modelManualTeach = new manualTeachParameter();
 		public halconModelParameter modelTrayReversePattern1 = new halconModelParameter();
 		public halconModelParameter modelTrayReversePattern2 = new halconModelParameter();
 
@@ -2415,12 +2414,6 @@ namespace PSA_SystemLibrary
         public para_member jogTeachUse;
 		public para_member VisionErrorSkip;
 		public para_member VisionErrorSkipCount;
-
-		public para_member useManualTeach;
-		public para_member MTeachPosX_P1;
-		public para_member MTeachPosY_P1;
-		public para_member MTeachPosX_P2;
-		public para_member MTeachPosY_P2;
 
         //public light_2channel_paramer[] jogTeachLight = new light_2channel_paramer[4];
         //public para_member[] jogTeachExposure = new para_member[4];
@@ -2478,45 +2471,12 @@ namespace PSA_SystemLibrary
 				writeTuple(modelPADC4.light.ch1, i, out i);
 				writeTuple(modelPADC4.light.ch2, i, out i);
 
-				writeTuple(modelManualTeach.paraP1.isCreate, i, out i);
-				writeTuple(modelManualTeach.paraP1.algorism, i, out i);
-				writeTuple(modelManualTeach.paraP1.passScore, i, out i);
-				writeTuple(modelManualTeach.paraP1.angleStart, i, out i);
-				writeTuple(modelManualTeach.paraP1.angleExtent, i, out i);
-				writeTuple(modelManualTeach.paraP1.exposureTime, i, out i);
-				writeTuple(modelManualTeach.paraP1.light.ch1, i, out i);
-				writeTuple(modelManualTeach.paraP1.light.ch2, i, out i);
-
-				writeTuple(modelManualTeach.paraP2.isCreate, i, out i);
-				writeTuple(modelManualTeach.paraP2.algorism, i, out i);
-				writeTuple(modelManualTeach.paraP2.passScore, i, out i);
-				writeTuple(modelManualTeach.paraP2.angleStart, i, out i);
-				writeTuple(modelManualTeach.paraP2.angleExtent, i, out i);
-				writeTuple(modelManualTeach.paraP2.exposureTime, i, out i);
-				writeTuple(modelManualTeach.paraP2.light.ch1, i, out i);
-				writeTuple(modelManualTeach.paraP2.light.ch2, i, out i);
-
-				writeTuple(modelManualTeach.dX, i, out i);
-				writeTuple(modelManualTeach.dY, i, out i);
-				writeTuple(modelManualTeach.dT, i, out i);
-				writeTuple(modelManualTeach.offsetX_P1, i, out i);
-				writeTuple(modelManualTeach.offsetY_P1, i, out i);
-				writeTuple(modelManualTeach.offsetX_P2, i, out i);
-				writeTuple(modelManualTeach.offsetY_P2, i, out i);
-
 				for (int ii = 0; ii < 20; ii++)
 				{
 					writeTuple(light[ii].ch1, i, out i);
 					writeTuple(light[ii].ch2, i, out i);
 					writeTuple(exposure[ii], i, out i);
 				}
-
-                //for (int ii = 0; ii < 4; ii++)
-                //{
-                //    writeTuple(jogTeachLight[ii].ch1, i, out i);
-                //    writeTuple(jogTeachLight[ii].ch2, i, out i);
-                //    writeTuple(jogTeachExposure[ii], i, out i);
-                //}
 
 				writeTuple(failretry, i, out i);
 
@@ -2541,12 +2501,6 @@ namespace PSA_SystemLibrary
                 writeTuple(jogTeachUse, i, out i);
 				writeTuple(VisionErrorSkip, i, out i);
 				writeTuple(VisionErrorSkipCount, i, out i);
-
-				writeTuple(useManualTeach, i, out i);
-				writeTuple(MTeachPosX_P1, i, out i);
-				writeTuple(MTeachPosY_P1, i, out i);
-				writeTuple(MTeachPosX_P2, i, out i);
-				writeTuple(MTeachPosY_P2, i, out i);
 
 				writeTuple(modelTrayReversePattern1.isCreate, i, out i);
 				writeTuple(modelTrayReversePattern1.algorism, i, out i);
@@ -2668,33 +2622,6 @@ namespace PSA_SystemLibrary
 				readTuple("modelPADC4.light.ch1", out modelPADC4.light.ch1, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelPADC4.light.ch2", out modelPADC4.light.ch2, out fail); if (fail) goto SET_FAIL;
 
-				readTuple("modelManualTeach.paraP1.isCreate", out modelManualTeach.paraP1.isCreate, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelManualTeach.paraP1.algorism", out modelManualTeach.paraP1.algorism, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelManualTeach.paraP1.passScore", out modelManualTeach.paraP1.passScore, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelManualTeach.paraP1.angleStart", out modelManualTeach.paraP1.angleStart, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelManualTeach.paraP1.angleExtent", out modelManualTeach.paraP1.angleExtent, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelManualTeach.paraP1.exposureTime", out modelManualTeach.paraP1.exposureTime, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelManualTeach.paraP1.light.ch1", out modelManualTeach.paraP1.light.ch1, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelManualTeach.paraP1.light.ch2", out modelManualTeach.paraP1.light.ch2, out fail); if (fail) goto SET_FAIL;
-
-				readTuple("modelManualTeach.paraP2.isCreate", out modelManualTeach.paraP2.isCreate, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelManualTeach.paraP2.algorism", out modelManualTeach.paraP2.algorism, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelManualTeach.paraP2.passScore", out modelManualTeach.paraP2.passScore, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelManualTeach.paraP2.angleStart", out modelManualTeach.paraP2.angleStart, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelManualTeach.paraP2.angleExtent", out modelManualTeach.paraP2.angleExtent, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelManualTeach.paraP2.exposureTime", out modelManualTeach.paraP2.exposureTime, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelManualTeach.paraP2.light.ch1", out modelManualTeach.paraP2.light.ch1, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelManualTeach.paraP2.light.ch2", out modelManualTeach.paraP2.light.ch2, out fail); if (fail) goto SET_FAIL;
-
-				readTuple("modelManualTeach.dX", out modelManualTeach.dX, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelManualTeach.dY", out modelManualTeach.dY, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelManualTeach.dT", out modelManualTeach.dT, out fail); if (fail) goto SET_FAIL;
-
-				readTuple("modelManualTeach.offsetX_P1", out modelManualTeach.offsetX_P1, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelManualTeach.offsetY_P1", out modelManualTeach.offsetY_P1, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelManualTeach.offsetX_P2", out modelManualTeach.offsetX_P2, out fail); if (fail) goto SET_FAIL;
-				readTuple("modelManualTeach.offsetY_P2", out modelManualTeach.offsetY_P2, out fail); if (fail) goto SET_FAIL;
-				
 				readTuple("modelTrayReversePattern1.isCreate", out modelTrayReversePattern1.isCreate, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelTrayReversePattern1.algorism", out modelTrayReversePattern1.algorism, out fail); if (fail) goto SET_FAIL;
 				readTuple("modelTrayReversePattern1.passScore", out modelTrayReversePattern1.passScore, out fail); if (fail) goto SET_FAIL;
@@ -2750,11 +2677,6 @@ namespace PSA_SystemLibrary
 				readTuple("VisionErrorSkip", out VisionErrorSkip, out fail); if (fail) goto SET_FAIL;
 				readTuple("VisionErrorSkipCount", out VisionErrorSkipCount, out fail); if (fail) goto SET_FAIL;
 
-				readTuple("useManualTeach", out useManualTeach, out fail); if (fail) goto SET_FAIL;
-				readTuple("MTeachPosX_P1", out MTeachPosX_P1, out fail); if (fail) goto SET_FAIL;
-				readTuple("MTeachPosY_P1", out MTeachPosY_P1, out fail); if (fail) goto SET_FAIL;
-				readTuple("MTeachPosX_P2", out MTeachPosX_P2, out fail); if (fail) goto SET_FAIL;
-				readTuple("MTeachPosY_P2", out MTeachPosY_P2, out fail); if (fail) goto SET_FAIL;
 				if (fiducialDiameter.value < 100) setDefault("fiducialDiameter", out fiducialDiameter, out fail); if (fail) goto SET_FAIL;
 
 				r = true;
@@ -2899,33 +2821,6 @@ namespace PSA_SystemLibrary
 			setDefault("modelPADC4.exposureTime", out modelPADC4.exposureTime, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelPADC4.light.ch1", out modelPADC4.light.ch1, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelPADC4.light.ch2", out modelPADC4.light.ch2, out fail); if (fail) goto SET_FAIL;
-
-			setDefault("modelManualTeach.paraP1.isCreate", out modelManualTeach.paraP1.isCreate, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelManualTeach.paraP1.algorism", out modelManualTeach.paraP1.algorism, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelManualTeach.paraP1.passScore", out modelManualTeach.paraP1.passScore, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelManualTeach.paraP1.angleStart", out modelManualTeach.paraP1.angleStart, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelManualTeach.paraP1.angleExtent", out modelManualTeach.paraP1.angleExtent, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelManualTeach.paraP1.exposureTime", out modelManualTeach.paraP1.exposureTime, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelManualTeach.paraP1.light.ch1", out modelManualTeach.paraP1.light.ch1, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelManualTeach.paraP1.light.ch2", out modelManualTeach.paraP1.light.ch2, out fail); if (fail) goto SET_FAIL;
-
-			setDefault("modelManualTeach.paraP2.isCreate", out modelManualTeach.paraP2.isCreate, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelManualTeach.paraP2.algorism", out modelManualTeach.paraP2.algorism, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelManualTeach.paraP2.passScore", out modelManualTeach.paraP2.passScore, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelManualTeach.paraP2.angleStart", out modelManualTeach.paraP2.angleStart, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelManualTeach.paraP2.angleExtent", out modelManualTeach.paraP2.angleExtent, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelManualTeach.paraP2.exposureTime", out modelManualTeach.paraP2.exposureTime, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelManualTeach.paraP2.light.ch1", out modelManualTeach.paraP2.light.ch1, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelManualTeach.paraP2.light.ch2", out modelManualTeach.paraP2.light.ch2, out fail); if (fail) goto SET_FAIL;
-
-			setDefault("modelManualTeach.dX", out modelManualTeach.dX, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelManualTeach.dY", out modelManualTeach.dY, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelManualTeach.dT", out modelManualTeach.dT, out fail); if (fail) goto SET_FAIL;
-
-			setDefault("modelManualTeach.offsetX_P1", out modelManualTeach.offsetX_P1, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelManualTeach.offsetY_P1", out modelManualTeach.offsetY_P1, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelManualTeach.offsetX_P2", out modelManualTeach.offsetX_P2, out fail); if (fail) goto SET_FAIL;
-			setDefault("modelManualTeach.offsetY_P2", out modelManualTeach.offsetY_P2, out fail); if (fail) goto SET_FAIL;
 			
 			setDefault("modelTrayReversePattern1.isCreate", out modelTrayReversePattern1.isCreate, out fail); if (fail) goto SET_FAIL;
 			setDefault("modelTrayReversePattern1.algorism", out modelTrayReversePattern1.algorism, out fail); if (fail) goto SET_FAIL;
@@ -2952,14 +2847,7 @@ namespace PSA_SystemLibrary
 				setDefault("exposure[" + ii.ToString() + "]", out exposure[ii], out fail); if (fail) goto SET_FAIL;
 			}
 
-            
-            //for (int ii = 0; ii < 4; ii++)
-            //{
-            //    setDefault("jogTeachLight[" + ii.ToString() + "].ch1", out jogTeachLight[ii].ch1, out fail); if (fail) goto SET_FAIL;
-            //    setDefault("jogTeachLight[" + ii.ToString() + "].ch2", out jogTeachLight[ii].ch2, out fail); if (fail) goto SET_FAIL;
-            //    setDefault("jogTeachExposure[" + ii.ToString() + "]", out jogTeachExposure[ii], out fail); if (fail) goto SET_FAIL;
-            //}
-            
+   
             setDefault("failretry", out failretry, out fail); if (fail) goto SET_FAIL;
 
 			setDefault("imageSave", out imageSave, out fail); if (fail) goto SET_FAIL;
@@ -2982,12 +2870,6 @@ namespace PSA_SystemLibrary
             setDefault("jogTeachUse", out jogTeachUse, out fail); if(fail) goto SET_FAIL;
 			setDefault("VisionErrorSkip", out VisionErrorSkip, out fail); if (fail) goto SET_FAIL;
 			setDefault("VisionErrorSkipCount", out VisionErrorSkipCount, out fail); if (fail) goto SET_FAIL;
-
-			setDefault("useManualTeach", out useManualTeach, out fail); if (fail) goto SET_FAIL;
-			setDefault("MTeachPosX_P1", out MTeachPosX_P1, out fail); if (fail) goto SET_FAIL;
-			setDefault("MTeachPosY_P1", out MTeachPosY_P1, out fail); if (fail) goto SET_FAIL;
-			setDefault("MTeachPosX_P2", out MTeachPosX_P2, out fail); if (fail) goto SET_FAIL;
-			setDefault("MTeachPosY_P2", out MTeachPosY_P2, out fail); if (fail) goto SET_FAIL;
 			r = true;
 			return;
 
@@ -3083,39 +2965,6 @@ namespace PSA_SystemLibrary
                 id++; if (name == "jogTeachUse") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "JogTeach Use Option");
 				id++; if (name == "VisionErrorSkip") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "VisionErrorSkip Option");
 				id++; if (name == "VisionErrorSkipCount") setDefault(out p, name, id, 0, 0, 100, AUTHORITY.MAINTENCE.ToString(), "VisionErrorSkip Count");
-
-				id++; if (name == "useManualTeach") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "Option for Manual Teach");
-				id++; if (name == "MTeachPosX_P1") setDefault(out p, name, id, 0, -100000, 100000, AUTHORITY.MAINTENCE.ToString(), "Manual Teaching Position 1");
-				id++; if (name == "MTeachPosY_P1") setDefault(out p, name, id, 0, -100000, 100000, AUTHORITY.MAINTENCE.ToString(), "Manual Teaching Position 2");
-				id++; if (name == "MTeachPosX_P2") setDefault(out p, name, id, 0, -100000, 100000, AUTHORITY.MAINTENCE.ToString(), "Manual Teaching Position 1");
-				id++; if (name == "MTeachPosY_P2") setDefault(out p, name, id, 0, -100000, 100000, AUTHORITY.MAINTENCE.ToString(), "Manual Teaching Position 2");
-
-				id++; if (name == "modelManualTeach.paraP1.isCreate") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelManualTeach.paraP1.algorism") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelManualTeach.paraP1.passScore") setDefault(out p, name, id, 70, 30, 90, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelManualTeach.paraP1.angleStart") setDefault(out p, name, id, -30, -360, 0, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelManualTeach.paraP1.angleExtent") setDefault(out p, name, id, 60, 0, 360, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelManualTeach.paraP1.exposureTime") setDefault(out p, name, id, 5000, 1000, 30000, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelManualTeach.paraP1.light.ch1") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelManualTeach.paraP1.light.ch2") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
-
-				id++; if (name == "modelManualTeach.paraP2.isCreate") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelManualTeach.paraP2.algorism") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelManualTeach.paraP2.passScore") setDefault(out p, name, id, 70, 30, 90, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelManualTeach.paraP2.angleStart") setDefault(out p, name, id, -30, -360, 0, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelManualTeach.paraP2.angleExtent") setDefault(out p, name, id, 60, 0, 360, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelManualTeach.paraP2.exposureTime") setDefault(out p, name, id, 5000, 1000, 30000, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelManualTeach.paraP2.light.ch1") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelManualTeach.paraP2.light.ch2") setDefault(out p, name, id, 0, 0, 255, AUTHORITY.MAINTENCE.ToString(), "description");
-				
-				id++; if (name == "modelManualTeach.dX") setDefault(out p, name, id, 0, -100000, 100000, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelManualTeach.dY") setDefault(out p, name, id, 0, -100000, 100000, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelManualTeach.dT") setDefault(out p, name, id, 0, -360, 360, AUTHORITY.MAINTENCE.ToString(), "description");
-
-				id++; if (name == "modelManualTeach.offsetX_P1") setDefault(out p, name, id, 0, -100000, 100000, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelManualTeach.offsetY_P1") setDefault(out p, name, id, 0, -100000, 100000, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelManualTeach.offsetX_P2") setDefault(out p, name, id, 0, -100000, 100000, AUTHORITY.MAINTENCE.ToString(), "description");
-				id++; if (name == "modelManualTeach.offsetY_P2") setDefault(out p, name, id, 0, -100000, 100000, AUTHORITY.MAINTENCE.ToString(), "description");
 
 				id++; if (name == "modelTrayReversePattern1.isCreate") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
 				id++; if (name == "modelTrayReversePattern1.algorism") setDefault(out p, name, id, 0, 0, 1, AUTHORITY.MAINTENCE.ToString(), "description");
