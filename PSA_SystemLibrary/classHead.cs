@@ -632,6 +632,7 @@ namespace PSA_SystemLibrary
 
 				#region AUTO
 				case (int)SEQ.AUTO:
+                    tool.placeToPick = false;
                     noUseSlugAlignment = false;
 					mc.hd.tool.ulcfailcount = 0;
 					mc.hd.tool.doublecheckcount = 0;
@@ -1000,6 +1001,7 @@ namespace PSA_SystemLibrary
                     tool.move_standby();		// 20140516 : place_home() -> place_standby()
 					if (tool.RUNING) break;
 					if (tool.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
+                    tool.placeToPick = false;
 					mc.log.mcclog.write(mc.log.MCCCODE.ATTACH_WORK, 1);
 					sqc = (int)SEQ.AUTO_WASTE_DONE_STOP; break;
                 case (int)SEQ.AUTO_WASTE_DONE_STOP:
@@ -2563,403 +2565,414 @@ namespace PSA_SystemLibrary
 		int pickretrycount;
 		bool pickupFailDone;
 
-		public void home_pick()
-		{
-			#region PICK_SUCTION_MODE.SEARCH_LEVEL_ON
-			if (sqc > 30 && sqc < 40 && mc.para.HD.pick.suction.mode.value == (int)PICK_SUCTION_MODE.SEARCH_LEVEL_ON)
-			{
-				mc.OUT.HD.SUC(out ret.b, out ret.message); ioCheck(sqc, ret.message);
-				if (!ret.b)
-				{
-					Z.commandPosition(out ret.d, out ret.message); mpiCheck(Z.config.axisCode, sqc, ret.message);
-					if (ret.d < posZ + mc.para.HD.pick.suction.level.value)
-					{
-						mc.OUT.HD.SUC(true, out ret.message); ioCheck(sqc, ret.message);
-					}
-				}
-			}
-			#endregion
-
-			switch (sqc)
-			{
-				case 0:
-					Esqc = 0;
-					sqc++; break;
-				case 1:
-					#region pos set
-					if (mc.hd.reqMode == REQMODE.DUMY)
-						posZ = tPos.z.DRYRUNPICK(mc.sf.workingTubeNumber);
-					else
-						posZ = tPos.z.PICK(mc.sf.workingTubeNumber);
-					if (mc.para.HD.pick.search.enable.value == (int)ON_OFF.ON)
-					{
-						levelS1 = mc.para.HD.pick.search.level.value;
-						delayS1 = mc.para.HD.pick.search.delay.value;
-						velS1 = (mc.para.HD.pick.search.vel.value) / 1000.0;
-						accS1 = mc.para.HD.pick.search.acc.value;
-					}
-					else
-					{
-						levelS1 = 0;
-						delayS1 = 0;
-					}
-					if (mc.para.HD.pick.search2.enable.value == (int)ON_OFF.ON)
-					{
-						levelS2 = mc.para.HD.pick.search2.level.value;
-						delayS2 = mc.para.HD.pick.search2.delay.value;
-						velS2 = (mc.para.HD.pick.search2.vel.value) / 1000;
-						accS2 = mc.para.HD.pick.search2.acc.value;
-					}
-					else
-					{
-						levelS2 = 0;
-						delayS2 = 0;
-					}
-					delay = mc.para.HD.pick.delay.value;
-					pickretrycount = 0;
-					pickupFailDone = false;
-					#endregion
-					sqc = 10; break;
-
-				#region case 10 Z.move.XY_MOVING
-				case 10:
-					mc.para.runInfo.startCycleTime();
-					mc.log.mcclog.write(mc.log.MCCCODE.HEAD_MOVE_PICK_POS, 0);
-                    if (placeDone)
+        public void home_pick()
+        {
+            #region PICK_SUCTION_MODE.SEARCH_LEVEL_ON
+            if (sqc > 30 && sqc < 40 && mc.para.HD.pick.suction.mode.value == (int)PICK_SUCTION_MODE.SEARCH_LEVEL_ON)
+            {
+                mc.OUT.HD.SUC(out ret.b, out ret.message); ioCheck(sqc, ret.message);
+                if (!ret.b)
+                {
+                    Z.commandPosition(out ret.d, out ret.message); mpiCheck(Z.config.axisCode, sqc, ret.message);
+                    if (ret.d < posZ + mc.para.HD.pick.suction.level.value)
                     {
-                        if (mc.para.HD.place.missCheck.enable.value == (int)ON_OFF.ON)
+                        mc.OUT.HD.SUC(true, out ret.message); ioCheck(sqc, ret.message);
+                    }
+                }
+            }
+            #endregion
+
+            switch (sqc)
+            {
+                case 0:
+                    Esqc = 0;
+                    sqc++; break;
+                case 1:
+                    if (mc.hd.reqMode == REQMODE.AUTO || mc.hd.reqMode == REQMODE.STEP || mc.hd.reqMode == REQMODE.DUMY) { mc.pd.req = true; mc.pd.reqMode = REQMODE.AUTO; }    // 20131022. Tray 첫 Point에서 underpress되는 현상.
+                    if (mc.hd.reqMode == REQMODE.SINGLE)
+                    {
+                        mc.pd.req = true;
+                        mc.pd.reqMode = REQMODE.AUTO;   // 20131022
+                    }
+                    #region pos set
+                    if (mc.hd.reqMode == REQMODE.DUMY)
+                        posZ = tPos.z.DRYRUNPICK(mc.sf.workingTubeNumber);
+                    else
+                        posZ = tPos.z.PICK(mc.sf.workingTubeNumber);
+                    if (mc.para.HD.pick.search.enable.value == (int)ON_OFF.ON)
+                    {
+                        levelS1 = mc.para.HD.pick.search.level.value;
+                        delayS1 = mc.para.HD.pick.search.delay.value;
+                        velS1 = (mc.para.HD.pick.search.vel.value) / 1000.0;
+                        accS1 = mc.para.HD.pick.search.acc.value;
+                    }
+                    else
+                    {
+                        levelS1 = 0;
+                        delayS1 = 0;
+                    }
+                    if (mc.para.HD.pick.search2.enable.value == (int)ON_OFF.ON)
+                    {
+                        levelS2 = mc.para.HD.pick.search2.level.value;
+                        delayS2 = mc.para.HD.pick.search2.delay.value;
+                        velS2 = (mc.para.HD.pick.search2.vel.value) / 1000;
+                        accS2 = mc.para.HD.pick.search2.acc.value;
+                    }
+                    else
+                    {
+                        levelS2 = 0;
+                        delayS2 = 0;
+                    }
+                    delay = mc.para.HD.pick.delay.value;
+                    pickretrycount = 0;
+                    pickupFailDone = false;
+                    #endregion
+                    sqc = 10; break;
+
+                #region case 10 Z.move.XY_MOVING
+                case 10:
+                    mc.para.runInfo.startCycleTime();
+                    mc.log.mcclog.write(mc.log.MCCCODE.HEAD_MOVE_PICK_POS, 0);
+                    Z.move(tPos.z.XY_MOVING, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
+                    T.move(tPos.t.ZERO, out ret.message); if (mpiCheck(T.config.axisCode, sqc, ret.message)) break;
+                    dwell.Reset();
+                    sqc++; break;
+                case 11:
+                    if (!Z_AT_TARGET) break;
+                    dwell.Reset();
+                    sqc++; break;
+                case 12:
+                    if (!Z_AT_DONE) break;
+                    sqc = 20; break;
+                #endregion
+
+                #region case 20 XY.move.PICK
+                case 20:
+                    Y.move(tPos.y.PICK(mc.sf.workingTubeNumber), out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                    X.move(tPos.x.PICK(mc.sf.workingTubeNumber), out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+
+                    if (placeToPick && mc.para.HD.place.missCheck.enable.value == (int)ON_OFF.ON)
+                    {
+                        mc.OUT.HD.SUC(true, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        placeMissCheckTime.Reset();
+                    }
+                    dwell.Reset();
+                    sqc++; break;
+                case 21:
+                    if (!X_AT_TARGET) break;
+                    if (!Y_AT_TARGET) break;
+                    mc.log.mcclog.write(mc.log.MCCCODE.HEAD_MOVE_PICK_POS, 1);
+                    sqc = 30; break;
+                #endregion
+
+                #region case 30 Z move down
+                case 30:
+                    if (mc.sf.RUNING) break;
+                    if (mc.sf.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
+
+                    if (placeToPick && mc.para.HD.place.missCheck.enable.value == (int)ON_OFF.ON)
+                    {
+                        mc.IN.HD.VAC_CHK(out ret.b, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                        if (ret.b)
                         {
-                            mc.IN.HD.VAC_CHK(out ret.b, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                            if (ret.b)
-                            {
-                                errorCheck(ERRORCODE.HD, sqc, "Vac Check Time:" + Math.Round(placeMissCheckTime.Elapsed).ToString(), ALARM_CODE.E_HD_PLACE_MISSCHECK);
-                                break;
-                            }
-                            if (mc.para.HD.pick.suction.mode.value != (int)PICK_SUCTION_MODE.MOVING_LEVEL_ON)
-                            {
-                                mc.OUT.HD.SUC(false, out ret.message); if (ioCheck(sqc, ret.message)) break;
-                            }
+                            errorCheck(ERRORCODE.HD, sqc, "Vac Check Time:" + Math.Round(placeMissCheckTime.Elapsed).ToString(), ALARM_CODE.E_HD_PLACE_MISSCHECK);
+                            break;
+                        }
+                        if (mc.para.HD.pick.suction.mode.value != (int)PICK_SUCTION_MODE.MOVING_LEVEL_ON)
+                        {
+                            mc.OUT.HD.SUC(false, out ret.message); if (ioCheck(sqc, ret.message)) break;
                         }
                     }
-					if (mc.para.HD.pick.suction.mode.value == (int)PICK_SUCTION_MODE.MOVING_LEVEL_ON)
-					{
-						mc.OUT.HD.SUC(true, out ret.message); if (ioCheck(sqc, ret.message)) break;
-					}
-					Z.move(tPos.z.XY_MOVING, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
-					T.move(tPos.t.ZERO, out ret.message); if (mpiCheck(T.config.axisCode, sqc, ret.message)) break;
-					dwell.Reset();
-					sqc++; break;
-				case 11:
-					if (!Z_AT_TARGET) break;
-					dwell.Reset();
-					sqc++; break;
-				case 12:
-					if (!Z_AT_DONE) break;
-					sqc = 20; break;
-				#endregion
+                    if (mc.para.HD.pick.suction.mode.value == (int)PICK_SUCTION_MODE.MOVING_LEVEL_ON)
+                    {
+                        mc.OUT.HD.SUC(true, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                    }
 
-				#region case 20 XY.move.PICK
-				case 20:
-					Y.move(tPos.y.PICK(mc.sf.workingTubeNumber), out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-					X.move(tPos.x.PICK(mc.sf.workingTubeNumber), out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-					dwell.Reset();
-					sqc++; break;
-				case 21:
-					if (!X_AT_TARGET) break;
-					if (!Y_AT_TARGET) break;
-					mc.log.mcclog.write(mc.log.MCCCODE.HEAD_MOVE_PICK_POS, 1);
-					sqc = 30; break;
-				#endregion
+                    if (mc.hd.reqMode == REQMODE.DUMY)
+                        posZ = tPos.z.DRYRUNPICK(mc.sf.workingTubeNumber);
+                    else
+                        posZ = tPos.z.PICK(mc.sf.workingTubeNumber);
+                    mc.hd.tool.F.stackFeedNum = mc.sf.workingTubeNumber;
+                    mc.hd.tool.F.req = true; mc.hd.tool.F.reqMode = REQMODE.F_M2PICK;
 
-				#region case 30 Z move down
-				case 30:
-					if (mc.sf.RUNING) break;
-					if (mc.sf.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
+                    mc.log.mcclog.write(mc.log.MCCCODE.PICK_UP_HEAT_SLUG, 0);
+                    if (levelS1 != 0)
+                    {
+                        Z.moveCompare(posZ + levelS1 + levelS2, -velS1, Y.config, tPos.y.PICK(mc.sf.workingTubeNumber) + 3000, false, false, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
+                        Z.move(posZ + levelS2, velS1, accS1, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
+                        if (delayS1 == 0) { sqc += 3; break; }
+                    }
+                    else
+                    {
+                        Z.moveCompare(posZ + levelS1 + levelS2, Y.config, tPos.y.PICK(mc.sf.workingTubeNumber) + 3000, false, false, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
+                        sqc += 3; break;
+                    }
+                    dwell.Reset();
+                    sqc++; break;
+                case 31:
+                    if (!Z_AT_TARGET) break;
+                    dwell.Reset();
+                    sqc++; break;
+                case 32:
+                    if (dwell.Elapsed < delayS1 - 3) break;
+                    sqc++; break;
+                case 33:
+                    if (levelS2 == 0) { sqc += 3; break; }
+                    Z.move(posZ, velS2, accS2, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
+                    if (levelD2 == 0) { sqc += 3; break; }
+                    dwell.Reset();
+                    sqc++; break;
+                case 34:
+                    if (!Z_AT_TARGET) break;
+                    dwell.Reset();
+                    sqc++; break;
+                case 35:
+                    if (dwell.Elapsed < delayS2 - 3) break;
+                    sqc++; break;
+                case 36:
+                    dwell.Reset();
+                    sqc++; break;
+                case 37:
+                    if (!Z_AT_TARGET) break;
+                    dwell.Reset();
+                    sqc++; break;
+                case 38:
+                    if (!Z_AT_DONE) break;
 
-					if (mc.hd.reqMode == REQMODE.DUMY)
-						posZ = tPos.z.DRYRUNPICK(mc.sf.workingTubeNumber);
-					else
-						posZ = tPos.z.PICK(mc.sf.workingTubeNumber);
-					mc.hd.tool.F.stackFeedNum = mc.sf.workingTubeNumber;
-					mc.hd.tool.F.req = true; mc.hd.tool.F.reqMode = REQMODE.F_M2PICK;
-
-					mc.log.mcclog.write(mc.log.MCCCODE.PICK_UP_HEAT_SLUG, 0);
-					if (levelS1 != 0)
-					{
-						Z.moveCompare(posZ + levelS1 + levelS2, -velS1, Y.config, tPos.y.PICK(mc.sf.workingTubeNumber) + 3000, false, false, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
-						Z.move(posZ + levelS2, velS1, accS1, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
-						if (delayS1 == 0) { sqc += 3; break; }
-					}
-					else
-					{
-						Z.moveCompare(posZ + levelS1 + levelS2, Y.config, tPos.y.PICK(mc.sf.workingTubeNumber) + 3000, false, false, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
-						sqc += 3; break;
-					}
-					dwell.Reset();
-					sqc++; break;
-				case 31:
-					if (!Z_AT_TARGET) break;
-					dwell.Reset();
-					sqc++; break;
-				case 32:
-					if (dwell.Elapsed < delayS1 - 3) break;
-					sqc++; break;
-				case 33:
-					if (levelS2 == 0) { sqc += 3; break; }
-					Z.move(posZ, velS2, accS2, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
-					if (levelD2 == 0) { sqc += 3; break; }
-					dwell.Reset();
-					sqc++; break;
-				case 34:
-					if (!Z_AT_TARGET) break;
-					dwell.Reset();
-					sqc++; break;
-				case 35:
-					if (dwell.Elapsed < delayS2 - 3) break;
-					sqc++; break;
-				case 36:
-					dwell.Reset();
-					sqc++; break;
-				case 37:
-					if (!Z_AT_TARGET) break;
-					dwell.Reset();
-					sqc++; break;
-				case 38:
-					if (!Z_AT_DONE) break;
-
-					if (mc.hd.cycleMode)
-					{
+                    if (mc.hd.cycleMode)
+                    {
                         mc.hd.userMessageBox.SetDisplayItems(DIAG_SEL_MODE.NextCancel, DIAG_ICON_MODE.QUESTION, textResource.MB_HD_CYCLE_SUC_HS);
-						mc.hd.userMessageBox.ShowDialog();
-						if (FormUserMessage.diagResult == DIAG_RESULT.Cancel) { mc.hd.stepCycleExit = true; sqc = SQC.STOP; break; }
-						mc.hd.stepCycleExit = false;
-					}
+                        mc.hd.userMessageBox.ShowDialog();
+                        if (FormUserMessage.diagResult == DIAG_RESULT.Cancel) { mc.hd.stepCycleExit = true; sqc = SQC.STOP; break; }
+                        mc.hd.stepCycleExit = false;
+                    }
 
-					if (mc.para.HD.pick.suction.mode.value == (int)PICK_SUCTION_MODE.PICK_LEVEL_ON)
-					{
-						mc.OUT.HD.SUC(true, out ret.message); if (ioCheck(sqc, ret.message)) break;
-					}
-					dwell.Reset();
-					sqc++; break;
-				case 39:
-					if (dwell.Elapsed < delay - 3) break;
-					dwell.Reset();
-					sqc = 40; break;
-				#endregion
+                    if (mc.para.HD.pick.suction.mode.value == (int)PICK_SUCTION_MODE.PICK_LEVEL_ON)
+                    {
+                        mc.OUT.HD.SUC(true, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                    }
+                    dwell.Reset();
+                    sqc++; break;
+                case 39:
+                    if (dwell.Elapsed < delay - 3) break;
+                    dwell.Reset();
+                    sqc = 40; break;
+                #endregion
 
-				#region case 40 suction.check
-				case 40:
-					mc.para.runInfo.writePickInfo(mc.sf.workingTubeNumber, PickCodeInfo.PICK);
-					if (mc.para.SF.useBlow.value == (int)ON_OFF.ON)         // Air Blow 켜준다.
-					{
-						mc.OUT.SF.TUBE_BLOW(mc.sf.workingTubeNumber, true, out ret.message);
-					}
-					if (mc.para.HD.pick.suction.check.value == (int)ON_OFF.OFF) { sqc = 50; break; }
-					sqc++; break;
-				case 41:
-					// wait suction check time
-					if (dwell.Elapsed > mc.para.HD.pick.suction.checkLimitTime.value)   // 공압 검사 ERROR
-					{
-						// 여기서 Suction을 OFF하는데, Waste Position으로 움직인 뒤에 Suction OFF해야 한다.
-						if (mc.hd.reqMode != REQMODE.AUTO)
-						{
-							Z.move(tPos.z.XY_MOVING, mc.speed.slow, out ret.message); //if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
-							errorCheck(ERRORCODE.HD, sqc, "Pick Suction Check Time Limit Error"); break;
-						}
-						else
-						{
-							if (mc.para.HD.pick.missCheck.enable.value == (int)ON_OFF.ON)
-							{
-								if ((pickretrycount+1) < (int)mc.para.HD.pick.missCheck.retry.value)
-								{	// retry pick up
-									// move to waste position
-									sqc = 80;
-									pickupFailDone = false;
-									mc.log.debug.write(mc.log.CODE.EVENT, String.Format("PickUp Suction Check Fail. FailCnt[{0}]", pickretrycount + 1));
-								}
-								else
-								{
-									// 버린 다음에 알람
-									pickupFailDone = true;
-									mc.log.debug.write(mc.log.CODE.EVENT, String.Format("PickUp Suction Check Fail", pickretrycount + 1));
-									sqc = 80;
-									break;
-								}
-								pickretrycount++;
-								mc.para.runInfo.writePickInfo(PickCodeInfo.AIRERR);
-							}
-							else
-							{
-								pickupFailDone = true;
-								mc.OUT.HD.SUC(false, out ret.message); if (ioCheck(sqc, ret.message)) break;
-								mc.log.debug.write(mc.log.CODE.EVENT, String.Format("PickUp Suction Check Fail"));
-								sqc = 80; 
-								mc.para.runInfo.writePickInfo(PickCodeInfo.AIRERR);
-							}
-							break;
-						}
-					}
-					mc.IN.HD.VAC_CHK(out ret.b, out ret.message); if (ioCheck(sqc, ret.message)) break;
-					if (!ret.b) break;
-					sqc = 50; break;
-				#endregion
+                #region case 40 suction.check
+                case 40:
+                    mc.para.runInfo.writePickInfo(mc.sf.workingTubeNumber, PickCodeInfo.PICK);
+                    if (mc.para.SF.useBlow.value == (int)ON_OFF.ON)         // Air Blow 켜준다.
+                    {
+                        mc.OUT.SF.TUBE_BLOW(mc.sf.workingTubeNumber, true, out ret.message);
+                    }
+                    if (mc.para.HD.pick.suction.check.value == (int)ON_OFF.OFF) { sqc = 50; break; }
+                    sqc++; break;
+                case 41:
+                    // wait suction check time
+                    if (dwell.Elapsed > mc.para.HD.pick.suction.checkLimitTime.value)   // 공압 검사 ERROR
+                    {
+                        // 여기서 Suction을 OFF하는데, Waste Position으로 움직인 뒤에 Suction OFF해야 한다.
+                        if (mc.hd.reqMode != REQMODE.AUTO)
+                        {
+                            Z.move(tPos.z.XY_MOVING, mc.speed.slow, out ret.message); //if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
+                            errorCheck(ERRORCODE.HD, sqc, "Pick Suction Check Time Limit Error"); break;
+                        }
+                        else
+                        {
+                            if (mc.para.HD.pick.missCheck.enable.value == (int)ON_OFF.ON)
+                            {
+                                if ((pickretrycount + 1) < (int)mc.para.HD.pick.missCheck.retry.value)
+                                {	// retry pick up
+                                    // move to waste position
+                                    sqc = 80;
+                                    mc.sf.req = true;
+                                    pickupFailDone = false;
+                                    mc.log.debug.write(mc.log.CODE.EVENT, String.Format("PickUp Suction Check Fail. FailCnt[{0}]", pickretrycount + 1));
+                                }
+                                else
+                                {
+                                    // 버린 다음에 알람
+                                    pickupFailDone = true;
+                                    mc.log.debug.write(mc.log.CODE.EVENT, String.Format("PickUp Suction Check Fail", pickretrycount + 1));
+                                    sqc = 80;
+                                    break;
+                                }
+                                pickretrycount++;
+                                mc.para.runInfo.writePickInfo(PickCodeInfo.AIRERR);
+                            }
+                            else
+                            {
+                                pickupFailDone = true;
+                                mc.OUT.HD.SUC(false, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                                mc.log.debug.write(mc.log.CODE.EVENT, String.Format("PickUp Suction Check Fail"));
+                                sqc = 80;
+                                mc.para.runInfo.writePickInfo(PickCodeInfo.AIRERR);
+                            }
+                            break;
+                        }
+                    }
+                    mc.IN.HD.VAC_CHK(out ret.b, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                    if (!ret.b) break;
+                    sqc = 50; break;
+                #endregion
 
-				#region case 50 XY.AT_DONE
-				case 50:
-					dwell.Reset();
-					sqc++; break;
-				case 51:
-					if (!X_AT_DONE || !Y_AT_DONE) break;
-					sqc++; break;
-				case 52:
-					if (mc.hd.tool.F.RUNING) break;
-					if (mc.hd.tool.F.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
-					sqc = SQC.STOP; break;
-				#endregion
+                #region case 50 XY.AT_DONE
+                case 50:
+                    dwell.Reset();
+                    sqc++; break;
+                case 51:
+                    if (!X_AT_DONE || !Y_AT_DONE) break;
+                    sqc++; break;
+                case 52:
+                    if (mc.hd.tool.F.RUNING) break;
+                    if (mc.hd.tool.F.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
+                    sqc = SQC.STOP; break;
+                #endregion
 
-				#region case 60, 70 next stack feeder
-				case 60:
-					pickretrycount = 0;
-					Z.move(tPos.z.XY_MOVING, mc.speed.slow, out ret.message); //if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
-					sqc++; break;
-				case 61:
-					if (mc.para.SF.useBlow.value == (int)ON_OFF.ON)
-					{
-						mc.OUT.SF.TUBE_BLOW(mc.sf.workingTubeNumber, false, out ret.message);
-					}
-					//if (!mc.sf.nextTubeChange)
-					{
-						//mc.sf.req = true; mc.sf.reqMode = REQMODE.DOWN;
-						//mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG1, true, out ret.message);
-						//mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG2, true, out ret.message);
-						sqc = 70; break;
-						//errorCheck(ERRORCODE.SF, sqc, "Stack Feeder Tube Empty"); break;
-					}
-					#region mc.sf.req
-					if (mc.sf.workingTubeNumber == UnitCodeSF.INVALID)
-					{
-						//mc.sf.req = true; mc.sf.reqMode = REQMODE.DOWN;
-						mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG1, true, out ret.message);
-						mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG2, true, out ret.message);
-						errorCheck(ERRORCODE.FULL, sqc, "", ALARM_CODE.E_MACHINE_RUN_HEAT_SLUG_EMPTY); break;
-						//sqc = 70; break;
-						//errorCheck(ERRORCODE.SF, sqc, "Stack Feeder Tube Empty"); break;
-						//if (mc.sf.workingTubeNumber == UnitCodeSF.INVALID)
-						//{
-						//    //mc.sf.req = true; mc.sf.reqMode = REQMODE.DOWN;	//SF Z축은 Homing Sequence를 따르는데 Homing 도중 Error로 Stop이 걸리기 때문에 Amp만 Abort된 상태로 끝난다.
-						//    mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG1, true, out ret.message);
-						//    mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG2, true, out ret.message);
-						//    errorCheck(ERRORCODE.SF, sqc, "", ALARM_CODE.E_MACHINE_RUN_HEAT_SLUG_EMPTY); break;
-						//}
-					}
-                    //mc.sf.reqTubeNumber = mc.sf.workingTubeNumber;
-                    //mc.sf.req = true;
-					#endregion
-					sqc++; break;
-				case 62:
-					if (mc.sf.RUNING) break;
-					if (mc.sf.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
-					if (mc2.req == MC_REQ.STOP) { Esqc = sqc; sqc = SQC.ERROR; break; }
-					sqc = 10; break;
-
-				case 70:
-					if (mc.sf.RUNING) break;
-					if (mc.sf.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
-					mc.sf.magazineClear(UnitCodeSFMG.MG1);
-					mc.sf.magazineClear(UnitCodeSFMG.MG2);
-					sqc++; break;
-				case 71:
-					if (mc2.req == MC_REQ.STOP) { Esqc = sqc; sqc = SQC.ERROR; break; }
-					if (mc.sf.workingTubeNumber == UnitCodeSF.INVALID) break;
-					dwell.Reset();
-					sqc++; break;
-				case 72:
-					if (dwell.Elapsed < 1000) break;
-                    //mc.sf.reqTubeNumber = mc.sf.workingTubeNumber;
-                    //mc.sf.req = true;
-					sqc++; break;
-				case 73:
-					if (mc.sf.RUNING) break;
-					if (mc.sf.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
-					sqc = 10; break;
-				#endregion
-
-				#region case 80 move to waste position
-				case 80:
-					Z.move(tPos.z.XY_MOVING, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
-					dwell.Reset();
-					sqc++; break;
-				case 81:
-					if (!Z_AT_TARGET) break;
-					if (mc.para.SF.useBlow.value == (int)ON_OFF.ON)
-					{
-						mc.OUT.SF.TUBE_BLOW(mc.sf.workingTubeNumber, false, out ret.message); { if (ioCheck(sqc, ret.message)) break; }
-					}
-					mc.hd.tool.F.req = true; mc.hd.tool.F.reqMode = REQMODE.F_2M;
-					// 쓰레기통으로 갈 때. 요놈도 문제를 발생할 가능성이 보인다.
-					//mc.pd.req = true; mc.pd.reqMode = REQMODE.READY;
-					dwell.Reset();
-					sqc++; break;
-				case 82:
-					if (!Z_AT_DONE) break;
-					X.commandPosition(out ret.d1, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-					Y.commandPosition(out ret.d2, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-					if (Math.Abs(tPos.x.WASTE - ret.d1) > 50000 || Math.Abs(tPos.y.WASTE - ret.d2) > 50000)
-					{
-						X.move(tPos.x.WASTE, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-						Y.move(tPos.y.WASTE, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-					}
-					else
-					{
-						X.move(tPos.x.WASTE, mc.speed.slow, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
-						Y.move(tPos.y.WASTE, mc.speed.slow, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
-					}
+                #region case 60, 70 next stack feeder
+                case 60:
+                    pickretrycount = 0;
+                    Z.move(tPos.z.XY_MOVING, mc.speed.slow, out ret.message); //if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
+                    sqc++; break;
+                case 61:
+                    if (mc.para.SF.useBlow.value == (int)ON_OFF.ON)
+                    {
+                        mc.OUT.SF.TUBE_BLOW(mc.sf.workingTubeNumber, false, out ret.message);
+                    }
+                    if (!mc.sf.nextTubeChange)
+                    {
+                        mc.sf.req = true; mc.sf.reqMode = REQMODE.DOWN;
+                        //mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG1, true, out ret.message);
+                        //mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG2, true, out ret.message);
+                        sqc = 70; break;
+                        //errorCheck(ERRORCODE.SF, sqc, "Stack Feeder Tube Empty"); break;
+                    }
+                    #region mc.sf.req
+                    if (mc.sf.workingTubeNumber == UnitCodeSF.INVALID)
+                    {
+                        mc.sf.req = true; mc.sf.reqMode = REQMODE.DOWN;
+                        mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG1, true, out ret.message);
+                        mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG2, true, out ret.message);
+                        errorCheck(ERRORCODE.FULL, sqc, "", ALARM_CODE.E_MACHINE_RUN_HEAT_SLUG_EMPTY); break;
+                        sqc = 70; break;
+                        //errorCheck(ERRORCODE.SF, sqc, "Stack Feeder Tube Empty"); break;
+                        //if (mc.sf.workingTubeNumber == UnitCodeSF.INVALID)
+                        //{
+                        //    //mc.sf.req = true; mc.sf.reqMode = REQMODE.DOWN;	//SF Z축은 Homing Sequence를 따르는데 Homing 도중 Error로 Stop이 걸리기 때문에 Amp만 Abort된 상태로 끝난다.
+                        //    mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG1, true, out ret.message);
+                        //    mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG2, true, out ret.message);
+                        //    errorCheck(ERRORCODE.SF, sqc, "", ALARM_CODE.E_MACHINE_RUN_HEAT_SLUG_EMPTY); break;
+                        //}
+                    }
+                    mc.sf.reqTubeNumber = mc.sf.workingTubeNumber;
                     mc.sf.req = true;
-					dwell.Reset();
-					sqc++; break;
-				case 83:
-					if (!X_AT_TARGET || !Y_AT_TARGET) break;
-					dwell.Reset();
-					sqc++; break;
-				case 84:
-					if (!X_AT_DONE || !Y_AT_DONE) break;
-					mc.OUT.HD.SUC(false, out ret.message); if (ioCheck(sqc, ret.message)) break;
-					mc.OUT.HD.BLW(true, out ret.message); if (ioCheck(sqc, ret.message)) break;
-					dwell.Reset();
-					sqc++; break;
-				case 85:
-					if (dwell.Elapsed < Math.Max(mc.para.HD.pick.wasteDelay.value, 15)) break;
-					mc.OUT.HD.BLW(false, out ret.message); if (ioCheck(sqc, ret.message)) break;
-					sqc++; break;
-				case 86:
-					if (mc.sf.RUNING) break;
-					if (mc.sf.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
-					if (mc.sf.workingTubeNumber == UnitCodeSF.INVALID)
-					{
-						//mc.sf.req = true; mc.sf.reqMode = REQMODE.DOWN;	//SF Z축은 Homing Sequence를 따르는데 Homing 도중 Error로 Stop이 걸리기 때문에 Amp만 Abort된 상태로 끝난다.
-						mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG1, true, out ret.message);
-						mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG2, true, out ret.message);
-						errorCheck(ERRORCODE.FULL, sqc, "", ALARM_CODE.E_MACHINE_RUN_HEAT_SLUG_EMPTY); break;
-					}
-					if (mc.hd.tool.F.RUNING) break;
-					if (mc.hd.tool.F.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
-					if (mc2.req == MC_REQ.STOP) { sqc = SQC.STOP; mc.hd.wastedonestop = true; break; }
-					if (pickupFailDone) { pickupFailDone = false; errorCheck(ERRORCODE.HD, sqc, "Pick up 할 때 흡착이 되지 않습니다! Tube의 HeatSlug 기울기, Pick Up Z축 높이 위치를 확인해주세요!"); break; }
-					else sqc = 10; break;
-				#endregion
+                    #endregion
+                    sqc++; break;
+                case 62:
+                    if (mc.sf.RUNING) break;
+                    if (mc.sf.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
+                    if (mc2.req == MC_REQ.STOP) { Esqc = sqc; sqc = SQC.ERROR; break; }
+                    sqc = 10; break;
 
-				case SQC.ERROR:
-					//string str = "HD home_pick Esqc " + Esqc.ToString();
-					mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HD home_pick Esqc {0}", Esqc));
-					//EVENT.statusDisplay(str);
-					sqc = SQC.STOP; break;
+                case 70:
+                    if (mc.sf.RUNING) break;
+                    if (mc.sf.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
+                    mc.sf.magazineClear(UnitCodeSFMG.MG1);
+                    mc.sf.magazineClear(UnitCodeSFMG.MG2);
+                    sqc++; break;
+                case 71:
+                    if (mc2.req == MC_REQ.STOP) { Esqc = sqc; sqc = SQC.ERROR; break; }
+                    if (mc.sf.workingTubeNumber == UnitCodeSF.INVALID) break;
+                    dwell.Reset();
+                    sqc++; break;
+                case 72:
+                    if (dwell.Elapsed < 1000) break;
+                    mc.sf.reqTubeNumber = mc.sf.workingTubeNumber;
+                    mc.sf.req = true;
+                    sqc++; break;
+                case 73:
+                    if (mc.sf.RUNING) break;
+                    if (mc.sf.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
+                    sqc = 10; break;
+                #endregion
 
-				case SQC.STOP:
-					sqc = SQC.END; break;
+                #region case 80 move to waste position
+                case 80:
+                    Z.move(tPos.z.XY_MOVING, out ret.message); if (mpiCheck(Z.config.axisCode, sqc, ret.message)) break;
+                    dwell.Reset();
+                    sqc++; break;
+                case 81:
+                    if (!Z_AT_TARGET) break;
+                    if (mc.para.SF.useBlow.value == (int)ON_OFF.ON)
+                    {
+                        mc.OUT.SF.TUBE_BLOW(mc.sf.workingTubeNumber, false, out ret.message); { if (ioCheck(sqc, ret.message)) break; }
+                    }
+                    mc.hd.tool.F.req = true; mc.hd.tool.F.reqMode = REQMODE.F_2M;
+                    // 쓰레기통으로 갈 때. 요놈도 문제를 발생할 가능성이 보인다.
+                    //mc.pd.req = true; mc.pd.reqMode = REQMODE.READY;
+                    dwell.Reset();
+                    sqc++; break;
+                case 82:
+                    if (!Z_AT_DONE) break;
+                    X.commandPosition(out ret.d1, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                    Y.commandPosition(out ret.d2, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                    if (Math.Abs(tPos.x.WASTE - ret.d1) > 50000 || Math.Abs(tPos.y.WASTE - ret.d2) > 50000)
+                    {
+                        X.move(tPos.x.WASTE, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                        Y.move(tPos.y.WASTE, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                    }
+                    else
+                    {
+                        X.move(tPos.x.WASTE, mc.speed.slow, out ret.message); if (mpiCheck(X.config.axisCode, sqc, ret.message)) break;
+                        Y.move(tPos.y.WASTE, mc.speed.slow, out ret.message); if (mpiCheck(Y.config.axisCode, sqc, ret.message)) break;
+                    }
+                    dwell.Reset();
+                    sqc++; break;
+                case 83:
+                    if (!X_AT_TARGET || !Y_AT_TARGET) break;
+                    dwell.Reset();
+                    sqc++; break;
+                case 84:
+                    if (!X_AT_DONE || !Y_AT_DONE) break;
+                    mc.OUT.HD.SUC(false, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                    mc.OUT.HD.BLW(true, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                    dwell.Reset();
+                    sqc++; break;
+                case 85:
+                    if (dwell.Elapsed < Math.Max(mc.para.HD.pick.wasteDelay.value, 15)) break;
+                    mc.OUT.HD.BLW(false, out ret.message); if (ioCheck(sqc, ret.message)) break;
+                    sqc++; break;
+                case 86:
+                    if (mc.sf.RUNING) break;
+                    if (mc.sf.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
+                    if (mc.sf.workingTubeNumber == UnitCodeSF.INVALID)
+                    {
+                        //mc.sf.req = true; mc.sf.reqMode = REQMODE.DOWN;	//SF Z축은 Homing Sequence를 따르는데 Homing 도중 Error로 Stop이 걸리기 때문에 Amp만 Abort된 상태로 끝난다.
+                        mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG1, true, out ret.message);
+                        mc.OUT.SF.MG_RESET(UnitCodeSFMG.MG2, true, out ret.message);
+                        errorCheck(ERRORCODE.FULL, sqc, "", ALARM_CODE.E_MACHINE_RUN_HEAT_SLUG_EMPTY); break;
+                    }
+                    if (mc.hd.tool.F.RUNING) break;
+                    if (mc.hd.tool.F.ERROR) { Esqc = sqc; sqc = SQC.ERROR; break; }
+                    if (mc2.req == MC_REQ.STOP) { sqc = SQC.STOP; mc.hd.wastedonestop = true; break; }
+                    if (pickupFailDone) { pickupFailDone = false; errorCheck(ERRORCODE.HD, sqc, "Pick up 할 때 흡착이 되지 않습니다! Tube의 HeatSlug 기울기, Pick Up Z축 높이 위치를 확인해주세요!"); break; }
+                    else sqc = 10; break;
+                #endregion
 
-			}
-		}
-		public void pick_home()
+                case SQC.ERROR:
+                    //string str = "HD home_pick Esqc " + Esqc.ToString();
+                    mc.log.debug.write(mc.log.CODE.ERROR, String.Format("HD home_pick Esqc {0}", Esqc));
+                    //EVENT.statusDisplay(str);
+                    sqc = SQC.STOP; break;
+
+                case SQC.STOP:
+                    sqc = SQC.END; break;
+
+            }
+        }
+
+        public void pick_home()
 		{
 			switch (sqc)
 			{
@@ -3709,6 +3722,7 @@ namespace PSA_SystemLibrary
 		int placeForceCheckCount;
         const int cameraDelay = 50;
 
+        public bool placeToPick = false;
 		StringBuilder tempSb = new StringBuilder();
 		double cosTheta, sinTheta;
 		double tmpDistX, tmpDistY;
@@ -3868,6 +3882,7 @@ namespace PSA_SystemLibrary
                     pickretrycount = 0;
                     mc.para.runInfo.checkCycleTime();
                     mc.log.mcclog.write(mc.log.MCCCODE.Z_AXIS_MOVE_UP, 1);
+                    placeToPick = true;
                     sqc = SQC.STOP;
                     break;
                 #endregion

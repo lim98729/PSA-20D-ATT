@@ -5591,6 +5591,25 @@ namespace DefineLibrary
             rY = pt2.y;
         }
 
+        public static double degreeToRadian(double angle)
+        {
+	        double rad = 0.0;
+	        rad = angle * (Math.PI / 180);
+
+	        return rad;
+        }
+
+        public static void findRotationCenter(double startX , double startY , double endX , double endY , double angle , out double rX , out double rY)
+        {
+            double rad = degreeToRadian(angle);
+
+            //dResultX = 1 / (1 - 2 * cos(radian_th) + pow(cos(radian_th), 2) + pow(sin(radian_th), 2)) * (dStartX * pow(sin(radian_th), 2) - dEndY * sin(radian_th) - dStartX * cos(radian_th) + dStartY * sin(radian_th) + dEndX + dStartX * pow(cos(radian_th), 2) - cos(radian_th) * dEndX);
+            //dResultY = -(dStartX * sin(radian_th) - dEndY + cos(radian_th) * dEndY + dStartY * cos(radian_th) - dStartY * pow(cos(radian_th), 2) - dStartY * pow(sin(radian_th), 2) - dEndX * sin(radian_th)) / (1 - 2 * cos(radian_th) + pow(cos(radian_th), 2) + pow(sin(radian_th), 2));
+            rX = 1 / (1 - 2 * Math.Cos(rad) + Math.Pow(Math.Cos(rad), 2) + Math.Pow(Math.Sin(rad), 2)) * (startX * Math.Pow(Math.Sin(rad), 2) - endY * Math.Sin(rad)
+                - startX * Math.Cos(rad) + startY * Math.Sin(rad) + endX + startX * Math.Pow(Math.Cos(rad), 2) - Math.Cos(rad) * endX);
+            rY = -(startX * Math.Sin(rad) - endY + Math.Cos(rad) * endY + startY * Math.Cos(rad) - startY * Math.Pow(Math.Cos(rad), 2)
+                - startY * Math.Pow(Math.Sin(rad), 2) - endX * Math.Sin(rad)) / (1 - 2 * Math.Cos(rad) + Math.Pow(Math.Cos(rad), 2) + Math.Pow(Math.Sin(rad), 2));
+        }
     }
 
     public class WorkingOriginData
