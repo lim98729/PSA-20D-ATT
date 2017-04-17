@@ -5580,8 +5580,8 @@ namespace DefineLibrary
             }
 
             DPOINT ct, pt1, pt2;
-            ct.x = dirX * lidSizeW / 2 - rotateCenterX;
-            ct.y = dirY * lidSizeH / 2 - rotateCenterY;
+            ct.x = dirX * lidSizeW / 2 + rotateCenterX;
+            ct.y = dirY * lidSizeH / 2 + rotateCenterY;
             pt1.x = pX;
             pt1.y = pY;
 
@@ -5599,7 +5599,7 @@ namespace DefineLibrary
 	        return rad;
         }
 
-        public static void findRotationCenter(double startX , double startY , double endX , double endY , double angle , out double rX , out double rY)
+        public static void rotateCenter(double startX , double startY , double endX , double endY , double angle , out double rX , out double rY)
         {
             double rad = degreeToRadian(angle);
 

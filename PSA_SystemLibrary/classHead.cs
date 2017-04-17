@@ -5944,99 +5944,58 @@ namespace PSA_SystemLibrary
 					}
 					#endregion
 
-                    if (!mc.swcontrol.useRotateCenter)
+                    
+                    if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
                     {
-                        if (mc.para.ULC.algorism.value == (int)MODEL_ALGORISM.RECTANGLE)
-                        {
-                            cosTheta = Math.Cos((-ulcT) * Math.PI / 180);
-                            sinTheta = Math.Sin((-ulcT) * Math.PI / 180);
-                            ulcX = (cosTheta * ulcX) - (sinTheta * ulcY);
-                            ulcY = (sinTheta * ulcX) + (cosTheta * ulcY);
-                            placeX -= ulcX;
-                            placeY -= ulcY;
+                        cosTheta = Math.Cos((-ulcT) * Math.PI / 180);
+                        sinTheta = Math.Sin((-ulcT) * Math.PI / 180);
+                        ulcX = (cosTheta * ulcX) - (sinTheta * ulcY);
+                        ulcY = (sinTheta * ulcX) + (cosTheta * ulcY);
+                        placeX -= ulcX;
+                        placeY -= ulcY;
 
-                            placeX += hdcX;
-                            placeY += hdcY;
-                            placeT = tPos.t.ZERO + ulcT - hdcT + mc.para.HD.place.offset.t.value;
-                        }
-                        else
-                        {
-                            //double calcX = 0, calcY = 0;
-                            double calcT = hdcT - ulcT;
-                            double lidSizeW = (double)mc.para.MT.lidSize.x.value * 1000;
-                            double lidSizeH = (double)mc.para.MT.lidSize.y.value * 1000;
-                            double rX1 = 0, rY1 = 0;
-                            double rX2 = 0, rY2 = 0;
-                            // 1. ULC P1 결과 회전변환
-                            if (mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3)
-                            {
-                                // Right Top
-                                Calc.calcAlign(0, ulcP1X, ulcP1Y, calcT, lidSizeW, lidSizeH, out rX1, out rY1);
-                                Calc.calcAlign(2, ulcP2X, ulcP2Y, calcT, lidSizeW, lidSizeH, out rX2, out rY2);
-                            }
-                            else
-                            {
-                                // Right Bottom
-                                Calc.calcAlign(1, ulcP1X, ulcP1Y, calcT, lidSizeW, lidSizeH, out rX1, out rY1);
-                                Calc.calcAlign(3, ulcP2X, ulcP2Y, calcT, lidSizeW, lidSizeH, out rX2, out rY2);
-                            }
-
-                            // 2. Delta HDC - Delta ULC
-                            //calcX = hdcX - (rX2 + rX2) / 2;
-                            //calcY = hdcY - (rY2 + rY2) / 2;
-
-                            //mc.log.debug.write(mc.log.CODE.ETC, "CalcX, CalcY, CalcY : " + calcX.ToString() + ", " + calcY.ToString() + ", " + calcT.ToString());
-                            // 3. Total
-                            placeX -= (rX1 + rX2) / 2;
-                            placeY -= (rY1 + rY2) / 2;
-                            placeX += hdcX;
-                            placeY += hdcY;
-                            placeT = tPos.t.ZERO - calcT + mc.para.HD.place.offset.t.value;
-                        }
+                        placeX += hdcX;
+                        placeY += hdcY;
+                        placeT = tPos.t.ZERO + ulcT - hdcT + mc.para.HD.place.offset.t.value;
                     }
                     else
                     {
-                        double calcX = 0, calcY = 0;
+                        //double calcX = 0, calcY = 0;
                         double calcT = hdcT - ulcT;
                         double lidSizeW = (double)mc.para.MT.lidSize.x.value * 1000;
                         double lidSizeH = (double)mc.para.MT.lidSize.y.value * 1000;
+                        double centerX = 0;
+                        double centerY = 0;
+                        if (mc.swcontrol.useRotateCenter)
+                        {
+                            centerX = mc.para.CAL.ToolRotateCenter.x.value;
+                            centerY = mc.para.CAL.ToolRotateCenter.y.value;    
+                        }
                         double rX1 = 0, rY1 = 0;
                         double rX2 = 0, rY2 = 0;
-                        double centerX = mc.para.CAL.ToolRotateCenter.x.value;
-                        double centerY = mc.para.CAL.ToolRotateCenter.y.value;
+
                         // 1. ULC P1 결과 회전변환
                         if (mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3)
                         {
                             // Right Top
                             Calc.calcAlign(0, centerX, centerY, ulcP1X, ulcP1Y, calcT, lidSizeW, lidSizeH, out rX1, out rY1);
-                        }
-                        else
-                        {
-                            // Right Bottom
-                            Calc.calcAlign(1, centerX, centerY, ulcP1X, ulcP1Y, calcT, lidSizeW, lidSizeH, out rX1, out rY1);
-                        }
-
-                        // 2. ULC P2 결과 회전변환
-                        if (mc.para.ULC.alignDirection.value == (int)ALIGN_CORNER.C1AndC3)
-                        {
-                            // Right Top
                             Calc.calcAlign(2, centerX, centerY, ulcP2X, ulcP2Y, calcT, lidSizeW, lidSizeH, out rX2, out rY2);
                         }
                         else
                         {
                             // Right Bottom
+                            Calc.calcAlign(1, centerX, centerY, ulcP1X, ulcP1Y, calcT, lidSizeW, lidSizeH, out rX1, out rY1);
                             Calc.calcAlign(3, centerX, centerY, ulcP2X, ulcP2Y, calcT, lidSizeW, lidSizeH, out rX2, out rY2);
                         }
 
-                        // 3. Delta HDC - Delta ULC
-                        calcX = hdcX - (rX1 + rX2) / 2;
-                        calcY = hdcY - (rY1 + rY2) / 2;
-
-                        // 4. Total
-                        placeX -= calcX;
-                        placeY -= calcY;
-                        placeT = tPos.t.ZERO + calcT + mc.para.HD.place.offset.t.value;
+                        // 2. Calculate..
+                        placeX -= (rX1 + rX2) / 2;
+                        placeY -= (rY1 + rY2) / 2;
+                        placeX += hdcX;
+                        placeY += hdcY;
+                        placeT = tPos.t.ZERO - calcT + mc.para.HD.place.offset.t.value;
                     }
+
 
 
 					if (padX < 0 || padY < 0)

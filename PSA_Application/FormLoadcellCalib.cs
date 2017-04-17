@@ -520,9 +520,16 @@ namespace PSA_Application
 
 				string writeData;
 
-				saveFilePath = mc2.savePath + "\\data\\calibration\\";
-				if (!Directory.Exists(saveFilePath)) Directory.CreateDirectory(saveFilePath);
-				saveFileName = saveFilePath + "RepeatCheck_Speed" + (checkRepeatSpeed).ToString() + "mm_Force" + (checkTargetForce).ToString() + "kg.dat";
+                for (int num = 0; num < 4; num++ )
+                {
+                    if (num == 0) checkRepeatSpeed = 0.5;
+                    else if (num == 1) checkRepeatSpeed = 0.7;
+                    else if (num == 2) checkRepeatSpeed = 0.9;
+                    else if (num == 3) checkRepeatSpeed = 1;
+
+                    saveFilePath = mc2.savePath + "\\data\\calibration\\";
+                    if (!Directory.Exists(saveFilePath)) Directory.CreateDirectory(saveFilePath);
+                    saveFileName = saveFilePath + "RepeatCheck_Speed" + (checkRepeatSpeed).ToString() + "mm_Force" + (checkTargetForce).ToString() + "kg.csv";
 
 				fileStm = new FileStream(saveFileName, FileMode.Create, FileAccess.Write);
 				stmWriter = new StreamWriter(fileStm, Encoding.Default);
@@ -531,12 +538,13 @@ namespace PSA_Application
 				stmWriter.WriteLine(writeData);
 				stmWriter.Flush();
 
-				#region start Calibration
-				for (int i = 0; i <checkRepeatCount; i++)
-				{
-					mc.hd.tool.F.kilogram(2, out retT.message);
-					posZ = mc.hd.tool.tPos.z.LOADCELL + 1000;	// move to contact point
-					mc.hd.tool.jogMove(posZ, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); headForceCalibStatus = 0; goto THREADEND; }
+                    mc.log.debug.write(mc.log.CODE.ETC, "Start Force Check : " + checkRepeatSpeed.ToString() + "[mm/s], " + checkTargetForce.ToString() + "[kg]");
+                    #region start Calibration
+                    for (int i = 0; i < checkRepeatCount; i++)
+                    {
+                        mc.hd.tool.F.kilogram(2, out retT.message);
+                        posZ = mc.hd.tool.tPos.z.LOADCELL + 1000;	// move to contact point
+                        mc.hd.tool.jogMove(posZ, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); headForceCalibStatus = 0; goto THREADEND; }
 
                     mc.loadCell.setZero(0);
                     mc.idle(500);
@@ -589,8 +597,10 @@ namespace PSA_Application
 				fileStm.Close();
 				#endregion
 
-				posZ = mc.hd.tool.tPos.z.XY_MOVING;	// move to Moving Point
-				mc.hd.tool.jogMove(posZ, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); return; }
+                    posZ = mc.hd.tool.tPos.z.XY_MOVING;	// move to Moving Point
+                    mc.hd.tool.jogMove(posZ, out retT.message); if (retT.message != RetMessage.OK) { mc.message.alarmMotion(retT.message); return; }
+                    if (headForceCalibStatus == 0) break;
+                }
                 mc.OUT.MAIN.UserRedBuzzerCtl(true);
                 mc.idle(500);
                 mc.OUT.MAIN.UserRedBuzzerCtl(false);

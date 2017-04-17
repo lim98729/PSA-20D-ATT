@@ -1541,6 +1541,17 @@ namespace PSA_SystemLibrary
                         motorAbortSkip = true;
                         break;
                     }
+                    double curPos = 0;
+                    if (workingZAxis == 1)
+                    {
+                        Z.actualPosition(out curPos, out ret.message);
+                        Z.setCommandPosition(curPos, out ret.message);
+                    }
+                    else
+                    {
+                        Z2.actualPosition(out curPos, out ret.message);
+                        Z2.setCommandPosition(curPos, out ret.message);
+                    }
                     sqc = SQC.STOP; break;
 				#endregion
 

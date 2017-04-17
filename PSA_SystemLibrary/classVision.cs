@@ -368,17 +368,19 @@ namespace PSA_SystemLibrary
 					}
 					//cam.writeGrabImage("FIND_EDGE_QUARTER_1");
 					#endregion
-                    if (unitCode == UnitCode.HDC)
+                    if (unitCode == UnitCode.HDC && !UtilityControl.useHalfPosition)
                     {
-                        cam.edgeIntersection.create(cam.acq.Image, cam.window, cam.acq.ResolutionX, cam.acq.ResolutionY, QUARTER_NUMBER.THIRD, out ret.b, UtilityControl.useHalfPosition);
+                        cam.edgeIntersection.create(cam.acq.Image, cam.window, cam.acq.ResolutionX, cam.acq.ResolutionY, QUARTER_NUMBER.THIRD, out ret.b, false);
                         if (!ret.b) { sqc = SQC.FIND_ERROR; break; }
-                        cam.edgeIntersection.find(out ret.b, UtilityControl.useHalfPosition);
+                        cam.edgeIntersection.find(out ret.b, false);
+                        cam.refresh_quater = QUARTER_NUMBER.THIRD;
                     }
                     else
                     {
                         cam.edgeIntersection.create(cam.acq.Image, cam.window, cam.acq.ResolutionX, cam.acq.ResolutionY, QUARTER_NUMBER.THIRD, out ret.b);
                         if (!ret.b) { sqc = SQC.FIND_ERROR; break; }
                         cam.edgeIntersection.find(out ret.b, true);
+                        cam.refresh_quater = QUARTER_NUMBER.INVALID;
                     }
 					if (!ret.b)
 					{
@@ -405,7 +407,6 @@ namespace PSA_SystemLibrary
 					}
 					#region refresh
 					cam.refresh_req = true;
-                    cam.refresh_quater = QUARTER_NUMBER.THIRD;
 					cam.refresh_reqMode = REFRESH_REQMODE.EDGE_INTERSECTION;
 					#endregion
 					sqc = SQC.STOP; break;
@@ -422,17 +423,19 @@ namespace PSA_SystemLibrary
 					}
 					//cam.writeGrabImage("FIND_EDGE_QUARTER_2");
 					#endregion
-                    if (unitCode == UnitCode.HDC)
+                    if (unitCode == UnitCode.HDC && !UtilityControl.useHalfPosition)
                     {
-                        cam.edgeIntersection.create(cam.acq.Image, cam.window, cam.acq.ResolutionX, cam.acq.ResolutionY, QUARTER_NUMBER.SECOND, out ret.b, UtilityControl.useHalfPosition);
+                        cam.edgeIntersection.create(cam.acq.Image, cam.window, cam.acq.ResolutionX, cam.acq.ResolutionY, QUARTER_NUMBER.SECOND, out ret.b, false);
                         if (!ret.b) { sqc = SQC.FIND_ERROR; break; }
-                        cam.edgeIntersection.find(out ret.b, UtilityControl.useHalfPosition);
+                        cam.edgeIntersection.find(out ret.b, false);
+                        cam.refresh_quater = QUARTER_NUMBER.SECOND;
                     }
                     else
                     {
                         cam.edgeIntersection.create(cam.acq.Image, cam.window, cam.acq.ResolutionX, cam.acq.ResolutionY, QUARTER_NUMBER.SECOND, out ret.b);
                         if (!ret.b) { sqc = SQC.FIND_ERROR; break; }
                         cam.edgeIntersection.find(out ret.b, true);
+                        cam.refresh_quater = QUARTER_NUMBER.INVALID;
                     }
 					if (!ret.b)
 					{
@@ -459,7 +462,6 @@ namespace PSA_SystemLibrary
 					}
 					#region refresh
 					cam.refresh_req = true;
-                    cam.refresh_quater = QUARTER_NUMBER.SECOND;
 					cam.refresh_reqMode = REFRESH_REQMODE.EDGE_INTERSECTION;
 					#endregion
 					sqc = SQC.STOP; break;
@@ -476,17 +478,19 @@ namespace PSA_SystemLibrary
 					}
 					//cam.writeGrabImage("FIND_EDGE_QUARTER_3");
 					#endregion
-                    if (unitCode == UnitCode.HDC)
+                    if (unitCode == UnitCode.HDC && !UtilityControl.useHalfPosition)
                     {
-                        cam.edgeIntersection.create(cam.acq.Image, cam.window, cam.acq.ResolutionX, cam.acq.ResolutionY, QUARTER_NUMBER.FIRST, out ret.b, UtilityControl.useHalfPosition);
+                        cam.edgeIntersection.create(cam.acq.Image, cam.window, cam.acq.ResolutionX, cam.acq.ResolutionY, QUARTER_NUMBER.FIRST, out ret.b, false);
                         if (!ret.b) { sqc = SQC.FIND_ERROR; break; }
-                        cam.edgeIntersection.find(out ret.b, UtilityControl.useHalfPosition);
+                        cam.edgeIntersection.find(out ret.b, false);
+                        cam.refresh_quater = QUARTER_NUMBER.FIRST;
                     }
                     else
                     {
                         cam.edgeIntersection.create(cam.acq.Image, cam.window, cam.acq.ResolutionX, cam.acq.ResolutionY, QUARTER_NUMBER.FIRST, out ret.b);
                         if (!ret.b) { sqc = SQC.FIND_ERROR; break; }
                         cam.edgeIntersection.find(out ret.b, true);
+                        cam.refresh_quater = QUARTER_NUMBER.INVALID;
                     }
 					if (!ret.b)
 					{
@@ -513,7 +517,6 @@ namespace PSA_SystemLibrary
 					}
 					#region refresh
 					cam.refresh_req = true;
-                    cam.refresh_quater = QUARTER_NUMBER.FIRST;
 					cam.refresh_reqMode = REFRESH_REQMODE.EDGE_INTERSECTION;
 					#endregion
 					sqc = SQC.STOP; break;
@@ -530,17 +533,19 @@ namespace PSA_SystemLibrary
 					}
 					//cam.writeGrabImage("FIND_EDGE_QUARTER_4");
 					#endregion
-                    if (unitCode == UnitCode.HDC)
+                    if (unitCode == UnitCode.HDC && !UtilityControl.useHalfPosition)
                     {
-                        cam.edgeIntersection.create(cam.acq.Image, cam.window, cam.acq.ResolutionX, cam.acq.ResolutionY, QUARTER_NUMBER.FOURTH, out ret.b, UtilityControl.useHalfPosition);
+                        cam.edgeIntersection.create(cam.acq.Image, cam.window, cam.acq.ResolutionX, cam.acq.ResolutionY, QUARTER_NUMBER.FOURTH, out ret.b, false);
                         if (!ret.b) { sqc = SQC.FIND_ERROR; break; }
-                        cam.edgeIntersection.find(out ret.b, UtilityControl.useHalfPosition);
+                        cam.edgeIntersection.find(out ret.b, false);
+                        cam.refresh_quater = QUARTER_NUMBER.FOURTH;
                     }
                     else
                     {
                         cam.edgeIntersection.create(cam.acq.Image, cam.window, cam.acq.ResolutionX, cam.acq.ResolutionY, QUARTER_NUMBER.FOURTH, out ret.b);
                         if (!ret.b) { sqc = SQC.FIND_ERROR; break; }
                         cam.edgeIntersection.find(out ret.b, true);
+                        cam.refresh_quater = QUARTER_NUMBER.INVALID;
                     }
 					if (!ret.b)
 					{
@@ -567,7 +572,6 @@ namespace PSA_SystemLibrary
 					}
 					#region refresh
 					cam.refresh_req = true;
-                    cam.refresh_quater = QUARTER_NUMBER.FOURTH;
 					cam.refresh_reqMode = REFRESH_REQMODE.EDGE_INTERSECTION;
 					#endregion
 					sqc = SQC.STOP; break;

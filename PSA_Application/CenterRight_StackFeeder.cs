@@ -87,7 +87,11 @@ namespace PSA_Application
                     mc.init.success.SF = false;
                 }
             }
-            if (sender.Equals(BT_UseMGZ1_SelectOnOff_Off)) mc.para.setting(ref mc.para.SF.useMGZ1, (int)ON_OFF.OFF);
+            if (sender.Equals(BT_UseMGZ1_SelectOnOff_Off))
+            {
+                mc.para.setting(ref mc.para.SF.useMGZ1, (int)ON_OFF.OFF);
+                mc.sf.magazineClear(UnitCodeSFMG.MG1);
+            }
             if (sender.Equals(BT_UseMGZ2_SelectOnOff_On))
             {
                 mc.para.setting(ref mc.para.SF.useMGZ2, (int)ON_OFF.ON);
@@ -99,7 +103,11 @@ namespace PSA_Application
                     mc.init.success.SF = false;
                 }
             }
-            if (sender.Equals(BT_UseMGZ2_SelectOnOff_Off)) mc.para.setting(ref mc.para.SF.useMGZ2, (int)ON_OFF.OFF);
+            if (sender.Equals(BT_UseMGZ2_SelectOnOff_Off))
+            {
+                mc.para.setting(ref mc.para.SF.useMGZ2, (int)ON_OFF.OFF);
+                mc.sf.magazineClear(UnitCodeSFMG.MG2);
+            }
 
 			mc.para.write(out ret.b); if (!ret.b) mc.message.alarm("para write error");
             refresh();
